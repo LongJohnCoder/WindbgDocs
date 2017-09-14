@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ubl</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ubl"><xml><MSHelp:Keyword Index="A" Term="r30_exts_kernel_U_77af4ef1-f9e1-459f-a90b-447d637812c5.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ubl extension">
+<META NAME="MS-HKWD" CONTENT="breakpoints, user-space breakpoints">
+<META NAME="MS-HKWD" CONTENT="breakpoints, User Breakpoint List (!ubl) extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r30_exts_kernel_U_77af4ef1-f9e1-459f-a90b-447d637812c5.xml"></A>!ubl</H1>
+<P>The <b>!ubl</b> extension lists all user-space breakpoints and their current status.<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ubl</b> <BR></nobr></P>
+<P></P>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example of the use and display of user-space breakpoints:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!ubp 8014a131</b><BR>This command is VERY DANGEROUS, and may crash your system!<BR>If you don't know what you are doing, enter "!ubc *" now!<BR><BR>kd&gt; <b>!ubp 801544f4</b><BR><BR>kd&gt; <b>!ubd 1</b><BR><BR>kd&gt; <b>!ubl</b><BR> 0: e ffffffff`8014a131 (ffffffff`82deb000) 1 ffffffff<BR> 1: d ffffffff`801544f4 (ffffffff`82dff000) 0 ffffffff<BR><BR></nobr></P>
+<P>Each line in this listing contains the breakpoint number, the status (<b>e</b> for enabled or <b>d</b> for disabled), the virtual address used to set the breakpoint, the physical address of the actual breakpoint, the byte position, and the contents of this memory location at the time the breakpoint was set.</P>
+<P></P>
+<H4>See Also</H4>
+<P><a href="r30_exts_kernel_u_5a1d83d1-e55f-4d6f-801c-eaa443f85fce.xml.htm"><b>!ubc</b></a>, <a href="r30_exts_kernel_u_53b140b2-d6e3-4183-88ce-4a28b6be1f70.xml.htm"><b>!ubd</b></a>, <a href="r30_exts_kernel_u_ef107e40-7ccd-40b7-866c-2a41bcf8a288.xml.htm"><b>!ube</b></a>, <a href="r30_exts_kernel_u_8b0bf882-3ee6-49ac-876f-107a5e602779.xml.htm"><b>!ubp</b></a>, <a href="r07_use_operation_d08cb60d-2986-48e8-87a7-ebbfec447f93.xml.htm">User Space and System Space</a> </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ubl RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

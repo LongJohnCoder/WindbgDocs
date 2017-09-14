@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging an Application Failure</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging an Application Failure"><xml><MSHelp:Keyword Index="A" Term="t01_basic_e62c9359-4abb-4ca3-a49e-3355ebfb36cc.xml"/>
+<META NAME="MS-HKWD" CONTENT="application failures"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t01_basic_e62c9359-4abb-4ca3-a49e-3355ebfb36cc.xml"></A>Debugging an Application Failure</H1>
+<P></P>
+<P>There are a variety of errors possible in user-mode applications.</P>
+<P>The most common kinds of failures include access violations, alignment faults, exceptions, critical section time-outs (deadlocks), and in-page I/O errors.</P>
+<P>Access violations and data type misalignments are among the most common. They usually occur when an invalid pointer is dereferenced. The blame could lie with the function that caused the fault, or with an earlier function that passed an invalid parameter to the faulting function.</P>
+<P>User-mode exceptions have many possible causes. If an unknown exception occurs, locate it in <i>ntstatus.h</i> or <i>winerror.h</i> if possible.</P>
+<P></P>
+<P>Critical section timeouts (or possible deadlocks) occur when one thread is waiting for a critical section for a long time. These are difficult to debug and require an in-depth analysis of the stack trace.</P>
+<P>In-page I/O errors are almost always hardware failures. You can double-check the status code in <i>ntstatus.h</i> to verify.</P>
+<P>See <a href="t13_advanced_6863b0fc-40c5-4b1f-be9f-0897b4881f60.xml.htm">Advanced Debugging Techniques</a> for some tips on how to proceed.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging an Application Failure RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

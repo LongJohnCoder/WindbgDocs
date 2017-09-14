@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Interacting with the Engine</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Interacting with the Engine"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_334264c4-55a9-4659-91de-3cfec6f6e5a3.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, use"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_334264c4-55a9-4659-91de-3cfec6f6e5a3.xml"></A>Interacting with the Engine</H1>
+<H4>Commands and Expressions</H4>
+<P>The debugger engine API provides methods to execute commands and evaluate expressions, like those typed into WinDbg's <a href="r05_use_start_7a79993b-70e5-49ef-bca5-095e88ebca78.xml.htm">Debugger Command Window</a>.  To execute a debugger command, use <a href="idebugcontrol_d49bfbf9-c9e1-4a43-8f2c-8778ef51db79.xml.htm"><b>Execute</b></a>. Or, to execute all of the commands in a file, use <a href="idebugcontrol_61c4589a-321e-4574-8565-87bdc7b36a73.xml.htm"><b>ExecuteCommandFile</b></a>.</P>
+<P>The method <a href="idebugcontrol_c985be86-1f8b-4b54-ae35-a7dec5980cec.xml.htm"><b>Evaluate</b></a> will evaluate expressions using the C++ or MASM syntax.  The syntax used by the debugger engine to evaluate expressions&#8212;such as in the <b>Evaluate</b> method&#8212;is given by <a href="idebugcontrol_9eae3270-fd1f-4d50-875b-3bd9908ba76d.xml.htm"><b>GetExpressionSyntax</b></a> and can be changed using <a href="idebugcontrol_88ebbf3c-a6f7-41d1-84e8-291a8db101c2.xml.htm"><b>SetExpressionSyntaxByName</b></a> and <a href="idebugcontrol_6f1ebcec-908b-4f00-b9cf-e7a036bc05e5.xml.htm"><b>SetExpressionSyntax</b></a>.  The number of different syntaxes that are recognized by the debugger is returned by <a href="idebugcontrol_af12dddf-1d15-4abf-8500-8beab99b69ea.xml.htm"><b>GetNumberExpressionSyntaxes</b></a>, and their names are returned by <a href="idebugcontrol_9556ddd4-d38f-4c56-8456-81c12afb177e.xml.htm"><b>GetExpressionSyntaxNames</b></a>.</P>
+<P>The type of value that is returned by <b>Evaluate</b> is determined by the symbols and constants used in the string that was evaluated.  The value is contained in a <a href="structures_2486f31c-2a25-41eb-ac3f-9cc1d62dd2e0.xml.htm">DEBUG_VALUE</a> structure and can be cast to different types using <a href="idebugcontrol_034a690e-25bb-40a1-b788-7b148ba0d9cd.xml.htm"><b>CoerceValue</b></a> and <a href="idebugcontrol_a17ec845-aaf3-4480-a0fd-79fb515c48d5.xml.htm"><b>CoerceValues</b></a>.</P>
+<H4>Aliases</H4>
+<P><i>Aliases</i> are character strings that are automatically replaced with other character strings when used in debugger commands and expressions.  For an overview of aliases, see <a href="r05_use_start_ba4aca87-0103-4e86-9e6c-f3d6a44b3578.xml.htm">Using Aliases</a>.  The debugger engine has several classes of aliases.</P>
+<P>The <i>fixed-name aliases</i> are indexed by number and have the names <b>$u0</b>, <b>$u1</b>, &#8230;, <b>$u9</b>.  The values of these aliases can be set using the <a href="idebugcontrol_5eac09ea-004d-4231-b865-d191790880fc.xml.htm"><b>SetTextMacro</b></a> method and can be retrieved using <a href="idebugcontrol_b6408c67-fb45-4a11-94b4-24099f406a8a.xml.htm"><b>GetTextMacro</b></a> method.</P>
+<P>The <i>automatic aliases</i> and <i>user-named aliases</i> can have any name.  The automatic aliases are defined by the debugger engine and the user-named aliases are defined by the user through debugger commands or the debugger engine API.  To define or remove a user-named alias, use the <a href="idebugcontrol_b53cd6ec-4cc4-45b2-96a0-b830bc7f8ca9.xml.htm"><b>SetTextReplacement</b></a> method.  The <a href="idebugcontrol_d21af006-aa5b-4faf-abba-3f28f338b6bd.xml.htm"><b>GetTextReplacement</b></a> method returns the name and value of an automatic alias or a user-named alias.  All the user-named aliases can be removed using the <a href="idebugcontrol_ba950bc7-3ed5-4e2e-913d-c743e1190482.xml.htm"><b>RemoveTextReplacements</b></a> method.  The <a href="idebugcontrol_34139b78-b8a1-4096-a54c-7fdfac7024ce.xml.htm"><b>GetNumberTextReplacements</b></a> method will return the number of user-name and automatic aliases; this can be used with <b>GetTextReplacement</b> to iterate over all these aliases. The <a href="idebugcontrol_57964e7b-e11a-446f-afab-7d3326fab695.xml.htm"><b>OutputTextReplacements</b></a> method will print a list of all the user-named aliases, including their names and values.</P>
+<P class="note"><b>Note</b> if a user-named alias is given the same name as an automatic alias, the user-named alias will hide the automatic alias so that when retrieving the value of the alias by name, the user-named alias will be used.</P>
+<H4>Engine Options</H4>
+<P>The engine has a number of options that control its behavior.  These options are listed in <a href="structures_535cd157-af13-4576-b398-d29fee2609a4.xml.htm">DEBUG_ENGOPT_<i>XXX</i></a>.  They are returned by <a href="idebugcontrol_75edd4f2-c81d-408d-a61a-3c2fcf5932e6.xml.htm"><b>GetEngineOptions</b></a> and can be set using <a href="idebugcontrol_bcc66264-b955-480d-b610-5080386354c9.xml.htm"><b>SetEngineOptions</b></a>.  Individual options can be set using <a href="idebugcontrol_6042b0b9-8175-4790-be19-43f8659716dc.xml.htm"><b>AddEngineOptions</b></a> and unset using <a href="idebugcontrol_b1af0528-4fc2-4ea3-90e8-c7d92b0632f4.xml.htm"><b>RemoveEngineOptions</b></a>.</P>
+<H4>Interrupts</H4>
+<P>An interrupt is a way to force a break into the debugger or to tell the engine to stop processing the current command, for example, by pressing Ctrl+Break in WinDbg.</P>
+<P>To request a break into the debugger, or to interrupt the debugger's current task, use <a href="idebugcontrol_dd73562c-6f15-4101-8ab3-3f432de5a002.xml.htm"><b>SetInterrupt</b></a>.  To check if there has been an interrupt, use <a href="idebugcontrol_059bd637-c75b-4b52-a382-c645cb4b25b9.xml.htm"><b>GetInterrupt</b></a>.</P>
+<P class="note"><b>Note</b>  When undertaking a long task from a debugger extension, it is recommended that the extension check <b>GetInterrupt</b> regularly and stop processing if an interrupt has been requested.</P>
+<P>When requesting a break into the debugger, the engine might time out if it takes too long for the target to carry out the break-in.  This can occur if the target is in a non-responsive state or if the break-in request is blocked or delayed by resource contention.  The length of time the engine will wait is returned by <a href="idebugcontrol_33383d54-faba-46a1-8e14-8a3215b0d2f7.xml.htm"><b>GetInterruptTimeout</b></a> and can be set using <a href="idebugcontrol_c16219f4-97b7-451d-8f04-30aa262667f6.xml.htm"><b>SetInterruptTimeout</b></a>.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Interacting with the Engine RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

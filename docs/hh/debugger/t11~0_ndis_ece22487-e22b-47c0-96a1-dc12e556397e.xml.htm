@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Enabling NDIS Debug Tracing By Setting Registry Values</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Enabling NDIS Debug Tracing By Setting Registry Values"><xml><MSHelp:Keyword Index="A" Term="t11~0_ndis_ece22487-e22b-47c0-96a1-dc12e556397e.xml"/>
+<META NAME="MS-HKWD" CONTENT="NDIS debugging, debug tracing, setting registry values"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~0_ndis_ece22487-e22b-47c0-96a1-dc12e556397e.xml"></A>Enabling NDIS Debug Tracing By Setting Registry Values</H1>
+<P>You can enable different levels of debug tracing in various NDIS components by editing the registry. Typically, you should add the following entries and values to the <b>HKLM\SYSTEM\CurrentControlSet\Services\NDIS\Parameters</b> registry key:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>"DebugLevel"=dword:00000000<BR>"DebugSystems"=dword:000030F3<BR>"DebugBreakPoint"=dword:00000001 <BR></nobr></P>
+<P>The following values are acceptable for <b>DebugBreakPoint</b>, <b>DebugLevel</b> and <b>DebugSystems</b>:</P>
+<DL><DT><b>DebugBreakPoint</b></DT>
+<DD>Controls whether an NDIS driver will automatically break into the debugger.  If this value is set to 1, NDIS will break into the debugger when a driver enters <i>Ndis.sys</i>'s <b>DriverEntry</b> function.</DD>
+<DT><b>DebugLevel</b></DT>
+<DD>Selects the level or amount of debug tracing in the NDIS components that you select with the <b>DebugSystems</b> value.  This corresponds to using the <a href="r32_exts_lg_nd_rpc_b747e4aa-ff66-40d0-a697-0dd81646eba4.xml.htm"><b>!ndiskd.dbglevel</b></a> extension.  The following values specify levels that you can select: <B></B><table>
+<TR valign="top">
+<TH Width="">Level</TH>
+<TH Width="">Description</TH>
+<TH Width="">Value</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_LEVEL_INFO</TD>
+<TD Width="">All available debug information. This is the highest level of trace.</TD>
+<TD Width="">0x00000000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_LEVEL_LOG</TD>
+<TD Width="">Log information.</TD>
+<TD Width="">0x00000800</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_LEVEL_WARN</TD>
+<TD Width="">Warnings.</TD>
+<TD Width="">0x00001000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_LEVEL_ERR</TD>
+<TD Width="">Errors.</TD>
+<TD Width="">0x00002000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_LEVEL_FATAL</TD>
+<TD Width="">Fatal errors, which can cause the operating system to crash. This is the lowest level of trace.</TD>
+<TD Width="">0x00003000</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>DebugSystems</b></DT>
+<DD>Enables debug tracing for specified NDIS components. This corresponds to using the <a href="r32_exts_lg_nd_rpc_178e44e0-7397-41ee-b8d5-63e0bcd80d1c.xml.htm"><b>!ndiskd.dbgsystems</b></a> extension.  The following values specify the NDIS components that you can select: <B></B><table>
+<TR valign="top">
+<TH Width="">Component</TH>
+<TH Width="">Description</TH>
+<TH Width="">Value</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_INIT</TD>
+<TD Width="">Handles adapter initialization.</TD>
+<TD Width="">0x00000001</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_CONFIG</TD>
+<TD Width="">Handles adapter configuration.</TD>
+<TD Width="">0x00000002</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_SEND</TD>
+<TD Width="">Handles sending data over the network.</TD>
+<TD Width="">0x00000004</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_RECV</TD>
+<TD Width="">Handles receiving data from the network.</TD>
+<TD Width="">0x00000008</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_PROTOCOL</TD>
+<TD Width="">Handles protocol operations.</TD>
+<TD Width="">0x00000010</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_BIND</TD>
+<TD Width="">Handles binding operations.</TD>
+<TD Width="">0x00000020</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_BUSINFO</TD>
+<TD Width="">Handles bus queries.</TD>
+<TD Width="">0x00000040</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_REG</TD>
+<TD Width="">Handles registry operations.</TD>
+<TD Width="">0x00000080</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_MEMORY</TD>
+<TD Width="">Handles memory management.</TD>
+<TD Width="">0x00000100</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_FILTER</TD>
+<TD Width="">Handles filter operations.</TD>
+<TD Width="">0x00000200</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_REQUEST</TD>
+<TD Width="">Handles requests.  </TD>
+<TD Width="">0x00000400</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_WORK_ITEM</TD>
+<TD Width="">Handles work-item operations.</TD>
+<TD Width="">0x00000800</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_PNP</TD>
+<TD Width="">Handles Plug and Play operations.</TD>
+<TD Width="">0x00001000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_PM</TD>
+<TD Width="">Handles power management operations.</TD>
+<TD Width="">0x00002000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_OPENREF</TD>
+<TD Width="">Handles operations that open reference objects.</TD>
+<TD Width="">0x00004000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_LOCKS</TD>
+<TD Width="">Handles locking operations.</TD>
+<TD Width="">0x00008000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_RESET</TD>
+<TD Width="">Handles resetting operations.</TD>
+<TD Width="">0x00010000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_WMI</TD>
+<TD Width="">Handles Windows Management Instrumentation operations.</TD>
+<TD Width="">0x00020000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_CO</TD>
+<TD Width="">Handles Connection-Oriented NDIS.</TD>
+<TD Width="">0x00040000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_REF</TD>
+<TD Width="">Handles reference operations.</TD>
+<TD Width="">0x00080000</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMP_ALL</TD>
+<TD Width="">Handles all NDIS components.</TD>
+<TD Width="">0xFFFFFFFF</TD>
+</TR>
+</table>
+<P></P>
+<P>You can select more than one NDIS component. If more than one component is selected, combine the data values with an OR operator. For example, to select DBG_COMP_PNP, DBG_COMP_PM, DBG_COMP_INIT and DBG_COMP_CONFIG, you would combine the corresponding values (0x1000, 0x2000, 0x1, and 0x2) to obtain the value 0x3003, and then set it in the registry thus:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>"DebugSystems"=dword:00003003<BR></nobr></P>
+</DD>
+</DL>
+<P></P>
+<P>Whenever you change registry values for debug tracing, you must restart your computer for the new settings to take effect.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Enabling NDIS Debug Tracing By Setting Registry Values RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

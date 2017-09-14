@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>; (Command Separator)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ;  (Command Separator)"><xml><MSHelp:Keyword Index="A" Term="r14_tokens_de2c1f74-59fa-4839-980a-f429363d0d06.xml"/>
+<META NAME="MS-HKWD" CONTENT="command separator (semicolon)">
+<META NAME="MS-HKWD" CONTENT="semicolon (command separator)">
+<META NAME="MS-HKWD" CONTENT="Debugger Command window, command separator (semicolon)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r14_tokens_de2c1f74-59fa-4839-980a-f429363d0d06.xml"></A>;  (Command Separator)</H1>
+<P>The semicolon ( <b>;</b> ) character is used to separate multiple commands on a single line.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><i>Command1</i> <b>;</b> <i>Command2</i> [<b>;</b> <i>Command3</i> ...] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Command1</i>, <i>Command2</i>, ...</DT>
+<DD>The commands to be executed.<P></P>
+</DD>
+</DL>
+<H4>Comments</H4>
+<P>Commands are executed sequentially from left to right. All commands on a single line refer to the current thread, unless otherwise specified. If a command causes the thread to execute, the remaining commands on the line will be deferred until that thread stops on a debug event.</P>
+<P>A small number of commands cannot be followed by a semicolon, because they automatically take the entire remainder of the line as their argument. These include <a href="r15_cmds_a_55827b17-9e6d-45ce-8f48-a2a78000a00c.xml.htm"><b>as (Set Alias)</b></a>, <a href="r15_cmds_a_85f99aae-f246-400c-8d44-625b758a0e10.xml.htm"><b>$&lt; (Run Script File)</b></a>, <a href="r15_cmds_a_85f99aae-f246-400c-8d44-625b758a0e10.xml.htm"><b>$&gt;&lt; (Run Script File)</b></a>, and any command beginning with the <a href="r14_tokens_b6aec954-2042-4d63-9351-88be964c23a7.xml.htm"><b>*  (Comment Line Specifier)</b></a> token.</P>
+<P>Here is an example. This executes the current program to source line 123, prints the value of <b>counter</b>, then resumes execution:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>g `:123`; ? poi(counter); g</b> <BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ;  (Command Separator) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

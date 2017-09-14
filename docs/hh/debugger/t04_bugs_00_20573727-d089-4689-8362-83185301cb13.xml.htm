@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x50: PAGE_FAULT_IN_NONPAGED_AREA</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x50: PAGE_FAULT_IN_NONPAGED_AREA"><xml><MSHelp:Keyword Index="A" Term="t04_bugs_00_20573727-d089-4689-8362-83185301cb13.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x50: PAGE_FAULT_IN_NONPAGED_AREA">
+<META NAME="MS-HKWD" CONTENT="PAGE_FAULT_IN_NONPAGED_AREA"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t04_bugs_00_20573727-d089-4689-8362-83185301cb13.xml"></A>Bug Check 0x50: PAGE_FAULT_IN_NONPAGED_AREA</H1>
+<P>The PAGE_FAULT_IN_NONPAGED_AREA bug check has a value of 0x00000050. This indicates that invalid system memory has been referenced.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">Memory address referenced</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width=""><b>0:</b> Read operation<BR><BR><b>1:</b> Write operation<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">Address that referenced memory (if known)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Reserved    </TD>
+</TR>
+</table>
+<P></P>
+<P>If the driver responsible for the error can be identified, its name is printed on the blue screen and stored in memory at the location (PUNICODE_STRING) <b>KiBugCheckDriver</b>.</P>
+<H4>Cause</H4>
+<P>Bug check 0x50 usually occurs after the installation of faulty hardware or in the event of failure of installed hardware (usually related to defective RAM, be it main memory, L2 RAM cache, or video RAM).</P>
+<P>Another common cause is the installation of a faulty system service.</P>
+<P>Antivirus software can also trigger this error, as can a corrupted NTFS volume.</P>
+<H4>Resolving the Problem</H4>
+<P><i>Resolving a faulty hardware problem:</i> If hardware has been added to the system recently, remove it to see if the error recurs. If existing hardware has failed, remove or replace the faulty component. You should run hardware diagnostics supplied by the system manufacturer. For details on these procedures, see the owner's manual for your computer. </P>
+<P><i>Resolving a faulty system service problem:</i> Disable the service and confirm that this resolves the error. If so, contact the manufacturer of the system service about a possible update. If the error occurs during system startup, restart your computer, and press F8 at the character-mode menu that displays the operating system choices. At the resulting Windows <b>Advanced Options</b> menu, choose the <b>Last Known Good Configuration</b> option. This option is most effective when only one driver or service is added at a time.</P>
+<P><i>Resolving an antivirus software problem:</i> Disable the program and confirm that this resolves the error. If it does, contact the manufacturer of the program about a possible update. </P>
+<P><i>Resolving a corrupted NTFS volume problem:</i> Run <b>Chkdsk /f /r</b> to detect and repair disk errors. You must restart the system before the disk scan begins on a system partition. If the hard disk is SCSI, check for problems between the SCSI controller and the disk.</P>
+<P>Finally, check the System Log in Event Viewer for additional error messages that might help pinpoint the device or driver that is causing the error. Disabling memory caching of the BIOS might also resolve it.</P>
+<H4>Comments</H4>
+<P>Typically, this address is in freed memory or is simply invalid.</P>
+<P>This cannot be protected by a <b>try - except</b> handler &#8212; it can only be protected by a probe.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x50: PAGE_FAULT_IN_NONPAGED_AREA RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

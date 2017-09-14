@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Accessing Symbols for Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Accessing Symbols for Debugging"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_915002a2-2d93-4380-8918-f381f9a1e288.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_915002a2-2d93-4380-8918-f381f9a1e288.xml"></A>Accessing Symbols for Debugging</H1>
+<P>Setting up symbols correctly for debugging can be a challenging task, particularly for kernel debugging. It often requires that you know the names and releases of all products on your computer. The debugger must be able to locate each of the symbol files corresponding to the product releases and service packs.</P>
+<P>This can result in an extremely long symbol path consisting of a long list of directories.</P>
+<P>To simplify these difficulties in coordinating symbol files, the symbol files can be gathered into a <i>symbol store</i>, which is then accessed by a <i>symbol server.  </i></P>
+<P>A symbol store is a collection of symbol files, an index, and a tool that can be used by an administrator to add and delete files. The files are indexed according to unique parameters such as the time stamp and image size. A symbol store can also hold executable image files which can be extracted using a symbol server.  Debugging Tools for Windows contains a symbol store creation tool called <a href="r09_symbols_d033164e-0b4c-4e3b-b534-b39437bc4d3b.xml.htm"><i>SymStore</i></a>. </P>
+<P>A symbol server enables the debuggers to automatically retrieve the correct symbol files from a symbol store without the user needing to know product names, releases, or build numbers. Debugging Tools for Windows contains a symbol server called <a href="r09_symbols_657d92f2-20a6-4ddb-8669-cd4e431bb668.xml.htm"><i>SymSrv</i></a>.  The  symbol server is activated by including a certain text string in the symbol path. Each time the debugger needs to load symbols for a newly loaded module, it calls the symbol server to locate the appropriate symbol files.</P>
+<P>If you wish to use a different method for your symbol search than that provided by SymSrv, you can create your own symbol server DLL.  For details on implementing such a symbol server, see <a href="r09_symbols_2ae18b5b-a7ee-4b1a-b7e6-5cc34e6881de.xml.htm">Other Symbol Servers</a>.</P>
+<P>If you are performing user-mode debugging, you will need symbols for the target application.  If you are performing kernel-mode debugging, you will need symbols for the driver you are debugging, as well as the Windows public symbols.  Microsoft has created a symbol store with public symbols for Microsoft products; this symbol store is available on the internet.  These symbols can be loaded using the <a href="r22_metacmds_s_ecda09e2-84b5-4553-84a7-01a79f360f9d.xml.htm"><b>.symfix (Set Symbol Store Path)</b></a> command, as long as you have access to the internet while your debugger is running.  For more information or to determine how to manually install these symbols, see <a href="r09_symbols_02a93db3-239a-4416-8bd5-2630a8eaa4f1.xml.htm">Installing Windows Symbol Files</a>. </P>
+<P>This section includes:</P><B></B><div class="indent1">
+<P><a href="r09_symbols_02a93db3-239a-4416-8bd5-2630a8eaa4f1.xml.htm">Installing Windows Symbol Files</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r09_symbols_cf2471ca-ad4b-4a54-b8cf-534539691b4c.xml.htm">Symbol Stores and Symbol Servers</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r09_symbols_538315dc-6582-4a76-9725-d9d53b52e4a0.xml.htm">Deferred Symbol Loading</a> </P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Accessing Symbols for Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

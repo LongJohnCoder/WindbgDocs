@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wudfext.wudfobject</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wudfext.wudfobject"><xml><MSHelp:Keyword Index="A" Term="r33~e_exts_umdf_b9beeeeb-9229-464e-87a4-8f1e8521b39e.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wudfext.wudfobject extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~e_exts_umdf_b9beeeeb-9229-464e-87a4-8f1e8521b39e.xml"></A>!wudfext.wudfobject</H1>
+<P><P>The <b>!wudfext.wudfobject</b> extension displays information about a WDF object, as well as its parent and child relationships.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wudfext.wudfobject</b> <i>pWDFObject</i> [<i>Flags</i> [<i>TypeName</i>] ] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>pWDFObject</i></DT>
+<DD>Specifies the address of the WDF interface to display information about. </DD>
+<DT><i>Flags</i></DT>
+<DD>Optional. Specifies the type of information to be displayed. <i>Flags</i> can be any combination of the following bits. The default value is 0x01.<DL><DT>Bit 0 (0x01)</DT>
+<DD>Steps recursively through the object hierarchy to obtain the parent and child relationships, which are displayed. </DD>
+<DT>Bit 1 (0x02)</DT>
+<DD>Displays only summary information about the object. </DD>
+<DT>Bit 8 (0x80)</DT>
+<DD>Steps recursively through the object hierarchy, and displays details about the internal framework. </DD>
+</DL>
+</DD>
+<DT><i>TypeName</i></DT>
+<DD>Optional. Specifies the type of the interface (for example, <b>IWDFDevice</b>). If a value for <i>TypeName</i> is supplied, the extension uses the value as the type of the interface. If an asterisk (<b>*</b>) is supplied as <i>TypeName</i>, or if <i>TypeName</i> is omitted, the extension attempts to automatically determine the type of the supplied interface. </DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Wudfext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>You can use <b>!wudfext.wudfobject</b> to list, for example, the child objects of an <b>IWDFDevice</b> object, which generally include the device&#8217;s queues.</P>
+<P>You can also use <b>!wudfext.wudfobject</b> to find WDF objects that are associated with a particular device, to check the state of a WDF object (for example, whether the WDF object is in the process of deletion), or to determine the WDF object&#8217;s current reference count. </P>
+<P>The <b>!wudfext.wudfobject</b> extension also displays the callback functions and context objects that the driver associated with each framework object and attempts to determine the framework object's type. This last feature might not work with certain compilers.</P>
+<P>The following are some examples.  In the first example, <a href="r33~e_exts_umdf_44e63815-7c05-4cdb-b157-ec323db05ff5.xml.htm"><b>!wudfext.umdevstacks</b></a> gives 0x03050E70 as the address of a device object, and this address is then passed to <b>!wudfext.wudfobject</b>. The 0x1 flag is included to display all the children of this object.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!umdevstacks</b> <BR>Number of device stacks: 1<BR>  Device Stack: 0x038f6f08    Pdo Name: \Device\USBPDO-11<BR>    Number of UM devices: 1<BR>    Device 0<BR>      Driver Config Registry Path: WUDFOsrUsbFx2<BR>      UMDriver Image Path: D:\Windows\system32\DRIVERS\UMDF\WUDFOsrUsbFx2.dll<BR>      Fx Driver: IWDFDriver 0x3044ff0<BR>      Fx Device: IWDFDevice 0x3050e70<BR>        IDriverEntry: WUDFOsrUsbFx2!CMyDriver 0x0303eff8<BR>      Open UM files (use !umfile &lt;addr&gt; for details): <BR>        0x049baf84<BR>      Device XFerMode: CopyImmediately RW: Buffered CTL: Buffered<BR>      Object Tracker Address: 0x00000000<BR>        Object   Tracking OFF<BR>        Refcount Tracking OFF<BR>    DevStack XFerMode: CopyImmediately RW: Buffered CTL: Buffered<BR><BR>0: kd&gt; <b>!wudfobject 0x3050e70 1</b> <BR>IWDFDevice 0x3050e70 Fx: 0x3050e30 [Ref 2]<BR>  15 Children<BR>    00: IWDFIoTarget 0x3056f90 Fx: 0x3056f50 [Ref 3]<BR>        No Children<BR>    01: &lt;Internal&gt;<BR>    02: &lt;Internal&gt;<BR>    03: &lt;Internal&gt;<BR>    04: IWDFIoQueue 0x305ae98 Fx: 0x305ae58 [Ref 8]<BR>        No Children<BR>    05: IWDFIoQueue 0x305ee98 Fx: 0x305ee58 [Ref 2]<BR>        No Children<BR>    06: IWDFIoQueue 0x3060e98 Fx: 0x3060e58 [Ref 2]<BR>        No Children<BR>    07: IWDFIoTarget 0x3066f80 Fx: 0x3066f40 [Ref 2]<BR>        1 Children<BR>          00: IWDFUsbInterface 0x306efd8 Fx: 0x306ef98 [Ref 1]<BR>              3 Children<BR>                00: IWDFIoTarget 0x3074f70 Fx: 0x3074f30 [Ref 2]<BR>                    2 Children<BR>                      00: IWDFMemory 0x30a4ff0 Fx: 0x30a4fb0 [Ref 2]<BR>                          No Children<BR>                      01: IWDFMemory 0x30aaff0 Fx: 0x30aafb0 [Ref 2]<BR>                          No Children<BR>                01: IWDFIoTarget 0x3078f70 Fx: 0x3078f30 [Ref 1]<BR>                    No Children<BR><BR></nobr></P>
+<P></P>
+<P>Here is an example of <b>!wudfext.wudfobject</b> displaying a file object: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wudfobject 0xf5060</b> <BR>IWDFFile 0xf5060 Fx: 0xf4fe8 [Ref 1]<BR>  State: Created   Parent: 0xf2f80<BR>  No Children<BR><BR></nobr></P>
+<P></P>
+<P>Here is an example of <b>!wudfext.wudfobject</b> displaying a driver object: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wudfobject 0xf2db8 0x01</b> <BR>IWDFDriver 0xf2db8 Fx: 0xf2d40 [Ref 2]<BR>  Callback: (WUDFEchoDriver!CMyDriver, 0xf2c68)<BR>  State: Created   Parent: 0<BR>  1 Children:<BR>    00: IWDFDevice 0xf2f80 Fx: 0xf2f08 [Ref 2]<BR>        State: Created   Parent: 0xf2db8<BR>        5 Children:<BR>          00: IWDFIoTarget 0xf33c0 Fx: 0xf3348 [Ref 3]<BR>              State: Created   Parent: 0xf2f80<BR>              No Children<BR>          01: IWDFIoQueue 0xf3500 Fx: 0xf3488 [Ref 3]<BR>              State: Created   Parent: 0xf2f80<BR>              No Children<BR>          02: IWDFFile 0xf5060 Fx: 0xf4fe8 [Ref 1]<BR>              State: Created   Parent: 0xf2f80<BR>              No Children<BR>          03: IWDFFile 0xf5100 Fx: 0xf5088 [Ref 101]<BR>              State: Created   Parent: 0xf2f80<BR>              No Children<BR>          04: IWDFFile 0xf51a0 Fx: 0xf5128 [Ref 101]<BR>              State: Created   Parent: 0xf2f80<BR>              No Children<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~e_umdf_274b4c46-4590-4992-9646-2353377d7549.xml.htm">User-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wudfext.wudfobject RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

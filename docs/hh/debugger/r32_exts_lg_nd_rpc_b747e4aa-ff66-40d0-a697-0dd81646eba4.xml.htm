@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ndiskd.dbglevel</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ndiskd.dbglevel"><xml><MSHelp:Keyword Index="A" Term="r32_exts_Lg_ND_RPC_b747e4aa-ff66-40d0-a697-0dd81646eba4.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ndiskd.dbglevel extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r32_exts_Lg_ND_RPC_b747e4aa-ff66-40d0-a697-0dd81646eba4.xml"></A>!ndiskd.dbglevel</H1>
+<P>The <b>!ndiskd.dbglevel</b> extension sets the NDIS debug level.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ndiskd.dbglevel</b> [<i>Level</i>] <BR><BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Level</i></DT>
+<DD>Specifies the amount of debug tracing in NDIS components that are selected within the <a href="r32_exts_lg_nd_rpc_178e44e0-7397-41ee-b8d5-63e0bcd80d1c.xml.htm"><b>!ndiskd.dbgsystems</b></a> extension.   If <i>Level</i> is omitted, the current level of debug tracing is displayed.  <P>Only one level can be selected. The following levels are possible:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Value</b></TD>
+<TD Width=""><b>Meaning</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">INFO</TD>
+<TD Width="">All available debug information is traced.  This is the highest level of tracing possible.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">LOG</TD>
+<TD Width="">Log information is traced.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">WARN</TD>
+<TD Width="">Warnings and errors are traced.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">ERR</TD>
+<TD Width="">Errors are traced.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">FATAL</TD>
+<TD Width="">Only fatal errors, which can cause the operating system to crash, are traced.  This is the lowest level of tracing possible.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ndiskd.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP</b></TD>
+<TD Width=""><i>Ndiskd.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows Vista and later</b></TD>
+<TD Width=""><i>Ndiskd.dll</i></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about NDIS drivers, see the Windows Driver Kit (WDK) documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ndiskd.dbglevel RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

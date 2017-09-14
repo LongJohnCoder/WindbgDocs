@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xC7: TIMER_OR_DPC_INVALID</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xC7: TIMER_OR_DPC_INVALID"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_1c5c2ecf-17a8-4e7d-82f6-6f4ae708aac1.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xC7: TIMER_OR_DPC_INVALID">
+<META NAME="MS-HKWD" CONTENT="TIMER_OR_DPC_INVALID"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_1c5c2ecf-17a8-4e7d-82f6-6f4ae708aac1.xml"></A>Bug Check 0xC7: TIMER_OR_DPC_INVALID</H1>
+<P>The TIMER_OR_DPC_INVALID bug check has a value of 0x000000C7. This is issued if a kernel timer or delayed procedure call (DPC) is found somewhere in memory where it is not permitted.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x0</TD>
+<TD Width="">Address of the timer object</TD>
+<TD Width="">Start of memory range being checked </TD>
+<TD Width="">End of memory range being checked</TD>
+<TD Width="">The timer object was found in a block of memory where a timer object is not permitted. .</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">Address of the DPC object</TD>
+<TD Width="">Start of memory range being checked</TD>
+<TD Width="">End of memory range being checked</TD>
+<TD Width="">The DPC object was found in a block of memory where a DPC object is not permitted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">Address of the DPC routine</TD>
+<TD Width="">Start of memory range being checked</TD>
+<TD Width="">End of memory range being checked</TD>
+<TD Width="">The DPC routine was found in a block of memory where a DPC object is not permitted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">Address of the DPC object</TD>
+<TD Width="">Processor number</TD>
+<TD Width="">Number of processors in the system</TD>
+<TD Width="">The processor number for the DPC object is not correct.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">Address of the DPC routine</TD>
+<TD Width="">The thread&#8217;s APC disable count before the kernel calls the DPC routine</TD>
+<TD Width="">The thread&#8217;s APC disable count after the DPC routine is called</TD>
+<TD Width="">The thread&#8217;s APC disable count was changed during DPC routine execution.<BR><BR>The APC disable count is decremented each time a driver calls <b>KeEnterCriticalRegion</b>, <b>FsRtlEnterFileSystem</b>, or acquires a mutex. <BR><BR>The APC disable count is incremented each time a driver calls <b>KeLeaveCriticalRegion</b>, <b>KeReleaseMutex</b>, or <b>FsRtlExitFileSystem</b>.<BR><BR><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">Address of the DPC routine</TD>
+<TD Width="">The thread&#8217;s APC disable count before the kernel calls the DPC routine</TD>
+<TD Width="">The thread&#8217;s APC disable count after the DPC routine is called</TD>
+<TD Width="">The thread&#8217;s APC disable count was changed during the execution of timer DPC routine.<BR><BR>The APC disable count is decremented each time a driver calls <b>KeEnterCriticalRegion</b>, <b>FsRtlEnterFileSystem</b>, or acquires a mutex. <BR><BR>The APC disable count is incremented each time a driver calls <b>KeLeaveCriticalRegion</b>, <b>KeReleaseMutex</b>, or <b>FsRtlExitFileSystem</b>.<BR><BR><BR><BR></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>This condition is usually caused by a driver failing to cancel a timer or DPC before freeing the memory where it resides. </P>
+<H4>Resolving the Problem</H4>
+<P>If you are the driver writer, use the information obtained through this bug check to fix the bugs in your code.</P>
+<P>If you are a system administrator, you should unload the driver if the problem persists.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xC7: TIMER_OR_DPC_INVALID RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

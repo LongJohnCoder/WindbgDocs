@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>CDB and NTSD</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, CDB and NTSD"><xml><MSHelp:Keyword Index="A" Term="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml"/>
+<META NAME="MS-HKWD" CONTENT="CDB">
+<META NAME="MS-HKWD" CONTENT="CDB, overview">
+<META NAME="MS-HKWD" CONTENT="Console Debugger (CDB)">
+<META NAME="MS-HKWD" CONTENT="NTSD, [Also see &quot;CDB&quot;]">
+<META NAME="MS-HKWD" CONTENT="NTSD">
+<META NAME="MS-HKWD" CONTENT="NTSD, overview">
+<META NAME="MS-HKWD" CONTENT="NT Symbolic Debugger (NTSD)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml"></A>CDB and NTSD</H1>
+<P>CDB and NTSD are console applications which can debug <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#b9622678-468c-4b90-a002-a3d4280796f0">user-mode</a> <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#997fd309-38d4-4217-9777-65e9f2af4377">programs</a>. These two debuggers are nearly identical, except in the manner in which they are launched.</P>
+<P>This documentation will use "CDB" when referring to the capabilities of both CDB and NTSD. <i>Except as noted, all references to CDB in this documentation apply equally to NTSD</i>. There are a few techniques that can only work properly with CDB, or can only work properly with NTSD. These differences are documented in the appropriate sections.</P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="f5cad0b2-b5ab-4d3d-a4ce-9d29bc7957df"></A>CDB</H3>
+<P>Microsoft Console Debugger (CDB) is a character-based console program that enables low-level analysis of Windows user-mode memory and constructs.</P>
+<P>CDB is extremely powerful for debugging a program that is currently running or has recently crashed ("live analysis"), yet simple to set up. It can be used to investigate the behavior of a working application. In the case of a failing application, CDB can be used to obtain a stack trace or to look at the guilty parameters. It works well across a network (using a remote access server), as it is character-based.</P>
+<P>With CDB, you can display and execute program code, set <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoints</a>, and examine and change values in memory. CDB can analyze binary code by "disassembling" it and displaying assembly instructions. It can also analyze source code directly.</P>
+<P>Because CDB can access memory locations through addresses or global symbols, you can refer to data and instructions by name rather than by address, making it easy to locate and debug specific sections of code. You can also display disassembled machine code. CDB supports debugging multiple threads and processes. It is extensible, and can read and write both paged and non-paged memory.</P>
+<P>If the target application is itself a console application, the target will share the console window with CDB. To spawn a separate console window for a target console application, use the <b>-2</b> <a href="r12_cmdline_3ec269e8-a2d8-43e4-8758-2201481cd323.xml.htm">command-line option</a>.</P>
+<P></P>
+<H3><A NAME="f7997e21-d84a-4224-af71-bc393265af91"></A>NTSD</H3>
+<P>There is a variation of the CDB debugger named Microsoft NT Symbolic Debugger (NTSD). It is identical to CDB in every way, except that it spawns a new text window when it is started, whereas CDB inherits the Command Prompt window from which it was invoked.</P>
+<P>Like CDB, NTSD is fully capable of debugging both console applications and graphical Windows programs. (The name "Console Debugger" is used to indicate the fact that CDB is classified as a console application; it does not imply that the target application must be a console application.)</P>
+<P>Since the <b>start</b> command can also be used to spawn a new console window, the following two constructions will give the same results:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>start cdb </b><i>parameters</i> <BR><b>ntsd </b><i>parameters</i> <BR><BR></nobr></P>
+<H4>NTSD in the <i>System32</i> Directory</H4>
+<P>Whereas CDB is only available as part of the Debugging Tools for Windows package, NTSD is available both in this package and as part of the Windows system itself. It can be found in the <i>system32</i> directory of Windows.</P>
+<P>If you are planning on using the NTSD that appears in the <i>system32</i> directory, there are two important facts you should be aware of:</P><B></B><UL type="disc">
+<LI>This version of NTSD cannot be used for <a href="r08_use_remote_e8049dea-474e-411d-8286-ec4a646480f7.xml.htm">Remote Debugging Through the Debugger</a>.</LI>
+<LI>This version of NTSD may not match the version of the documentation you are currently reading.</LI>
+</UL>
+<P></P>
+<P>To avoid these issues, it is recommended that you use only the version of NTSD or CDB that was installed as part of the Debugging Tools for Windows package.</P>
+<H4>Controlling CDB or NTSD from the Kernel Debugger</H4>
+<P>It is possible to redirect the input and output from CDB or NTSD so that it can be controlled from a kernel debugger (either KD or WinDbg).</P>
+<P>If this technique is used with CDB, the CDB window will appear but will not be useable for input and output. If this is used with NTSD, no console window will appear at all.</P>
+<P>Controlling NTSD from the kernel debugger is therefore especially useful, since it results in an extremely light-weight debugger that places almost no burden on the computer containing the target application. This combination can be used to debug system processes, shutdown, and the later stages of boot up. See <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a> for details.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: CDB and NTSD RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

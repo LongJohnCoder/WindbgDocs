@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetNearNameByOffset</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetNearNameByOffset"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetNearNameByOffset"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_cdd9bec8-6fe8-4523-ac98-df3ce90fd073.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::GetNearNameByOffset method">
+<META NAME="MS-HKWD" CONTENT="GetNearNameByOffset (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_cdd9bec8-6fe8-4523-ac98-df3ce90fd073.xml"></A>GetNearNameByOffset</H1>
+<P><P>The <b>GetNearNameByOffset</b> and <b>GetNearNameByOffsetWide</b> methods return the name of a symbol that is located near the specified location.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbols::GetNearNameByOffset(</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN LONG  </b><i>Delta</i><b>,</b><BR><b>    OUT OPTIONAL PSTR  </b><i>NameBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>NameBufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>NameSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG64  </b><i>Displacement</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugSymbols3::GetNearNameByOffsetWide(</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN LONG  </b><i>Delta</i><b>,</b><BR><b>    OUT OPTIONAL PWSTR  </b><i>NameBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>NameBufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>NameSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG64  </b><i>Displacement</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetNearNameByOffsetT GetNearNameByOffsetWide</b><BR><b>#else</b><BR><b>#define GetNearNameByOffsetT GetNearNameByOffset</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Offset</i></DT>
+<DD>Specifies the location in the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>'s virtual address space of the symbol from which the desired symbol is determined.</DD>
+<DT><i>Delta</i></DT>
+<DD>Specifies the relationship between the desired symbol and the symbol located at <i>Offset</i>.  If positive, the engine will return the symbol that is <i>Delta</i> symbols after the symbol located at <i>Offset</i>.  If negative, the engine will return the symbol that is <i>Delta</i> symbols before the symbol located at <i>Offset</i>.</DD>
+<DT><i>NameBuffer</i></DT>
+<DD>Receives the symbol's name.  The name is qualified by the module to which the symbol belongs (for example, <b>mymodule!main</b>).  If <i>NameBuffer</i> is NULL, this information is not returned.</DD>
+<DT><i>NameBufferSize</i></DT>
+<DD>Specifies the size in characters of the buffer <i>NameBuffer</i>.</DD>
+<DT><i>NameSize</i></DT>
+<DD>Receives the size in characters of the symbol's name.  If <i>NameSize</i> is NULL, this information is not returned.</DD>
+<DT><i>Displacement</i></DT>
+<DD>Receives the difference between the value of <i>Offset</i> and the location in the target's memory address space of the symbol.  If <i>Displacement</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful.  However, the buffer was not large enough to hold the symbol's name so it was truncated.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>No symbol matching the specifications of <i>Offset</i> and <i>Delta</i> was found.</DD>
+</DL>
+<P>This method may also return other error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetNearNameByOffset</b> is available in all versions of <b>IDebugSymbols</b>.  <b>GetNearNameByOffsetWide</b> is available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4>Comments</H4>
+<P>By increasing or decreasing the value of <i>Delta</i>, these methods can be used to iterate over the target's symbols starting at a particular location.</P>
+<P>If <i>Delta</i> is zero, these methods behave the same way as <a href="idebugsymbols_5045ed52-43b3-4f5c-90fe-d9725aeb5782.xml.htm"><b>GetNameByOffset</b></a>.</P>
+<P>For more information about symbols and symbol names, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Symbols</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="idebugsymbols_5045ed52-43b3-4f5c-90fe-d9725aeb5782.xml.htm"><b>GetNameByOffset</b></a>, <a href="idebugsymbols_ef72e546-d27f-4cdf-9eeb-53151680c2d1.xml.htm"><b>GetOffsetByName</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetNearNameByOffset RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

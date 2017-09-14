@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>c (Compare Memory)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, c (Compare Memory)"><xml><MSHelp:Keyword Index="A" Term="r16_cmds_C_fc4bffa8-b064-48f3-b2a6-b3985c6d68d3.xml"/>
+<META NAME="MS-HKWD" CONTENT="c (Compare Memory) command">
+<META NAME="MS-HKWD" CONTENT="Compare Memory (c) command">
+<META NAME="MS-HKWD" CONTENT="memory, Compare Memory (c) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r16_cmds_C_fc4bffa8-b064-48f3-b2a6-b3985c6d68d3.xml"></A>c (Compare Memory)</H1>
+<P>The <b>c</b> command compares the values held in two memory areas.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>c</b> <i>Range</i> <i>Address</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Range</i></DT>
+<DD>The first of the two memory ranges to be compared. For more syntax details, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+<DT><i>Address</i></DT>
+<DD>The starting address of the second memory range to be compared. The size of this range will be the same as that specified for the first range. For more syntax details, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If the two areas are not identical, the debugger will display all memory addresses in the first range where they do not agree.</P>
+<P>As an example, consider the following code:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>void main()<BR>{<BR>    char rgBuf1[100];<BR>    char rgBuf2[100];<BR><BR>    memset(rgBuf1, 0xCC, sizeof(rgBuf1));<BR>    memset(rgBuf2, 0xCC, sizeof(rgBuf2));<BR><BR>    rgBuf1[42] = 0xFF;<BR>}<BR><BR></nobr></P>
+<P>To compare <b>rgBuf1</b> and <b>rgBuf2</b>, use either of the following commands:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>c rgBuf1 (rgBuf1+0n100) rgBuf2</b><BR><BR>0:000&gt; <b>c rgBuf1 L 0n100 rgBuf2</b><BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For an overview of memory manipulation and a description of other memory-related commands, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: c (Compare Memory) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

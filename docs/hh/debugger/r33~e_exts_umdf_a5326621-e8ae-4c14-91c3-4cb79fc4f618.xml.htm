@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wudfext.umdevstacks</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wudfext.umdevstacks"><xml><MSHelp:Keyword Index="A" Term="r33~e_exts_umdf_a5326621-e8ae-4c14-91c3-4cb79fc4f618.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wudfext.umdevstacks extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~e_exts_umdf_a5326621-e8ae-4c14-91c3-4cb79fc4f618.xml"></A>!wudfext.umdevstacks</H1>
+<P><P>The <b>!wudfext.umdevstacks</b> extension displays information about all device stacks in the current host process.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wudfext.umdevstacks</b> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Optional. Specifies the type of information to be displayed. <i>Flags</i> can be any combination of the following bits. The default value is 0x01.<DL><DT>Bit 0 (0x01)</DT>
+<DD>Displays detailed information about each device stack.</DD>
+<DT>Bit 8 (0x80)</DT>
+<DD>Displays information about the internal framework. </DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Wudfext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!wudfext.umdevstacks</b> extension displays the framework interface objects that are associated with each device stack. For more information about using the output from <b>!wudfext.umdevstacks</b>, see <a href="r33~e_exts_umdf_44e63815-7c05-4cdb-b157-ec323db05ff5.xml.htm"><b>!wudfext.umdevstack</b></a>.</P>
+<P>The <b>!wudfext.umdevstacks</b> output includes two fields entitled "Object Tracking" and "Refcount Tracking".  These indicate whether the object tracking option (<b>TrackObjects</b>) and the reference count tracking option (<b>TrackRefCounts</b>) have been enabled in WDF Verifier, respectively. If the object tracking option has been enabled, the display includes the object tracker address; this address can be passed to <a href="r33~e_exts_umdf_0047d2cf-5cb8-4cea-bb15-9f95035573b4.xml.htm"><b>!wudfext.wudfdumpobjects</b></a> to display tracking information. </P>
+<P>Here is an example of the <b>!wudfext.umdevstacks</b> display:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!umdevstacks</b> <BR>Number of device stacks: 1<BR>  Device Stack: 0x038c6f08    Pdo Name: \Device\USBPDO-11<BR>    Number of UM devices: 1<BR>    Device 0<BR>      Driver Config Registry Path: WUDFOsrUsbFx2<BR>      UMDriver Image Path: D:\Windows\system32\DRIVERS\UMDF\WUDFOsrUsbFx2.dll<BR>      Fx Driver: IWDFDriver 0x3076ff0<BR>      Fx Device: IWDFDevice 0x3082e70<BR>        IDriverEntry: WUDFOsrUsbFx2!CMyDriver 0x0306eff8<BR>      Open UM files (use !umfile &lt;addr&gt; for details): <BR>        0x04a8ef84<BR>      Device XFerMode: CopyImmediately RW: Buffered CTL: Buffered<BR>      Object Tracker Address: 0x03074fd8<BR>        Object   Tracking ON<BR>        Refcount Tracking OFF<BR>    DevStack XFerMode: CopyImmediately RW: Buffered CTL: Buffered<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~e_umdf_274b4c46-4590-4992-9646-2353377d7549.xml.htm">User-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wudfext.umdevstacks RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

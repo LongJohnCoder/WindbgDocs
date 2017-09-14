@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.breakin (Break to the Kernel Debugger)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .breakin (Break to the Kernel Debugger)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_d3f65c1e-657b-4ead-8fe0-7f20503cb30f.xml"/>
+<META NAME="MS-HKWD" CONTENT=".breakin (Break to the Kernel Debugger) command">
+<META NAME="MS-HKWD" CONTENT="Break to the Kernel Debugger (.breakin) command">
+<META NAME="MS-HKWD" CONTENT="controlling the user-mode debugger from the kernel debugger, Break to the Kernel Debugger (.breakin) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_d3f65c1e-657b-4ead-8fe0-7f20503cb30f.xml"></A>.breakin (Break to the Kernel Debugger)</H1>
+<P>The <b>.breakin</b> command switches from user-mode debugging to kernel-mode debugging. This command is particularly useful when you are controlling the user-mode debugger from the kernel debugger.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.breakin</b> <BR></nobr></P>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P></P>
+<P>If kernel-mode debugging was enabled during the boot process and you are running a user-mode debugger, you can use the <b>.breakin</b> command to halt the operating system and transfer control to a kernel debugger.</P>
+<P>The <b>.breakin</b> command causes a kernel-mode break in the debugger's process context. If a kernel debugger is attached, it will become active. The kernel debugger's <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">process context</a> will automatically be set to the process of the user-mode debugger, <i>not</i> the user-mode debugger's target process.</P>
+<P>This command is primarily useful when debugging a user-mode problem requires retrieving information about the kernel state of the system. Resuming execution in the kernel debugger is necessary before the user-mode debugging session can continue.</P>
+<P>When you are <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">controlling the user-mode debugger from the kernel debugger</a> and the user-mode debugger prompt is visible in the kernel debugger, this command will pause the user-mode debugger and make the kernel-mode debugging prompt appear.</P>
+<P>If the system is unable to break into the kernel debugger, an error message is displayed.</P>
+<P>This command is also useful if you use the kernel debugger to set a breakpoint in user space and that breakpoint is caught by a user-mode debugger instead of the kernel debugger. Issuing this command in the user-mode debugger will transfer control to the kernel debugger.   </P>
+<P>If the <b>.breakin</b> command is used on a system that was not booted with debugging enabled, it has no effect.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .breakin (Break to the Kernel Debugger) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

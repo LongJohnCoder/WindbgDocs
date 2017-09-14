@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Watch Window</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Watch Window"><xml><MSHelp:Keyword Index="A" Term="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml"/>
+<META NAME="MS-HKWD" CONTENT="debugging information windows, Watch window">
+<META NAME="MS-HKWD" CONTENT="Watch window">
+<META NAME="MS-HKWD" CONTENT="memory, Watch window"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_WINDOW_WATCH"></a><H1><A NAME="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml"></A>Watch Window</H1>
+<P></P>
+<P>The Watch window displays information about global variables, local variables, and registers. You can customize this window to show the items that you are tracking.</P>
+<H4>Opening the Watch Window</H4>
+<P>To open or switch to the Watch window, in the WinDbg window, on the <b>View</b> menu, click <b>Watch</b>. (You can also press ALT+2 or click the <b>Watch (ALT+2)</b> button (<img src="tbwatch.bmp">) on the toolbar.  ALT+SHIFT+2 will close the Watch window.)</P>
+<P>The following figure shows an example of a Watch window.</P>
+<p><img src="window-watch.bmp"></p>
+<P>The Watch window can contain four columns. The <b>Name</b> and <b>Value</b> columns are always displayed, and the <b>Type</b> and <b>Location</b> columns are optional. To display the <b>Type</b> and <b>Location</b> columns, click the <b>Typecast</b> and <b>Locations</b> buttons, respectively, on the toolbar.</P>
+<H4>Using the Watch Window</H4>
+<P>In the Watch window, you can do the following:</P><B></B><UL type="disc">
+<LI>To add a variable to the Watch window, select the first empty cell in the <b>Name</b> column, type the variable name, and then press ENTER. Separate the module name from the variable with an exclamation point (<b>!</b>). If you do not specify a module, the current module is used. To enter an address in the <b>Name</b> field, the address must begin with a decimal digit (if necessary, use the prefix <b>0x</b>).<P>If the variable name that you have entered is defined in the current function's scope, its value appears in the <b>Value</b> column. If it is not defined, the <b>Value </b>column displays "Error: Cannot get value".</P>
+<P>Even if a variable is not defined, it can be useful to add it to the Watch window. If the program counter enters a function in which a variable of this name is defined, its value appears in the window at that time.</P>
+</LI>
+<LI>To remove a variable from the Watch window, double-click its name, press DELETE, and then press ENTER. You can also replace an old name with a new name by double-clicking the old name, typing the new name, and then pressing ENTER.</LI>
+<LI>If a variable is a data structure, a check box appears next to its name. To expand and collapse the display of structure members, select or clear the check box.</LI>
+<LI>Integers of type <b>int</b> are displayed as decimal values; integers of type <b>UINT</b> are displayed in the current radix. To change the current radix, use the <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command in the Debugger Command window. </LI>
+<LI>To change the value of a local variable, double-click its <b>Value</b> cell. Enter the new value, or edit the old value. (The cut, copy, and paste commands are available to use for editing.) The value that you enter can include any <a href="r13_syntax_372599d3-a780-4c57-9219-05575c604059.xml.htm">C++ expression</a>. After you enter a new value or edit the old value, you can press ENTER to store the new value or press ESC to discard it. If you submit an invalid value, the old value will reappear after you press ENTER.<P>Integers of type <b>int</b> are displayed as decimal values; integers of type <b>UINT</b> are displayed in the current radix. To change the current radix, use the <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command in the Debugger Command window.</P>
+<P></P>
+</LI>
+<LI>The <b>Type</b> column (if it is displayed in the Watch window) shows the current data type of each variable. Each variable is displayed in the format that is proper for its own data type. Data structures have their type names in the <b>Type</b> column. Other variable types display "Enter new type" in this column. <P>If you double-click "Enter new type", you can cast the type by entering a new data type. This cast alters the current display of this variable only in the Watch window; it does not change anything in the debugger or on the target computer. Moreover, if you enter a <i>new</i> value in the <b>Value</b> column, the text you enter will be parsed based on the actual type of the symbol, rather than any new type you may have entered in the <b>Type</b> column.  If you close and reopen the Watch window, you will lose the data type changes.</P>
+<P>You can also enter an extension command in the <b>Type</b> column.  The debugger will pass the address of the symbol to this extension, and will display the resulting output in a series of collapsible rows beneath the current row.  For example, if the symbol in this row is a valid address for a thread environment block, you can enter <b>!teb</b> in the <b>Type</b> column to run the <a href="r25_exts_general_he_8f21ff4e-e437-4947-8075-37872377efac.xml.htm"><b>!teb</b></a> extension on this symbol's address.</P>
+</LI>
+<LI>The <b>Location</b> column (if it is displayed in the Watch window) shows the offset of each member of a data structure.</LI>
+<LI>In addition to variables, you can also monitor the following items in the Watch window:<B></B><UL type="circle">
+<LI>Registers. When you add a register to the Watch window, prefix its name with an at sign (<b>@</b>). Unlike variables, you cannot change register values through the Watch window.</LI>
+<LI>Vtables that contain function pointers. When a Vtable appears in the Watch window, you can browse the function entries in the table.   If a Vtable is contained in a base class that points to a derived implementation, the notation <b>_vtcast_</b><I><B>Class</B></I> is displayed to indicate the members that are being added because of the derived class. These members expand like the derived class type. </LI>
+<LI>The return values of extension functions, such as _EFN_GetPoolData.   </LI>
+</UL>
+</LI>
+<P></P>
+<P></P>
+<P></P>
+</UL>
+<P>Unlike the <a href="r36_gui_1_e05d85f5-f61e-41e4-b80a-f72b4fc0bdd7.xml.htm">Locals window</a>, the Watch window is not affected by changes to the <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">register context</a>. In the Watch window, you can see and modify only those variables that are defined in the scope of the current program counter.   </P>
+<P>If you open a new workspace, the Watch window contents are discarded and replaced with those in the new workspace.</P>
+<H4>Toolbar and Shortcut Menu</H4>
+<P>The Watch window has a toolbar that contains two buttons (<b>Typecast</b> and <b>Locations</b>) and a shortcut menu with additional commands. To access the menu, right-click the title bar of the window or click the icon near the upper-right corner of the window (<img src="window-watch-menu.png">). The toolbar and menu contain the following buttons and commands:</P><B></B><UL type="disc">
+<LI><i>(Toolbar and menu) </i><b>Typecast</b> turns the display of the <b>Type</b> column on and off.</LI>
+<LI><i>(Toolbar and menu) </i><b>Locations</b> turns the display of the <b>Location</b> column on and off.</LI>
+<LI><i>(Menu only)</i>  <b>Display 16-bit values as Unicode</b> displays Unicode strings in this window. This command turns on and off a global setting that affects the <a href="r36_gui_1_e05d85f5-f61e-41e4-b80a-f72b4fc0bdd7.xml.htm">Locals window</a>, the Watch window, and debugger command output. This command is equivalent to using the <a href="r20_metacmds_e_9485abdb-48eb-4cbd-a410-76ac2f4ad2bd.xml.htm"><b>.enable_unicode (Enable Unicode Display)</b></a> command.</LI>
+<LI><i>(Menu only)</i>  <b>Always display numbers in default radix</b> causes integers to be displayed in the default radix instead of always displaying them in decimal format. This command turns on and off a global setting that affects the Locals window, the Watch window, and debugger command output. This command is equivalent to using the <a href="r20_metacmds_e_6ecddf08-b9b9-4677-bc82-328776009dbd.xml.htm"><b>.force_radix_output (Use Radix for Integers)</b></a> command.<P class="note"><b>Note</b>  The <b>Always display numbers in default radix</b> command does not affect long integers. Long integers are displayed in decimal format unless the <a href="r20_metacmds_e_c15fcdd0-2668-465e-b455-98469d929bd6.xml.htm"><b>.enable_long_status (Enable Long Integer Display)</b></a> command is used. The <b>.enable_long_status</b> command affects the display in the Locals window, the Watch window, and debugger command output. There is no equivalent for this command in the menu in the Watch window.</P>
+</LI>
+<LI><i>(Menu only)</i>  <b>Open memory window for selected value</b> opens a new docked Memory window that displays memory starting at the address of the selected expression.</LI>
+<LI><i>(Menu only)</i>  <b>Invoke dt for selected memory value</b> runs the <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a> command with the selected symbol as its parameter.  The result appears in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>.  The <b>-n</b> option is automatically used to differentiate the symbol from a hexadecimal address.  No other options are used.  Note that the content produced using this menu selection is identical to the content produced when running the <b>dt</b> command from the command line, but the format is slightly different.<P></P>
+</LI>
+<LI><i>(Menu only)</i>  <b>Toolbar</b> turns the toolbar on and off.</LI>
+<LI><i>(Menu only)</i>  <b>Dock</b> or <b>Undock</b> causes the window to enter or leave the docked state.</LI>
+<LI><i>(Menu only)</i>  <b>Move to new dock</b> closes the Watch window and opens it in a new dock.</LI>
+<LI><i>(Menu only)</i> <b>Set as tab-dock target for window type</b> is unavailable for the Watch window.  This option is only available for <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source</a> or <a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory</a> windows.</LI>
+<LI><i>(Menu only)</i>  <b>Always floating</b> causes the window to remain undocked even if it is dragged to a docking location.</LI>
+<LI><i>(Menu only)</i>  <b>Move with frame</b> causes the window to move when the WinDbg frame is moved, even if the window is undocked. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>.</LI>
+<LI><i>(Menu only)</i>  <b>Help</b> opens this topic in the Debugging Tools for Windows documentation.</LI>
+<LI><i>(Menu only)</i>  <b>Close</b> closes this window.</LI>
+</UL>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about controlling variables and a description of other memory-related commands, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>. For more information about registers and their manipulation, see <a href="r07_use_operation_5cbc4ff1-b5f4-4308-b937-4343876eaaa8.xml.htm">Reading and Writing Registers and Flags</a>. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>. For more information about all techniques that you can use to control debugging information windows, see <a href="r06_use_gui_35306de1-d9fb-45e6-800f-e3ee00114421.xml.htm">Using Debugging Information Windows</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Watch Window RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

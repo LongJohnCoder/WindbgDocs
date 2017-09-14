@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.open (Open Source File)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .open (Open Source File)"><xml><MSHelp:Keyword Index="A" Term="r21_metacmds_L_2bf63e00-f90a-4416-a13a-b4d4153e12dd.xml"/>
+<META NAME="MS-HKWD" CONTENT=".open (Open Source File) command">
+<META NAME="MS-HKWD" CONTENT="Open Source File (.open) command">
+<META NAME="MS-HKWD" CONTENT="source files and paths, Open Source File (.open) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r21_metacmds_L_2bf63e00-f90a-4416-a13a-b4d4153e12dd.xml"></A>.open (Open Source File)</H1>
+<P>The <b>.open</b> command searches the source path for a source file and opens this file.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.open</b> [<b>-m</b> <i>Address</i>] <i>FileName</i> <BR><b>.open -a</b> <i>Address</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>FileName</i></DT>
+<DD>Specifies the source file name. This name can include an absolute or relative path. Unless you specify an absolute path, the path is interpreted as relative to a directory in the source path.</DD>
+<DT><b>-m</b> <i>Address</i></DT>
+<DD>Specifies an address within the source file. This address must be contained in a known module. You should use the <b>-m </b><i>Address</i> parameter if the file that <i>FileName</i> specifies is not unique. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm"><u>Address and Address Range Syntax</u></a>.<P>The <b>-m</b> parameter is required if you are using a <a href="r06_use_gui_9f858c04-aa3a-4c3b-a747-45d9d46c3a62.xml.htm">s<u>ource server</u></a> to retrieve the source files.</P>
+</DD>
+<DT><b>-a</b> <i>Address</i></DT>
+<DD>Specifies an address within the source file. This address must be contained in a known module. If the debugger can find the source file, the debugger loads and opens the file, and the line that corresponds to the specified address is highlighted. If the debugger cannot find the source file, the address is displayed in the <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a>. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+</DL>
+<H4>Environment</H4>
+<P>You can use the <b>.open</b> command only in WinDbg, and you cannot use it in script files.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about source files and source paths and for other ways to load source files, see <a href="r06_use_gui_b85f4b8e-eb5f-4502-9a0e-92d84cd3d8f1.xml.htm">Source Path</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .open (Open Source File) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

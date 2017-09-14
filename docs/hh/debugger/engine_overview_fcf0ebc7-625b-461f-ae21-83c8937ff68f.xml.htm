@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Symbols</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Symbols"><xml><MSHelp:Keyword Index="A" Term="Engine_Overview_fcf0ebc7-625b-461f-ae21-83c8937ff68f.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine, symbols"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_Overview_fcf0ebc7-625b-461f-ae21-83c8937ff68f.xml"></A>Symbols</H1>
+<P>A <i>symbol</i> is a named unit of data or code from a source file that appears in a <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a>.  Information about symbols can include the name, type (if applicable), the address or register where it is stored, and any parent or child symbols.  Examples of symbols include variables (local and global), functions, and any entry point into a module.</P>
+<P>The symbol information is used by the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2dbaa658-dbfe-47de-8266-97ed86c41aea">engine</a> to help interpret data and code in the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>.  With this information, the engine can search for symbols by name or location in memory and provide a description of a symbol.</P>
+<P>The engine gets its information about symbols from <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#ee431472-4429-4f7a-b2e1-da9fe9759455">symbol files</a>, which are located on the local file system or loaded from a symbol server.  When using a symbol server, the engine will automatically use the correct version of the symbol file to match the module in the target.  Symbol files can be loaded whenever the corresponding module is loaded, or they can be loaded as needed.</P>
+<P class="note"><b>Note</b>  Often optimizing compilers do not include accurate information in symbol files.  This can cause the engine to misinterpret the value of some variables as the variable's location or lifetime might be incorrectly described, causing the engine to look at the wrong piece of memory or think a variable value is live when it is dead (or vice versa).  It is also possible for an optimizing compiler to change the order of execution or to split a function into several pieces.  Best results are usually obtained when debugging unoptimized code.</P>
+<H4>Additional Information</H4>
+<P>For details about using symbols, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Using Symbols</a>.  For an overview of using symbol files and symbol servers, see <a href="r09_symbols_750b8c7c-1e41-4116-b7d3-ecd4c7fe42ce.xml.htm">Symbols</a> in the Debuggers section of this documentation.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Symbols RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

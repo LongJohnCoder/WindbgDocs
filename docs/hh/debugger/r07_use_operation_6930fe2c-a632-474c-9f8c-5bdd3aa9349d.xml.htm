@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging Multiple Targets</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging Multiple Targets"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_6930fe2c-a632-474c-9f8c-5bdd3aa9349d.xml"/>
+<META NAME="MS-HKWD" CONTENT="multiple targets">
+<META NAME="MS-HKWD" CONTENT="system">
+<META NAME="MS-HKWD" CONTENT="system, overview">
+<META NAME="MS-HKWD" CONTENT="system,"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_6930fe2c-a632-474c-9f8c-5bdd3aa9349d.xml"></A>Debugging Multiple Targets</H1>
+<P>You can debug multiple dump files or live user-mode applications at the same time. Each target contains one or more processes, and each process contains one or more threads.</P>
+<P>These targets are also grouped into <i>systems</i>. Systems are sets of targets that are grouped together for easy identification and manipulation. Systems are defined as follows:</P><B></B><UL type="disc">
+<LI>Each kernel-mode or user-mode dump file is a separate system.</LI>
+<LI>When you are debugging live user-mode applications on different computers (by using a <a href="r08_use_remote_0828c18f-b042-4288-9b58-a56e3076eb2e.xml.htm">process server</a>, such as Dbgsrv), each application is a separate system.</LI>
+<LI>When you are debugging live user-mode applications on the local computer, the applications are combined into a single system.</LI>
+</UL>
+<P></P>
+<P>The <i>current</i> or <i>active</i> system is the system that you are currently debugging.</P>
+<H4>Acquiring Multiple Targets</H4>
+<P>The first target is acquired in the usual manner.</P>
+<P>You can debug additional live user-mode applications by using the <a href="r19_metacmds_a_8c6d47be-d1e0-4d39-b0cd-14ac56c87de5.xml.htm"><b>.attach (Attach to Process)</b></a> or <a href="r19_metacmds_a_90b70ef1-43b7-4dd2-87cf-8f6df0d6108d.xml.htm"><b>.create (Create Process)</b></a> command, followed by the <b>g (Go)</b> command.</P>
+<P>You can debug additional dump files by using the <a href="r21_metacmds_l_7e3720ef-d5f9-4717-ac69-9aa308d9b576.xml.htm"><b>.opendump (Open Dump File)</b></a> command, followed by the <b>g (Go)</b> command. You can also open multiple dump files when the debugger is started. To open multiple dump files, include multiple <b>-z</b> switches in the command, each followed by a different file name.</P>
+<P>You can use the preceding commands even if the processes are on different systems. You must start a process server on each system and then use the <nobr><b>-premote</b></nobr> parameter with <b>.attach</b> or <b>.create</b> to identify the proper process server. If you use the <b>.attach</b> or <b>.create</b> command again without specifying the <nobr><b>-premote</b></nobr> parameter, the debugger attaches to, or creates, a process on the current system. </P>
+<H4>Manipulating Systems and Targets</H4>
+<P>When debugging begins, the current system is the one that the debugger most recently attached to. If an exception occurs, the current system switches to the system that this exception occurred on.</P>
+<P>To close one target and continue to debug the other targets, use the <a href="r20_metacmds_e_5c2717e9-eef2-4d91-9a54-33653ba7f904.xml.htm"><b>.kill (Kill Process)</b></a> command. On Microsoft Windows XP and later versions of Windows, you can use the <a href="r19_metacmds_a_1174b7a4-f70a-44d2-a43d-163fbe5a8d7e.xml.htm"><b>.detach (Detach from Process)</b></a> command or WinDbg's <a href="r37_gui_2_e7b107b7-14cd-4ba8-9e0c-7930d45f664c.xml.htm"><b>Debug | Detach Debuggee</b></a> menu command instead. These commands detach the debugger from the target but leave the target running.</P>
+<P>To control the debugging of multiple systems, you can use the following methods:</P><B></B><UL type="disc">
+<LI>The <a href="r15_cmds_a_dd2901f8-95ac-43ec-b382-3d8c189f1f2a.xml.htm"><b>|| (System Status)</b></a> command displays information about one or more systems</LI>
+<LI>The <a href="r15_cmds_a_71ad20ba-2731-457c-aa06-e7c6f2cfaee2.xml.htm"><b>||s (Set Current System)</b></a> command enables you to select the current system</LI>
+<LI><i>(WinDbg only)</i>  The <a href="r36_gui_1_8a25e803-69aa-49a0-b3ef-2f3334b803c5.xml.htm">Processes and Threads window</a> enables you display or select systems, processes, and threads </LI>
+</UL>
+<P></P>
+<P>By using these commands to select the current system, and by using the standard commands to <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">select the current process and thread</a>, you can determine the context of commands that display memory and registers.</P>
+<P>However, you cannot separate execution of these processes. The <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command always causes all targets to execute together.</P>
+<P class="note"><b>Note</b>  We recommend that you do not debug live targets and dump targets together, because commands behave differently for each type of debugging. For example, if you use the <b>g (Go)</b> command when the current system is a dump file, the debugger begins executing, but you cannot break back into the debugger, because the break command is not recognized as valid for dump file debugging.    </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging Multiple Targets RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

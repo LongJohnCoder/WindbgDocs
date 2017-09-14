@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.expr (Choose Expression Evaluator)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .expr (Choose Expression Evaluator)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_9a36ade0-e6ed-44d8-b399-9e64f4651383.xml"/>
+<META NAME="MS-HKWD" CONTENT=".expr (Choose Expression Evaluator) command">
+<META NAME="MS-HKWD" CONTENT="Choose Expression Evaluator (.expr) command">
+<META NAME="MS-HKWD" CONTENT="expressions, Choose Expression Evaluator (.expr) command">
+<META NAME="MS-HKWD" CONTENT="C++ expressions, Choose Expression Evaluator (.expr) command">
+<META NAME="MS-HKWD" CONTENT="MASM expressions, Choose Express"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_9a36ade0-e6ed-44d8-b399-9e64f4651383.xml"></A>.expr (Choose Expression Evaluator)</H1>
+<P>The <b>.expr</b> command specifies the default expression evaluator.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.expr /s</b> <b>masm</b> <BR><b>.expr /s</b> <b>c++</b> <BR><b>.expr /q</b> <BR><b>.expr</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>/s masm</b></DT>
+<DD>Changes the default expression type to Microsoft Assembler expression evaluator (MASM). This type is the default value when you start the debugger.</DD>
+<DT><b>/s c++</b></DT>
+<DD>Changes the default expression type to the C++ expression evaluator.</DD>
+<DT><b>/q</b></DT>
+<DD>Displays the list of possible expression types.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>When you use the <b>.expr</b> command without an argument, the debugger displays the current default expression type.</P>
+<P>The <a href="r15_cmds_a_5452eb2e-975c-4151-9bc0-890b163f004d.xml.htm"><b>?? (Evaluate C++ Expression)</b></a> command, the <a href="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml.htm">Watch window</a>, and the <a href="r36_gui_1_e05d85f5-f61e-41e4-b80a-f72b4fc0bdd7.xml.htm">Locals window</a> always use C++ expression syntax. All other commands and debugging information windows use the default expression evaluator.</P>
+<P>For more information about how to control which syntax is used, see <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a>. For more information about the syntax, see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .expr (Choose Expression Evaluator) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

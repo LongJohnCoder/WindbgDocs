@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Editing Boot Options</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Editing Boot Options"><xml><MSHelp:Keyword Index="A" Term="bootini_0ce0aaf6-154d-441a-80ae-89ffd6a631ec.xml"/>
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], editing">
+<META NAME="MS-HKWD" CONTENT="editing boot options">
+<META NAME="MS-HKWD" CONTENT="Bootcfg tool">
+<META NAME="MS-HKWD" CONTENT="custom boot options [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot entries [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot entries [WDK]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_0ce0aaf6-154d-441a-80ae-89ffd6a631ec.xml"></A>Editing Boot Options</H1>
+<P>This section is a practical guide to editing the boot options on a computer running Windows Vista and later versions of Windows, and Windows Server 2003, Windows XP, or Windows 2000. It suggests a step-by-step procedure for customizing the basic elements of boot options.</P>
+<P>For Windows Server 2003 and Windows XP, this section describes a method of using Bootcfg, a tool included in Windows Server 2003 and Windows XP.</P>
+<P>For Windows Vista and later versions of Windows, this section describes a method of using BCDEdit, a tool included with the operating system. For information about BCDEdit command syntax, type <b>bcdedit /?</b> or<b> bcdedit /? TOPICS</b> in a Command Prompt window.</P>
+<P>For help on editing boot entry parameters to enable and disable Windows features, see <a href="bootini_eca9701d-6f34-4e1c-a9ad-f2e14ba189d5.xml.htm">Using Boot Parameters</a>.</P>
+<P>To configure operating system features in boot options:</P><B></B><UL type="disc">
+<LI><a href="bootini_fd57070a-30c8-4214-88c8-203d73d98268.xml.htm">Add a new boot entry</a> for the operating system by copying an existing boot entry from the same operating system.</LI>
+<LI><a href="bootini_a38a0af6-fdcd-4fde-a2d0-842754545340.xml.htm">Change the friendly name</a> of the newly created boot entry so that you can identify it in the boot menu.</LI>
+<LI><a href="bootini_695dd6dc-4598-4f93-8a4d-16ebc6394b8b.xml.htm">Add parameters to the boot entry</a> that enable and configure Windows features.</LI>
+</UL>
+<P></P>
+<P>Then, to make testing quicker and easier:</P><B></B><UL type="disc">
+<LI><a href="bootini_f39e3846-1f38-45bf-8ef3-dc447b2396e1.xml.htm">Make the new boot entry the default entry</a>.</LI>
+<LI><a href="bootini_74349aae-4d5a-4052-8fc8-ed95faafd641.xml.htm">Change the boot menu time-out</a>. You can shorten the boot menu time-out so that Windows boots quickly. Or, lengthen the boot menu time-out so that you have ample time to select the preferred boot entry.</LI>
+</UL>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Editing Boot Options RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

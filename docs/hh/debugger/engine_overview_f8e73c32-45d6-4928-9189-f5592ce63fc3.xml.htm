@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Remote Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Remote Debugging"><xml><MSHelp:Keyword Index="A" Term="Engine_Overview_f8e73c32-45d6-4928-9189-f5592ce63fc3.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine, remote debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_Overview_f8e73c32-45d6-4928-9189-f5592ce63fc3.xml"></A>Remote Debugging</H1>
+<P>Remote debugging occurs when a <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client</a>'s communication with a target is indirect, for example, through a network connection.  When remote debugging, more than one instance of the debugger engine can be involved in debugging a target. However, exactly one of these instances is responsible for the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugging session</a>; this instance is called the <i>host engine</i>.</P>
+<P>There are many possible configurations: the client object can be created in the host engine (<a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#e969f84e-cb68-450e-bec4-6995463722ed">smart clients</a>), or a different instance of the engine (<a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cab89f06-8d34-430d-b047-ea48e96aac1b">debugging clients</a>); the host engine can be connected directly to the target (<a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#098e09f5-d7db-435e-9403-16661d6693b5">debugging server</a>); or a proxy can be directly connected to the target (<a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#927cdf63-ac0c-4f34-af24-1cdc17ca8d68">process server</a> and kernel connection server).</P>
+<P>Multiple clients can simultaneously connect to the host engine.  And the host engine can connect to multiple targets in the same debugging session.  Optionally, there can be one or more proxies between the clients and the host engine and between the host engine and each target.</P>
+<P>Smart clients are client objects that communicate directly with the host engine.  A debugging client is created by calling <a href="clientfns_7beeb350-b8bd-44ea-b5c9-ca0da15146ae.xml.htm"><b>DebugConnect</b></a>; the client communicates with the host engine using RPC calls that represent method calls in the engine's API (including calls that the host engine makes to the client's <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#1c902c96-93dc-4d9d-9f83-c1cf26bce7f0">callback objects</a>).</P>
+<P>A debugging server is an engine instance that communicates directly with the target and is also the host engine.  Process servers and kernel connection servers communicate directly with the target but are not the host engine.  The host engine communicates with the process server, or kernel connection server, by sending low-level memory, processor, and operating system requests, and the server sends back the results.</P>
+<P class="note"><b>Note</b>  A typical two-computer setup for kernel debugging&#8212;where one computer is the target and the other the host computer&#8212;is not considered to be remote debugging as there is only one instance of the engine (on the host computer) and it communicates directly with the target.</P>
+<H4>Additional Information</H4>
+<P>For details about performing remote debugging, see <a href="engine_dg_403e6a06-76ae-4dfc-a475-4e8a77318c95.xml.htm">Remote Targets</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Remote Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

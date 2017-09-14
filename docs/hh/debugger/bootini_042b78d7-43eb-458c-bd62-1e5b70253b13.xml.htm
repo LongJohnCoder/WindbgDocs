@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>/burnmemory</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, /burnmemory"><xml><MSHelp:Keyword Index="A" Term="bootini_042b78d7-43eb-458c-bd62-1e5b70253b13.xml"/>
+<META NAME="MS-HKWD" CONTENT="/burnmemory"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_042b78d7-43eb-458c-bd62-1e5b70253b13.xml"></A>/burnmemory</H1>
+<P>The <b>/burnmemory</b> parameter reduces the amount of memory available to Windows by the specified amount. </P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/burnmemory=</b><i>SizeInMB</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Subparameter</H4>
+<DT><i>SizeInMB</i></DT>
+<DD>Specifies an amount of memory (in megabytes). Enter a decimal integer. This value is subtracted from the amount of memory otherwise allocated to the system.</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>/burnmemory</b> parameter is supported only on Windows Server 2003, Windows XP, and Windows 2000. On Windows Vista and later versions of Windows, use the <b>removememory</b> option with BCDEdit.</P>
+<P>This parameter is similar to the <a href="bootini_1827b040-9a2c-4ec3-ad58-1194c63cefcc.xml.htm"><b>/maxmem</b></a> parameter, which specifies the amount of memory available to Windows. However, because <b>/maxmem</b> actually sets an upper bound for memory addresses available to Windows, and because there might be gaps in the allocation of system memory, the <b>/burnmemory</b> parameter is more precise than the <b>/maxmem</b> parameter.</P>
+<H4>Example</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /burnmemory=256<BR><BR></nobr></P>
+<H4>Bootcfg Command</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /raw "/burnmemory=256" /A /ID 1<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: /burnmemory RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

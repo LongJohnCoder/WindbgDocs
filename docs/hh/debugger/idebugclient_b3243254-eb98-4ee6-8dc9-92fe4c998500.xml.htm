@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>EndSession</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, EndSession"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="EndSession"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_b3243254-eb98-4ee6-8dc9-92fe4c998500.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::EndSession method">
+<META NAME="MS-HKWD" CONTENT="EndSession (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_b3243254-eb98-4ee6-8dc9-92fe4c998500.xml"></A>EndSession</H1>
+<P><P>The <b>EndSession</b> method ends the current <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugger session</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient::EndSession(</b><BR><b>    IN ULONG  </b><i>Flags</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Specifies how to end the session.  <i>Flags</i> can be one of the following values:<B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_END_PASSIVE</TD>
+<TD Width="">Perform cleanup for the session.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_END_ACTIVE_TERMINATE</TD>
+<TD Width="">Attempt to terminate all <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#997fd309-38d4-4217-9777-65e9f2af4377">user-mode targets</a> before performing cleanup for the session.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_END_ACTIVE_DETACH</TD>
+<TD Width="">Attempt to disconnect from all <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">targets</a> before performing cleanup for the session.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_END_REENTRANT</TD>
+<TD Width="">Perform only the cleanup that doesn't require acquiring locks.  See Comments section for details.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_END_DISCONNECT</TD>
+<TD Width="">Do not end the session.  Disconnect the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client</a> from the session and disable the client.<BR><BR>This flag is intended for when remote clients disconnect.  It generates a server message about the disconnection.<BR><BR></TD>
+</TR>
+</table>
+<P></P>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>EndSession</b> is available in all versions of <b>IDebugClient</b>.</P>
+<H4>Comments</H4>
+<P>This method may be called at any time with <i>Flags</i> set to DEBUG_END_REENTRANT.  If, for example, the application needs to exit but another <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#dbab27fb-1baa-4eed-9e6b-c0aab6e1defb">thread</a> is using the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a>, this method can be used to perform as much cleanup as possible.</P>
+<P>Using DEBUG_END_REENTRANT may leave the engine in an indeterminate state. If this flag is used, no subsequent calls should be made to the engine.</P>
+<P>For more information about debugger sessions, see <a href="engine_overview_87d6e561-6d31-4a9e-8be3-1b5b93ebb5a3.xml.htm">Debugging Session and Execution Model</a>.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: EndSession RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

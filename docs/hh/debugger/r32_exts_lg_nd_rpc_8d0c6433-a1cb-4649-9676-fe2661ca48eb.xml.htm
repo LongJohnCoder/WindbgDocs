@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!logexts.loge</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !logexts.loge"><xml><MSHelp:Keyword Index="A" Term="r32_exts_Lg_ND_RPC_8d0c6433-a1cb-4649-9676-fe2661ca48eb.xml"/>
+<META NAME="MS-HKWD" CONTENT="!logexts.loge extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r32_exts_Lg_ND_RPC_8d0c6433-a1cb-4649-9676-fe2661ca48eb.xml"></A>!logexts.loge</H1>
+<P>The <b>!logexts.loge</b> extension enables logging. If logging has not been initialized, it will be initialized and enabled.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!logexts.loge</b> [<i>OutputDirectory</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>OutputDirectory</i></DT>
+<DD>Specifies the directory to use for output. If <i>OutputDirectory</i> is specified, it must exist &#8212; the debugger will not create it. If a relative path is specified, it will be relative to the directory from which the debugger was started. If <i>OutputDirectory</i> is omitted, the path to the Desktop will be used. The debugger will create a <i>LogExts</i> subdirectory of <i>OutputDirectory</i>, and all Logger output will be placed in this subdirectory.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Logexts.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Logexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If Logger has not yet been injected into the target application by the <a href="r32_exts_lg_nd_rpc_beab35f4-c05a-437e-9f96-80483de1f1b2.xml.htm"><b>!logexts.logi</b></a> extension, the <b>!logexts.loge</b> extension will inject Logger into the target and then enable logging.</P>
+<P>If <b>!logexts.logi</b> has already been run, you cannot include <i>OutputDirectory</i>, because the output directory will have already been set.</P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="logger+logviewer_04a62565-7398-4aa3-b6bb-46caea421b75.xml.htm">Logger and LogViewer</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !logexts.loge RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

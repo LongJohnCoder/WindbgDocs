@@ -1,0 +1,1047 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xC4: DRIVER_VERIFIER_DETECTED_VIOLATION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xC4: DRIVER_VERIFIER_DETECTED_VIOLATION"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_77bda7e9-4f41-49e9-86db-04446dc9c7b7.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xC4: DRIVER_VERIFIER_DETECTED_VIOLATION">
+<META NAME="MS-HKWD" CONTENT="DRIVER_VERIFIER_DETECTED_VIOLATION"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_77bda7e9-4f41-49e9-86db-04446dc9c7b7.xml"></A>Bug Check 0xC4: DRIVER_VERIFIER_DETECTED_VIOLATION</H1>
+<P>The DRIVER_VERIFIER_DETECTED_VIOLATION bug check has a value of 0x000000C4. This is the general bug check code for fatal errors found by  Driver Verifier.  </P>
+<H4>Parameters</H4>
+<P>Four bug check parameters are displayed on the blue screen. Parameter 1 identifies the type of violation. The meaning of the remaining parameters varies with the value of Parameter 1. The parameter values are described in the following table.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x00</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver requested a zero-byte pool allocation. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x01</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Size of allocation, in bytes</TD>
+<TD Width="">The driver attempted to allocate paged memory with IRQL &gt; APC_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x02</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Size of allocation, in bytes</TD>
+<TD Width="">The driver attempted to allocate nonpaged memory with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x03  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The driver attempted to allocate multiple pages of must succeed pool, but at most one page can be allocated using this routine.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10</TD>
+<TD Width="">Bad Address</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver attempted to free an address that was not returned from an allocate call. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x11</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Address of pool</TD>
+<TD Width="">The driver attempted to free paged pool with IRQL &gt; APC_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x12</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Address of pool</TD>
+<TD Width="">The driver attempted to free nonpaged pool with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x13<BR>or<BR>0x14</TD>
+<TD Width="">Reserved   </TD>
+<TD Width="">Pointer to pool header</TD>
+<TD Width="">Pool header contents</TD>
+<TD Width="">The driver attempted to free memory pool which was already freed.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x15</TD>
+<TD Width="">Timer entry</TD>
+<TD Width="">Pool type (-1 for special pool)</TD>
+<TD Width="">Pool address being freed</TD>
+<TD Width="">The driver attempted to free pool which contains an active timer. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x16</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Pool address</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver attempted to free pool at a bad address, or the driver passed invalid parameters to a memory routine. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x17</TD>
+<TD Width="">Resource entry</TD>
+<TD Width="">Pool type (-1 for special pool)</TD>
+<TD Width="">Pool address being freed</TD>
+<TD Width="">The driver attempted to free pool which contains an active ERESOURCE. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x30</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Requested IRQL</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver passed an invalid parameter to <b>KeRaiseIrql</b>. <BR><BR>(The parameter was either a value lower than the current IRQL, or a value higher than HIGH_LEVEL. This may be the result of using an uninitialized parameter.) <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x31</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Requested IRQL</TD>
+<TD Width=""><b>0:</b>  New IRQL is bad<BR><BR><b>1:</b>  New IRQL is invalid inside a DPC routine<BR><BR></TD>
+<TD Width="">The driver passed an invalid parameter to <b>KeLowerIrql</b>. <BR><BR>(The parameter was either a value higher than the current IRQL, or a value higher than HIGH_LEVEL. This may be the result of using an uninitialized parameter.) <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x32</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Spin lock address</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>KeReleaseSpinLock</b> at an IRQL other than DISPATCH_LEVEL.<BR><BR>(This may be due to a double-release of a spin lock.) <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x33</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Fast mutex address</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver attempted to acquire fast mutex with IRQL &gt; APC_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x34</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Fast mutex address</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver attempted to release fast mutex at an IRQL other than APC_LEVEL. <b> </b> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x35</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Spin lock address</TD>
+<TD Width="">Old IRQL</TD>
+<TD Width="">The kernel released a spin lock with IRQL not equal to DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x36</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Spin lock number</TD>
+<TD Width="">Old IRQL</TD>
+<TD Width="">The kernel released a queued spin lock with IRQL not equal to DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x37</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Thread APC disable count</TD>
+<TD Width="">Resource</TD>
+<TD Width="">The driver tried to acquire a resource, but APCs are not disabled. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x38</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Thread APC disable count</TD>
+<TD Width="">Resource</TD>
+<TD Width="">The driver tried to release a resource, but APCs are not disabled. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x39</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Thread APC disable count</TD>
+<TD Width="">Mutex</TD>
+<TD Width="">The driver tried to acquire a mutex "unsafe" with IRQL not equal to APC_LEVEL on entry. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3A</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Thread APC disable count</TD>
+<TD Width="">Mutex</TD>
+<TD Width="">The driver tried to release a mutex "unsafe" with IRQL not equal to APC_LEVEL on entry. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3B</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Object to wait for</TD>
+<TD Width="">Time-out parameter</TD>
+<TD Width="">The driver called <b>KeWaitXxx</b> with IRQL &gt;= DISPATCH_LEVEL.<BR><BR>(This is permitted only if the driver already owns the DISPATCHER lock and it passes a time-out value of zero to the routine.) <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3C</TD>
+<TD Width="">Handle passed to routine</TD>
+<TD Width="">Object type</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>ObReferenceObjectByHandle</b> with a bad handle. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3D</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">Address of the bad resource </TD>
+<TD Width="">The driver passed a bad (unaligned) resource to <b>ExAcquireResourceExclusive</b>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3E</TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width="">The driver called <b>KeLeaveCriticalRegion</b> for a thread that is not currently in a critical region.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3F</TD>
+<TD Width="">Object address</TD>
+<TD Width="">New object reference count.<BR><BR><b>-1:</b>  dereference case<BR><BR><b>1: </b> reference case<BR><BR></TD>
+<TD Width="">0</TD>
+<TD Width="">The driver applied  <b>ObReferenceObject</b> to an object that has a reference count of zero, or the driver applied <b>ObDereferenceObject</b> to an object that has a reference count of zero. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x40</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Spin lock address</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>KeAcquireSpinLockAtDpcLevel</b> with IRQL &lt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x41</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Spin lock address</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>KeReleaseSpinLockFromDpcLevel</b> with IRQL &lt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x42</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Spin lock address</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>KeAcquireSpinLock</b> with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x51</TD>
+<TD Width="">Base address of allocation</TD>
+<TD Width="">Address of the reference beyond the allocation</TD>
+<TD Width="">Number of charged bytes</TD>
+<TD Width="">The driver attempted to free memory after having written past the end of the allocation.  A bug check with this parameter occurs only when the <b>Pool Tracking </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x52</TD>
+<TD Width="">Base address of allocation</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Number of charged bytes</TD>
+<TD Width="">The driver attempted to free memory after having written past the end of the allocation.  A bug check with this parameter occurs only when the <b>Pool Tracking </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x53,<BR>0x54,<BR>or<BR>0x59</TD>
+<TD Width="">Base address of allocation</TD>
+<TD Width="">Reserved  </TD>
+<TD Width="">Reserved  </TD>
+<TD Width="">The driver attempted to free memory after having written past the end of the allocation.  A bug check with this parameter occurs only when the <b>Pool Tracking </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x60</TD>
+<TD Width="">Bytes allocated from paged pool</TD>
+<TD Width="">Bytes allocated from nonpaged pool</TD>
+<TD Width="">Total number of allocations that were not freed</TD>
+<TD Width="">The driver is unloading without first freeing its pool allocations. A bug check with this parameter occurs only when the <b>Pool Tracking </b>option of Driver Verifier is active.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x61</TD>
+<TD Width="">Bytes allocated from paged pool</TD>
+<TD Width="">Bytes allocated from nonpaged pool</TD>
+<TD Width="">Total number of allocations that were not freed</TD>
+<TD Width="">A driver thread is attempting to allocate pool memory while the driver is unloading.  A bug check with this parameter occurs only when the <b>Pool Tracking </b>option of Driver Verifier is active.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x62</TD>
+<TD Width="">Name of the driver</TD>
+<TD Width="">Reserved  </TD>
+<TD Width="">Total number of allocations that were not freed, including both paged and nonpaged pool</TD>
+<TD Width="">The driver is unloading without first freeing its pool allocations.  A bug check with this parameter occurs only when the <b>Pool Tracking </b>option of Driver Verifier is active.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6F</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Physical page being locked</TD>
+<TD Width="">Highest physical page in the system</TD>
+<TD Width="">The driver passed a page to <b>MmProbeAndLockPages</b> that was not in the PFN database.<BR><BR>(This often results from a driver that attempts to lock its own private dualport RAM. Such behavior can corrupt memory on machines with noncontiguous physical RAM.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x70</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Access mode</TD>
+<TD Width="">The driver called <b>MmProbeAndLockPages</b> with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x71</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Process address</TD>
+<TD Width="">The driver called <b>MmProbeAndLockProcessPages</b> with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x72</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Process address</TD>
+<TD Width="">The driver called <b>MmProbeAndLockSelectedPages</b> <b> </b> with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x73</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width=""><i>In 32-bit Windows: </i>Low 32 bits of the physical address<BR><BR><i>In 64-bit Windows:</i> the 64-bit physical address<BR><BR></TD>
+<TD Width="">Number of bytes</TD>
+<TD Width="">The driver called <b>MmMapIoSpace</b> with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x74</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Access mode</TD>
+<TD Width="">The driver called <b>MmMapLockedPages</b> in kernel mode with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x75</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Access mode</TD>
+<TD Width="">The driver called <b>MmMapLockedPages</b> in user mode with IRQL &gt; APC_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x76</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Access mode</TD>
+<TD Width="">The driver called <b>MmMapLockedPagesSpecifyCache</b> in kernel mode with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x77</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Access mode</TD>
+<TD Width="">The driver called <b>MmMapLockedPagesSpecifyCache</b> in user mode with IRQL &gt; APC_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x78</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>MmUnlockPages</b> with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x79</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Virtual address being unmapped</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">The driver called <b>MmUnmapLockedPages</b> in kernel mode with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7A</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Virtual address being unmapped</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">The driver called <b>MmUnmapLockedPages</b> in user mode with IRQL &gt; APC_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7B</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Virtual address being unmapped</TD>
+<TD Width="">Number of bytes</TD>
+<TD Width="">The driver called <b>MmUnmapIoSpace</b> with IRQL &gt; APC_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7C</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>MmUnlockPages</b>, and passed an MDL whose pages were never successfully locked. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7D</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>MmUnlockPages</b>, and passed an MDL whose pages are from nonpaged pool.<BR><BR>(These should never be unlocked.) <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x80</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Event address</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>KeSetEvent</b> with IRQL &gt; DISPATCH_LEVEL. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x81</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>MmMapLockedPages</b>.<BR><BR>(You should use <b>MmMapLockedPagesSpecifyCache</b> instead, with the <i>BugCheckOnFailure</i> parameter set to FALSE.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x82</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">0 </TD>
+<TD Width="">The driver called <b>MmMapLockedPagesSpecifyCache</b> with the <i>BugCheckOnFailure</i> parameter equal to TRUE.<BR><BR>(This parameter should be set to FALSE.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x83</TD>
+<TD Width="">Start of physical address range to map</TD>
+<TD Width="">Number of bytes to map</TD>
+<TD Width="">First page frame number that isn't locked down</TD>
+<TD Width="">The driver called <b>MmMapIoSpace</b> without having locked down the MDL pages.  The physical pages represented by the physical address range being mapped must have been locked down prior to making this call.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x84</TD>
+<TD Width="">Start of physical address range to map</TD>
+<TD Width="">Number of bytes to map</TD>
+<TD Width="">First page frame number that is on the free list</TD>
+<TD Width="">The driver called <b>MmMapIoSpace</b> without having locked down the MDL pages (or after freeing the MDL pages).  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x85</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Number of pages to map</TD>
+<TD Width="">First page frame number that isn't locked down</TD>
+<TD Width="">The driver called <b>MmMapLockedPages</b> without having locked down the MDL pages. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x86</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Number of pages to map</TD>
+<TD Width="">First page frame number that is on the free list</TD>
+<TD Width="">The driver called <b>MmMapLockedPages</b> without having locked down the MDL pages (or after freeing the MDL pages).  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x87</TD>
+<TD Width="">Base physical page of the existing mapping<BR><BR>(Shift left for physical address)<BR><BR></TD>
+<TD Width="">Number of pages already mapped in the existing mapping</TD>
+<TD Width="">MEMORY_CACHING_TYPE of the existing mapping</TD>
+<TD Width="">The driver called <b>MmMapIoSpace</b>, but the caller's cache type conflicts with an existing mapping.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x88</TD>
+<TD Width="">Base physical page of the requested mapping<BR><BR>(Shift left for physical address)<BR><BR></TD>
+<TD Width="">Number of pages in the requested mapping</TD>
+<TD Width="">MEMORY_CACHING_TYPE of the requested mapping</TD>
+<TD Width="">The driver called <b>MmMapIoSpace</b> to map a physical range as non-cached or write-combined, but the caller's physical range already has an existing cached mapping.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x89</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Pointer to the non-memory page in the MDL</TD>
+<TD Width="">The non-memory page number in the MDL</TD>
+<TD Width="">An MDL is not marked as "I/O", but it contains non-memory page addresses.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8A</TD>
+<TD Width="">MDL address</TD>
+<TD Width="">Base physical page of the requested mapping<BR><BR>(Shift left for physical address)<BR><BR></TD>
+<TD Width="">MEMORY_CACHING_TYPE of the requested mapping</TD>
+<TD Width="">The driver called <b>MmMapLockedPages</b><I><B>Xxx</B></I> to map a physical range as non-cached or write-combined, but the caller's physical range already has an existing cached mapping.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x90  (<i>Windows 2000, Windows XP, and Windows Server 2003 only</i>)</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The driver switched stacks, and the current stack is neither a thread stack nor a DPC stack.<BR><BR>(Typically, the driver doing this should be on the stack obtained by using the <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kb (Display Stack Backtrace)</b></a> command.)    <b> </b> <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x91</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">The driver switched stacks using a method that is not supported by the operating system.  The only supported way to extend a kernel mode stack is by using <b>KeExpandKernelStackAndCallout</b>.   </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xA0 (<i>Windows Server 2003 and later operating systems only)</i></TD>
+<TD Width="">Pointer to the IRP making the read or write request</TD>
+<TD Width="">Device object of the lower device</TD>
+<TD Width="">Number of the sector in which the error was detected</TD>
+<TD Width="">A cyclic redundancy check (CRC) error was detected on a hard disk.   A bug check with this parameter occurs only when the <b>Disk Integrity Checking </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xA1 (<i>Windows Server 2003 and later operating systems only)</i></TD>
+<TD Width="">Copy of the IRP making the read or write request. (The actual IRP has been completed.)</TD>
+<TD Width="">Device object of the lower device</TD>
+<TD Width="">Number of the sector in which the error was detected</TD>
+<TD Width="">A CRC error was detected on a sector (asynchronously).  A bug check with this parameter occurs only when the <b>Disk Integrity Checking </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xA2 (<i>Windows Server 2003 and later operating systems only)</i></TD>
+<TD Width="">IRP making the read or write request, or a copy of this IRP</TD>
+<TD Width="">Device object of the lower device</TD>
+<TD Width="">Number of the sector in which the error was detected</TD>
+<TD Width="">The CRCDISK checksum copies don't match.  This could be a paging error.  A bug check with this parameter occurs only when the <b>Disk Integrity Checking </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB0 <i>(Windows Vista and later operating systems only)</i></TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">Incorrect MDL flags</TD>
+<TD Width="">The driver called <b>MmProbeAndLockPages</b> for an MDL with incorrect flags.  For example, the driver passed an MDL created by <b>MmBuildMdlForNonPagedPool</b> to <b>MmProbeAndLockPages.</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB1  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">Incorrect MDL flags</TD>
+<TD Width="">The driver called <b>MmProbeAndLockProcessPages</b> for an MDL with incorrect flags.  For example, the driver passed an MDL created by <b>MmBuildMdlForNonPagedPool<u> </u></b>to <b>MmProbeAndLockProcessPages</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB2  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">Incorrect MDL flags</TD>
+<TD Width="">The driver called <b>MmMapLockedPages</b> for an MDL with incorrect flags.  For example, the driver passed an MDL that is already mapped to a system address or that was not locked to <b>MmMapLockedPages</b>.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB3  (<i>Windows Vista and later operating  systems only)</i></TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">Missing MDL flags (at least one was expected)</TD>
+<TD Width="">The driver called <b>MmMapLockedPages</b> for an MDL with incorrect flags.  For example, the driver passed an MDL that is not locked to <b>MmMapLockedPages</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB4  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">Unexpected partial MDL flag</TD>
+<TD Width="">The driver called <b>MmUnlockPages</b> for a partial MDL.  A partial MDL is one that was created by <b>IoBuildPartialMdl</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB5  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">Unexpected partial MDL flag </TD>
+<TD Width="">The driver called <b>MmUnmapLockedPages</b> for a partial MDL.  A partial MDL is one that was created by <b>IoBuildPartialMdl</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB6  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">MDL address</TD>
+<TD Width="">MDL flags</TD>
+<TD Width="">Missing MDL flag </TD>
+<TD Width="">The driver called <b>MmUnmapLockedPages</b> for an MDL that is not mapped to a system address.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB7  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Number of corrupted physical pages </TD>
+<TD Width="">Address of first corrupted physical page</TD>
+<TD Width="">Address of last corrupted physical page</TD>
+<TD Width="">The system BIOS has corrupted low physical memory during a sleep transition.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xC0  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the IRP</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The driver called <b>IoCallDriver</b> with interrupts disabled. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xC1  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the driver dispatch routine</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">A driver dispatch routine was returned with interrupts disabled.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xC2  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The driver called a Fast I/O dispatch routine after interrupts were disabled.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xC3  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the driver Fast I/O dispatch routine</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">A driver Fast I/O dispatch routine was returned with interrupts disabled.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xC5  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the driver dispatch routine</TD>
+<TD Width="">The current thread&#8217;s APC disable count</TD>
+<TD Width="">The thread&#8217;s APC disable count prior to calling the driver dispatch routine</TD>
+<TD Width="">A driver dispatch routine has changed the thread&#8217;s APC disable count. <BR><BR>The APC disable count is decremented each time a driver calls <b>KeEnterCriticalRegion</b>, <b>FsRtlEnterFileSystem</b>, or acquires a mutex. <BR><BR>The APC disable count is incremented each time a driver calls <b>KeLeaveCriticalRegion</b>, <b>KeReleaseMutex</b>, or <b>FsRtlExitFileSystem</b>.<BR><BR>Because these calls should always be in pairs, the APC disable count should be zero whenever a thread is exited. A negative value indicates that a driver has disabled APC calls without re-enabling them. A positive value indicates that the reverse is true.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xC6  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the driver Fast I/O dispatch routine</TD>
+<TD Width="">Current thread&#8217;s APC disable count</TD>
+<TD Width="">The thread&#8217;s APC disable count prior to calling the Fast I/O driver dispatch routine</TD>
+<TD Width="">A driver Fast I/O dispatch routine has changed the thread&#8217;s APC disable count. <BR><BR>The APC disable count is decremented each time a driver calls <b>KeEnterCriticalRegion</b>, <b>FsRtlEnterFileSystem</b>, or acquires a mutex. <BR><BR>The APC disable count is incremented each time a driver calls <b>KeLeaveCriticalRegion</b>, <b>KeReleaseMutex</b>, or <b>FsRtlExitFileSystem</b>.<BR><BR>Because these calls should always be in pairs, the APC disable count should be zero whenever a thread is exited. A negative value indicates that a driver has disabled APC calls without re-enabling them. A positive value indicates that the reverse is true.<BR><BR><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xCA  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the lookaside list</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The driver has attempted to re-initialize a lookaside list.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xCB  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the lookaside list</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The driver has attempted to delete an uninitialized lookaside list.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xCC  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the lookaside list</TD>
+<TD Width="">Starting address of the pool allocation</TD>
+<TD Width="">Size of the pool allocation</TD>
+<TD Width="">The driver has attempted to free a pool allocation that contains an active lookaside list.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xCD  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the lookaside list</TD>
+<TD Width="">Block size specified by the caller</TD>
+<TD Width="">Minimum supported block size</TD>
+<TD Width="">The driver has attempted to create a lookaside list with an allocation block size that is too small.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xD0  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the ERESOURCE structure</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The driver has attempted to re-initialize an ERESOURCE structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xD1  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the ERESOURCE structure</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The driver has attempted to delete an uninitialized ERESOURCE structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xD2  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the ERESOURCE structure</TD>
+<TD Width="">Starting address of the pool allocation</TD>
+<TD Width="">Size of the pool allocation</TD>
+<TD Width="">The driver has attempted to free a pool allocation that contains an active ERESOURCE structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xD5  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the IO_REMOVE_LOCK structure created by the checked build version of the driver</TD>
+<TD Width="">Current <b>IoReleaseRemoveLock</b> tag</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The current <b>IoReleaseRemoveLock</b> tag does not match the previous <b>IoAcquireRemoveLock </b>tag.  If the driver calling <b>IoReleaseRemoveLock</b> is not in a checked build, Parameter 2 is the address of the shadow IO_REMOVE_LOCK structure created by Driver Verifier on behalf of the driver. In this case, the address of the IO_REMOVE_LOCK structure used by the driver is not used at all, because Driver Verifier is replacing the lock address for all the remove lock APIs.   A bug check with this parameter occurs only when the <b>I/O Verification </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xD6  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the IO_REMOVE_LOCK structure created by the checked build version of the driver</TD>
+<TD Width="">Tag that does not match previous <b>IoAcquireRemoveLock</b> tag</TD>
+<TD Width="">Previous <b>IoAcquireRemoveLock</b> tag</TD>
+<TD Width="">The current <b>IoReleaseRemoveLockAndWait</b> tag does not match the previous <b>IoAcquireRemoveLock </b>tag.  If the driver calling <b>IoReleaseRemoveLock</b> is not a checked build, Parameter 2 is the address of the shadow IO_REMOVE_LOCK structure created by Driver Verifier on behalf of the driver. In this case, the address of the IO_REMOVE_LOCK structure used by the driver is not used at all, because Driver Verifier is replacing the lock address for all the remove lock APIs.  A bug check with this parameter occurs only when the <b>I/O Verification </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xD7  <i>(</i>Windows 7<i>operating systems and later only)</i></TD>
+<TD Width="">Address of the checked build Remove Lock structure that is used internally by Driver Verifier</TD>
+<TD Width="">Address of the Remove Lock structure that is specified by the driver</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">A Remove Lock cannot be re-initialized, even after it calls <b>IoReleaseRemoveLockAndWait</b>, because other threads might still be using that lock (by calling <b>IoAcquireRemoveLock</b>). The driver should allocate the Remove Lock inside its device extension, and initialize it a single time. The lock will be deleted together with the device extension.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xDA  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Starting address of the driver</TD>
+<TD Width="">WMI callback address inside the driver</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">An attempt was made to unload a driver that has not deregistered its WMI callback function.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xDB  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the device object</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">An attempt was made to delete a device object that was not deregistered from WMI.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xDC  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">An invalid RegHandle value was specified as a parameter of the function <b>EtwUnregister.</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xDD  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the call to <b>EtwRegister</b></TD>
+<TD Width="">Starting address of the unloading driver</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">An attempt was made to unload a driver without calling <b>EtwUnregister.</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xDF  <i>(</i>Windows 7<i>operating systems and later only)</i></TD>
+<TD Width="">Synchronization object address </TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">The synchronization object is in session address space. Synchronization objects are not allowed in session address space because they can be manipulated from another session or from system threads that have no session virtual address space.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xE0  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">User-mode address that is used as a parameter</TD>
+<TD Width="">Size ,in bytes, of the address range that is used as a parameter</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">A call was made to an operating system kernel function that specified a user-mode address as a parameter.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xE1  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the synchronization object</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">A synchronization object was found to have an address that was either invalid or pageable.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xE2  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the IRP</TD>
+<TD Width="">User-mode address present in the IRP </TD>
+<TD Width="">Reserved</TD>
+<TD Width="">An IRP with <b>Irp-&gt;RequestorMode</b> set to <b>KernelMode</b> was found to have a user-mode address as one of its members.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xE3  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the call to the API</TD>
+<TD Width="">User-mode address used as a parameter in the API</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">A driver has made a call to a kernel-mode <b>Zw</b><I><B>Xxx</B></I> routine with a user-mode address as a parameter.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xE4  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the call to the API</TD>
+<TD Width="">Address of the malformed UNICODE_STRING structure</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">A driver has made a call to a kernel-mode <b>Zw</b><I><B>Xxx</B></I> routine with a malformed UNICODE_STRING structure as a parameter.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xE5  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">A call was made to a Kernel API at the incorrect IRQL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xEA  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">The thread&#8217;s APC disable count</TD>
+<TD Width="">Address of the pushlock</TD>
+<TD Width="">A driver has attempted to acquire a pushlock while APCs are enabled.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xEB  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">The thread&#8217;s APC disable count</TD>
+<TD Width="">Address of the pushlock</TD>
+<TD Width="">A driver has attempted to release a pushlock while APCs are enabled.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xF0  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the destination buffer</TD>
+<TD Width="">Address of the source buffer</TD>
+<TD Width="">Number of bytes to copy</TD>
+<TD Width="">A driver called the <b>memcpy</b> function with overlapping source and destination buffers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xF5  (<i>Windows Vista and later operating systems only)</i></TD>
+<TD Width="">Address of the NULL handle</TD>
+<TD Width="">Object type</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">A driver passed a NULL handle to <b>ObReferenceObjectByHandle</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xF6 <i>(</i>Windows 7<i>operating systems and later)</i></TD>
+<TD Width="">Handle value being referenced</TD>
+<TD Width="">Address of the current process</TD>
+<TD Width="">Address inside the driver that performs the incorrect reference</TD>
+<TD Width="">A driver references a user-mode handle as kernel mode.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xFA <i>(</i>Windows 7<i>operating systems and later)</i></TD>
+<TD Width="">Completion routine address.</TD>
+<TD Width="">IRQL value before it calls the completion routine</TD>
+<TD Width="">Current IRQL value, after it calls the completion routine</TD>
+<TD Width="">The IRP completion routine returned at an IRQL that was different from the IRQL the routine was called at.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xFB  <i>(</i>Windows 7<i>operating systems and later)</i></TD>
+<TD Width="">Completion routine address</TD>
+<TD Width="">Current thread&#8217;s APC disable count</TD>
+<TD Width="">The thread&#8217;s APC disable count before it calls the IRP completion routine</TD>
+<TD Width="">The thread&#8217;s APC disable count was changed by the driver&#8217;s IRP completion routine.<BR><BR>The APC disable count is decremented each time a driver calls <b>KeEnterCriticalRegion</b>, <b>FsRtlEnterFileSystem</b>, or acquires a mutex. <BR><BR>The APC disable count is incremented each time a driver calls <b>KeLeaveCriticalRegion</b>, <b>KeReleaseMutex</b>, or <b>FsRtlExitFileSystem</b>.<BR><BR>Because these calls should always be in pairs, the APC disable count should be zero whenever a thread is exited. A negative value indicates that a driver has disabled APC calls without re-enabling them. A positive value indicates that the reverse is true.<BR><BR><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x105<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">Address of the IRP</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">The driver uses ExFreePool instead of IoFreeIrp to release the IRP.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10A<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">The driver attempts to charge pool quota to the Idle process.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10B<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width=""></TD>
+<TD Width=""><BR><BR><BR><BR></TD>
+<TD Width=""></TD>
+<TD Width="">The driver attempts to charge pool quota from a DPC routine. This is incorrect because the current process context is undefined.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x110<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">Address of the Interrupt Service Routine</TD>
+<TD Width="">Address of the extended context that was saved before it executed the ISR</TD>
+<TD Width="">Address of the extended context was saved after it executed the ISR</TD>
+<TD Width="">The interrupt service routine (ISR) for the driver has corrupted the extended thread context.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x115<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">The address of the thread that is responsible for the shutdown, which might be deadlocked</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Driver Verifier detected that the system has taken longer than 20 minutes and shutdown is not complete. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x11A<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">Current IRQL</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">The driver calls KeEnterCriticalRegion at IRQL &gt; APC_LEVEL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x11B<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">Current IRQL</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">The driver calls KeLeaveCriticalRegion at IRQL &gt; APC_LEVEL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x120<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">Address of the IRQL value</TD>
+<TD Width="">Address of the Object to wait on</TD>
+<TD Width="">Address of Timeout value</TD>
+<TD Width="">The thread waits at IRQL &gt; DISPATCH_LEVEL. Callers of KeWaitForSingleObject or KeWaitForMultipleObjects must run at IRQL &lt;= DISPATCH_LEVEL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x121<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">Address of the IRQL value</TD>
+<TD Width="">Address of the Object to wait on</TD>
+<TD Width="">Address of Timeout value</TD>
+<TD Width="">The thread waits at IRQL equals DISPATCH_LEVEL and the Timeout is NULL. Callers of KeWaitForSingleObject or KeWaitForMultipleObjects can run at IRQL &lt;= DISPATCH_LEVEL. If a NULL pointer is supplied for Timeout, the calling thread remains in a wait state until the Object is signaled.<BR><BR><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x122<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">Address of the IRQL value</TD>
+<TD Width="">Address of the Object to wait on</TD>
+<TD Width="">Address of the Timeout value </TD>
+<TD Width="">The thread waits at DISPATCH_LEVEL and Timeout value is not equal to zero (0). If the Timeout != 0, the callers of KeWaitForSingleObject or KeWaitForMultipleObjects must run at IRQL  &lt;= APC_LEVEL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x123<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">Address of the Object to wait on</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">The caller of KeWaitForSingleObject or KeWaitForMultipleObjects specified the wait as <b>UserMode</b>, but the Object is on the kernel stack. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x130<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">Address of work item</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">The work item is in session address space. Work items are not allowed in session address space because they can be manipulated from another session or from system threads that have no session virtual address space.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x131<BR><BR><i>(</i>Windows 7<i>operating systems and later)</i><BR><BR></TD>
+<TD Width="">Address of work item</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">The work item is in pageable memory. Work items have to be in nonpageable memory because the kernel uses them at DISPATCH_LEVEL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x135</TD>
+<TD Width="">Address of IRP</TD>
+<TD Width="">Number of milliseconds allowed between the <b>IoCancelIrp</b> call and the completion for this IRP</TD>
+<TD Width=""></TD>
+<TD Width="">The canceled IRP did not completed in the expected time The driver took longer than expected to complete the canceled IRP. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x13A</TD>
+<TD Width="">Address of the pool block being freed</TD>
+<TD Width="">Incorrect value</TD>
+<TD Width="">Address of the incorrect value</TD>
+<TD Width="">The driver has called <b>ExFreePool</b> and Driver Verifier detects an error in one of the internal values that is used to track pool usage.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x13B</TD>
+<TD Width="">Address of the pool block being freed</TD>
+<TD Width="">Address of the incorrect value</TD>
+<TD Width="">Address of a pointer to the incorrect memory page</TD>
+<TD Width="">The driver has called <b>ExFreePool</b> and Driver Verifier detects an error in one of the internal values that is used to track pool usage.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x13C</TD>
+<TD Width="">Address of the pool block being freed</TD>
+<TD Width="">Incorrect value</TD>
+<TD Width="">Address of the incorrect value</TD>
+<TD Width="">The driver has called <b>ExFreePool</b> and Driver Verifier detects an error in one of the internal values that is used to track pool usage.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x13D</TD>
+<TD Width="">Address of the pool block being freed</TD>
+<TD Width="">Address of the incorrect value</TD>
+<TD Width="">Correct value that was expected</TD>
+<TD Width="">The driver has called <b>ExFreePool</b> and Driver Verifier detects an error in one of the internal values that is used to track pool usage.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x13E</TD>
+<TD Width="">Pool block address specified by the caller</TD>
+<TD Width="">Pool block address tracked by Driver Verifier</TD>
+<TD Width="">Pointer to the pool block address that is tracked by Driver Verifier</TD>
+<TD Width="">The pool block address specified by the caller of <b>ExFreePool</b> is different from the address tracked by Driver Verifier.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x13F</TD>
+<TD Width="">Address of the pool block being freed</TD>
+<TD Width="">Number of bytes being freed</TD>
+<TD Width="">Pointer to the number of bytes tracked by Driver Verifier</TD>
+<TD Width="">The number of bytes of memory being freed in the call to <b>ExFreePool</b> is different from the number of bytes tracked by Driver Verifier.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1000 (<i>Windows XP and later operating systems only)</i></TD>
+<TD Width="">Address of the resource</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Self-deadlock:</b> The current thread has tried to recursively acquire a resource.  A bug check with this parameter occurs only when the <b>Deadlock Detection </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1001 (<i>Windows XP and later operating systems only)</i></TD>
+<TD Width="">Address of the resource that was the final cause of the deadlock</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Deadlock:</b> A lock hierarchy violation has been found.  A bug check with this parameter occurs only when the <b>Deadlock Detection </b>option of Driver Verifier is active. <BR><BR>(Use the <a href="r26_exts_kernel_a_e10a3a85-32de-4854-b6ea-c877b0650ea6.xml.htm"><b>!deadlock</b></a>  extension for further information.) <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1002 (<i>Windows XP and later operating systems only)</i></TD>
+<TD Width="">Address of the resource</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Uninitialized resource:</b> A resource has been acquired without having been initialized first.  A bug check with this parameter occurs only when the <b>Deadlock Detection </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1003 (<i>Windows XP and later operating systems only)</i></TD>
+<TD Width="">Address of the resource that is being released deadlocked</TD>
+<TD Width="">Address of the resource that should have been released first</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Unexpected release:</b> A resource has been released in an incorrect order.  A bug check with this parameter occurs only when the <b>Deadlock Detection </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1004 (<i>Windows XP and later operating systems only)</i></TD>
+<TD Width="">Address of the resource</TD>
+<TD Width="">Address of the thread that acquired the resource</TD>
+<TD Width="">Address of the current thread</TD>
+<TD Width=""><b>Unexpected thread:</b> The wrong thread releases a resource.  A bug check with this parameter occurs only when the <b>Deadlock Detection </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1005 (<i>Windows XP and later operating systems only)</i></TD>
+<TD Width="">Address of the resource</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Multiple initialization:</b> A resource is initialized more than one time.  A bug check with this parameter occurs only when the <b>Deadlock Detection </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1006 (<i>Windows XP and later operating systems only)</i></TD>
+<TD Width="">Address of the thread being deleted</TD>
+<TD Width="">Address of the resource owned by the thread</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Thread holds resources:</b> A thread is deleted before the thread can release its resources.  A bug check with this parameter occurs only when the <b>Deadlock Detection </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1007 (<i>Windows XP and later operating systems only)</i></TD>
+<TD Width="">Address of the resource</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Unacquired resource:</b> A resource is released before it has been acquired.  A bug check with this parameter occurs only when the <b>Deadlock Detection </b>option of Driver Verifier is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1008<BR><BR>(operating systems and later)<BR><BR></TD>
+<TD Width="">Lock address</TD>
+<TD Width="">Driver Verifier internal data</TD>
+<TD Width="">Driver Verifier internal data</TD>
+<TD Width="">The driver tried to acquire a lock by using an API that is mismatched for this lock type.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1009<BR><BR>(operating systems and later)<BR><BR></TD>
+<TD Width="">Lock address</TD>
+<TD Width="">Driver Verifier internal data</TD>
+<TD Width="">Driver Verifier internal data</TD>
+<TD Width="">The driver tried to release a lock by using an API that is mismatched for this lock type.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x100A<BR><BR>(operating systems and later)<BR><BR></TD>
+<TD Width="">Owner thread address</TD>
+<TD Width="">Driver Verifier internal data</TD>
+<TD Width=""></TD>
+<TD Width="">The terminated thread owns the lock.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x100B<BR><BR>(operating systems and later)<BR><BR></TD>
+<TD Width="">Lock address</TD>
+<TD Width="">Owner thread address</TD>
+<TD Width="">Driver Verifier internal address</TD>
+<TD Width="">The deleted lock is still owned by a thread.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>See the description of each code in the Parameters section for a description of the cause. Further information can be obtained by using the <a href="r24_exts_general_a_6e1c68d6-f825-4a02-a9ba-2b0cd08cded8.xml.htm"><b>!analyze -v </b></a> extension.</P>
+<H4>Resolving the Problem</H4>
+<P>This bug check can only occur when Driver Verifier has been instructed to monitor one or more drivers. If you did not intend to use Driver Verifier, you should deactivate it. You might consider removing the driver which caused this problem as well.</P>
+<P>If you are the driver writer, use the information obtained through this bug check to fix the bugs in your code.</P>
+<P>For full details on Driver Verifier,  see the Driver Verifier section of the Windows Driver Kit (WDK).  </P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P></P>
+<P>The _POOL_TYPE codes are enumerated in <i>Ntddk.h</i>. In particular, <b>0</b> (zero) indicates nonpaged pool and <b>1</b> (one) indicates paged pool.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xC4: DRIVER_VERIFIER_DETECTED_VIOLATION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

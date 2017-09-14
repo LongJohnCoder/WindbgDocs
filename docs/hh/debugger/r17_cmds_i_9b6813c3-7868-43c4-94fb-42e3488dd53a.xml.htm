@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ln (List Nearest Symbols)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ln (List Nearest Symbols)"><xml><MSHelp:Keyword Index="A" Term="r17_cmds_I_9b6813c3-7868-43c4-94fb-42e3488dd53a.xml"/>
+<META NAME="MS-HKWD" CONTENT="ln (List Nearest Symbols) command">
+<META NAME="MS-HKWD" CONTENT="List Nearest Symbols (ln) command">
+<META NAME="MS-HKWD" CONTENT="symbols, List Nearest Symbols (ln) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r17_cmds_I_9b6813c3-7868-43c4-94fb-42e3488dd53a.xml"></A>ln (List Nearest Symbols)</H1>
+<P>The <b>ln</b> command displays the symbols at or near the given address.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>ln</b> <i>Address</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the address where the debugger should start to search for symbols. The nearest symbols, either before or after <i>Address</i>, are displayed. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>You can use the <b>ln</b> command to help determine what a pointer is pointing to. This command can also be useful when you are looking at a corrupted stack to determine which procedure made a call.</P>
+<P>If source line information is available, the <b>ln</b> display also includes the source file name and line number information.  </P>
+<P>If you are using a <a href="r06_use_gui_9f858c04-aa3a-4c3b-a747-45d9d46c3a62.xml.htm">source server</a>, the <b>ln</b> command displays information that is related to the source server.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ln (List Nearest Symbols) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

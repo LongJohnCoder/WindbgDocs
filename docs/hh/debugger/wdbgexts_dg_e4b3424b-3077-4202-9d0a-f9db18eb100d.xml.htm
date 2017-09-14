@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Writing WdbgExts Extension Code</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Writing WdbgExts Extension Code"><xml><MSHelp:Keyword Index="A" Term="WdbgExts_DG_e4b3424b-3077-4202-9d0a-f9db18eb100d.xml"/>
+<META NAME="MS-HKWD" CONTENT="WdbgExts extensions">
+<META NAME="MS-HKWD" CONTENT="extensions, WdbgExts"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_DG_e4b3424b-3077-4202-9d0a-f9db18eb100d.xml"></A>Writing WdbgExts Extension Code</H1>
+<P>WdbgExts extension commands can call any standard C function, as well as the debugger-related functions that appear in the <i>WdbgExts.h</i> header file.</P>
+<P>The WdbgExts functions are intended for use in debugger extension commands only. They are useful for controlling and inspecting the computer or application that is being debugged. The <i>WdbgExts.h</i> header file should be included by any code that is calling these WdbgExts functions.</P>
+<P>A number of these functions have 32-bit versions as well as  64-bit versions. Typically,  the names of the 64-bit WdbgExts functions end in "64," for example <b>ReadIoSpace64</b>. The 32-bit versions have no numerical ending, for example, <b>ReadIoSpace</b>. If you are using 64-bit pointers, you should use the function name ending in "64"; if you are using 32-bit pointers, you should use the "undecorated" function name. 64-bit pointers are recommended for any extension that you are writing. See <a href="wdbgexts_dg_850413ea-f120-4037-9556-72dbd34764ba.xml.htm">32-Bit Pointers and 64-Bit Pointers</a> for details.</P>
+<P>WdbgExts extensions cannot use the C++ interfaces that appear in the <i>DbgEng.h</i> header file. If you wish to use these interfaces, you should write a DbgEng extension or an EngExtCpp extension instead. Both DbgEng extensions and EngExtCpp extensions can use all the interfaces in <i>DbgEng.h</i> as well as those in <i>WdbgExts.h</i>.  For details, see <a href="extensions_dg_234fe538-f350-4149-9d65-d7d60d74e5da.xml.htm">Writing DbgEng Extensions</a> and <a href="engextcpp_dg_76c4f780-fe4d-4906-a0da-2d74b8ec9886.xml.htm">Writing EngExtCpp Extensions</a>. </P>
+<P class="note"><b>Note</b>  You must not attempt to call any DbgHelp or ImageHlp routines from a debugger extension. This is not supported and may cause a variety of problems.</P>
+<P>The following topics give an overview of various categories of WdbgExts functions:</P><B></B><div class="indent1">
+<P><a href="wdbgexts_dg_12d4d5ed-2f47-4018-affc-3fbb24ff9e83.xml.htm">WdbgExts Input and Output</a> </P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_dg_74a148ab-2b3c-46e5-a8c8-99c3c48fcd69.xml.htm">WdbgExts Memory Access</a> </P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_dg_bee66511-f295-4861-8362-4a07f8a4a457.xml.htm">WdbgExts Threads and Processes</a> </P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_dg_0a03ffbe-f2ac-4a7c-a20a-435bba838a59.xml.htm">WdbgExts Symbols</a> </P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_dg_c93c3d8a-021c-45cf-95f8-18b9f681c421.xml.htm">WdbgExts Target Information</a> </P>
+</div>
+<P>For a full list of these functions, see <a href="wdbgexts_ref_a074bbf3-80f8-415e-988d-1b45b2e73cc1.xml.htm">WdbgExts Functions</a>.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Writing WdbgExts Extension Code RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

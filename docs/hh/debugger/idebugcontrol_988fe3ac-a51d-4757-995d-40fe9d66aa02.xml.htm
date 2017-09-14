@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>CloseLogFile</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, CloseLogFile"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="CloseLogFile"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_988fe3ac-a51d-4757-995d-40fe9d66aa02.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::CloseLogFile method">
+<META NAME="MS-HKWD" CONTENT="CloseLogFile (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_988fe3ac-a51d-4757-995d-40fe9d66aa02.xml"></A>CloseLogFile</H1>
+<P>The <b>CloseLogFile</b> method closes the currently-open log file.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::CloseLogFile(</b><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<P>None</P>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>CloseLogFile</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>If no log file is open, this method has no effect.</P>
+<P>For more about log files, see <a href="engine_dg_ce5dd9cd-7068-4ca7-95d9-f4985a9812c2.xml.htm">Using Input and Output</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_93e0a810-9b23-43c2-b714-99a39c398f1e.xml.htm"><b>OpenLogFile2</b></a>, <a href="idebugcontrol_9822bd84-b8ee-4d36-a66f-e38567d23646.xml.htm"><b>GetLogFile2</b></a>, <a href="idebugcontrol_984f684e-c1c0-4819-b8ac-02718581c6ad.xml.htm"><b>OpenLogFile</b></a>, <a href="idebugcontrol_cad2fa56-b2ca-4a26-822e-193acf602913.xml.htm"><b>GetLogFile</b></a>, <b>.logclose</b></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: CloseLogFile RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Editing the Boot.ini File</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Editing the Boot.ini File"><xml><MSHelp:Keyword Index="A" Term="bootini_ff101da7-6579-4895-adcb-5f1fb2986cc9.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bootcfg tool">
+<META NAME="MS-HKWD" CONTENT="Boot.ini files [WDK], editing">
+<META NAME="MS-HKWD" CONTENT="editing boot options">
+<META NAME="MS-HKWD" CONTENT="Notepad [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="text editors [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="manual editing [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="boot entry parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="indefinite boot time-out values [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot time-out values [WDK]">
+<META NAME="MS-HKWD" CONTENT="time-outs [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="Boot.ini files [WDK], attribute removal">
+<META NAME="MS-HKWD" CONTENT="removing Boot.ini attributes">
+<META NAME="MS-HKWD" CONTENT="viewing boot options">
+<META NAME="MS-HKWD" CONTENT="Boot.ini files [WDK], viewing">
+<META NAME="MS-HKWD" CONTENT="editors [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], editing"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_ff101da7-6579-4895-adcb-5f1fb2986cc9.xml"></A>Editing the <i>Boot.ini</i> File</H1>
+<P>Prior to Windows Vista, BIOS-based computers running Windows store boot options in a <i>Boot.ini</i> text file. You can edit the <i>Boot.ini</i> file by using Bootcfg (bootcfg.exe), a tool included in Windows XP and Windows Server 2003, or by using a text editor such as Notepad. Bootcfg is documented in Windows Help and Support.</P>
+<P>You can also view and change some boot options in Control Panel under System. In the System Properties dialog box, on the Advanced tab, click Settings under <b>Startup and Recovery</b>. Because this functionality is limited, it is not discussed in this section. For information about the <b>Startup and Recovery</b> dialog box, see Help and Support Center.</P>
+<H4>Bootcfg</H4>
+<P>Bootcfg is a command-line tool that edits boot options on local and remote computers. Using the same Bootcfg commands and procedures, you can edit a <i>Boot.ini</i> file or the boot options in Extensible Firmware Interface, Non-Volatile Random Access Memory (EFI NVRAM). Bootcfg is included in the %Systemroot%\System32 directory in Windows XP and Windows Server 2003. (The Bootcfg display is slightly different on systems that store boot options in EFI NVRAM, but the commands are the same.)</P>
+<P>You can use Bootcfg to add, delete, and change all boot entry parameters and boot options; however, you cannot use it to set an indefinite boot time-out value. You can also use Bootcfg commands in a script or batch file to set boot options or to reset them after you replace or upgrade an operating system.</P>
+<P>Unlike manual editing, Bootcfg edits boot options without changing the protective attributes on the <i>Boot.ini</i> file. It also helps you avoid typing errors that might prevent the operating system from starting.</P>
+<P>You must be a member of the Administrators group on the computer to use Bootcfg. For detailed instructions about using Bootcfg, see Help and Support Center.</P>
+<H4>Editing in Notepad</H4>
+<P>You can edit use a text editor, such as Notepad, to edit the <i>Boot.ini</i> file. However, because this method is prone to error, use it only when Bootcfg is not available.</P>
+<P>Before editing the <i>Boot.ini</i> file, you must remove the file attributes that Windows uses to protect the file from inadvertent changes. When the <i>Boot.ini</i> file is on an NTFS drive, you must be a member of the Administrators group on the computer to change its attributes.</P>
+<P>Use the following procedure to prepare the <i>Boot.ini</i> file for manual editing. This procedure removes the system, hidden, and read-only attributes of the file. </P><B>To configure the Boot.ini file attributes for editing</B><OL type="1">
+<LI>At a command prompt, navigate to the root of the boot directory.</LI>
+<LI>Type the following text at the command line:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>attrib -s -h -r <i>Boot.ini</i><BR></nobr></P>
+<P>System, hidden, and read-only attributes are removed from the file.</P>
+</LI>
+<LI>When your editing is complete, you can restore the file attributes to protect the <i>Boot.ini</i> file. However, Ntldr can use the <i>Boot.ini</i> file with any attribute set. At a command prompt, type the following text:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>attrib +s +h +r <i>Boot.ini</i><BR></nobr></P>
+<P>This restores the attributes that protect the <i>Boot.ini</i> file.</P>
+</LI>
+</OL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Editing the Boot.ini File RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

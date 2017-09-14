@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Tracking Contention in the Server Process</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Tracking Contention in the Server Process"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_8cf04980-4ce1-4948-883b-11a712e972a3.xml"/>
+<META NAME="MS-HKWD" CONTENT="RPC debugging, tracking contention"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_8cf04980-4ce1-4948-883b-11a712e972a3.xml"></A>Tracking Contention in the Server Process</H1>
+<P>In order to service incoming requests, RPC will maintain a set of worker threads. Ideally, the number of threads will be small. However, this ideal situation has only been seen in lab environments, where the server manager routines are carefully tuned. In a real situation, the number of threads will vary depending on server workload, but it can be anywhere from 1 to 50.</P>
+<P>If the number of worker threads is above 50, you may have excessive contention in the server process. Common causes of this are indiscriminate use of the heap, memory pressure, or serializing most activities in a server through a single critical section.</P>
+<P>To see the number of threads in a given server process, use the <a href="r32_exts_lg_nd_rpc_d860cd45-5614-4fe5-8eb7-bbc921c70fc3.xml.htm"><b>!rpcexts.getthreadinfo</b></a> extension, or use DbgRpc with the <b>-t</b> switch. Supply the process ID (in the following example, 0xC4):</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>D:\wmsg&gt;<b>dbgrpc -t -P c4</b><BR>Searching for thread info ...<BR>PID  CELL ID   ST TID      LASTTIME<BR>-----------------------------------<BR>00c4 0000.0004 03 0000011c 000f164f<BR>00c4 0000.0007 03 00000120 008a6290<BR>00c4 0000.0015 03 0000018c 008a6236<BR>00c4 0000.0026 03 00000264 0005c443<BR>00c4 0000.002d 03 00000268 000265bb<BR>00c4 0000.0030 03 0000026c 000f1d32<BR>00c4 0000.0034 03 00000388 007251e9<BR><BR></nobr></P>
+<P>In this case, there are only seven worker threads, which is reasonable.</P>
+<P>If there are over 100 threads, a debugger should be attached to this process and the cause investigated.</P>
+<P class="note"><b>Note</b>  Running queries such as <b>dbgrpc -t</b> remotely is expensive to the server and the network. If you use this query in a script, you should make sure this command is not run too often.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Tracking Contention in the Server Process RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>File | Kernel Debug</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, File | Kernel Debug"><xml><MSHelp:Keyword Index="A" Term="r36_gui_1_fe3f56e8-09fe-496d-a26e-8a692a70bc25.xml"/>
+<META NAME="MS-HKWD" CONTENT="File | Kernel Debug">
+<META NAME="MS-HKWD" CONTENT="starting the debugger, File | Kernel Debug"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_POPUP_KERNEL_DEBUGGING"></a><H1><A NAME="r36_gui_1_fe3f56e8-09fe-496d-a26e-8a692a70bc25.xml"></A>File | Kernel Debug</H1>
+<P></P>
+<P></P>
+<P>Click <b>Kernel Debug</b> on the <b>File</b> menu to debug a target computer in kernel mode.</P>
+<P>This command is equivalent to pressing CTRL+K. You can use this command only when WinDbg is in <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#012a9e6e-a351-4156-b2fd-99bd88066e28">dormant mode</a>.</P>
+<H4>Dialog Box</H4>
+<P>When you click <b>Kernel Debug</b>, the <b>Kernel Debugging</b> dialog box appears with three tabs:</P><B></B><UL type="disc">
+<LI>The <b>COM</b> tab indicates that the connection will use a COM port. In the <b>Baud Rate</b> box, enter the baud rate. In the <b>Port</b> box, enter the name of the COM port. </LI>
+<LI>The <b>1394</b> tab indicates that the connection will use 1394. In the <b>Channel</b> box, enter the 1394 channel number. 1394 debugging is supported only if both the host computer and target computer are running Windows XP or later versions of the Windows operating system. </LI>
+<LI>The <b>USB 2.0</b> tab indicates that the connection will use USB 2.0. In the <b>Target Name</b> box, enter the connection string. This must match the string specified with the <b>targetname</b> boot option.  For information on this boot option prior to Windows Vista, see <a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug</b></a>. For information on this boot option in Windows Vista and later versions of Windows, see <a href="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml.htm"><b>BCDEdit / dbgsettings</b></a>.  USB 2.0 debugging is supported only if the host computer is running Windows 2000 or a later version of Windows, and the target computer is running Windows Vista or a later version. </LI>
+<LI>The <b>Local</b> tab indicates that WinDbg will perform local kernel debugging. Local kernel debugging is supported only on Windows XP and later.</LI>
+</UL>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about settings for kernel debugging, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>.</P>
+<P>For more information and for other methods of beginning a kernel debugging session, see <a href="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml.htm">Attaching to a Target Computer (Kernel Mode)</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: File | Kernel Debug RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

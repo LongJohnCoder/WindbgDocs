@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Choosing Kernel Debugging Settings</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Choosing Kernel Debugging Settings"><xml><MSHelp:Keyword Index="A" Term="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml"/>
+<META NAME="MS-HKWD" CONTENT="1394 connection, kernel debugging protocol">
+<META NAME="MS-HKWD" CONTENT="COM port (kernel debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="modem (kernel debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="named pipe (kernel debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="NPIPE (kernel debugging protocol)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml"></A>Choosing Kernel Debugging Settings</H1>
+<P><P>Before you can begin kernel debugging, you must choose your connection settings.</P>
+<P>The debuggers support several different kinds of kernel debugging:</P><B></B><UL type="disc">
+<LI>Host computer and target computer connected through the COM ports. </LI>
+<LI>Host computer and target computer connected by a 1394 cable.  This is supported only if both the host and the target are running Windows XP or later.  Before you can debug over a 1394 cable, you must properly configure the software on both the target and the host. See <a href="r02~a_setup_1a_fcdec49c-b16c-4f8e-b1df-c1ceea0815f3.xml.htm">Disabling the 1394 Host Controller</a> and <a href="r03_setup_2_d48986aa-46cb-41a8-9be9-925545754d3a.xml.htm">Installing the 1394 Virtual Driver</a> for details. </LI>
+<LI>Host computer and target computer connected by a USB 2.0 debug cable.  This is supported only if the host computer is running Windows, and the target computer is running Windows Vista or later.  Additional configuration is required; see <a href="r02_setup_1_8237073f-467e-4a10-b191-b7cd218175ce.xml.htm">Setting Up a USB 2.0 Debug Cable Connection</a> for details. </LI>
+<LI>Host computer and target computer communicating through a modem. </LI>
+<LI>Debugger and virtual machine (on the same computer or a different computer) communicating through a named pipe. </LI>
+<LI>Local kernel debugging on a single computer.  This is supported only on Windows XP and later. </LI>
+</UL>
+<P></P>
+<P>There are three ways to configure the kernel debugging settings: through environment variables, on the debugger command line, or through the WinDbg graphical interface. If none of these methods are used, the debugger will default to a COM port connection, using COM1 and 19200 baud.</P>
+</P>
+<H4>Environment Variables</H4>
+<P>If you are configuring a COM port connection with environment variables, the following two variables should be used:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>set _NT_DEBUG_PORT =</b> <i>ComPort</i> <BR><b>set _NT_DEBUG_BAUD_RATE =</b> <i>BaudRate</i> <BR></nobr></P>
+<P></P>
+<P>If you are configuring a 1394 connection with environment variables, the following three variables should be used:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>set _NT_DEBUG_BUS = 1394</b> <BR><b>set _NT_DEBUG_1394_CHANNEL =</b> <i>1394Channel</i> <BR><b>set _NT_DEBUG_1394_SYMLINK =</b> <i>1394Protocol</i> <BR></nobr></P>
+<P></P>
+<P>Environment variables cannot be used to set up debugging over a USB 2.0 debug cable, debugging over a modem, debugging through a named pipe, or local kernel debugging.</P>
+<H4>KD Command Line</H4>
+<P>If you are using the KD command line, you can specify the connection settings after the <b>-k</b> command-line option. The <b>com:port</b> parameter causes the debugger to connect through a COM port. The <b>1394</b> parameter causes the debugger to connect through a 1394 cable. The <b>usb2</b> parameter causes the debugger to connect through a USB 2.0 debug cable. The <b>com:modem</b> parameter causes the debugger to connect through a modem. The <b>com:pipe</b> parameter causes the debugger to connect through a named pipe. The <b>-kl</b> command-line option starts local kernel debugging. If these parameters are omitted, the environment variable settings or the defaults are used.</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>kd ...</b> <b>-k com:port=</b><i>ComPort</i><b>,baud=</b><i>BaudRate</i> <b>...</b> <BR><b>kd ...</b> <b>-k 1394:channel=</b><i>1394Channel</i>[<b>,symlink=</b><i>1394Protocol</i>] <b>...</b> <BR><b>kd ...</b> <b>-k usb2:targetname=</b><i>USBString</i> <b>...</b> <BR><b>kd ...</b> <b>-k com:pipe,port=\\</b><i>VMHost</i><b>\pipe\</b><i>PipeName</i>[<b>,resets=0</b>][<b>,reconnect</b>] <b>...</b> <BR><b>kd ...</b> <b>-k com:modem</b> <b>...</b> <BR><b>kd ...</b> <b>-kl</b> <b>...</b> <BR><b>kd ...</b> <BR></nobr></P>
+<P></P>
+<H4>WinDbg Command Line</H4>
+<P>The WinDbg connection parameters are the same as those for KD. The only difference is that if you wish to use the environment variable settings or the defaults, you still must specify the <b>-k</b> option.</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>windbg ...</b> <b>-k com:port=</b><i>ComPort</i><b>,baud=</b><i>BaudRate</i> <b>...</b> <BR><b>windbg ...</b> <b>-k 1394:channel=</b><i>1394Channel</i>[<b>,symlink=</b><i>1394Protocol</i>] <b>...</b> <BR><b>windbg ...</b> <b>-k usb2:targetname=</b><i>USBString</i> <b>...</b> <BR><b>windbg ...</b> <b>-k com:pipe,port=\\</b><i>VMHost</i><b>\pipe\</b><i>PipeName</i>[<b>,resets=0</b>][<b>,reconnect</b>] <b>...</b> <BR><b>windbg ... -k com:modem</b> <b>...</b> <BR><b>windbg ...</b> <b>-kl</b> <b>...</b> <BR><b>windbg ...</b> <b>-k</b> <b>...</b> <BR></nobr></P>
+<P></P>
+<H4>WinDbg Dialog Box</H4>
+<P>If WinDbg is already running and is in dormant mode, you can use the <b>File | Kernel Debug</b> menu option to start a new kernel debugging session. A dialog box will appear with four tabs: <b>COM</b>, <b>1394</b>, <b>USB 2.0</b>, and <b>Local</b>. Each of them specifies a different connection method:</P><B></B><UL type="disc">
+<LI>The <b>COM</b> tab indicates that the connection will use a COM port. In the <b>Baud Rate</b> box, enter the <i>BaudRate</i>. In the <b>Port</b> box, enter the <i>ComPort</i>.</LI>
+<LI>The <b>1394</b> tab indicates that the connection will use 1394. In the <b>Channel</b> box, enter the <i>1394Channel</i>.</LI>
+<LI>The <b>USB 2.0</b> tab indicates that the connection will use USB 2.0. In the <b>Target Name</b> box, enter the <i>USBString</i>. </LI>
+<LI>The <b>Local</b> tab indicates that WinDbg will perform local kernel debugging. Local kernel debugging is supported only on Windows XP and later versions of Windows.</LI>
+</UL>
+<P></P>
+<P>This dialog box cannot be used to set up debugging over a modem or a named pipe.</P>
+<DL><H4>Parameters</H4>
+<P>The parameters used for these environment variables, command line options, and the WinDbg dialog box have the following possible values:</P>
+<DT><i>ComPort</i></DT>
+<DD>Specifies the name of the COM port. This can be in the format "com2" or in the format "\\.\com2", but should not simply be a number.</DD>
+<DT><i>BaudRate</i></DT>
+<DD>Specifies the baud rate. This can be 9600, 19200, 38400, 57600, or 115200.   </DD>
+<DT><i>1394Channel</i></DT>
+<DD>Specifies the 1394 channel number.  Valid channel numbers are any integer between 0 and 62, inclusive. <i>1394Channel</i> must match the number used by the target computer, but does not depend on the physical 1394 port chosen on the adapter.<P class="note"><b>Note</b>   1394 kernel debugging is supported only if both the host and the target are running Windows XP or later.  Before you can debug over a 1394 cable, you must properly configure the software on both the target and the host. See <a href="r02~a_setup_1a_fcdec49c-b16c-4f8e-b1df-c1ceea0815f3.xml.htm">Disabling the 1394 Host Controller</a> and <a href="r03_setup_2_d48986aa-46cb-41a8-9be9-925545754d3a.xml.htm">Installing the 1394 Virtual Driver</a> for details.</P>
+</DD>
+<DT><i>1394Protocol</i></DT>
+<DD>Specifies the connection protocol to be used for the 1394 kernel connection. This can almost always be omitted, since the debugger will automatically choose the correct protocol. If you wish to set this manually, and the target computer is running Windows XP, <i>1394Protocol</i> should be set equal to "channel". If the target computer is running Windows Server 2003 or later, <i>1394Protocol</i> should be set equal to "instance". If it is omitted, the debugger will default to the protocol appropriate for the current target computer. <i>This can only be specified through the command line or the environment variables, not through the WinDbg graphical interface.</i></DD>
+<DT><i>USBString</i></DT>
+<DD>Specifies a USB 2.0 connection string.  This must match the string specified with the <b>/targetname</b> boot option.  For information on this boot option prior to Windows Vista, see <a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug</b></a>. For information on this boot option in Windows Vista and later versions of Windows, see <a href="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml.htm"><b>BCDEdit / dbgsettings</b></a>.  <P class="note"><b>Note</b>   USB 2.0 kernel debugging is supported only if the host computer is running Windows, and the target computer is running Windows Vista or later.  Additional configuration is required; see <a href="r02_setup_1_8237073f-467e-4a10-b191-b7cd218175ce.xml.htm">Setting Up a USB 2.0 Debug Cable Connection</a> for details. </P>
+</DD>
+<DT><i>VMHost</i></DT>
+<DD>When debugging a virtual machine, <i>VMHost</i> specifies the name of the physical computer on which the virtual machine is running. The virtual machine documentation usually refers to this as the <i>virtual machine host</i>. If the virtual machine is running on the same computer as the kernel debugger itself, use a single period (<b>.</b>) for <i>VMHost.</i></DD>
+<DT><i>PipeName</i></DT>
+<DD>Specifies the name of the pipe created by the virtual machine for the debugging connection.</DD>
+<DT><b>resets=0</b></DT>
+<DD>Specifies that an unlimited number of reset packets can be sent to the target when the host and target are synchronizing. This parameter is only needed when debugging certain kinds of virtual machines. See <a href="r05_use_start_fe29f2ea-16f9-44b8-aa54-f74a058b825e.xml.htm">Attaching to a Virtual Machine (Kernel Mode)</a> for details.</DD>
+<DT><b>reconnect</b></DT>
+<DD>Causes the debugger to automatically disconnect and reconnect the pipe if a read/write failure occurs. Additionally, if the named pipe is not found when the debugger is started, the <b>reconnect</b> parameter will cause it to wait for a pipe of this name to appear. This parameter is only needed when debugging certain kinds of virtual machines. See <a href="r05_use_start_fe29f2ea-16f9-44b8-aa54-f74a058b825e.xml.htm">Attaching to a Virtual Machine (Kernel Mode)</a> for details.</DD>
+<DT><b>modem</b></DT>
+<DD>Causes the debugger to connect through a modem.</DD>
+<DT><b>-kl</b></DT>
+<DD>Causes the debugger to perform local kernel debugging. Only users that have debug privileges can start this process. For local kernel debugging to work, the x86 <i>boot.ini</i> file or the Itanium <b>OsLoadOptions</b> settings must include the <b>/debug</b> option.   See <a href="r07_use_operation_fabb9469-404e-4883-950a-5f35a09c27a2.xml.htm">Performing Local Kernel Debugging</a> for features peculiar to this technique.</DD>
+<P>For a list of other useful environment variables and command line options, see <a href="r12_cmdline_53f400f6-9ae2-427a-85d7-82b0cab41a96.xml.htm">Environment Variables</a> and <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">Command-Line Options</a>.</P>
+<P></P>
+</DL>
+<H4>Examples</H4>
+<P>The following batch file could be used to set up a COM connection:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>set _NT_SYMBOL_PATH=d:\mysymbols<BR>set _NT_DEBUG_PORT=com1<BR>set _NT_DEBUG_BAUD_RATE=19200<BR>set _NT_DEBUG_LOG_FILE_OPEN=d:\debuggers\logfile1.log<BR>kd<BR><BR></nobr></P>
+<P>The following batch file could be used with a 1394 connection: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>set _NT_SYMBOL_PATH=d:\mysymbols<BR>set _NT_DEBUG_BUS=1394<BR>set _NT_DEBUG_1394_CHANNEL=44<BR>set _NT_DEBUG_LOG_FILE_OPEN=d:\debuggers\logfile1.log<BR>windbg -k<BR><BR></nobr></P>
+<P>The following command lines would each start KD, without any environment variables:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd -y d:\mysymbols -k com:modem <BR><BR>kd -y d:\mysymbols -k com:port=com2,baud=57600 <BR><BR>kd -y d:\mysymbols -k com:port=\\.\com2,baud=115200 <BR><BR>kd -y d:\mysymbols -k 1394:channel=20,symlink=instance <BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Choosing Kernel Debugging Settings RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

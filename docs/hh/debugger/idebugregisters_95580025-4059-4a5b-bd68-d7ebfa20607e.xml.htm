@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetPseudoIndexByName</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetPseudoIndexByName"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetPseudoIndexByName"/>
+<MSHelp:Keyword Index="A" Term="IDebugRegisters_95580025-4059-4a5b-bd68-d7ebfa20607e.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugRegisters::GetPseudoIndexByName method">
+<META NAME="MS-HKWD" CONTENT="GetPseudoIndexByName (IDebugRegisters) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugRegisters_95580025-4059-4a5b-bd68-d7ebfa20607e.xml"></A>GetPseudoIndexByName</H1>
+<P><P>The <b>GetPseudoIndexByName</b> and <b>GetPseudoIndexByNameWide</b> methods return the index of a pseudo-register.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugRegisters2::GetPseudoIndexByName(</b><BR><b>    IN PCSTR  </b><i>Name</i><b>,</b><BR><b>    OUT PULONG  </b><i>Index</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugRegisters2::GetPseudoIndexByNameWide(</b><BR><b>    IN PCWSTR  </b><i>Name</i><b>,</b><BR><b>    OUT PULONG  </b><i>Index</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetPseudoIndexByNameT GetPseudoIndexByNameWide</b><BR><b>#else</b><BR><b>#define GetPseudoIndexByNameT GetPseudoIndexByName</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Name</i></DT>
+<DD>Specifies the name of the pseudo-register whose index is requested.  The name includes the leading dollar sign ( <b>$</b> ), for example, "$frame".</DD>
+<DT><i>Index</i></DT>
+<DD>Receives the index of the pseudo-register.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This list does not contain all the errors that might occur.  For a list of possible errors, see <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">HRESULT Values</a>.</P>
+<P></P>
+<H4>Interface Version</H4>
+<P><b>GetPseudoIndexByName</b> and <b>GetPseudoIndexByNameWide</b> are available in <b>IDebugRegisters2</b> and later versions.</P>
+<H4><b>Comments</b></H4>
+<P>For the names of all the pseudo-registers, see <a href="r13_syntax_c05da1f3-3310-46cb-8e56-da3d670e05f3.xml.htm">Pseudo-Register Syntax</a>.</P>
+<P>For an overview of the <a href="idebugregisters_ca710692-a977-4276-b779-2b66311938dc.xml.htm"><b>IDebugRegisters</b></a> interface and other register-related methods, see <a href="engine_dg_eaa71da7-23ac-4464-9142-23c89a31e14e.xml.htm">Registers</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="idebugregisters_7b1f8069-32d0-4fb4-9cee-7fd045bae8d3.xml.htm"><b>GetPseudoDescription</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetPseudoIndexByName RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

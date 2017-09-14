@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Address and Address Range Syntax</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Address and Address Range Syntax"><xml><MSHelp:Keyword Index="A" Term="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml"/>
+<META NAME="MS-HKWD" CONTENT="expressions, addresses">
+<META NAME="MS-HKWD" CONTENT="expressions, address ranges">
+<META NAME="MS-HKWD" CONTENT="addresses, command syntax">
+<META NAME="MS-HKWD" CONTENT="memory, command syntax">
+<META NAME="MS-HKWD" CONTENT="addresses, address modes">
+<META NAME="MS-HKWD" CONTENT="addresses, segment support">
+<META NAME="MS-HKWD" CONTENT="segment support">
+<META NAME="MS-HKWD" CONTENT="addresses, address arguments">
+<META NAME="MS-HKWD" CONTENT="range syntax">
+<META NAME="MS-HKWD" CONTENT="addresses, virtual">
+<META NAME="MS-HKWD" CONTENT="virtual address">
+<META NAME="MS-HKWD" CONTENT="addresses, syntax">
+<META NAME="MS-HKWD" CONTENT="addresses, ranges">
+<META NAME="MS-HKWD" CONTENT="ranges of addresses">
+<META NAME="MS-HKWD" CONTENT="LSize range specifier">
+<META NAME="MS-HKWD" CONTENT="L?Size range specifier">
+<META NAME="MS-HKWD" CONTENT="L-Size range specifier">
+<META NAME="MS-HKWD" CONTENT="address range specifier">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, addresses"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml"></A>Address and Address Range Syntax</H1>
+<P></P>
+<P>There are several ways to specify addresses in the debugger.</P>
+<P>Addresses are always <i>virtual addresses</i>, except when the documentation specifically indicates another kind of address. In user mode, the debugger interprets virtual addresses according to the page directory of the <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm"><i>current process</i></a>. In kernel mode, the debugger interprets virtual addresses according to the page directory of the process that the <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#e761ea09-6dde-4444-9472-9e71933f4e71"><i>process context</i></a> specifies. You can also directly set the <i>user-mode address context</i>. For more information about the user-mode address context, see <a href="r19_metacmds_a_649c5127-f473-4518-aa6b-490c2a68d4f8.xml.htm"><b>.context (Set User-Mode Address Context)</b></a>.</P>
+<H4>Address Modes and Segment Support</H4>
+<P></P>
+<P>On x86-based platforms, CDB and KD support the following addressing modes. These modes are distinguished by their prefixes.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Prefix</TH>
+<TH Width="">Name</TH>
+<TH Width="">Address types</TH>
+</TR>
+<TR valign="top">
+<TD Width="">%</TD>
+<TD Width="">flat</TD>
+<TD Width="">32-bit addresses (also 16-bit selectors that point to 32-bit segments) and 64-bit addresses on 64-bit systems.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">&amp;</TD>
+<TD Width="">virtual 86</TD>
+<TD Width="">Real-mode addresses. x86-based only.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">#</TD>
+<TD Width="">plain</TD>
+<TD Width="">Real-mode addresses. x86-based only.</TD>
+</TR>
+</table>
+<P></P>
+<P>The difference between the plain and virtual 86 modes is that a plain 16-bit address uses the segment value as a selector and looks up the segment descriptor. But a virtual 86 address does not use selectors and instead maps directly into the lower 1 MB.</P>
+<P>If you access memory through an addressing mode that is not the current default mode, you can use the address mode prefixes to override the current address mode.</P>
+<H4>Address Arguments</H4>
+<P>Address arguments specify the location of variables and functions.  The following table explains the syntax and meaning of the various addresses that you can use in CDB and KD. </P><B></B><table>
+<TR valign="top">
+<TH Width="">Syntax</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width="">offset</TD>
+<TD Width="">The absolute address in virtual memory space, with a type that corresponds to the current execution mode. For example, if the current execution mode is 16 bit, the offset is 16 bit. If the execution mode is 32-bit segmented, the offset is 32-bit segmented.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>&amp;</b>[[ segment:]]  offset</TD>
+<TD Width="">The real address. x86-based and x64-based.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%</b>segment:[[ offset]]  </TD>
+<TD Width="">A segmented 32-bit or 64-bit address. x86-based and x64-based.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%</b>[[ offset]]  </TD>
+<TD Width="">An absolute address (32-bit or 64-bit) in virtual memory space. x86-based and x64-based.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">name[[ <b>+</b>|<b>&#8722; </b>]]  offset</TD>
+<TD Width="">A flat 32-bit or 64-bit address. <i>name</i> can be any symbol. <i>offset</i> specifies the offset. This offset can be whatever  address mode its prefix indicates. No prefix specifies a default mode address. You can specify the offset as a positive (+) or negative (&#8722;) value. </TD>
+</TR>
+</table>
+<P></P>
+<P>Use the <a href="r16_cmds_c_71e1c8d1-9e56-4c46-93cc-509d73d3eecc.xml.htm"><b>dg (Display Selector)</b></a> command to view segment descriptor information.</P>
+<P>In MASM expressions, you can also use the <b>poi</b> operator to dereference any pointer. For example, if the pointer at address 0x00123456 points to address location 0x00420000, the following two commands are equivalent.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dd 420000</b> <BR>0:000&gt; <b>dd poi(123456)</b> <BR></nobr></P>
+<P>In C++ expressions, pointers behave like pointers in C++. However, numbers are interpreted as integers. If you have to deference an actual number, you must cast it first, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dd *( (long*) 0x123456 )</b> <BR></nobr></P>
+<P>Some <a href="r13_syntax_c05da1f3-3310-46cb-8e56-da3d670e05f3.xml.htm">pseudo-registers</a> also hold common addresses, such as the current program counter location.</P>
+<P>You can also indicate an address in an application by specifying the original source file name and line number. For more information about how to specify this information, see <a href="r13_syntax_01fe3d5e-b319-4199-9143-d7676bc32279.xml.htm">Source Line Syntax</a>.</P>
+<H4>Address Ranges</H4>
+<P>You can specify an address range by a pair of addresses or by an address and object count.</P>
+<P>To specify a range by a pair of addresses, specify the starting address and the ending address. For example, the following example is a range of 8 bytes, beginning at the address 0x00001000.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0x00001000  0x00001007<BR></nobr></P>
+<P>To specify an address range by an address and object count, specify an address argument, the letter <b>L</b> (uppercase or lowercase), and a value argument. The address specifies the starting address. The value specifies the number of objects to be examined or displayed. The size of the object depends on the command. For example, if the object size is 1 byte, the following example is a range of 8 bytes, beginning at the address 0x00001000.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0x00001000  L8<BR></nobr></P>
+<P>However, if the object size is a double word (32 bits or 4 bytes), the following two ranges each give an 8-byte range.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0x00001000  0x00001007<BR>0x00001000  L2<BR></nobr></P>
+<P></P>
+<P>There are two other ways to specify the value (the <b>L</b><i>Size</i> range specifier):</P><B></B><UL type="disc">
+<LI><b>L?</b><i>Size</i> (with a question mark) means the same as <b>L</b><i>Size</i>, except that <b>L?</b><i>Size</i> removes the debugger's automatic range limit. Typically, there is a range limit of 256 MB, because larger ranges are typographic errors. If you want to specify a range that is larger than 256 MB, you must use the <b>L?</b><i>Size</i> syntax.</LI>
+<LI><b>L-</b><i>Size</i> (with a hyphen) specifies a range of length <i>Size</i> that ends at the given address. For example, <b>80000000 L20</b> specifies the range from 0x80000000 through 0x8000001F, and <b>80000000 L-20</b> specifies the range from 0x7FFFFFE0 through 0x7FFFFFFF.</LI>
+</UL>
+<P></P>
+<P>Some commands that ask for address ranges accept a single address as the argument. In this situation, the command uses some default object count to compute the size of the range. Typically, commands for which the address range is the final parameter permit this syntax. For the exact syntax and the default range size for each command, see the reference topics for each command.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Address and Address Range Syntax RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

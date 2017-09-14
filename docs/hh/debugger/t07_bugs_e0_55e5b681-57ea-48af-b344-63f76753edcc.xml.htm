@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x109: CRITICAL_STRUCTURE_CORRUPTION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x109:  CRITICAL_STRUCTURE_CORRUPTION"><xml><MSHelp:Keyword Index="A" Term="t07_bugs_E0_55e5b681-57ea-48af-b344-63f76753edcc.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x109: CRITICAL_STRUCTURE_CORRUPTION">
+<META NAME="MS-HKWD" CONTENT="CRITICAL_STRUCTURE_CORRUPTION"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t07_bugs_E0_55e5b681-57ea-48af-b344-63f76753edcc.xml"></A>Bug Check 0x109:  CRITICAL_STRUCTURE_CORRUPTION</H1>
+<P>The CRITICAL_STRUCTURE_CORRUPTION bug check has a value of 0x00000109. This indicates that the kernel has detected critical kernel code or data corruption.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">Reserved </TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">Reserved </TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">Reserved </TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">The type of the corrupted region. (<i>See the following table later on this page</i>.)</TD>
+</TR>
+</table>
+<P></P>
+<P>The value of Parameter 4 indicates the type of corrupted region.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 4</TH>
+<TH Width="">Type of Corrupted Region, Type of Corruption, or Type of Action Taken That Caused the Corruption</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x0</TD>
+<TD Width="">A generic data region</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">A function modification or the Itanium-based function location </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">A processor interrupt dispatch table (IDT)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">A processor global descriptor table (GDT)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">A type-1 process list corruption</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">A type-2 process list corruption</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6</TD>
+<TD Width="">A debug routine modification</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7</TD>
+<TD Width="">A critical MSR modification</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>There are generally three different causes for this bug check:</P><B></B><OL type="1">
+<LI>A driver has inadvertently, or deliberately, modified critical kernel code or data.  Microsoft Windows Server 2003 with Service Pack 1 (SP1) and later versions of Windows for x64-based computers do not allow the kernel to be patched except through authorized Microsoft-originated hot patches.  For more information, see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=50719" target="_blank">Patching Policy for x64-based Systems</a>.  </LI>
+<LI>A developer attempted to set a normal kernel breakpoint using a kernel debugger that was not attached when the system was started.  Normal breakpoints (<a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bp</b></a>) can only be set if the debugger is attached at start time.  Processor breakpoints (<a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba</b></a>) can be set at any time.</LI>
+<LI>A hardware corruption occurred.  For example, the kernel code or data could have been stored in memory that failed.  </LI>
+</OL>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x109:  CRITICAL_STRUCTURE_CORRUPTION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

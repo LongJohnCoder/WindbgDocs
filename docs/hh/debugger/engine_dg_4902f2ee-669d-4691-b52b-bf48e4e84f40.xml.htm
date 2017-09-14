@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Client Objects</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Client Objects"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_4902f2ee-669d-4691-b52b-bf48e4e84f40.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, COM Interfaces"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_4902f2ee-669d-4691-b52b-bf48e4e84f40.xml"></A>Using Client Objects</H1>
+<P></P>
+<P>For an overview of the role of client objects in interacting with the debugger engine, see <a href="engine_overview_2838c538-1dc7-4494-b92d-49e58a4ad2aa.xml.htm">Client Objects</a>.</P>
+<P>In general, a client's methods may be called only from the thread in which the client was created. Typically, methods called from the wrong thread will fail immediately.  The notable exception to this rule is the method <a href="idebugclient_baa33ba0-bc95-4bfb-b8bf-b91598833599.xml.htm"><b>CreateClient</b></a>; this method may be called from any thread, and returns a new client that can be used in the thread from which it was called.  Other exceptions are documented in the reference section.</P>
+<P>A string describing a client object is returned by the method <a href="idebugclient_7c54bffa-5190-49f5-919d-16bfb851ae36.xml.htm"><b>GetIdentity</b></a> or can be written to the engine's output stream using <a href="idebugclient_2013e1cd-3c95-4ef7-a53f-004ba30d9ea2.xml.htm"><b>OutputIdentity</b></a>.</P>
+<H4>COM Interfaces</H4>
+<P>The debugger engine API contains several COM interfaces; they implement the <b>IUnknown</b> interface.</P>
+<P>Every one of the interfaces described in the section <a href="idebugadvanced_ea68aa33-a007-412b-a326-0a817520c785.xml.htm">Client COM Interfaces</a> is implemented by the client (though not necessarily at the latest version).  You may use the COM method <b>IUnknown::QueryInterface</b> to obtain each of these interfaces from any of the others.</P>
+<P>The clients implement the <b>IUnknown</b> COM interface and use it for maintaining reference counts and interface selection. However, the clients are not registered COM objects.  The method <b>IUnknown::AddRef</b> is used to increment the reference count on the object, and the method <b>IUnknown::Release</b> is used to decrement the reference count.  When <b>IUnknown::QueryInterface</b> is called, the reference count is incremented, so when a client interface pointer is no longer needed <b>IUnknown::Release</b> should be called to decrement the reference count.</P>
+<P>The reference count will be initialized to one when the client object is created using <a href="clientfns_4a96fd16-32b9-40f5-bc7f-60ae6ecadb32.xml.htm"><b>DebugCreate</b></a> or <a href="clientfns_7beeb350-b8bd-44ea-b5c9-ca0da15146ae.xml.htm"><b>DebugConnect</b></a>.</P>
+<P>See the Platform SDK for more information about when reference counts should be incremented and decremented.</P>
+<P><b>IUnknown::QueryInterface</b>, <b>DebugCreate</b>, and <b>DebugConnect</b> each take an interface ID as one of their arguments.  This interface ID can be obtained using the <b>__uuidof</b> operator. For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>IDebugClient * debugClient;<BR>HRESULT Hr = DebugCreate( __uuidof(IDebugClient), (void **)&amp;debugClient );<BR></nobr></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Client Objects RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

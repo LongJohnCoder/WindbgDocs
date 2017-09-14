@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Analyze UMDH Logs</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Analyze UMDH Logs"><xml><MSHelp:Keyword Index="A" Term="UMDH_c7556c73-4880-45bb-b2be-dddec81093c7.xml"/>
+<META NAME="MS-HKWD" CONTENT="UMDH, analyzing UMDH logs"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="UMDH_c7556c73-4880-45bb-b2be-dddec81093c7.xml"></A>Analyze UMDH Logs</H1>
+<P>Use the following commands to analyze UMDH logs that were created by running UMDH with the syntax described in <a href="umdh_ce82902d-1a62-4d44-b6bc-170f1b842e2f.xml.htm">Analyze a Running Process</a>. This analysis focuses on allocations, instead of stack traces.<P>You can analyze a single log file or compare logs from different runs to detect the changes in the program or driver's memory dump allocations over time.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>umdh</b> [<b>-d</b>] [<b>-v</b>] [-<b>l</b>] <i>File1</i> [<i>File2</i>] [<b>-h </b>|<b> ?</b>]<BR><BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>-d</b></DT>
+<DD>Displays numeric data in decimal numbers. The default is hexadecimal.</DD>
+<DT><b>-v</b></DT>
+<DD>Verbose mode. Includes the traces, as well as summary information. The traces are most helpful when analyzing a single log file.</DD>
+<DT><b>-l</b></DT>
+<DD>Includes file names and line numbers in the log. (Please note that the parameter is the lowercased letter "L," not the number one.)</DD>
+<DT><i>File1 </i>[<i>File2</i>]</DT>
+<DD>Specifies the UMDH log files to analyze. <P>UMDH creates log files when you run it in the <a href="umdh_ce82902d-1a62-4d44-b6bc-170f1b842e2f.xml.htm">analyze a running process</a> mode and save the log content in a text file (<b>-f</b>).</P>
+<P>When you specify one log file, UMDH analyzes the file and displays the function calls in each trace in descending order of bytes allocated. </P>
+<P>When you specify two log files, UMDH compares the files and displays in descending order the function calls whose allocations have grown the most between the two trials.</P>
+</DD>
+<DT><b>-h</b> | <b>?</b></DT>
+<DD>Displays help.</DD>
+</DL>
+<P></P>
+<H4>Sample Usage</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>umdh dump.txt<BR>umdh -d -v dump.txt<BR>umdh dump1.txt dump2.txt<BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Analyze UMDH Logs RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

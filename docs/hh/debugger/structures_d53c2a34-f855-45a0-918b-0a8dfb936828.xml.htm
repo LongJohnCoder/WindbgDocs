@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_MODULE_AND_ID</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_MODULE_AND_ID"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_MODULE_AND_ID"/>
+<MSHelp:Keyword Index="A" Term="Structures_d53c2a34-f855-45a0-918b-0a8dfb936828.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_MODULE_AND_ID structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_d53c2a34-f855-45a0-918b-0a8dfb936828.xml"></A>DEBUG_MODULE_AND_ID</H1>
+<P><P>The DEBUG_MODULE_AND_ID structure describes a symbol within a <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a>.</P>
+<P></P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_MODULE_AND_ID</b><BR><b>{</b><BR><b>    ULONG64  ModuleBase;</b><BR><b>    ULONG64  Id;</b><BR><b>} DEBUG_MODULE_AND_ID, * PDEBUG_MODULE_AND_ID;</b><BR></P>
+<DL><H4><b>Members</b></H4>
+<DT><b>ModuleBase</b></DT>
+<DD>The location in the target's virtual address space of the module&#8217;s base address.</DD>
+<DT><b>Id</b></DT>
+<DD>The symbol ID of the symbol within the module.</DD>
+</DL>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_MODULE_AND_ID RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

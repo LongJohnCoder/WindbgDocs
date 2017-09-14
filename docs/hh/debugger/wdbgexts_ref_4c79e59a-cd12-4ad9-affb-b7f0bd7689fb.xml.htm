@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>FIELD_INFO</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, FIELD_INFO"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="FIELD_INFO"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_4c79e59a-cd12-4ad9-affb-b7f0bd7689fb.xml"/>
+<META NAME="MS-HKWD" CONTENT="FIELD_INFO structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_4c79e59a-cd12-4ad9-affb-b7f0bd7689fb.xml"></A>FIELD_INFO</H1>
+<P><P>The FIELD_INFO structure is used by the <a href="wdbgexts_ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml.htm">IG_DUMP_SYMBOL_INFO</a> <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation to provide information about a member in a structure.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _FIELD_INFO {</b><BR><b>    PUCHAR  fName;</b><BR><b>    PUCHAR  printName;</b><BR><b>    ULONG  size;</b><BR><b>    ULONG  fOptions;</b><BR><b>    ULONG64  address;</b><BR><b>    union {</b><BR><b>        PVOID  fieldCallBack;</b><BR><b>        PVOID  pBuffer;</b><BR><b>    };</b><BR><b>    ULONG  TypeId;</b><BR><b>    ULONG  FieldOffset;</b><BR><b>    ULONG  BufferSize;</b><BR><b>    struct _BitField {</b><BR><b>        USHORT  Position;</b><BR><b>        USHORT  Size;</b><BR><b>    }  BitField;</b><BR><b>    ULONG  fPointer:2;</b><BR><b>    ULONG  fArray:1;</b><BR><b>    ULONG  fStruct:1;</b><BR><b>    ULONG  fConstant:1;</b><BR><b>    ULONG  Reserved:27;</b><BR><b>} FIELD_INFO, *PFIELD_INFO;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>fName</b></DT>
+<DD>Specifies the name of the symbol's member to which this structure applies.  Submembers can be specified using the delimiters "<b>.</b>" and "<b>-&gt;</b>".  Unless DBG_DUMP_FIELD_FULL_NAME is set in <b>fOptions</b>, <b>fName</b> is considered to be the beginning of the member name.</DD>
+<DT><b>printName</b></DT>
+<DD>Specifies an alternative name to use when printing the name of the member.  If <b>printName</b> is NULL, the actual name of the member is used when printing the name of the member.</DD>
+<DT><b>size</b></DT>
+<DD>Receives the size in the target's memory, in bytes, of the member that is specified by <b>fName</b>.<P>If the member is an array, <b>size</b> specifies the number of elements in the array.</P>
+</DD>
+<DT><b>fOptions</b></DT>
+<DD>Specifies the flags that determine the behavior of the IG_DUMP_SYMBOL_INFO <b>Ioctl</b> operation.  For a description of these flags, see <a href="wdbgexts_ref_9dc7c9ae-db39-47b0-9af8-7f70b831e9e8.xml.htm">DBG_DUMP_FIELD_<i>XXX</i></a>.</DD>
+<DT><b>address</b></DT>
+<DD>Receives the address in the target's memory of the member that is specified by <b>fName</b>.  If no address is supplied for the symbol type in SYM_DUMP_PARAM.<b>addr</b>, <b>address</b> receives the offset of the member relative to the beginning of an instance of the type.  For more information about SYM_DUMP_PARAM, see <a href="wdbgexts_ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml.htm">IG_DUMP_SYMBOL_INFO</a>.</DD>
+<DT><b>fieldCallBack</b></DT>
+<DD>Specifies a <a href="wdbgexts_ref_37493dec-e340-408d-8f7c-bda18057f427.xml.htm">PSYM_DUMP_FIELD_CALLBACK</a> callback function to be called with the information about the member that is specified by <b>fName</b>.  The callback function is passed a structure with the field information and the value of SYM_DUMP_PARAM.<b>context</b>.<P>No callback function is called if DBG_DUMP_FIELD_NO_CALLBACK_REQ is set in <b>fOptions</b>, <b>fieldCallBack</b> is NULL, or the <b>Options</b> member of the SYM_DUMP_PARAM structure passed to <b>Ioctl</b> does not have DBG_DUMP_CALL_FOR_EACH set.  If DBG_DUMP_FIELD_COPY_FIELD_DATA is set in <b>fOptions</b>, <b>fieldCallBack</b> is not used.</P>
+</DD>
+<DT><b>pBuffer</b></DT>
+<DD>Specifies a buffer to receive the value of the member specified by <b>fName</b>.  This member is only used if DBG_DUMP_FIELD_COPY_FIELD_DATA is set in <b>fOptions</b>.</DD>
+<DT><b>TypeId</b></DT>
+<DD>Receives the identifier for the type of the member that is specified by <b>fName</b>.</DD>
+<DT><b>FieldOffset</b></DT>
+<DD>Receives the offset of the member within the structure.</DD>
+<DT><b>BufferSize</b></DT>
+<DD>Specifies the size, in bytes, of the <b>pBuffer</b> buffer.</DD>
+<DT><b>BitField</b></DT>
+<DD>Receives information about bit fields in a structure.<DL><DT><b>Position</b></DT>
+<DD>Receives the start position of the bit field.  This is the number of bits from to the beginning of the structure to the bit field.</DD>
+<DT><b>Size</b></DT>
+<DD>Receives the size, in bits, of the bit field.</DD>
+</DL>
+</DD>
+<DT><b>fPointer</b></DT>
+<DD>Receives a Boolean value that indicates whether the member is a pointer.  <b>fPointer</b> is FALSE if the member is not a pointer.  It is 1 if the member is a 32-bit pointer and 3 if the member is a 64-bit pointer.</DD>
+<DT><b>fArray</b></DT>
+<DD>Receives a Boolean value that indicates whether the member is an array.  <b>fArray</b> is FALSE if the field is not an array and TRUE if it is.</DD>
+<DT><b>fStruct</b></DT>
+<DD>Receives a Boolean value that indicates whether the member is a structure.  <b>fStruct</b> is FALSE if the member is not a structure and TRUE if it is.</DD>
+<DT><b>fConstant</b></DT>
+<DD>Receives a Boolean value that indicates whether the member is a constant.  <b>fConstant</b> is FALSE if the member is not a constant and TRUE if it is.</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>When calling the <a href="wdbgexts_ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml.htm">IG_DUMP_SYMBOL_INFO</a> <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation, the <b>fName</b> member of this structure should be set to the name of the symbol's member to which this structure applies and the <b>fOptions</b> member should reflect the desired functionality of the operation.  The other members are either optional, or are filled in by <b>Ioctl</b>.</P>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml.htm">IG_DUMP_SYMBOL_INFO</a>, <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a>, <a href="wdbgexts_ref_9dc7c9ae-db39-47b0-9af8-7f70b831e9e8.xml.htm">DBG_DUMP_FIELD_<i>XXX</i></a>, <a href="wdbgexts_ref_37493dec-e340-408d-8f7c-bda18057f427.xml.htm">PSYM_DUMP_FIELD_CALLBACK</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: FIELD_INFO RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

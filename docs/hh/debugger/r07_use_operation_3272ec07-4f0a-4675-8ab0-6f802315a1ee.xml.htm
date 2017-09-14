@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Mapping Driver Files</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Mapping Driver Files"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_3272ec07-4f0a-4675-8ab0-6f802315a1ee.xml"/>
+<META NAME="MS-HKWD" CONTENT="mapping driver files">
+<META NAME="MS-HKWD" CONTENT="driver replacement map">
+<META NAME="MS-HKWD" CONTENT="driver replacement map, overview">
+<META NAME="MS-HKWD" CONTENT="driver replacement map, file format">
+<META NAME="MS-HKWD" CONTENT="driver replacement map, replacing boot drivers">
+<META NAME="MS-HKWD" CONTENT="boot driver replacement"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_3272ec07-4f0a-4675-8ab0-6f802315a1ee.xml"></A>Mapping Driver Files</H1>
+<P>Replacing driver files can be difficult. Frequently, you have to boot to the Microsoft Windows <i>safe build</i>, replace the driver binary, and then boot again.</P>
+<P>However, Windows XP and later versions of Windows support a simpler method of replacing driver files. You can use this method to replace any kernel-mode driver (including display drivers), any Windows subsystem driver, or any other kernel-mode module. For simplicity, these files are called <i>drivers</i> in this topic, even though you can use this method for any kernel-mode module.</P>
+<P></P>
+<P>You can use this method whenever WinDbg or KD is attached as a kernel debugger. You can also use this method on a boot driver, but it is more difficult. For more information about how to use this method with boot drivers, see <a href="#3cec8d2d-55c6-4978-bcb4-e6bc683a76c9">Replacing Boot Drivers</a>.</P>
+<P>To use a driver replacement map to replace driver files, do the following:</P><B></B><OL type="1">
+<LI>Create a <i>driver replacement map file</i>. This file is a text file that lists the drivers on the target computer and their replacement drivers on the host computer. You can replace any number of drivers. For example, you might create a file that is named <i>Mymap.ini</i> in the <i>d:\Map_Files</i> directory of your host computer that contains the following information.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>map<BR>\Systemroot\system32\drivers\videoprt.sys<BR>\\myserver\myshare\new_drivers\videoprt.sys<BR></nobr></P>
+<P>For more information about the syntax of this file, see <a href="#03c2317c-ae25-4066-9e8d-a0cd40efb020">Driver Replacement Map File Format</a>.</P>
+</LI>
+<LI>Set up a kernel debugging connection to the target computer, and start the kernel debugger (KD or WinDbg) on your host computer. (You do not have to actually break in to the target computer.)</LI>
+<LI>Load the driver replacement map file by doing one of the following:<B></B><UL type="disc">
+<LI>Set the _NT_KD_FILES <a href="r12_cmdline_53f400f6-9ae2-427a-85d7-82b0cab41a96.xml.htm">environment variable</a> before you start the kernel debugger.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>D:\Debugging Tools for Windows&gt; <b>set _NT_KD_FILES=d:\Map_Files\mymap.ini</b><BR>D:\Debugging Tools for Windows&gt; <b>kd</b><BR></nobr></P>
+</LI>
+<LI>Use the <a href="r20_metacmds_e_ac521695-c758-497c-bf40-870a5b50011d.xml.htm"><b>.kdfiles (Set Driver Replacement Map)</b></a> command after you start the kernel debugger.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>D:\Debugging Tools for Windows&gt; <b>kd</b><BR>kd&gt; <b>.kdfiles d:\Map_Files\mymap.ini</b><BR>KD file associations loaded from 'd:\Map_Files\mymap.ini'<BR></nobr></P>
+<P>You can also use the <b>.kdfiles</b> command to display the current driver replacement map file or to delete the driver replacement map. If you do not use this command, the map persists until you exit the debugger.</P>
+</LI>
+</UL>
+<P></P>
+</LI>
+</OL>
+<P></P>
+<P>After you complete this procedure, the driver replacement map takes effect.</P>
+<P>Whenever the target computer is about to load a driver, it queries the kernel debugger to determine whether this driver has been mapped. If the driver has been mapped, the replacement file is sent over the kernel connection and copied over the old driver file. The new driver is then loaded.</P>
+<P></P>
+<P></P>
+<H3><A NAME="03c2317c-ae25-4066-9e8d-a0cd40efb020"></A>Driver Replacement Map File Format</H3>
+<P>Each driver file replacement is indicated by three lines in the driver replacement map file. </P><B></B><UL type="disc">
+<LI>The first line consists of the word "map". </LI>
+<LI>The second line specifies the path and file name of the old driver on the target computer. </LI>
+<LI>The third line specifies the full path of the new driver. This driver can be located on the host computer or on some other server.</LI>
+</UL>
+<P>You can repeat this pattern of information any number of times.</P>
+<P>Paths and file names are case insensitive, and the actual driver file names can be different. The file that you specify on the third line is copied over the file that you specify on the second line when the target computer is about to load that driver.</P>
+<P class="note"><b>Warning</b>  The old driver's path and file name must be an <i>exact</i> case-insensitive match for the path and file name that is stored in the Service Control Manager (SCM) database. This path frequently begins with <b>\SystemRoot\system32\drivers</b>. However, several variations are possible (for example, a path that begins with <b>\??\c:\windows\system32\drivers</b>). The name in the SCM database is identical to the name that was passed to <b>MmLoadSystemImage</b>.</P>
+<P>The file can include blank lines and can include comment lines that begin with a number sign (<b>#</b>).     However, after "map" appears in the file, the next two lines must be the old driver and the new driver. The blank lines and comment lines cannot break up the three-line map blocks.</P>
+<P>The following example shows a driver replacement map file.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>map<BR>\Systemroot\system32\drivers\videoprt.sys<BR>e:\MyNewDriver\binaries\videoprt.sys<BR>map<BR>\Systemroot\system32\mydriver.sys<BR>\\myserver\myshare\new_drivers\mydriver0031.sys<BR><BR># Here is a comment<BR>map<BR>\??\c:\windows\system32\beep.sys<BR>\\myserver\myshare\new_drivers\new_beep.sys<BR></nobr></P>
+<P>The driver replacement map file must be a text file, but you can use any file name and file name extension (<i>.ini</i>, <i>.txt</i>, <i>.map</i>, and so on). </P>
+<H4>Additional Notes</H4>
+<P>When driver substitution occurs, a message appears in the kernel debugger.</P>
+<P>If you use <a href="r23_keys_099a6f71-3f8d-48fd-9839-6e38b8cbb28d.xml.htm">CTRL+D</a> (in KD) or CTRL+ALT+D (in WinDbg), you see verbose information about the replacement request. This information can be useful if you are not sure whether the name that you have listed matches the one in the SCM database.    </P>
+<P>If the kernel debugger exits, no more driver replacement occurs. However, any drivers that have already been replaced do not revert to their old binaries, because the driver files are actually overwritten.</P>
+<P>This driver replacement feature automatically bypasses Windows File Protection (WFP).</P>
+<P>You do not have to restart the target computer. Driver replacement occurs any time that the target computer loads a driver, regardless of whether it has been restarted. Of course, most drivers are loaded during the boot process, so in practice you should restart the target computer after the map file has been loaded.</P>
+<P>If the _NT_KD_FILES variable is defined, the specified driver replacement map file is read when the kernel debugger is started. If you issue the <b>.kdfiles</b> command, the specified file is read immediately. At this point, the debugger verifies that the file has the basic map/line/line format. But the actual paths and file names are not verified until substitution occurs.</P>
+<P>After the map file has been read, the debugger stores its contents. If you change this file after this point, the changes have no effect (unless you reissue the <b>.kdfiles</b> command).</P>
+<P>For large driver files, we recommend 1394 kernel connections. A kernel connection through a COM port might result in a long copying time.</P>
+<H3><A NAME="3cec8d2d-55c6-4978-bcb4-e6bc683a76c9"></A>Replacing Boot Drivers</H3>
+<P>If you want to replace a boot driver file by using this driver replacement method, you must connect the kernel debugger to the Windows boot loader (Ntldr), not to the Windows kernel. Before you can make this connection, you must install a special debugger-enabled version of Ntldr. You can find this version of Ntldr in the Windows Driver Kit (WDK), in the <i>%DDKROOT%\debug</i> directory.    </P>
+<P>Because the target computer bypasses its <i>Boot.ini</i> file, you cannot set the kernel connection protocol in the typical manner. You must make the connection through the COM1 port on the target computer. The baud rate is 115200. Therefore, the kernel debugger on the host computer should be configured to use a COM connection at the 115200 speed.</P>
+<P>This special method applies only to boot drivers (that is, <i>Acpi.sys</i>, <i>Classpnp.sys</i>, <i>Disk.sys</i>, and anything else that <a href="r17_cmds_i_2360e197-1deb-4e41-98ff-d2c7e6c7d8f3.xml.htm"><b>lm t n</b></a> displays at the initial Windows breakpoint). If you have to replace a standard driver that <b>MmLoadSystemImage</b> loads after the boot has been completed, you should use the standard method described earlier.</P>
+<P></P>
+<P>You cannot replace boot drivers on a computer that uses EFI firmware instead of the <i>Boot.ini</i> file (for example, an Itanium-based computer).</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Mapping Driver Files RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

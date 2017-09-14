@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!token</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !token"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_f406eac0-4356-4e7c-aaa4-a21600d9d179.xml"/>
+<META NAME="MS-HKWD" CONTENT="!token extension">
+<META NAME="MS-HKWD" CONTENT="token">
+<META NAME="MS-HKWD" CONTENT="security token"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_f406eac0-4356-4e7c-aaa4-a21600d9d179.xml"></A>!token</H1>
+<P>The <b>!token</b> extension displays a formatted view of a security token object.</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000 (kernel mode only)</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!token</b> [<i>Address</i>] <BR></nobr></P>
+<P></P>
+<P>Kernel-Mode Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!token</b> [<b>-n</b>] [<i>Address</i>] <BR><b>!token</b> <b>-?</b> <BR></nobr></P>
+<P></P>
+<P>User-Mode Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!token</b> [<b>-n</b>] [<i>Handle</i>] <BR><b>!token</b> <b>-?</b> <BR></nobr></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD><i>(Kernel mode only)</i>  Specifies the address of the token to be displayed. If this is 0 or omitted, the token for the active thread is displayed.   </DD>
+<DT><i>Handle</i></DT>
+<DD><i>(User mode only)</i>  Specifies the handle of the token to be displayed. If this is 0 or omitted, the token associated with the target thread is displayed.</DD>
+<DT><b>-n</b></DT>
+<DD><i>(Windows XP and later; user mode only)</i>  Causes the display to include the friendly name. This includes the security identifier (SID) type, as well as the domain and user name for the SID. This option cannot be used when you are debugging LSASS.</DD>
+<DT><b>-?</b></DT>
+<DD>(Windows XP and later)  Displays some brief Help text for this extension in the Debugger Command window.  </DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Exts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P>In Windows 2000, <b>!token</b> is only available in kernel-mode debugging. In Windows XP and later operating systems, <b>!token</b> is available in kernel-mode and live user-mode debugging. It cannot be used on user-mode dump files.</P>
+<H4>Comments</H4>
+<P>The TOKEN structure is a security object type that represents an authenticated user process. Every process has an assigned token, which becomes the default token for each thread of that process. However, an individual thread can be assigned a token that overrides this default.</P>
+<P>You can get the token address from the output of <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a>. To display a list of the individual fields of the TOKEN structure, use the <a href="r29_exts_kernel_q_293206d1-a1f6-4fad-82a6-732b2640d193.xml.htm"><b>!tokenfields</b></a> extension in Windows 2000, or use the <b>dt nt!_TOKEN</b> command in Windows XP or later.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!process 81464da8 1</b><BR>PROCESS 81464da8  SessionId: 0  Cid: 03bc    Peb: 7ffdf000  ParentCid: 0124<BR>    DirBase: 0dec2000  ObjectTable: e1a31198  TableSize: 275.<BR>    Image: MSMSGS.EXE<BR>    VadRoot 81468cc0 Vads 170 Clone 0 Private 455. Modified 413. Locked 0.<BR>    DeviceMap e1958438<BR>    Token                             e1bed030<BR>    ElapsedTime                       0:44:15.0142<BR>    UserTime                          0:00:00.0290<BR>    KernelTime                        0:00:00.0300<BR>    QuotaPoolUsage[PagedPool]         49552<BR>    QuotaPoolUsage[NonPagedPool]      10872<BR>    Working Set Sizes (now,min,max)  (781, 50, 345) (3124KB, 200KB, 1380KB)<BR>    PeakWorkingSetSize                1550<BR>    VirtualSize                       57 Mb<BR>    PeakVirtualSize                   57 Mb<BR>    PageFaultCount                    2481<BR>    MemoryPriority                    BACKGROUND<BR>    BasePriority                      8<BR>    CommitCharge                      2497<BR>kd&gt; <b>!exts.token -n e1bed030</b><BR>_TOKEN e1bed030<BR>TS Session ID: 0<BR>User: S-1-5-21-518066528-515770016-299552555-2981724 (User: MYDOMAIN\myuser)<BR>Groups:<BR> 00 S-1-5-21-518066528-515770016-299552555-513 (Group: MYDOMAIN\Domain Users)<BR>    Attributes - Mandatory Default Enabled<BR> 01 S-1-1-0 (Well Known Group: localhost\Everyone)<BR>    Attributes - Mandatory Default Enabled<BR> 02 S-1-5-32-544 (Alias: BUILTIN\Administrators)<BR>    Attributes - Mandatory Default Enabled Owner<BR> 03 S-1-5-32-545 (Alias: BUILTIN\Users)<BR>    Attributes - Mandatory Default Enabled<BR> 04 S-1-5-21-518066528-515770016-299552555-2999049 (Group: MYDOMAIN\AllUsers)<BR>    Attributes - Mandatory Default Enabled<BR> 05 S-1-5-21-518066528-515770016-299552555-2931095 (Group: MYDOMAIN\SomeGroup1)<BR>    Attributes - Mandatory Default Enabled<BR> 06 S-1-5-21-518066528-515770016-299552555-2931096 (Group: MYDOMAIN\SomeGroup2)<BR>    Attributes - Mandatory Default Enabled<BR> 07 S-1-5-21-518066528-515770016-299552555-3014318 (Group: MYDOMAIN\SomeGroup3)<BR>    Attributes - Mandatory Default Enabled<BR> 08 S-1-5-21-518066528-515770016-299552555-3053352 (Group: MYDOMAIN\Another Group)<BR>    Attributes - Mandatory Default Enabled<BR> 09 S-1-5-21-518066528-515770016-299552555-2966661 (Group: MYDOMAIN\TestGroup)<BR>    Attributes - Mandatory Default Enabled<BR> 10 S-1-5-21-2117033040-537160606-1609722162-17637 (Group: MYOTHERDOMAIN\someusers)<BR>    Attributes - Mandatory Default Enabled<BR> 11 S-1-5-21-518066528-515770016-299552555-3018354 (Group: MYDOMAIN\TestGroup2)<BR>    Attributes - Mandatory Default Enabled<BR> 12 S-1-5-21-518066528-515770016-299552555-3026602 (Group: MYDOMAIN\SomeGroup4)<BR>    Attributes - Mandatory Default Enabled<BR> 13 S-1-5-21-518066528-515770016-299552555-2926570 (Group: MYDOMAIN\YetAnotherGroup)<BR>    Attributes - Mandatory Default Enabled<BR> 14 S-1-5-21-661411660-2927047998-133698966-513 (Group: MYDOMAIN\Domain Users)<BR>    Attributes - Mandatory Default Enabled<BR> 15 S-1-5-21-518066528-515770016-299552555-2986081 (Alias: MYDOMAIN\an_alias)<BR>    Attributes - Mandatory Default Enabled GroupResource<BR> 16 S-1-5-21-518066528-515770016-299552555-3037986 (Alias: MYDOMAIN\AReallyLongGroupName1)<BR>    Attributes - Mandatory Default Enabled GroupResource<BR> 17 S-1-5-21-518066528-515770016-299552555-3038991 (Alias: MYDOMAIN\AReallyLongGroupName2)<BR>    Attributes - Mandatory Default Enabled GroupResource<BR> 18 S-1-5-21-518066528-515770016-299552555-3037999 (Alias: MYDOMAIN\AReallyLongGroupName3)<BR>    Attributes - Mandatory Default Enabled GroupResource<BR> 19 S-1-5-21-518066528-515770016-299552555-3038983 (Alias: MYDOMAIN\AReallyReallyLongGroupName)<BR>    Attributes - Mandatory Default Enabled GroupResource<BR> 20 S-1-5-5-0-71188 (no name mapped)<BR>    Attributes - Mandatory Default Enabled LogonId<BR> 21 S-1-2-0 (Well Known Group: localhost\LOCAL)<BR>    Attributes - Mandatory Default Enabled<BR> 22 S-1-5-4 (Well Known Group: NT AUTHORITY\INTERACTIVE)<BR>    Attributes - Mandatory Default Enabled<BR> 23 S-1-5-11 (Well Known Group: NT AUTHORITY\Authenticated Users)<BR>    Attributes - Mandatory Default Enabled<BR>Primary Group: S-1-5-21-518066528-515770016-299552555-513 (Group: MYDOMAIN\Domain Users)<BR>Privs:<BR> 00 0x000000017 SeChangeNotifyPrivilege           Attributes - Enabled Default<BR> 01 0x000000008 SeSecurityPrivilege               Attributes -<BR> 02 0x000000011 SeBackupPrivilege                 Attributes -<BR> 03 0x000000012 SeRestorePrivilege                Attributes -<BR> 04 0x00000000c SeSystemtimePrivilege             Attributes -<BR> 05 0x000000013 SeShutdownPrivilege               Attributes -<BR> 06 0x000000018 SeRemoteShutdownPrivilege         Attributes -<BR> 07 0x000000009 SeTakeOwnershipPrivilege          Attributes -<BR> 08 0x000000014 SeDebugPrivilege                  Attributes -<BR> 09 0x000000016 SeSystemEnvironmentPrivilege      Attributes -<BR> 10 0x00000000b SeSystemProfilePrivilege          Attributes -<BR> 11 0x00000000d SeProfileSingleProcessPrivilege   Attributes -<BR> 12 0x00000000e SeIncreaseBasePriorityPrivilege   Attributes -<BR> 13 0x00000000a SeLoadDriverPrivilege             Attributes - Enabled<BR> 14 0x00000000f SeCreatePagefilePrivilege         Attributes -<BR> 15 0x000000005 SeIncreaseQuotaPrivilege          Attributes -<BR> 16 0x000000019 SeUndockPrivilege                 Attributes - Enabled<BR> 17 0x00000001c SeManageVolumePrivilege           Attributes -<BR>Authentication ID:         (0,11691)<BR>Impersonation Level:       Anonymous<BR>TokenType:                 Primary<BR>Source: User32             TokenFlags: 0x9 ( Token in use )<BR>Token ID: 18296            ParentToken ID: 0<BR>Modified ID:               (0, 18298)<BR>RestrictedSidCount: 0      RestrictedSids: 00000000<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about the kernel-mode TOKEN structure, see <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. For information about the user-mode TOKEN structure, see the Microsoft Windows SDK documentation.   </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !token RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

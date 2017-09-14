@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Caching Acquired Symbol Files</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Caching Acquired Symbol Files"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_27c283e7-5fb1-4a06-9540-ea7ba4374312.xml"/>
+<META NAME="MS-HKWD" CONTENT="SymProxy, caching"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_27c283e7-5fb1-4a06-9540-ea7ba4374312.xml"></A>Caching Acquired Symbol Files</H1>
+<P>Typically, SymProxy caches the files that it acquires in the directory designated within Internet Information Services (IIS) as the virtual root for the associated Web site.  Then IIS makes the file available to the client debugger.  Because the debugger cannot open a file directly from HTTP, it copies the file to a local cache, specified by the symbol path:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>srv*c:\localcache*http://server/symbols<BR></nobr></P>
+<P></P>
+<P>In this example, the client debugger copies the file to <i>c:\localcache</i>.  In a situation such as this, the file is copied twice &#8211; once by SymProxy to the virtual root of the Web site, and again by the debugger to its local cache.</P>
+<P>It is possible to avoid the second copy operation and speed up processing.  To do this, you must first  share the virtual root of the Web site as a UNC path that can be accessed by the debuggers.  For sake of example,  this path is named <i>\\server\symbols</i>.  You must then remove the IIS configuration for MIME types:</P><B>To remove the IIS configuration for MIME types</B><OL type="1">
+<LI>From <b>Administrative Tools</b> open <b>Internet Information Services (IIS) Manager</b>.</LI>
+<LI>Expand <b>Web Sites</b>.</LI>
+<LI>Right-click <b>Default Web Site</b>.</LI>
+<LI>Right-click the <b>Symbols</b> virtual directory and select <b>Properties</b>.</LI>
+<LI>Click the <b>HTTP Headers</b> tab.</LI>
+<LI>Click <b>MIME Types</b> .</LI>
+<LI>Select all types in the list box labelled <b>Registered MIME Types</b>.</LI>
+<LI>Click <b>Remove</b> .</LI>
+<LI>To exit the <b>MIME Types</b> dialog, click <b>OK</b>.</LI>
+<LI>To exit <b>Symbols Properties</b>, click <b>OK</b>.</LI>
+</OL>
+<P></P>
+<P>This causes IIS to return <b>file not found</b> to the debugging client for all transactions on the Web site.  However, it does not prevent SymProxy from populating the virtual root with the file.</P>
+<P>After you remove the IIS configuration for MIME types, configure the debugger clients to look for symbols first in the HTTP store and in the share that maps to the virtual root of the store with the command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>srv**http://server/symbols;srv*\\server\symbols<BR></nobr></P>
+<P></P>
+<P>In the preceding example, the first element of the symbol path (<i>srv**http://server/symbols</i>) says to get files from the HTTP store and copy them to the default symbol store as a local cache.  The specified cache is of no importance because no file is ever received from the HTTP store.  After this failure, it attempts to obtain the file from the actual location of the virtual root of the store (<i>srv*\\server\symbols</i>).  This attempt succeeds because the file is copied to that location as a side effect of the previous path processing.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Caching Acquired Symbol Files RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

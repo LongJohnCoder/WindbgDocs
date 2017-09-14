@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.fpo (Control FPO Overrides)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .fpo (Control FPO Overrides)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_db758fac-48bf-4ef3-8ec1-0ddc0322e826.xml"/>
+<META NAME="MS-HKWD" CONTENT=".fpo (Control FPO Overrides) command">
+<META NAME="MS-HKWD" CONTENT="Control FPO Overrides (.fpo) command">
+<META NAME="MS-HKWD" CONTENT="FPO overrides"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_db758fac-48bf-4ef3-8ec1-0ddc0322e826.xml"></A>.fpo (Control FPO Overrides)</H1>
+<P>The <b>.fpo</b> command controls the frame pointer omission (FPO) overrides.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.fpo</b> <b>-s</b> [<b>-f</b><i>Flag</i>] <i>Address</i> <BR><b>.fpo</b> <b>-d</b> <i>Address</i> <BR><b>.fpo</b> <b>-x</b> <i>Address</i> <BR><b>.fpo</b> <b>-o</b> <i>Address</i> <BR><b>.fpo</b> <i>Address</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>-s</b></DT>
+<DD>Sets an FPO override at the specified address.</DD>
+<DT><b>-f</b><i>Flag</i></DT>
+<DD>Specifies FPO flags for the override. You must not add a space between <b>-f</b> and <i>Flag</i>. If the flag takes an argument, you must add a space between the flag and that argument. If you want multiple flags, you must repeat the <b>-f</b> switch (for example, <b>-fb -fp 4 -fe</b>). You can use the <b>-f</b> switch only with <b>-s</b>. You can use one of the following values for <i>Flag</i>.<B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>b</b></TD>
+<TD Width="">Sets <b>fUseBP</b> equal to TRUE.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>e</b></TD>
+<TD Width="">Sets <b>fUseSEH</b> equal to TRUE.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>n</b></TD>
+<TD Width="">Sets <b>cbFrame</b> equal to FRAME_NONFPO.  (By default, <b>cbFrame</b> is set to FRAME_FPO.)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>l</b> <i>Term</i></TD>
+<TD Width="">Sets <b>cdwLocals</b> equal to <i>Term</i>. <i>Term</i> should specify the local DWORD count that you want.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>p</b> <i>Term</i></TD>
+<TD Width="">Sets <b>cdwParams</b> equal to <i>Term</i>. <i>Term</i> should specify the parameter DWORD count that you want.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r</b> <i>Term</i></TD>
+<TD Width="">Sets <b>cbRegs</b> equal to <i>Term</i>. <i>Term</i> should specify the register count that you want.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>s</b> <i>Term</i></TD>
+<TD Width="">Sets <b>cbProcSize</b> equal to <i>Term</i>. <i>Term</i> should specify the procedure size that you want.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""> <b>t</b> <i>Term</i></TD>
+<TD Width="">Sets <b>cbFrame</b> equal to <i>Term</i>. <i>Term</i> should specify one of the following frame types:<B></B><UL type="disc">
+<LI>FRAME_FPO       0</LI>
+<LI>FRAME_TRAP      1</LI>
+<LI>FRAME_TSS       2</LI>
+<LI>FRAME_NONFPO    3</LI>
+</UL>
+</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the address where the debugger sets or removes the override or the address whose overrides the debugger should display. This address must be within a module in the current module list.</DD>
+<DT><b>-d</b></DT>
+<DD>Removes the FPO overrides at the specified address.</DD>
+<DT><b>-x</b></DT>
+<DD>Removes all FPO overrides within the module that contains the <i>Address</i> address.</DD>
+<DT><b>-o</b></DT>
+<DD>Displays all FPO overrides within the module that contains the <i>Address</i> address.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Without parameters, the <b>.fpo</b> command displays the FPO overrides for the specified address.</P>
+<P>Some compilers (including Microsoft Visual Studio 6.0 and earlier versions) generate FPO information to indicate how the stack frame is set up. During stack walking, the debugger uses these FPO records to understand the stack. If the compiler generated incorrect FPO information, you can use the <b>.fpo</b> command to fix this problem.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .fpo (Control FPO Overrides) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

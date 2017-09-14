@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wdfkd.wdfhandle</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wdfkd.wdfhandle"><xml><MSHelp:Keyword Index="A" Term="r33~c_exts_WDF_5a925857-dd4e-40ee-a93e-28f698d1c26a.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wdfkd.wdfhandle extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~c_exts_WDF_5a925857-dd4e-40ee-a93e-28f698d1c26a.xml"></A>!wdfkd.wdfhandle</H1>
+<P>The <b>!wdfkd.wdfhandle</b> extension displays information about a specified framework object handle, such as the handle type, object context pointers, and the underlying framework object pointer.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wdfkd.wdfhandle</b> <i>Handle</i> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Handle</i></DT>
+<DD>A handle to a framework object.</DD>
+<DT><i>Flags</i></DT>
+<DD>Optional. Flags that specify the kind of information to display. <i>Flags</i> can be any combination of the following bits. The default value is 0x0.<DL><DT>Bit 4 (0x10)</DT>
+<DD>The display will include the subtree of child objects for the specified handle.</DD>
+<DT>Bit 5 (0x20)</DT>
+<DD>The display will include context and callback function information for the specified handle. This flag is valid only when bit 4 (0x10) is set.  </DD>
+<DT>Bit 6 (0x40)</DT>
+<DD>The display will include additional information for the specified handle. This flag is valid only when bit 4 (0x10) is set.  </DD>
+<DT>Bit 7 (0x80)</DT>
+<DD>The handle information will be displayed in a more compact format.  </DD>
+<DT>Bit 8 (0x100)</DT>
+<DD>The display will left align internal type information. This flag is valid only when bit 4 (0x10) is set. </DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P><i>Wdfkd.dll</i></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The following example shows the output of the <b>!wdfhandle</b> extension with bit 4 set in the <i>Flags</i> parameter (so the output displays information about the child objects).</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wdfhandle 0x7ca7b1c0 10</b> <BR><BR>handle 0x7ca7b1c0, type is WDFDEVICE<BR><BR>Contexts:<BR>    context:  dt 0x83584ff8 ROOT_CONTEXT (size is 0x1 bytes)<BR>     &lt;no associated attribute callbacks&gt;<BR><BR>Child WDFHANDLEs of 0x7ca7b1c0:<BR>    WDFDEVICE 0x7ca7b1c0<BR>        WDFCMRESLIST 0x7ccfb058<BR>        WDFCMRESLIST 0x7cadb058<BR>        WDFCHILDLIST 0x7c72f0c8<BR>        WDFCHILDLIST 0x7cc090c8<BR>        WDFIOTARGET 0x7c9630b8<BR><BR>!wdfobject 0x83584e38<BR><BR></nobr></P>
+<P>In the preceding example, the input handle refers to a WDFDEVICE object. This particular device object has five child objects&#8212;two WDFCMRESLIST objects, two WDFCHILDLIST objects, and one WDFIOTARGET object.</P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~c_wdf_b21958be-e8b5-460c-87b7-a755da1cf37e.xml.htm">Kernel-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wdfkd.wdfhandle RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.while</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .while"><xml><MSHelp:Keyword Index="A" Term="r14_tokens_c5ca2d62-6dd6-4103-ab3a-43f8478ca1e1.xml"/>
+<META NAME="MS-HKWD" CONTENT=".while token"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r14_tokens_c5ca2d62-6dd6-4103-ab3a-43f8478ca1e1.xml"></A>.while</H1>
+<P>The <b>.while</b> token behaves like the <b>while</b> keyword in C.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.while (</b><i>Condition</i><b>) {</b> <i>Commands</i> <b>}</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Syntax Elements</H4>
+<DT><i>Condition</i></DT>
+<DD>Specifies a condition. If this evaluates to zero, it is treated as false; otherwise it is true. Enclosing <i>Condition</i> in parentheses is optional. <i>Condition</i> must be an expression, not a debugger command. It will be evaluated by the default expression evaluator (MASM or C++). For details, see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a>.</DD>
+<DT><i>Commands</i></DT>
+<DD>Specifies one or more commands that will be executed repeatedly as long as the condition is true. This block of commands needs to be enclosed in braces, even if it consists of a single command. Multiple commands should be separated by semicolons, but the final command before the closing brace does not need to be followed by a semicolon.</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>The <a href="r14_tokens_ebe92d74-eea0-4a48-a02d-442aabdc9e43.xml.htm"><b>.break</b></a> and <a href="r14_tokens_0fcdb845-860b-4f9a-b2ed-f7da017f6a65.xml.htm"><b>.continue</b></a> tokens can be used to exit or restart the <i>Commands</i> block.</P>
+<H4>Additional Information</H4>
+<P>For information about other control flow tokens and their use in debugger command programs, see <a href="r05_use_start_81070bdc-2ffb-4a22-a785-0935553fb4c4.xml.htm">Using Debugger Command Programs</a>.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .while RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

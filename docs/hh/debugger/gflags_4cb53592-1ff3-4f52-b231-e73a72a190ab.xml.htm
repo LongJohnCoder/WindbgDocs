@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Configuring Object Reference Tracing</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Configuring Object Reference Tracing"><xml><MSHelp:Keyword Index="A" Term="GFlags_4cb53592-1ff3-4f52-b231-e73a72a190ab.xml"/>
+<META NAME="MS-HKWD" CONTENT="Object Reference Tracing, configuration"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_4cb53592-1ff3-4f52-b231-e73a72a190ab.xml"></A>Configuring Object Reference Tracing</H1>
+<P>You can use Gflags to enable, disable, and configure the Object Reference Tracing feature of Windows. Object Reference Tracing records sequential stack traces whenever an object reference counter is incremented or decremented. The traces can help you to detect object reference errors, including double-dereferencing, failure to reference, and failure to dereference objects. This feature is supported only in Windows Vista and later versions of Windows. For detailed information about this feature, see <a href="gflags_29eddbe3-a557-4bd0-8907-2a58e7b7d9f3.xml.htm">Object Reference Tracing</a>.</P><B>To enable Object Reference Tracing</B><OL type="1">
+<LI>In the Gflags dialog box, select the <b>System Registry</b> tab or the <b>Kernel Flags</b> tab.</LI>
+<LI>In the Object Reference Tracing section, select <b>Enable</b>.<P>You must limit the trace to objects with specified pool tags, to objects created by a specified process, or both.</P>
+</LI>
+<LI>To limit the trace to objects with a particular pool tag, type the pool tag name. To list multiple pool tags, use semicolons (;) to separate the pool tags. When you list multiple pool tags, the trace includes objects with any of the specified pool tags. Pool tags are case sensitive.<P>For example, <b>Fred;Tag1</b>.</P>
+</LI>
+<LI>To limit the trace to objects that are created by a particular process, type the image name of the process. You can specify only one image file name.<P>When you specify both pool tags and a process, the trace includes objects that are created by the process that have any of the specified pool tags.</P>
+</LI>
+<LI>To retain the trace after the trace object is destroyed, select <b>Permanent</b>. <P>When you select <b>Permanent</b>, the trace is retained until you disable object reference tracing, or shut down or restart Windows.</P>
+</LI>
+<LI>Click <b>Apply</b> or <b>OK</b>.</LI>
+</OL>
+<P></P>
+<P>The following illustration shows Object Reference Tracing enabled on the <b>Kernel Flags</b> tab. This trace will include only objects that were created by the <i>notepad.exe</i> process that have the pool tag <b>Fred</b> or <b>Tag1</b>. Because this is a run time (kernel flags) setting, the trace starts immediately. If it were a registry setting, you would have to restart Windows to start the trace.</P><img src="gflags-obj.png"><P></P><B>To disable Object Reference Tracing</B><OL type="1">
+<LI>In the Gflags dialog box, select the <b>System Registry</b> tab or the <b>Kernel Flags</b> tab.  Object Reference Tracing will appear on the latter tab only in Windows Vista and later versions of Windows.</LI>
+<LI>In the Object Reference Tracing section, clear the <b>Enable</b> check box.</LI>
+</OL>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Configuring Object Reference Tracing RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

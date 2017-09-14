@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wdfkd.wdfdevice</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wdfkd.wdfdevice"><xml><MSHelp:Keyword Index="A" Term="r33~c_exts_WDF_6c586906-bba2-4f39-9e39-f9f8b71e0cd9.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wdfkd.wdfdevice extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~c_exts_WDF_6c586906-bba2-4f39-9e39-f9f8b71e0cd9.xml"></A>!wdfkd.wdfdevice</H1>
+<P><P>The <b>!wdfkd.wdfdevice</b> extension displays information that is associated with a WDFDEVICE-typed object handle.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wdfkd.wdfdevice</b> <i>Handle</i> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Handle</i></DT>
+<DD>A handle to a WDFDEVICE-typed object.</DD>
+<DT><i>Flags</i></DT>
+<DD>Optional. The kind of information to display. <i>Flags</i> can be any combination of the following bits:<DL><DT>Bit 0 (0x1)</DT>
+<DD>The display will include verbose information about the device, such as the associated WDFCHILDLIST-typed handles, synchronization scope, and execution level.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>The display will include detailed power state information. </DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>The display will include detailed power policy state information. </DD>
+<DT>Bit 3 (0x8)</DT>
+<DD>The display will include detailed Plug and Play (PnP) state information. </DD>
+<DT>Bit 4 (0x10)</DT>
+<DD>The display will include the device object's callback functions. </DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P><i>Wdfkd.dll</i></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The following example uses the <b>!wdfkd.wdfdevice</b> extension on a WDFDEVICE handle that represents a physical device object (PDO), without specifying any flags.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wdfdevice 0x7cad31c8</b> <BR><BR>Dumping WDFDEVICE 0x7cad31c8<BR>=================================<BR><BR>WDM PDEVICE_OBJECTs:  self 81fb00e8<BR><BR>Pnp state:  119 ( WdfDevStatePnpStarted )<BR>Power state:  31f ( WdfDevStatePowerDx )<BR>Power Pol state:  508 ( WdfDevStatePwrPolWaitingUnarmed )<BR><BR>Parent WDFDEVICE 7ca7b1c0<BR>Parent states:<BR>   Pnp state:  119 ( WdfDevStatePnpStarted )<BR>   Power state:  307 ( WdfDevStatePowerD0 )<BR>   Power Pol state:  565 ( WdfDevStatePwrPolStarted )<BR><BR>No pended pnp or power irps<BR>Device is the power policy owner for the stack<BR><BR></nobr></P>
+<P></P>
+<P>The following example displays the same device object as the preceding example, but this time with a flag value of 0xF.  This flag value, a combination of the bits 0x1, 0x2, 0x4, and 0x8, causes the display to include verbose device information, power state information, power policy state information, and PnP state information.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wdfdevice 0x7cad31c8 f</b> <BR><BR>Dumping WDFDEVICE 0x7cad31c8<BR>=================================<BR><BR>WDM PDEVICE_OBJECTs:  self 81fb00e8<BR><BR>Pnp state:  119 ( WdfDevStatePnpStarted )<BR>Power state:  31f ( WdfDevStatePowerDx )<BR>Power Pol state:  508 ( WdfDevStatePwrPolWaitingUnarmed )<BR><BR>Parent WDFDEVICE 7ca7b1c0<BR>Parent states:<BR>   Pnp state:  119 ( WdfDevStatePnpStarted )<BR>   Power state:  307 ( WdfDevStatePowerD0 )<BR>   Power Pol state:  565 ( WdfDevStatePwrPolStarted )<BR><BR>No pended pnp or power irps<BR>Device is the power policy owner for the stack<BR><BR>Pnp state history:<BR>[0] WdfDevStatePnpObjectCreated (0x100)<BR>[1] WdfDevStatePnpInit (0x105)<BR>[2] WdfDevStatePnpInitStarting (0x106)<BR>[3] WdfDevStatePnpHardwareAvailable (0x108)<BR>[4] WdfDevStatePnpEnableInterfaces (0x109)<BR>[5] WdfDevStatePnpStarted (0x119)<BR><BR>Power state history:<BR>[0] WdfDevStatePowerD0StartingConnectInterrupt (0x310)<BR>[1] WdfDevStatePowerD0StartingDmaEnable (0x311)<BR>[2] WdfDevStatePowerD0StartingStartSelfManagedIo (0x312)<BR>[3] WdfDevStatePowerDecideD0State (0x313)<BR>[4] WdfDevStatePowerD0BusWakeOwner (0x309)<BR>[5] WdfDevStatePowerGotoDx (0x31a)<BR>[6] WdfDevStatePowerGotoDxIoStopped (0x31c)<BR>[7] WdfDevStatePowerDx (0x31f)<BR><BR>Power policy state history:<BR>[0] WdfDevStatePwrPolStarting (0x501)<BR>[1] WdfDevStatePwrPolStartingSucceeded (0x502)<BR>[2] WdfDevStatePwrPolStartingDecideS0Wake (0x504)<BR>[3] WdfDevStatePwrPolStartedIdleCapable (0x505)<BR>[4] WdfDevStatePwrPolTimerExpiredNoWake (0x506)<BR>[5] WdfDevStatePwrPolTimerExpiredNoWakeCompletePowerDown (0x507)<BR>[6] WdfDevStatePwrPolWaitingUnarmedQueryIdle (0x509)<BR>[7] WdfDevStatePwrPolWaitingUnarmed (0x508)<BR><BR>WDFCHILDLIST Handles:<BR> !WDFCHILDLIST 0x7ce710c8<BR><BR>SyncronizationScope is WdfSynchronizationScopeNone<BR>ExecutionLevel is WdfExecutionLevelDispatch<BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~c_wdf_b21958be-e8b5-460c-87b7-a755da1cf37e.xml.htm">Kernel-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wdfkd.wdfdevice RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

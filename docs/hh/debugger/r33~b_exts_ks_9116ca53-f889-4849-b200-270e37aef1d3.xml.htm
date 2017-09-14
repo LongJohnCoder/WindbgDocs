@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ks.dump</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ks.dump"><xml><MSHelp:Keyword Index="A" Term="r33~b_exts_KS_9116ca53-f889-4849-b200-270e37aef1d3.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ks.dump extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~b_exts_KS_9116ca53-f889-4849-b200-270e37aef1d3.xml"></A>!ks.dump</H1>
+<P>The <b>!ks.dump</b> extension displays the specified object.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ks.dump </b><i>Object </i>[<i>Level</i>] [<i>Flags</i>]  <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Object</i></DT>
+<DD>Specifies a pointer to an AVStream structure, an AVStream class object, or a PortCls object. Can also specify a pointer to an an IRP or a file object. </DD>
+<DT><i>Level</i></DT>
+<DD>Optional. Specifies the level of detail to display on a 0-7 scale with progressively more information displayed for higher values.  To display all available details, supply a value of 7. You can see more information about levels by issuing a <b>!ks.dump</b> command with no arguments.</DD>
+<DT><i>Flags</i></DT>
+<DD>Optional. Specifies the kind of information to be displayed. <i>Flags</i> can be any combination of the following bits.<DL><DT>Bit 0 (0x1)</DT>
+<DD>Display all queued IRPs.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Display all pending IRPs.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>Analyze a stalled graph for suspects.</DD>
+<DT>Bit 3 (0x8)</DT>
+<DD>Show all pin states.</DD>
+</DL>
+</DD>
+<P></P>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>winxp\Ks.dll </i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ks.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!ks.dump </b>command recognizes most AVStream objects, including pins, filters, factories, devices, pipes, and stream pointers. This command also recognizes some stream class structures, including stream objects, filter instances, device extensions, and SRBs.</P>
+<P>Following is an example of the <b>!ks.dump</b> display for a filter:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!dump 829493c4</b><BR>Filter object 829493c4 [CKsFilter = 82949350]<BR>    Descriptor     f7a233c8:<BR>    Context        829dce28<BR><BR></nobr></P>
+<P>Following is an example of the <b>!ks.dump </b>display for a pin:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!dump 8160DDE0 7</b><BR>Pin object 8160DDE0 [CKsPin = 8160DD50]<BR>    DeviceState    KSSTATE_RUN<BR>    ClientState    KSSTATE_RUN<BR>    ResetState     KSRESET_END<BR>    CKsPin object 8160DD50 [KSPIN = 8160DDE0]<BR>        State                    KSSTATE_RUN<BR>        Processing Mutex         8160DFD0 is not held<BR>        And Gate &amp;               8160DF88<BR>        And Gate Count           1<BR><BR><BR></nobr></P>
+<P>Some important parts of this display are included in the following table.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Parameter</b></TD>
+<TD Width=""><b>Meaning</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>DeviceState</b></TD>
+<TD Width="">The state that the pin was requested to enter. If different from <b>ClientState</b>, this is the state that the minidriver will transition to next.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ClientState</b></TD>
+<TD Width="">The state that the minidriver is actually in. This reflects the state of the pipe. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ResetState</b></TD>
+<TD Width="">Indicates whether or not the object is in the middle of a flush.<BR><BR><b>KSRESET_BEGIN</b> indicates a flush.<BR><BR><b>KSRESET_END </b>indicates no flush.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>State</b></TD>
+<TD Width="">The internal state of the pin's transport to non-AVStream filters.</TD>
+</TR>
+</table>
+<P></P>
+<P>Following is an example of the <b>!ks.dump </b>display for a stream class driver:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!dump 81a0a170 7</b><BR>Device Extension 81a0a228:<BR>    Device Object          81a0a170 [\Driver\TESTCAP]<BR>    Next Device Object     81bd56d8 [\Driver\PnpManager]<BR>    Physical Device Object 81bd56d8 [\Driver\PnpManager]<BR>    REGISTRY FLAGS:<BR>        Page out driver when closed<BR>        No suspend if running<BR>    MINIDRIVER Data:<BR>        Device Extension       81a0a44c<BR>        Interrupt Routine      00000000<BR>        Synchronize Routine    STREAM!StreamClassSynchronizeExecution<BR>        Receive Device SRB     testcap!AdapterReceivePacket<BR>        Cancel Packet          testcap!AdapterCancelPacket<BR>        Timeout Packet         testcap!AdapterTimeoutPacket<BR>        Size (d / r / s / f)   1a0(416), 14(20), 978(2424), 0(0)<BR>        Sync Mode              Driver Synchronizes<BR>    Filter Type 0:<BR>        Symbolic Links:<BR>            Information Paged Out<BR>        Instances:<BR>            816b7bd8<BR><BR></nobr></P>
+<P>Note that the sizes are listed both in hexadecimal numbers, and then, parenthetically in the decimal equivalent. The <b>Size</b> abbreviations in this display are listed in the following table.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Size</b></TD>
+<TD Width=""><b>Explanation</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>d</b></TD>
+<TD Width="">Device</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r</b></TD>
+<TD Width="">Request</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>s</b></TD>
+<TD Width="">Stream</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>f</b></TD>
+<TD Width="">Filter.  If the filter size is 0, the filter is single instance.  If it is greater than 0, it is multi-instance.</TD>
+</TR>
+</table>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~b_ks_b4eb1677-2223-49b7-8562-fdcfe42da3da.xml.htm">Kernel Streaming Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ks.dump RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

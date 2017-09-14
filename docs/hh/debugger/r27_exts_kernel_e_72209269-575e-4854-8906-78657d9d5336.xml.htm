@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!isr</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !isr"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_72209269-575e-4854-8906-78657d9d5336.xml"/>
+<META NAME="MS-HKWD" CONTENT="!isr extension">
+<META NAME="MS-HKWD" CONTENT="ISR (Interruption Status Register)">
+<META NAME="MS-HKWD" CONTENT="Interruption Status Register (ISR)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_72209269-575e-4854-8906-78657d9d5336.xml"></A>!isr</H1>
+<P><P>The <b>!isr </b>extension displays the Itanium Interruption Status Register (ISR) at the specified address.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!isr</b> <i>Expression</i> [<i>DisplayLevel</i>]<BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Expression</i></DT>
+<DD>Specifies the hexadecimal address of the ISR register to display. The expression <b>@isr</b> can also be used for this parameter. In that case, information about the current processor ISR register is displayed.</DD>
+<DT><i>DisplayLevel</i></DT>
+<DD>Can be any one of the following options:<DL><DT><b>0</b></DT>
+<DD>Displays  only the values of each ISR field. This is the default.</DD>
+<DT><b>1</b></DT>
+<DD>Displays detailed information about ISR fields that are not reserved or ignored.</DD>
+<DT><b>2</b></DT>
+<DD>Displays details about all  ISR fields, including those that are ignored or reserved.</DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension command can only be used with an Itanium target computer.</P>
+<P></P>
+<H4>Comments</H4>
+<P>Here are a couple of examples of output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!isr @isr</b><BR>isr:ed ei so ni ir rs sp na r w x vector code<BR> 0  0  0  0  0  0  0  0 0 0 0      0   0<BR><BR>kd&gt; <b>!isr @isr 2</b><BR><BR> cod : 0 : interruption Code<BR> vec : 0 : IA32 exception vector number<BR>  rv : 0 : reserved0<BR>   x : 0 : eXecute exception<BR>   w : 0 : Write exception<BR>   r : 0 : Read exception<BR>  na : 0 : Non-Access exception<BR>  sp : 0 : Speculative load exception<BR>  rs : 0 : Register Stack<BR>  ir : 0 : Invalid Register frame<BR>  ni : 0 : Nested Interruption<BR>  so : 0 : IA32 Supervisor Override<BR>  ei : 0 : Exception IA64 Instruction<BR>  ed : 0 : Exception Deferral<BR>  rv : 0 : reserved1<BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !isr RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

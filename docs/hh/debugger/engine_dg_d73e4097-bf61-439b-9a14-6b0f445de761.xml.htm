@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Calling Extensions and Extension Functions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Calling Extensions and Extension Functions"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_d73e4097-bf61-439b-9a14-6b0f445de761.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, calling extensions"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_d73e4097-bf61-439b-9a14-6b0f445de761.xml"></A>Calling Extensions and Extension Functions</H1>
+<P>To load an extension library (or to obtain a handle for an already loaded extension library), use <a href="idebugcontrol_9d85fcbb-1c02-4b5a-b9ab-c50b9b266d1d.xml.htm"><b>AddExtension</b></a>.  An extension library can be unloaded with <a href="idebugcontrol_c762281b-f49c-4837-a524-e2f04edb3b0c.xml.htm"><b>RemoveExtension</b></a>.</P>
+<P>Extension commands can be called using <a href="idebugcontrol_c37b420a-b94b-4d54-8a5a-2e1a74b49f26.xml.htm"><b>CallExtension</b></a>.</P>
+<H4>Extension Functions</H4>
+<P><i>Extension functions</i> are functions that are exported by extension libraries.  They can use any function prototype and are called directly using C function pointers.</P>
+<P>They are not extension commands and are not available via debugger commands.  Extension functions cannot be called remotely; they must be called directly.  Hence they cannot be used from debugging clients.  They can only be called when the client object is inside the host engine &#8209;  when not remotely debugging or when using a smart client.</P>
+<P>Extension functions are identified within extension libraries by the "_EFN_" prepended to their names.</P>
+<P>To obtain a pointer to an extension function, use <a href="idebugcontrol_9f227e3a-ee1e-44d0-9675-ec773e3391e5.xml.htm"><b>GetExtensionFunction</b></a>.  The type of this function pointer should match the prototype of the extension function.  The extension function can now be called just like any other function pointer in C.</P>
+<H4>Example</H4>
+<P>If the following extension function was included in an extension library and loaded into the debugger engine:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HRESULT CALLBACK<BR>_EFN_GetObject(IDebugClient * client, SomeObject * obj);<BR></nobr></P>
+<P></P>
+<P>It could be called using:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>typedef ULONG (CALLBACK * GET_OBJECT)(IDebugClient * client, SomeObject * obj);<BR><BR><BR><BR>HRESULT status = S_OK;<BR>GET_OBJECT extFn = NULL;<BR>SomeObject myObj;<BR><BR>if (g_DebugControl-&gt;<BR>        GetExtensionFunction(0,<BR>                             "GetObject",<BR>                             (FARPROC *) &amp;extFn ) == S_OK &amp;&amp;<BR>    extFn)<BR>{<BR>    status = (*extFn)(client, &amp;myObj);<BR>}<BR></nobr></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Calling Extensions and Extension Functions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

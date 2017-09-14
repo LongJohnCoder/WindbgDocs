@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>R</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, glossary, R"><xml><MSHelp:Keyword Index="A" Term="dbg_glossary_67e8768c-0585-41a5-ab7c-f8d2b5978663.xml"/>
+<META NAME="MS-HKWD" CONTENT="remote debugging">
+<META NAME="MS-HKWD" CONTENT="register">
+<META NAME="MS-HKWD" CONTENT="register context">
+<META NAME="MS-HKWD" CONTENT="retail build"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>    <H1><A NAME="dbg_glossary_67e8768c-0585-41a5-ab7c-f8d2b5978663.xml"></A>R</H1>
+<P></P>
+<DL><DT><B><A NAME="d7a98e7e-e63f-4109-af02-d92b48b4b024"></A>remote debugging</B></DT>
+<DD>Remote debugging is the practice of using a remote connection to perform debugging.<P>Since user-mode debugging is usually done on one machine, remote user-mode debugging typically uses two machines.  In this scenario, one computer contains the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#997fd309-38d4-4217-9777-65e9f2af4377">target application</a> and a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#098e09f5-d7db-435e-9403-16661d6693b5">debugging server</a>, while the other computer contains the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cab89f06-8d34-430d-b047-ea48e96aac1b">debugging client</a>.  An alternate method is to have the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#997fd309-38d4-4217-9777-65e9f2af4377">target application</a> and a <a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#927cdf63-ac0c-4f34-af24-1cdc17ca8d68">process server</a> on one computer, and a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#e969f84e-cb68-450e-bec4-6995463722ed">smart client</a> on the other.</P>
+<P>Since kernel-mode debugging is usually done on two machines, remote kernel-mode debugging requires three machines. The <i>target computer</i> is the computer being debugged. The <i>server</i> is attached to the target; it contains the kernel-mode debugger. The <i>client</i> is the computer which is controlling the session remotely.  Typically, one computer is the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#592a23b6-7f7d-434c-b4f6-5e1470b41393">target computer</a> being debugged, another contains the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#098e09f5-d7db-435e-9403-16661d6693b5">debugging server</a>, and the third contains the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cab89f06-8d34-430d-b047-ea48e96aac1b">debugging client</a>.</P>
+<P>In addition, there are other methods of remote debugging:  using the Remote tool, using a KD connection server, or using a repeater.  The method you should choose depends on the configuration of the machines in question and the available connections.</P>
+<P>For more information, see <a href="r08_use_remote_e6793edc-50b2-4f6b-8e7c-2bfcfe2a0396.xml.htm">Remote Debugging</a>.</P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="14df9d28-2548-44c6-b68f-410607212d6c"></A>register</B></DT>
+<DD>A very fast temporary memory location in the CPU.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="203060b3-930a-4f3b-9173-348c463917c7"></A>register context</B></DT>
+<DD>The full processor state which includes all the processor's <a href="dbg_glossary_67e8768c-0585-41a5-ab7c-f8d2b5978663.xml.htm#14df9d28-2548-44c6-b68f-410607212d6c">registers</a>. </DD>
+<P>For more information, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">Register Context</a>. </P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="22c5ee1d-cae8-460c-8024-698576ecf94e"></A>retail build</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_115ca2a1-47f8-405f-a4f7-a7446892d897.xml.htm#fa518e01-fcc1-428f-9548-a6443ecba5d0">free build</a><i>.</i></DD>
+</DL>
+<P></P>  <DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: R RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

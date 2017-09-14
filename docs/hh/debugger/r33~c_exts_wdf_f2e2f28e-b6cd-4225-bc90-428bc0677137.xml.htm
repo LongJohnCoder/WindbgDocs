@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wdfkd.wdffindobjects</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wdfkd.wdffindobjects"><xml><MSHelp:Keyword Index="A" Term="r33~c_exts_WDF_f2e2f28e-b6cd-4225-bc90-428bc0677137.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wdfkd.wdffindobjects extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~c_exts_WDF_f2e2f28e-b6cd-4225-bc90-428bc0677137.xml"></A>!wdfkd.wdffindobjects</H1>
+<P><P>The <b>!wdfkd.wdffindobjects</b> extension searches memory for WDF objects. </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wdfkd.wdffindobjects</b> [ <i>StartAddress</i> [<i>Flags</i>] ] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>StartAddress</i></DT>
+<DD>Optional. Specifies the address at which the search must begin. If this is omitted, the search will begin from where the most recent <b>!wdfkd.wdffindobjects</b> search ended. </DD>
+<DT><i>Flags</i></DT>
+<DD>Optional. Specifies the kind of information to display. <i>Flags</i> can be any combination of the following bits. The default value is 0x0.  <i>Flags</i> cannot be used unless <i>StartAddress</i> is specified. <DL><DT>Bit 0 (0x1)</DT>
+<DD>Displays verbose output. </DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Displays internal type information for each handle. </DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P><i>Wdfkd.dll</i></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The following examples show the output of the <b>!wdffindobjects</b> extension.  The 0x1 flag is set in the second example.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>1: kd&gt; <b>!wdffindobjects 0xfffffa600211b668</b> <BR>  Address             Value               Object<BR>  ------------------  ------------------  ------------------<BR>  0xfffffa600211b668  0x0000000000000008  <BR>  0xfffffa600211b670  0xfffffa8002e7b1f0  !WDFREQUEST 0x0000057ffd184e08<BR>  0xfffffa600211b678  0x0000000000000004  <BR>  0xfffffa600211b680  0x0000000000000001  <BR>  0xfffffa600211b688  0xfffffa8006aa3640  !WDFUSBPIPE 0x0000057ff955c9b8<BR>  0xfffffa600211b690  0x0000000000000000  <BR>  0xfffffa600211b698  0xfffff80001e61f78  <BR>  0xfffffa600211b6a0  0x0000000000000010  <BR>  0xfffffa600211b6a8  0x0000000000010286  <BR>  0xfffffa600211b6b0  0xfffffa600211b6c0  <BR>  0xfffffa600211b6b8  0x0000000000000000  <BR>  0xfffffa600211b6c0  0xfffffa8006aa3640  !WDFUSBPIPE 0x0000057ff955c9b8<BR>  0xfffffa600211b6c8  0x0000057ffd184e08  !WDFREQUEST 0x0000057ffd184e08<BR>  0xfffffa600211b6d0  0x0000000000000000  <BR>  0xfffffa600211b6d8  0x0000057ffc51ea18  !WDFMEMORY 0x0000057ffc51ea18<BR>  0xfffffa600211b6e0  0x0000000000000000  <BR><BR>1: kd&gt; <b>!wdffindobjects 0xfffffa600211b668 1</b> <BR>  Address             Value               Type    Object<BR>  ------------------  ------------------  ------  ------------------<BR>  0xfffffa600211b668  0x0000000000000008  <BR>  0xfffffa600211b670  0xfffffa8002e7b1f0  Object  !WDFREQUEST 0x0000057ffd184e08<BR>  0xfffffa600211b678  0x0000000000000004  <BR>  0xfffffa600211b680  0x0000000000000001  <BR>  0xfffffa600211b688  0xfffffa8006aa3640  Object  !WDFUSBPIPE 0x0000057ff955c9b8<BR>  0xfffffa600211b690  0x0000000000000000  <BR>  0xfffffa600211b698  0xfffff80001e61f78  <BR>  0xfffffa600211b6a0  0x0000000000000010  <BR>  0xfffffa600211b6a8  0x0000000000010286  <BR>  0xfffffa600211b6b0  0xfffffa600211b6c0  <BR>  0xfffffa600211b6b8  0x0000000000000000  <BR>  0xfffffa600211b6c0  0xfffffa8006aa3640  Object  !WDFUSBPIPE 0x0000057ff955c9b8<BR>  0xfffffa600211b6c8  0x0000057ffd184e08  Handle  !WDFREQUEST 0x0000057ffd184e08<BR>  0xfffffa600211b6d0  0x0000000000000000  <BR>  0xfffffa600211b6d8  0x0000057ffc51ea18  Handle  !WDFMEMORY 0x0000057ffc51ea18<BR>  0xfffffa600211b6e0  0x0000000000000000  <BR><BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~c_wdf_b21958be-e8b5-460c-87b7-a755da1cf37e.xml.htm">Kernel-Mode Driver Framework Debugging</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wdfkd.wdffindobjects RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

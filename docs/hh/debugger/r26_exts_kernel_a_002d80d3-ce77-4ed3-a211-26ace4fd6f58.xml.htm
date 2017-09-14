@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!drvobj</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !drvobj"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_002d80d3-ce77-4ed3-a211-26ace4fd6f58.xml"/>
+<META NAME="MS-HKWD" CONTENT="!drvobj extension">
+<META NAME="MS-HKWD" CONTENT="DRIVER_OBJECT"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_002d80d3-ce77-4ed3-a211-26ace4fd6f58.xml"></A>!drvobj</H1>
+<P>The <b>!drvobj</b> extension displays detailed information about a DRIVER_OBJECT.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!drvobj</b> <i>DriverObject</i> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>DriverObject</i></DT>
+<DD>Specifies the driver object. This can be the hexadecimal address of the DRIVER_OBJECT structure or the name of the driver.</DD>
+<DT><i>Flags</i></DT>
+<DD>Can be any combination of the following bits. (The default is 0x01.)<DL><DT>Bit 0 (0x1)</DT>
+<DD>Causes the display to include device objects owned by the driver.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Causes the display to include entry points for the driver's dispatch routines.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>Lists with detailed information the device objects owned by the driver (requires bit 0 (0x1)).</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If <i>DriverObject</i> specifies the name of the device but supplies no prefix, the prefix <i>\Driver\</i> is assumed. Note that this command will check to see if <i>DriverObject</i> is a valid address or device name <i>before</i> using the expression evaluator.</P>
+<P>If <i>DriverObject</i> is an address, it must be the address of the DRIVER_OBJECT structure. This can be obtained by examining the arguments passed to the driver's <b>DriverEntry</b> routine.</P>
+<P>This extension command will display a list of all device objects created by a specified driver. It will also display all fast I/O routines registered with this driver object.</P>
+<P>The following is an example for the Symbios Logic 810 SCSI miniport driver:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>bp DriverEntry          </b><i>//  breakpoint at DriverEntry</i><BR><BR>kd&gt; <b>g</b><BR>symc810!DriverEntry+0x40:    <BR>80006a20: b07e0050 stl     t2,50(sp)<BR><BR>kd&gt; <b>r a0 </b>       <i>//address of DevObj (the first parameter)</i><BR>a0=809d5550<BR><BR>kd&gt; <b>!drvobj 809d5550  </b>    <i>//  display the driver object</i><BR>Driver object is for:<BR>\Driver\symc810<BR>Device Object list:<BR>809d50d0<BR><BR></nobr></P>
+<P>You can also use <a href="r26_exts_kernel_a_d7c58f52-7920-4308-92c8-362514c0c278.xml.htm"><b>!devobj 809d50d0</b></a> to get information about the device object.</P>
+<H4>Additional Information</H4>
+<P>See <a href="t12_drivers_ba75fa45-397b-473d-88dc-c5e0d598456a.xml.htm">Plug and Play Debugging</a> for examples and applications of this extension command. For information about driver objects, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !drvobj RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

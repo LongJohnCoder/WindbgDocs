@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!error</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !error"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_65a4febd-447d-4cae-9667-5e41ff1e00b7.xml"/>
+<META NAME="MS-HKWD" CONTENT="!error extension">
+<META NAME="MS-HKWD" CONTENT="error codes">
+<META NAME="MS-HKWD" CONTENT="Win32 error codes">
+<META NAME="MS-HKWD" CONTENT="WinSock error codes"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_65a4febd-447d-4cae-9667-5e41ff1e00b7.xml"></A>!error</H1>
+<P><P>The <b>!error</b> extension decodes and displays information about an error value.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!error</b> <i>Value</i> [<i>Flags</i>]<BR></nobr></P>
+<P> </P>
+<DL><H4>Parameters</H4>
+<DT><i>Value</i></DT>
+<DD>Specifies one of the following error codes:<B></B><UL type="disc">
+<LI>Win32</LI>
+<LI>Winsock</LI>
+<LI>NTSTATUS</LI>
+<LI>NetAPI</LI>
+</UL>
+</DD>
+<DT><i>Flags</i></DT>
+<DD>If <i>Flags</i> is set to 1, the error code is read as an NTSTATUS code.</DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ext.dll</i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The following example shows you how to use <b>!error</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!error 2</b><BR>Error code: (Win32) 0x2 (2) - The system cannot find the file specified.<BR>0:000&gt; !error 2 1<BR>Error code: (NTSTATUS) 0x2 - STATUS_WAIT_2<BR></nobr></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !error RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

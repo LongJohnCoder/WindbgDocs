@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!rpcexts.getendpointinfo</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !rpcexts.getendpointinfo"><xml><MSHelp:Keyword Index="A" Term="r32_exts_Lg_ND_RPC_2630a6b1-73b4-4700-8f0f-bf9c1058a85e.xml"/>
+<META NAME="MS-HKWD" CONTENT="!rpcexts.getendpointinfo extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r32_exts_Lg_ND_RPC_2630a6b1-73b4-4700-8f0f-bf9c1058a85e.xml"></A>!rpcexts.getendpointinfo</H1>
+<P>The <b>!rpcexts.getendpointinfo</b> extension searches the system's RPC state information for endpoint information.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!rpcexts.getendpointinfo</b> [<i>EndpointName</i>] <BR><b>!rpcexts.getendpointinfo</b> <b>-?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>EndpointName</i></DT>
+<DD>Specifies the number of the endpoint to be displayed. If omitted, the endpoints for all processes on the system are displayed.</DD>
+<DT><b>-?</b></DT>
+<DD>Displays some brief Help text for this extension in the Command Prompt window.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Rpcexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension can only be used with CDB or with user-mode WinDbg.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:002&gt; <b>!rpcexts.getendpointinfo</b><BR>Searching for endpoint info ...<BR>PID  CELL ID   ST PROTSEQ        ENDPOINT<BR>-------------------------------------------------------------<BR>00a8 0000.0001 01            NMP \PIPE\InitShutdown<BR>00a8 0000.0003 01            NMP \PIPE\SfcApi<BR>00a8 0000.0004 01            NMP \PIPE\ProfMapApi<BR>00a8 0000.0005 01           LRPC OLE5<BR>00a8 0000.0007 01            NMP \pipe\winlogonrpc<BR>00c4 0000.0001 01           LRPC ntsvcs<BR>00c4 0000.0003 01            NMP \PIPE\ntsvcs<BR>00c4 0000.0008 01            NMP \PIPE\scerpc<BR>00d0 0000.0001 01            NMP \PIPE\lsass<BR>00d0 0000.0003 01            NMP \pipe\WMIEP_d0<BR>00d0 0000.0006 01           LRPC policyagent<BR>00d0 0000.0007 01            NMP \PIPE\POLICYAGENT<BR>0170 0000.0001 01           LRPC epmapper<BR>0170 0000.0003 01            TCP 135<BR>0170 0000.0005 01            SPX 34280<BR>0170 0000.0006 01             NB 135<BR>0170 0000.0007 01             NB 135<BR>0170 0000.000b 01            NMP \pipe\epmapper<BR>01c0 0000.0001 01            NMP \pipe\spoolss<BR>01c0 0000.0003 01           LRPC spoolss<BR>01c0 0000.0007 01           LRPC OLE7<BR>020c 0000.0001 01           LRPC OLE2<BR>020c 0000.0005 01           LRPC senssvc<BR>020c 0000.0007 01            NMP \pipe\tapsrv<BR>020c 0000.0009 01           LRPC tapsrvlpc<BR>020c 0000.000c 01            NMP \PIPE\ROUTER<BR>020c 0000.0016 01            NMP \pipe\WMIEP_20c<BR>0218 0000.0001 01            NMP \PIPE\winreg<BR>022c 0000.0001 01           LRPC LRPC0000022c.00000001<BR>022c 0000.0003 01            TCP 1041<BR>022c 0000.0005 01            SPX 24576<BR>022c 0000.0006 01            NMP \PIPE\atsvc<BR>0294 0000.0001 01           LRPC OLE3<BR>0378 0000.0001 01           LRPC OLE9<BR>026c 0000.0001 01            TCP 1118<BR>0344 0000.0001 01           LRPC OLE12<BR><BR></nobr></P>
+<P>For a similar example using the DbgRpc tool, see <a href="t11_rpc_acpi_ecadb256-27c9-45e4-8fb2-4e7752ff6ca4.xml.htm">Get RPC Endpoint Information</a>.</P>
+<H4>Additional Information</H4>
+<P>For more information about debugging Microsoft Remote Procedure Call (RPC), see <a href="t11_rpc_acpi_df2011c1-80e2-4ff6-83f6-340a17586c7f.xml.htm">RPC Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !rpcexts.getendpointinfo RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

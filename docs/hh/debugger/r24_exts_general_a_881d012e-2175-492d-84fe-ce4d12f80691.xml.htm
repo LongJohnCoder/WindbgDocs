@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!address</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !address"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_881d012e-2175-492d-84fe-ce4d12f80691.xml"/>
+<META NAME="MS-HKWD" CONTENT="!address extension">
+<META NAME="MS-HKWD" CONTENT="addresses, !address extension">
+<META NAME="MS-HKWD" CONTENT="memory, !address extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_881d012e-2175-492d-84fe-ce4d12f80691.xml"></A>!address</H1>
+<P><P>The <b>!address</b> extension displays information about the memory that the target process or target computer uses.</P>
+</P>
+<H4>Syntax</H4>
+<P>User-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!address</b> <i>Address</i><BR><b>!address -summary</b> <BR><b>!address </b>[<b>-f</b>:<i>F1</i>,<i>F2</i>,...] {[<b>-o</b>:{<b>csv</b> | <b>tsv</b> | <b>1</b>}] | [<b>-c</b>:"<i>Command</i>"]}<BR><b>!address</b> -<b>? | -help</b> <BR></nobr></P>
+<P></P>
+<P>Kernel-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!address</b> <i>Address</i> <BR><b>!address</b> <BR></nobr></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Displays only the region of the address space that contains <i>Address</i>. </DD>
+<DT><b>-summary</b></DT>
+<DD>Displays only summary information. </DD>
+<DT><b>-f</b>:<i>F1</i>, <i>F2</i>, &#8230;</DT>
+<DD>Displays only the regions specified by the filters <i>F1</i>, <i>F2</i>, and so on.<P>The following filter values specify memory regions by the way that the target process is using them.</P><B></B><table>
+<TR valign="top">
+<TH Width=""> Filter value</TH>
+<TH Width="">Memory regions displayed</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>VAR</b> </TD>
+<TD Width="">Busy regions. These regions include all virtual allocation blocks, the SBH heap, memory from custom allocators, and all other regions of the address space that fall into no other classification.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Free</b> </TD>
+<TD Width="">Free memory. This includes all memory that has not been reserved.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Image</b> </TD>
+<TD Width="">Memory that is mapped to a file that is part of an executable image.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Stack</b> </TD>
+<TD Width="">Memory used for thread stacks.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Teb</b> </TD>
+<TD Width="">Memory used for thread environment blocks (TEBs). </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Peb</b></TD>
+<TD Width="">Memory used for the process environment block (PEB).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Heap</b> </TD>
+<TD Width="">Memory used for heaps.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PageHeap</b> </TD>
+<TD Width="">The memory region used for the full-page heap.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>CSR</b></TD>
+<TD Width="">CSR shared memory.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Actx</b></TD>
+<TD Width="">Memory used for activation context data.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>NLS</b></TD>
+<TD Width="">Memory used for National Language Support (NLS) tables.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>FileMap</b></TD>
+<TD Width="">Memory used for memory-mapped files. This filter is applicable only during live debugging.</TD>
+</TR>
+</table>
+<P></P>
+<P>The following filter values specify memory regions by the memory type.</P><B></B><table>
+<TR valign="top">
+<TH Width=""> Filter value</TH>
+<TH Width="">Memory regions displayed</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>MEM_IMAGE</b></TD>
+<TD Width="">Memory that is mapped to a file that is part of an executable image.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>MEM_MAPPED</b></TD>
+<TD Width="">Memory that is mapped to a file that is not part of an executable image. This includes memory that is mapped to the paging file.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>MEM_PRIVATE</b></TD>
+<TD Width="">Private memory. This memory is not shared by any other process, and it is not mapped to any file.</TD>
+</TR>
+</table>
+<P></P>
+<P>The following filter values specify memory regions by the state of the memory.</P><B></B><table>
+<TR valign="top">
+<TH Width=""> Filter value</TH>
+<TH Width="">Memory regions displayed</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>MEM_COMMIT</b></TD>
+<TD Width="">Committed memory.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>MEM_FREE</b></TD>
+<TD Width="">Free memory. This includes all memory that has not been reserved.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>MEM_RESERVE</b></TD>
+<TD Width="">Reserved memory.</TD>
+</TR>
+</table>
+<P></P>
+<P>The following filter values specify memory regions by the protection applied to the memory.</P><B></B><table>
+<TR valign="top">
+<TH Width=""> Filter value</TH>
+<TH Width="">Memory regions displayed</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_NOACCESS</b></TD>
+<TD Width="">Memory that cannot be accessed.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_READONLY</b></TD>
+<TD Width="">Memory that is readable, but not writable and not executable.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_READWRITE</b></TD>
+<TD Width="">Memory that is readable and writable, but not executable.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_WRITECOPY</b></TD>
+<TD Width="">Memory that has copy-on-write behavior.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_EXECUTE</b></TD>
+<TD Width="">Memory that is executable, but not readable and not writeable.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_EXECUTE_READ</b></TD>
+<TD Width="">Memory that is executable and readable, but not writable.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_EXECUTE_READWRITE</b></TD>
+<TD Width="">Memory that is executable, readable, and writable.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_EXECUTE_WRITECOPY</b></TD>
+<TD Width="">Memory that is executable and has copy-on-write behavior.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_GUARD</b></TD>
+<TD Width="">Memroy that acts as a guard page.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_NOCACHE</b></TD>
+<TD Width="">Memory that is not cached.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>PAGE_WRITECOMBINE</b></TD>
+<TD Width="">Memory that has write-combine access enabled.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+</DD>
+<DT><b>-o:</b>{<b>csv</b> | <b>tsv</b> | <b>1</b>}</DT>
+<DD>Displays the output according to one of the following options.<B></B><table>
+<TR valign="top">
+<TH Width=""> Option</TH>
+<TH Width="">Output format</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>csv</b> </TD>
+<TD Width="">Displays the output as comma-separated values.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>tsv</b> </TD>
+<TD Width="">Displays the output as tab-separated values.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>1</b> </TD>
+<TD Width="">Displays the output in bare format. This format works well when <b>!address</b> is used as input to <a href="r14_tokens_edf3a785-a32a-495f-be5c-364833d77aa6.xml.htm">.foreach</a>.</TD>
+</TR>
+</table>
+</DD>
+<DT><b>-c</b>:"<i>Command</i>"</DT>
+<DD>Executes a custom command for each memory region. You can use the following placeholders in your command to represent output fields of the <b>!address</b> extension.<B></B><table>
+<TR valign="top">
+<TH Width=""> Placeholder</TH>
+<TH Width="">Output field</TH>
+</TR>
+<TR valign="top">
+<TD Width="">%1 </TD>
+<TD Width="">Base address</TD>
+</TR>
+<TR valign="top">
+<TD Width="">%2 </TD>
+<TD Width="">End address + 1</TD>
+</TR>
+<TR valign="top">
+<TD Width="">%3 </TD>
+<TD Width="">Region size</TD>
+</TR>
+<TR valign="top">
+<TD Width="">%4</TD>
+<TD Width="">Type</TD>
+</TR>
+<TR valign="top">
+<TD Width="">%5 </TD>
+<TD Width="">State</TD>
+</TR>
+<TR valign="top">
+<TD Width="">%6</TD>
+<TD Width="">Protection</TD>
+</TR>
+<TR valign="top">
+<TD Width="">%7</TD>
+<TD Width="">Usage</TD>
+</TR>
+</table>
+<P>For example, <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">!address -f:Heap -c:".echo %1 %3 %5"</span> displays the base address, size, and state for each memory region of type <b>Heap</b>.</P>
+<P>Quotes in the command must be preceded by a back slash (\"). For example, !address -f:Heap -c:"s -a %1 %2 \"pad\"" searches each memory region of type <b>Heap</b> for the string "pad". </P>
+<P>Multiple commands separated by semicolons are not supported.</P>
+</DD>
+<DT><b>-?</b></DT>
+<DD>Displays minimal Help text for this extension in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>.</DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Without any parameters, the <b>!address</b> extension displays information about the whole address space. The <b>!address -summary</b> command shows only the summary.</P>
+<P>In kernel mode, this extension searches only kernel memory, even if you used <a href="r21_metacmds_l_b8eace76-f3f6-4f0c-96fc-0c9d8dd572cc.xml.htm"><b>.process (Set Process Context)</b></a> to specify a given process' virtual address space. In user mode, the <b>!address</b> extension always refers to the memory that the target process owns.</P>
+<P>In user mode, <b>!address </b><I><B>Address</B></I> shows the characteristics of the region that the specified address belongs to. Without parameters, <b>!address</b> shows the characteristics of all memory regions. These characteristics include the memory usage, memory type, memory state, and memory protection. For more information about the meaning of this information, see the earlier tables in the description of the <b>-f</b> parameter.</P>
+<P>The following example uses <b>!address</b> to retrieve information about a region of memory that is mapped to kernel32.dll.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; !address 75831234<BR>Usage:                  Image<BR>Base Address:           75831000<BR>End Address:            758f6000<BR>Region Size:            000c5000<BR>Type:                   01000000MEM_IMAGE<BR>State:                  00001000MEM_COMMIT<BR>Protect:                00000020PAGE_EXECUTE_READ<BR>More info:              lmv m kernel32<BR>More info:              !lmi kernel32<BR>More info:              ln 0x75831234<BR></nobr></P>
+<P>This example uses an <i>Address</i> value of 0x75831234. The display shows that this address is in a memory region that begins with the address 0x75831000 and ends with the address 0x758f6000. The region has usage <b>Image</b>, type <b>MEM_IMAGE</b>, state <b>MEM_COMMIT</b>, and protection <b>PAGE_EXECUTE_READ</b>. (For more information about the meaning of these values, see the earlier tables.) The display also lists three other debugger commands that you can use to get more information about this memory address.</P>
+<P>If you are starting with an address and trying to determine information about it, the usage information is frequently the most valuable. After you know the usage, you can use additional extensions to learn more about this memory. For example, if the usage is <b>Heap</b>, you can use the <a href="r25_exts_general_he_6f575a41-220b-4f5d-b82b-a4d7ed3a79bf.xml.htm"><b>!heap</b></a> extension to learn more.</P>
+<P>The following example uses the <a href="r18_cmds_s_7a06634c-21dc-40a0-9b81-d3449a652870.xml.htm">s (Search Memory)</a> command to search each memory region of type <b>Image</b> for the wide-character string "Note".</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>!address /f:Image /c:"s -u %1 %2 \"Note\""<BR><BR>*** Executing: s -u 0xab0000 0xab1000 "Note"<BR>*** Executing: s -u 0xab1000 0xabc000 "Note"<BR>00ab2936  004e 006f 0074 0065 0070 0061 0064 0000  N.o.t.e.p.a.d...<BR>00ab2f86  004e 006f 0074 0065 0070 0061 0064 005c  N.o.t.e.p.a.d.\.<BR>00ab32e4  004e 006f 0074 0065 0070 0061 0064 0000  N.o.t.e.p.a.d...<BR>*** Executing: s -u 0xabc000 0xabd000 "Note"<BR>. . .<BR></nobr></P>
+<P>In kernel mode, the output of <b>!address</b> is similar to the user mode output but contains less information. The following example example shows the kernel mode output.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!address</b><BR>  804de000 - 00235000                           <BR>          Usage       KernelSpaceUsageImage<BR>          ImageName   ntoskrnl.exe<BR><BR>  80c00000 - 001e1000<BR>          Usage       KernelSpaceUsagePFNDatabase<BR><BR>....<BR><BR>  f85b0000 - 00004000<BR>          Usage       KernelSpaceUsageKernelStack<BR>          KernelStack 817b4da0 : 324.368<BR><BR>  f880d000 - 073d3000<BR>          Usage       KernelSpaceUsageNonPagedPoolExpansion<BR></nobr></P>
+<P>The meaning of "usage" is the same as in user mode. "ImageName" indicates the module that is associated with this address. "KernelStack" shows the address of this thread's ETHREAD block (0x817B4DA0), the process ID (0x324), and the thread ID (0x368).</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about how to display and search memory, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>. For additional extensions that display memory properties, see <a href="r30_exts_kernel_u_f7bac801-e399-4fab-af3e-ad2c1effce20.xml.htm"><b>!vm</b></a> (kernel mode) and <a href="r31_exts_user_43a1b87f-d7c7-44ae-b324-c54854ed9cad.xml.htm"><b>!vprot</b></a> (user mode).</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !address RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

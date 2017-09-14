@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Anatomy of a DbgEng Extension DLL</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Anatomy of a DbgEng Extension DLL"><xml><MSHelp:Keyword Index="A" Term="Extensions_DG_188c35a9-449b-47eb-99ac-ffbd69ff5953.xml"/>
+<META NAME="MS-HKWD" CONTENT="DbgEng Extensions, DLL anatomy"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Extensions_DG_188c35a9-449b-47eb-99ac-ffbd69ff5953.xml"></A>Anatomy of a DbgEng Extension DLL</H1>
+<P>A DbgEng extension DLL exports a number of callback functions, some of which may be implementations of extension commands.</P>
+<P>These extension DLLs are loaded by the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> and can provide extra functionality or automation of tasks while performing <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#1a7518e7-05c9-4be8-baf0-63b4024f4e30">user-mode</a> or <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a> on Microsoft Windows.</P>
+<P>If you performed a full install of Debugging Tools for Windows, a sample DbgEng extension called "exts" can be found in the sdk\samples\exts subdirectory of the installation directory.</P>
+<H4>Extension Commands</H4>
+<P></P>
+<P>An extension DLL may export any number of functions that are used to execute extension commands.  Each function is explicitly declared as an export in the <i>.def</i> file, and its name must consist entirely of lowercase letters.</P>
+<P>Functions used to implement extension commands must match the prototype <a href="extensions_ref_fc621d91-0419-4ae3-8e53-71f4c522c318.xml.htm">PDEBUG_EXTENSION_CALL</a>.</P>
+<P>These functions are named according to the standard C++ convention, except that uppercase letters are not permitted. The exported function name and the extension command name are identical, except that the extension command begins with an exclamation point ( <b>!</b> ). For example, when you load <i>myextension.dll</i> into the debugger and then type <b>!stack</b> into the Debugger Command window, the debugger looks for an exported function named <b>stack</b> in <i>myextension.dll</i>.</P>
+<P>If <i>myextension.dll</i> is not already loaded, or if there may be other extension commands with the same name in other extension DLLs, you can type <b>!myextension.stack</b> into the Debugger Command window to indicate the extension DLL and the extension command in that DLL.</P>
+<H4>Other Exported Functions</H4>
+<P>A DbgEng extension DLL must export <a href="extensions_ref_e260c42c-8299-4578-8919-3b2167701275.xml.htm"><b>DebugExtensionInitialize</b></a>.  This will be called when the DLL is loaded, to initialize the DLL.  It may be used by the DLL to initialize global variables.</P>
+<P>An extension DLL may export <a href="extensions_ref_76594e24-5f2d-495f-b8a9-6acec1f21ba4.xml.htm"><b>DebugExtensionUninitialize</b></a>.  If this is exported, it will be called before the extension DLL is unloaded.  It may be used by the DLL to clean up before it is unloaded.</P>
+<P>An extension DLL may export <a href="extensions_ref_18dd6999-773d-42e8-826a-dcac1fc1ed35.xml.htm"><b>DebugExtensionNotify</b></a>.  If this is exported, it will be called when a session begins or ends, and when a target starts or stops executing.  These notifications are also provided to <a href="comcallbacks_72745555-ec34-41fa-9305-cf23357bcd17.xml.htm"><b>IDebugEventCallbacks</b></a> objects registered with a client.</P>
+<P>An extension DLL may export <a href="extensions_ref_dfff8fda-36a7-42ab-9ad7-1698c352c028.xml.htm"><b>KnownStructOutput</b></a>.  If this is exported, it will be called when the DLL is loaded. This function returns a list of structures that the DLL knows how to print on a single line.  It may be called later to format instances of these structures for printing.</P>
+<H4>Engine Procedure for Loading a DbgEng Extension DLL</H4>
+<P>When an extension DLL is loaded, the callback functions are called by the engine in the following order:</P><B></B><OL type="1">
+<LI><b>DebugExtensionInitialize</b> is called so the extension DLL can initialize.</LI>
+<LI>If exported, <b>DebugExtensionNotify</b> is called if the engine has an active session, and called again if the session is <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#0a6b6a99-2d54-46ab-99eb-d47231b221e6">suspended</a> and accessible.</LI>
+<LI>If exported, <b>KnownStructOutput</b> is called to request a list of structures the DLL knows how to print on a single line.</LI>
+</OL>
+<P>See <a href="r08_use_remote_ac80d1f3-ff3f-4374-9e70-2a73b84ac647.xml.htm">Loading Debugger Extension DLLs</a> for information about how to use the debugger to load and unload an extension DLL, and see <a href="r08_use_remote_8493d413-185c-4d40-be6b-bd00cb61cc03.xml.htm">Using Debugger Extension Commands</a> for information about executing an extension command.</P>
+<P>The debugger engine will place a <b>try / except</b> block around a call to an extension DLL.  This protects the engine from some types of bugs in the extension code; but, since the extension calls are executed in the same thread as the engine, they can still cause it to crash.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Anatomy of a DbgEng Extension DLL RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x1A: MEMORY_MANAGEMENT</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x1A: MEMORY_MANAGEMENT"><xml><MSHelp:Keyword Index="A" Term="t04_bugs_00_a19cedae-b8ab-4885-af8d-7075e64de6fd.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x1A: MEMORY_MANAGEMENT">
+<META NAME="MS-HKWD" CONTENT="MEMORY_MANAGEMENT"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t04_bugs_00_a19cedae-b8ab-4885-af8d-7075e64de6fd.xml"></A>Bug Check 0x1A: MEMORY_MANAGEMENT</H1>
+<P>The MEMORY_MANAGEMENT bug check has a value of 0x0000001A. This indicates that a severe memory management error occurred.</P>
+<H4>Parameters</H4>
+<P></P>
+<P>The following parameters are displayed on the blue screen. Parameter 1 is the only parameter of interest; this identifies the exact violation.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">The fork clone block reference count is corrupt. (This only occurs on checked builds of Windows.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x777</TD>
+<TD Width="">The caller is unlocking a system cache address that is not currently locked. (This address was either never mapped or is being unlocked twice.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x778</TD>
+<TD Width="">The system is using the very last system cache view address, instead of preserving it.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x780<BR>0x781</TD>
+<TD Width="">The PTEs mapping the argument system cache view have been corrupted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1000</TD>
+<TD Width="">A caller of <b>MmGetSystemAddressForMdl*</b> tried to map a fully-cached physical page as non-cached. This action would cause a conflicting hardware translation buffer entry, and so it was refused by the operating system. Since the caller specified "bug check on failure" in the requesting MDL, the system had no choice but to issue a bug check in this instance.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1010</TD>
+<TD Width="">The caller is unlocking a pageable section that is not currently locked. (This section was either never locked or is being unlocked twice.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1234</TD>
+<TD Width="">The caller is trying lock a nonexistent pageable section.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1235</TD>
+<TD Width="">The caller is trying to protect an MDL with an invalid mapping.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3451</TD>
+<TD Width="">The PTEs of a kernel thread stack that has been swapped out are corrupted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8888<BR>0x8889</TD>
+<TD Width="">Internal memory management structures are corrupted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x41283</TD>
+<TD Width="">The working set index encoded in the PTE is corrupted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x41284</TD>
+<TD Width="">A PTE or the working set list is corrupted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x41286</TD>
+<TD Width="">The caller is trying to free an invalid pool address.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x41785</TD>
+<TD Width="">The working set list is corrupted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x41287</TD>
+<TD Width="">Internal memory management structures are corrupted. To further investigate the cause, a kernel memory dump file is needed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x61940</TD>
+<TD Width="">A PDE has been unexpectedly invalidated.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x03030303</TD>
+<TD Width="">The boot loader is broken. (This value applies only to Intel Itanium machines.)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>Other</i></TD>
+<TD Width="">An unknown memory management error occurred.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x1A: MEMORY_MANAGEMENT RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

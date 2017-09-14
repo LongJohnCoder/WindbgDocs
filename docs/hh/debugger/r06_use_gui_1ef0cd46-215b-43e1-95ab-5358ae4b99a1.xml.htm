@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Specifying Module and Function Owners</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Specifying Module and Function Owners"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_1ef0cd46-215b-43e1-95ab-5358ae4b99a1.xml"/>
+<META NAME="MS-HKWD" CONTENT="executable files and paths, specifying module owner">
+<META NAME="MS-HKWD" CONTENT="function owners">
+<META NAME="MS-HKWD" CONTENT="owners of modules and functions">
+<META NAME="MS-HKWD" CONTENT="triage.ini file">
+<META NAME="MS-HKWD" CONTENT="triage.ini file, syntax">
+<META NAME="MS-HKWD" CONTENT="!analyze extension, triage.ini file"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_1ef0cd46-215b-43e1-95ab-5358ae4b99a1.xml"></A>Specifying Module and Function Owners</H1>
+<P>The <b>!analyze</b> and <b>!owner</b> extensions use a file that is named <i>Triage.ini</i> to determine the owner of the symbols that the debugger encounters.</P>
+<P>When you use these extensions, the identities of the function or module owner are displayed after the word "Followup".</P>
+<P>The <i>Triage.ini</i> file is a text file that resides in the \<i>triage</i> subdirectory of your Debugging Tools for Windows installation. A sample <i>Triage.ini</i> file is included as part of the Debugging Tools for Windows package.</P>
+<P class="note"><b>Warning</b>  If you install an updated version of Debugging Tools for Windows in the same directory as the current version, it overwrites all of the files in that directory, including <i>Triage.ini</i>. After you modify or replace the sample <i>Triage.ini</i> file, save a copy of it to a different directory. After you reinstall the debuggers, you can copy the saved <i>Triage.ini</i> over the default version.</P>
+<H4>Format of the <i>Triage.ini</i> File</H4>
+<P>Although the <i>Triage.ini</i> file is intended to help you determine the <i>owner</i> of a function that has broken into the debugger, the "owner" strings in this file can be anything that might help you with debugging. The strings can be names of people who wrote or maintain the code. Or, the strings can be short instructions about what you can do when an error occurs in a module or function.</P>
+<P>Each line in this file has the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><i>Module</i>[<b>!</b><i>Function</i>]=<i>Owner</i> <BR></nobr></P>
+<P>You can add an asterisk (<b>*</b>) only at the <i>end</i> of a module or function name. If it appears elsewhere, it is interpreted as a literal character.</P>
+<P>You cannot add spaces in the owner string. If spaces do exist in the owner string, they are ignored.    </P>
+<P>For more information about syntax options, see <a href="#9429e464-f2a3-42fc-9ab7-039a081fb852">Special <i>Triage.ini</i> Syntax</a>.</P>
+<P>The following examples shows a sample <i>triage.ini</i> file.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>module1=Person1<BR>module2!functionA=Person2<BR>module2!functionB=Person3<BR>module2!funct*=Person4<BR>module2!*=Person5<BR>module3!singleFunction=Person6<BR>mod*!functionC=Person7<BR></nobr></P>
+<H4><i>Triage.ini</i> and !owner</H4>
+<P>When you pass a module or function name to the <a href="r25_exts_general_he_e593e9b0-8cf1-429b-8428-cc5aa26f4601.xml.htm"><b>!owner</b></a> extension, the debugger displays the word "Followup" followed by the name of the module or function's owner.</P>
+<P>The following example uses the previous sample <i>Triage.ini</i> file.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!owner module2!functionB</b><BR>Followup:  Person3<BR></nobr></P>
+<P>According to the file, "Person3" owns <b>module2!functionB</b>, and "Person4" owns <b>module2!funct*</b>. Both of these strings match the argument that is passed to <b>!owner</b>, so the more complete match is used.</P>
+<H4><i>Triage.ini</i> and !analyze</H4>
+<P>When you use the <a href="r24_exts_general_a_6e1c68d6-f825-4a02-a9ba-2b0cd08cded8.xml.htm"><b>!analyze</b></a> extension, the debugger looks at the top faulting frame in the stack and tries to determine the owner of the module and function in this frame. If the debugger can determine the owner, the owner information is displayed.</P>
+<P>If the debugger cannot determine the owner, the debugger passes to the next stack frame, and so on, until the debugger determines the owner or the stack is completely examined.</P>
+<P>If the debugger can determine the owner, the owner name is displayed after the word "Followup". If the debugger searches the whole stack without finding any information, no name is displayed.</P>
+<P>The following example uses the sample <i>Triage.ini</i> file that is given earlier in this topic.</P>
+<P>Suppose the first frame on the stack is <b>MyModule!someFunction</b>. The debugger does not find <b>MyModule</b> in the <i>Triage.ini</i> file. Next, it continues to the second frame on the stack.</P>
+<P>Suppose the second frame is <b>module3!anotherFunction</b>. The debugger does see an entry for <b>module3</b>, but there is no match for <b>anotherFunction</b> in this module. Next, the debugger continues to the third frame.</P>
+<P>Suppose the third frame is <b>module2!functionC</b>. The debugger first looks for an exact match, but such a match does not exist. The debugger then trims the function name and discovers <b>module2!funct*</b> in <i>Triage.ini</i>. This match ends the search, because the debugger determines that the owner is "Person4".</P>
+<P>The debugger then displays output that is similar to the following example.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!analyze</b><BR>*******************************************************************************<BR>*                                                                             *<BR>*                        Exception Analysis                                   *<BR>*                                                                             *<BR>*******************************************************************************<BR><BR>Use !analyze -v to get detailed debugging information.<BR><BR>Probably caused by : module2 ( module2!functionC+15a )<BR><BR>Followup: Person4<BR>---------<BR></nobr></P>
+<P>A more complete match takes precedence over a shorter match. However, a module name match is always preferred to a function name match. If <b>module2!funct*</b> had not been in this <i>Triage.ini </i>file, the debugger would have selected <b>module2!*</b> as the match. And if both <b>module2!funct*</b> and <b>module2!*</b> were removed, <b>mod*!functionC</b> would have been selected. </P>
+<P></P>
+<H3><A NAME="9429e464-f2a3-42fc-9ab7-039a081fb852"></A>Special <i>Triage.ini</i> Syntax</H3>
+<P>If you omit the exclamation point and function name or add <b>!*</b> after a module name, all functions in that module are indicated. If a function within this module is also specified separately, the more precise specification takes precedence.</P>
+<P>If you use "default" as a module name or a function name, it is equivalent to a wildcard character. For example, <b>nt!*</b> is the same as <b>nt!default</b>, and <b>default</b> is the same as <b>*!*</b>.</P>
+<P>If a match is made, but the word <b>ignore</b> appears to the right of the equal sign (=), the debugger continues to the next frame in the stack.</P>
+<P>You can add <b>last_</b> or <b>maybe_ </b>before an owner's name. This prefix gives the owner less priority when you run <b>!analyze</b>. The debugger chooses a definite match that is lower on the stack over a <b>maybe_</b> match that is higher on the stack. The debugger also chooses a <b>maybe_</b> match that is lower on the stack over a <b>last</b>_ match that is higher on the stack.</P>
+<P></P>
+<H4>Sample <i>Triage.ini</i></H4>
+<P>A sample <i>Triage.ini</i> template is included in the Debugging Tools for Windows package. You can add the owners of any modules and functions that you want to this file. If you want to have no global default, delete the <b>default=MachineOwner</b> line at the beginning of this file.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Specifying Module and Function Owners RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Overview of RPC Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Overview of RPC Debugging"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_773f4eaf-758b-475e-baf1-f1fcc0842986.xml"/>
+<META NAME="MS-HKWD" CONTENT="RPC debugging, overview">
+<META NAME="MS-HKWD" CONTENT="remote procedure call (RPC)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_773f4eaf-758b-475e-baf1-f1fcc0842986.xml"></A>Overview of RPC Debugging</H1>
+<P>Microsoft Remote Procedure Call (RPC) makes it easy to cross process and machine boundaries and carry data around. This network programming standard is one reason that networking with Microsoft Windows is so powerful.</P>
+<P>However, because RPC hides network calls from individual processes, it obscures the details of the interactions between the computers. This can make it hard to be sure why threads are doing what they are doing &#8212; or fail to do what they are supposed to do. As a result, debugging and troubleshooting RPC errors can be difficult. In addition, the vast majority of problems that <i>appear</i> to be RPC errors are actually configuration issues, or network connectivity issues, or other component issues.</P>
+<P>Debugging Tools for Windows contains a tool called DbgRpc, as well as RPC-related debugger extensions. These can be used to analyze a variety of RPC problems on Windows XP and later versions of Windows.</P>
+<P>These Windows versions can be configured to save RPC run-time state information. Different amounts of state information can be saved; this allows you to obtain the information you need without placing a significant burden on your computer. See <a href="t11_rpc_acpi_abc7732c-fc43-4867-9a31-876548cd5412.xml.htm">Enabling RPC State Information</a> for details.</P>
+<P>This information can then be accessed through either the debugger or the DbgRpc tool. In each case, a collection of queries is available. See <a href="t11_rpc_acpi_27d1302a-e73c-411f-bd7a-62a396ee166a.xml.htm">Displaying RPC State Information</a> for details.</P>
+<P>In many cases, you can troubleshoot a problem by using the techniques outlined in <a href="t11_rpc_acpi_774921c7-2d63-45fc-9b89-6e6202fea0a6.xml.htm">Common RPC Debugging Techniques</a>.</P>
+<P>If you want to explore the mechanics of how this information is stored, or if you want to devise your own techniques for state information analysis, see <a href="t11_rpc_acpi_8e4cc9f0-2ec6-4d6d-8434-d83192f2e2a7.xml.htm">RPC State Information Internals</a>.</P>
+<P>These tools and techniques do not work on Windows 2000.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Overview of RPC Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

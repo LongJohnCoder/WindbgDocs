@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ivt</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ivt"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_60a75f07-ea4c-4a4f-8962-e0bb8fe175c6.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ivt extension">
+<META NAME="MS-HKWD" CONTENT="interrupt vector table"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_60a75f07-ea4c-4a4f-8962-e0bb8fe175c6.xml"></A>!ivt</H1>
+<P><P>The <b>!ivt </b>extension displays the Itanium interrupt vector table.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ivt</b> [<b>-v</b>] [<b>-a</b>] [<i>Vector</i>] <BR><b>!ivt</b> -<b>?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Vector</i></DT>
+<DD>Specifies an interrupt vector table entry for the current processor. If <i>Vector</i> is omitted, the entire interrupt vector table for the current processor on the target computer is displayed. Interrupt vectors that have not been assigned are not displayed unless the <b>&#8211;a </b> option is specified. </DD>
+<DT><b>-a</b></DT>
+<DD>Displays all interrupt vectors, including those that are unassigned. </DD>
+<DT><b>-v</b></DT>
+<DD>Displays detailed output. </DD>
+<DT><b>-?</b></DT>
+<DD>Displays help  for this extension in the Debugger Command window. </DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension command can only be used with an Itanium target computer.</P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example of the output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!ivt</b><BR><BR>Dumping IA64 IVT:<BR><BR>00:e000000083005f60 nt!KiPassiveRelease<BR>0f:e000000083576830 hal!HalpPCIISALine2Pin<BR>10:e0000000830067f0 nt!KiApcInterrupt<BR>20:e000000083006790 nt!KiDispatchInterrupt<BR>30:e000000083576b30 hal!HalpCMCIHandler<BR>31:e000000083576b20 hal!HalpCPEIHandler<BR>41:e000000085039680 i8042prt!I8042KeyboardInterruptService (KINTERRUPT e000000085039620)<BR>51:e000000085039910 i8042prt!I8042MouseInterruptService (KINTERRUPT e0000000850398b0)<BR>61:e0000000854484f0 VIDEOPRT!pVideoPortInterrupt (KINTERRUPT e000000085448490)<BR>71:e0000000856c9450 NDIS!ndisMIsr (KINTERRUPT e0000000856c93f0)<BR>81:e0000000857fd000 SCSIPORT!ScsiPortInterrupt (KINTERRUPT e0000000857fcfa0)<BR>91:e0000000857ff510 atapi!IdePortInterrupt (KINTERRUPT e0000000857ff4b0)<BR>a1:e0000000857d84b0 atapi!IdePortInterrupt (KINTERRUPT e0000000857d8450)<BR>a2:e0000165fff2cab0 portcls!CInterruptSyncServiceRoutine (KINTERRUPT e0000165fff2ca50)<BR>b1:e0000000858c7460 ACPI!ACPIInterruptServiceRoutine (KINTERRUPT e0000000858c7400)<BR>b2:e0000000850382e0 USBPORT!USBPORT_InterruptService (KINTERRUPT e000000085038280)<BR>d0:e0000000835768d0 hal!HalpClockInterrupt<BR>e0:e000000083576850 hal!HalpIpiInterruptHandler<BR>f0:e0000000835769c0 hal!HalpProfileInterrupt<BR>f1:e000000083576830 hal!HalpPCIISALine2Pin<BR>fd:e000000083576b10 hal!HalpMcRzHandler<BR>fe:e000000083576830 hal!HalpPCIISALine2Pin<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information about how to display the interrupt dispatch tables on an x64 or x86 target computer, see <a href="r27_exts_kernel_e_d2462212-c130-4a5b-875b-8d1006f6b8d3.xml.htm"><b>!idt</b></a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ivt RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

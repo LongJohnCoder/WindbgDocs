@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>RPC State Information Internals</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, RPC State Information Internals"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_8e4cc9f0-2ec6-4d6d-8434-d83192f2e2a7.xml"/>
+<META NAME="MS-HKWD" CONTENT="RPC debugging, RPC state information internals"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_8e4cc9f0-2ec6-4d6d-8434-d83192f2e2a7.xml"></A>RPC State Information Internals</H1>
+<P>This section provides details of the internal structure of the state information gathered by the RPC Run-Time.</P>
+<P>All RPC run-time state information is contained in cells. A cell is the smallest unit of information that can be viewed and updated individually.</P>
+<P>Each key object in the RPC Run-Time will maintain one or more cells of information about its state. Each cell has a cell ID. When an objects refers to another object, it does so by specifying that object's cell ID. The key objects that the RPC Run-Time can maintain information about are endpoints, threads, connection objects, Server Call (SCALL) objects, and Client Call (CCALL) objects.</P>
+<P><i>When an RPC server is running</i>, the RPC Run-Time listens on a set of endpoints using one or more worker threads. Whenever data is transmitted to the server, a thread picks up the data and determines what the incoming request is. If the request is to create a connection, a Connection object is created, and this object then services all calls on the connection. When an RPC call is made on the connection, the Connection object instantiates a Server Call (SCALL) object corresponding to the Client Call (CCALL) object. This Server Call object then handles this particular call.</P>
+<P><i>When an RPC client is running</i>, the RPC Run-Time creates a Client Call object each time a call is made. This Client Call object contains information about this particular call.</P>
+<H4>Endpoint Cells</H4>
+<P>From the RPC run-time's point of view, an endpoint is an entry point through which the particular server can be contacted. The endpoint is always associated with a given RPC transport. The endpoint state information is used to associate a client call with a particular process on the server.</P>
+<P>The fields in an endpoint cell are:</P>
+<DL><DT><b>ProtseqType</b></DT>
+<DD>The protocol sequence for this endpoint.</DD>
+<DT><b>Status</b></DT>
+<DD>The status value: <i>allocated</i>, <i>active</i>, or <i>inactive</i>. Most endpoints are active. An endpoint has <i>allocated</i> status when the creation process has started, but is not complete yet. An endpoint is <i>inactive</i> if it is no longer in use (for example, when a protocol has been uninstalled).</DD>
+<DT><b>EndpointName</b></DT>
+<DD>The first 28 characters of the endpoint name.</DD>
+</DL>
+<P></P>
+<H4>Thread Cells</H4>
+<P>Server threads are worker threads (standard Win32 threads for use by RPC).</P>
+<P>The fields in a thread cell are:</P>
+<DL><DT><b>Status</b></DT>
+<DD>The status value: <i>processing</i>, <i>dispatched</i>, <i>allocated</i>, or <i>idle</i>. A <i>processing</i> thread is one that is within the Run-Time and is processing information. A <i>dispatched</i> thread has already dispatched (called) to the server-provided manager routine (usually just called the <i>server routine</i>). An <i>allocated</i> thread has been cached. An <i>idle</i> thread is available to service requests.</DD>
+<DT><b>LastUpdateTime</b></DT>
+<DD>The time (in milliseconds after boot) when the information was last updated.</DD>
+<DT><b>TID</b></DT>
+<DD>The thread ID of this thread. This is useful when trying to correlate with the thread list in the debugger.</DD>
+</DL>
+<P></P>
+<H4>Connection Object Cells</H4>
+<P>The fields in a connection object cell are:</P>
+<DL><DT><b>Flags</b></DT>
+<DD>Flag values include <i>exclusive</i>/<i>non-exclusive</i>, <i>authentication level</i>, and <i>authentication service</i>.</DD>
+<DT><b>LastTransmitFragmentSize</b></DT>
+<DD>The size of the last fragment transmitted over the connection.</DD>
+<DT><b>Endpoint</b></DT>
+<DD>The cell ID of the endpoint that this connection was picked up from.</DD>
+<DT><b>LastSendTime</b></DT>
+<DD>The last time data was sent on a connection.</DD>
+<DT><b>LastReceiveTime</b></DT>
+<DD>The last time data was received on a connection.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>Server Call Object Cells</H4>
+<P>The fields in a Server Call (SCALL) object cell are:</P>
+<DL><DT><b>Status</b></DT>
+<DD>The status value: <i>allocated</i>, <i>active</i>, or <i>dispatched</i>. An <i>allocated</i> call is inactive and cached. When a call is <i>active</i>, the RPC Run-Time is processing information related to this call. When a call is <i>dispatched</i>, the manager routine (server routine) has been called and has not returned yet.</DD>
+<DT><b>ProcNum</b></DT>
+<DD>The procedure number (operation number, in netmon capture files) of this call. The RPC Run-Time identifies individual routines from an interface by numbering them by position in the IDL file. The first routine in the interface will be number zero, the second number one, and so on.</DD>
+<DT><b>InterfaceUUIDStart</b></DT>
+<DD>The first DWORD of the interface UUID.</DD>
+<DT><b>ServicingTID</b></DT>
+<DD>The cell ID of the thread that is servicing this call. If the call is not <i>active</i> or <i>dispatched</i>, this contains stale information.</DD>
+<DT><b>CallFlags</b></DT>
+<DD>These flag values indicate whether this is the cached call in an exclusive connection, whether this is an asynchronous call, whether this is a pipe call, and whether this is an LRPC or OSF call.</DD>
+<DT><b>LastUpdateTime</b></DT>
+<DD>The time (in milliseconds after boot) when the call object state information was last updated.</DD>
+<DT><b>PID</b></DT>
+<DD>The Process ID of the caller. Valid only for LRPC calls.</DD>
+<DT><b>TID</b></DT>
+<DD>The Thread ID of the caller. Valid only for LRPC calls.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>Client Call Object Cells</H4>
+<P>A Client Call (CCALL) object is broken into two cells, because the information about a client call is too large to fit in one cell. The first cell is called <i>Client Call Information</i>, and the second is called <i>Call Target Information</i>. Most tools will show the information together, so you do not need to distinguish between them.</P>
+<P>Information about client calls is not maintained unless you are gathering Full state information. There is one exception to this rule: information about client calls made <i>within</i> a server call is maintained even when only Server state information is being gathered. This allows you to trace calls spanning multiple hops.</P>
+<P>The fields in the Client Call Information cell are:</P>
+<DL><DT><b>ProcNum</b></DT>
+<DD>The procedure number (operation number, in netmon capture files) of the method being called. The RPC Run-Time identifies individual routines from an interface by numbering them by position in the IDL file. The first routine in the interface will be number zero, the second number one, and so on.</DD>
+<DT><b>ServicingThread</b></DT>
+<DD>The cell ID of the thread on which this call is made.</DD>
+<DT><b>IfStart</b></DT>
+<DD>The first DWORD of the interface UUID on which the call is made.</DD>
+<DT><b>Endpoint</b></DT>
+<DD>The first 12 characters of the endpoint on the server to which the call was made.<P></P>
+</DD>
+</DL>
+<P></P>
+<P>The fields in the Call Target Information cell are:</P>
+<DL><DT><b>ProtocolSequence</b></DT>
+<DD>The protocol sequence for this call.</DD>
+<DT><b>LastUpdateTime</b></DT>
+<DD>The time (in milliseconds after boot) when the information about the client call or the call target was updated.</DD>
+<DT><b>TargetServer</b></DT>
+<DD>The first 24 characters of the name of the server to which the call is made.</DD>
+</DL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: RPC State Information Internals RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

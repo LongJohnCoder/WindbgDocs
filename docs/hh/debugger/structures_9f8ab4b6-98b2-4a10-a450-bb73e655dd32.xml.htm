@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_SYMBOL_SOURCE_ENTRY</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_SYMBOL_SOURCE_ENTRY"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_SYMBOL_SOURCE_ENTRY"/>
+<MSHelp:Keyword Index="A" Term="Structures_9f8ab4b6-98b2-4a10-a450-bb73e655dd32.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_SYMBOL_SOURCE_ENTRY structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_9f8ab4b6-98b2-4a10-a450-bb73e655dd32.xml"></A>DEBUG_SYMBOL_SOURCE_ENTRY</H1>
+<P><P>The DEBUG_SYMBOL_SOURCE_ENTRY structure describes a section of the source code and a corresponding region of the target's memory.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_SYMBOL_SOURCE_ENTRY</b><BR><b>{</b><BR><b>    ULONG64  ModuleBase;</b><BR><b>    ULONG64  Offset;</b><BR><b>    ULONG64  FileNameId;</b><BR><b>    ULONG64  EngineInternal;</b><BR><b>    ULONG  Size;</b><BR><b>    ULONG  Flags;</b><BR><b>    ULONG  FileNameSize;</b><BR><b>    ULONG  StartLine;</b><BR><b>    ULONG  EndLine;</b><BR><b>    ULONG  StartColumn;</b><BR><b>    ULONG  EndColumn;</b><BR><b>    ULONG  Reserved;</b><BR><b>} DEBUG_SYMBOL_SOURCE_ENTRY, *PDEBUG_SYMBOL_SOURCE_ENTRY;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>ModuleBase</b></DT>
+<DD>The base address, in the target's virtual address space, of the <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> that the source symbol came from.</DD>
+<DT><b>Offset</b></DT>
+<DD>The location of the memory corresponding to the source code in the target's virtual address space.</DD>
+<DT><b>FileNameId</b></DT>
+<DD>Identifier for the source code file name. If this information is not available, <b>FieldNameId</b> is set to zero.</DD>
+<DT><b>EngineInternal</b></DT>
+<DD>Reserved for internal debugger engine use.</DD>
+<DT><b>Size</b></DT>
+<DD>The size of the region of memory corresponding to the source code. If this information is not available, <b>Size</b> is set to one.</DD>
+<DT><b>Flags</b></DT>
+<DD>Set to zero.</DD>
+<DT><b>FileNameSize</b></DT>
+<DD>The number of characters in the source filename, including the terminator. </DD>
+<DT><b>StartLine</b></DT>
+<DD>The line number of the start of the region of source code in the file. The number of the first line in the file is one. If this information is not available, <b>StartLine</b> is set to DEBUG_ANY_ID.</DD>
+<DT><b>EndLine</b></DT>
+<DD>The line number of the end of the region of source code in the file. The number of the first line in the file is one. If this information is not available, <b>StartLine</b> is set to DEBUG_ANY_ID.</DD>
+<DT><b>StartColumn</b></DT>
+<DD>The column number of the start of the region of source code. The number of the first column is one. If this information is not available, <b>StartLine</b> is set to DEBUG_ANY_ID.</DD>
+<DT><b>EndColumn</b></DT>
+<DD>The column number of the end of the region of source code. The number of the first column is one. If this information is not available, <b>StartLine</b> is set to DEBUG_ANY_ID.</DD>
+<DT><b>Reserved</b></DT>
+<DD>Reserved for future use.</DD>
+</DL>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_SYMBOL_SOURCE_ENTRY RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

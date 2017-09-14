@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Starting the Debugger</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Starting the Debugger"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_f7e1fb28-0ab2-4880-af04-50e888d431cb.xml"/>
+<META NAME="MS-HKWD" CONTENT="starting the debugger">
+<META NAME="MS-HKWD" CONTENT="starting the debugger, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_f7e1fb28-0ab2-4880-af04-50e888d431cb.xml"></A>Starting the Debugger</H1>
+<P>When you start the CDB, KD, or WinDbg applications, there are several ways you can select your debugging target.</P>
+<P>KD and CDB each begin a session with a target, and when the session ends, the program exits. </P>
+<P>WinDbg, on the other hand, can start without a target, either by starting it from a command prompt without specifying a target, or by starting it from the <b>Start</b> menu by opening <b>Debugging Tools for Windows</b> and clicking <b>WinDbg</b>. You can also end a WinDbg debugging session without exiting the WinDbg application. If you open WinDbg without specifying a target or end a WinDbg session without existing the application, WinDbg enters <i>dormant mode</i>. In this mode, you can select a new debugging target and begin a new session.</P>
+<P>This section describes the following methods to begin a debugging session. Each method involves starting a new debugger or selecting a target for a dormant WinDbg.</P><B></B><div class="indent1">
+<P><a href="r05_use_start_93639902-63fa-4e1b-a145-bd91af8eabb8.xml.htm">Attaching to a Running Process (User Mode)</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r05_use_start_77acc3de-f774-4eba-8804-ae878cd5e99d.xml.htm">Spawning a New Process (User Mode)</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r05_use_start_284e0db2-ee99-4c59-a6ef-af2557ee719b.xml.htm">Noninvasive Debugging (User Mode)</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml.htm">Attaching to a Target Computer (Kernel Mode)</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r05_use_start_6d6822e5-6ee5-4b68-9105-cb668b94a7d4.xml.htm">Opening a Crash Dump</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r05_use_start_fe29f2ea-16f9-44b8-aa54-f74a058b825e.xml.htm">Attaching to a Virtual Machine (Kernel Mode)</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r05_use_start_28414ce3-f9ab-4e88-94ca-3e2d59456c81.xml.htm">Attaching to a Target Computer Running Hyper-V</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a> </P>
+</div>
+<P></P>
+<P>You can also do the following to begin a debugging session:</P><B></B><OL type="1">
+<LI>You can join a remote debugging session by connecting to a debugging server. For more information about this method, see <a href="r08_use_remote_d737f4f5-2c99-44cf-b276-0fda82be08c8.xml.htm">Activating a Debugging Client</a>.</LI>
+<LI>The debugger can be automatically opened when a user-mode process fails. For more information about this method, see <a href="r04_setup_3_40cc08bd-c0da-4d75-90cd-f677b4f63d68.xml.htm">Enabling Postmortem Debugging</a>.</LI>
+<LI>You can automatically reactivate a previous debugging session by loading a named workspace. For more information about this method, see <a href="r06_use_gui_913ac9c6-536d-45c5-91b7-61369b2d2854.xml.htm">Using Workspaces</a>.</LI>
+</OL>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Starting the Debugger RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

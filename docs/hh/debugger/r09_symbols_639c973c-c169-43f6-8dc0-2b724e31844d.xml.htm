@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SymStore Compressed Files</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SymStore Compressed Files"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_639c973c-c169-43f6-8dc0-2b724e31844d.xml"/>
+<META NAME="MS-HKWD" CONTENT="SymStore, compressed files"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_639c973c-c169-43f6-8dc0-2b724e31844d.xml"></A>SymStore Compressed Files</H1>
+<P>SymStore can be used with compressed files in two different ways:</P><B></B><OL type="1">
+<LI>Use SymStore with the <b>/p</b> option to store pointers to the symbol files. After SymStore finishes, compress the files that the pointers refer to.</LI>
+<LI>Use SymStore with the <b>/x</b> option to create an index file. After SymStore finishes, compress the files listed in the index file. Then, use SymStore with the <b>/y</b> option (and, if you wish, the <b>/p</b> option) to store the files or pointers to the files in the symbol store. (SymStore will not need to uncompress the files to perform this operation.)</LI>
+</OL>
+<P></P>
+<P>Your symbol server will be responsible for uncompressing the files at the proper time.</P>
+<P>If you are using SymSrv as your symbol server, any compression should be done using the <i>compress.exe</i> tool that is distributed with the Microsoft Windows SDK. Compressed files should have an underscore as the last character in their file extensions (for example, <i>module1.pd_</i> or <i>module2.db_</i>). For details, see <a href="r09_symbols_657d92f2-20a6-4ddb-8669-cd4e431bb668.xml.htm">SymSrv</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SymStore Compressed Files RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

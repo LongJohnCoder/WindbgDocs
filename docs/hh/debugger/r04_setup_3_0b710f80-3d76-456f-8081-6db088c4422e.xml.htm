@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Configuring tools.ini</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Configuring tools.ini"><xml><MSHelp:Keyword Index="A" Term="r04_setup_3_0b710f80-3d76-456f-8081-6db088c4422e.xml"/>
+<META NAME="MS-HKWD" CONTENT="tools.ini file">
+<META NAME="MS-HKWD" CONTENT="ntsd.ini file"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r04_setup_3_0b710f80-3d76-456f-8081-6db088c4422e.xml"></A>Configuring <i>tools.ini</i></H1>
+<P></P>
+<P></P>
+<P>The file <i>tools.ini</i> contains information to initialize the command-line debuggers. On startup, the debugger searches for the appropriate section header in the <i>tools.ini</i> file and extracts initialization information from the entries under the header. Each command-line debugger has its own section header - [CDB], [NTSD], and [KD]. The environment variable INIT must point to the directory containing the <i>tools.ini</i> file.</P>
+<P>WinDbg does not use the <i>tools.ini</i> file. Instead, WinDbg saves initialization settings in <a href="r06_use_gui_913ac9c6-536d-45c5-91b7-61369b2d2854.xml.htm">workspaces</a>.</P>
+<P>The <i>tools.ini</i> entries are shown in the following table.</P>
+<P>Keywords must be separated from the values by white space or a colon. Keywords are not case-sensitive.</P>
+<P>For TRUE or FALSE values, "FALSE" is the only false value. Anything else is TRUE.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Entry</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$u0:</b> <i>value<BR><B>...</B><B><BR></B></I><b>$u9:</b> <i>value</i></TD>
+<TD Width="">Assign values to fixed-name aliases. You can specify numeric values <i>n </i>or <i>0xn</i> or any other string. See <a href="r05_use_start_ba4aca87-0103-4e86-9e6c-f3d6a44b3578.xml.htm">Using Aliases</a> for details. No command-line equivalent.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>DebugChildren:</b> <i>flag</i></TD>
+<TD Width="">TRUE or FALSE. If TRUE, CDB debugs the specified application as well as any child processes that it might spawn. Command-line equivalent is <b>-o</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>DebugOutput:</b> <i>flag</i></TD>
+<TD Width="">TRUE or FALSE. If TRUE, CDB sends output and receives input through a terminal. If FALSE, output goes to the user screen. The command-line option <b>-d </b>is similar but not identical.    </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IniFile:</b> <i>file</i></TD>
+<TD Width="">Specifies the name of the script file that CDB or KD takes commands from at startup. The default is the <i>ntsd.ini</i> file in the current directory. Command-line equivalent is <b>-cf</b>. For details, see <a href="r05_use_start_1aa9e034-9f62-48a5-b48e-12b581f5d211.xml.htm">Using Script Files</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>LazyLoad:</b> <i>flag</i></TD>
+<TD Width="">TRUE or FALSE. If TRUE, CDB performs lazy symbol loading; that is, symbols are not loaded until required. Command-line equivalent is <b>-s</b>.<BR><BR>For details, and other methods of setting this option, see <a href="r09_symbols_538315dc-6582-4a76-9725-d9d53b52e4a0.xml.htm">Deferred Symbol Loading</a>. <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>SetDll:</b> <i>filename</i></TD>
+<TD Width="">Set extension DLL. The <i>.dll</i> filename extension should be omitted. Default is <i>userexts.dll</i>. Command-line equivalent is <b>-a</b>.<BR><BR>For details, and other methods of setting this default, see <a href="r08_use_remote_ac80d1f3-ff3f-4374-9e70-2a73b84ac647.xml.htm">Loading Debugger Extension DLLs</a>.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>StopFirst:</b> <i>flag</i></TD>
+<TD Width="">True or false. If true, CDB stops on the breakpoint at the end of the image-loading process. Command-line equivalent is <b>-g</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>StopOnProcessExit:</b> <i>flag</i></TD>
+<TD Width="">TRUE or FALSE. If TRUE, CDB stops when it receives a process termination notification. Command-line equivalent is <b>-G</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sxd:</b> <i>event</i><BR><b>sxe:</b> <i>event</i></TD>
+<TD Width="">Sets the debugger response and the handling status for the specified exception or event.<BR><BR>Exceptions and events may be specified in the following ways:<BR><BR><b>*</b>: Default exception<BR><i>n</i>: Exception <i>n</i> (decimal)<BR><i>0xn</i>: Exception <i>0xn</i> (hexadecimal)<BR>(other): Event code<BR><BR>See <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a> for details of this process and for other methods of controlling these settings.  <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>VerboseOutput:</b> <i>flag</i></TD>
+<TD Width="">TRUE or FALSE. If TRUE, CDB will display detailed information about symbol handling, event notification, and other run-time occurrences. Command-line equivalent is <b>-v</b>.</TD>
+</TR>
+</table>
+<P></P>
+<P>A sample [NTSD] section in the <i>tools.ini</i> file follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[NTSD]<BR>sxe: 3c<BR>sxe: cc<BR>$u0: VeryLongName<BR>VerboseOutput:true<BR><BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Configuring tools.ini RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

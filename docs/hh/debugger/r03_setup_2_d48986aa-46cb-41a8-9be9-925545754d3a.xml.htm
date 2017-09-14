@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Installing the 1394 Virtual Driver</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Installing the 1394 Virtual Driver"><xml><MSHelp:Keyword Index="A" Term="r03_setup_2_d48986aa-46cb-41a8-9be9-925545754d3a.xml"/>
+<META NAME="MS-HKWD" CONTENT="virtual driver for 1394 debugging">
+<META NAME="MS-HKWD" CONTENT="driver for 1394 debugging">
+<META NAME="MS-HKWD" CONTENT="1394 connection, installing the 1394 virtual driver"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r03_setup_2_d48986aa-46cb-41a8-9be9-925545754d3a.xml"></A>Installing the 1394 Virtual Driver</H1>
+<P>If you are debugging over a 1394 connection, the debugger will install a 1394 virtual driver that allows the debugger to communicate with the target computer.</P>
+<P>There are three stages to this installation:</P><B></B><OL type="1">
+<LI>When the debugger package is installed on your system, it places certain files in the <i>1394</i> subdirectory of the debugger installation directory.</LI>
+<LI>The first time you start a kernel debugging session over a 1394 connection, the debugger will perform a pre-installation of the 1394 virtual drivers.</LI>
+<LI>If this pre-installation is successful, the debugger will call the bus driver. The bus driver will then complete the installation process.</LI>
+</OL>
+<P></P>
+<P></P>
+<P>During steps 2 and 3, you must be logged in as Administrator on the host computer, since only Administrator can install new drivers.</P>
+<P>There are two different 1394 drivers: one for target computers running Windows XP, and one for target computers running Windows Server 2003 or a later version of Windows. These correspond to the two different 1394 protocol settings. You should not need to configure the protocol setting; it will be determined automatically. If you have some reason for overriding the protocol choice, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a> for details on this setting.</P>
+<P>If you debug a Windows XP target over 1394, and later debug a Windows Server 2003 (or later) target over 1394, or vice-versa, both drivers will be installed on your host computer.</P>
+<H4>Relocating the Debugger Binaries</H4>
+<P>Each 1394 virtual driver will only be installed once.</P>
+<P>As a result, if you have installed the Debugging Tools for Windows package and then performed 1394 debugging, you should not copy the binaries to a different computer. The copied version will not attempt to reinstall the 1394 driver, which will make it impossible to debug over the 1394 connection.</P>
+<P>A similar problem can occur if you have a dual-boot machine with a single copy of the debugger binaries.</P>
+<P>To assure that 1394 debugging will work, each computer (or operating system on a dual-boot computer) should install a separate Debugging Tools package. See <a href="r02_setup_1_06851ef4-eab5-4780-8b1f-005f51a67541.xml.htm">Debugger Installation</a> for instructions.</P>
+<P class="note"><b>Note</b>  Before performing kernel debugging over a 1394 cable, you must also configure the software on the target computer. See <a href="r02~a_setup_1a_fcdec49c-b16c-4f8e-b1df-c1ceea0815f3.xml.htm">Disabling the 1394 Host Controller</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Installing the 1394 Virtual Driver RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

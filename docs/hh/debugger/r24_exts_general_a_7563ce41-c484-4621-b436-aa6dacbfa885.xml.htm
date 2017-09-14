@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!findxmldata</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !findxmldata"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_7563ce41-c484-4621-b436-aa6dacbfa885.xml"/>
+<META NAME="MS-HKWD" CONTENT="!findxmldata extension">
+<META NAME="MS-HKWD" CONTENT="CAB file containing a dump file, !findxmldata extension">
+<META NAME="MS-HKWD" CONTENT="XML data in CAB files">
+<META NAME="MS-HKWD" CONTENT="sysdata.xml"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_7563ce41-c484-4621-b436-aa6dacbfa885.xml"></A>!findxmldata</H1>
+<P><P>The <b>!findxmldata</b> extension retrieves XML data from a CAB file that contains a kernel-mode Small Memory Dump file.</P>
+</P>
+<P></P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!findxmldata</b> [ <b>-d</b> <i>DeviceName</i> | <b>-h</b> <i>HwId</i> ] <BR><b>!findxmldata -r</b> <i>Driver</i><b> </b><BR><b>!findxmldata -chksum </b>[ <b>-z </b><i>CabFile </i>]<BR><b>!findxmldata -v </b><BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-d</b> <i>DeviceName</i></DT>
+<DD>Displays all devices whose device name contains the string that <i>DeviceName</i> specifies.</DD>
+<DT><b>-h</b> <i>HwId</i></DT>
+<DD>Displays all devices whose hardware IDs contain the string that <i>HwId</i> specifies. If you use both <b>-d</b> and <b>-h</b>, the debugger displays only those devices that satisfy both matches.</DD>
+<DT><b>-r</b> <i>Driver</i></DT>
+<DD>Displays information about the driver that the <i>Driver </i>parameter specifies, including all devices that use this driver.</DD>
+<DT><b>-chksum</b></DT>
+<DD>Displays the XML file's checksum.</DD>
+<DT><b>-z</b> <i>CabFile</i></DT>
+<DD>Enables you to perform a checksum on the CAB<i> </i>file that  the <i>CabFile</i> parameter specifies, instead of on the default <i>Sysdata.xml </i>file. </DD>
+<DT><b>-v</b></DT>
+<DD>Displays system version information.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>The <b>!findxmldata</b> extension works only on a kernel-mode Small Memory Dump file that is stored in a CAB file.</P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!findxmldata</b> extension retrieves data from the <i>Sysdata.xml</i> file that is stored in a CAB file that contains a kernel-mode <a href="r10_dump_files_1c793f2b-a711-4e06-9c87-99be8f297556.xml.htm">Small Memory Dump</a> file.</P>
+<P>When you do not use any options, the extension displays all devices.   </P>
+<P>The following examples show you how to use <b>!findxmldata</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!findxmldata -v</b><BR>SYSTEM Info:<BR>OSVER: 5.1.2600 2.0<BR>OSLANGUAGE: 2052<BR>OSNAME: Microsoft Windows XP Home Edition<BR>kd&gt; !findxmldata -d MIDI<BR>Node DEVICE<BR>        DESCRIPTION    : MPU-401 Compatible MIDI Device<BR>        HARDWAREID     : ACPI\PNPB006<BR>        SERVICE        : ms_mpu401<BR>        DRIVER         : msmpu401.sys<BR><BR>kd&gt; <b>!findxmldata -r msmpu</b><BR>Node DRIVER<BR>        FILENAME       : msmpu401.sys<BR>        FILESIZE       : 2944<BR>        CREATIONDATE   : 05-06-2005 09:18:34<BR>        VERSION        : 5.1.2600.0<BR>        MANUFACTURER   : Microsoft Corporation<BR>        PRODUCTNAME    : Microsoft« Windows« Operating System<BR>Node DEVICE<BR>        DESCRIPTION    : MPU-401 Compatible MIDI Device<BR>        HARDWAREID     : ACPI\PNPB006<BR>        SERVICE        : ms_mpu401<BR>        DRIVER         : msmpu401.sys<BR><BR>kd&gt; <b>!findxmldata -h PCI\VEN_8086&amp;DEV_24C3&amp;SUBSYS_24C28086</b><BR>Node DEVICE<BR>        DESCRIPTION    : Intel(R) 82801DB/DBM SMBus Controller - 24C3<BR>        HARDWAREID     : PCI\VEN_8086&amp;DEV_24C3&amp;SUBSYS_24C28086&amp;REV_01<BR>kd&gt; !findxmldata -h USB\ROOT_HUB&amp;VID8086&amp;PID24C4&amp;REV0001<BR>Node DEVICE<BR>        DESCRIPTION    : USB Root Hub<BR>        HARDWAREID     : USB\ROOT_HUB&amp;VID8086&amp;PID24C4&amp;REV0001<BR>        SERVICE        : usbhub<BR>        DRIVER         : usbhub.sys<BR><BR>kd&gt; <b>!findxmldata -h ACPI\PNPB006</b><BR>Node DEVICE<BR>        DESCRIPTION    : MPU-401 Compatible MIDI Device<BR>        HARDWAREID     : ACPI\PNPB006<BR>        SERVICE        : ms_mpu401<BR>        DRIVER         : msmpu401.sys<BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information about how to put dump files into CAB files, see <a href="r19_metacmds_a_36f5b679-9add-4f17-8bdc-c30ac9736229.xml.htm"><b>.dumpcab (Create Dump File CAB)</b></a>. For information more about how to debug a kernel-mode dump file, including dump files that are stored inside CAB files, see <a href="r10_dump_files_4bc6b822-4b12-43ca-a288-33cecca6e560.xml.htm">Analyzing a Kernel-Mode Dump File</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !findxmldata RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

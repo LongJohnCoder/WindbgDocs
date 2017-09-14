@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!logonsession</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !logonsession"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_cb545b2e-c9cd-45be-9cba-3b81128c3837.xml"/>
+<META NAME="MS-HKWD" CONTENT="!logonsession extension">
+<META NAME="MS-HKWD" CONTENT="logon session">
+<META NAME="MS-HKWD" CONTENT="logon session, !logonsession extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_cb545b2e-c9cd-45be-9cba-3b81128c3837.xml"></A>!logonsession</H1>
+<P><P>The <b>!logonsession </b>extension displays information about a specified logon session.</P>
+</P>
+<H4>Syntax</H4>
+<P>Free Build Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!logonsession</b> <i>LUID</i> <BR></nobr></P>
+<P></P>
+<P>Checked Build Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!logonsession</b> <i>LUID</i> [<i>InfoLevel</i>] <BR></nobr></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>LUID</i></DT>
+<DD>Specifies the locally unique identifier (LUID) of a logon session to display. If <i>LUID </i>is 0, information about all logon sessions is displayed. <P>To display information about the system session and all system tokens in a checked build, enter <b>!logonsession 3e7 1</b>.</P>
+</DD>
+<DT><i>InfoLevel</i></DT>
+<DD>(<i>Checked Build Only</i>) Specifies how much token information is displayed. The <i>InfoLevel</i> parameter can take values from 0 to 4, with 0 representing the least information and 4 representing the most information.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example of the output from this extension on a free build:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!logonsession 0</b><BR><BR>Dumping all logon sessions.<BR><BR>** Session   0 = 0x0<BR>   LogonId     = {0x0 0x0}<BR>   References  = 0<BR>** Session   1 = 0x8ebb50<BR>   LogonId     = {0xe9f1 0x0}<BR>   References  = 21<BR>** Session   2 = 0x6e31e0<BR>   LogonId     = {0x94d1 0x0}<BR>   References  = 1<BR>** Session   3 = 0x8ecd60<BR>   LogonId     = {0x6b31 0x0}<BR>   References  = 0<BR>** Session   4 = 0xe0000106<BR>   LogonId     = {0x0 0x0}<BR>   References  = 0<BR>** Session   5 = 0x0<BR>   LogonId     = {0x0 0x0}<BR>   References  = 0<BR>** Session   6 = 0x8e9720<BR>   LogonId     = {0x3e4 0x0}<BR>   References  = 6<BR>** Session   7 = 0xe0000106<BR>   LogonId     = {0x0 0x0}<BR>   References  = 0<BR>** Session   8 = 0xa2e160<BR>   LogonId     = {0x3e5 0x0}<BR>   References  = 3<BR>** Session   9 = 0xe0000106<BR>   LogonId     = {0x0 0x0}<BR>   References  = 0<BR>** Session  10 = 0x3ca0<BR>   LogonId     = {0x3e6 0x0}<BR>   References  = 2<BR>** Session  11 = 0xe0000106<BR>   LogonId     = {0x0 0x0}<BR>   References  = 0<BR>** Session  12 = 0x1cd0<BR>   LogonId     = {0x3e7 0x0}<BR>   References  = 33<BR>** Session  13 = 0xe0000106<BR>   LogonId     = {0x0 0x0}<BR>   References  = 0<BR>14 sessions in the system.<BR><BR></nobr></P>
+<P>You can stop execution at any point by pressing CTRL+BREAK (in WinDbg) or CTRL+C (in KD).</P>
+<H4>Additional Information</H4>
+<P>For information about logon sessions, see the Microsoft Windows SDK documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !logonsession RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

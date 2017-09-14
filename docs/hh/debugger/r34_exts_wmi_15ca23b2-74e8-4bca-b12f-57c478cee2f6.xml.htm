@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wmitrace.tmffile</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wmitrace.tmffile"><xml><MSHelp:Keyword Index="A" Term="r34_exts_WMI_15ca23b2-74e8-4bca-b12f-57c478cee2f6.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wmitrace.tmffile extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r34_exts_WMI_15ca23b2-74e8-4bca-b12f-57c478cee2f6.xml"></A>!wmitrace.tmffile</H1>
+<P><P>The <b>!wmitrace.tmffile</b> extension specifies a trace message format (TMF) file. The file specified by this extension is used to format trace messages displayed or written by other WMI tracing extensions.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wmitrace.tmffile</b> <i>TMFFile</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>TMFFile</i></DT>
+<DD>Specifies a trace message format file. </DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P>This extension is exported by <i>Wmitrace.dll</i>. </P>
+<P>This extension is available in Windows 2000 and later versions of Windows. If you want to use this extension with Windows 2000, you must first copy the <i>Wmitrace.dll</i> file from the <i>winxp</i> subdirectory of the Debugging Tools for Windows installation directory to the <i>w2kfre</i> subdirectory. </P>
+<P></P>
+<H4>Comments</H4>
+<P><i>Trace message format files</i> (<i>.tmf</i>) are structured text files that are created during Windows software trace preprocessor (WPP) software tracing. These files contain instructions for formatting trace binary trace messages so that they can be displayed in human-readable form.</P>
+<P>In order to display the trace message in a trace buffer (<a href="r34_exts_wmi_cda1a996-6130-4728-809c-2d0cf5eba21c.xml.htm"><b>!wmitrace.logdump</b></a>) or write them to a file <a href="r34_exts_wmi_82e6f6d9-f2ea-41cf-95ae-f4d161b51842.xml.htm">(<b>!wmitrace.logsave</b></a>), you must first identify the TMF files for the trace messages.</P>
+<P>You can use <a href="r34_exts_wmi_bc37cf69-1e42-4c02-b7e0-ad8563e93124.xml.htm"><b>!wmitrace.searchpath</b></a> to specify a directory in which TMF files are stored. The system then searches the directory for a TMF file that contains instructions for the messages that it is formatting. (It uses the message GUID to associate the message with the correct TMF file.)</P>
+<P>However, you can use <b>!wmitrace.tmffile</b> to specify a particular TMF file. You must use <b>!wmitrace.tmffile</b> if the TMF file name is not a message GUID followed by the <i>.tmf</i> extension. Otherwise, the system will not find it.</P>
+<P>If you do not use either <b>!wmitrace.searchpath</b> or <b>!wmitrace.tmffile</b>, the system uses the value of the TRACE_FORMAT_SEARCH_PATH environment variable. If that variable is not present, it uses the <i>default.tmf</i> file. If the system cannot find formatting information for a trace message, it writes a "No format information found" error message, instead of the trace message content.</P>
+<P>This extension is only useful during WPP software tracing, and earlier (legacy) methods of Event Tracing for Windows. Trace events that are produced by other manifested providers do not use trace message format (TMF) files, and therefore this extension cannot be used with them. </P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For a conceptual overview of event tracing, see the Microsoft Windows SDK. For information about trace message format files, see the "Trace Message Format File" topic in the Windows Driver Kit (WDK).</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wmitrace.tmffile RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

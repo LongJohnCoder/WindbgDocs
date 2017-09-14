@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>CTRL+A (Toggle Baud Rate)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, CTRL+A (Toggle Baud Rate)"><xml><MSHelp:Keyword Index="A" Term="r23_keys_5e94e92d-e89a-40df-8030-190b68a181e5.xml"/>
+<META NAME="MS-HKWD" CONTENT="CTRL+A (Toggle Baud Rate) control key">
+<META NAME="MS-HKWD" CONTENT="Toggle Baud Rate (CTRL+A) control key">
+<META NAME="MS-HKWD" CONTENT="baud rate"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r23_keys_5e94e92d-e89a-40df-8030-190b68a181e5.xml"></A>CTRL+A (Toggle Baud Rate)</H1>
+<P>The <b>CTRL+A</b> key toggles the baud rate used in the kernel debugging connection.</P>
+<H4>Syntax</H4>
+<P>KD Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr>CTRL+A  ENTER <BR></nobr></P>
+<P></P>
+<P>WinDbg Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr>CTRL+ALT+A <BR></nobr></P>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Debuggers</b></TD>
+<TD Width="">KD and WinDbg only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">kernel mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This will cycle through all available baud rates for the kernel debugging connection.</P>
+<P>Supported baud rates are 19200, 38400, 57600, and 115200. Each time this control key is used, the next baud rate will be selected. If the baud rate is already at 115200, it will be reduced to 19200.</P>
+<P>In WinDbg, this can also be accomplished by selecting <a href="r37_gui_2_e66b21a1-a52f-4ae5-b7dd-692b532e603e.xml.htm"><b>Debug | Kernel Connection | Cycle Baud Rate</b></a>.</P>
+<P>You cannot actually use this control key to change the baud rate at which you are debugging. The baud rate of the host computer and the target computer must match, and the baud rate of the target computer cannot be changed without rebooting. Therefore, you only need to toggle through the baud rates if the two computers are attempting to communicate at different rates. In this case, you must change the host computer's baud rate to match that of the target computer.</P>
+<P>To change the target computer's baud rate, see <a href="bootini_pageone_dbg_06095f76-d8a9-4397-880e-d9d461b84904.xml.htm">Configuring Software on the Target Computer</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: CTRL+A (Toggle Baud Rate) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

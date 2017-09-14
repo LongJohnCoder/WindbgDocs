@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Calls Window</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Calls Window"><xml><MSHelp:Keyword Index="A" Term="r36_gui_1_b6fb163f-531c-4403-aa9d-100772f42189.xml"/>
+<META NAME="MS-HKWD" CONTENT="debugging information windows, Calls window">
+<META NAME="MS-HKWD" CONTENT="Calls window">
+<META NAME="MS-HKWD" CONTENT="call stack, Calls window"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_WINDOW_CALLS"></a><H1><A NAME="r36_gui_1_b6fb163f-531c-4403-aa9d-100772f42189.xml"></A>Calls Window</H1>
+<P></P>
+<P>The Calls window displays the current call stack information.</P>
+<H4>Opening the Calls Window</H4>
+<P>To open or switch to the Calls window, in the WinDbg window, on the <b>View</b> menu, click <b>Call Stack</b>. (You can also press ALT+6 or click the <b>Calls (Alt+6)</b> button (<img src="tbcall.bmp">) on the toolbar.  ALT+SHIFT+6 will close the Calls Window.)</P>
+<P>The following figure shows an example of a Calls window.</P>
+<p><img src="window-calls.bmp"></p>
+<P>The Calls window displays the call stack information in several columns, most of which can be visible or hidden. If none of the optional columns are visible, only the name or offset of each function is displayed.</P>
+<H4>Using the Calls Window</H4>
+<P>To move to the corresponding call location in the <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a> or <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a>, double-click a line of the call stack, or select a line and press ENTER. This action also changes the <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#348f186b-acf8-4f68-be90-b68b085d7600">local context</a> to the selected stack frame. For more information about running to or from this point, see <a href="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml.htm">Controlling the Target</a>.</P>
+<P>In user mode, the stack trace is based on the stack of the current thread. For more information about the stack of the current thread, see <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">Controlling Processes and Threads</a>.</P>
+<P>In kernel mode, the stack trace is based on the current register context. You can set the register context to match a specific thread, context record, or trap frame. For more information about setting the register context, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">Register Context</a>.</P>
+<H4>Toolbar and Shortcut Menu</H4>
+<P>The Calls window has a toolbar that contains several buttons and has a shortcut menu with additional commands. To access this menu, right-click the title bar or click the icon near the upper-right corner of the window (<img src="tbcall.bmp">). The toolbar and menu contain the following buttons and commands:</P><B></B><UL type="disc">
+<LI><i>(Toolbar and menu)</i> <b>Raw</b> <b>args</b> displays the first three parameters that are passed to the function. On an x86-based processor, this display includes the first three parameters that are passed to the function ("Args to Child"). On an Itanium-based processor, this display includes the parameters that are passed to the function ("Arguments to Callee"), if the <b>Nonvolatile regs</b> button is also turned on.</LI>
+<LI><b>Func info</b> displays Frame Pointer Omission (FPO) data and other internal information about the function. This command is available only on an x86-based processor.</LI>
+<LI><b>Source</b> displays source module names and line numbers after the function names (if the debugger has this information).</LI>
+<LI><b>Addrs</b> displays various frame-related addresses. On an x86-based processor, this display includes the base pointer for the stack frame ("ChildEBP") and the return address ("RetAddr"). On an Itanium-based processor, this display includes a pointer to the function that is being called ("Callee-BSP") and the return address ("Return-RA"), unless both the <b>Args</b> and <b>Nonvolatile regs</b> buttons are turned on as well.</LI>
+<LI><b>Headings</b> displays column headings at the top of each column.</LI>
+<LI><b>Nonvolatile regs</b> displays the nonvolatile portion of the register context. This command is available only on an Itanium-based processor.</LI>
+<LI><b>Frame nums</b> displays frame numbers. Frames are always numbered consecutively, beginning with zero.</LI>
+<LI><b>Arg types</b> displays detailed information about the arguments that are expected and received by the functions in the stack.</LI>
+<LI><b>More</b> changes the length of the stack trace. Each time you click <b>More</b>, the stack display increases by ten frames, if a stack trace of this length is available.</LI>
+<LI><b>Less</b> changes the length of the stack trace. Each time you click <b>Less</b>, the stack display decreases by ten frames, unless this change would cause the stack display to be shorter than ten frames total.</LI>
+<LI><i>(Menu only)</i>  <b>Copy stack to clipboard</b> copies the current contents of the Calls window to the clipboard.</LI>
+<LI><i>(Menu only)</i>  <b>Toolbar</b> turns the toolbar on and off.</LI>
+<LI><i>(Menu only)</i>  <b>Dock</b> or <b>Undock</b> causes the window to enter or leave the docked state.</LI>
+<LI><i>(Menu only)</i>  <b>Move to new dock</b> closes the Calls window and opens it in a new dock.</LI>
+<LI><i>(Menu only)</i> <b>Set as tab-dock target for window type</b> is unavailable for the Calls window.  This option is only available for <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source</a> or <a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory</a> windows.</LI>
+<LI><i>(Menu only)</i>  <b>Always floating</b> causes the window to remain undocked even if it is dragged to a docking location.</LI>
+<LI><i>(Menu only)</i>  <b>Move with frame</b> causes the window to move when the WinDbg frame is moved, even if the window is undocked. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>.</LI>
+<LI><i>(Menu only)</i>  <b>Help</b> opens this topic in the Debugging Tools for Windows documentation.</LI>
+<LI><i>(Menu only)</i>  <b>Close</b> closes this window.</LI>
+</UL>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about stack traces and for other ways to display stack traces, see <a href="r07_use_operation_531a7dd9-5201-43eb-9054-a793c3e60a60.xml.htm">Viewing the Call Stack</a>. For more information about the register context and the local context, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>. For more information about all techniques that you can use to control debugging information windows, see <a href="r06_use_gui_35306de1-d9fb-45e6-800f-e3ee00114421.xml.htm">Using Debugging Information Windows</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Calls Window RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xFE: BUGCODE_USB_DRIVER</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xFE: BUGCODE_USB_DRIVER"><xml><MSHelp:Keyword Index="A" Term="t07_bugs_E0_ee52c585-14b2-4b07-a188-6ee6c21d9d8c.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xFE: BUGCODE_USB_DRIVER">
+<META NAME="MS-HKWD" CONTENT="BUGCODE_USB_DRIVER"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t07_bugs_E0_ee52c585-14b2-4b07-a188-6ee6c21d9d8c.xml"></A>Bug Check 0xFE: BUGCODE_USB_DRIVER</H1>
+<P>The BUGCODE_USB_DRIVER bug check has a value of 0x000000FE. This indicates that an error has occurred in a Universal Serial Bus (USB) driver.</P>
+<H4>Parameters</H4>
+<P>The four bug check parameters are displayed on the blue screen. Parameter 1 identifies the type of violation.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">An internal error has occurred in the USB stack.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">Address of the pending IRP</TD>
+<TD Width="">Address of the IRP that was passed in</TD>
+<TD Width="">Address of the USB request block (URB) that caused the error</TD>
+<TD Width="">The USB client driver has submitted a URB that is still attached to another IRP that is pending in the bus driver.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The USB miniport driver has generated a bug check. This usually happens in response to a catastrophic hardware failure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">Address of the IRP</TD>
+<TD Width="">Address of the URB</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The caller has submitted an IRP that is already pending in the USB bus driver.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">Device extension pointer of the host controller</TD>
+<TD Width="">PCI vendor, product id for the controller</TD>
+<TD Width="">Pointer to endpoint data structure</TD>
+<TD Width="">A hardware failure has occurred due to a bad physical address found in a hardware data structure.  This is not due to a driver bug.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Ox6</TD>
+<TD Width="">Object address</TD>
+<TD Width="">Signature that was expected</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">An Internal data structure (object) has been corrupted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7</TD>
+<TD Width="">Pointer to usbport.sys debug log</TD>
+<TD Width="">Message string</TD>
+<TD Width="">File name</TD>
+<TD Width="">Please consult the provided message string for details.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8</TD>
+<TD Width="">Reserved Type</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>See the description of each code in the Parameters section for an explanation of the cause.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xFE: BUGCODE_USB_DRIVER RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

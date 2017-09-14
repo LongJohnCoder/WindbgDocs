@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>/nopae</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, /nopae"><xml><MSHelp:Keyword Index="A" Term="bootini_37644df1-f3ea-4e1b-9ea6-c5ea00a1164b.xml"/>
+<META NAME="MS-HKWD" CONTENT="/nopae"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_37644df1-f3ea-4e1b-9ea6-c5ea00a1164b.xml"></A>/nopae</H1>
+<P>The <b>/nopae</b> parameter disables Physical Address Extension (PAE) and forces the boot loader to load the non-PAE version of the Windows kernel.<P>For more information about using the <b>/nopae</b> parameter and the other parameters that affect PAE configuration, see <a href="bootini_29e11bdf-06dc-489d-af10-27a8c03d3a62.xml.htm">Boot Parameters to Configure DEP and PAE</a>.</P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/nopae</b> <BR></nobr></P>
+<P></P>
+<H4>Comments</H4>
+<P>This parameter is valid only on boot entries for 32-bit versions of Windows that run on computers with x86 and x64-based processors. </P>
+<P>The <b>/nopae</b> option is supported only on Windows Server 2003 with SP1 and Windows XP with SP2. On Windows Vista and later versions of Windows, use the <b>PAE</b> element in BCDEdit with a value of <b>ForceDisable</b>.</P>
+<P>Consider using this parameter on systems on which a device does not operate properly when PAE is enabled.</P>
+<P>Typically, this parameter is not necessary because PAE is not enabled unless you use the <a href="bootini_17b4305e-23ac-40ea-99db-4858b29a5d66.xml.htm"><b>/pae</b></a> boot parameter. However, on computers with x86 processors, Windows automatically enables PAE when the computer is configured for hot-add memory devices in memory ranges beyond the 4 GB region, as defined by the Static Resource Affinity Table (SRAT). <i>Hot-add memory </i>supports memory devices that you can add without rebooting or turning off power to the computer. In this case, because PAE must be enabled when the system starts, it is enabled automatically so that the system can immediately address extended memory that is added between restarts. (Disabling PAE on these systems disables hot-add memory.)  Hot-add memory is supported only on Windows Server 2003, Datacenter Edition; Windows Server 2003, Enterprise Edition; Windows Server 2008, Datacenter Edition; Windows Server 2008, Enterprise IA64 Edition; and on the datacenter and enterprise editions of all later versions of Windows Server.  Moreover, for versions of Windows prior to Windows Server 2008, hot-add memory is supported only on computers with an ACPI BIOS, an x86 processor, and specialized hardware.  For Windows Server 2008 and later versions of Windows Server, it is supported for all processor architectures. </P>
+<P>On a computer that supports hardware-enabled Data Execution Protection (DEP) and is running a 32-bit version of the Windows operating system that supports DEP, PAE is automatically enabled when DEP is enabled, even if <b>/nopae</b> is set. On all 32-bit versions of Windows that support DEP, except Windows Server 2003 with SP1, when you disable DEP, Windows automatically disables PAE, but you can use <b>/pae</b> to enable it. For information about DEP, see <a href="bootini_aff45176-bd02-43cf-9895-c212fa392de2.xml.htm"><b>/noexecute</b></a>.</P>
+<P>PAE is supported in Windows 2000 and later versions of Windows.</P>
+<H4>Example</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Windows Server 2003, Enterprise" /fastdetect /nopae<BR><BR></nobr></P>
+<H4>Bootcfg Command</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /raw "/nopae" /A /ID 1<BR><BR></nobr></P>
+<H4>See Also</H4>
+<P><a href="bootini_17b4305e-23ac-40ea-99db-4858b29a5d66.xml.htm"><b>/pae</b></a></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: /nopae RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

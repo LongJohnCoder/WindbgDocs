@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Performing Local Kernel Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Performing Local Kernel Debugging"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_fabb9469-404e-4883-950a-5f35a09c27a2.xml"/>
+<META NAME="MS-HKWD" CONTENT="local kernel debugging">
+<META NAME="MS-HKWD" CONTENT="local kernel debugging, commands available">
+<META NAME="MS-HKWD" CONTENT="local kernel debugging, LiveKD tool">
+<META NAME="MS-HKWD" CONTENT="LiveKD tool"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_fabb9469-404e-4883-950a-5f35a09c27a2.xml"></A>Performing Local Kernel Debugging</H1>
+<P>KD and WinDbg can perform <i>local kernel debugging</i>. This kind of debugging is kernel debugging on a single computer. In other words, the debugger is debugging the computer that it is running on.</P>
+<P>Local kernel debugging is supported only on Microsoft Windows XP and later versions of Windows. Only users who have debug permissions can start local kernel debugging.</P>
+<H4>Starting Local Kernel Debugging</H4>
+<P>To enable local kernel debugging, you must use the <b>/debug</b> boot switch. For more information about this switch, see <a href="bootini_pageone_dbg_06095f76-d8a9-4397-880e-d9d461b84904.xml.htm">Configuring Software on the Target Computer</a>.   </P>
+<P>To start a local kernel debugging session, start a debugger with the <b>-kl</b> command-line option, click the <b>Local</b> tab in the <b>Kernel Debugging </b>dialog box (<a href="r36_gui_1_fe3f56e8-09fe-496d-a26e-8a692a70bc25.xml.htm"><b>File | Kernel Debug</b></a>), or use the <nobr><a href="r19_metacmds_a_8c6d47be-d1e0-4d39-b0cd-14ac56c87de5.xml.htm"><b>.attach -k</b></a></nobr> command. For more information about starting such a session, see <a href="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml.htm">Attaching to a Target Computer (Kernel Mode)</a>.</P>
+<H4>Commands That Are Not Available</H4>
+<P>Not all commands are available in a local kernel debugging session. Typically, you cannot use any command that causes the target computer to stop, even momentarily, because you cannot resume operation.</P>
+<P>In particular, you cannot use the following commands:</P><B></B><UL type="disc">
+<LI>Execution commands, such as <b>g (Go)</b>, <b>p (Step)</b>, <b>t (Trace)</b>, <b>wt (Trace and Watch Data)</b>, <b>tb (Trace to Next Branch)</b>, <b>gh (Go with Exception Handled)</b>, and <b>gn (Go with Exception Not Handled)</b> </LI>
+<LI>Shutdown and dump file commands, such as <b>.crash</b>, <b>.dump</b>, and <b>.reboot</b> </LI>
+<LI>Breakpoint commands, such as <b>bp</b>, <b>bu</b>, <b>ba</b>, <b>bc</b>, <b>bd</b>, <b>be</b>, and <b>bl</b> </LI>
+<LI>Register display commands, such as <b>r</b> and variations </LI>
+<LI>Stack trace commands, such as <b>k</b> and variations </LI>
+</UL>
+<P></P>
+<P>If you are performing local kernel debugging with WinDbg, all of the equivalent menu commands and buttons are also unavailable.</P>
+<H4>Commands That Are Available</H4>
+<P>All memory input and output commands are available. You can freely read from user memory and kernel memory. You can also write to memory. Make sure that you do not write to the wrong part of kernel memory, because it can corrupt data structures and frequently causes the computer to stop responding (that is, <i>crash</i>).</P>
+<H4>Difficulties in Performing Local Kernel Debugging</H4>
+<P>Local kernel debugging is a very delicate operation. Be careful that you do not corrupt or crash the system.</P>
+<P>One of the most difficult aspects of local kernel debugging is that the machine state is constantly changing. Memory is paged in and out, the active process constantly changes, and virtual address contexts do not remain constant. However, under these conditions, you can effectively analyze things that change slowly, such as certain device states.</P>
+<P>Kernel-mode drivers and the Windows operating system frequently send messages to the kernel debugger by using <b>DbgPrint</b> and related functions. These messages are not automatically displayed during local kernel debugging. You can display them by using the <a href="r26_exts_kernel_a_da744a34-04ee-4dd7-8bdc-a0419cdb60c1.xml.htm"><b>!dbgprint</b></a> extension.</P>
+<H4>LiveKD</H4>
+<P>The LiveKD tool simulates local kernel debugging. This tool creates a "snapshot" dump file of the kernel memory, without actually stopping the kernel while this snapshot is made. (Therefore, the snapshot might not actually show a single instant state of the computer.)</P>
+<P>LiveKD is not part of the Debugging Tools for Windows package. You can download <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=56552" target="_blank">LiveKd</a> from the Windows Sysinternals site. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Performing Local Kernel Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

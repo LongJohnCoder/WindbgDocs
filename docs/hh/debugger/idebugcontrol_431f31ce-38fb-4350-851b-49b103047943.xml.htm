@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>RemoveBreakpoint</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, RemoveBreakpoint"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="RemoveBreakpoint"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_431f31ce-38fb-4350-851b-49b103047943.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::RemoveBreakpoint method">
+<META NAME="MS-HKWD" CONTENT="RemoveBreakpoint (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_431f31ce-38fb-4350-851b-49b103047943.xml"></A>RemoveBreakpoint</H1>
+<P><P>The <b>RemoveBreakpoint</b> and <b>RemoveBreakpoint2</b> methods remove a <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoint</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::RemoveBreakpoint(</b><BR><b>    IN IDebugBreakpoint *  </b><i>Bp</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::RemoveBreakpoint2(</b><BR><b>    IN IDebugBreakpoint2 *  </b><i>Bp</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Bp</i></DT>
+<DD>Specifies an interface pointer to breakpoint to remove.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return other error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>RemoveBreakpoint</b> is available in all versions of <b>IDebugControl</b>.  <b>RemoveBreakpoint2</b> is available in <b>IDebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>After <b>RemoveBreakpoint</b> and <b>RemoveBreakpoint2</b> are called, the breakpoint object specified in the <i>Bp</i> parameter must not be used again.</P>
+<P class="note"><b>Note</b>  Even though <a href="comother_93345db9-13c0-4b46-be4a-d3fbb6039cc7.xml.htm"><b>IDebugBreakpoint</b></a> extends the COM interface <b>IUnknown</b>, the lifetime of the breakpoint is not controlled using the <b>IUnknown</b> interface.  Instead, the breakpoint is deleted after <b>RemoveBreakpoint</b> and <b>RemoveBreakpoint2</b> are called.</P>
+<P>For more details, see <a href="engine_dg_127dfdf0-b01d-405e-a25c-511830d82cc0.xml.htm">Using Breakpoints</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="comother_93345db9-13c0-4b46-be4a-d3fbb6039cc7.xml.htm"><b>IDebugBreakpoint</b></a>, <a href="idebugcontrol_3d11665a-ec78-4742-8195-2798601814e9.xml.htm"><b>AddBreakpoint</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: RemoveBreakpoint RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

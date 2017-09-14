@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Mapping Symbols When the PEB is Paged Out</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Mapping Symbols When the PEB is Paged Out"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_89ff1877-f99b-4437-9145-6763483c089f.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_89ff1877-f99b-4437-9145-6763483c089f.xml"></A>Mapping Symbols When the PEB is Paged Out</H1>
+<P>To load symbols, the debugger looks at the list of modules loaded by the operating system. The pointer to the user-mode module list is one of the items stored in the process environment block (PEB).</P>
+<P>In order to reclaim memory, the Memory Manager may page out user-mode data to make space for other process or kernel mode components.  The user-mode data that is paged out may include the PEB data structure.  Without this data structure, the debugger cannot determine for which images to load symbols.</P>
+<P class="note"><b>Note</b>  This affects symbol files only for the user-mode modules. Kernel-mode modules and symbols are not affected, as they are tracked in a different list.</P>
+<P>The following examples demonstrates how to use the <a href="r30_exts_kernel_u_59525e64-a9ab-4421-867f-c0002fdb792a.xml.htm"><b>!vad</b></a> extension to map symbols when the PEB is paged out.  The basic idea is to find the starting address and size of the relevant DLL so that you can then use the <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload</b></a> command to load the necessary symbols.</P>
+<P>Suppose that the address of the current process is 0xE0000126`01BA0AF0 and you want to fix the symbols for it.  First, use the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a> command to obtain the virtual address descriptor (VAD) root address:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!process e000012601ba0af0 1</b><BR>PROCESS e000012601ba0af0<BR>    SessionId: 2  Cid: 0b50    Peb: 6fbfffde000  ParentCid: 0efc<BR>    DirBase: 079e8461  ObjectTable: e000000600fbceb0  HandleCount: 360.<BR>    Image: explorer.exe<BR>    VadRoot <b>e000012601a35e70</b> Vads 201 Clone 0 Private 917. Modified 2198. Locked 0.<BR>&#8230;<BR></nobr></P>
+<P>Then use the <b>!vad</b> extension to list the VAD tree associated with the process.  Those VADs labelled "EXECUTE_WRITECOPY" belong to DLLs.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!vad e000012601a35e70</b><BR>VAD     level      start      end    commit<BR>&#8230;<BR>e0000126019f9790 ( 6)      3fff0    3fff7        -1 Private      READONLY<BR>e000012601be1080 ( 7)   37d9bd30 37d9bd3e         2 Mapped  Exe  EXECUTE_WRITECOPY           <I><B>&lt;-- these are DLLs</B></I><BR>e000012600acd970 ( 5)   37d9bec0 37d9bece         2 Mapped  Exe  EXECUTE_WRITECOPY<BR>e000012601a5cba0 ( 7)   37d9c910 37d9c924         2 Mapped  Exe  EXECUTE_WRITECOPY<BR>&#8230;<BR><BR></nobr></P>
+<P>Then use the <b>!vad</b> extension again to find the starting address and size of the paged out memory which holds the DLL of interest.  This confirms that you have found the correct DLL:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!vad e000012601be1080 1</b><BR><BR>VAD @ e000012601be1080<BR>  Start VPN:      <b>37d9bd30</b>  End VPN: <b>37d9bd3e</b>  Control Area:  e00001260197b8d0<BR>  First ProtoPte: e0000006013e00a0  Last PTE fffffffffffffffc  Commit Charge         2 (2.)<BR>  Secured.Flink          0  Blink           0  Banked/Extend:        0<BR>  File Offset   0<BR>   ImageMap ViewShare EXECUTE_WRITECOPY<BR><BR>&#8230;<BR>        File: \Windows\System32\<b>ExplorerFrame.dll</b><BR><BR></nobr></P>
+<P>The "Start VPN" field &#8211; in this case, 0x37D9BD30 &#8211; indicates the starting virtual page number.  This must be converted to an actual address, by multiplying it by the page size.  You can use the <a href="r15_cmds_a_c6ea44eb-73b8-451d-8054-ded9b17ac2bd.xml.htm"><b>? (Evaluate Expression)</b></a> command to multiply this value by 0x2000, which is the page size for the Itanium-based machine the example comes from.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>? 37d9bd3e*2000</b>        <BR>Evaluate expression: 7676040298496 = 000006fb`37a7c000<BR></nobr></P>
+<P>Then the size of the range can be converted to bytes:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>? 37d9bd3e-37d9bd30+1</b>          <I><B>&lt;--   computes the number of pages</B></I><BR>Evaluate expression: 15 = 00000000`0000000f<BR>kd&gt; <b>? f*2000</b><BR>Evaluate expression: 122880 = 00000000`0001e000        <BR></nobr></P>
+<P>So <i>ExplorerFrame.dll </i>starts at address 0x000006Fb`37A7C000 and is 0x1E000 bytes large. You can load its symbols with:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>.reload /f ExplorerFrame.dll=6fb`37a7c000,1e000</b><BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Mapping Symbols When the PEB is Paged Out RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

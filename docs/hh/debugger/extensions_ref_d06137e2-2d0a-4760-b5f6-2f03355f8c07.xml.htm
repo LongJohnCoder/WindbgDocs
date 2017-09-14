@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DebugExtensionQueryValueNames</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DebugExtensionQueryValueNames"><xml><MSHelp:Keyword Index="A" Term="Extensions_Ref_d06137e2-2d0a-4760-b5f6-2f03355f8c07.xml"/>
+<META NAME="MS-HKWD" CONTENT="DebugExtensionQueryValueNames callback function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Extensions_Ref_d06137e2-2d0a-4760-b5f6-2f03355f8c07.xml"></A>DebugExtensionQueryValueNames</H1>
+<P>The <b>DebugExtensionQueryValueNames</b> callback function recovers <a href="engine_dg_eaa71da7-23ac-4464-9142-23c89a31e14e.xml.htm">pseudo-register</a> values.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT CALLBACK</b><BR><b>  DebugExtensionQueryValueNames (</b><BR><b>    __in PDEBUG_CLIENT  </b><i>Client</i><b>,</b><BR><b>    __in ULONG  </b><i>Flags</i><b>,</b><BR><b>    __out_ecount(BufferChars) PWSTR  </b><i>Buffer</i><b>,</b><BR><b>    __in ULONG  </b><i>BufferChars</i><b>,</b><BR><b>    __out PULONG  </b><i>BufferNeeded</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Client</i></DT>
+<DD>A client to use if the extension needs DbgEng<b> </b>functions.</DD>
+<P></P>
+<DT><i>Flags</i></DT>
+<DD>Provides behavioral flags. This parameter is currently reserved.</DD>
+<P></P>
+<DT><i>Buffer</i></DT>
+<DD>A string buffer that the caller provides, to be filled with the set of value names that the client wants to expose.</DD>
+<P></P>
+<DT><i>BufferChars</i></DT>
+<DD>The count of wide characters in <i>Buffer</i>.</DD>
+<P></P>
+<DT><i>BufferNeeded</i></DT>
+<DD>The number of wide characters that this function needs to complete successfully.</DD>
+<P></P>
+</DL>
+<H4>Return Value</H4>
+<P><b>DebugExtensionQueryValueNames</b> might return one of the following values:</P>
+<DL><DT>S_OK</DT>
+<DD>The function was successfully completed.</DD>
+<DT>S_FALSE</DT>
+<DD>The function completed without error, but it obtained only partial results.</DD>
+</DL>
+<P></P>
+<P>This function might also return error values.  For more information about possible return values, see <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a>.</P>
+<P></P>
+<H4>Comments</H4>Value names must start with <b>$$</b> and have a terminating NULL character. The <i>Buffer</i> string must also be NULL-terminated. For example, <i>Buffer</i> could be &#8220;$$myval1\0$$myval2\0\0&#8221;.<H4><b>Requirements</b></H4>
+<p><b>Headers:</b> The <i>Dbgeng.h</i> header file has the definitions of the callback prototypes.</p>
+<H4>See Also</H4>
+<P><a href="extensions_ref_e260c42c-8299-4578-8919-3b2167701275.xml.htm"><b>DebugExtensionInitialize</b></a>, <a href="extensions_ref_e260c42c-8299-4578-8919-3b2167701275.xml.htm"><b>DebugExtensionNotify</b></a>, <a href="extensions_ref_e260c42c-8299-4578-8919-3b2167701275.xml.htm"><b>DebugExtensionProvideValue</b></a>, <a href="extensions_ref_e260c42c-8299-4578-8919-3b2167701275.xml.htm"><b>DebugExtensionUninitialize</b></a>, <a href="extensions_ref_e260c42c-8299-4578-8919-3b2167701275.xml.htm"><b>KnownStructOutput</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DebugExtensionQueryValueNames RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

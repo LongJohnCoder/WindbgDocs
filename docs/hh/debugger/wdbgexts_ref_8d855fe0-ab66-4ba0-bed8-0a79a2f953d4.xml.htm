@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ReadTypedControlSpace32</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ReadTypedControlSpace32"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="ReadTypedControlSpace32"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_8d855fe0-ab66-4ba0-bed8-0a79a2f953d4.xml"/>
+<META NAME="MS-HKWD" CONTENT="ReadTypedControlSpace32 macro"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_8d855fe0-ab66-4ba0-bed8-0a79a2f953d4.xml"></A>ReadTypedControlSpace32</H1>
+<P><P>The <b>ReadTypedControlSpace32</b> macro is a thin wrapper around the <a href="wdbgexts_ref_3327dad4-903c-4285-b3cc-fe408d15f129.xml.htm"><b>ReadControlSpace64</b></a> function.  It is provided as a convenience for reading processor-specific control space into a structure.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>#define ReadTypedControlSpace32( </b><i>_Proc</i><b>, </b><i>_Addr</i><b>, </b><i>_Buf</i><b> ) \</b><BR><b>    ReadControlSpace64( (USHORT)(</b><i>_Proc</i><b>), (ULONG)(</b><i>_Addr</i><b>), (PVOID)&amp;(</b><i>_Buf</i><b>), (ULONG)sizeof(</b><i>_Buf</i><b>) )</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>_Proc</i></DT>
+<DD>Specifies the number of the processor whose control space is to be read.</DD>
+<DT><i>_Addr</i></DT>
+<DD>Specifies the address of the control space.</DD>
+<DT><i>_Buf</i></DT>
+<DD>Specifies the object into which the control space data is read.</DD>
+</DL>
+<H4>Comments</H4>
+<P>The parameters provided to this macro are the same as those provided to the <b>ReadControlSpace64</b> function except that instead of providing a pointer to a structure and its size, the structure can be provided directly.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this macro, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_3327dad4-903c-4285-b3cc-fe408d15f129.xml.htm"><b>ReadControlSpace64</b></a>, <a href="wdbgexts_ref_7dacba07-9543-4198-a16d-b519f6195889.xml.htm"><b>ReadTypedControlSpace64</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ReadTypedControlSpace32 RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

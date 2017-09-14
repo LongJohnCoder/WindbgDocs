@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Features of Secure Mode</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Features of Secure Mode"><xml><MSHelp:Keyword Index="A" Term="r11_security_a451afa8-09c9-4afe-8c98-28be7979daa8.xml"/>
+<META NAME="MS-HKWD" CONTENT="Secure Mode, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r11_security_a451afa8-09c9-4afe-8c98-28be7979daa8.xml"></A>Features of Secure Mode</H1>
+<P>When Secure Mode is active, all commands that could be used to affect the <i>host</i> computer are deactivated, and there are some restrictions on symbol servers and debugger extensions.</P>
+<P>The specific effects of Secure Mode are as follows:</P><B></B><UL type="disc">
+<LI>The <a href="r19_metacmds_a_8c6d47be-d1e0-4d39-b0cd-14ac56c87de5.xml.htm"><b>.attach (Attach to Process)</b></a>, <a href="r19_metacmds_a_90b70ef1-43b7-4dd2-87cf-8f6df0d6108d.xml.htm"><b>.create (Create Process)</b></a>, <a href="r19_metacmds_a_1174b7a4-f70a-44d2-a43d-163fbe5a8d7e.xml.htm"><b>.detach (Detach from Process)</b></a>, <a href="r19_metacmds_a_ea8b7b66-835b-4c3c-a9f9-773e073bc583.xml.htm"><b>.abandon (Abandon Process)</b></a>, <a href="r20_metacmds_e_5c2717e9-eef2-4d91-9a54-33653ba7f904.xml.htm"><b>.kill (Kill Process)</b></a>, <a href="r22_metacmds_s_7423d5a0-4d52-4388-aca4-a0550d2c2955.xml.htm"><b>.tlist (List Process IDs)</b></a>, <a href="r19_metacmds_a_10de67ad-e8c3-42f2-ba9e-95a146a0320d.xml.htm"><b>.dump (Create Dump File)</b></a>, <a href="r21_metacmds_l_7e3720ef-d5f9-4717-ac69-9aa308d9b576.xml.htm"><b>.opendump (Open Dump File)</b></a>, <a href="r22_metacmds_s_b995b7e0-6845-4ad1-81f9-2f66b611d19b.xml.htm"><b>.writemem (Write Memory to File)</b></a>, <a href="r21_metacmds_l_053f3ae2-1c0f-4493-b226-aeddbf5ac3a4.xml.htm"><b>.netuse (Control Network Connections)</b></a>, and <a href="r21_metacmds_l_6dd9ea99-39d7-4415-81bd-4b242e62883f.xml.htm"><b>.quit_lock (Prevent Accidental Quit)</b></a> commands are not available.</LI>
+<LI>The <a href="r36_gui_1_9f476268-a365-4ae3-a658-5e6ee79ae2db.xml.htm"><b>File | Attach to a Process</b></a>, <a href="r36_gui_1_11bd83b0-34a0-44fe-be7c-1a0f16f91d80.xml.htm"><b>File | Open Executable</b></a>, <a href="r37_gui_2_e7b107b7-14cd-4ba8-9e0c-7930d45f664c.xml.htm"><b>Debug | Detach Debuggee</b></a>, <a href="r37_gui_2_b5acf3a0-cf4a-4664-9c1c-53e8f8c9b1c5.xml.htm"><b>Debug | Stop Debugging</b></a>, <a href="r36_gui_1_65e9c332-1a66-4d1c-962d-d449012f055a.xml.htm"><b>File | Open Crash Dump</b></a> WinDbg menu commands are not available.</LI>
+<LI>The <a href="r22_metacmds_s_6a45ee2d-cc3f-4f6b-a649-87dde063d5ca.xml.htm"><b>.shell (Command Shell)</b></a> command is not available.</LI>
+<LI>Extension DLLs must be loaded from a local disk; they cannot be loaded from UNC paths.</LI>
+<LI>Only the two standard types of extension DLLs (<i>wdbgexts.h</i> and <i>dbgeng.h</i>) are permitted. Other types of DLLs cannot be loaded as extensions.</LI>
+<LI>If you are using a symbol server, there are several restrictions. Only SymSrv (<i>symsrv.dll</i>) is permitted; other symbol server DLLs will not be accepted. You may not use a downstream store for your symbols, and any existing downstream store will be ignored. HTTP and HTTPS connections are not permitted. </LI>
+<LI>The source server is disabled.</LI>
+<P></P>
+</UL>
+<P></P>
+<P>After it has been activated, Secure Mode cannot be turned off.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Features of Secure Mode RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

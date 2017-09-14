@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.endpsrv (End Process Server)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .endpsrv (End Process Server)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_8d3fa8c7-e811-4040-bb10-c73bbcdc980a.xml"/>
+<META NAME="MS-HKWD" CONTENT=".endpsrv (End Process Server) command">
+<META NAME="MS-HKWD" CONTENT="End Process Server (.endpsrv) command">
+<META NAME="MS-HKWD" CONTENT="process server, End Process Server (.endpsrv) command">
+<META NAME="MS-HKWD" CONTENT="KD connection server, End Process Server (.endpsrv) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_8d3fa8c7-e811-4040-bb10-c73bbcdc980a.xml"></A>.endpsrv (End Process Server)</H1>
+<P>The <b>.endpsrv</b> command causes the current <a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#927cdf63-ac0c-4f34-af24-1cdc17ca8d68">process server</a> or <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#51c238eb-bf11-4a5e-8fe6-ae86b29808d9">KD connection server</a> to close.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.endpsrv</b> <BR></nobr></P>
+<H4>Environment</H4>
+<P>You can use this command only when you are performing remote debugging through a process server or KD connection server.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>.endpsrv</b> command terminates the process server or KD connection server currently connected to your smart client.</P>
+<P>If you wish to terminate a process server or KD connection server from the computer on which it is running, use Task Manager to end the process (<i>dbgsrv.exe</i> or <i>kdsrv.exe</i>).</P>
+<P>The <b>.endpsrv</b> command can terminate a process server or KD connection server, but it cannot terminate a debugging server.  For information on how to do that, see <a href="r08_use_remote_6a360dc5-a228-4746-a24e-13fc94f80fe2.xml.htm">Controlling a Remote Debugging Session</a>.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about these servers, see <a href="r08_use_remote_0828c18f-b042-4288-9b58-a56e3076eb2e.xml.htm">Process Servers (User Mode)</a> or <a href="r08_use_remote_da274d6a-0dd9-43db-98cf-5c84038694db.xml.htm">KD Connection Servers (Kernel Mode)</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .endpsrv (End Process Server) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

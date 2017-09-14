@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Choosing a 32-Bit or 64-Bit Debugger Package</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Choosing a 32-Bit or 64-Bit Debugger Package"><xml><MSHelp:Keyword Index="A" Term="r02_setup_1_bec62139-3e78-4a5a-9ff0-b525fe703d98.xml"/>
+<META NAME="MS-HKWD" CONTENT="32-bit debugger package">
+<META NAME="MS-HKWD" CONTENT="64-bit debugger package">
+<META NAME="MS-HKWD" CONTENT="installation, choosing between 32-bit and 64-bit packages"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r02_setup_1_bec62139-3e78-4a5a-9ff0-b525fe703d98.xml"></A>Choosing a 32-Bit or 64-Bit Debugger Package</H1>
+<P>The Debugging Tools for Windows package is available in three different versions: a 32-bit version, a native Intel Itanium version, and a native x64 version.</P>
+<P>To determine which package to use, you have to know the processor that your <a href="r02_setup_1_3ababa5c-2202-4141-b689-a847cbfc3cb1.xml.htm">host computer</a> is running on.</P>
+<H4>x86-based Host Computer</H4>
+<P>If your host computer uses an x86-based processor, always use the 32-bit package.</P>
+<H4>Itanium Host Computer</H4>
+<P>If your host computer uses an Itanium-based processor, the following rules apply:</P><B></B><UL type="disc">
+<LI>If you are analyzing a dump file, and if the dump file was made on Microsoft Windows XP or a later version of Windows, you can use the 32-bit package or the Itanium package. (It is not important whether the dump file is a user-mode dump file or a kernel-mode dump file, and it is not important whether the dump file was made on an x86-based or an Itanium-based platform.)    </LI>
+<LI>If you are analyzing a dump file, and if the dump file was made on Windows 2000, you should use the 32-bit package. (It is not important whether the dump file is a user-mode dump file or a kernel-mode dump file)  </LI>
+<LI>If you are performing live kernel-mode debugging, and if the target computer is running Windows XP or a later version of Windows, you can use the 32-bit package or the Itanium package. (This situation applies to both x86-based and Itanium-based targets.)    </LI>
+<LI>If you are performing live kernel-mode debugging, and if the target computer is running Windows 2000, you should use the 32-bit package.  </LI>
+<LI>If you are performing live user-mode debugging, always use the Itanium package. It is not important whether the target is a 64-bit application or a 32-bit application. The debugger that is included in the Itanium package can debug any kind of application and the <a href="dbg_glossary_39db479e-a9f5-4a31-b599-21aa77a0c60d.xml.htm#d3917b78-9dea-441e-99a1-d8cddce2b1a9">WOW64</a> emulator.    </LI>
+</UL>
+<P></P>
+<H4>x64-based Host Computer</H4>
+<P>If your host computer uses an x64-based processor, the following rules apply:</P><B></B><UL type="disc">
+<LI>If you are analyzing a dump file, and if the dump file was made on Windows XP or a later version of Windows, you can use either the 32-bit package or the x64 package. (It is not important whether the dump file is a user-mode dump file or a kernel-mode dump file, and it is not important whether the dump file was made on an x86-based or an x64-based platform.)    </LI>
+<LI>If you are analyzing a dump file, and if the dump file was made on Windows 2000 operating system, you should use the 32-bit package. (It is not important whether the dump file is a user-mode dump file or a kernel-mode dump file)  </LI>
+<LI>If you are performing live kernel-mode debugging, and if the target computer is running Windows XP or a later version of Windows, you can use either the 32-bit package or the x64 package. (This situation applies to both x86-based and x64-based targets.)    </LI>
+<LI>If you are performing live kernel-mode debugging, and if the target computer is running Windows 2000, you should use the 32-bit package.  </LI>
+<LI>If you are performing live user-mode debugging, use the x64 package for debugging WOW64 with both 64-bit and 32-bit code. To debug other targets, use a 32-bit debugger to debug 32-bit code.   </LI>
+</UL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Choosing a 32-Bit or 64-Bit Debugger Package RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

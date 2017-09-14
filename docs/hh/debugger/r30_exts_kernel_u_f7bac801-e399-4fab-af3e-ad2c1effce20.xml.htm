@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!vm</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !vm"><xml><MSHelp:Keyword Index="A" Term="r30_exts_kernel_U_f7bac801-e399-4fab-af3e-ad2c1effce20.xml"/>
+<META NAME="MS-HKWD" CONTENT="!vm extension">
+<META NAME="MS-HKWD" CONTENT="memory, Memory Statistics (!vm) extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r30_exts_kernel_U_f7bac801-e399-4fab-af3e-ad2c1effce20.xml"></A>!vm</H1>
+<P><P>The <b>!vm</b> extension displays summary information about virtual memory use statistics on the target system.</P>
+<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!vm</b> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Specifies what information will be displayed in the output from this command. This can be any sum of the following bits. The default is 0, which causes the display to include system-wide virtual memory statistics as well as memory statistics for each process.<DL><DT>Bit 0 (0x1)</DT>
+<DD>Causes the display to omit process-specific statistics.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Causes the display to include memory management thread stacks.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD><i>(Windows XP and later)</i>  Causes the display to include terminal server memory usage.</DD>
+<DT>Bit 3 (0x8)</DT>
+<DD><i>(Windows XP and later)</i>  Causes the display to include the page file write log.</DD>
+<DT>Bit 4 (0x10)</DT>
+<DD><i>(Windows XP and later)</i>  Causes the display to include working set owner thread stacks.</DD>
+<DT>Bit 5 (0x20)</DT>
+<DD><i>(Windows XP and later)</i>  Causes the display to include kernel virtual address usage.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example of the short output produced when <i>Flags</i> is 1:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!vm 1</b><BR><BR>*** Virtual Memory Usage ***<BR>      Physical Memory:     16270   (   65080 Kb)<BR>      Page File: \??\E:\pagefile.sys<BR>         Current:     98304Kb Free Space:     61044Kb<BR>         Minimum:     98304Kb Maximum:       196608Kb<BR>      Available Pages:      5543   (   22172 Kb)<BR>      ResAvail Pages:       6759   (   27036 Kb)<BR>      Locked IO Pages:       112   (     448 Kb)<BR>      Free System PTEs:    45089   (  180356 Kb)<BR>      Free NP PTEs:         5145   (   20580 Kb)<BR>      Free Special NP:       336   (    1344 Kb)<BR>      Modified Pages:        714   (    2856 Kb)<BR>      NonPagedPool Usage:    877   (    3508 Kb)<BR>      NonPagedPool Max:     6252   (   25008 Kb)<BR>      PagedPool 0 Usage:     729   (    2916 Kb)<BR>      PagedPool 1 Usage:     432   (    1728 Kb)<BR>      PagedPool 2 Usage:     436   (    1744 Kb)<BR>      PagedPool Usage:      1597   (    6388 Kb)<BR>      PagedPool Maximum:   13312   (   53248 Kb)<BR>      Shared Commit:        1097   (    4388 Kb)<BR>      Special Pool:          229   (     916 Kb)<BR>      Shared Process:       1956   (    7824 Kb)<BR>      PagedPool Commit:     1597   (    6388 Kb)<BR>      Driver Commit:         828   (    3312 Kb)<BR>      Committed pages:     21949   (   87796 Kb)<BR>      Commit limit:        36256   (  145024 Kb)<BR><BR></nobr></P>
+<P>All memory use is listed in pages and in kilobytes. The most useful information in this display is the following:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>physical memory</b></TD>
+<TD Width="">Total physical memory in the system.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>available pages</b></TD>
+<TD Width="">Number of pages of memory available on the system, both virtual and physical.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>nonpaged pool usage</b></TD>
+<TD Width="">The amount of pages allocated to the nonpaged pool. The nonpaged pool is memory that cannot be swapped out to the paging file, so it must always occupy physical memory. If this number is too large, this is usually an indication that there is a memory leak somewhere in the system.</TD>
+</TR>
+</table>
+<P></P>
+<H4>Additional Information</H4>
+<P>The <a href="r27_exts_kernel_e_e5a27ddd-3d24-48ce-9076-7c72c6dd208d.xml.htm"><b>!memusage</b></a> extension command can be used to analyze physical memory usage. For more information about memory management, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !vm RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

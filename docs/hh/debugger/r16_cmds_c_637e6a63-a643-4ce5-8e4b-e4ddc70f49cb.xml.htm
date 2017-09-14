@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>dl (Display Linked List)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, dl (Display Linked List)"><xml><MSHelp:Keyword Index="A" Term="r16_cmds_C_637e6a63-a643-4ce5-8e4b-e4ddc70f49cb.xml"/>
+<META NAME="MS-HKWD" CONTENT="dl (Display Linked List) command">
+<META NAME="MS-HKWD" CONTENT="Display Linked List (dl) command">
+<META NAME="MS-HKWD" CONTENT="linked lists">
+<META NAME="MS-HKWD" CONTENT="memory, Display Linked List (dl) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r16_cmds_C_637e6a63-a643-4ce5-8e4b-e4ddc70f49cb.xml"></A>dl (Display Linked List)</H1>
+<P>The <b>dl</b> command displays a LIST_ENTRY or SINGLE_LIST_ENTRY linked list.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>dl</b>[<b>b</b>] <i>Address</i> <i>MaxCount</i> <i>Size</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>b</b></DT>
+<DD>If this is included, the list is dumped in reverse order. (In other words, the debugger follows the <b>Blink</b>s instead of the <b>Flink</b>s.) This cannot be used with a SINGLE_LIST_ENTRY.</DD>
+<DT><i>Address</i></DT>
+<DD>The starting address of the list. For more syntax details, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+<DT><i>MaxCount</i></DT>
+<DD>Maximum number of elements to dump.</DD>
+<DT><i>Size</i></DT>
+<DD>Size of each element. This is the number of consecutive ULONG_PTRs that will be displayed for each element in the list.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>This list must be a LIST_ENTRY or SINGLE_LIST_ENTRY structure. If this is embedded in a larger structure, be sure that <i>Address</i> points to the linked list structure and not to the beginning of the outer structure.</P>
+<P>The display begins with <i>Address</i>. Therefore, if you are supplying the address of a pointer that points to the beginning of the list, you should disregard the first element printed.</P>
+<P>The <i>Address</i>, <i>MaxCount</i>, and <i>Size</i> parameters are in the current default radix. You can use the <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command or the <b>0x</b> prefix to change the radix.</P>
+<P>If the list loops back on itself, the dump will stop. If a null pointer is encountered, the dump will stop.</P>
+<P>If you want to execute some command for each element of the list, use the <a href="r25_exts_general_he_8deee1dc-d85a-4a95-a2da-9846d0507fbb.xml.htm"><b>!list</b></a> extension.</P>
+<H4>Additional Information</H4>
+<P>For an overview of memory manipulation and a description of other memory-related commands, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: dl (Display Linked List) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>EngExtCpp Extension Libraries</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, EngExtCpp Extension Libraries"><xml><MSHelp:Keyword Index="A" Term="EngExtCpp_DG_00d3e401-1158-49e2-bab9-db76dfe271ca.xml"/>
+<META NAME="MS-HKWD" CONTENT="EngExtCpp extensions, libraries"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_DG_00d3e401-1158-49e2-bab9-db76dfe271ca.xml"></A>EngExtCpp Extension Libraries</H1>
+<P>An EngExtCpp extension library is a DLL that uses the EngExtCpp extension framework found in <i>EngExtCpp.h</i>.  When this library is loaded by the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a>, its methods and functions can provide extra functionality or automation of tasks while performing <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#1a7518e7-05c9-4be8-baf0-63b4024f4e30">user-mode</a> or <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a> on Microsoft Windows.</P>
+<P>The EngExtCpp extension framework is built on top of the <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">DbgEng extension framework</a>.  It offers the same <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#98ac5bd2-076f-48f9-94e6-2a4518471d3c">debugger engine API</a> for interaction with the debugger engine. but it also provides additional features to make common tasks simpler.</P>
+<P>If you performed a full install of Debugging Tools for Windows, a sample EngExtCpp extension called "extcpp" can be found in the <i>sdk\samples\extcpp</i> subdirectory of the installation directory.</P>
+<H4>EXT_CLASS and ExtExtension</H4>
+<P>At the core of an EngExtCpp extension library is a single instance of the <a href="engextcpp_ref_731f5b1a-bf23-4c78-8c2e-663dd7c35793.xml.htm">EXT_CLASS</a> class.  An EngExtCpp extension library will provide the implementation of this class, which contains all the extension commands and methods for formatting structures that are exported by the library.</P>
+<P>EXT_CLASS is a subclass of <a href="engextcpp_ref_3a533353-f008-4887-b937-2098acf1c68e.xml.htm"><b>ExtExtension</b></a>.  The single instance of this class is created using the <a href="engextcpp_ref_a5d385c6-22c3-4d60-8ad6-a605ab3705c9.xml.htm">EXT_DECLARE_GLOBALS</a> macro which must appear exactly once in the source files for the extension library.</P>
+<P>When the extension library is loaded, the <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>Initialize</b></a> method of the class is called by the engine, and the <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>Uninitialize</b></a> method is called before unloading the class.  Additionally, the methods <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>OnSessionActive</b></a>, <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>OnSessionInactive</b></a>, <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>OnSessionAccessible</b></a>, and <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>OnSessionInaccessible</b></a> are called by the engine to notify the extension library of the state of the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugging session</a>.</P>
+<H4>Extension Commands</H4>
+<P>The <a href="engextcpp_ref_731f5b1a-bf23-4c78-8c2e-663dd7c35793.xml.htm">EXT_CLASS</a> class can contain a number of methods that are used to execute extension commands.  Each extension command is declared in the EXT_CLASS class by using the <a href="engextcpp_ref_a4a0b264-50e1-457b-a962-ca691509ea36.xml.htm">EXT_COMMAND_METHOD</a> macro.  The implementation of a command is defined by using the <a href="engextcpp_ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml.htm">EXT_COMMAND</a> macro.</P>
+<H4>Known Structures</H4>
+<P>The <a href="engextcpp_ref_731f5b1a-bf23-4c78-8c2e-663dd7c35793.xml.htm">EXT_CLASS</a> class can contain a number of methods that use the <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> prototype.  The methods can be used by the engine to format instances of certain structure types for output.</P>
+<H4>Provided Values</H4>
+<P>The <a href="engextcpp_ref_731f5b1a-bf23-4c78-8c2e-663dd7c35793.xml.htm">EXT_CLASS</a> class can contain a number of methods that use the <b>ExtProvideValueMethod</b> prototype.  The methods can be used by the engine to evaluate some pseudo-registers provided by the extension.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: EngExtCpp Extension Libraries RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

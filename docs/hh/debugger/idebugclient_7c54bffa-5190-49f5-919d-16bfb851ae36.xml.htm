@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetIdentity</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetIdentity"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetIdentity"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_7c54bffa-5190-49f5-919d-16bfb851ae36.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::GetIdentity method">
+<META NAME="MS-HKWD" CONTENT="GetIdentity (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_7c54bffa-5190-49f5-919d-16bfb851ae36.xml"></A>GetIdentity</H1>
+<P><P>The <b>GetIdentity</b> and <b>GetIdentityWide</b> methods return a string describing the computer and user this <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client</a> represents.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient::GetIdentity(</b><BR><b>    OUT OPTIONAL PSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>IdentitySize</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugClient5::GetIdentityWide(</b><BR><b>    OUT OPTIONAL PWSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>IdentitySize</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetIdentityT GetIdentityWide</b><BR><b>#else</b><BR><b>#define GetIdentityT GetIdentity</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Buffer</i></DT>
+<DD>Specifies the buffer to receive the string.  If <i>Buffer</i> is NULL, this information is not returned.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size of the buffer <i>Buffer</i>.</DD>
+<DT><i>IdentitySize</i></DT>
+<DD>Receives the size of the string. If <i>IdentitySize</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful</DD>
+<DT>S_FALSE</DT>
+<DD>The size of the string was greater than the size of the buffer, so it was truncated to fit into the buffer.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetIdentity</b> is available in all versions of <b>IDebugClient</b>.  <b>GetIdentityWide</b> is available in <b>IDebugClient5</b> and later versions.</P>
+<H4>Comments</H4>
+<P>The specific content of the string varies with the operating system.  If the client is remotely connected, some network information may also be present.</P>
+<P>For more information about client objects, see <a href="engine_overview_2838c538-1dc7-4494-b92d-49e58a4ad2aa.xml.htm">Client Objects</a>.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugclient_2013e1cd-3c95-4ef7-a53f-004ba30d9ea2.xml.htm"><b>OutputIdentity</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetIdentity RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.catch</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .catch"><xml><MSHelp:Keyword Index="A" Term="r14_tokens_019197ba-ea14-43be-9ca2-ebff396a8a09.xml"/>
+<META NAME="MS-HKWD" CONTENT=".catch token"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r14_tokens_019197ba-ea14-43be-9ca2-ebff396a8a09.xml"></A>.catch</H1>
+<P>The <b>.catch</b> token is used to prevent a program from terminating if an error occurs.<P>It does not behave like the <b>catch</b> keyword in C++.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><i>Commands</i> ; <b>.catch {</b> <i>Commands</i> <b>}</b> ; <i>Commands</i> <BR></nobr></P>
+<H4>Comments</H4>
+<P>The <b>.catch</b> token is followed by braces enclosing one or more commands.</P>
+<P>If a command within a <b>.catch</b> block generates an error, the error message is displayed, all remaining commands within the braces are ignored, and execution resumes with the first command after the closing brace.</P>
+<P>If <b>.catch</b> is not used, an error will terminate the entire debugger command program.</P>
+<P>You can use <a href="r14_tokens_956e934f-e3cb-4e1f-9a7e-b73a5f8cf910.xml.htm"><b>.leave</b></a> to exit from a <b>.catch</b> block.</P>
+<H4>Additional Information</H4>
+<P>For information about other control flow tokens and their use in debugger command programs, see <a href="r05_use_start_81070bdc-2ffb-4a22-a785-0935553fb4c4.xml.htm">Using Debugger Command Programs</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .catch RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

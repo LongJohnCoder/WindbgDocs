@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>IDebugEventCallbacks::ChangeEngineState</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, IDebugEventCallbacks::ChangeEngineState"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="IDebugEventCallbacks::ChangeEngineState"/>
+<MSHelp:Keyword Index="A" Term="ComCallbacks_fafc4238-0565-410b-9e00-1cbce74737f4.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugEventCallbacks, ChangeEngineState">
+<META NAME="MS-HKWD" CONTENT="ChangeEngineState (IDebugEventCallbacks)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ComCallbacks_fafc4238-0565-410b-9e00-1cbce74737f4.xml"></A>IDebugEventCallbacks::ChangeEngineState</H1>
+<P><P>The <b>ChangeEngineState</b> callback method is called by the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> when its state has changed.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugEventCallbacks::ChangeEngineState(</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    IN ULONG64  </b><i>Argument</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugEventCallbacksWide::ChangeEngineState(</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    IN ULONG64  </b><i>Argument</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define IDebugEventCallbacksT IDebugEventCallbacksWide</b><BR><b>#else</b><BR><b>#define IDebugEventCallbacksT IDebugEventCallbacks</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Specifies a bit-set indicating the type of changes that occurred in the engine's state.  The following bit flags might be set:<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_CURRENT_THREAD</TD>
+<TD Width="">The <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#e79fad75-e3ff-41d6-9f36-896e7b1ce5bb">current thread</a> has changed, which implies that the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#2a8fdab1-9104-4107-b188-c3879a3c4a66">current target</a> and <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a> might also have changed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_EFFECTIVE_PROCESSOR</TD>
+<TD Width="">The <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#ba5af89e-695c-44ee-98cc-bdb218ce8d1c">effective processor</a> has changed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_BREAKPOINTS</TD>
+<TD Width="">One or more <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoints</a> have changed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_CODE_LEVEL</TD>
+<TD Width="">The code interpretation level has changed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_EXECUTION_STATUS</TD>
+<TD Width="">The execution status has changed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_ENGINE_OPTIONS</TD>
+<TD Width="">The engine options have changed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_LOG_FILE</TD>
+<TD Width="">The log file has been opened or closed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_RADIX</TD>
+<TD Width="">The default radix has changed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_EVENT_FILTERS</TD>
+<TD Width="">The event filters have changed.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_PROCESS_OPTIONS</TD>
+<TD Width="">The process options for the current process have changed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_EXTENSIONS</TD>
+<TD Width=""><a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#9625e841-0468-4bf3-940b-56f3f5831a12">Extension DLLs</a> have been loaded or unloaded. (For more information, see <a href="r08_use_remote_ac80d1f3-ff3f-4374-9e70-2a73b84ac647.xml.htm">Loading Debugger Extension DLLs</a>.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_SYSTEMS</TD>
+<TD Width="">A <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a> has been added or removed. <b> </b> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_ASSEMBLE_OPTIONS</TD>
+<TD Width="">The assemble options have changed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_EXPRESSION_SYNTAX</TD>
+<TD Width="">The default expression syntax has changed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_CES_TEXT_REPLACEMENTS</TD>
+<TD Width="">Text replacements have changed.  </TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>Argument</i></DT>
+<DD>Provides additional information about the change to the engine's state.  If more than one bit flag is set in the <i>Flags</i> parameter, the <i>Argument</i> parameter is not used.  Otherwise, the interpretation of the value of <i>Argument</i> depends on the value of <i>Flags</i>:<DL><DT>DEBUG_CES_CURRENT_THREAD</DT>
+<DD>The value of <i>Argument</i> is the current engine thread ID or&#8212;if there is no current thread&#8212;DEBUG_ANY_ID.  For more information, see <a href="engine_dg_1442c778-acca-4b77-a596-6863ab5c8279.xml.htm">Threads and Processes</a>.</DD>
+<DT>DEBUG_CES_EFFECTIVE_PROCESSOR</DT>
+<DD>The value of <i>Argument</i> is the type of the effective processor.</DD>
+<DT>DEBUG_CES_BREAKPOINTS</DT>
+<DD>The value of <i>Argument</i> is the breakpoint ID of the breakpoint that was changed or&#8212;if more than one breakpoint was changed&#8212;DEBUG_ANY_ID.  For more information, see <a href="engine_dg_4f9c88b1-f2a7-4a25-b1ff-ac050eb5c42d.xml.htm">Breakpoints</a>.</DD>
+<DT>DEBUG_CES_CODE_LEVEL</DT>
+<DD>The value of <i>Argument</i> is the code interpretation level.</DD>
+<DT>DEBUG_CES_EXECUTION_STATUS</DT>
+<DD>The value of <i>Argument</i> is the execution status (as described in the <a href="structures_c68bce96-5dba-43bb-a3dd-3f8f3b11520e.xml.htm">DEBUG_STATUS_<i>XXX</i></a> topic) possibly combined with the bit flag DEBUG_STATUS_INSIDE_WAIT. DEBUG_STATUS_INSIDE_WAIT is set when a <b>WaitForEvent</b> call is pending. For more information, see <a href="engine_overview_87d6e561-6d31-4a9e-8be3-1b5b93ebb5a3.xml.htm">Debugging Session and Execution Model</a>.</DD>
+<DT>DEBUG_CES_ENGINE_OPTIONS</DT>
+<DD>The value of <i>Argument</i> is the engine options. </DD>
+<DT>DEBUG_CES_LOG_FILE</DT>
+<DD>The value of <i>Argument</i> is TRUE if the log file was opened and FALSE if the log file was closed.</DD>
+<DT>DEBUG_CES_RADIX</DT>
+<DD>The value of <i>Argument</i> is the default radix.</DD>
+<DT>DEBUG_CES_EVENT_FILTERS</DT>
+<DD>The value of <i>Argument</i> is the index of the event filter that was changed or&#8212;if more than one event filter was changed&#8212;DEBUG_ANY_ID.</DD>
+<DT>DEBUG_CES_PROCESS_OPTIONS</DT>
+<DD>The value of <i>Argument</i> is the process options for the current process.</DD>
+<DT>DEBUG_CES_EXTENSIONS</DT>
+<DD>The value of <i>Argument</i> is zero.</DD>
+<DT>DEBUG_CES_SYSTEMS</DT>
+<DD>The value of <i>Argument</i> is the target ID of the target that was added or&#8212;if a target was removed&#8212;DEBUG_ANY_ID.</DD>
+<DT>DEBUG_CES_ASSEMBLE_OPTIONS</DT>
+<DD>The value of <i>Argument</i> is the assemble options.</DD>
+<DT>DEBUG_CES_EXPRESSION_SYNTAX</DT>
+<DD>The value of <i>Argument</i> is the default expression syntax.</DD>
+<DT>DEBUG_CES_TEXT_REPLACEMENTS</DT>
+<DD>The value of <i>Argument</i> is DEBUG_ANY_ID.</DD>
+</DL>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<P>The return value is ignored by the engine unless it indicates a remote procedure call error; in this case the client, with which this <b>IDebugEventCallbacks</b> object is registered, is disabled.</P>
+<H4>Comments</H4>
+<P>This method is only called by the engine if the DEBUG_EVENT_CHANGE_ENGINE_STATE flag is set in the mask returned by <a href="comcallbacks_564e7fce-ee9a-404e-9ae4-06805cb0b677.xml.htm"><b>IDebugEventCallbacks::GetInterestMask</b></a>.</P>
+<P>For more information about handling events, see <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>. </P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: IDebugEventCallbacks::ChangeEngineState RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

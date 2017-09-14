@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!arbiter</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !arbiter"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_099f9cf2-9d4f-4b09-93d8-7d2b59486d12.xml"/>
+<META NAME="MS-HKWD" CONTENT="!arbiter extension">
+<META NAME="MS-HKWD" CONTENT="arbiter">
+<META NAME="MS-HKWD" CONTENT="resource arbiter"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_099f9cf2-9d4f-4b09-93d8-7d2b59486d12.xml"></A>!arbiter</H1>
+<P>The <b>!arbiter </b>extension displays the current system resource arbiters and arbitrated ranges.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!arbiter</b> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Specifies which classes of arbiters are displayed. If omitted, all arbiters are displayed. These bits can be combined freely.<DL><DT>Bit 0 (0x1)</DT>
+<DD>I/O arbiters.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Memory arbiters.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>IRQ arbiters.</DD>
+<DT>Bit 3 (0x8)</DT>
+<DD>DMA arbiters.</DD>
+<DT>Bit 4 (0x10)</DT>
+<DD>Bus number arbiters.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>For each arbiter, <b>!arbiter</b> displays each allocated range of system resources, some optional flags, the PDO attached to that range (in other words, the range's owner), and the service name of this owner (if known).</P>
+<P>The flags have the following meanings:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>S</b></TD>
+<TD Width="">Range is shared</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>C</b></TD>
+<TD Width="">Range in conflict</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>B</b></TD>
+<TD Width="">Range is boot-allocated</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>D</b></TD>
+<TD Width="">Range is driver-exclusive</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>A</b></TD>
+<TD Width="">Range alias</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>P</b></TD>
+<TD Width="">Range positive decode</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!arbiter 4</b><BR><BR>DEVNODE 80e203b8 (HTREE\ROOT\0)<BR>  Interrupt Arbiter "" at 80167140<BR>    Allocated ranges:<BR>      0000000000000000 - 0000000000000000   B   80e1d3d8 <BR>      0000000000000001 - 0000000000000001   B   80e1d3d8 <BR>      .....<BR>      00000000000001a2 - 00000000000001a2    <BR>        00000000000001a2 - 00000000000001a2  CB   80e1d3d8 <BR>        00000000000001a2 - 00000000000001a2  CB   80e52538  (Serial)<BR>      00000000000001a3 - 00000000000001a3       80e52778  (i8042prt)<BR>      00000000000001b3 - 00000000000001b3       80e1b618  (i8042prt)<BR>    Possible allocation:<BR>      &lt; none &gt;<BR><BR></nobr></P>
+<P>In this example, the next-to-last line shows the resource range (which consists of 0x1A3 alone), the PDO of 0x80E52778, and the service of <i>i8042prt.sys</i>. No flags are listed on this line.</P>
+<P>You can now use <a href="r26_exts_kernel_a_d7c58f52-7920-4308-92c8-362514c0c278.xml.htm"><b>!devobj</b></a> with this PDO address to find the device extension and device node addresses:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devobj 80e52778</b><BR>Device object (80e52778) is for:<BR> 00000034 \Driver\PnpManager DriverObject 80e20610<BR>Current Irp 00000000 RefCount 1 Type 00000004 Flags 00001040<BR>DevExt 80e52830 DevObjExt 80e52838 DevNode 80e52628 <BR>ExtensionFlags (0000000000)  <BR>AttachedDevice (Upper) 80d78b28 \Driver\i8042prt<BR>Device queue is not busy.<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>See <a href="t12_drivers_ba75fa45-397b-473d-88dc-c5e0d598456a.xml.htm">Plug and Play Debugging</a> for applications of this extension command.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !arbiter RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Get RPC Thread Information</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Get RPC Thread Information"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_0a6e6c3c-e352-4581-a39f-58e88e5ce4b9.xml"/>
+<META NAME="MS-HKWD" CONTENT="RPC thread information"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_0a6e6c3c-e352-4581-a39f-58e88e5ce4b9.xml"></A>Get RPC Thread Information</H1>
+<P>Thread information is displayed by the <b>!rpcexts.getthreadinfo</b> extension, or by DbgRpc when the <b>-t</b> switch is used.</P>
+<P>The PID of a process must be specified. You may specify a thread within that process as well. If the thread is omitted, all threads within that process will be displayed.</P>
+<P>In the following example, the process ID is 0x278 and the thread ID is omitted:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>D:\wmsg&gt;<b>dbgrpc -t -P 278</b><BR>Searching for thread info ...<BR>PID  CELL ID   ST TID      LASTTIME<BR>-----------------------------------<BR>0278 0000.0002 01 000001a4 00072c09<BR>0278 0000.0005 03 0000031c 00072bf5<BR><BR></nobr></P>
+<P>For details on the optional parameters, see <a href="r12_cmdline_37869b07-780b-4f69-9a4f-69e21cc9759d.xml.htm">DbgRpc Command-Line Options</a>.</P>
+<P>For a similar example using the RPC debugger extensions, see <a href="r32_exts_lg_nd_rpc_d860cd45-5614-4fe5-8eb7-bbc921c70fc3.xml.htm"><b>!rpcexts.getthreadinfo</b></a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Get RPC Thread Information RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

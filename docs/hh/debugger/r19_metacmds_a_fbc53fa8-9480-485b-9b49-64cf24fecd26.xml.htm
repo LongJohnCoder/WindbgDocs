@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.bpcmds (Display Breakpoint Commands)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .bpcmds (Display Breakpoint Commands)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_fbc53fa8-9480-485b-9b49-64cf24fecd26.xml"/>
+<META NAME="MS-HKWD" CONTENT=".bpcmds (Display Breakpoint Commands)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_fbc53fa8-9480-485b-9b49-64cf24fecd26.xml"></A>.bpcmds (Display Breakpoint Commands)</H1>
+<P>The <b>.bpcmds</b> command displays the commands that were used to set  each of the current breakpoints.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.bpcmds</b><BR></nobr></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If it is unclear whether a particular breakpoint is set at an address, at a symbolic reference, or at a symbol, use the <b>.bpcmds</b> command to shows which breakpoint command was used to creat it.  The command that was used to create a breakpoint determines its nature:</P><B></B><UL type="disc">
+<LI>The <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bp (Set Breakpoint)</b></a> command sets a breakpoint at an address. </LI>
+<LI>The <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bu (Set Unresolved Breakpoint)</b></a> command sets a breakpoint on a symbolic reference. </LI>
+<LI>The <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bm (Set Symbol Breakpoint)</b></a> command sets a breakpoint on symbols that match a specified pattern. If the <b>/d</b> switch is included, it creates zero or more breakpoints on addresses (like <b>bp</b>), otherwise it creates zero or more breakpoints on symbolic references (like <b>bu</b>). </LI>
+<LI>The <a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba (Break on Access)</b></a> command sets a data breakpoint at an address. </LI>
+</UL>
+<P></P>
+<P>The output of <b>.bpcmds</b> reflects the current nature of each breakpoint. Each line of the <b>.bpcmds</b> display begins with the command used to create it (<b>bp</b>, <b>bu</b>, or <b>ba</b>) followed by the breakpoint ID, and then the location of the breakpoint.</P>
+<P>If the breakpoint was created by <b>ba</b>, the access type and size are displayed as well.</P>
+<P>If the breakpoint was created by <b>bm</b> without the <b>/d</b> switch, the display indicates the breakpoint type as <b>bu</b>, followed by the evaluated symbol enclosed in the <b>@!""</b> token (which indicates it is a literal symbol and not a numeric expression or register). If the breakpoint was created by <b>bm</b> with the <b>/d</b> switch, the display indicates the breakpoint type as <b>bp</b>.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bp notepad!winmain</b> <BR><BR>0:000&gt; <b>.bpcmds </b><BR>bp0 0x00000001`00003340 ;<BR><BR>0:000&gt; <b>bu myprog!winmain </b><BR>breakpoint 0 redefined<BR><BR>0:000&gt; <b>.bpcmds </b><BR>bu0 notepad!winmain;<BR><BR>0:000&gt; <b>bu myprog!LoadFile</b> <BR><BR>0:000&gt; <b>bp myprog!LoadFile+10</b> <BR><BR>0:000&gt; <b>bm myprog!openf*</b> <BR>  3: 00421200 @!"myprog!openFile"<BR>  4: 00427800 @!"myprog!openFilter"<BR><BR>0:000&gt; <b>bm /d myprog!closef*</b> <BR>  5: 00421600 @!"myprog!closeFile"<BR><BR>0:000&gt; <b>ba r2 myprog!LoadFile+2E</b> <BR><BR>0:000&gt; <b>.bpcmds</b><BR>bu0 notepad!winmain;<BR>bu1 notepad!LoadFile;<BR>bp2 0x0042cc10 ;<BR>bu3 @!"myprog!openFile";<BR>bu4 @!"myprog!openFilter";<BR>bp5 0x00421600 ;<BR>ba6 r2 0x0042cc2e ;<BR><BR></nobr></P>
+<P>In this example, notice that the output of <b>.bpcmds</b> begins with the relevant command ("bu", "bp", or "ba"), followed by the breakpoint number (with no intervening space).</P>
+<P>Notice that because breakpoint number 0 was originally set using <b>bp</b>, and then was redefined using <b>bu</b>, the display shows its type as "bu".</P>
+<P>Notice also that breakpoints 3, 4, and 5, which were created by the <b>bm</b> commands shown in this example, are displayed as either type "bp" or type "bu", depending on whether the <b>/d</b> switch was included when <b>bm</b> was used.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about and examples of how to use breakpoints, other breakpoint commands and methods of controlling breakpoints, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .bpcmds (Display Breakpoint Commands) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

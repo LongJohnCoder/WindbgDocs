@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetShortField</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetShortField"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetShortField"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_ef67af78-e72f-440c-9ef3-d84b8cca12dc.xml"/>
+<META NAME="MS-HKWD" CONTENT="GetShortField function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_ef67af78-e72f-440c-9ef3-d84b8cca12dc.xml"></A>GetShortField</H1>
+<P><P>The <b>GetShortField</b> function reads the value of a member in a structure if its size is less than or equal to 8 bytes, or initializes a structure so it can be read later.  This function is not intended to be used directly; <a href="wdbgexts_ref_ead1e7df-6fe3-4b61-a511-99993117e9d7.xml.htm"><b>InitTypeRead</b></a> or <a href="wdbgexts_ref_b0221684-224c-4fa9-bdaf-ed93b7a89766.xml.htm"><b>InitTypeReadPhysical</b></a> and <a href="wdbgexts_ref_0343858a-65d2-4c15-a1ff-7053d62b0fb9.xml.htm"><b>ReadField</b></a> should be used instead.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>ULONG64</b><BR><b>GetShortField (</b><BR><b>    IN  ULONG64  </b><i>TypeAddress</i><b>,</b><BR><b>    IN  LPCSTR  </b><i>Name</i><b>,</b><BR><b>    IN  USHORT  </b><i>StoreAddress</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>TypeAddress</i></DT>
+<DD>The meaning of this parameter depends on the value of <i>StoreAddress</i>.<DL><DT>If <i>StoreAddress</i> is non-zero:</DT>
+<DD>Specifies the address of the structure in the target's memory.  This address is used for subsequent calls when <i>StoreAddress</i> is zero. </DD>
+<DT>If <i>StoreAddress</i> is zero:</DT>
+<DD><i>TypeAddress</i> is ignored.  The value of <i>TypeAddress</i> from the last call when <i>StoreAddress</i> was non-zero is used to specify the address of the structure in the target's memory. </DD>
+</DL>
+</DD>
+<DT><i>Name</i></DT>
+<DD>The meaning of this parameter depends on the value of <i>StoreAddress</i>.<DL><DT>If <i>StoreAddress</i> is non-zero:</DT>
+<DD>Specifies the name of the type of the structure at <i>TypeAddress</i>.</DD>
+<DT>If <i>StoreAddress</i> is zero:</DT>
+<DD>Specifies the name of the member in the structure to read.  The address and type of the structure are remembered from a previous call to this function with <i>StoreAddress</i> not equal to zero.  Submembers can be specified by using a period-separated path, for example, "myfield.mysubfield". </DD>
+</DL>
+</DD>
+<DT><i>StoreAddress</i></DT>
+<DD>Specifies the mode of this function.<DL><DT>If <i>StoreAddress</i> is non-zero:</DT>
+<DD>Causes this function to initialize a structure for reading its members.  The address and type name for the structure is remembered.<P>If the bit value 0x2 is set in <i>StoreAddress</i>, the address <i>TypeAddress</i> is considered a physical address; otherwise, it is considered a virtual address. </P>
+</DD>
+<DT>If <i>StoreAddress</i> is zero:</DT>
+<DD>Causes this function to read a member from a previously initialized structure. </DD>
+</DL>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>If <i>StoreAddress</i> is non-zero:</DT>
+<DD>If the function succeeds, it returns the value zero.  If the function fails because the caller passed a zero value as <i>TypeAddress</i>, it returns the value MEMORY_READ_ERROR (defined in <i>Wdbgexts.h</i>).  If the function fails for any other reason, it returns an <a href="wdbgexts_ref_a6260d9a-190f-4533-bcc4-8f5e5ae08647.xml.htm">IG_DUMP_SYMBOL_INFO error code</a>.</DD>
+<DT>If <i>StoreAddress</i> is zero:</DT>
+<DD>If the function succeeds, it returns the value of the specified field in the previously initialized structure.  The structure is the one initialized in a previous call to <b>GetShortField</b>.  The field is the one specified by the <i>Name</i> parameter of the current call to <b>GetShortField</b>. The return value is cast to ULONG64.  If the function fails, it returns the value zero. </DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>When <b>GetShortField</b> is called with a nonzero <i>StoreAddress</i> value, it initializes the structure located at the address specified by <i>TypeAddress</i>. Only one structure can be initialized at a time. If <b>GetShortField</b> is called more than once with a nonzero <i>StoreAddress</i> value, only the structure specified in the most recent call is initialized. When <b>GetShortField</b> is called with <i>StoreAddress</i> equal to zero, it accesses the most recently initialized structure, reads in that structure the field specified by <i>Name</i>, and returns the value of that field. </P>
+<P>This function does not need to be called directly.  The macros <a href="wdbgexts_ref_ead1e7df-6fe3-4b61-a511-99993117e9d7.xml.htm"><b>InitTypeRead</b></a> and <a href="wdbgexts_ref_b0221684-224c-4fa9-bdaf-ed93b7a89766.xml.htm"><b>InitTypeReadPhysical</b></a> call this function with <i>StoreAddress</i> non-zero to prepare a structure for reading its members.  The macro <a href="wdbgexts_ref_0343858a-65d2-4c15-a1ff-7053d62b0fb9.xml.htm"><b>ReadField</b></a> calls this function with <i>StoreAddress</i> (and <i>TypeAddress</i>) equal to zero, to read members from the structure.</P>
+<P class="note"><b>Note</b>  because this function stores the <i>TypeAddress</i> and <i>Name</i> by using static local variables, and because this function is defined in <i>WdbgExts.h</i>, the C pre-processor will create a new instance of this function for each DLL, and <i>TypeAddress</i> and <i>Name</i> will only be available within a single source file.  In other words, the structure must be initialized in the same source file from which the members are read.</P>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this function, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_ead1e7df-6fe3-4b61-a511-99993117e9d7.xml.htm"><b>InitTypeRead</b></a>, <a href="wdbgexts_ref_b0221684-224c-4fa9-bdaf-ed93b7a89766.xml.htm"><b>InitTypeReadPhysical</b></a>, <a href="wdbgexts_ref_0343858a-65d2-4c15-a1ff-7053d62b0fb9.xml.htm"><b>ReadField</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetShortField RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

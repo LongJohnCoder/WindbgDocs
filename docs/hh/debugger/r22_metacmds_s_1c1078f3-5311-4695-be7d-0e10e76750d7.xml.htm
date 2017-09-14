@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.trap (Display Trap Frame)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .trap (Display Trap Frame)"><xml><MSHelp:Keyword Index="A" Term="r22_metacmds_S_1c1078f3-5311-4695-be7d-0e10e76750d7.xml"/>
+<META NAME="MS-HKWD" CONTENT=".trap (Display Trap Frame) command">
+<META NAME="MS-HKWD" CONTENT="Display Trap Frame (.trap) command">
+<META NAME="MS-HKWD" CONTENT="trap frame"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r22_metacmds_S_1c1078f3-5311-4695-be7d-0e10e76750d7.xml"></A>.trap (Display Trap Frame)</H1>
+<P>The <b>.trap</b> command displays the trap frame register state and also sets the register context.<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.trap</b> [<i>Address</i>] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Hexadecimal address of the trap frame on the target system. Omitting the address does not display any trap frame information, but it does reset the register context.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">kernel mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump    </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>.trap</b> command displays the important registers for the specified trap frame.</P>
+<P></P>
+<P>This command also instructs the kernel debugger to use the specified context record as the register context. After this command is executed, the debugger will have access to the most important registers and the stack trace for this thread. This register context persists until you allow the target to execute or use another register context command (<b>.thread</b>, <b>.cxr</b>, or <b>.trap</b>). See <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">Register Context</a> for full details.</P>
+<P>This extension is commonly used when debugging bug check 0xA and 0x7F.   For details and an example, see <a href="t04_bugs_00_92ed1f1a-43b9-453a-af0c-06260d719a7d.xml.htm">Bug Check 0xA</a> (IRQL_NOT_LESS_OR_EQUAL).   </P>
+<H4>Additional Information</H4>
+<P>For more information about the register context and other context settings, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .trap (Display Trap Frame) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

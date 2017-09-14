@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>WdbgExts Symbols</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, WdbgExts Symbols"><xml><MSHelp:Keyword Index="A" Term="WdbgExts_DG_0a03ffbe-f2ac-4a7c-a20a-435bba838a59.xml"/>
+<META NAME="MS-HKWD" CONTENT="WdbgExts extensions, symbols"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_DG_0a03ffbe-f2ac-4a7c-a20a-435bba838a59.xml"></A>WdbgExts Symbols</H1>
+<P>This topic provides a brief overview of how symbols can be manipulated using the WdbgExts API.  For an overview of using symbols in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a>, see <a href="engine_overview_fcf0ebc7-625b-461f-ae21-83c8937ff68f.xml.htm">Symbols</a> in the <a href="engine_overview_a9228fb3-172b-458a-9781-00ab1470afe8.xml.htm">Debugger Engine Overview</a> section of this documentation.</P>
+<P></P>
+<P>To evaluate a MASM or C++ expression, use the functions <a href="wdbgexts_ref_666ae7de-7842-4ba8-9352-e79aefe24ba7.xml.htm"><b>GetExpression</b></a> or <a href="wdbgexts_ref_74af8a17-694a-46ec-827c-fdd2aecbf15c.xml.htm"><b>GetExpressionEx</b></a>.</P>
+<P></P>
+<P>To read the value of a member in a structure, use the <a href="wdbgexts_ref_898dacb4-308c-4a8f-99e2-030adf2b0eae.xml.htm"><b>GetFieldData</b></a> function or, if, the member contains a primitive value, <a href="wdbgexts_ref_68aca028-5d92-48a3-845d-f9eb480a2c40.xml.htm"><b>GetFieldValue</b></a> can be used.  To determine the size of an instance of a symbol in the target's memory, use the <a href="wdbgexts_ref_f3c7edf8-5c3b-440f-ace7-2081f9923d6f.xml.htm"><b>GetTypeSize</b></a> function.</P>
+<P>To locate the offset of a member in a structure, use the <a href="wdbgexts_ref_22c8a9bc-dec9-4eec-95c6-b265694b4385.xml.htm"><b>GetFieldOffset</b></a> function.</P>
+<P></P>
+<P>To read multiple members in a structure, first use the <a href="wdbgexts_ref_ead1e7df-6fe3-4b61-a511-99993117e9d7.xml.htm"><b>InitTypeRead</b></a> function to initialize the structure.  Then, you can use the <a href="wdbgexts_ref_0343858a-65d2-4c15-a1ff-7053d62b0fb9.xml.htm"><b>ReadField</b></a> function to read the members with size less than or equal to 8 bytes one at a time.  For structure addresses in physical memory, use the <a href="wdbgexts_ref_b0221684-224c-4fa9-bdaf-ed93b7a89766.xml.htm"><b>InitTypeReadPhysical</b></a> function instead of <b>InitTypeRead</b>.  </P>
+<P></P>
+<P>There are two functions that  you can use for iterating over linked lists.  For doubly-linked lists that use the LIST_ENTRY32 or LIST_ENTRY64 structures, the function <a href="wdbgexts_ref_ab7a48d6-aa2a-4ed1-a4dc-7339993ccb45.xml.htm"><b>ReadListEntry</b></a> can be used to find the next and previous entries.  The function <a href="wdbgexts_ref_aa50fe48-2a66-4d5e-aec7-d225966cfab2.xml.htm"><b>ListType</b></a> will iterate over all the entries in a linked list and call a callback function for each entry.</P>
+<P></P>
+<P>To locate a symbol near a specified address in the target's memory, use the <a href="wdbgexts_ref_a892aa24-d1ee-43f4-8fd5-ea8d00aa678a.xml.htm"><b>GetSymbol</b></a> function.</P>
+<P></P>
+<P>To delete all the symbol information from the debugger engine's cache, use the <a href="wdbgexts_ref_c48c63b8-6c59-42f7-8a44-78462cbf653f.xml.htm"><b>ReloadSymbols</b></a> function.  To read or change the symbol path, which is used to search for symbol files, use the <a href="wdbgexts_ref_66364d7b-fd3c-424a-a04d-b7bf24178039.xml.htm"><b>GetSetSympath</b></a> function.</P>
+<P></P>
+<P>Almost all symbol operations provided by the debugger engine can be executed using the <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation <a href="wdbgexts_ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml.htm"><b>IG_DUMP_SYMBOL_INFO</b></a>.  However, while being a very flexible function, it is advanced and we recommend that you use the above simpler functions where applicable.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For a more powerful symbols API, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Using Symbols</a> in the <a href="engine_dg_d8e9e675-c026-46b5-b182-4da8b2e1f9a6.xml.htm">Using the Debugger Engine API</a> section of this documentation.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: WdbgExts Symbols RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

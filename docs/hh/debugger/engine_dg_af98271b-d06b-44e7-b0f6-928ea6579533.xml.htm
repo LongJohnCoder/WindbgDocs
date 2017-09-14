@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Source Files</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Source Files"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_af98271b-d06b-44e7-b0f6-928ea6579533.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, source"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_af98271b-d06b-44e7-b0f6-928ea6579533.xml"></A>Using Source Files</H1>
+<P>The <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> maintains a <i>source path</i>, which is a list of directories and source servers that contain source code files associated with the current <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">targets</a>.  The debugger engine can search these directories and source servers for the source files.  With the help of <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35">symbol files</a>, the debugger engine can match lines in the source files with locations in the target's memory.</P>
+<P>For an overview of using source files with debuggers, see <a href="r07_use_operation_6f6332fb-7207-429d-8a27-a2ff0bf02bbb.xml.htm">Debugging in Source Mode</a>.  For an overview of source paths, see <a href="r06_use_gui_b85f4b8e-eb5f-4502-9a0e-92d84cd3d8f1.xml.htm">Source Path</a>.  For an overview of using source servers from the debugger engine, see <a href="r06_use_gui_9f858c04-aa3a-4c3b-a747-45d9d46c3a62.xml.htm">Using a Source Server</a>.</P>
+<H4>Source Path</H4>
+<P>To add a directory or source server to the source path, use the method <a href="idebugsymbols_8e47c1ea-e190-4f34-a952-1dcf4ef9e971.xml.htm"><b>AppendSourcePath</b></a>.  The whole source path is returned by <a href="idebugsymbols_cbdf5e16-41ba-4134-b41b-81164dfc07a0.xml.htm"><b>GetSourcePath</b></a> and can be changed using <a href="idebugsymbols_d592ec7c-56f9-46b2-9627-d79e8fdba5c4.xml.htm"><b>SetSourcePath</b></a>.  A single directory or source server can be retrieved from the source path using <a href="idebugsymbols_517435f9-812c-43c2-bf82-5924de7955a2.xml.htm"><b>GetSourcePathElement</b></a>.</P>
+<P>To find a source file relative to the source path, use <a href="idebugsymbols_4b585dd9-8278-457d-901a-89350f6643e4.xml.htm"><b>FindSourceFile</b></a> or, for more advanced options when using source servers, use <a href="idebugadvanced_3c88de99-1ddb-47e4-ab70-37a2521b9f1b.xml.htm"><b>FindSourceFileAndToken</b></a>. <a href="idebugadvanced_3c88de99-1ddb-47e4-ab70-37a2521b9f1b.xml.htm"><b>FindSourceFileAndToken</b></a> can also be used along with <a href="idebugadvanced_2f76d1fd-36fe-48c1-a131-eb4722d2af95.xml.htm"><b>GetSourceFileInformation</b></a> to retrieve variables related to a file on a source server.</P>
+<H4>Matching Source Files to Code in Memory</H4>
+<P>The debugger engine provides three methods for locating the memory locations that correspond to lines in a source file.  To map a single line of source code to a memory location, use <a href="idebugsymbols_1aa7fddc-6a33-469e-828f-45ff0f31aae7.xml.htm"><b>GetOffsetByLine</b></a>.  To search for memory locations for more than one source line or for nearby source lines, use <a href="idebugsymbols_b750f895-6583-49a6-be03-c373f89808a7.xml.htm"><b>GetSourceEntriesByLine</b></a>.  The <a href="idebugsymbols_18a64f21-a082-4953-8d69-2b3f7d805c60.xml.htm"><b>GetSourceFileLineOffsets</b></a> method will return the memory location of every line in a source file.</P>
+<P>To perform the opposite operation and find the line of a source file that matches a location in the target's memory, use <a href="idebugsymbols_2ed557af-4f84-46d7-be40-fd37a87cd960.xml.htm"><b>GetLineByOffset</b></a>.</P>
+<P class="note"><b>Note:</b> the relationship between memory locations and lines in a source file is not necessarily one-to-one.  It is possible for a single line of source code to correspond to multiple memory locations and for a single memory location to correspond to multiple lines of source code.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Source Files RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

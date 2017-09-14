@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wdfkd.wdfdriverinfo</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wdfkd.wdfdriverinfo"><xml><MSHelp:Keyword Index="A" Term="r33~c_exts_WDF_d1981fe8-8db6-464f-b259-5188cfd2e3e1.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wdfkd.wdfdriverinfo extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~c_exts_WDF_d1981fe8-8db6-464f-b259-5188cfd2e3e1.xml"></A>!wdfkd.wdfdriverinfo</H1>
+<P><P>The <b>!wdfkd.wdfdriverinfo</b> extension displays information about the specified driver, including its device tree, the version of the Kernel-Mode Driver Framework (KMDF) library that the driver was compiled with, and a list of the framework device objects that the driver created.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wdfkd.wdfdriverinfo</b> [<i>DriverName</i> [<i>Flags</i>] ] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>DriverName</i></DT>
+<DD>Optional. The name of the driver. <i>DriverName </i>must not include the .<i>sys</i> file name extension.  </DD>
+<DT><i>Flags</i></DT>
+<DD>Optional. Flags that specify the kind of information to display. <i>Flags</i> can be any combination of the following bits: <DL><DT>Bit 0 (0x1)</DT>
+<DD>The display will include verifier settings for the driver, and will also include a count of WDF objects. This flag can be combined with bit 6 (0x40) to display internal objects. </DD>
+<DT>Bit 4 (0x10)</DT>
+<DD>The display will include the KMDF handle hierarchy for the driver. </DD>
+<DT>Bit 5 (0x20)</DT>
+<DD>The display will include context and callback function information for each handle.  This flag is valid only when bit 4 (0x10) is set.  </DD>
+<DT>Bit 6 (0x40)</DT>
+<DD>The display will include additional information for each handle.  This flag is valid only when bit 4 (0x10) is set.  This flag can be combined with bit 0 (0x1) to display internal objects. </DD>
+<DT>Bit 7 (0x80)</DT>
+<DD>The handle information will be displayed in a more compact format.  </DD>
+<DT>Bit 8 (0x100)</DT>
+<DD>The display will left align internal type information. This flag is valid only when bit 4 (0x10) is set.  </DD>
+<DT>Bit 9 (0x200)</DT>
+<DD>The display will include handles that the driver potentially leaked. KMDF version 1.1 and later support this flag.  This flag is valid only when bit 4 (0x10) is set. </DD>
+<DT>Bit 10 (0x400)</DT>
+<DD>The display will include the device tree in verbose form. </DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P><i>Wdfkd.dll</i></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If you omit the <i>DriverName </i>parameter, the default driver is used. You can display the default driver  by using the <a href="r33~c_exts_wdf_5fb4814b-c564-4648-95e2-74cd56672689.xml.htm"><b>!wdfkd.wdfgetdriver</b></a> extension; you can set the default driver by using the <a href="r33~c_exts_wdf_b65c7163-f379-4d51-b0a2-c456afaf6ee7.xml.htm"><b>!wdfkd.wdfsetdriver</b></a> extension. </P>
+<P>The following example shows the display from the <b>!wdfkd.wdfdriverinfo</b> extension.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wdfdriverinfo wdfrawbusenumtest</b> <BR>----------------------------------<BR>Default driver image name:   wdfrawbusenumtest<BR>WDF library image name:      Wdf01000<BR> FxDriverGlobals  0x83b7af18<BR> WdfBindInfo      0xf22250ec<BR>   Version        v1.5 build(1234)<BR>----------------------------------<BR>WDFDRIVER: 0x7cbc90d0<BR><BR>    !WDFDEVICE 0x7ca7b1c0<BR>            context:  dt 0x83584ff8 ROOT_CONTEXT (size is 0x1 bytes)<BR>             &lt;no associated attribute callbacks&gt;<BR><BR>    !WDFDEVICE 0x7cad31c8<BR>            context:  dt 0x8352cff0 RAW_PDO_CONTEXT (size is 0xc bytes)<BR>             &lt;no associated attribute callbacks&gt;<BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~c_wdf_b21958be-e8b5-460c-87b7-a755da1cf37e.xml.htm">Kernel-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wdfkd.wdfdriverinfo RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

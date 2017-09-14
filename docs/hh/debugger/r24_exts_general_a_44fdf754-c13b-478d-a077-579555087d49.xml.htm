@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!for_each_frame</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !for_each_frame"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_44fdf754-c13b-478d-a077-579555087d49.xml"/>
+<META NAME="MS-HKWD" CONTENT="!for_each_frame extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_44fdf754-c13b-478d-a077-579555087d49.xml"></A>!for_each_frame</H1>
+<P><P>The <b>!for_each_frame</b> extension executes a debugger command one time for each frame in the stack of the current thread.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!for_each_frame</b> [<b>"</b><i>CommandString</i><b>"</b>] <BR><b>!for_each_frame -?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>CommandString</i></DT>
+<DD>Specifies the debugger commands to execute one time for each frame. If <i>CommandString</i> includes multiple commands, you must separate them with semicolons and enclose <i>CommandString</i> in quotation marks. If you include multiple commands, the individual commands within <i>CommandString</i> cannot contain quotation marks. If you want to refer to the index of the current frame within <i>Command</i>, use the <b>@$frame </b>pseudoregister.</DD>
+<DT><b>-?</b></DT>
+<DD>Displays some Help text for this extension in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If you do not specify any arguments, the <b>!for_each_frame </b>extension displays a list of all frames and their frame indexes. For a more detailed list of all frames, use the <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>k (Display Stack Backtrace)</b></a> command.</P>
+<P>The <b>k</b> command walks up to 256 frames. For each enumerated frame, that frame temporarily becomes the current local context (similar to the <a href="r20_metacmds_e_562cba4e-2bec-44d2-a751-719a48625811.xml.htm"><b>.frame (Set Local Context)</b></a> command). After the context has been set, <i>CommandString</i> is executed. After all frames have been used, the local context is reset to the value that it had before you used the <b>!for_each_frame</b> extension.</P>
+<P>If you include <i>CommandString</i>, the debugger displays the frame and its index before the command is executed for that frame.</P>
+<P>The following command displays all local variables for the current stack.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>!for_each_frame !for_each_local dt @#Local</b><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information about the local context, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !for_each_frame RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

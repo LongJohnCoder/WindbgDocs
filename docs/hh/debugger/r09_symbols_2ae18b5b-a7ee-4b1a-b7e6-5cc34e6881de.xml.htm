@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Other Symbol Servers</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Other Symbol Servers"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_2ae18b5b-a7ee-4b1a-b7e6-5cc34e6881de.xml"/>
+<META NAME="MS-HKWD" CONTENT="symbol servers, writing your own symbol server"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_2ae18b5b-a7ee-4b1a-b7e6-5cc34e6881de.xml"></A>Other Symbol Servers</H1>
+<P>If you wish to use a different method for your symbol search, you can provide your own symbol server DLL rather than using SymSrv.</P>
+<H4>Setting the Symbol Path</H4>
+<P>When implementing a symbol server other than SymSrv, the debugger's symbol path is set in the same way as with SymSrv. See <a href="r09_symbols_657d92f2-20a6-4ddb-8669-cd4e431bb668.xml.htm">SymSrv</a> for an explanation of the symbol path syntax. The only change you need to make is to replace the string <b>symsrv.dll</b> with the name of your own symbol server DLL.</P>
+<P>If you wish, you are free to use a different syntax within the parameters to indicate the use of different technologies such as UNC paths, SQL database identifiers, or Internet specifications.</P>
+<H4>Implementing Your Own Symbol Server</H4>
+<P>The central portion of the server is the code that communicates with DbgHelp to find the symbols. Every time DbgHelp requires symbols for a newly loaded module, it calls the symbol server to locate the appropriate symbol files. The symbol server locates each file according to unique parameters such as the time stamp or image size. The server returns a validated path to the requested file. To implement this, the server must export the <b>SymbolServer</b> function.</P>
+<P>The server should also support the <b>SymbolServerSetOptions</b> and <b>SymbolServerGetOptions</b> functions. And DbgHelp will call the <b>SymbolServerClose</b> function, if it is exported by the server. See <a href="r35_errors_c131970c-3ac5-4cf4-add1-a519e85daf90.xml.htm">Symbol Server API</a> for information about where these routines are documented.</P>
+<P>You must not change the actual symbol file name returned by your symbol server. DbgHelp stores the name of a symbol file in multiple locations. Therefore, the server must return a file of the same name as that specified when the symbol was requested. This restriction is needed to assure that the symbol names displayed during symbol loading are the ones that the programmer will recognize.</P>
+<H4>Restrictions on Multiple Symbol Servers</H4>
+<P>DbgHelp supports the use of only one symbol server at a time. Your symbol path can contain multiple instances of the same symbol server DLL, but not two different symbol server DLLs. This is not much of a restriction, since you are still free to include multiple instances of a symbol server in your symbol path, each pointing to a different symbol store. But if you want to switch between two different symbol server DLLs, you will have to change the symbol path each time.</P>
+<H4>Installing Your Symbol Server</H4>
+<P>The details of your symbol server installation will depend on your situation. You might wish to set up an installation process that copies your symbol server DLL and sets the _NT_SYMBOL_PATH environment variable automatically.</P>
+<P>Depending on the technology used in your server, you may also need to install or access the symbol data itself.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Other Symbol Servers RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

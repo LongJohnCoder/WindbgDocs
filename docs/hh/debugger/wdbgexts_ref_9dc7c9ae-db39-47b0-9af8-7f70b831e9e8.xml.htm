@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DBG_DUMP_FIELD_XXX</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DBG_DUMP_FIELD_XXX"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DBG_DUMP_FIELD_XXX"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_9dc7c9ae-db39-47b0-9af8-7f70b831e9e8.xml"/>
+<META NAME="MS-HKWD" CONTENT="DBG_DUMP_FIELD_XXX bit flags"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_9dc7c9ae-db39-47b0-9af8-7f70b831e9e8.xml"></A>DBG_DUMP_FIELD_<i>XXX</i></H1>
+<P>The DBG_DUMP_FIELD_<i>XXX</i> bit flags are used by the <b>fOptions</b> member of the <a href="wdbgexts_ref_4c79e59a-cd12-4ad9-affb-b7f0bd7689fb.xml.htm">FIELD_INFO</a> structure to control the behavior of the <a href="wdbgexts_ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml.htm">IG_DUMP_SYMBOL_INFO</a> <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation.</P>
+<P>The following flags can be present.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FIELD_CALL_BEFORE_PRINT</TD>
+<TD Width="">The callback function is called before printing the member.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FIELD_NO_CALLBACK_REQ</TD>
+<TD Width="">No callback function is called.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FIELD_RECUR_ON_THIS</TD>
+<TD Width="">Submembers of the member are processed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FIELD_FULL_NAME</TD>
+<TD Width=""><b>fName</b> must match completely, as opposed to just having a matching prefix, for the member to be processed.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FIELD_ARRAY</TD>
+<TD Width="">Print array elements of an array member.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FIELD_COPY_FIELD_DATA</TD>
+<TD Width="">The value of the member is copied into <b>pBuffer</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FIELD_RETURN_ADDRESS</TD>
+<TD Width="">During a callback or when <b>Ioctl</b> returns, the FIELD_INFO.<b>address</b> member contains the address of the symbol's member.<BR><BR>If no address is supplied for the type, FIELD_INFO.<b>address</b> contains total offset of the member from the beginning of the type.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FIELD_SIZE_IN_BITS</TD>
+<TD Width="">For a bit field, return the offset and size in bits instead of bytes.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FIELD_NO_PRINT</TD>
+<TD Width="">Do not print this member (only callback function are called and data copies are performed).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FIELD_DEFAULT_STRING DBG_DUMP_FIELD_WCHAR_STRING DBG_DUMP_FIELD_MULTI_STRING DBG_DUMP_FIELD_GUID_STRING </TD>
+<TD Width="">If the member is a pointer, it is printed as a string, ANSI string , WCHAR string, MULTI string, or GUID.</TD>
+</TR>
+</table>
+<P></P>
+<P>In addition, the result of the macro DBG_DUMP_RECUR_LEVEL(<i>Level</i>) can be added to the bit-set to specify how deep into structures to recurse.  <i>Level</i> can be a number between 0 and 15.</P>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that uses these constants, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml.htm">IG_DUMP_SYMBOL_INFO</a>, <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a>, <a href="wdbgexts_ref_4c79e59a-cd12-4ad9-affb-b7f0bd7689fb.xml.htm">FIELD_INFO</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DBG_DUMP_FIELD_XXX RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

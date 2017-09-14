@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Crash Mode</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Crash Mode"><xml><MSHelp:Keyword Index="A" Term="ADPlus_5c0245b0-d5f8-47aa-b73f-86b8d8c6111c.xml"/>
+<META NAME="MS-HKWD" CONTENT="ADPlus, crash mode"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_5c0245b0-d5f8-47aa-b73f-86b8d8c6111c.xml"></A>Crash Mode</H1>
+<P>In crash mode, ADPlus attaches the CDB debugger to all processes that are specified at the command prompt and automatically configures the debugger to monitor for the following kinds of exceptions:</P><B></B><UL type="disc">
+<LI>Invalid handle </LI>
+<LI>Illegal instruction </LI>
+<LI>Integer divide-by-zero </LI>
+<LI>Floating-point divide-by-zero </LI>
+<LI>Integer overflow </LI>
+<LI>Invalid lock sequence </LI>
+<LI>Access violation </LI>
+<LI>Stack overflow </LI>
+<LI>C++ EH exception </LI>
+<LI>Unknown exception </LI>
+</UL>
+<P></P>
+<P>You can use ADPlus in crash mode instead of <a href="r10_dump_files_bbade5fe-7a72-4267-84e3-6c7c5389cd5c.xml.htm">UserDump</a> when you are troubleshooting these kinds of exceptions.</P>
+<P>Because crash mode uses an "invasive" attach through the CDB debugger, you cannot use this mode in a Microsoft Windows 2000 Terminal Server session, because these operating systems do not permit a debugger in one window station to attach to a process in a different window station. Crash mode is supported in a Terminal Server session on Windows XP and later versions of Windows. <a href="adplus_503a3c03-7ffb-4999-b99c-3ca4b9f69b06.xml.htm">Hang mode</a> does work inside a Terminal Server session on any platform.</P>
+<P class="note"><b>Note</b>  For a workaround in Windows 2000 Terminal Server by using <i>remote.exe</i>, see <a href="adplus_662c9738-6925-4c36-9688-97cd038c2b18.xml.htm">Running in Crash Mode Remotely</a>. For more information about invasive and non-invasive attaching, see <a href="r05_use_start_f7e1fb28-0ab2-4880-af04-50e888d431cb.xml.htm">Starting the Debugger</a>.</P>
+<P>When ADPlus is running in crash mode, a debugger remains attached to each process that is specified at the command prompt for the lifetime of that process until a fatal exception is trapped and the process fails (that is, <i>crashes</i>), or until a user presses CTRL+C to detach the debugger from that process. To manually detach the debugger from the process, you must maximize the debugger window and press CTRL+C to break into the debugger. When you press CTRL+C, ADPlus traps the command, begins to list the stacks for all threads to a log file, and then produces a minidump file of the process before it detaches from the debugger. Because crash mode performs an invasive attach, the process is ended when the debugger is detached, and you have to restart it. If the process is a Microsoft Transaction Server (MTS) or COM+ process, the process is restarted automatically the next time that a call is made to a component in that package.</P>
+<H4>First-Chance Exceptions</H4>
+<P>Each kind of exception (access violation, stack overflow, and so on) can be raised to a debugger as a "first chance" or "second chance" exception. <a href="dbg_glossary_115ca2a1-47f8-405f-a4f7-a7446892d897.xml.htm#721095c2-e24a-4306-b08a-12feea466aa2"><i>First-chance exceptions</i></a> are not fatal unless they are not handled properly by an error handler. If a first-change exception is not handled properly by an error handler, they are raised again as a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#a48a7a88-0cc3-46d0-a1c9-2ccfeebb4c01">second-chance exception</a> (which only a debugger can handle). If a debugger does not handle a second-chance exception, the application is shut down.</P>
+<P>By default, when ADPlus detects a first-chance (nonfatal) exception for all kinds of exceptions (except unknown and EH exceptions), ADPlus does the following: </P><B></B><OL type="1">
+<LI>Pauses the process to log the date and time that the exception occurred in the log file for the process that is being monitored.</LI>
+<LI>Logs the thread ID and call stack for the thread that raised the exception in the log file for the process that is being monitored.</LI>
+<LI>Produces a uniquely-named minidump file of the process at the time that the exception occurred and then resumes the process. (This step is equivalent to <b>.dump -u /m</b>.) </LI>
+</OL>
+<P></P>
+<P>By default, ADPlus does not produce a unique minidump file for first-chance EH and unknown exceptions because processes frequently encounter many of these exceptions. These kinds of exceptions are typically handled by error handling code in a process or DLL. In other words, these exceptions are typically handled exceptions, and they do not become second-chance (unhandled) exceptions, which end the process.</P>
+<P>However, you can configure ADPlus to produce unique minidump files for first-chance EH and unknown exceptions. For more information about how to configure ADPlus, see <a href="adplus_fca9d42a-47f8-4596-ba51-238604e15c04.xml.htm">ADPlus Command-Line Options</a> and <a href="adplus_75cb775e-c52e-4c05-85a6-aa7be34270c5.xml.htm">ADPlus Configuration Files</a>.</P>
+<H4>Second-Chance Exceptions</H4>
+<P>When ADPlus detects a second-chance (fatal) exception for all kinds of exceptions (including EH and unknown exceptions), ADPlus does the following: </P><B></B><OL type="1">
+<LI>Pauses the process.</LI>
+<LI>Logs the date and time that the exception occurred.</LI>
+<LI>Logs the thread ID and the call stack for the thread that raised the exception.</LI>
+<LI>Produces a full memory dump of the process at the time that the fatal exception occurred.</LI>
+<LI>Exits the debugger. This step ends the process.</LI>
+</OL>
+<P></P>
+<P>ADPlus keeps a separate log file for each process that it monitors.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Crash Mode RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

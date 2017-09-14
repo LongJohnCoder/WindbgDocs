@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Breakpoints</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Breakpoints"><xml><MSHelp:Keyword Index="A" Term="ADPlus_13f28666-5871-4192-8159-c4c99be626d4.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_13f28666-5871-4192-8159-c4c99be626d4.xml"></A>Breakpoints</H1>
+<P>The <b>Breakpoints</b> section enables you to define the breakpoints that you want to monitor and to configure the actions that you want the debugger to take when these breakpoints are hit.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>    &lt;Breakpoints&gt;</b><BR><b>      &lt;NewBP&gt;</b><BR><b>          &lt;Address&gt; </b><i>Address</i><b> &lt;/Address&gt;</b><BR><b>          &lt;Type&gt; </b>{ <b>BP</b> | <b>BU</b> | <b>BM</b> } <b>&lt;/Type&gt;</b><BR><b>          &lt;Passes&gt; </b><i>Passes </i><b> &lt;/Passes&gt; </b><BR><b>          &lt;Actions&gt; </b><i>Actions</i><b>  &lt;/Actions&gt; </b><BR><b>          &lt;CustomActions&gt; </b><i>CustomActions</i><b>  &lt;/CustomActions&gt; </b><BR><b>          &lt;ReturnAction&gt; </b>{ <b>G</b> | <b>Q</b> | <b>QD</b> } <b>&lt;/ReturnAction&gt; </b><BR><b>       &lt;/NewBP&gt;  </b><BR><b>       &lt;Config&gt;</b><BR><b>          &lt;Address&gt;</b> { <i>Address</i> | <b>AllBreakpoints</b> } <b>&lt;/Address&gt;</b><BR><b>          &lt;Actions&gt; </b><i>Actions</i><b>  &lt;/Actions&gt; </b><BR><b>          &lt;CustomActions&gt; </b><i>CustomActions</i><b>  &lt;/CustomActions&gt; </b><BR><b>          &lt;ReturnAction&gt; </b>{ <b>G</b> | <b>Q</b> | <b>QD</b> } <b>&lt;/ReturnAction&gt; </b><BR><b>       &lt;/Config&gt;  </b><BR><b>    &lt;/Breakpoints&gt;</b><BR></nobr></P>
+<P>The <b>&lt;NewBP&gt;</b> tag enables you to define new breakpoints. The <b>&lt;Config&gt;</b> tag enables you to define the behavior for breakpoints that are already defined.</P>
+<P>All of the subtags of <b>&lt;NewBP&gt;</b> and <b>&lt;Config&gt;</b> are optional, except for <b>&lt;Address&gt;</b>.</P>
+<P>You can use the following parameters:</P>
+<DL><DT><i>Address</i></DT>
+<DD>Uses the debugger syntax (<b>MyModule!MyClass::MyMethod</b>). You can separate multiple addresses by semicolons.</DD>
+<DT>{ <b>BP</b> | <b>BU</b> | <b>BM</b> }</DT>
+<DD>Defines which debugger command should be used to create the breakpoint. The default value is <b>BP</b>.<P>If you use <b>BM</b>, you can define multiple breakpoints at the same time by using wildcard characters in the address. For example, you could define the address as <b>Advapi32!Crypt*</b>. This syntax creates a breakpoint in all functions in <i>Advapi32.dll</i> that begin with <b>Crypt</b>.</P>
+</DD>
+<DT><i>Passes</i></DT>
+<DD>Specifies the number of hits to ignore before breaking into the debugger.</DD>
+<DT><i>Actions</i></DT>
+<DD>Specifies the actions that you want to include. Separate multiple actions with semicolons, as follows.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>&lt;Actions&gt; MiniDump;Stack&lt;/Actions&gt;<BR></nobr></P>
+<P>You can use the following case-sensitive actions:</P>
+<DL><DT><b>Log</b></DT>
+<DD>Adds a log entry that is related to the exception.</DD>
+<DT><b>EventLog</b></DT>
+<DD>Adds an event log that is related to the exception.</DD>
+<DT><b>MiniDump</b></DT>
+<DD>Creates a minidump.</DD>
+<DT><b>FullDump</b></DT>
+<DD>Creates a full dump.</DD>
+<DT><b>MiniDumpOver</b></DT>
+<DD>Creates a minidump and overwrites multiple instances for the same exception.</DD>
+<DT><b>FullDumpOver</b></DT>
+<DD>Creates a full dump and overwrites multiple instances for the same exception.</DD>
+<DT><b>Stack</b></DT>
+<DD>Lists the faulting call stack into the log.</DD>
+<DT><b>Stacks</b></DT>
+<DD>Lists all thread call stacks into the log.</DD>
+<DT><b>LoadedModules</b></DT>
+<DD>Lists all loaded modules.</DD>
+<DT><b>MatchingSymbols</b></DT>
+<DD>Lists all modules with matching symbols.</DD>
+<DT><b>Void</b></DT>
+<DD>Does nothing.</DD>
+</DL>
+</DD>
+<DT><i>CustomActions</i></DT>
+<DD>Specifies any debugger commands. Separate multiple actions with semicolons. You can include any debugger commands that are available in CDB.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>&lt;CustomActions&gt;!runaway;!heap&lt;/CustomActions&gt;<BR></nobr></P>
+</DD>
+<DT>{ <b>G</b> | <b>Q</b> | <b>QD</b> }</DT>
+<DD>Specifies how to return from the debugger after the breakpoint is done. These parameters work like the <b>g</b>, <b>q</b>, and <b>qd </b>debugger commands. <b>QD</b> is supported only in Microsoft Windows XP and later versions of Windows.</DD>
+</DL>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Breakpoints RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

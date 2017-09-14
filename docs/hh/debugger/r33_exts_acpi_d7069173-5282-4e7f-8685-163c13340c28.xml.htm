@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!amli set</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !amli set"><xml><MSHelp:Keyword Index="A" Term="r33_exts_ACPI_d7069173-5282-4e7f-8685-163c13340c28.xml"/>
+<META NAME="MS-HKWD" CONTENT="!amli set extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33_exts_ACPI_d7069173-5282-4e7f-8685-163c13340c28.xml"></A>!amli set</H1>
+<P>The <b>!amli set</b> extension sets or displays the AMLI Debugger options.</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!acpikd.amli set</b> <i>Options</i> <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!amli set</b> <i>Options</i> <BR></nobr></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Specifies one or more options to be set. Separate multiple options with spaces. Possible values include:<DL><DT><b>spewon</b></DT>
+<DD><i>(Windows XP and later)</i>  Causes full debug output to be sent from the target computer. This option should be left on at all times for effective AML debugging. See the <b>Comments</b> section for details.</DD>
+<DT><b>spewoff</b></DT>
+<DD><i>(Windows XP and later)</i>  Suppresses debug output.</DD>
+<DT><b>verboseon</b></DT>
+<DD>Turns on <i>verbose mode</i>. This causes the AMLI Debugger to display the names of AML methods as they are evaluated.    </DD>
+<DT><b>verboseoff</b></DT>
+<DD>Turns off verbose mode.</DD>
+<DT><b>traceon</b></DT>
+<DD>Activates ACPI tracing. This produces much more output than the <b>verboseon</b> option. This option is very useful for tracking SMI-related hard hangs.</DD>
+<DT><b>traceoff</b></DT>
+<DD>Deactivates ACPI tracing.</DD>
+<DT><b>nesttraceon</b></DT>
+<DD>Activates nest tracing. This option is only effective if the <b>traceon</b> option is also selected.</DD>
+<DT><b>nesttraceoff</b></DT>
+<DD>Deactivates nest tracing.</DD>
+<DT><b>lbrkon</b></DT>
+<DD>Breaks into the AMLI Debugger when DDB loading is completed.   </DD>
+<DT><b>lbrkoff</b></DT>
+<DD>Deactivates the <b>lbrkon</b> option.</DD>
+<DT><b>errbrkon</b></DT>
+<DD>Breaks into the AMLI Debugger whenever the interpreter has a problem evaluating AML code.</DD>
+<DT><b>errbrkoff</b></DT>
+<DD>Deactivates the <b>errbrkon</b> option.</DD>
+<DT><b>logon</b></DT>
+<DD>Enables event logging.</DD>
+<DT><b>logoff</b></DT>
+<DD>Disables event logging.</DD>
+<DT><b>logmuton</b></DT>
+<DD>Enables mutex event logging.</DD>
+<DT><b>logmutoff</b></DT>
+<DD>Disables mutex event logging.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Acpikd.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If no options are specified, the current status of all options is displayed.</P>
+<P>In Windows 2000, full debug output is always sent to the debugger. However, Windows XP and later versions of Windows usually filter out most of these messages. If you are running the AMLI Debugger on these systems, you need to turn this output on with <b>!amli set spewon</b>. Otherwise, numerous important AMLI Debugger messages will be lost.</P>
+<P>If the AML interpreter breaks into the AMLI Debugger, this output will be automatically turned on.</P>
+<P>For more details on this output filtering, see <b>DbgPrintEx</b> and <b>KdPrintEx</b> in the Windows Driver Kit (WDK) documentation.</P>
+<H4>Additional Information</H4>
+<P>For information about related commands and their uses, see <a href="t11_rpc_acpi_26cfe8b9-d3ee-4915-b8b5-f2335c18d782.xml.htm">The AMLI Debugger</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !amli set RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

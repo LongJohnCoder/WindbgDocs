@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Critical Section Time Outs</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Critical Section Time Outs"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_73588c25-c0b4-4628-bfab-1b39a09504f3.xml"/>
+<META NAME="MS-HKWD" CONTENT="critical section, debugging critical section time outs"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_73588c25-c0b4-4628-bfab-1b39a09504f3.xml"></A>Critical Section Time Outs</H1>
+<P>Critical section time outs can be identified by the stack trace that shows the routine <b>RtlpWaitForCriticalSection</b> near the top of the stack. Another variety of critical section time out is a possible deadlock application error. To debug critical section time outs properly, CDB or WinDbg is necessary.</P>
+<P>As with resource time outs, the <b>!ntsdexts.locks</b> extension will give a list of locks currently held and the threads that own them. Unlike resource time outs, the thread IDs given are not immediately useful. These are system IDs that do not map directly to the thread numbers used by CDB.</P>
+<P>Just as with <b>ExpWaitForResource</b><I><B>Xxx</B></I>, the lock identifier is the first parameter to <b>RtlpWaitForCriticalSection</b>. Continue tracing the chain of waits until either a loop is found or the final thread is not waiting for a critical section time out.</P>
+<H4>Example of Debugging a Critical Time Out</H4>
+<P>Start by displaying the stack:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:024&gt; <b>kb</b><BR><BR>ChildEBP RetAddr  Args to Child<BR>0569fca4 77f79c78 77f71000 002a6b88 7fffffff ntdll!_DbgBreakPoint<BR>0569fd04 77f71048 5ffa9f9c 5fef0b4b 5ffa9f9c ntdll!_RtlpWaitForCriticalSection+0x89<BR>0569fd0c 5fef0b4b 5ffa9f9c 002a6b88 002a0019 ntdll!_RtlEnterCriticalSection+0x48<BR>0569fd70 5fedf83f 002a6b88 0569fdc0 0000003e winsrv!_StreamScrollRegion+0x1f0<BR>0569fd8c 5fedfa5b 002a6b88 00190000 00000000 winsrv!_AdjustCursorPosition+0x8e<BR>0569fdc0 5fedf678 0569ff18 0031c200 0335ee88 winsrv!_DoWriteConsole+0x104<BR><BR>0569fefc 5fe6311b 0569ff18 0569ffd0 00000005 winsrv!_SrvWriteConsole+0x96<BR>0569fff4 00000000 00000000 00000024 00000024 csrsrv!_CsrApiRequestThread+0x4ff <BR></nobr></P>
+<P>Now use the <a href="r31_exts_user_719ca52d-1eb4-4877-a644-4f6eff6f94dc.xml.htm"><b>!ntsdexts.locks</b></a> extension to find the critical section:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:024&gt; <b>!locks</b> <BR>CritSec winsrv!_ScrollBufferLock at 5ffa9f9c        5ffa9f9c is the first one <BR>LockCount          5<BR>RecursionCount     1<BR>OwningThread       88         <i>// here's the owning thread ID </i><BR>EntryCount         11c<BR>ContentionCount    135<BR>*** Locked<BR><BR>CritSec winsrv!_gcsUserSrv+0 at 5ffa91b4    <i> //second critical section found below</i> <BR><BR>LockCount          8<BR>RecursionCount     1<BR>OwningThread       6d         <i>// second owning thread </i><BR>EntryCount         1d6c<BR>ContentionCount    1d47<BR>*** Locked <BR></nobr></P>
+<P>Now search for the thread that has the ID number 0x6D:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:024&gt; <b>~</b> <BR>  0  id: 16.15   Teb 7ffdd000 Unfrozen<BR>  1  id: 16.13   Teb 7ffdb000 Unfrozen<BR>  2  id: 16.30   Teb 7ffda000 Unfrozen<BR>  3  id: 16.2f   Teb 7ffd9000 Unfrozen<BR>  4  id: 16.2e   Teb 7ffd8000 Unfrozen<BR>  5  id: 16.6c   Teb 7ff6c000 Unfrozen<BR>  6  id: 16.6d   Teb 7ff68000 Unfrozen    <i>// this thread owns the second critical section</i><BR>  7  id: 16.2d   Teb 7ffd7000 Unfrozen<BR>  8  id: 16.33   Teb 7ffd6000 Unfrozen<BR>  9  id: 16.42   Teb 7ff6f000 Unfrozen<BR> 10  id: 16.6f   Teb 7ff6e000 Unfrozen<BR> 11  id: 16.6e   Teb 7ffd5000 Unfrozen<BR> 12  id: 16.52   Teb 7ff6b000 Unfrozen<BR> 13  id: 16.61   Teb 7ff6a000 Unfrozen<BR> 14  id: 16.7e   Teb 7ff69000 Unfrozen<BR> 15  id: 16.43   Teb 7ff67000 Unfrozen<BR> 16  id: 16.89   Teb 7ff50000 Unfrozen<BR> 17  id: 16.95   Teb 7ff65000 Unfrozen<BR> 18  id: 16.90   Teb 7ff64000 Unfrozen<BR> 19  id: 16.71   Teb 7ff63000 Unfrozen<BR> 20  id: 16.bb   Teb 7ff62000 Unfrozen<BR> 21  id: 16.88   Teb 7ff61000 Unfrozen    <i>// this thread owns the first critical section</i><BR> 22  id: 16.cd   Teb 7ff5e000 Unfrozen<BR> 23  id: 16.c1   Teb 7ff5f000 Unfrozen<BR> 24  id: 16.bd   Teb 7ff5d000 Unfrozen <BR></nobr></P>
+<P>Thread 21 owns the first critical section. Make that the active thread and get a stack trace:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:024&gt; <b>~21s</b><BR>ntdll!_ZwWaitForSingleObject+0xb:<BR>77f71bfb c20c00           ret     0xc<BR><BR>0:021&gt; <b>kb</b><BR><BR>ChildEBP RetAddr  Args to Child<BR>0556fc44 77f79c20 00000110 00000000 77fa4700 ntdll!_ZwWaitForSingleObject+0xb<BR>0556fcb0 77f71048 5ffa91b4 5feb4f7e 5ffa91b4 ntdll!_RtlpWaitForCriticalSection+0x31<BR>0556fcb8 5feb4f7e 5ffa91b4 0556fd70 77f71000 ntdll!_RtlEnterCriticalSection+0x48<BR>0556fcf4 5fef0b76 01302005 00000000 fffffff4 winsrv!__ScrollDC+0x14<BR>0556fd70 5fedf83f 002bd880 0556fdc0 00000025 winsrv!_StreamScrollRegion+0x21b<BR>0556fd8c 5fedfa5b 002bd880 00190000 00000000 winsrv!_AdjustCursorPosition+0x8e<BR><BR>0556fdc0 5fedf678 0556ff18 002bdf70 002a4d58 winsrv!_DoWriteConsole+0x104<BR>0556fefc 5fe6311b 0556ff18 0556ffd0 00000005 winsrv!_SrvWriteConsole+0x96<BR>0556fff4 00000000 00000000 00000024 00000024 csrsrv!_CsrApiRequestThread+0x4ff <BR></nobr></P>
+<P>Thread 6 owns the second critical section. Examine its stack as well:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:021&gt; <b>~6s</b><BR>winsrv!_PtiFromThreadId+0xd:<BR>5fe8429a 394858           cmp     [eax+0x58],ecx    ds:0023:7f504da8=000000f8<BR><BR>0:006&gt; <b>kb</b><BR><BR>ChildEBP RetAddr  Args to Child<BR>01ecfeb4 5fecd0d7 00000086 00000000 7f5738e0 winsrv!_PtiFromThreadId+0xd<BR>01ecfed0 5feccf62 00000086 01ecfff4 00000113 winsrv!__GetThreadDesktop+0x12<BR>01ecfefc 5fe6311b 01ecff18 01ecffd0 00000005 winsrv!___GetThreadDesktop+0x8b<BR>01ecfff4 00000000 00000000 00000024 00000024 csrsrv!_CsrApiRequestThread+0x4ff <BR></nobr></P>
+<P>Thread 21 has <b>RtlpWaitForCriticalSection</b> near the top of its stack. Thread 6 does not. So thread 21 is the culprit.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Critical Section Time Outs RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

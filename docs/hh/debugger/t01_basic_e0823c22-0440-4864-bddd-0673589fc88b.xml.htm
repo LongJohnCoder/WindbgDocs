@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Executing Until a Specified State is Reached</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Executing Until a Specified State is Reached"><xml><MSHelp:Keyword Index="A" Term="t01_basic_e0823c22-0440-4864-bddd-0673589fc88b.xml"/>
+<META NAME="MS-HKWD" CONTENT="executing until a specified state is reached">
+<META NAME="MS-HKWD" CONTENT="breakpoints, used to control execution">
+<META NAME="MS-HKWD" CONTENT="breakpoints, and pseudo-registers">
+<META NAME="MS-HKWD" CONTENT="script file, used to control execution"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t01_basic_e0823c22-0440-4864-bddd-0673589fc88b.xml"></A>Executing Until a Specified State is Reached</H1>
+<P>There are several ways to cause the target to execute until a specified state is reached.</P>
+<H4>Using a Breakpoint to Control Execution</H4>
+<P>One method is to use a breakpoint.  The simplest breakpoint halts execution when the program counter reaches a specified address.  A more complex breakpoint can:</P><B></B><UL type="disc">
+<LI>be triggered only when this address is executed by a specific thread, </LI>
+<LI>allow a specified number of passes through this address before being triggered, </LI>
+<LI>automatically issue a specified command when it is triggered, or </LI>
+<LI>watch a specified address in non-executable memory, being triggered when that memory is read or written to.</LI>
+</UL>
+<P>For details on how to set and control breakpoints, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a>.</P>
+<P>A more complicated way to execute until a specified state is reached is to use a <i>conditional breakpoint</i>.  This kind of breakpoint is set at a certain address, but is only triggered if a specified condition holds.  For details, see <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm">Setting a Conditional Breakpoint</a>. </P>
+<H4>Breakpoints and Pseudo-Registers</H4>
+<P>In specifying the desired state, it is often helpful to use <i>automatic pseudo-registers</i>.  These are variables controlled by the debugger which allow you to reference a variety of values related to the target state.</P>
+<P>For example, the following breakpoint uses the <b>$thread</b> pseudo-register, which is always equal to the value of the current thread.  It resolves to the value of the current thread when it is used in a command.  By using <b>$thread</b> as the argument of the <b>/t</b> parameter of the <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bp (Set Breakpoint)</b></a> command, you can create a breakpoint that will be triggered every time that <b>NtOpenFile</b> is called by the thread which was active at the time you issued the <b>bp</b> command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>bp /t @$thread nt!ntopenfile</b><BR></nobr></P>
+<P>This breakpoint will not be triggered when any other thread calls <b>NtOpenFile</b>.</P>
+<P>For a list of automatic psuedo-registers, see <a href="r13_syntax_c05da1f3-3310-46cb-8e56-da3d670e05f3.xml.htm">Pseudo-Register Syntax</a>.</P>
+<P></P>
+<H4>Using a Script File to Control Execution</H4>
+<P>Another way to execute until a specified state is reached is to create a script file that calls itself recursively, testing the desired state in each iteration.</P>
+<P>Typically, this script file will contain the <a href="r14_tokens_1685a3f4-2a71-4a78-abce-d0d42efaa274.xml.htm"><b>.if</b></a> and <a href="r14_tokens_b9798daf-9fab-4557-95b5-429cc6d23ddb.xml.htm"><b>.else</b></a> tokens.  You can use a command such as <a href="r18_cmds_s_fe6d30ae-7c39-40db-a971-2aae584c13d3.xml.htm"><b>t (Trace)</b></a> to execute a single step, and then test the condition in question.</P>
+<P>For example, if you wish to execute until the <b>eax</b> register contains the value 0x1234, you can create a script file called <i>eaxstep.txt</i> that contains the following line:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>.if (@eax == 1234) { .echo Value of eax is 1234. } .else { t ; $&lt;eaxstep.txt }</b><BR></nobr></P>
+<P>Then issue the following command from the Debugger Command window:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>t "$&lt;eaxstep.txt"</b><BR></nobr></P>
+<P>This <b>t</b> command will execute a single step, and then execute the quoted command.  This command happens to be <a href="r15_cmds_a_85f99aae-f246-400c-8d44-625b758a0e10.xml.htm"><b>$&lt; (Run Script File)</b></a>, which runs the <i>eaxstep.txt</i> file.  The script file tests the value of <b>eax</b>, runs the <b>t</b> command, and then calls itself recursively.  This continues until the <b>eax</b> register equals 0x1234, at which point the <a href="r20_metacmds_e_6eb44413-2b5e-423a-8a53-73546ee1e3d1.xml.htm"><b>.echo (Echo Comment)</b></a> command prints a message to the Debugger Command window, and execution stops.</P>
+<P>For details on script files, see <a href="r05_use_start_1aa9e034-9f62-48a5-b48e-12b581f5d211.xml.htm">Using Script Files</a> and <a href="r05_use_start_81070bdc-2ffb-4a22-a785-0935553fb4c4.xml.htm">Using Debugger Command Programs</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Executing Until a Specified State is Reached RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

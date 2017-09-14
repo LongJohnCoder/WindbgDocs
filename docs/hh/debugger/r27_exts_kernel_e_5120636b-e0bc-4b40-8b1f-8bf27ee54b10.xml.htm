@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!icpleak</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !icpleak"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_5120636b-e0bc-4b40-8b1f-8bf27ee54b10.xml"/>
+<META NAME="MS-HKWD" CONTENT="!icpleak extension">
+<META NAME="MS-HKWD" CONTENT="I/O completion"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_5120636b-e0bc-4b40-8b1f-8bf27ee54b10.xml"></A>!icpleak</H1>
+<P><P>The <b>!icpleak </b>extension examines all I/O completion objects in the system for the object with the largest number of queued entries.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!icpleak</b> [<i>HandleFlag</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>HandleFlag</i></DT>
+<DD>If this flag is set, the display also includes all processes that have a handle to the object with the largest number of queued entries.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>This extension is useful when there is a leak in the I/O completion pool. I/O completion pool leaks can occur when a process is allocating I/O completion packets by calling <b>PostQueuedCompletionStatus</b>, but is not calling <b>GetQueuedCompletionStatus </b>to free them, or when a process is queuing completion entries to a port, but there is no thread retrieving the entries. To detect a leak run the <a href="r28_exts_kernel_n_47a5b9f5-03d6-4479-827c-ad88f67d08b2.xml.htm"><b>!poolused</b></a> extension and check the value of ICP pool tag. If pool use with the ICP tag is significant, a leak might have occurred.</P>
+<P>This extension works only if the system maintains type lists. If the <i>HandleFlag</i> is set and the system has many processes, this extension will take a long time to run. </P>
+<P>You can stop at any point by pressing CTRL+BREAK (in WinDbg) or CTRL+C (in KD).</P>
+<H4>Additional Information</H4>
+<P>For information about I/O completion ports, see <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !icpleak RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

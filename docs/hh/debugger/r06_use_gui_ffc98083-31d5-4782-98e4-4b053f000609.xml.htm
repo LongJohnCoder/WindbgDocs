@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Customizing a Theme</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Customizing a Theme"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_ffc98083-31d5-4782-98e4-4b053f000609.xml"/>
+<META NAME="MS-HKWD" CONTENT="themes, customizing"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_ffc98083-31d5-4782-98e4-4b053f000609.xml"></A>Customizing a Theme</H1>
+<P>Before customizing a theme, it must first be loaded.  See <a href="r06_use_gui_ccdc8ef7-6bcc-4c38-92fa-e69c424ede8f.xml.htm">Loading a Theme</a> for details.</P>
+<P>After the theme is loaded, start WinDbg with no command-line parameters.  This opens the base workspace.  There are two common areas of focus for customizing a theme:  setting paths and adjusting window position.</P>
+<P>After you have completed any wanted adjustments, exit WinDbg and save your workspace by selecting <b>Save Workspace</b> from the <b>File </b>menu.  If you want to save your new settings to a <i>.reg</i> file, open Regedit and export the registry key under <i>HKCU\Software\Microsoft\Windbg\Workspaces</i><b> </b>to a <i>.reg</i> file.</P>
+<H4>Setting Paths</H4>
+<P>By setting the appropriate paths, you can ensure that WinDbg can locate all of the files that it needs to debug effectively.  There are three main paths to set:  the symbol path, the source path, and the executable image path.</P>
+<P>Here are examples of how to set the symbol and source path.  The executable image path is typically the same as your symbol path.  For more details, see <a href="r06_use_gui_2a32f2c3-5091-4c35-8cc5-c393c96fb87e.xml.htm">Setting Paths and Loading Files</a>.</P>
+<P>To set your symbol path:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>SRV*c:\MySymCache*\\CompanySymbolServer\Symbols;SRV*c:\WinSymCache*http://msdl.microsoft.com/download/symbols</b><BR></nobr></P>
+<P>To set your source path:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>SRV*;d:\MySourceRoot</b><BR></nobr></P>
+<H4>Adjusting Window Position</H4>
+<P>Before using your theme, you should adjust the window positioning so that WinDbg handles your source files correctly.  This ensures that Source windows knows where to dock.</P>
+<P>Begin by opening a Source window in WinDbg.  Tab-dock this window with the placeholder set aside for your Source windows.  In order for the proper relationship to be made, the placeholder window must be the uppermost window in the dock before you perform this tab-docking operation.  Now close the source window but not the placeholder window.</P>
+<P>Because debugging information windows "remember" their last docking operation, each source window's last docking operation is associated with one of the placeholder windows after you have performed this procedure.  Because of this memory attribute, you should not close any of your placeholder windows.  Further, if you choose to change the theme's configuration, any window you reposition in a dock should always be tab-docked with a placeholder file.</P>
+<P>The sample themes included with the Debugging Tools for Windows were created using the following actions:</P><B></B><div class="indent1">
+<P>Place and position the <i>placeholder*.c</i> files into the dock.</P>
+</div>
+<div class="indent1">
+<P>Tab-dock every window type above the wanted placeholder window.</P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<P>For further information about adjusting window position in WinDbg, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Customizing a Theme RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

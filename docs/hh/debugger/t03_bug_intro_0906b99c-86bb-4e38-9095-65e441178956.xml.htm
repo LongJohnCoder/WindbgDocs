@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>General Troubleshooting Tips</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, General Troubleshooting Tips"><xml><MSHelp:Keyword Index="A" Term="t03_bug_intro_0906b99c-86bb-4e38-9095-65e441178956.xml"/>
+<META NAME="MS-HKWD" CONTENT="bug check, troubleshooting"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t03_bug_intro_0906b99c-86bb-4e38-9095-65e441178956.xml"></A>General Troubleshooting Tips</H1>
+<P>When a bug check occurs as a result of code you have written, you should use the kernel debugger to analyze the problem, and then fix the bugs in your code.   For full details, see the individual bug check code in the <a href="t03_bug_intro_2552b67e-0b4f-4950-8bd1-6fb6c0d5c90d.xml.htm">Bug Check Code Reference</a> section.  </P>
+<P>However, you might also encounter bug checks that are not caused by your own code. In this case, you probably will not be able to fix the actual cause of the problem, so your goal should be to work around the problem, and if possible isolate and remove the hardware or software component that is at fault.</P>
+<P>Many problems can be resolved through basic troubleshooting procedures, such as verifying instructions, reinstalling key components, and verifying file dates. Also, diagnostic tools such as Winmsd, Network General Sniffer, and Microsoft Windows Resource Kit Tools Help might isolate and resolve these issues.</P>
+<P>For general troubleshooting of Windows bug check codes, follow these suggestions:</P><B></B><UL type="disc">
+<LI>If you recently added hardware to the system, try removing or replacing it. Or check with the manufacturer to see if any patches are available.</LI>
+<LI>You can try running the hardware diagnostics supplied by the system manufacturer. </LI>
+<LI>Check with the manufacturer to see if an updated system BIOS or firmware is available. </LI>
+<LI>Make sure that any expansion board is properly seated and all cables are completely connected.</LI>
+<LI>Confirm that any new hardware is listed in the Microsoft Windows Marketplace Tested Products List.</LI>
+<LI>If new device drivers or system services have been added recently, try removing or updating them. <P class="note"><b>Important</b>  Use Safe Mode when removing or disabling components. Using Safe Mode loads only the minimum required drivers and system services during the Windows startup. To enter Safe Mode, restart your computer, and press F8 at the character-mode menu that displays the operating system choices. At the resulting <b>Windows</b> <b>Advanced Options</b> menu, choose <b>Safe Mode</b>. </P>
+</LI>
+<LI>Run a virus detection program. Viruses can infect all types of hard disks formatted for Windows, and resulting disk corruption can generate system bug check codes. Make sure the virus detection program checks the Master Boot Record for infections.</LI>
+<LI>Verify that the system has the latest Service Pack installed. To detect which Service Pack, if any, is installed on your system, click <b>Start</b>, click <b>Run</b>, type <b>winver,</b> and then press ENTER. The <b>About Windows</b> dialog box displays the Windows version number and the version number of the Service Pack, if one has been installed.</LI>
+<LI>Disable BIOS memory options such as caching or shadowing.</LI>
+<LI>Check the System Log and Application Log in Event Viewer to see if any additional error messages have been logged recently. These might pinpoint the cause of the error.</LI>
+</UL>
+<P></P>
+<P>Kernel debugging is especially useful when other troubleshooting techniques fail, or for a recurring problem. Remember to capture the exact text in the bug check information section of the error message. To isolate a complex problem and develop a viable workaround or a program replacement, you must record the exact actions that lead to the failure.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: General Troubleshooting Tips RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

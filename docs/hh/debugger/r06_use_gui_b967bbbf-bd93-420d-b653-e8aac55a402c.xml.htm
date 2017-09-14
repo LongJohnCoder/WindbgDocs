@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Symbol Path</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Symbol Path"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml"/>
+<META NAME="MS-HKWD" CONTENT="symbol files and paths">
+<META NAME="MS-HKWD" CONTENT="symbol files and paths, overview">
+<META NAME="MS-HKWD" CONTENT="symbols, lazy symbol loading">
+<META NAME="MS-HKWD" CONTENT="symbols, deferred symbol loading">
+<META NAME="MS-HKWD" CONTENT="symbol path">
+<META NAME="MS-HKWD" CONTENT="symbol path, [See &quot;symbol files and paths&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml"></A>Symbol Path</H1>
+<P>The <i>symbol path</i> specifies the directories where the symbol files are located. For more information about symbols and symbol files, see <a href="r09_symbols_750b8c7c-1e41-4116-b7d3-ecd4c7fe42ce.xml.htm">Symbols</a>.</P>
+<P>Some compilers (such as Microsoft Visual Studio) put symbol files in the same directory as the binary files. The symbol files and the checked binary files contain path and file name information. This information frequently enables the debugger to find the symbol files automatically. If you are debugging a user-mode process on the computer where the executable was built, and if the symbol files are still in their original location, the debugger can locate the symbol files without you setting the symbol path.</P>
+<P>In most other situations, you have to set the symbol path to point to your symbol file locations.</P>
+<H4>Symbol Path Syntax</H4>
+<P>The debugger's symbol path is a string that consists of multiple directory paths, separated by semicolons. </P>
+<P>Relative paths are supported. However, unless you always start the debugger from the same directory, you should add a drive letter or a network share before each path. Network shares are also supported.</P>
+<P></P>
+<P>For each directory in the symbol path, the debugger looks in three directories. For example, if the symbol path includes the <i>c:\MyDir</i> directory, and the debugger is looking for symbol information for a DLL, the debugger first looks in <i>c:\MyDir\symbols\dll</i>, then in <i>c:\MyDir\dll</i>, and finally in <i>c:\MyDir</i>. The debugger then repeats this process for each directory in the symbol path. Finally, the debugger looks in the current directory and then in the current directory with <i>\dll</i> appended to it. (The debugger appends <i>dll</i>, <i>exe</i>, or <i>sys</i>, depending on which binaries it is debugging.)</P>
+<P>However, because symbol files have date and time stamps, you do not have to worry that the debugger will use the wrong symbols because they are the symbols found first in this sequence. The debugger always looks for the symbols that match the time stamp on the binary files that it is debugging. For more information about responses in case the symbols files are not available, see <a href="r09_symbols_3dda96c3-bcd7-41c7-9905-a4e8685af077.xml.htm">Compensating for Symbol-Matching Problems</a>.</P>
+<P class="note"><b>Note</b>  If you are connected to the Internet or a corporate network, the most efficient way to access symbols is to use a symbol server. You can use a symbol server by using the <b>srv*</b> or <b>symsrv*</b> string within your symbol path. For more information about symbol servers, see <a href="r09_symbols_cf2471ca-ad4b-4a54-b8cf-534539691b4c.xml.htm">Symbol Stores and Symbol Servers</a>.</P>
+<H4>Lazy Symbol Loading</H4>
+<P>The debugger's default behavior is to use <i>lazy symbol loading</i> (also known as <i>deferred symbol loading</i>). This kind of loading means that symbols are not loaded until they are required. However, if the symbol path is changed, all <i>already-loaded</i> symbols are immediately reloaded. For more information about lazy symbol loading and how to activate and deactivate it, see <a href="r09_symbols_538315dc-6582-4a76-9725-d9d53b52e4a0.xml.htm">Deferred Symbol Loading</a>.</P>
+<P>You can turn off lazy symbol loading in CDB and KD by using the <b>-s</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>. You can also force symbol loading by using the <a href="r17_cmds_i_4c0144c7-30e4-40ee-a7aa-6ee2c44b143d.xml.htm"><b>ld (Load Symbols)</b></a> command or by using the <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload (Reload Module)</b></a> command together with the <b>/f</b> option.</P>
+<H4>Controlling the Symbol Path</H4>
+<P>To control the symbol path, you can do one of the following:</P><B></B><UL type="disc">
+<LI>Before you start the debugger, use the _NT_SYMBOL_PATH and _NT_ALT_SYMBOL_PATH <a href="r12_cmdline_53f400f6-9ae2-427a-85d7-82b0cab41a96.xml.htm">environment variables</a> to set the path. The symbol path is created by appending _NT_SYMBOL_PATH <i>after</i> _NT_ALT_SYMBOL_PATH. (Typically, the path is set through the _NT_SYMBOL_PATH. However, you might want to use _NT_ALT_SYMBOL_PATH to override these settings in special cases, such as if you have private versions of shared symbol files.) If you try to add an invalid directory through these environment variables, the debugger ignores this directory.</LI>
+<LI>When you start the debugger, use the <b>-y</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> to set the path.</LI>
+<LI>Use the <a href="r22_metacmds_s_9b66f1cb-f87e-45be-9382-dc21f116fa2c.xml.htm"><b>.sympath</b></a> command to display, set, change, or append to the path. If you are using a source server, the <a href="r22_metacmds_s_ecda09e2-84b5-4553-84a7-01a79f360f9d.xml.htm"><b>.symfix (Set Symbol Store Path)</b></a> command is similar to <b>.sympath</b> but saves you typing.</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r36_gui_1_7c9dc212-257a-4fce-b41b-96a997e6bab2.xml.htm"><b>File | Symbol File Path</b></a> command or press CTRL+S to display, set, change, or append to the path.</LI>
+</UL>
+<P></P>
+<P>If you use the <b>-sins</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>, the debugger ignores the symbol path environment variable.</P>
+<H4>cache*<i>localsymbolcache</i></H4>
+<P>If you include the string <b>cache*</b><i>localsymbolcache</i> in your symbol path, the specified directory <i>localsymbolcache</i> will be used to store any symbols loaded from any element that appears in your symbol path to the right of this string. This allows you to use a local cache for symbols downloaded from any location, not just those downloaded by a symbol server.</P>
+<P>For example, if you set your symbol path with the following <a href="r22_metacmds_s_9b66f1cb-f87e-45be-9382-dc21f116fa2c.xml.htm"><b>.sympath</b></a> command, the directory <i>c:\mysymbols</i> will be used to store files from both of the <i>\\private</i> shares, but not from <i>\\someshare</i>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>.sympath \\someshare\that\cachestar\ignores;cache*c:\mysymbols;\\private\binary\symbol\location;\\private\test\build\symbol\share<BR></nobr></P>
+<P></P>
+<P>This can be easily combined with the <a href="r09_symbols_7bd43120-4e98-4568-a44f-0fe75ee0ac12.xml.htm">Microsoft public symbol store</a> by using the following initial setting:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>_NT_SYMBOL_PATH=srv*c:\mysymbols*http://msdl.microsoft.com/download/symbols;cache*c:\mysymbols<BR></nobr></P>
+<P></P>
+<P>After this, you can expand the symbol path with the <b>.sympath+</b> command, which will append additional locations to the right of the current path.  Symbols from these new locations will be cached in <i>c:\mysymbols</i> because they are listed to the right of the <b>cache*</b> string in the path; symbols from the symbol server will be stored in <i>c:\mysymbols</i> because of the usual syntax used by the symbol server (see <a href="r06_use_gui_e1aaa539-33f7-49f7-b5a4-9aa8321b3e05.xml.htm">Using a Symbol Server</a>).</P>
+<P></P>
+<H4>Using AgeStore to Reduce the Cache Size</H4>
+<P>You can use the AgeStore tool to delete cached files that are older than a specified date, or to delete enough old files that the resulting size of the cache is less than a specified amount.  This can be useful if your downstream store is too large.  For details, see <a href="symchk_578d84f8-168a-40be-84c7-44815ac942c5.xml.htm">AgeStore</a>. </P>
+<P></P>
+<P>For more information about symbol servers and symbol stores, see <a href="r09_symbols_cf2471ca-ad4b-4a54-b8cf-534539691b4c.xml.htm">Symbol Stores and Symbol Servers</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Symbol Path RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

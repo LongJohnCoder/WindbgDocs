@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Ending the Debugging Session</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Ending the Debugging Session"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_cec0a699-8a28-48a9-b3f8-62271f688f6c.xml"/>
+<META NAME="MS-HKWD" CONTENT="exiting the debugger">
+<META NAME="MS-HKWD" CONTENT="exiting the debugger, overview">
+<META NAME="MS-HKWD" CONTENT="quitting the debugger">
+<META NAME="MS-HKWD" CONTENT="quitting the debugger, overview">
+<META NAME="MS-HKWD" CONTENT="ending the debugging session">
+<META NAME="MS-HKWD" CONTENT="ending the debugging session, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_cec0a699-8a28-48a9-b3f8-62271f688f6c.xml"></A>Ending the Debugging Session</H1>
+<P></P>
+<P>You can exit any Microsoft Windows debugger during the debugging session. The three debuggers have somewhat different methods of exiting. WinDbg also enables you to end the debugging session without exiting WinDbg.</P>
+<P>If you want to avoid accidentally ending the debugging session, you can use the <a href="r21_metacmds_l_6dd9ea99-39d7-4415-81bd-4b242e62883f.xml.htm"><b>.quit_lock (Prevent Accidental Quit)</b></a> command.</P>
+<H4>Exiting CDB</H4>
+<P>You can exit CDB by using the <a href="r17_cmds_i_27fbcb2b-e3e7-470e-bab9-29dd7a115129.xml.htm"><b>q (Quit)</b></a> command. This command also closes the application that you are debugging.</P>
+<P>On Windows XP and later versions of Windows, the <a href="r17_cmds_i_922e4540-49bd-419a-a76e-c8b9f766db22.xml.htm"><b>qd (Quit and Detach)</b></a> command detaches CDB from the target application, exits the debugger, and leaves the target application running. If you used the <b>-pd</b> command-line option when you started the debugger, detaching occurs if the session is ended for <i>any</i> reason. (This technique makes <b>-pd</b> especially useful when you are debugging a sensitive process, such as CSRSS, that you do not want to end.)</P>
+<P>On Windows 2000, the <b>qd</b> command or the <b>-pd</b> option generates a warning message and has no effect. These operating systems do not allow a debugger to detach from its target application. (If the target must not be ended, you should use noninvasive debugging and exit by using the <b>Q</b> command. For more information, see <a href="r05_use_start_93639902-63fa-4e1b-a145-bd91af8eabb8.xml.htm">Attaching to a Running Process (User Mode)</a>.)    </P>
+<P>If the debugger is not responding, you can exit by pressing <a href="r23_keys_847bf5ac-4c45-4a3c-bb2b-bed857dfa042.xml.htm">CTRL+B</a> and then ENTER. This method is a secondary exit mechanism. It abruptly ends the debugger and is similar to ending a process through Task Manager or by closing the window.</P>
+<H4>Exiting KD</H4>
+<P>There are two different ways to exit KD.</P><B></B><UL type="disc">
+<LI>Issue a <a href="r17_cmds_i_27fbcb2b-e3e7-470e-bab9-29dd7a115129.xml.htm"><b>q (Quit)</b></a> command in KD to save the log file, end the debugging session, and exit the debugger. The target computer remains locked.</LI>
+<LI>Press <a href="r23_keys_847bf5ac-4c45-4a3c-bb2b-bed857dfa042.xml.htm">CTRL+B</a> and then press ENTER to end the debugger abruptly. If you want the target computer to continue to run after the debugger is ended, you must use this method. Because CTRL+B does not remove breakpoints, you should use the following commands first.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt;  <b>bc *</b><BR>kd&gt;  <b>g</b><BR>kd&gt;  &lt;<b>CTRL+B</b>&gt; &lt;<b>ENTER</b>&gt; <BR></nobr></P>
+</LI>
+</UL>
+<P>Exiting the debugger by using CTRL+B does not clear kernel-mode breakpoints, but attaching a new kernel debugger <i>does</i> clear these breakpoints.</P>
+<P>When you are perfomring remote debugging, <b>q</b> ends the debugging session. CTRL+B exits the debugger but leaves the session active. This situation enables another debugger to connect to the session.</P>
+<P>If the <b>q</b> command does not work, press <a href="r23_keys_0f90911c-d4cf-4a2e-9811-5945a2db09fe.xml.htm">CTRL+R</a> and then press ENTER on the host computer's keyboard, and then retry the <b>q</b> command. If this procedure does not work, you must use CTRL+B to exit the debugger.</P>
+<H4>Exiting WinDbg</H4>
+<P>You can exit WinDbg by clicking <a href="r36_gui_1_62159c61-bb8b-45c2-ad16-047040982808.xml.htm"><b>Exit</b></a> on the <b>File </b>menu or by pressing ALT+F4.</P>
+<P>If you are performing user-mode debugging, these commands close the application that you are debugging, unless you used the <b>-pd</b> command-line option when you started the debugger.   </P>
+<P>If you are performing kernel-mode debugging, the target computer remains in its current state. This situation enables you to leave the target running or frozen. (If you leave the target frozen, any future connection from a kernel debugger can resume debugging where you left it.)</P>
+<P></P>
+<H4>Ending a User-Mode Session Without Exiting</H4>
+<P>To end a user-mode debugging session, return the debugger to dormant mode, and close the target application, you can use the following methods:</P><B></B><UL type="disc">
+<LI>The <a href="r20_metacmds_e_5c2717e9-eef2-4d91-9a54-33653ba7f904.xml.htm"><b>.kill (Kill Process)</b></a> command </LI>
+<LI><i>(WinDbg only)</i>  The <a href="r17_cmds_i_27fbcb2b-e3e7-470e-bab9-29dd7a115129.xml.htm"><b>q (Quit)</b></a> command (unless you started the debugger with the <b>-pd</b> option) </LI>
+<LI><i>(WinDbg only)</i>  The <a href="r37_gui_2_b5acf3a0-cf4a-4664-9c1c-53e8f8c9b1c5.xml.htm"><b>Debug | Stop Debugging</b></a> command </LI>
+<LI><i>(WinDbg only)</i>  The SHIFT+F5 shortcut keys </LI>
+<LI><i>(WinDbg only)</i>  The <b>Stop debugging (Shift+F5) </b>button (<img src="tbstop.bmp">) on the toolbar</LI>
+</UL>
+<P>To end a user-mode debugging session, return the debugger to dormant mode, and set the target application running again, you can use the following methods:</P><B></B><UL type="disc">
+<LI><i>(Windows XP and later versions of Windows)</i>  The <a href="r19_metacmds_a_1174b7a4-f70a-44d2-a43d-163fbe5a8d7e.xml.htm"><b>.detach (Detach from Process)</b></a> command. If you are debugging multiple targets, this command detaches from the current target and continues the debugging session with the remaining targets.</LI>
+<LI><i>(Windows XP and later versions of Windows, WinDbg only)</i>  The <a href="r37_gui_2_e7b107b7-14cd-4ba8-9e0c-7930d45f664c.xml.htm"><b>Debug | Detach Debuggee</b></a> command. If you are debugging multiple targets, this command detaches from all current targets.</LI>
+<LI><i>(Windows XP and later versions of Windows)</i>  The <a href="r17_cmds_i_922e4540-49bd-419a-a76e-c8b9f766db22.xml.htm"><b>qd (Quit and Detach)</b></a> command. </LI>
+<LI><i>(Windows XP and later versions of Windows)</i>  The <a href="r17_cmds_i_27fbcb2b-e3e7-470e-bab9-29dd7a115129.xml.htm"><b>q (Quit)</b></a> command, if you started the debugger with the <b>-pd</b> option. </LI>
+</UL>
+<P></P>
+<P>You can detach from a target only in Windows XP and later versions of Windows. On Windows 2000, the <b>qd</b> command or the <b>-pd</b> option generates a warning message and has no effect. These operating systems do not allow a debugger to detach from its target application. If the target must not end, you should use noninvasive debugging instead. For more information, see <a href="r05_use_start_284e0db2-ee99-4c59-a6ef-af2557ee719b.xml.htm">Noninvasive Debugging (User Mode)</a>.</P>
+<P>To end a user-mode debugging session, return the debugger to dormant mode, but leave the target application in the debugging state, you can use the following method:</P><B></B><UL type="disc">
+<LI><i>(Windows XP and later versions of Windows)</i>  The <a href="r19_metacmds_a_ea8b7b66-835b-4c3c-a9f9-773e073bc583.xml.htm"><b>.abandon (Abandon Process)</b></a> command </LI>
+</UL>
+<P></P>
+<P>For more information about reattaching to the target, see <a href="r07_use_operation_1d5faf67-01fe-4837-94ec-14e2fd60dea3.xml.htm">Reattaching to the Target Application</a>.</P>
+<H4>Ending a Kernel-Mode Session Without Exiting</H4>
+<P>To end a kernel-mode debugging session, return the debugger to dormant mode, and leave the target computer frozen, you can use the following methods:</P><B></B><UL type="disc">
+<LI><i>(WinDbg only)</i>  The <a href="r17_cmds_i_27fbcb2b-e3e7-470e-bab9-29dd7a115129.xml.htm"><b>Q (Quit)</b></a> command (unless you started the debugger with the <b>-pd</b> option) </LI>
+<LI><i>(WinDbg only)</i>  The <a href="r37_gui_2_b5acf3a0-cf4a-4664-9c1c-53e8f8c9b1c5.xml.htm"><b>Debug | Stop Debugging</b></a> menu command </LI>
+<LI><i>(WinDbg only)</i>  The SHIFT+F5 shortcut key </LI>
+<LI><i>(WinDbg only)</i>  The <b>Stop debugging (Shift+F5) </b>button (<img src="tbstop.bmp">) on the toolbar</LI>
+</UL>
+<P></P>
+<P>When a WinDbg session ends, you are prompted to save the workspace for the current session, and then WinDbg returns to dormant mode. At this point, you can use all starting options. That is, you can start to debug a running process, spawn a new process, attach to a target computer, open a crash dump, or connect to a remote debugging session. For more information about all of these options, see <a href="r05_use_start_f7e1fb28-0ab2-4880-af04-50e888d431cb.xml.htm">Starting the Debugger</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Ending the Debugging Session RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

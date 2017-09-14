@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>|| (System Status)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, || (System Status)"><xml><MSHelp:Keyword Index="A" Term="r15_cmds_A_dd2901f8-95ac-43ec-b382-3d8c189f1f2a.xml"/>
+<META NAME="MS-HKWD" CONTENT="|| (System Status) command">
+<META NAME="MS-HKWD" CONTENT="System Status ( || ) command">
+<META NAME="MS-HKWD" CONTENT="system, System Status ( || ) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r15_cmds_A_dd2901f8-95ac-43ec-b382-3d8c189f1f2a.xml"></A>|| (System Status)</H1>
+<P>The double vertical bar (<b>||</b>) command prints status for the specified system or for all systems that you are currently debugging.<P>Do not confuse this command with the <a href="r15_cmds_a_94a10932-6816-4202-8307-985cd46649d1.xml.htm"><b>| (Process Status)</b></a> command.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>||</b> <i>System</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>System</i></DT>
+<DD>Specifies the system to display. If you omit this parameter, all systems that you are debugging are displayed. For more information about the syntax, see <a href="r13_syntax_ab2cedff-c069-4bc2-b75d-a56914229093.xml.htm">System Syntax</a>.</DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">Multiple target debugging</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>||</b> command is useful only when you are debugging multiple targets. Many, but not all, multiple-target debugging sessions involve multiple systems. For more information about these sessions, see <a href="r07_use_operation_6930fe2c-a632-474c-9f8c-5bdd3aa9349d.xml.htm">Debugging Multiple Targets</a>.</P>
+<P>Each system listing includes the server name and the protocol details. The system that the debugger is running on is identified as <b>&lt;Local&gt;</b>.</P>
+<P>The following examples show you how to use this command. The following command displays all systems.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>3:2:005&gt; <b>||</b><BR></nobr></P>
+<P>The following command also displays all systems.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>3:2:005&gt; <b>||*</b><BR></nobr></P>
+<P>The following command displays the currently active system.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>3:2:005&gt; <b>||.</b><BR></nobr></P>
+<P>The following command displays the system that had the most recent exception or break.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>3:2:005&gt; <b>||#</b><BR></nobr></P>
+<P>The following command displays system number 2.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>3:2:005&gt; <b>||2</b><BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: || (System Status) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.outmask (Control Output Mask)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .outmask (Control Output Mask)"><xml><MSHelp:Keyword Index="A" Term="r21_metacmds_L_b7481381-1a22-488e-be2e-164d3289da08.xml"/>
+<META NAME="MS-HKWD" CONTENT=".outmask (Control Output Mask) command">
+<META NAME="MS-HKWD" CONTENT="Control Output Mask (.outmask) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r21_metacmds_L_b7481381-1a22-488e-be2e-164d3289da08.xml"></A>.outmask (Control Output Mask)</H1>
+<P>The <b>.outmask</b> command controls the current output mask.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.outmask</b>[<b>-</b>] [<b>/l</b>] <i>Expression</i> <BR><b>.outmask /a</b> <BR><b>.outmask /d</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Expression</i></DT>
+<DD>Specifies the flags to add to the mask. <i>Expression</i> can be any ULONG value that specifies the flag bits that you want. For a list of the possible flags, see the table in the Comments section.</DD>
+<DT><b>-</b></DT>
+<DD>Removes the bits that <i>Expression</i> specifies from the mask, instead of adding them to the mask.</DD>
+<DT><b>/l</b></DT>
+<DD>Preserves the current value of the log file's output mask. If you do not include <b>/l</b>, the log file's output mask is the same as the regular output mask.</DD>
+<DT><b>/a</b></DT>
+<DD>Activates all mask flags. This parameter is equivalent to <b>.outmask 0xFFFFFFFF</b>.</DD>
+<DT><b>/d</b></DT>
+<DD>Restores the output mask to the default value. This parameter is equivalent to <b>.outmask 0x3F7</b>.</DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Each output mask flag enables the debugger to display certain output in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command Window</a>. If all of the mask flags are set, all output is displayed.</P>
+<P>You should remove output mask flags with caution, because you might be unable to read debugger output.</P>
+<P>The following flag values exist.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Default setting</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1  </TD>
+<TD Width="">On </TD>
+<TD Width="">Normal output</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2  </TD>
+<TD Width="">On </TD>
+<TD Width="">Error output</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4  </TD>
+<TD Width="">On </TD>
+<TD Width="">Warnings</TD>
+</TR>
+<TR valign="top">
+<TD Width="">8  </TD>
+<TD Width="">Off </TD>
+<TD Width="">Additional output</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10  </TD>
+<TD Width="">On </TD>
+<TD Width="">Prompt output</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x20  </TD>
+<TD Width="">On </TD>
+<TD Width="">Register dump before prompt</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x40  </TD>
+<TD Width="">On </TD>
+<TD Width="">Warnings that are specific to extension operation</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x80  </TD>
+<TD Width="">On </TD>
+<TD Width="">Debug output from the target (for example, <b>OutputDebugString</b> or <b>DbgPrint</b>)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x100  </TD>
+<TD Width="">On </TD>
+<TD Width="">Debug input expected by the target (for example, <b>DbgPrompt</b>)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x200  </TD>
+<TD Width="">On </TD>
+<TD Width="">Symbol messages (for example, <b>!sym noisy</b>)</TD>
+</TR>
+</table>
+<P></P>
+<P><I><B> </B></I></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .outmask (Control Output Mask) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

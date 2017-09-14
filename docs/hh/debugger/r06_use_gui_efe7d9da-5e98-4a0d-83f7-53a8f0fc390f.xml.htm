@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using the Toolbar and Status Bar</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using the Toolbar and Status Bar"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_efe7d9da-5e98-4a0d-83f7-53a8f0fc390f.xml"/>
+<META NAME="MS-HKWD" CONTENT="toolbar (WinDbg)">
+<META NAME="MS-HKWD" CONTENT="toolbar (WinDbg), overview">
+<META NAME="MS-HKWD" CONTENT="buttons (WinDbg Toolbar)">
+<META NAME="MS-HKWD" CONTENT="buttons (WinDbg Toolbar), overview">
+<META NAME="MS-HKWD" CONTENT="status bar">
+<META NAME="MS-HKWD" CONTENT="status bar, overview">
+<META NAME="MS-HKWD" CONTENT="WinDbg, toolbar">
+<META NAME="MS-HKWD" CONTENT="WinDbg, status bar">
+<META NAME="MS-HKWD" CONTENT="WinDbg, buttons"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_efe7d9da-5e98-4a0d-83f7-53a8f0fc390f.xml"></A>Using the Toolbar and Status Bar</H1>
+<P>The <i>toolbar</i> appears underneath the menu bar, near the top of the WinDbg window. The <i>status bar</i> appears at the bottom of the WinDbg window.</P>
+<H4>Using the Toolbar</H4>
+<p><img src="toolbar4.bmp"><p><b>Toolbar</b></p>
+</p>
+<P>The toolbar buttons have various effects. Most of them are equivalent to menu commands. To execute the command that is associated with a toolbar button, click the toolbar button. When you cannot use a button, it appears unavailable.</P>
+<P>For more information about each button, see <a href="r37_gui_2_1d4d089a-a763-419f-a172-174815e9773c.xml.htm">Toolbar Buttons</a>.</P>
+<H4>Using the Status Bar</H4>
+<p><img src="statusbar3.bmp"><p><b>Status bar</b></p>
+</p>
+<P>The following table describes the sections of the WinDbg status bar. </P><B></B><table>
+<TR valign="top">
+<TH Width="">Section</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Message</TD>
+<TD Width="">Displays messages from the debugger.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Ln, Col</TD>
+<TD Width="">Displays the line number and column number at the cursor in the active <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Sys</TD>
+<TD Width="">Shows the internal decimal number of the system that you are debugging, followed by its computer name (or <b>&lt;Local&gt;</b> if it is the same as the computer as the debugger is running on).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Proc</TD>
+<TD Width="">Shows the internal decimal number of the process that you are debugging, followed by its hexadecimal process ID.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Thrd</TD>
+<TD Width="">Shows the internal decimal number of the thread that you are debugging, followed by its hexadecimal thread ID.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">ASM</TD>
+<TD Width="">Indicates that WinDbg is in assembly mode. If ASM is unavailable, WinDbg is in source mode.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">OVR</TD>
+<TD Width="">Indicates that overtype mode is active. If OVR is unavailable, insert mode is active.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">CAPS</TD>
+<TD Width="">Indicates that CAPS LOCK is on.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">NUM</TD>
+<TD Width="">Indicates that NUM LOCK is on.</TD>
+</TR>
+</table>
+<P></P>
+<H4>Hiding the Toolbar or Status Bar</H4>
+<P>To display or hide the toolbar, select or clear <a href="r37_gui_2_7726935f-6075-4577-950f-b2ce4f40138e.xml.htm"><b>Toolbar</b></a> on the <b>View</b> menu. To display or hide the status bar, select or clear <a href="r37_gui_2_6690e9ff-2e6c-41dc-a4fd-dd0d2bfafd14.xml.htm"><b>Status Bar</b></a> on the <b>View</b> menu.</P>
+<P>If you hide the toolbar or the status bar, you have more space for debugging information windows in the WinDbg display area.</P>
+<H4>Setting the Window Title</H4>
+<P>You can change the title of the WinDbg window by using the <a href="r22_metacmds_s_4545597b-8952-46bc-9870-d1e8e7a17648.xml.htm"><b>.wtitle (Set Window Title)</b></a> command.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using the Toolbar and Status Bar RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

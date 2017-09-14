@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.ocommand (Expect Commands from Target)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .ocommand (Expect Commands from Target)"><xml><MSHelp:Keyword Index="A" Term="r21_metacmds_L_9c3a182e-e8b9-4baa-a8cd-aea4cd4d0ae6.xml"/>
+<META NAME="MS-HKWD" CONTENT=".ocommand (Expect Commands from Target) command">
+<META NAME="MS-HKWD" CONTENT="Expect Commands from Target (.ocommand) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r21_metacmds_L_9c3a182e-e8b9-4baa-a8cd-aea4cd4d0ae6.xml"></A>.ocommand (Expect Commands from Target)</H1>
+<P>The <b>.ocommand</b> command enables the target application to send commands to the debugger.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.ocommand </b><i>String</i> <BR><b>.ocommand</b> <b>-d</b> <BR><b>.ocommand </b><BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>String</i></DT>
+<DD>Specifies the command prefix string. <i>String</i> can include spaces, but you cannot use C-style control characters such as <b>\"</b> and <b>\n</b>. You can also enclose <i>String</i> in quotation marks. However, if <i>String</i> includes a semicolon, leading spaces, or trailing spaces, you must enclose <i>String </i>in quotation marks.</DD>
+<DT><b>-d</b></DT>
+<DD>Deletes the command prefix string.</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If you use the <b>.ocommand</b> command without parameters, the debugger displays the current command prefix string. To clear the existing string, use <b>.ocommand -d</b>.</P>
+<P>When you have set a command prefix string, any target output (such as the contents of an <b>OutputDebugString</b> command) is scanned. If this output begins with the command prefix string, the text of the output that follows the prefix string is treated as a debugger command string and is run. When this text is executed, the command string is not displayed. </P>
+<P>The target can include an <a href="r20_metacmds_e_6eb44413-2b5e-423a-8a53-73546ee1e3d1.xml.htm"><b>.echo (Echo Comment)</b></a> command in the output string if you want additional messages. Target output that does not begin with the prefix string is displayed in the typical manner.</P>
+<P>After the commands within the command string have been executed, the target remains broken into the debugger, unless the final command is <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a>.</P>
+<P>The comparison between the command prefix string and the target output is not case sensitive. (However, subsequent uses of <b>.ocommand</b> display the string that you entered with the case preserved).</P>
+<P>For this example, assume that you enter the following command in the debugger.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.ocommand magiccommand</b><BR></nobr></P>
+<P>Then, the target application executes the following line.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>OutputDebugString("MagicCommand kb;g");<BR></nobr></P>
+<P>The debugger recognizes the command string prefix and executes <b>kb;g</b> immediately.</P>
+<P>However, the following line does not cause any commands to be executed.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>OutputDebugString("Command on next line.\nmagiccommand kb;g");<BR></nobr></P>
+<P>There are no commands executed from the preceding example because the command string prefix is not at the beginning of the output, even though it does begin a new line.</P>
+<P class="note"><b>Note</b>  You should choose a command string prefix that will not likely appear in any target output <i>other</i> than your own commands.</P>
+<H4>Additional Information</H4>
+<P>For more information about <b>OutputDebugString</b> and other user-mode functions that communicate with a debugger, see the Microsoft Windows SDK documentation.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .ocommand (Expect Commands from Target) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

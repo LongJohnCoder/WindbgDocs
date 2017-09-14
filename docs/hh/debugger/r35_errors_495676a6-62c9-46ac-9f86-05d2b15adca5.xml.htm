@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>dbgerr004: Page Not Present in Dump File</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, dbgerr004: Page Not Present in Dump File"><xml><MSHelp:Keyword Index="A" Term="r35_errors_495676a6-62c9-46ac-9f86-05d2b15adca5.xml"/>
+<META NAME="MS-HKWD" CONTENT="dbgerr004">
+<META NAME="MS-HKWD" CONTENT="Page not present in dump file (dbgerr004)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r35_errors_495676a6-62c9-46ac-9f86-05d2b15adca5.xml"></A>dbgerr004: Page Not Present in Dump File</H1>
+<P>Debugger error <b>dbgerr004</b> displays the message "Page <i>number</i> not present in dump file." This error indicates that the debugger needed a memory page that was not included in the dump file being debugged.</P>
+<P>The specified <i>number</i> is the page frame number (PFN) corresponding to the location in the physical memory of the original page.</P>
+<P>To suppress this error message, use the <a href="r20_metacmds_e_86da1eae-eba8-43f4-bebc-a35a7ddf7803.xml.htm"><b>.ignore_missing_pages 1</b></a> command. This command allows debugging to proceed, but does not display this error message.</P>
+<P>Kernel-mode memory dumps come in three sizes, and the smaller sizes do not include all the memory pages. For details, see <a href="r10_dump_files_fb0158c7-161d-4959-9dd3-00be89aebd02.xml.htm">Varieties of Kernel-Mode Dump Files</a>.</P>
+<P>User-mode memory dumps also come in various sizes. See <a href="r10_dump_files_a7472684-646c-4d81-bff3-2abe04563271.xml.htm">User-Mode Dump Files</a> for details.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: dbgerr004: Page Not Present in Dump File RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

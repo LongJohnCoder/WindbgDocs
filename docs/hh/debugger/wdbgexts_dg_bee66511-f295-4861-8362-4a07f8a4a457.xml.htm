@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>WdbgExts Threads and Processes</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, WdbgExts Threads and Processes"><xml><MSHelp:Keyword Index="A" Term="WdbgExts_DG_bee66511-f295-4861-8362-4a07f8a4a457.xml"/>
+<META NAME="MS-HKWD" CONTENT="WdbgExts extensions, threads">
+<META NAME="MS-HKWD" CONTENT="WdbgExts extensions, processes"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_DG_bee66511-f295-4861-8362-4a07f8a4a457.xml"></A>WdbgExts Threads and Processes</H1>
+<P>This topic provides a brief overview of how threads and processes can be manipulated using the WdbgExts API.  For an overview of threads and processes in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a>, see <a href="engine_overview_89c9fa4e-c2fe-4ba7-84d5-b049cebd3130.xml.htm">Threads and Processes</a> in the <a href="engine_overview_a9228fb3-172b-458a-9781-00ab1470afe8.xml.htm">Debugger Engine Overview</a> section of this documentation.</P>
+<H4>Threads</H4>
+<P>To get the address of the thread environment block (TEB) that describes the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#e79fad75-e3ff-41d6-9f36-896e7b1ce5bb">current thread</a>, use the method <a href="wdbgexts_ref_69ad127f-7df4-4c57-9475-55040aa02f78.xml.htm"><b>GetTebAddress</b></a>.  In <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>, the KTHREAD structure is also available to describe a thread. This structure is returned by <a href="wdbgexts_ref_03db8f68-2e64-4530-bf35-df2a6f0d7736.xml.htm"><b>GetCurrentThreadAddr</b></a> (in <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#1a7518e7-05c9-4be8-baf0-63b4024f4e30">user-mode debugging</a>, <b>GetCurrentThreadAddr</b> returns the address of the TEB).</P>
+<P>The <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#55d53254-4010-4b02-b11f-938de8c2622b">thread context</a> is the state preserved by Windows when switching threads; it is represented by the CONTEXT structure.  This structure varies with the operating system and platform and care should be taken when using the CONTEXT structure.  The thread context is returned by the <a href="wdbgexts_ref_52639fac-abbf-4abc-a01f-361d14e49fd0.xml.htm"><b>GetContext</b></a> function and can be set using the <a href="wdbgexts_ref_1a94f80d-7df9-45d1-9bca-19a18a2efb22.xml.htm"><b>SetContext</b></a> function.</P>
+<P>To examine the stack trace for the current thread, use the <a href="wdbgexts_ref_5ccc4adf-2b59-4373-8e4a-3bc8847c5749.xml.htm"><b>StackTrace</b></a> function.  To temporarily change the thread used for examining the stack trace, use the <a href="wdbgexts_ref_62cb59e2-5a16-4bee-936c-6eeaa5126fbc.xml.htm"><b>SetThreadForOperation</b></a> or <a href="wdbgexts_ref_8c7ef2e9-4096-4284-9878-63d90f49e227.xml.htm"><b>SetThreadForOperation64</b></a> functions.  See <a href="engine_dg_0756bc19-99ad-464e-9978-6965c4714540.xml.htm">Examining the Stack Trace</a> in the <a href="engine_dg_d8e9e675-c026-46b5-b182-4da8b2e1f9a6.xml.htm">Using the Debugger Engine API</a> section of this documentation for additional methods for examining the stack.</P>
+<P></P>
+<P>To get information about an operating system thread in the target, use the <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation <a href="wdbgexts_ref_dfcc01ec-d4f4-4eba-adb5-d729f951f502.xml.htm"><b>IG_GET_THREAD_OS_INFO</b></a>.</P>
+<P></P>
+<H4>Processes</H4>
+<P>To get the address of the process environment block (PEB) that describes the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a> use the method <a href="wdbgexts_ref_a51cb865-4701-4fbc-a075-7bcadd8ee8be.xml.htm"><b>GetPebAddress</b></a>.  In kernel-mode debugging, the KPROCESS structure is also available to describe a process. This structure is returned by <a href="wdbgexts_ref_cf956b74-b0e4-43fa-911f-289b01dbf8c8.xml.htm"><b>GetCurrentProcessAddr</b></a> (in user-mode debugging, <b>GetCurrentProcessAddr</b> returns the address of the PEB).</P>
+<P>The method <a href="wdbgexts_ref_50cc8e27-7f7e-4ec3-ad2d-745f38e87037.xml.htm"><b>GetCurrentProcessHandle</b></a> returns the system handle for the current process.</P>
+<H4>Additional Information</H4>
+<P>For a more powerful thread manipulation and process manipulation API, see <a href="engine_dg_1442c778-acca-4b77-a596-6863ab5c8279.xml.htm">Controlling Threads and Processes</a> in the <a href="engine_dg_d8e9e675-c026-46b5-b182-4da8b2e1f9a6.xml.htm">Using the Debugger Engine API</a> section of this documentation.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: WdbgExts Threads and Processes RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

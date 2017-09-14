@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>x64 Instructions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, x64 Instructions"><xml><MSHelp:Keyword Index="A" Term="t09_arch_x86_9c7d3f73-9a54-4958-a3bc-c74105d8447a.xml"/>
+<META NAME="MS-HKWD" CONTENT="x64 processor, instructions"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t09_arch_x86_9c7d3f73-9a54-4958-a3bc-c74105d8447a.xml"></A>x64 Instructions</H1>
+<P>Most x86 instructions continue to be valid for x64 in 64-bit mode.  Some rarely-used operations are no longer supported in 64-bit mode, such as:</P><B></B><UL type="disc">
+<LI>binary-coded decimal arithmetic instructions: AAA, AAD, AAM, AAS, DAA, DAS</LI>
+<LI>BOUND</LI>
+<LI>PUSHAD and POPAD</LI>
+<LI>most operations that dealt with segment registers, such as PUSH DS and POP DS.  (Operations that use the FS or GS segment registers are still valid.)</LI>
+</UL>
+<P></P>
+<P>The x64 instruction set includes recent additions to the x86, such as SSE 2.  Programs compiled for x64 can freely use these instructions.</P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="312107af-9e7d-44f8-a748-cf66c65e29ec"></A>Data Transfer</H3>
+<P>The x64 provides new variants of the MOV instruction that can handle 64-bit immediate constants or memory addresses.</P><B></B><table>
+<TR valign="top">
+<TD Width="">MOV</TD>
+<TD Width=""><b>r</b>,#n</TD>
+<TD Width=""><b>r</b> = #n</TD>
+</TR>
+<TR valign="top">
+<TD Width="">MOV</TD>
+<TD Width=""><b>rax</b>, m</TD>
+<TD Width="">Move contents at 64-bit address to <b>rax</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">MOV</TD>
+<TD Width="">m, <b>rax</b></TD>
+<TD Width="">Move contents of <b>rax</b> to 64-bit address.</TD>
+</TR>
+</table>
+<P></P>
+<P>The x64 also provides a new instruction to sign-extend 32-bit operands to 64 bits.</P><B></B><table>
+<TR valign="top">
+<TD Width="">MOVSXD</TD>
+<TD Width=""><b>r1</b>, <b>r</b>/m</TD>
+<TD Width="">Move DWORD with sign extension to QWORD.</TD>
+</TR>
+</table>
+<P></P>
+<P>Ordinary MOV operations into 32-bit subregisters automatically zero extend to 64 bits, so there is no MOVZXD instruction.</P>
+<P>Two SSE instructions can be used to move 128-bit values (such as GUIDs) from memory to an <b>xmm</b><i>n</i> register or vice versa.</P><B></B><table>
+<TR valign="top">
+<TD Width="">MOVDQA</TD>
+<TD Width=""><b>r1</b>/m, <b>r2</b>/m</TD>
+<TD Width="">Move 128-bit aligned value to <b>xmm</b><i>n</i> register, or vice versa.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">MOVDQU</TD>
+<TD Width=""><b>r1</b>/m, <b>r2</b>/m</TD>
+<TD Width="">Move 128-bit value (not necessarily aligned) to register, or vice versa.</TD>
+</TR>
+</table>
+<P></P>
+<H3><A NAME="e4031ba9-1631-436e-8209-02d2efe2e041"></A>Data Conversion</H3><B></B><table>
+<TR valign="top">
+<TD Width="">CDQE</TD>
+<TD Width="">Convert dword (<b>eax</b>) to qword (<b>rax</b>).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">CQO</TD>
+<TD Width="">convert qword (<b>rax</b>) to oword (<b>rdx</b>:<b>rax</b>).</TD>
+</TR>
+</table>
+<P></P>
+<H3><A NAME="599e21e6-69c6-44ec-85b0-3dfb9f68e06e"></A>String Manipulation</H3><B></B><table>
+<TR valign="top">
+<TD Width="">MOVSQ</TD>
+<TD Width="">Move qword from <b>rsi</b> to <b>rdi.</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">CMPSQ</TD>
+<TD Width="">Compare qword at <b>rsi</b> with <b>rdi.</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">SCASQ</TD>
+<TD Width="">Scan qword at <b>rdi</b>. Compares qword at <b>rdi</b> to <b>rax</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">LODSQ</TD>
+<TD Width="">Load qword from <b>rsi</b> into <b>rax</b><i>.</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STOSQ</TD>
+<TD Width="">Store qword to <b>rdi</b> from <b>rax</b><i>.</i></TD>
+</TR>
+</table>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: x64 Instructions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

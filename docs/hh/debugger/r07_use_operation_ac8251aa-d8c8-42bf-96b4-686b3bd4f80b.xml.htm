@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Breakpoint Syntax</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Breakpoint Syntax"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_ac8251aa-d8c8-42bf-96b4-686b3bd4f80b.xml"/>
+<META NAME="MS-HKWD" CONTENT="methods, breakpoints on methods">
+<META NAME="MS-HKWD" CONTENT="breakpoints, breakpoints on methods">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, b?[] (breakpoint identifier)">
+<META NAME="MS-HKWD" CONTENT="b?[] (breakpoint identifier)">
+<META NAME="MS-HKWD" CONTENT="breakpoint identifier ( b?[] )">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, @!&quot;&quot; (literal MASM identifier)">
+<META NAME="MS-HKWD" CONTENT="@!&quot;&quot; (literal MASM identifier)">
+<META NAME="MS-HKWD" CONTENT="templated functions">
+<META NAME="MS-HKWD" CONTENT="templated functions, breakpoints">
+<META NAME="MS-HKWD" CONTENT="breakpoints, syntax"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_ac8251aa-d8c8-42bf-96b4-686b3bd4f80b.xml"></A>Breakpoint Syntax</H1>
+<P>The following syntax elements can be used when creating a <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">breakpoint</a>, either through the Debugger Command window or through the WinDbg graphical interface.</P>
+<H4>Addresses in Breakpoints</H4>
+<P>Breakpoints support many kinds of address syntax, including virtual addresses, function offsets, and source line numbers. For example, you can use any of the following commands to set breakpoints:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bp 0040108c</b><BR>0:000&gt; <b>bp main+5c</b><BR>0:000&gt; <b>bp `source.c:31`</b><BR></nobr></P>
+<P></P>
+<P>For more information about this syntax, see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a>, <a href="r13_syntax_01fe3d5e-b319-4199-9143-d7676bc32279.xml.htm">Source Line Syntax</a>, and the individual command topics.</P>
+<H4>Breakpoints on Methods</H4>
+<P>If you want to put a breakpoint on the <b>MyMethod</b> method in the <b>MyClass</b> class, you can use two different syntaxes:</P><B></B><UL type="disc">
+<LI>In MASM expression syntax, you can indicate a method by a double colon or by a double underscore.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bp MyClass::MyMethod</b> <BR>0:000&gt; <b>bp MyClass__MyMethod</b> <BR></nobr></P>
+</LI>
+<LI>In C++ expression syntax, you must indicate a method by a double colon.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bp @@( MyClass::MyMethod )</b> <BR></nobr></P>
+</LI>
+</UL>
+<P></P>
+<P>If you want to use a more complex breakpoint command, you should use MASM expression syntax. For more information about expression syntax, see <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a>. </P>
+<H4>Breakpoints Using Complicated Text</H4>
+<P>To set a breakpoint on complicated functions, including functions that contain spaces, as well as a member of a C++ public class, enclose the expression in parentheses. For example, use <b>bp (??MyPublic)</b> or <b>bp (operator new)</b>. </P>
+<P>A more versatile technique is to use the <nobr><b>@!"</b><i>chars</i><b>"</b></nobr> syntax. This is a special escape in the MASM evaluator that enables you to provide arbitrary text for symbol resolution. You must start with the three symbols <nobr><b>@!"</b></nobr> and end with a quotation mark (<b>"</b>). Without this syntax, you cannot use spaces, angle brackets (&lt;, &gt;), or other special characters in symbol names in the MASM evaluator. This syntax is exclusively for names, and not parameters. Templates and overloads are the primary sources of symbols that require this quote notation. You can also set the <b>bu </b>command by using the <nobr><b>@!"</b><i>chars</i><b>"</b></nobr> syntax, as the following code example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bu @!"</b><i>ExecutableName</i><b>!std::pair&lt;unsigned int,std::basic_string&lt;unsigned short,std::char_traits&lt;unsigned short&gt;,std::allocator&lt;unsigned short&gt; &gt; &gt;::operator="</b><BR></nobr></P>
+<P></P>
+<P>In this example, <i>ExecutableName</i> is the name of an executable file.</P>
+<P>This escape syntax is more useful for C++ (for example, overloaded operators) instead of C because there are no spaces (or special characters) in C function names. However, this syntax is also important for a lot of managed code because of the considerable use of overloads in the .NET Framework.</P>
+<P>To set a breakpoint on arbitrary text in C++ syntax, use <b>bu</b> <b>@@c++(</b><i>text</i><b>)</b> for C++-compatible symbols.</P>
+<H4>Breakpoints in Scripts</H4>
+<P>Breakpoint IDs do not have to be referred to explicitly.  Instead, you can use a numerical expression that resolves to an integer that corresponds to a breakpoint ID.  To indicate that the expression should be interpreted as a breakpoint, use the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>b?[</b><i>Expression</i><b>]</b><BR></nobr></P>
+<P></P>
+<P>In this syntax, the square brackets are required, and <i>Expression</i> stands for any numerical expression that resolves to an integer that corresponds to a breakpoint ID.</P>
+<P>This syntax allows debugger scripts to programmatically select a breakpoint.  In the following example, the breakpoint changes depending on the value of a user-defined pseudo-register.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>b?[@$t0]</b><BR></nobr></P>
+<P></P>
+<H4>Breakpoint Pseudo-Registers</H4>
+<P>If you want to refer to a breakpoint address in an expression, you can use a <a href="r13_syntax_c05da1f3-3310-46cb-8e56-da3d670e05f3.xml.htm">pseudo-register</a> with the <b>$bp</b><i>Number</i> syntax, where <i>Number</i> is the breakpoint ID. For more information about this syntax, see <a href="r13_syntax_c05da1f3-3310-46cb-8e56-da3d670e05f3.xml.htm">Pseudo-Register Syntax</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Breakpoint Syntax RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

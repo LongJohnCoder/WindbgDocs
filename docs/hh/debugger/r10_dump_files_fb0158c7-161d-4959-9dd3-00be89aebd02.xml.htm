@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Varieties of Kernel-Mode Dump Files</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Varieties of Kernel-Mode Dump Files"><xml><MSHelp:Keyword Index="A" Term="r10_dump_files_fb0158c7-161d-4959-9dd3-00be89aebd02.xml"/>
+<META NAME="MS-HKWD" CONTENT="dump file, kernel-mode file types"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r10_dump_files_fb0158c7-161d-4959-9dd3-00be89aebd02.xml"></A>Varieties of Kernel-Mode Dump Files</H1>
+<P>There are three kinds of kernel-mode crash dump files:</P><B></B><div class="indent1">
+<P><a href="r10_dump_files_940a7ef7-167f-4f4c-8c73-227538dd30f2.xml.htm">Complete Memory Dump</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r10_dump_files_cc9e7162-5f3f-486d-9732-328deb2078e9.xml.htm">Kernel Memory Dump</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r10_dump_files_1c793f2b-a711-4e06-9c87-99be8f297556.xml.htm">Small Memory Dump</a> </P>
+</div>
+<P></P>
+<P>The difference between these dump files is one of size. The <i>Complete Memory Dump</i> is the largest and contains the most information, the <i>Kernel Memory Dump </i>is somewhat smaller, and the <i>Small Memory Dump</i> is only 64 KB in size.</P>
+<P>The advantage to the larger files is that, since they contain more information, they are more likely to help you find the cause of the crash.</P>
+<P>The advantage of the smaller files is that they are smaller and written more quickly. Speed is often valuable; if you are running a server, you may want the server to reboot as quickly as possible after a crash, and the reboot will not take place until the dump file has been written.</P>
+<P>After a Complete Memory Dump or Kernel Memory Dump has been created, it is possible to create a Small Memory Dump file <i>from the larger dump file</i>. See the <a href="r19_metacmds_a_10de67ad-e8c3-42f2-ba9e-95a146a0320d.xml.htm"><b>.dump (Create Dump File)</b></a> command for details.</P>
+<P class="note"><b>Note</b>  Much information can be obtained by analyzing a kernel-mode dump file. However, no kernel-mode dump file can provide as much information as actually debugging the crash directly with a kernel debugger.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Varieties of Kernel-Mode Dump Files RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

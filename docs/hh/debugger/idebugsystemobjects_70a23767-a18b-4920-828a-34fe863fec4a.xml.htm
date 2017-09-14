@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SetCurrentSystemId</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SetCurrentSystemId"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="SetCurrentSystemId"/>
+<MSHelp:Keyword Index="A" Term="IDebugSystemObjects_70a23767-a18b-4920-828a-34fe863fec4a.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSystemObjects::SetCurrentSystemId method">
+<META NAME="MS-HKWD" CONTENT="SetCurrentSystemId (IDebugSystemObjects) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSystemObjects_70a23767-a18b-4920-828a-34fe863fec4a.xml"></A>SetCurrentSystemId</H1>
+<P><P>The <b>SetCurrentSystemId</b> method makes the specified target the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#2a8fdab1-9104-4107-b188-c3879a3c4a66">current target</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSystemObjects3::SetCurrentSystemId(</b><BR><b>    IN ULONG  </b><i>Id</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Id</i></DT>
+<DD>Specifies the engine target ID for the target that is to become the current target.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>No process with the given ID was found.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>SetCurrentSystemId</b> is available in <b>IDebugSystemObjects3</b> and later versions.</P>
+<H4>Comments</H4>
+<P>This method also sets the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#e79fad75-e3ff-41d6-9f36-896e7b1ce5bb">current thread</a> and <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a>, and may change the current computer.</P>
+<P>If the current target is changed, the callback <a href="comcallbacks_fafc4238-0565-410b-9e00-1cbce74737f4.xml.htm"><b>IDebugEventCallbacks::ChangeEngineState</b></a> will be called with the DEBUG_CES_CURRENT_THREAD bit set.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="engine_overview_87d6e561-6d31-4a9e-8be3-1b5b93ebb5a3.xml.htm">Debugging Session and Execution Model</a>, <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SetCurrentSystemId RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

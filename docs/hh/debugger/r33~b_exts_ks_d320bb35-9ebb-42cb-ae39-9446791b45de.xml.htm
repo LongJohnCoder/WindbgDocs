@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ks.libexts</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ks.libexts"><xml><MSHelp:Keyword Index="A" Term="r33~b_exts_KS_d320bb35-9ebb-42cb-ae39-9446791b45de.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ks.libexts extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~b_exts_KS_d320bb35-9ebb-42cb-ae39-9446791b45de.xml"></A>!ks.libexts</H1>
+<P>The <b>!ks.libexts</b> extension provides access to Microsoft-supplied library extensions that are statically linked to the extension module.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ks.libexts</b> [<i>Command</i>] [<i>Libext</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Command</i></DT>
+<P>Optional. Specifies one of the following values. If this argument is omitted, <b>!libexts</b> returns help information.</P>
+<DL><DT><b>disableall</b></DT>
+<DD>Disable all library extensions. When this is used, omit the <i>Libext</i> parameter.</DD>
+<DT><b>disable</b></DT>
+<DD>Disable a specific library extension by name. When this is used, specify the name in the <i>Libext</i> parameter.</DD>
+<DT><b>enableall</b></DT>
+<DD>Enable all library extensions. Only loaded components with correct symbols are enabled. When this is used, omit the <i>Libext</i> parameter.</DD>
+<DT><b>enable</b></DT>
+<DD>Enable a specific library extension by name. When this is used, specify the name in the <i>Libext</i> parameter. Only loaded components with correct symbols can be enabled.</DD>
+<DT><b>details</b></DT>
+<DD>Show details about all currently linked library extensions. When this is used, omit the <i>Libext</i> parameter. </DD>
+</DL>
+<DT><i>Libext</i></DT>
+<DD>Specifies the name of a library extension. Required only for <i>Command</i> values of <b>enable</b> or <b>disable</b>. </DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>winxp\Ks.dll </i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ks.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The extension module contains an extensibility framework that allows separate components to be built and linked into <i>Ks.dll</i>. These extra components are called library extensions.</P>
+<P>The <b>!libexts</b> command allows viewing of statistics about those library extensions as well as control over them. For details, issue <b>!libexts</b> with no arguments.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~b_ks_b4eb1677-2223-49b7-8562-fdcfe42da3da.xml.htm">Kernel Streaming Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ks.libexts RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

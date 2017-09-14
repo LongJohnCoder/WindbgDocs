@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Remote Targets</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Remote Targets"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_403e6a06-76ae-4dfc-a475-4e8a77318c95.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, targets, remote">
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, debugging servers">
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, process servers">
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, kernel connection servers">
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, smart clients"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_403e6a06-76ae-4dfc-a475-4e8a77318c95.xml"></A>Remote Targets</H1>
+<P>There are two different forms of remote debugging, depending on which computer (remote client or server) is the host computer.  The <i>host computer</i> is the computer on which the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> is active.  On the other computer, the debugger engine is merely acting as a proxy relaying commands and data to the host engine.</P>
+<P>All debugger operations &#8212; such as executing commands and <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#a1e40118-1d4c-4ebf-8adc-4fe9a9d1a90f">extensions</a>, and symbol loading &#8212; are performed by the host engine.  A <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugger session</a> is also relative to the host engine.</P>
+<P>To list the debugging servers and process servers currently running on a computer, use <a href="idebugclient_8fecfb37-5e4d-4a2b-af1e-df081e636337.xml.htm"><b>OutputServers</b></a>.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="ef57e4cd-0279-4746-8c0e-1b5416eac328"></A>Debugging Servers and Debugging Clients</H3>
+<P>A <i>debugging server</i> is an instance of the debugger engine acting as a host and listening for connections from debugging clients.  The method <a href="idebugclient_5ca142fb-bb02-4484-adf0-9337f53d0bdc.xml.htm"><b>StartServer</b></a> will tell the debugger engine to start listening for connections from debugging clients.</P>
+<P>A <i>debugging client</i> is an instance of the debugger engine acting as a proxy, sending debugger commands and I/O to the debugging server.  The function <a href="clientfns_7beeb350-b8bd-44ea-b5c9-ca0da15146ae.xml.htm"><b>DebugConnect</b></a> can be used to connect to the debugging server.</P>
+<P>The client object returned by <b>DebugConnect</b> is not automatically joined to the debugger session on the debugging server.  The method <a href="idebugclient_b6ec9f48-f400-4a91-bf23-dc40dd702a15.xml.htm"><b>ConnectSession</b></a> can be used to join the session, synchronizing input and output.</P>
+<P>The communication between a debugging server and a debugging client mostly consists of debugger commands and RPC calls sent to the server, and command output sent back to the client.</P>
+<H3><A NAME="2198fa25-e6ef-4e68-b715-3a32968b560c"></A>Process Servers, Kernel Connection Servers, and Smart Clients</H3>
+<P><i>Process servers</i> and <i>kernel connection servers</i> are both instances of the debugger engine acting as proxies, listening for connections from smart clients, and performing memory, processor, or operating system operations as requested by these remote clients.  A <i>process server</i> facilitates the debugging of processes that are running on the same computer.  A <i>kernel connection server</i> facilitates the debugging of a Windows kernel debugging target that is connected to the computer that is running the connection server.  A process server can be started using the method <a href="idebugclient_de137b80-ffd7-4399-85a3-50b3c870c28c.xml.htm"><b>StartProcessServer</b></a> or the program <a href="r08_use_remote_0828c18f-b042-4288-9b58-a56e3076eb2e.xml.htm"><b>DbgSrv</b></a>.  The method <a href="idebugclient_ac54327c-85c5-41ab-906f-605d374a0e2d.xml.htm"><b>WaitForProcessServerEnd</b></a> will wait for a process server started with <b>StartProcessServer</b> to end.  A kernel connection server can be activated using the program <a href="r08_use_remote_567a9c86-34fe-49bc-a29f-dcfa3b739dc8.xml.htm"><b>KdSrv</b></a>.</P>
+<P>A <i>smart client</i> is an instance of the debugger engine acting as a host engine and connected to a process server.  The method <a href="idebugclient_519f5e11-6f3b-4469-8352-e6cd7c1ed384.xml.htm"><b>ConnectProcessServer</b></a> will connect to a process server.  Once connected, the methods described in <a href="engine_dg_5e74ebf4-af57-41c3-ad2a-bd87417cd8d9.xml.htm">Live User-Mode Targets</a> can be used. </P>
+<P>When the remote client is finished with the process server, it can disconnect using <a href="idebugclient_7cfc70fe-c298-40bf-aa28-0c084262d41d.xml.htm"><b>DisconnectProcessServer</b></a>, or it can use <a href="idebugclient_a24a3c82-f966-424c-a739-a775b45cb600.xml.htm"><b>EndProcessServer</b></a> to request that the process server shut down. To shut down the process server from the computer that it is running on, use Task Manager to end the process. If the instance of the debugger engine that used <b>StartProcessServer</b> is still running, it can use <a href="idebugcontrol_d49bfbf9-c9e1-4a43-8f2c-8778ef51db79.xml.htm"><b>Execute</b></a> to issue the debugger command <a href="r20_metacmds_e_f733aa12-edf5-451a-9e98-da99bc21a41c.xml.htm"><b>.endsrv 0</b></a>, which will end the process server (this is an exception to the usual behavior of <b>.endsrv</b>, which generally does not affect process servers). </P>
+<P>The communication between a process server and a smart client typically consists of low-level memory, processor, and operating system operations and requests that are sent from the remote client to the server. Their results are then sent back to the client.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Remote Targets RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

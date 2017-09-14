@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ba (Break on Access)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ba (Break on Access)"><xml><MSHelp:Keyword Index="A" Term="r15_cmds_A_12b97b7c-4264-440b-8422-f1c7cf647113.xml"/>
+<META NAME="MS-HKWD" CONTENT="ba (Break on Access) command">
+<META NAME="MS-HKWD" CONTENT="Break on Access (ba) command">
+<META NAME="MS-HKWD" CONTENT="breakpoints, Break on Access (ba) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r15_cmds_A_12b97b7c-4264-440b-8422-f1c7cf647113.xml"></A>ba (Break on Access)</H1>
+<P>The <b>ba</b> command sets a processor breakpoint (often called, less accurately, a <i>data breakpoint</i>). This breakpoint is triggered when the specified memory is accessed.<P></P>
+</P>
+<H4>Syntax</H4>
+<P>User-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr>[<b>~</b><i>Thread</i>] <b>ba</b>[<i>ID</i>] <i>Access</i> <i>Size</i> [<i>Options</i>] [<i>Address</i> [<i>Passes</i>]] [<b>"</b><i>CommandString</i><b>"</b>] <BR></nobr></P>
+<P></P>
+<P>Kernel-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>ba</b>[<i>ID</i>] <i>Access</i> <i>Size</i> [<i>Options</i>] [<i>Address</i> [<i>Passes</i>]] [<b>"</b><i>CommandString</i><b>"</b>] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Thread</i></DT>
+<DD>Specifies the thread that the breakpoint applies to. For more information about syntax, see <a href="r13_syntax_5bebd798-3782-4d86-8a4f-33b8f2488b7a.xml.htm">Thread Syntax</a>. You can specify threads only in user mode. </DD>
+<DT><i>ID</i></DT>
+<DD>Specifies an optional number that identifies the breakpoint. If you do not specify <i>ID</i>, the first available breakpoint number is used. You cannot add space between <b>ba</b> and the ID number. Each processor supports only a limited number of processor breakpoints, but there is no restriction on the value of the <i>ID</i> number. If you enclose <i>ID</i> in square brackets (<b>[]</b>), <i>ID</i> can include any expression. For more information about the syntax, see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a>. </DD>
+<DT><i>Access</i></DT>
+<DD>Specifies the type of access that satisfies the breakpoint. This parameter can be one of the following values.<B></B><table>
+<TR valign="top">
+<TH Width="">Option</TH>
+<TH Width="">Action</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>e</b> (execute)</TD>
+<TD Width="">Breaks into the debugger when the CPU retrieves an instruction from the specified address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r</b> (read/write)</TD>
+<TD Width="">Breaks into the debugger when the CPU reads or writes at the specified address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>w</b> (write)</TD>
+<TD Width="">Breaks into the debugger when the CPU writes at the specified address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>i</b> (i/o)</TD>
+<TD Width=""><i>(Microsoft Windows XP and later versions, kernel mode only, x86-based systems only)</i>  Breaks into the debugger when the I/O port at the specified <i>Address</i> is accessed.  </TD>
+</TR>
+</table>
+<P></P>
+<P>You cannot add space between <i>Access</i> and <i>Size</i>.</P>
+<P class="note"><b>Note</b>  On Windows Server 2003 with Service Pack 1 (SP1), on an Itanium-based computer that uses WOW64 to emulate x86, processor breakpoints do not work with the execute option but they do work with the read and write options.</P>
+</DD>
+<DT><i>Size</i></DT>
+<DD>Specifies the size of the location, in bytes, to monitor for access. On an x86-based processor, this parameter can be 1, 2, or 4. However, if <i>Access</i> equals <b>e</b>, <i>Size</i> must be 1. <P>On an x64-based processor, this parameter can be 1, 2, 4, or 8. However, if <i>Access</i> equals <b>e</b>, <i>Size</i> must be 1. </P>
+<P>On an Itanium-based processor, this parameter can be any power of 2, from 1 to 0x80000000. </P>
+<P>You cannot add space between <i>Access</i> and <i>Size</i>.</P>
+</DD>
+<DT><i>Options</i></DT>
+<DD>Specifies breakpoint options. You can use any number of the following options, except as indicated:<DL><DT><b>/1</b></DT>
+<DD>Creates a "one-shot" breakpoint. After this breakpoint is triggered, the breakpoint is permanently removed from the breakpoint list.</DD>
+<DT><b>/f</b> <i>PredNum</i></DT>
+<DD><i>(Itanium only, user mode only)</i>  Specifies a predicate number. The breakpoint is predicated with the corresponding predicate register (for example, <b>bp /f 4 </b><I><B>address</B></I> sets a breakpoint that is predicated with the <b>p4</b> predicate register). For more information about predicate registers, see <a href="t10_arch_ia64_058d30c8-b157-4fed-8317-371ffe0d0942.xml.htm">Itanium Architecture</a>.</DD>
+<DT><b>/p</b> <i>EProcess</i></DT>
+<DD><i>(Kernel mode only)</i>  Specifies a process that is associated with this breakpoint. <i>EProcess</i> should be the actual address of the EPROCESS structure, not the PID. The breakpoint is triggered only if it is encountered in the context of this process.</DD>
+<DT><b>/t</b> <i>EThread</i></DT>
+<DD><i>(Kernel mode only)</i>  Specifies a thread that is associated with this breakpoint. <i>EThread</i> should be the actual address of the ETHREAD structure, not the thread ID. The breakpoint is triggered only if it is encountered in the context of this thread. If you use <b>/p </b><i>EProcess</i> and <b>/t </b><i>EThread</i> , you can enter them in either order.   </DD>
+<DT><b>/c</b> <i>MaxCallStackDepth</i></DT>
+<DD>Causes the breakpoint to be active only when the call stack depth is less than <i>MaxCallStackDepth</i>. You cannot combine this option together with <b>/C</b>. </DD>
+<DT><b>/C</b> <i>MinCallStackDepth</i></DT>
+<DD>Causes the breakpoint to be active only when the call stack depth is larger than <i>MinCallStackDepth</i>. You cannot combine this option together with <b>/c</b>. </DD>
+</DL>
+</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies any valid address. If the application accesses memory at this address, the debugger stops execution and displays the current values of all registers and flags. This address must be an offset and suitably aligned to match the <i>Size</i> parameter. (For example, if <i>Size</i> is 4, <i>Address</i> must be a multiple of 4.) If you omit <i>Address</i>, the current instruction pointer is used. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>. </DD>
+<DT><i>Passes</i></DT>
+<DD>Specifies the number of times the breakpoint is passed by until it activates. This number can be any 16-bit value. The number of times the program counter passes through this point <i>without</i> breaking is one less than the value of this number. Therefore, omitting this number is the same as setting it equal to 1. Note also that this number counts only the times that the application <i>executes</i> past this point. Stepping or tracing past this point does not count. After the full count is reached, you can reset this number only by clearing and resetting the breakpoint. </DD>
+<DT><i>CommandString</i></DT>
+<DD>Specifies a list of commands to execute every time that the breakpoint is encountered the specified number of times. These commands are executed only if the breakpoint is hit after you issue a <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command, instead of after a <a href="r18_cmds_s_fe6d30ae-7c39-40db-a971-2aae584c13d3.xml.htm"><b>t (Trace)</b></a> or <a href="r17_cmds_i_169c2b2f-7f47-4e0a-85a9-506f151f0a8f.xml.htm"><b>p (Step)</b></a> command. Debugger commands in <i>CommandString</i> can include parameters. <P>You must enclose this command string in quotation marks, and you should separate multiple commands by semicolons. You can use standard C control characters (such as <b>\n</b> and <b>\"</b>). Semicolons that are contained in second-level quotation marks (<b>\"</b>) are interpreted as part of the embedded quoted string.</P>
+<P>This parameter is optional. </P>
+</DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All</TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The debugger uses the <i>ID</i> number to refer to the breakpoint in later <a href="r15_cmds_a_ccc07fee-278e-46c1-83a8-a80313d93ba2.xml.htm"><b>bc (Breakpoint Clear)</b></a>, <a href="r15_cmds_a_086f3898-7c6d-4c41-b262-ca44e1966aa6.xml.htm"><b>bd (Breakpoint Disable)</b></a>, and <a href="r15_cmds_a_1bc918e0-3f85-4e12-b692-a9e84b2681cf.xml.htm"><b>be (Breakpoint Enable)</b></a> commands.</P>
+<P>Use the <a href="r15_cmds_a_4239e89a-bfe7-423f-ab96-4f0725cef52a.xml.htm"><b>bl (Breakpoint List)</b></a> command to list all existing breakpoints, their ID numbers, and their status.</P>
+<P>Use the <a href="r19_metacmds_a_fbc53fa8-9480-485b-9b49-64cf24fecd26.xml.htm"><b>.bpcmds (Display Breakpoint Commands)</b></a> command to list all existing breakpoints, their ID numbers, and the commands that were used to create them.</P>
+<P></P>
+<P>Each processor breakpoint has a size associated with it.  For example, a <b>w</b> (write) processor breakpoint could be set at the address 0x70001008 with a size of four bytes. This would monitor the block of addresses from 0x70001008 to 0x7000100B, inclusive. If this block of memory is written to, the breakpoint will be triggered. </P>
+<P>It can happen that the processor performs an operation on a memory region that <i>overlaps</i> with, but is not identical to, the specified region. In this example, a single write operation that includes the range 0x70001000 to 0x7000100F, or a write operation that includes only the byte at 0x70001009, would be an overlapping operation. In such a situation, whether the breakpoint is triggered is processor-dependent. You should consult the processor manual for specific details. To take one specific instance, on an x86 processor, a read or write breakpoint is triggered whenever the accessed range overlaps the breakpoint range.  </P>
+<P>Similarly, if an <b>e</b> (execute) breakpoint is set on the address 0x00401003, and then a two-byte instruction spanning the addresses 0x00401002 and 0x00401003 is executed, the result is processor-dependent. Again, consult the processor architecture manual for details. </P>
+<P>The processor distinguishes between breakpoints set by a user-mode debugger and breakpoints set by a kernel-mode debugger. A user-mode processor breakpoint does not affect any kernel-mode processes. A kernel-mode processor breakpoint might or might not affect a user-mode process, depending on whether the user-mode code is using the debug register state and whether there is a user-mode debugger that is attached.</P>
+<P>To apply the current process' existing data breakpoints to a different register context, use the <a href="r19_metacmds_a_b9e14456-09b9-431f-89fa-b50fd865be97.xml.htm"><b>.apply_dbp (Apply Data Breakpoint to Context)</b></a> command.</P>
+<P>On a multiprocessor computer, each processor breakpoint applies to all processors. For example, if the current processor is 3 and you use the command <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">ba e1 MyAddress</span> to put a breakpoint at <b>MyAddress</b>, any processor &#8212; not only processor 3 &#8212; that executes at that address triggers the breakpoint. (This holds for software breakpoints as well.) </P>
+<P>You cannot create multiple processor breakpoints at the same address that differ only in their <i>CommandString</i> values. However, you can create multiple breakpoints at the same address that have different restrictions (for example, different values of the <b>/p</b>, <b>/t</b>, <b>/c</b>, and <b>/C</b> options).</P>
+<P>For more details on processor breakpoints, and additional restrictions that apply to them, see <a href="r07_use_operation_d80bd6e2-8037-421c-ae24-557262f4dad4.xml.htm">Processor Breakpoints (<b>ba</b> Breakpoints)</a>. </P>
+<P></P>
+<P>The following examples show the <b>ba</b> command. The following command sets a breakpoint for read access on 4 bytes of the variable <b>myVar</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>ba r4 myVar</b><BR></nobr></P>
+<P>The following command adds a breakpoint on all serial ports with addresses from 0x3F8 through 0x3FB. This breakpoint is triggered if anything is read or written to these ports.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>ba i4 3f8</b><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information on processor breakpoints, see <a href="r07_use_operation_d80bd6e2-8037-421c-ae24-557262f4dad4.xml.htm">Processor Breakpoints (<b>ba</b> Breakpoints)</a>. For more information about and examples of using breakpoints, other breakpoint commands and methods of controlling breakpoints, and information about how to set breakpoints in user space from a kernel debugger, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a>. For more information about conditional breakpoints, see <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm">Setting a Conditional Breakpoint</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ba (Break on Access) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

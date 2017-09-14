@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Dealing with Unavailable Symbol Stores</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Dealing with Unavailable Symbol Stores"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_3acbad07-7206-42c7-ab82-adb6b7318341.xml"/>
+<META NAME="MS-HKWD" CONTENT="SymProxy, unavailable stores"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_3acbad07-7206-42c7-ab82-adb6b7318341.xml"></A>Dealing with Unavailable Symbol Stores</H1>
+<P>If one of the symbol stores that SymSrv is configured to obtain files from is down or otherwise unavailable, the result can be long waits from the client for every file request.  When SymSrv is called from SymProxy, you can avoid most of these waits by setting up SymSrv to stop trying to access the store in question.  When this feature is engaged, SymSrv stops trying to use the store for a set period of time after it experiences a specified number of timeouts from the same store during a set interval.  The values of these variables can be controlled either by an <i>.ini</i> file or from the registry.</P><B>To control symbol store access using a .ini file</B><OL type="1">
+<LI>In <i>%WINDIR%\system32\inetsrv\Symsrv.ini</i>, create a section called <b>timeouts</b>.</LI>
+<LI>Add the values <b>trigger</b>, <b>count</b>, and <b>blackout</b> to this section.</LI>
+</OL>
+<P></P>
+<P><i>Trigger</i> indicates the amount of time in minutes to watch for timeouts.  <i>Count</i> indicates the number of timeouts to look for during the <i>trigger</i> period.  <i>Blackout</i> indicates the length of time in minutes to disable the store after the threshhold is reached.</P>
+<P>For example, we recommend the following settings:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[timeouts]<BR>trigger=10<BR>count=5<BR>blackout=15<BR></nobr></P>
+<P>In this example, the store access is turned off if five timeouts are experienced in a 10-minute period.  At the completion of a 15-minute blackout, the store is reactivated. </P>
+<P></P><B>To control symbol store access using the registry</B><OL type="1">
+<LI>Create a key named <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKLM\ Software\Microsoft\Symbol Server\Timeouts<BR></nobr></P>
+</LI>
+<LI>Add three REG_DWORD values <b>trigger</b>, <b>count</b>, and <b>blackout</b> to this key.  Set these values as you would in the <i>.ini</i> file.</LI>
+</OL>
+<P></P>
+<P>Whether using the registry or an .<i>ini</i> file, if any of the <i>trigger, count, </i>or <i>blackout</i> values are set to 0 or if any of the keys or values do not exist, this functionality is disabled. </P>
+<P>This feature of SymSrv is currently available only when running as a service.  This means that the only practical application of this feature is when it is called from SymProxy.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Dealing with Unavailable Symbol Stores RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

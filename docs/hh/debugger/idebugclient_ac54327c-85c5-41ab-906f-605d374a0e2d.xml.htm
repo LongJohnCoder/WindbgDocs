@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>WaitForProcessServerEnd</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, WaitForProcessServerEnd"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="winbase.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="WaitForProcessServerEnd"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_ac54327c-85c5-41ab-906f-605d374a0e2d.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::WaitForProcessServerEnd method">
+<META NAME="MS-HKWD" CONTENT="WaitForProcessServerEnd (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_ac54327c-85c5-41ab-906f-605d374a0e2d.xml"></A>WaitForProcessServerEnd</H1>
+<P><P>The <b>WaitForProcessServerEnd</b> method waits for a local <a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#927cdf63-ac0c-4f34-af24-1cdc17ca8d68">process server</a> to exit.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient2::WaitForProcessServerEnd(</b><BR><b>    IN ULONG  </b><i>Timeout</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Timeout</i></DT>
+<DD>Specifies how long in milliseconds to wait for a process server to exit.  If <i>Timeout</i> is INFINITE, this method will not return until a process server has ended.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>A time-out occurred &#8212; <i>Timeout</i> milliseconds passed without a local process server exiting.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>WaitForProcessServerEnd</b> is available in <b>IDebugClient2</b> and later versions.</P>
+<H4>Comments</H4>
+<P>This method will only wait for the first local process server to end.  After a process server has ended, subsequent calls to this method will return immediately.</P>
+<P>For more information about process servers and remote debugging, see <a href="engine_dg_403e6a06-76ae-4dfc-a475-4e8a77318c95.xml.htm#2198fa25-e6ef-4e68-b715-3a32968b560c">Process Servers, Kernel Connection Servers, and Smart Clients</a>.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.  The constant INFINITE is defined in <i>winbase.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugclient_de137b80-ffd7-4399-85a3-50b3c870c28c.xml.htm"><b>StartProcessServer</b></a>, <a href="idebugclient_a24a3c82-f966-424c-a739-a775b45cb600.xml.htm"><b>EndProcessServer</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: WaitForProcessServerEnd RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

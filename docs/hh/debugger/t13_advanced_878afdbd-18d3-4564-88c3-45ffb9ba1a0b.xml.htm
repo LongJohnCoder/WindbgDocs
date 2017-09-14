@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging the Service Application Automatically</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging the Service Application Automatically"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_878afdbd-18d3-4564-88c3-45ffb9ba1a0b.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_878afdbd-18d3-4564-88c3-45ffb9ba1a0b.xml"></A>Debugging the Service Application Automatically</H1>
+<P>A debugger can be launched automatically when the service application starts up. Alternatively, it can be launched automatically when the service application encounters an exception or executes a <b>DebugBreak</b> command. If you have chosen one of these methods, this topic explains how to proceed. If you are not sure which method to choose, see <a href="t13_advanced_421325cc-6e83-41aa-81d5-57a3ba622c23.xml.htm">Choosing the Best Method</a>.</P>
+<P>Then use the following procedure:</P><B></B><OL type="1">
+<LI>Do one of the following preparatory steps:<B></B><UL type="disc">
+<LI>If you plan to debug the service application from the very beginning, including its initialization code, follow the procedure described in <a href="t13_advanced_1d91f582-44b7-4603-804b-8ed48a14a2cf.xml.htm#79122a2e-368f-45dd-9ce4-f018c72f09e0">Enabling the Debugging of the Initialization Code</a>.  Alternatively, if you want the service application to break into the debugger when it crashes or encounters an exception, follow the procedure described in <a href="t13_advanced_1d91f582-44b7-4603-804b-8ed48a14a2cf.xml.htm#29cf2a2b-7e71-499b-a0fe-6e8be975b9b2">Enabling the Service Application to Break Into the Debugger</a>. </LI>
+<LI>To assure that the service application will allow the debugger to run properly, perform the procedure described in <a href="t13_advanced_1d91f582-44b7-4603-804b-8ed48a14a2cf.xml.htm#98ef593d-7d83-4b6c-a7cb-4742103b9144">Adjusting the Service Application Timeout</a>. </LI>
+<LI>If the service is combined with other services in a single SvcHost process, perform the procedure described in <a href="t13_advanced_1d91f582-44b7-4603-804b-8ed48a14a2cf.xml.htm#a59821de-7863-44d3-85be-fb0165d63db0">Isolating the Service</a>. </LI>
+</UL>
+</LI>
+<LI>If the service is already running, you must restart it for these changes to take effect.  We recommend that you restart Windows itself, in order to remove any effects of the running service.  If you do not want to restart Windows, use the following commands, where <i>ServiceName</i> is the name of the service:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>net stop </b><i>ServiceName</i> <BR><b>net start </b><i>ServiceName</i> <BR></nobr></P>
+</LI>
+<LI>If you have chosen to debug the service application's initialization code, when the the service starts, the debugger is launched and attaches to the service application. <P>If you have chosen to let the debugger be triggered by an exception, the service application executes normally until it encounters an exception or executes a <b>DebugBreak</b> function. At this point, the debugger is launched and attaches to the service application. </P>
+</LI>
+<LI>The next step depends on the debugger command line you specified during step 1:<B></B><UL type="disc">
+<LI>If you specified a debugger without any remoting options, this debugger is launched and its window becomes visible. </LI>
+<LI>If you specified NTSD with the <nobr><b>-server</b></nobr> and <nobr><b>-noio</b></nobr> options, NTSD is launched without a console window. You can then connect to the debugging session from another computer by starting any user-mode debugger with the <nobr><b>-remote</b></nobr> parameter. For instructions, see <a href="r08_use_remote_d737f4f5-2c99-44cf-b276-0fda82be08c8.xml.htm">Activating a Debugging Client</a>. </LI>
+<LI>If you specified NTSD with the <nobr><b>-d</b></nobr> option, NTSD is launched without a console window. You can then connect to the debugging session by using kernel debugger running on another computer.  For instructions, see <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a>. </LI>
+<LI>If you specified NTSD with the <nobr><b>-ddefer</b></nobr> and <nobr><b>-server</b></nobr> options, NTSD is launched without a console window. You can then connect to the debugging session by using both a kernel debugger and a user-mode remote debugger, running on a different computer than the service (but possibly the same computer as each other).  For instructions, see <a href="r05_use_start_d9ff842e-7b5a-4989-9931-f7318ac828b2.xml.htm">Combining This Method with Remote Debugging</a>. </LI>
+</UL>
+</LI>
+<LI>When the debugger starts, the service pauses at the initial process breakpoint, the exception, or the <b>DebugBreak</b> command.  This enables you to examine the current state of the service application, set breakpoints, and make any other desired configuration choices.</LI>
+<LI>Use <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> or another execution command to resume the execution of the service application. For other available commands, see <a href="r07_use_operation_167942d3-b143-49df-b4f6-2ca81063bcce.xml.htm">Debugger Operation (User Mode)</a> and <a href="r07_use_operation_167942d3-b143-49df-b4f6-2ca81063bcce.xml.htm">Debugger Operation (User Mode)</a>. </LI>
+</OL>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information on the <b>DebugBreak</b> function, see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=124229" target="_blank"><b><u>DebugBreak</u></b></a> in the Microsoft Windows SDK.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging the Service Application Automatically RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

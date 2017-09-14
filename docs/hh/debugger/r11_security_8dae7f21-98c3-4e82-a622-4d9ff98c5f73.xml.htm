@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Security During User-Mode Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Security During User-Mode Debugging"><xml><MSHelp:Keyword Index="A" Term="r11_security_8dae7f21-98c3-4e82-a622-4d9ff98c5f73.xml"/>
+<META NAME="MS-HKWD" CONTENT="security considerations, user-mode debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r11_security_8dae7f21-98c3-4e82-a622-4d9ff98c5f73.xml"></A>Security During User-Mode Debugging</H1>
+<P>When a user-mode debugger is active, it can effectively control any of the processes on the computer.</P>
+<P>There are three possible ways in which security problems could arise during user-mode debugging:</P><B></B><UL type="disc">
+<LI>If you use corrupt or destructive extension DLLs, they could cause your debugger to take unexpected actions, possibly affecting applications other than your target.</LI>
+<LI>It is possible that corrupt or destructive symbol files could also cause your debugger to take unexpected actions, possibly affecting applications other than your target.</LI>
+<LI>If you are running a remote debugging session, an unexpected client might attempt to link to your server. Or perhaps the client you <i>are</i> expecting might attempt to perform actions that you do not anticipate.</LI>
+</UL>
+<P></P>
+<P>For suggestions on how to guard against unexpected remote connections, see <a href="r11_security_7db68a09-a3b2-45b5-b6da-7bcd8589eb05.xml.htm">Security During Remote Debugging</a>. After a remote client has joined a user-mode debugging session, there is no way to restrict its access to processes on your computer.    </P>
+<P>If you are not performing remote debugging, you should still beware of bad symbol files and extension DLLs. do not load symbols or extensions that you distrust!</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Security During User-Mode Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

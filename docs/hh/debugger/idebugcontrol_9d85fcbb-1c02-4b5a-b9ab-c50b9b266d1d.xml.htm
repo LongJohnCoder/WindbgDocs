@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>AddExtension</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, AddExtension"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="AddExtension"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_9d85fcbb-1c02-4b5a-b9ab-c50b9b266d1d.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::AddExtension method">
+<META NAME="MS-HKWD" CONTENT="AddExtension (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_9d85fcbb-1c02-4b5a-b9ab-c50b9b266d1d.xml"></A>AddExtension</H1>
+<P>The <b>AddExtension</b> and <b>AddExtensionWide</b> methods load an extension library into the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a>.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::AddExtension(</b><BR><b>    IN PCSTR  </b><i>Path</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Handle</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::AddExtensionWide(</b><BR><b>    IN PCWSTR  </b><i>Path</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Handle</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define AddExtensionT AddExtensionWide</b><BR><b>#else</b><BR><b>#define AddExtensionT AddExtension</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Path</i></DT>
+<DD>Specifies the fully qualified path and file name of the extension library to load.</DD>
+<DT><i>Flags</i></DT>
+<DD>Set to zero.</DD>
+<DT><i>Handle</i></DT>
+<DD>Receives the handle of the loaded extension library.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>AddExtension</b> is available in all versions of <b>IDebugControl</b>.  <b>AddExtensionWide</b> is available in <b>IDebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>If the extension library has already been loaded, the handle to already loaded library is returned.  The extension library is not loaded again.</P>
+<P>The extension library is loaded into the <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#77205ddc-d81d-483c-ab52-47eb6d613eac">host engine</a> and <i>Path</i> contains a path and file name for this instance of the debugger engine.</P>
+<P>For more information on using extension libraries, see <a href="engine_dg_d73e4097-bf61-439b-9a14-6b0f445de761.xml.htm">Calling Extensions and Extension Functions</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_c762281b-f49c-4837-a524-e2f04edb3b0c.xml.htm"><b>RemoveExtension</b></a>, <a href="idebugcontrol_821ee348-ddb2-4464-93cd-b6a58e267795.xml.htm"><b>GetExtensionByPath</b></a></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: AddExtension RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

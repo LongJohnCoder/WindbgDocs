@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_MODULE_PARAMETERS</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_MODULE_PARAMETERS"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_MODULE_PARAMETERS"/>
+<MSHelp:Keyword Index="A" Term="Structures_6e7366d2-9f49-4b7e-a277-d788808e4c40.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_MODULE_PARAMETERS structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_6e7366d2-9f49-4b7e-a277-d788808e4c40.xml"></A>DEBUG_MODULE_PARAMETERS</H1>
+<P><P>The DEBUG_MODULE_PARAMETERS structure contains most of the parameters for describing a <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_MODULE_PARAMETERS</b><BR><b>{</b><BR><b>    ULONG64  Base;</b><BR><b>    ULONG  Size;</b><BR><b>    ULONG  TimeDateStamp;</b><BR><b>    ULONG  Checksum;</b><BR><b>    ULONG  Flags;</b><BR><b>    ULONG  SymbolType;</b><BR><b>    ULONG  ImageNameSize;</b><BR><b>    ULONG  ModuleNameSize;</b><BR><b>    ULONG  LoadedImageNameSize;</b><BR><b>    ULONG  SymbolFileNameSize;</b><BR><b>    ULONG  MappedImageNameSize;</b><BR><b>    ...</b><BR><b>} DEBUG_MODULE_PARAMETERS, *PDEBUG_MODULE_PARAMETERS;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>Base</b></DT>
+<DD>The location in the target's virtual address space of the module&#8217;s base.  If the value of <b>Base</b> is DEBUG_INVALID_OFFSET, the structure is invalid.</DD>
+<DT><b>Size</b></DT>
+<DD>The size, in bytes, of the memory range that is occupied by the module.</DD>
+<DT><b>TimeDateStamp</b></DT>
+<DD>The date and time stamp of the module's executable file.  This is the number of seconds elapsed since midnight (00:00:00), January 1, 1970 Coordinated Universal Time (UTC) as stored in the image file header.</DD>
+<DT><b>Checksum</b></DT>
+<DD>The checksum of the <a href="dbg_glossary_48d73de7-50e9-4e41-8a7f-0207d5301620.xml.htm#4feb6c4a-924f-451f-aa79-a8a7232c2802">image</a>.  This value can be zero.</DD>
+<DT><b>Flags</b></DT>
+<DD>A bit-set that contains the module's flags.  The bit-flags that can be present are as follows. <B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_MODULE_UNLOADED</TD>
+<TD Width="">The module was unloaded.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_MODULE_USER_MODE</TD>
+<TD Width="">The module  is a user-mode module.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_MODULE_SYM_BAD_CHECKSUM</TD>
+<TD Width="">The checksum in the symbol file did not match the checksum for the module image.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>SymbolType</b></DT>
+<DD>The type of symbols that are loaded for the module.  This member can have one of the following values.<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMTYPE_NONE</TD>
+<TD Width="">No symbols are loaded.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMTYPE_COFF</TD>
+<TD Width="">The symbols are in common object file format (COFF).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMTYPE_CODEVIEW</TD>
+<TD Width="">The symbols are in Microsoft CodeView format. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMTYPE_PDB</TD>
+<TD Width="">Symbols in PDB format have been loaded through the pre-Debug Interface Access (DIA) interface.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMTYPE_EXPORT</TD>
+<TD Width="">No actual symbol files were found; symbol information was extracted from the binary file's export table.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMTYPE_DEFERRED</TD>
+<TD Width="">The module was loaded, but the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> has deferred its loading of the symbols.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMTYPE_SYM</TD>
+<TD Width="">Symbols in SYM format have been loaded.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMTYPE_DIA</TD>
+<TD Width="">Symbols in PDB format have been loaded through the DIA interface. </TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>ImageNameSize</b></DT>
+<DD>The size of the file name for the module. The size is measured in characters, including the terminator.</DD>
+<DT><b>ModuleNameSize</b></DT>
+<DD>The size of the module name of the module. The size is measured in characters, including the terminator.</DD>
+<DT><b>LoadedImageNameSize</b></DT>
+<DD>The size of the loaded image name for the module. The size is measured in characters, including the terminator.</DD>
+<DT><b>SymbolFileNameSize</b></DT>
+<DD>The size of the symbol file name for the module. The size is measured in characters, including the terminator.</DD>
+<DT><b>MappedImageNameSize</b></DT>
+<DD>The size of the mapped image name of the module. The size is measured in characters, including the terminator.</DD>
+</DL>
+<H4>Comments</H4>
+<P>This structure is returned by <a href="idebugsymbols_0a78fd64-15b7-4032-83a8-9867037e5081.xml.htm"><b>GetModuleParameters</b></a>.</P>
+<P>To locate the different names for the module, use <a href="idebugsymbols_e00a93fb-08c4-4f37-9915-577a22d9c889.xml.htm"><b>GetModuleNameString</b></a>.</P>
+<P>For more information about modules, see <a href="engine_dg_7c681050-ba73-4e87-818f-a9fac75a720b.xml.htm">Modules</a>.  For details about the different names for the module, see <a href="idebugsymbols_e00a93fb-08c4-4f37-9915-577a22d9c889.xml.htm"><b>GetModuleNameString</b></a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_MODULE_PARAMETERS RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

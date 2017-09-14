@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Extensions for Debugging Plug and Play Drivers</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Extensions for Debugging Plug and Play Drivers"><xml><MSHelp:Keyword Index="A" Term="t12_drivers_fc31c715-123a-4c51-8946-4141d035fcb4.xml"/>
+<META NAME="MS-HKWD" CONTENT="Plug and Play (PnP), extensions">
+<META NAME="MS-HKWD" CONTENT="extensions, plug and play"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t12_drivers_fc31c715-123a-4c51-8946-4141d035fcb4.xml"></A>Extensions for Debugging Plug and Play Drivers</H1>
+<P>When you debug Plug and Play drivers, you may find the following debugger extensions useful.</P>
+<H4><a href="r26_exts_kernel_a_099f9cf2-9d4f-4b09-93d8-7d2b59486d12.xml.htm">!arbiter</a> </H4>
+<P>Displays the current system resource arbiters. An <i>arbiter</i> is a piece of code that is exposed by the bus driver that arbitrates requests for resources, and attempts to solve the resource conflicts among the devices connected on that bus.</P>
+<H4><a href="r26_exts_kernel_a_b7d05c13-7730-4337-93f7-bcbdda7a9b4b.xml.htm">!cmreslist</a> </H4>
+<P>Displays the CM_RESOURCE_LIST for the specified device object.</P>
+<P>You must know the address of the CM Resource List.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt;<b> !cmreslist 0xe12576e8</b><BR><BR>CmResourceList at 0xe12576e8  Version 0.0  Interface 0x1  Bus #0<BR>  Entry 0 - Port (0x1) Device Exclusive (0x1)<BR>    Flags (0x01) - PORT_MEMORY PORT_IO<BR>    Range starts at 0x3f8 for 0x8 bytes<BR>  Entry 1 - Interrupt (0x2) Shared (0x3)<BR>    Flags (0x01) - LATCHED<BR>    Level 0x4, Vector 0x4, Affinity 0xffffffff <BR><BR></nobr></P>
+<P>This shows that the device with this CM resource list is using I/O Range 3F8-3FF and IRQ 4.</P>
+<H4>!dcs </H4>
+<P>This extension is obsolete &#8212; its functionality has been subsumed by <b>!pci</b>. See the <b>!pci 100</b> example later in this section.</P>
+<H4><a href="r26_exts_kernel_a_346bd09f-2f67-4afe-81ad-dc77887036d6.xml.htm">!devext</a> </H4>
+<P>Displays bus-specific device extension information for a variety of devices.</P>
+<H4><a href="r26_exts_kernel_a_87ee2749-b028-4ab8-b0c0-d4a6fc734488.xml.htm">!devnode</a> </H4>
+<P>Displays information about a node in the device tree.</P>
+<P>Device node 0 (zero) is the root of the device tree.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devnode 0xff0d4a08</b><BR><BR>DevNode 0xff0d4a08 for PDO <b>0xff0d4af0</b> at level 0<BR>  Parent 0xff0daf48   Sibling 0xff0d4848   Child 0000000000<BR>  InterfaceType 0xffffffff  Bus Number 0xfffffff0<BR>  InstancePath is "Root\*PNP0501\PnPBIOS_2"<BR>  ServiceName is "Serial"<BR>  TargetDeviceNotify List - f 0xff0d4a6c  b 0xff0d4a6c<BR>  Flags (0x6000122b)  DNF_PROCESSED, DNF_STARTED,<BR>                      DNF_ENUMERATED, DNF_MADEUP,<BR>                      DNF_RESOURCE_ASSIGNED, DNF_ADDED,<BR>                      DNF_HAS_BOOT_CONFIG<BR>                      Unknown flags 0x40000000 <BR><BR></nobr></P>
+<H4><a href="r26_exts_kernel_a_d7c58f52-7920-4308-92c8-362514c0c278.xml.htm">!devobj</a> </H4>
+<P>Displays detailed information about a DEVICE_OBJECT.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devobj 0xff0d4af0</b><BR><BR>Device object (ff0d4af0) is for:<BR> 00252d <b>\Driver\PnpManager</b> DriverObject ff0d9030<BR>Current Irp 00000000 RefCount 0 Type 00000004 Flags 00001040AttachedDev <b>ff0b59e0</b><BR><BR>DevExt ff0d4ba8 DevNode ff0d4a08<BR>Device queue is not busy.<BR><BR></nobr></P>
+<H4><a href="r26_exts_kernel_a_c8029c52-4738-4fa1-88a8-bf6f6819dc09.xml.htm">!drivers</a> </H4>
+<P>The <b>!drivers</b> command is no longer supported. Please use the <b>lm t n</b> command instead.</P>
+<H4><a href="r26_exts_kernel_a_002d80d3-ce77-4ed3-a211-26ace4fd6f58.xml.htm">!drvobj</a> </H4>
+<P>Displays detailed information about a DRIVER_OBJECT.</P>
+<P>Lists all the device objects created by the specified driver.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!drvobj serial</b><BR><BR>Driver object (ff0ba630) is for:<BR> \Driver\Serial<BR>Driver Extension List: (id , addr)<BR><BR>Device Object list:<BR>ffba3040  ff0b4040  <b>ff0b59e0</b>  ff0b5040<BR><BR></nobr></P>
+<P></P>
+<H4><a href="r27_exts_kernel_e_4226d023-93d5-4be6-9f95-e301a3fdb99f.xml.htm">!ecb</a>, <a href="r27_exts_kernel_e_4226d023-93d5-4be6-9f95-e301a3fdb99f.xml.htm">!ecd</a>, <a href="r27_exts_kernel_e_4226d023-93d5-4be6-9f95-e301a3fdb99f.xml.htm">!ecw</a> </H4>
+<P><i>(x86 target computers only)</i>  Writes a sequence of values into the PCI configuration space.</P>
+<H4><a href="r17_cmds_i_31c2e6e2-06c5-42be-828a-030f9c4454fe.xml.htm">ib, iw, id</a> </H4>
+<P>Reads data from an I/O port.</P>
+<P>These three commands are useful for determining whether a certain I/O range is claimed by a device other than the driver being debugged. A byte value of 0xFF at a port indicates that the port is not in use.</P>
+<H4><a href="r27_exts_kernel_e_e3aca792-e930-4c16-972e-5ecfb2d5ee1b.xml.htm">!ioreslist</a> </H4>
+<P>Displays the specified IO_RESOURCE_REQUIREMENTS_LIST.</P>
+<H4><a href="r27_exts_kernel_e_6ffea330-24c4-4204-bba3-f97f5bd882ea.xml.htm">!irp</a> </H4>
+<P>Displays information about an IRP.</P>
+<H4><a href="r27_exts_kernel_e_f937a896-8b86-463a-8bfc-24af6b7181cc.xml.htm">!irpfind</a> </H4>
+<P>Displays information about all IRPs currently allocated in the target system, or information about those IRPs whose fields match the specified search criteria.</P>
+<H4><a href="r28_exts_kernel_n_c5448aa8-f80a-4a16-b121-de72229f834c.xml.htm">!pci</a> </H4>
+<P><i>(x86 target computers only)</i>  Displays the current status of the PCI buses and any devices attached to them. It can also display the PCI configuration space.</P>
+<P>The following example displays the devices on the primary bus:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt;<b> !pci</b><BR>PCI Bus 0<BR>00:0  8086:1237.02  Cmd[0106:.mb..s]  Sts[2280:.....]  Device  Host bridge<BR>0d:0  8086:7000.01  Cmd[0007:imb...]  Sts[0280:.....]  Device  ISA bridge<BR>0d:1  8086:7010.00  Cmd[0005:i.b...]  Sts[0280:.....]  Device  IDE controller<BR>0e:0  1011:0021.01  Cmd[0107:imb..s]  Sts[0280:.....]  PciBridge 0-&gt;1-1  PCI-PCI<BR> bridge<BR>10:0  5333:8811.43  Cmd[0023:im.v..]  Sts[0200:.....]  Device  VGA compatible controller<BR><BR></nobr></P>
+<P>The following example displays the devices for the secondary bus, with verbose output:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!pci 1 1</b><BR><BR>PCI Bus 1<BR>08:0  10b7:5900.00  Cmd[0107:imb..s]  Sts[0200:.....]  Device  Ethernet<BR>      cf8:80014000  IntPin:1  IntLine:f  Rom:fa000000  cis:0  cap:0<BR>      IO[0]:fce1<BR><BR>09:0  9004:8178.00  Cmd[0117:imb..s]  Sts[0280:.....]  Device  SCSI controller<BR>      cf8:80014800  IntPin:1  IntLine:f  Rom:fa000000  cis:0  cap:0<BR>      IO[0]:f801       MEM[1]:f9fff000<BR><BR>0b:0  9004:5800.10  Cmd[0116:.mb..s]  Sts[0200:.....]  Device  SubID:9004:8940<BR>1394 host controller<BR>      cf8:80015800  IntPin:1  IntLine:e  Rom:fa000000  cis:0  cap:0<BR>      MEM[0]:f9ffec00<BR><BR></nobr></P>
+<P>The following example displays the PCI configuration space for the SCSI controller (bus 1, device 9, function 0):</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt;<b> !pci 100 1 9 0</b> <BR>00: 9004    ;VendorID=9004<BR>02: 8178    ;DeviceID=8178<BR>04: 0117    ;Command=SERREnable,MemWriteEnable,BusInitiate,MemSpaceEnable,IOSpac<BR>eEnable<BR>06: 0280    ;Status=FB2BCapable,DEVSELTiming:1<BR>08: 00      ;RevisionID=00<BR>09: 00      ;ProgIF=00 (SCSI bus controller)<BR>0a: 00      ;SubClass=00<BR>0b: 01      ;BaseClass=01 (Mass storage controller)<BR>0c: 08      ;CacheLineSize=Burst8DW<BR>0d: 20      ;LatencyTimer=20<BR>0e: 00      ;HeaderType=00<BR>0f: 00      ;BIST=00<BR>10: 0000f801;BAR0=0000f801<BR>14: f9fff000;BAR1=f9fff000<BR>18: 00000000;BAR2=00000000<BR>1c: 00000000;BAR3=00000000<BR>20: 00000000;BAR4=00000000<BR>24: 00000000;BAR5=00000000<BR>28: 00000000;CBCISPtr=00000000<BR>2c: 0000    ;SubSysVenID=0000<BR>2e: 0000    ;SubSysID=0000<BR>30: fa000000;ROMBAR=fa000000<BR>34: 00000000;Reserved=00000000<BR>38: 00000000;Reserved=00000000<BR>3c: 0f      ;IntLine=0f<BR>3d: 01      ;IntPin=01<BR>3e: 08      ;MinGnt=08<BR>3f: 08      ;MaxLat=08<BR>40: 00001580,00001580,00000000,00000000,00000000,00000000,00000000,00000000<BR>60: 00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000<BR>80: 00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000<BR>a0: 00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000<BR>c0: 00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000<BR>e0: 00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000<BR><BR></nobr></P>
+<H4><a href="r28_exts_kernel_n_e3bde835-eb06-4fdd-9310-48edf83c58f6.xml.htm">!pcitree</a> </H4>
+<P>Displays information about PCI device objects, including child PCI buses and CardBus buses, as well as the devices attached to them.</P>
+<H4><a href="r28_exts_kernel_n_3b7b9cde-2584-48ea-a644-3dd183dc0da4.xml.htm">!pnpevent</a> </H4>
+<P>Displays the PnP device event queue.</P>
+<P></P>
+<H4><a href="r29_exts_kernel_q_c2c45f9b-01cf-4a0f-9d47-e05b8603543f.xml.htm">!rellist</a> </H4>
+<P>Displays a PnP relation list and any related CM_RESOURCE_LIST and IO_RESOURCE_LIST structures.    </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Extensions for Debugging Plug and Play Drivers RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

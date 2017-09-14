@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Breakpoints</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Breakpoints"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_4f9c88b1-f2a7-4a25-b1ff-ac050eb5c42d.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, breakpoints"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_4f9c88b1-f2a7-4a25-b1ff-ac050eb5c42d.xml"></A>Using Breakpoints</H1>
+<P>For an overview of <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoints</a> in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a>, see <a href="engine_overview_c23d9360-986f-4a98-8815-580deb69b591.xml.htm">Breakpoints</a>.</P>
+<P>Breakpoints are <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> triggers which, when the breakpoint's conditions are satisfied, will halt execution of the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a> and break into the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#84783e5c-aa71-4d1c-be03-f4cc8ce3d72f">debugger</a>. Breakpoints allow the user to analyze and perhaps modify the target when execution reaches a certain point or when a certain memory location is accessed.</P>
+<P>The debugger engine inserts a <i>software breakpoint</i> into a target by modifying the processor instruction at the breakpoint's location; this modification is invisible to the engine's clients.  A software breakpoint is triggered when the target executes the instruction at the breakpoint location.  A <i>processor breakpoint</i> is inserted into the target's processor by the debugger engine; its capabilities are processor-specific.  It is triggered by the processor when the memory at the breakpoint location is accessed; what type of access will trigger this breakpoint is specified when the breakpoint is created. </P>
+<P>This topic includes:</P><B></B><div class="indent1">
+<P><a href="engine_dg_127dfdf0-b01d-405e-a25c-511830d82cc0.xml.htm">Setting Breakpoints</a></P>
+</div>
+<div class="indent1">
+<P><a href="engine_dg_139ab0e2-36b9-463b-bfdd-05cd64791d4f.xml.htm">Controlling Breakpoint Flags and Parameters</a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Breakpoints RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Reading Bug Check Callback Data</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Reading Bug Check Callback Data"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_7e36aa08-dfef-4421-b020-fffbaf9c5066.xml"/>
+<META NAME="MS-HKWD" CONTENT="callback data for bug checks">
+<META NAME="MS-HKWD" CONTENT="callback data for bug checks, displaying callback data">
+<META NAME="MS-HKWD" CONTENT="callback data for bug checks, displaying secondary data">
+<META NAME="MS-HKWD" CONTENT="secondary bug check callback data">
+<META NAME="MS-HKWD" CONTENT="bug check, callback routines">
+<META NAME="MS-HKWD" CONTENT="dbgeng.h header file, IDebugDataSpaces3">
+<META NAME="MS-HKWD" CONTENT="dbgeng.h header file, ReadTagged">
+<META NAME="MS-HKWD" CONTENT="dbgeng.h header file, StartEnumTagged">
+<META NAME="MS-HKWD" CONTENT="dbgeng.h header file, GetNextTagged">
+<META NAME="MS-HKWD" CONTENT="dbgeng.h header file, EndEnumTagged"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_7e36aa08-dfef-4421-b020-fffbaf9c5066.xml"></A>Reading Bug Check Callback Data</H1>
+<P>Many drivers supply <i>bug check callback routines</i>. When Windows issues a bug check, it calls these routines before shutting down the system. One task these routines can do is indicate certain important parts of memory for debugging purposes.</P>
+<P>In Windows 2000, and Windows XP prior to SP1, the bug check callback function is named <b>BugCheckCallback</b>. It is primarily used to write data to a region in memory &#8212; this data is called <i>callback data</i>.</P>
+<P>In Windows XP SP1, Windows Server 2003, and later versions of Windows, there are multiple callback functions. <b>BugCheckCallback</b> is the same as its counterpart in earlier versions of Windows, except that it is called <i>after</i> the dump file is written. Another callback function, <b>BugCheckSecondaryDumpDataCallback</b>, is called before the dump file is written &#8212; the data written by this routine is called <i>secondary callback data</i>.</P>
+<P>How much of this information is available to the debugger depends on several factors:</P><B></B><UL type="disc">
+<LI>If you are performing live debugging of a crashed system, callback data will be available if it has already been written by <b>BugCheckCallback</b>. Secondary callback data will not be available, because  it is not stored in any fixed memory location.</LI>
+<LI>If you are debugging a Complete Memory Dump or Kernel Memory Dump in Windows 2000, or Windows XP prior to SP1, all callback data will be available.</LI>
+<LI>If you are debugging a Complete Memory Dump or Kernel Memory Dump in Windows XP SP1, Windows Server 2003, or a later version of Windows, callback data will not be available. The dump file will contain an image of the buffer that holds this data, but this image will have been made <i>before</i> the <b>BugCheckCallback</b> routine wrote the callback data to the buffer. On the other hand, secondary callback data <i>will</i> be present.</LI>
+<LI>If you are debugging a Small Memory Dump, callback data will not be available. Secondary callback data <i>will</i> be available in Windows XP SP1, Windows Server 2003, or a later version of Windows.</LI>
+</UL>
+<P></P>
+<P>See <a href="r10_dump_files_fb0158c7-161d-4959-9dd3-00be89aebd02.xml.htm">Varieties of Kernel-Mode Dump Files</a> for more details on these different dump file sizes.</P>
+<H4>Displaying Callback Data</H4>
+<P>To display bug check callback data, you can use the <a href="r26_exts_kernel_a_86618685-e25d-4962-9e7f-1c209ae651cb.xml.htm"><b>!bugdump</b></a> extension.</P>
+<P>Without any parameters, <b>!bugdump</b> will display data for all callbacks.</P>
+<P>To view data for one specific callback routine, use <b>!bugdump </b><I><B>Component</B></I>, where <i>Component</i> is the same parameter that was passed to <b>KeRegisterBugCheckCallback</b> when that routine was registered.</P>
+<H4>Displaying Secondary Callback Data</H4>
+<P>There are two methods for displaying secondary callback data in Windows XP SP1, Windows Server 2003, and later versions of Windows. You can use the <b>.enumtag</b> command or you can write your own debugger extension.</P>
+<P>Each block of secondary callback data is identified by a GUID tag. This tag is specified by the <b>Guid</b> field of the <b>(KBUGCHECK_SECONDARY_DUMP_DATA)ReasonSpecificData</b> parameter passed to <b>BugCheckSecondaryDumpDataCallback</b>.</P>
+<P>The <a href="r20_metacmds_e_5ae2073d-37a2-4ec1-a50c-fd914cffe35d.xml.htm"><b>.enumtag (Enumerate Secondary Callback Data)</b></a> command is not a very precise instrument. It displays every secondary data block, showing the tag and then showing the data in hexadecimal and ASCII format. It is generally useful only to determine what tags are actually being used for secondary data blocks.</P>
+<P>To use this data in a more practical way, it is recommended that you write your own debugger extension. This extension must call methods in the <i>dbgeng.h</i> header file. For details, see <a href="r08_use_remote_56103a91-dd41-4126-95e1-a0f8e5f42d5e.xml.htm">Writing New Debugger Extensions</a>.</P>
+<P>If you know the GUID tag of the secondary data block, your extension should use the method <b>IDebugDataSpaces3::ReadTagged</b> to access the data. Its prototype is as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>STDMETHOD(ReadTagged)(<BR>    THIS_<BR>    IN LPGUID Tag,<BR>    IN ULONG Offset,<BR>    OUT OPTIONAL PVOID Buffer,<BR>    IN ULONG BufferSize,<BR>    OUT OPTIONAL PULONG TotalSize<BR>    ) PURE; <BR></nobr></P>
+<P>Here is an example of how to use this method:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>UCHAR RawData[MY_DATA_SIZE];<BR>GUID MyGuid = .... ;<BR><BR>Success = DataSpaces-&gt;ReadTagged(  &amp;MyGuid,  0,  RawData,<BR>                                   sizeof(RawData),  NULL); <BR></nobr></P>
+<P>If you supply a <i>BufferSize</i> that is too small, <b>ReadTagged</b> will succeed but will write only the requested number of bytes to <i>Buffer</i>. If you specify a <i>BufferSize</i> that is too large, <b>ReadTagged</b> will succeed but will write only the actual block size to <i>Buffer</i>. If you supply a pointer for <i>TotalSize</i>, <b>ReadTagged</b> will use it to return the size of the actual block. If the block cannot be accessed, <b>ReadTagged</b> will return a failure status code.</P>
+<P>If two blocks have identical GUID tags, the first matching block will be returned, and the second block will be inaccessible.</P>
+<P>If you are not sure of the GUID tag of your block, you can use the <b>IDebugDataSpaces3::StartEnumTagged</b>, <b>IDebugDataSpaces3::GetNextTagged</b>, and <b>IDebugDataSpaces3::EndEnumTagged</b> methods to enumerate the tagged blocks. Their prototypes are as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>STDMETHOD(StartEnumTagged)(<BR>    THIS_<BR>    OUT PULONG64 Handle<BR>    ) PURE;<BR><BR>STDMETHOD(GetNextTagged)(<BR>    THIS_<BR>    IN ULONG64 Handle,<BR>    OUT LPGUID Tag,<BR>    OUT PULONG Size<BR>    ) PURE;<BR><BR>STDMETHOD(EndEnumTagged)(<BR>    THIS_<BR>    IN ULONG64 Handle<BR>    ) PURE; <BR></nobr></P>
+<H4>Debugging Callback Routines</H4>
+<P>It is also possible to debug the callback routine itself. Breakpoints within callback routines work just like any other breakpoint.</P>
+<P>If the callback routine causes a second bug check, this new bug check will be processed first. However, Windows will not repeat certain parts of the Stop process &#8212; for example, it will not write a second crash dump file. The Stop code displayed on the blue screen will be the <i>second</i> bug check code. If a kernel debugger is attached, messages about both bug checks will usually appear.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Reading Bug Check Callback Data RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

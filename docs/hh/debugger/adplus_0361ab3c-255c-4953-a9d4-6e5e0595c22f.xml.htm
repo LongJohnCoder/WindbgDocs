@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ADPlus Overview</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ADPlus Overview"><xml><MSHelp:Keyword Index="A" Term="ADPlus_0361ab3c-255c-4953-a9d4-6e5e0595c22f.xml"/>
+<META NAME="MS-HKWD" CONTENT="Exception Monitor (obsolete)">
+<META NAME="MS-HKWD" CONTENT="Exception Monitor (obsolete), [See &quot;ADPlus&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_0361ab3c-255c-4953-a9d4-6e5e0595c22f.xml"></A>ADPlus Overview</H1>
+<P>ADPlus automates the CDB debugger to produce memory dumps and log files that contain debug output from one or more processes.</P>
+<P>Every time that you run ADPlus, debugging information (such as memory dumps and text files that contain debug information) is put in a new, uniquely named folder (such as <i>C:\Temp\Crash_Mode__Date_01-22-2001__Time_09-41-08AM</i>) on the local file system or a remote network share. In addition, each file that ADPlus creates is also given a unique name (such as <i>PID-1708__Inetinfo.exe__Date_01-22-2001__Time_09-41-08AM.log</i>) to avoid overwriting older files with newer ones.</P>
+<P>ADPlus works with any user-mode process or service such as Internet Information Services (IIS), Microsoft Transaction Server (MTS), or Microsoft COM+ applications.</P>
+<P>ADPlus has the following features: </P><B></B><UL type="disc">
+<LI>ADPlus uses the latest Microsoft debuggers for speed and reliability.</LI>
+<LI>ADPlus dumps memory asynchronously for multiple processes so that each process is frozen and dumped at the same time. This process provides an effective "snapshot" of the whole application at the time ADPlus was run. It is important to capture all of the processes that make up a given application and all of the processes that a given application uses at the same time so that you can capture the state of the application at the time that the problem occurs. This snapshot is especially important for applications that make remote procedure calls to other processes.</LI>
+<LI>ADPlus has a command-line interface. Because ADPlus does not have a graphical user interface (GUI), you can run it with the <b>-quiet</b> option in a remote command shell (a Command Prompt window that is controlled through <i>Remote.exe</i>). The <b>-quiet</b> option suppresses all dialog boxes and logs all output to the event log. For more information about how to run ADPlus from a remote command shell, see <a href="adplus_662c9738-6925-4c36-9688-97cd038c2b18.xml.htm">Running in Crash Mode Remotely</a>.</LI>
+<LI>When ADPlus monitors for crashes, it can notify you or a computer of a crash through the Microsoft Windows Messenger service. This feature is activated though the <b>-notify</b> command-line option.</LI>
+<LI>When ADPlus monitors a process in crash mode and a failure (that is, <i>crash</i>) occurs, ADPlus sends important information about the type of failure to the event log.</LI>
+<LI>ADPlus supports XCOPY deployment. That is, if you copy the Debugging Tools for Windows installation folder to a new location, ADPlus still works correctly. In addition, ADPlus does not require that you register any custom Component Object Model (COM) components on the system. Therefore, this tool is ideal for use on production servers that have a locked-down software configuration. To remove ADPlus, you have to only delete the folder that it was installed or copied to.</LI>
+</UL>
+<P></P>
+<P class="note"><b>Note</b>  The Exception Monitor tool is obsolete. ADPlus contains all of the functionality of Exception Monitor.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ADPlus Overview RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

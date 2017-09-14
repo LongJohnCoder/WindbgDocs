@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GFlags Flag Table</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GFlags Flag Table"><xml><MSHelp:Keyword Index="A" Term="GFlags_bf174207-b0ea-40b3-b4d7-fc7e921e119e.xml"/>
+<META NAME="MS-HKWD" CONTENT="GFlags, flag table"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_bf174207-b0ea-40b3-b4d7-fc7e921e119e.xml"></A>GFlags Flag Table</H1>
+<P>The following table lists the flags that GFlags changes, the hexadecimal value and abbreviation for each flag, and the destination (<b>R</b> for registry, <b>K</b> for kernel, <b>I</b> for image file) in which the flag is valid.</P>
+<P>For a detailed description of each flag, see the <a href="gflags_a79083df-57a3-487a-92b0-a05402c20b93.xml.htm">Global Flag Reference</a>.</P>
+<P class="note"><b>Important</b>  Pool tagging is permanently enabled in Windows Server 2003 and later versions of Windows. On these systems, the <b>Enable pool tagging</b> check box on the <b>Global Flags</b> dialog box is dimmed, and commands to enable or disable pool tagging fail.<P class="note"><b>Note</b>  The symbolic name of each flag is provided for reference only. Because symbolic names change, they are not a reliable identifier of a global flag. </P>
+<P class="note"></P>
+</P><B></B><table>
+<TR valign="top">
+<TH Width="">Description</TH>
+<TH Width="">Symbolic Name</TH>
+<TH Width="">Hexadecimal Value</TH>
+<TH Width="">Abbreviation</TH>
+<TH Width="">Destination</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_4e2d89a7-86bf-44b0-9028-c3f07eb398a0.xml.htm">Buffer DbgPrint Output</a> </TD>
+<TD Width="">FLG_DISABLE_DBGPRINT</TD>
+<TD Width="">0x08000000</TD>
+<TD Width="">ddp</TD>
+<TD Width="">R,K</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_de1bfc7d-138e-4876-968a-6981787e5cce.xml.htm">Create kernel mode stack trace database</a> </TD>
+<TD Width="">FLG_KERNEL_STACK_TRACE_DB</TD>
+<TD Width="">0x2000</TD>
+<TD Width="">kst</TD>
+<TD Width="">R</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_afe6f8c7-152a-45fb-ba04-ef3ea84b2199.xml.htm">Create user mode stack trace database</a> </TD>
+<TD Width="">FLG_USER_STACK_TRACE_DB</TD>
+<TD Width="">0x1000</TD>
+<TD Width="">ust</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_e2e42295-65a8-4232-92c8-2d3c6191e497.xml.htm">Debug initial command</a> </TD>
+<TD Width="">FLG_DEBUG_INITIAL_COMMAND</TD>
+<TD Width="">0x4</TD>
+<TD Width="">dic</TD>
+<TD Width="">R</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_40f5db4b-cbb2-41e3-8866-ef99199e222e.xml.htm">Debug WinLogon</a> </TD>
+<TD Width="">FLG_DEBUG_INITIAL_COMMAND_EX</TD>
+<TD Width="">0x04000000</TD>
+<TD Width="">dwl</TD>
+<TD Width="">R</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_5b329b7c-9671-4385-8818-216da35168de.xml.htm">Disable heap coalesce on free</a> </TD>
+<TD Width="">FLG_HEAP_DISABLE_COALESCING</TD>
+<TD Width="">0x00200000</TD>
+<TD Width="">dhc</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_f9978fc4-b694-41fc-b10d-c3d31e848084.xml.htm">Disable paging of kernel stacks</a> </TD>
+<TD Width="">FLG_DISABLE_PAGE_KERNEL_STACKS</TD>
+<TD Width="">0x80000</TD>
+<TD Width="">dps</TD>
+<TD Width="">R</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_cbf92f33-ef2c-4200-86dd-ba056d952abf.xml.htm">Disable protected DLL verification</a> </TD>
+<TD Width="">FLG_DISABLE_PROTDLLS</TD>
+<TD Width="">0x80000000</TD>
+<TD Width="">dpd</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_f29c4191-a56f-4136-833c-0352ac420057.xml.htm">Disable stack extension</a> </TD>
+<TD Width="">FLG_DISABLE_STACK_EXTENSION</TD>
+<TD Width="">0x10000</TD>
+<TD Width="">dse</TD>
+<TD Width="">I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_e572ef51-5064-4701-b269-a19005c6e7ac.xml.htm">Early critical section event creation</a> </TD>
+<TD Width="">FLG_CRITSEC_EVENT_CREATION</TD>
+<TD Width="">0x10000000</TD>
+<TD Width="">cse</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_e5bc1ef5-6398-40ba-9fdf-3e69481fe1c0.xml.htm">Enable application verifier</a> </TD>
+<TD Width="">FLG_APPLICATION_VERIFIER</TD>
+<TD Width="">0x100</TD>
+<TD Width="">vrf</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_10f43bfa-20dd-4416-b0b3-9916d33c546d.xml.htm">Enable bad handles detection</a> </TD>
+<TD Width="">FLG_ENABLE_HANDLE_EXCEPTIONS</TD>
+<TD Width="">0x40000000</TD>
+<TD Width="">bhd</TD>
+<TD Width="">R,K</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_574034a7-b5ed-49b7-8968-30cedd6663f8.xml.htm">Enable close exception</a> </TD>
+<TD Width="">FLG_ENABLE_CLOSE_EXCEPTIONS</TD>
+<TD Width="">0x00400000</TD>
+<TD Width="">ece</TD>
+<TD Width="">R,K</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_3a747a36-7519-4923-b891-cb711d15a2dc.xml.htm">Enable debugging of Win32 subsystem</a> </TD>
+<TD Width="">FLG_ENABLE_CSRDEBUG</TD>
+<TD Width="">0x20000</TD>
+<TD Width="">d32</TD>
+<TD Width="">R</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_31db8c4c-8452-4fe5-8d34-3e7207ea396b.xml.htm">Enable exception logging</a> </TD>
+<TD Width="">FLG_ENABLE_EXCEPTION_LOGGING</TD>
+<TD Width="">0x00800000</TD>
+<TD Width="">eel</TD>
+<TD Width="">R,K</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_e0fcbd4d-10d1-40a0-8d6c-e98e7a9cc3cf.xml.htm">Enable heap free checking</a> </TD>
+<TD Width="">FLG_HEAP_ENABLE_FREE_CHECK</TD>
+<TD Width="">0x20</TD>
+<TD Width="">hfc</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_ca9ec92d-c740-4a80-ab6c-ab9bb43a5936.xml.htm">Enable heap parameter checking</a> </TD>
+<TD Width="">FLG_HEAP_VALIDATE_PARAMETERS</TD>
+<TD Width="">0x40</TD>
+<TD Width="">hpc</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_338c95b8-b450-486a-aab6-aa16cdf523a9.xml.htm">Enable heap tagging</a> </TD>
+<TD Width="">FLG_HEAP_ENABLE_TAGGING</TD>
+<TD Width="">0x800</TD>
+<TD Width="">htg</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_7297173d-0912-44c2-88b2-e8810d01ffde.xml.htm">Enable heap tagging by DLL</a> </TD>
+<TD Width="">FLG_HEAP_ENABLE_TAG_BY_DLL</TD>
+<TD Width="">0x8000</TD>
+<TD Width="">htd</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_97d957e1-c53b-4775-8ec2-91571ed3947f.xml.htm">Enable heap tail checking</a> </TD>
+<TD Width="">FLG_HEAP_ENABLE_TAIL_CHECK</TD>
+<TD Width="">0x10</TD>
+<TD Width="">htc</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_3484c15e-ca6a-4eeb-860c-cea347584d90.xml.htm">Enable heap validation on call</a> </TD>
+<TD Width="">FLG_HEAP_VALIDATE_ALL</TD>
+<TD Width="">0x80</TD>
+<TD Width="">hvc</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_d2ac466c-0f8d-40c5-ab56-7ff9bfb6de49.xml.htm">Enable loading of kernel debugger symbols</a> </TD>
+<TD Width="">FLG_ENABLE_KDEBUG_SYMBOL_LOAD</TD>
+<TD Width="">0x40000</TD>
+<TD Width="">ksl</TD>
+<TD Width="">R,K</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_f72cd3cf-091c-4c62-818f-c6a08a6e6546.xml.htm">Enable object handle type tagging</a> </TD>
+<TD Width="">FLG_ENABLE_HANDLE_TYPE_TAGGING</TD>
+<TD Width="">0x01000000</TD>
+<TD Width="">eot</TD>
+<TD Width="">R,K</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_68e44540-168b-4c75-bacd-9cb9d34b1fcc.xml.htm">Enable page heap</a> </TD>
+<TD Width="">FLG_HEAP_PAGE_ALLOCS</TD>
+<TD Width="">0x02000000</TD>
+<TD Width="">hpa</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_c858b070-5a5e-4afc-9cfa-f933c81c8793.xml.htm">Enable pool tagging</a><BR>(<i>Windows 2000 and Windows XP only</i>) </TD>
+<TD Width="">FLG_POOL_ENABLE_TAGGING</TD>
+<TD Width="">0x400</TD>
+<TD Width="">ptg</TD>
+<TD Width="">R</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_065a8f6d-3073-4d1d-bd6a-ba8047866fe8.xml.htm">Enable system critical breaks</a> </TD>
+<TD Width="">FLG_ENABLE_SYSTEM_CRIT_BREAKS</TD>
+<TD Width="">0x100000</TD>
+<TD Width="">scb</TD>
+<TD Width="">R, K, I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_29e30902-a3fe-4f4f-97f7-8977892dd4e2.xml.htm">Load DLLs top-down</a> <BR>(Win64 only) </TD>
+<TD Width="">FLG_LDR_TOP_DOWN</TD>
+<TD Width="">0x20000000</TD>
+<TD Width="">ltd</TD>
+<TD Width="">R, K, I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_371537d6-9e53-4b33-a0fc-30b0b1ec80fd.xml.htm">Load image using large pages if possible</a> </TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">lpg</TD>
+<TD Width="">I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_b8f49023-a9a9-45b7-b11c-4591667a09ca.xml.htm">Maintain a list of objects for each type</a> </TD>
+<TD Width="">FLG_MAINTAIN_OBJECT_TYPELIST</TD>
+<TD Width="">0x4000</TD>
+<TD Width="">otl</TD>
+<TD Width="">R</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_29eddbe3-a557-4bd0-8907-2a58e7b7d9f3.xml.htm">Object Reference Tracing</a> <BR><BR>(<i>Windows Vista and later</i>)<BR><BR></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">R, K</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_999447f4-8d22-4f30-8f92-a5c8293e71f6.xml.htm">Show loader snaps</a> </TD>
+<TD Width="">FLG_SHOW_LDR_SNAPS</TD>
+<TD Width="">0x2</TD>
+<TD Width="">sls</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_49d59420-7de8-4925-8f99-7ee0e8acd8ec.xml.htm">Special Pool</a></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">spp</TD>
+<TD Width="">R<BR><BR>R,K (<i>Windows Vista and later</i>)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_63bbcb81-387c-4eb8-bdfa-5862905d5cae.xml.htm">Stop on exception</a> </TD>
+<TD Width="">FLG_STOP_ON_EXCEPTION</TD>
+<TD Width="">0x1</TD>
+<TD Width="">soe</TD>
+<TD Width="">R,K,I</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="gflags_a262d5a8-f83e-4f09-a114-be1d8dba9cff.xml.htm">Stop on hung GUI</a> </TD>
+<TD Width="">FLG_STOP_ON_HUNG_GUI</TD>
+<TD Width="">0x8</TD>
+<TD Width="">shg</TD>
+<TD Width="">K</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GFlags Flag Table RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

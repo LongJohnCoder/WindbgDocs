@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!thread</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !thread"><xml><MSHelp:Keyword Index="A" Term="r29_exts_kernel_Q_127b52f2-51ff-49c3-9392-7059a2f5a723.xml"/>
+<META NAME="MS-HKWD" CONTENT="!thread extension">
+<META NAME="MS-HKWD" CONTENT="thread, Thread Summary (!thread) extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r29_exts_kernel_Q_127b52f2-51ff-49c3-9392-7059a2f5a723.xml"></A>!thread</H1>
+<P><P>The <b>!thread</b> extension displays summary information about a thread on the target system, including the ETHREAD block. This command can be used only during kernel-mode debugging.</P>
+<P>This extension command is not the same as the <a href="r22_metacmds_s_5263404d-63fa-4eda-a34a-c986e174e8e7.xml.htm"><b>.thread (Set Register Context)</b></a> command.</P>
+<P></P>
+</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!thread</b> [<i>Address</i> [<i>Flags</i>]] <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows XP:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!thread</b> [<b>-p</b>] [-<b>t</b>] [<i>Address</i> [<i>Flags</i>]] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-p</b></DT>
+<DD>Displays summary information about the process that owns the thread.</DD>
+<DT><b>-t</b></DT>
+<DD>When this option is included, <i>Address</i> is the thread ID, not the thread address.</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the hexadecimal address of the thread on the target computer. If <i>Address</i> is <nobr>-1</nobr> or omitted, it indicates the current thread.</DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies the level of detail to display. <i>Flags</i> can be any combination of the following bits. If <i>Flags</i> is 0, only a minimal amount of information is displayed. The default is 0x6:   <DL><DT>Bit 1 (0x2)</DT>
+<DD>Displays the thread's wait states.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>If this bit is used without Bit 1 (0x2), it has no effect. If this bit is used with Bit 1, the thread is displayed with a stack trace.</DD>
+<DT>Bit 3 (0x8)</DT>
+<DD><i>(Windows XP and later)</i>  <P>Adds the return address, the stack pointer, and (on Itanium systems) the <b>bsp</b> register value to the information displayed for each function and suppresses the display of function arguments.</P>
+</DD>
+<DT>Bit 4 (0x10)</DT>
+<DD><i>(Windows XP and later)</i>  Sets the process context equal to the process that owns the specified thread for the duration of this command. This results in more accurate display of thread stacks. </DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example from a Windows 2000 system:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!thread ff8632c0</b><BR>THREAD ff8632c0  Cid 38c.380  Teb: 7ffde000  Win32Thread: e1bc1a08 WAIT: (WrUserRequest) UserMode Non-Alertable<BR>    ff8543e0  SynchronizationEvent<BR>Not impersonating<BR>Owning Process ff89c7a0<BR>WaitTime (seconds)      16923<BR>Context Switch Count    67                   LargeStack<BR>UserTime                  0:00:00.0000<BR>KernelTime                0:00:00.0093<BR>Start Address 0x77e878c1<BR>Win32 Start Address 0x01003dd0<BR>Stack Init fd536000 Current fd535c20 Base fd536000 Limit fd531000 Call 0<BR>Priority 12 BasePriority 8 PriorityDecrement 0 DecrementCount 0<BR><BR>ChildEBP RetAddr  Args to Child<BR>fd535c38 8012d61c 00000000 e1bc1a08 00000001 ntoskrnl!KiSwapThread+0xc5<BR>fd535cbc 801672a2 00000001 00000001 000021bf ntoskrnl!KeWaitForSingleObject+0x1a1<BR>fd535d4c 80161691 0006ff08 00000000 00000000 ntoskrnl!ExFreePool+0xb<BR>fd535d4c a01772a8 0006ff08 00000000 00000000 ntoskrnl!KiSystemService+0xc4<BR>ffffffff 00000000 00000000 00000000 00000000 +0xa01772a8<BR><BR></nobr></P>
+<P>The important information in the <b>!thread</b> display is explained in the following table.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Thread address</b></TD>
+<TD Width="">The hexadecimal number after the word <i>THREAD</i> is the address of the ETHREAD block. In the preceding example, the thread address is 0xFF8632C0.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Thread ID</b></TD>
+<TD Width="">The two hexadecimal numbers after the word <i>Cid</i> are the process ID and the thread ID: <i>process ID.thread ID</i>. In the preceding example, the process ID is 0x38C, or decimal 908, and the thread ID is 0x380, or decimal 896.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Thread Environment Block (TEB)</b></TD>
+<TD Width="">The hexadecimal number after the word <i>Teb</i> is the address of the thread environment block (TEB). In the preceding example, the TEB is located at address 0x7FFDE000.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>System Service Dispatch Table</b></TD>
+<TD Width="">The hexadecimal number after the word <i>Win32Thread</i> is the address of the system service dispatch table. In the preceding example, the system dispatch table is located at address 0xE1BC1A08.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Thread State</b></TD>
+<TD Width="">The thread state is displayed at the end of the line that begins with the word <i>WAIT</i>. In the preceding example, the thread is in a non-alertable state.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Owning Process</b></TD>
+<TD Width="">The hexadecimal number after the words <i>Owning Process</i> is the address of the EPROCESS for the process that owns this thread.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Start Address</b></TD>
+<TD Width="">The hexadecimal number after the words <i>Start Address</i> is the thread start address. This might appear in symbolic form.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>User Thread Function</b></TD>
+<TD Width="">The hexadecimal number after the words <i>Win32 Start Address</i> is the address of the user thread function.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Priority</b></TD>
+<TD Width="">The priority information for the thread follows the word <i>Priority</i>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Stack trace</b></TD>
+<TD Width="">A stack trace for the thread appears at the end of this display.</TD>
+</TR>
+</table>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about threads in kernel mode, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>. For more information about analyzing processes and threads, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !thread RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Finding the Process ID</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Finding the Process ID"><xml><MSHelp:Keyword Index="A" Term="r04_setup_3_a40111cb-c7c2-451d-b09a-8a2e579f8514.xml"/>
+<META NAME="MS-HKWD" CONTENT="process, process ID (PID)">
+<META NAME="MS-HKWD" CONTENT="PID (process ID)">
+<META NAME="MS-HKWD" CONTENT="TList, related techniques">
+<META NAME="MS-HKWD" CONTENT="Task Manager"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r04_setup_3_a40111cb-c7c2-451d-b09a-8a2e579f8514.xml"></A>Finding the Process ID</H1>
+<P>Each process running in Microsoft Windows is assigned a unique decimal number called the <i>process ID</i>, or <i>PID</i>. This number is used to specify the process when attaching a debugger to it.</P>
+<P>There are several ways to determine the PID for a given application: using the Task Manager, using the <b>tasklist</b> command, using the TList utility, or using the debugger.</P>
+<H4>Task Manager</H4>
+<P>The <i>Task Manager</i> may be activated in a number of ways, but the simplest is to press CTRL+ALT+DELETE and then click on <b>Task Manager</b>.</P>
+<P>If you select the <b>Processes</b> tab, each process and its PID will be listed, along with other useful information.</P>
+<P>Some kernel errors may cause delays in <b>Task Manager</b>'s graphical interface.</P>
+<H4>The Tasklist Command</H4>
+<P>In Windows XP and later versions of Windows, you can use the <b>tasklist</b> command from a Command Prompt window. This displays all processes, their PIDs, and a variety of other details.</P>
+<H4>TList</H4>
+<P>TList (<i>Task List Viewer</i>, <i>tlist.exe</i>) is a command-line utility that displays a list of tasks, or user-mode processes, currently running on the local computer. TList is included in the Debugging Tools for Windows package.</P>
+<P>When you run TList from the command prompt, it will display a list of all the user-mode processes in memory with a unique process identification (PID) number. For each process, it shows the PID, process name, and, if the process has a window, the title of that window.</P>
+<P>For more information, see <a href="tlist_d98fd688-471d-4855-aa5c-997719bd11c3.xml.htm">TList</a>.</P>
+<H4>The .tlist Debugger Command</H4>
+<P>If there is already a user-mode debugger running on the system in question, the <a href="r22_metacmds_s_7423d5a0-4d52-4388-aca4-a0550d2c2955.xml.htm"><b>.tlist (List Process IDs)</b></a> command will display a list of all PIDs on that system.</P>
+<H4>CSRSS and User-Mode Drivers</H4>
+<P>To debug a user-mode driver running on another computer, debug the Client Server Run-Time Subsystem (CSRSS) process. For more information, see <a href="t13_advanced_ca72febd-3528-4880-aba8-fed799ea20d5.xml.htm">Debugging CSRSS</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Finding the Process ID RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

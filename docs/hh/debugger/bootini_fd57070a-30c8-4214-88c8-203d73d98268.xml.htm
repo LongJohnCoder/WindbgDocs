@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Adding Boot Entries</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Adding Boot Entries"><xml><MSHelp:Keyword Index="A" Term="bootini_fd57070a-30c8-4214-88c8-203d73d98268.xml"/>
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], adding boot entries">
+<META NAME="MS-HKWD" CONTENT="boot entries [WDK]">
+<META NAME="MS-HKWD" CONTENT="adding boot entries">
+<META NAME="MS-HKWD" CONTENT="Boot.ini files [WDK], adding boot entries"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_fd57070a-30c8-4214-88c8-203d73d98268.xml"></A>Adding Boot Entries</H1>
+<P>The first step in customizing boot options in operating systems is to add a new <i>boot entry</i> for an operating system. A <i>boot entry</i> is a set of options that define a load configuration for an operating system or bootable program.</P>
+<P>You can have multiple boot entries for an operating system, each with a different set of boot parameters. Windows Installer creates a standard boot entry when you install an operating system, and you can create additional, customized boot entries for an operating system by editing the boot options.</P>
+<P>You can add, delete, and change the options in the boot entry that Windows Installer created. However, it is prudent to keep the standard entry and, instead, add a separate entry that you customize.</P>
+<P>To add a boot entry, copy an existing boot entry, and then modify the copy.</P>
+<H4>Using Bootcfg in operating systems prior to Windows Vista</H4>
+<P>You can use the Bootcfg <b>/copy</b> switch to copy a boot entry on any system, regardless of the type of firmware.</P>
+<P>The following Bootcfg command copies the second boot entry to create a new entry. The <b>/ID</b> switch identifies the line number of the entry being copied and the <b>/d</b> (description) switch specifies a friendly name for the new entry, which must be in quotation marks.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bootcfg /copy /ID 2 /d "Microsoft Windows XP Professional - new"</b><BR><BR></nobr></P>
+<P>If you have added boot entries that you are no longer using, be sure to delete them, especially on computers that store boot options in the finite EFI NVRAM resource. Use the Bootcfg <b>/delete</b> switch to delete unused entries.</P>
+<P>If you have more than one boot entry for an operating system, be sure to select your preferred entry from the boot menu or set the preferred entry as the default boot entry. For instructions, see <a href="bootini_f39e3846-1f38-45bf-8ef3-dc447b2396e1.xml.htm">Changing the Default Boot Entry</a>.</P>
+<P>For complete instructions for using Bootcfg, see Help and Support Services. For examples, see <a href="bootini_eca9701d-6f34-4e1c-a9ad-f2e14ba189d5.xml.htm">Using Boot Parameters</a>.</P>
+<H4>Editing the <i>Boot.ini</i> File in operating systems prior to Windows Vista</H4>
+<P>To add a boot entry to a <i>Boot.ini</i> file, copy and paste an existing boot entry. Then, change the friendly name of the entry so you can easily distinguish it in the file and on the boot menu. The friendly name is the quoted string in the boot entry.</P>
+<P>For example, in the following sample <i>Boot.ini</i> file, the original entry for Windows XP was duplicated, and then the friendly name of the duplicate entry was changed. The newly created entry appears in bold text.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINNT<BR>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(1)\WINNT="Microsoft Windows 2000 Professional" /fastdetect <BR>multi(0)disk(0)rdisk(0)partition(3)\WINDOWS="Microsoft Windows XP Professional" /fastdetect <BR><b>multi(0)disk(0)rdisk(0)partition(3)\WINDOWS="Microsoft Windows XP Professional - new" /fastdetect</b><BR><BR></nobr></P>
+<P></P>
+<P></P>
+<P></P>
+<H4>Adding a new boot entry in Windows Vista and Later</H4>
+<P>In Windows Vista and later versions of Windows, you use BCDEdit to modify your boot options. To add a new boot entry, open a Command Prompt window with elevated privileges (right click <b>Command Prompt</b> and click <b>Run as administrator</b> from the shortcut menu).</P>
+<P>Use BCDEdit with the <b>/copy</b> option to copy an existing boot entry. For example, in the following command, BCDEdit copies the Microsoft Windows boot entry that was last used to boot Windows, identified as {current}, and creates a new boot entry. The <b>/d</b> description option specifies DebugEntry as the name of the new boot entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /copy {current} /d "DebugEntry"<BR></nobr></P>
+<P></P>
+<P></P>
+<P>If the command succeeds, BCDEdit displays a message similar to the following:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>The entry was successfully copied to {49916baf-0e08-11db-9af4-000bdbd316a0}.<BR></nobr></P>
+<P></P>
+<P></P>
+<P>When you copy a boot loader entry that appears on the boot menu, the copy is automatically added as the last item on the boot menu. </P>
+<P>The GUID in the preceding message (which appears between braces (<b>{}</b>)) is the identifier of the new boot entry. You use the identifier to represent the entry in all subsequent BCDEdit commands.</P>
+<P>If the command fails, be sure that you are running in a Command Prompt window with administrator privileges and that all of the command parameters are spelled correctly, including the braces around <b>{current}</b>.</P>
+<P>You can also add a boot entry using the <b>/create</b> option. For example, the following creates a new operating system boot entry called "My Windows Vista":</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /create /d "My Windows Vista" /application osloader<BR></nobr></P>
+<P></P>
+<P></P>
+<P>When you use the <b>/create</b> option, the new boot loader entries are not added to the boot menu automatically. You must add the new boot entry to the boot menu by using the <b>/displayorder</b> option. You can place the boot loader entries in any order.</P>
+<P>For information about the <b>/create</b> command parameters, type <b>bcdedit /? /create</b> in a Command Prompt window.</P>
+<H4>Editing the boot menu in Windows Vista and Later</H4>
+<P>In Windows Vista and later versions of Windows, new boot loader entries are not added to the boot menu automatically. You can place the boot loader entries in any order.</P>
+<P>You can use the <b>/displayorder</b> option to set the order in which the boot manager displays the boot entries on a multi-boot menu. The command has the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /displayorder {ID} {ID} ...<BR></nobr></P>
+<P></P>
+<P>The ID is the GUID of the boot entry or a reserved identifier, such as<b> {current}</b>). Separate each identifier with a space. Be sure to include the braces ({}).</P>
+<P>For example, to add the DebugEntry boot entry to the boot menu after the <b>{current} </b>entry, use the following command: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /displayorder {current} {49916baf-0e08-11db-9af4-000bdbd316a0}<BR></nobr></P>
+<P></P>
+<P>You can also use the options <b>/addlast,</b> <b>/addfirst</b>, and <b>/remove </b>to order and remove items from the menu. For example, the following command adds the DebugEntry boot entry as the last item on the menu:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /displayorder {49916baf-0e08-11db-9af4-000bdbd316a0} /addlast <BR></nobr></P>
+<P></P>
+<P></P>
+<P>To verify that the display order is correct, use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit<BR></nobr></P>
+<P></P>
+<P>When you type <b>bcdedit</b> without additional parameters, BCDEdit displays the boot manager entry and the boot loader entries in the order that they will appear in the menu. </P>
+<P>The Windows Boot Manager entry also includes the boot menu display order, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><BR>Windows Boot Manager<BR>--------------------<BR>identifier              {bootmgr}<BR>device                  partition=C:<BR>description             Windows Boot Manager<BR>locale                  en-US<BR>inherit                 {globalsettings}<BR>default                 {current}<BR>displayorder            {current}<BR>                        {18b123cd-2bf6-11db-bfae-00e018e2b8db}<BR>toolsdisplayorder       {memdiag}<BR>timeout                 30<BR><BR>Windows Boot Loader<BR>-------------------<BR>identifier              {current}<BR>device                  partition=C:<BR>path                    \Windows\system32\winload.exe<BR>description             Microsoft Windows Vista<BR>locale                  en-US<BR>inherit                 {bootloadersettings}<BR>osdevice                partition=C:<BR>systemroot              \Windows<BR>resumeobject            {d7094401-2641-11db-baba-00e018e2b8db}<BR>nx                      OptIn<BR><BR>Windows Boot Loader<BR>-------------------<BR>identifier              {18b123cd-2bf6-11db-bfae-00e018e2b8db}<BR>device                  partition=C:<BR>path                    \Windows\system32\winload.exe<BR>description             Debugger Boot<BR>locale                  en-US<BR>inherit                 {bootloadersettings}<BR>osdevice                partition=C:<BR>systemroot              \Windows<BR>resumeobject            {d7094401-2641-11db-baba-00e018e2b8db}<BR>nx                      OptIn<BR>debug                   Yes<BR><BR><BR><BR></nobr></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Adding Boot Entries RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

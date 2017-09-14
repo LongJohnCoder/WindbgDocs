@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Extracting Source Files</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Extracting Source Files"><xml><MSHelp:Keyword Index="A" Term="SymChk_1a4ba602-a79e-4b90-bf2e-ed2ad1d926d9.xml"/>
+<META NAME="MS-HKWD" CONTENT="extracting source files">
+<META NAME="MS-HKWD" CONTENT="source servers, extracting source files"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_1a4ba602-a79e-4b90-bf2e-ed2ad1d926d9.xml"></A>Extracting Source Files</H1>
+<P>To extract all of the source files from all the modules for which you want to provide source, use the command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>srctool.exe -x</b><BR></nobr></P>
+<P>This tool must be executed on <i>.pdb</i> files that have already been source-indexed for your version control system on a computer that has version control access.  This places all source files into a common directory tree.  Copy the contents of this tree to the root of the Web site.  You can do this as often as you want on any new products or modules that you want to add.  There is no worry about files overwriting each other because the directory tree structure keeps dissimilar files separated and uniquely accessible.</P>
+<H4>Walk</H4>
+<P>The Walk (<i>Walk.cmd</i>) script is included in Debugging Tools for Windows.  This script searches recursively through a directory tree and executes any specified command on any file that matches a specified file mask.  The syntax is:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>walk.cmd </b><i>FileMask</i> <i>Command</i><BR></nobr></P>
+<P>where <i>FileMask</i> specifies a file mask, with or without an accompanying starting directory, and <i>Command</i> specifies the command to be executed.</P>
+<P>Here is an example that runs the <i>srctool.exe</i> file extraction command on all <i>.pdb</i> files in <i>c:\symbols</i> and its subdirectories:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>walk.cmd c:\symbols\*.pdb srctool.exe -x<BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Extracting Source Files RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

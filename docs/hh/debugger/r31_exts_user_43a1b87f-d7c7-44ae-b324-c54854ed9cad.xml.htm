@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!vprot</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !vprot"><xml><MSHelp:Keyword Index="A" Term="r31_exts_user_43a1b87f-d7c7-44ae-b324-c54854ed9cad.xml"/>
+<META NAME="MS-HKWD" CONTENT="!vprot extension">
+<META NAME="MS-HKWD" CONTENT="memory, memory protection"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r31_exts_user_43a1b87f-d7c7-44ae-b324-c54854ed9cad.xml"></A>!vprot</H1>
+<P>The <b>!vprot</b> extension displays virtual memory protection information.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!vprot</b> [<i>Address</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the hexadecimal address whose memory protection status is to be displayed.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Uext.dll</i> <BR><i>Ntsdexts.dll</i>   </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Uext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!vprot</b> extension command can be used for both live debugging and dump file debugging. </P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!vprot 30c191c</b><BR>BaseAddress: 030c1000<BR>AllocationBase: 030c0000<BR>AllocationProtect: 00000080 PAGE_EXECUTE_WRITECOPY<BR>RegionSize: 00011000<BR>State: 00001000 MEM_COMMIT<BR>Protect: 00000010 PAGE_EXECUTE<BR>Type: 01000000 MEM_IMAGE<BR><BR></nobr></P>
+<P>In this display, the AllocationProtect line shows the default protection that the entire region was created with. Note that individual addresses within this region can have their protection altered after memory is allocated (for example, if <b>VirtualProtect</b> is called). The Protect line shows the actual protection for this specific address. The possible protection values are PAGE_NOACCESS, PAGE_READONLY, PAGE_READWRITE, PAGE_EXECUTE, PAGE_EXECUTE_READ, PAGE_EXECUTE_READWRITE, PAGE_WRITECOPY, PAGE_EXECUTE_WRITECOPY, and PAGE_GUARD.</P>
+<P>The State line also applies to the specific virtual address passed to <b>!vprot</b>. The possible state values are MEM_COMMIT, MEM_FREE, and MEM_RESERVE.</P>
+<P>The Type line shows the memory type. The possible values are MEM_IMAGE, MEM_MAPPED, and MEM_PRIVATE.</P>
+<H4>Additional Information</H4>
+<P>To view memory protection information for all memory ranges owned by the target process, use <a href="r31_exts_user_882e1e6f-6605-4019-a976-e1c79a59cc61.xml.htm"><b>!vadump</b></a>. For information about memory protection, see <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !vprot RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

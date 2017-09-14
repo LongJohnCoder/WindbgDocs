@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>br (Breakpoint Renumber)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, br (Breakpoint Renumber)"><xml><MSHelp:Keyword Index="A" Term="r15_cmds_A_a5203f1e-08a8-4990-8737-0b4d09210fa5.xml"/>
+<META NAME="MS-HKWD" CONTENT="br (Breakpoint Renumber) command">
+<META NAME="MS-HKWD" CONTENT="Breakpoint Renumber (br) command">
+<META NAME="MS-HKWD" CONTENT="breakpoints, Breakpoint Renumber (br) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r15_cmds_A_a5203f1e-08a8-4990-8737-0b4d09210fa5.xml"></A>br (Breakpoint Renumber)</H1>
+<P>The <b>br</b> command renumbers one or more breakpoints.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>br</b> <i>OldID NewID </i>[<i>OldID2 NewID2</i> ...] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>OldID</i></DT>
+<DD>Specifies the current ID number of the breakpoint.</DD>
+<DT><i>NewID</i></DT>
+<DD>Specifies a new number that becomes the ID of the breakpoint.</DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>You can use the <b>br</b> command to renumber any number of breakpoints at the same time. For each breakpoint, list the old ID and the new ID, in that order, as parameters to <b>br</b>.</P>
+<P>If there is already a breakpoint with an ID equal to <i>NewID</i>, the command fails and an error message is displayed.</P>
+<H4>Additional Information</H4>
+<P>For more information about and examples of how to use breakpoints, other breakpoint commands and methods of controlling breakpoints, and how to set breakpoints in user space from a kernel debugger, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a>. For more information about conditional breakpoints, see <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm">Setting a Conditional Breakpoint</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: br (Breakpoint Renumber) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>WriteIoSpaceEx</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, WriteIoSpaceEx"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="WriteIoSpaceEx"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_53bdc758-08b1-4103-9732-5b7b72c80fdd.xml"/>
+<META NAME="MS-HKWD" CONTENT="WriteIoSpaceEx function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_53bdc758-08b1-4103-9732-5b7b72c80fdd.xml"></A>WriteIoSpaceEx</H1>
+<P><P>The <b>WriteIoSpaceEx</b> function is an extended version of <a href="wdbgexts_ref_1aa4429d-9d99-4c7c-8870-7a75ccaad6e5.xml.htm"><b>WriteIoSpace</b></a>. It can write to either a system I/O location or an I/O location on a bus. <b>WriteIoSpace</b> works like <b>WriteIoSpaceEx</b>, except that it defaults <i>interfacetype</i> to ISA, <i>busnumber</i> to zero, and <i>addressspace</i> to 1.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>VOID </b><BR><b>  WriteIoSpaceEx (</b><BR><b>    ULONG</b> <i>address</i><b>,</b><BR>    <b>ULONG</b> <i>data</i><b>,</b><BR>    <b>PULONG</b> <i>size</i><b>,</b><BR>    <b>ULONG</b> <i>interfacetype</i><b>,</b><BR>    <b>ULONG</b> <i>busnumber</i><b>,</b><BR>    <b>ULONG</b> <i>addressspace</i><BR><i>    </i><b>);</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>address</i></DT>
+<DD>Specifies the I/O address to write to.</DD>
+<DT><i>data</i></DT>
+<DD>Specifies the address of a variable that holds the data to write. This must be at least the number of bytes contained in <i>size</i>.</DD>
+<DT><i>size</i></DT>
+<DD>Specifies the address of a variable that contains the number of bytes to write. <i>Size</i> must be 1, 2, or 4. After the data is written, <i>size</i> will contain the number of bytes actually written.</DD>
+<DT><i>interfacetype</i></DT>
+<DD>Specifies the type of interface on which the extended I/O space exists. Possible values include ISA, EISA, and MCA. For more information, see <i>ntddk.h</i>, which is available as part of the Windows Driver Kit.</DD>
+<DT><i>busnumber</i></DT>
+<DD>Specifies the number of the bus on which the extended I/O space exists. This is typically zero, unless there is more than one bus of a given type.</DD>
+<DT><i>addressspace</i></DT>
+<DD>This is typically 1.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>None</P>
+<H4>Comments</H4>
+<P>If you are writing 64-bit code, you should use <a href="wdbgexts_ref_378f5c2e-fcbc-4401-8527-f6e98bfa6257.xml.htm"><b>WriteIoSpaceEx64</b></a> instead. See <a href="wdbgexts_dg_850413ea-f120-4037-9556-72dbd34764ba.xml.htm">32-Bit Pointers and 64-Bit Pointers</a> for details.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this function, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: WriteIoSpaceEx RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

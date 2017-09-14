@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Unresolved Breakpoints (bu Breakpoints)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Unresolved Breakpoints  (bu Breakpoints)"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_3a87f521-a016-43a6-bc5f-820bfd4fa0c4.xml"/>
+<META NAME="MS-HKWD" CONTENT="breakpoints, deferred">
+<META NAME="MS-HKWD" CONTENT="deferred breakpoints">
+<META NAME="MS-HKWD" CONTENT="breakpoints, BP versus BU">
+<META NAME="MS-HKWD" CONTENT="breakpoints, unresolved"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_3a87f521-a016-43a6-bc5f-820bfd4fa0c4.xml"></A>Unresolved Breakpoints  (bu Breakpoints)</H1>
+<P>If a <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">breakpoint</a> is set for a routine name that has not been loaded, the breakpoint is called a <i>deferred</i>, <i>virtual</i>, or <i>unresolved</i> breakpoint. (These terms are used interchangeably.) Unresolved breakpoints are not associated with any specific load of a module. Every time that a new application is loaded, it is checked for this routine name. If this routine appears, the debugger computes the actual coded address of the virtual breakpoint and enables the breakpoint.</P>
+<P>If you set a breakpoint by using the <b>bu</b> command, the breakpoint is automatically considered unresolved. If this breakpoint is in a loaded module, the breakpoint is still enabled and functions normally. However, if the module is later unloaded and reloaded, this breakpoint does not vanish. On the other hand, a breakpoint that you set with <b>bp</b> is immediately resolved to an address.</P>
+<P>There are three primary differences between <b>bp</b> breakpoints and <b>bu</b> breakpoints:</P><B></B><UL type="disc">
+<LI>A <b>bp</b> breakpoint location is always converted to an address. If a module change moves the code at which a <b>bp</b> breakpoint was set, the breakpoint remains at the same address. On the other hand, a <b>bu</b> breakpoint remains associated with the symbolic value (typically a symbol plus an offset) that was used, and it tracks this symbolic location even if its address changes.</LI>
+<LI>If a <b>bp</b> breakpoint address is found in a loaded module, and if that module is later unloaded, the breakpoint is removed from the breakpoint list.  On the other hand, <b>bu</b> breakpoints persist after repeated unloads and loads. </LI>
+<LI>Breakpoints that you set with <b>bp</b> are not saved in WinDbg <a href="r06_use_gui_913ac9c6-536d-45c5-91b7-61369b2d2854.xml.htm">workspaces</a>. Breakpoints that are set with <b>bu</b> are saved in workspaces. </LI>
+</UL>
+<P></P>
+<H4>Controlling Address Breakpoints and Unresolved Breakpoints</H4>
+<P>Address breakpoints can be created with the <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bp (Set Breakpoint)</b></a> command, or the <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bm (Set Symbol Breakpoint)</b></a> command when the <b>/d</b> switch is included. Unresolved breakpoints can be created with the <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bu (Set Unresolved Breakpoint)</b></a> command, or the <b>bm</b> command when the <b>/d</b> switch is not included.  Commands that disable, enable, and modify breakpoints apply to all kinds of breakpoints.  Commands that display a list of breakpoints include all breakpoints, and indicate the type of each. For a listing of these commands, see <a href="r07_use_operation_9046922f-e012-41ac-a685-01804f6ec8ec.xml.htm">Methods of Controlling Breakpoints</a>.</P>
+<P>The WinDbg <b>Breakpoints</b> dialog box displays all breakpoints, indicating unresolved breakpoints with the notation "u". This dialog box can be used to modify any breakpoint.The <b>Command</b> text box on this dialog box can be used to create any type of breakpoint; if the type is omitted, an unresolved breakpoint is created. For details, see <a href="r37_gui_2_5abe2105-cf44-4d1e-a4ae-f4d44409ed58.xml.htm"><b>Edit | Breakpoints</b></a>. When you set a breakpoint by using the mouse in the WinDbg <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a> or <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a>, the debugger creates an unresolved breakpoint.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Unresolved Breakpoints  (bu Breakpoints) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

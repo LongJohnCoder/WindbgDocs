@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_VALUE</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_VALUE"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_VALUE"/>
+<MSHelp:Keyword Index="A" Term="Structures_2486f31c-2a25-41eb-ac3f-9cc1d62dd2e0.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_VALUE structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_2486f31c-2a25-41eb-ac3f-9cc1d62dd2e0.xml"></A>DEBUG_VALUE</H1>
+<P><P>The DEBUG_VALUE structure holds register and expression values.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_VALUE {</b><BR><b>  union {</b><BR><b>    UCHAR  I8;</b><BR><b>    USHORT  I16;</b><BR><b>    ULONG  I32;</b><BR><b>    struct {</b><BR><b>      ULONG64  I64;</b><BR><b>      BOOL  Nat;</b><BR><b>    };</b><BR><b>    float  F32;</b><BR><b>    double  F64;</b><BR><b>    UCHAR  F80Bytes[10];</b><BR><b>    UCHAR  F82Bytes[11];</b><BR><b>    UCHAR  F128Bytes[16];</b><BR><b>    UCHAR  VI8[16];</b><BR><b>    USHORT  VI16[8];</b><BR><b>    ULONG  VI32[4];</b><BR><b>    ULONG64  VI64[2];</b><BR><b>    float  VF32[4];</b><BR><b>    double  VF64[2];</b><BR><b>    struct {</b><BR><b>      ULONG  LowPart;</b><BR><b>      ULONG  HighPart;</b><BR><b>    }  I64Parts32;</b><BR><b>    struct {</b><BR><b>      ULONG64  LowPart;</b><BR><b>      LONG64  HighPart;</b><BR><b>    }  F128Parts64;</b><BR><b>    UCHAR  RawBytes[24];</b><BR><b>  };</b><BR><b>  ...</b><BR><b>  ULONG  Type;</b><BR><b>} DEBUG_VALUE, *PDEBUG_VALUE;</b><BR></P>
+<P></P>
+<P>The <b>Type</b> field specifies the value type that is being held by the structure.  This also specifies which field in the structure is valid.  The possible values of the <b>Type</b> field, and the corresponding field specified as valid in the structure, include the following.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Type Name</TH>
+<TH Width="">Type</TH>
+<TH Width="">Valid DEBUG_VALUE Field</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_VALUE_INT8</TD>
+<TD Width="">8-bit signed integer</TD>
+<TD Width=""><b>I8</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_VALUE_INT16</TD>
+<TD Width="">16-bit signed integer</TD>
+<TD Width=""><b>I16</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_VALUE_INT32</TD>
+<TD Width="">32-bit signed integer</TD>
+<TD Width=""><b>I32</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_VALUE_INT64</TD>
+<TD Width="">64-bit signed integer</TD>
+<TD Width=""><b>I64</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_VALUE_FLOAT32</TD>
+<TD Width="">32-bit floating point number</TD>
+<TD Width=""><b>F32</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_VALUE_FLOAT64</TD>
+<TD Width="">64-bit floating point number</TD>
+<TD Width=""><b>F64</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_VALUE_FLOAT80</TD>
+<TD Width="">80-bit floating point number</TD>
+<TD Width=""><b>F80Bytes</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_VALUE_FLOAT128</TD>
+<TD Width="">128-bit floating point number</TD>
+<TD Width=""><b>F128Bytes</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_VALUE_VECTOR64</TD>
+<TD Width="">64-bit vector</TD>
+<TD Width=""><b>VI8[8]</b>, <b>VI16[4]</b>, <b>VI32[2]</b>, <b>VI64[1]</b>, <b>VF32[2]</b>, <b>VF64[1]</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_VALUE_VECTOR128</TD>
+<TD Width="">128-bit vector</TD>
+<TD Width=""><b>VI8[16]</b>, <b>VI16[8]</b>, <b>VI32[4]</b>, <b>VI64[2]</b>, <b>VF32[4]</b>, <b>VF64[2]</b></TD>
+</TR>
+</table>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_VALUE RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

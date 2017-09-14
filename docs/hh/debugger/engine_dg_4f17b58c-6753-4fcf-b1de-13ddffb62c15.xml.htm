@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Dump-File Targets</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Dump-File Targets"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_4f17b58c-6753-4fcf-b1de-13ddffb62c15.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, targets, crash dump files"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_4f17b58c-6753-4fcf-b1de-13ddffb62c15.xml"></A>Dump-File Targets</H1>
+<P>For an introduction and overview of crash dump files, see <a href="r10_dump_files_fba942f0-e0f2-4644-9426-95ad5bca7c9a.xml.htm">Crash Dump Files</a>.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="58a96fbc-dbed-4377-8520-4a646ad3b6e6"></A>Opening Dump Files</H3>
+<P>To open a crash dump file for use as a <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">debugger target</a>, use <a href="idebugclient_4ab673e2-629c-455a-8d40-27465005375f.xml.htm"><b>OpenDumpFile</b></a> or <a href="idebugclient_e3280682-6272-4324-bba5-120a95f27b15.xml.htm"><b>OpenDumpfileWide</b></a>.  These methods are similar to the <a href="r21_metacmds_l_7e3720ef-d5f9-4717-ac69-9aa308d9b576.xml.htm"><b>.opendump</b></a> debugger command.</P>
+<P class="note"><b>Note</b>  The <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2dbaa658-dbfe-47de-8266-97ed86c41aea">engine</a> doesn't completely attach to the dump file until the <a href="idebugcontrol_19a7d8b3-1f16-400e-bf8f-c782d48b2cf5.xml.htm"><b>WaitForEvent</b></a> method has been called.  When a dump file is created from a process or kernel, information about the last <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> is stored in the dump file.  After the dump file is opened, the next time execution is attempted, the engine will generate this event for the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#b82b8e27-44ea-4267-932f-0ed8f937939c">event callbacks</a>.  Only then does the dump file become available in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugging session</a>.  See <a href="engine_overview_87d6e561-6d31-4a9e-8be3-1b5b93ebb5a3.xml.htm">Debugging Session and Execution Model</a> for more details.</P>
+<P>Additional files can be used to assist in debugging a crash dump file.  The methods <a href="idebugclient_11398d02-21c4-4ec5-9e1c-8e7e87808c35.xml.htm"><b>AddDumpInformationFile</b></a> and <a href="idebugclient_515044fe-647d-447a-bb74-5738d4d08d6d.xml.htm"><b>AddDumpInformationFileWide</b></a> register files containing page-file information to be used when the next dump file is opened.  These methods must be called before the dump file is opened.  <a href="idebugclient_db74cf2c-c7e7-46c2-be98-f4023b22c5c3.xml.htm"><b>GetNumberDumpFiles</b></a> will return the number of such files that were used when the current dump file was opened and <a href="idebugclient_f4f1540c-116c-4e74-ad19-10beb0ac2739.xml.htm"><b>GetDumpFile</b></a> will return a description of these files.</P>
+<P>User-mode minidump files contain several streams of information.  These streams can be read using the <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation <a href="idebugadvanced_60564876-4bdf-4236-875e-f094d8b0e84a.xml.htm">DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM</a>.</P>
+<H3><A NAME="4e33092c-d531-4148-a05a-a5e17c122e12"></A>Creating Dump Files</H3>
+<P>To create a crash dump file of the current target &#8212; <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#b9622678-468c-4b90-a002-a3d4280796f0">user-mode</a> or <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#c2dfd7a9-249b-4018-9789-2b3d6268346b">kernel-mode</a> &#8212; use <a href="idebugclient_6ce4aeba-f7a6-4872-9ff2-baf3b3165471.xml.htm"><b>WriteDumpFile2</b></a>.  This method is similar to the <a href="r19_metacmds_a_10de67ad-e8c3-42f2-ba9e-95a146a0320d.xml.htm"><b>.dump</b></a> debugger command.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Dump-File Targets RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

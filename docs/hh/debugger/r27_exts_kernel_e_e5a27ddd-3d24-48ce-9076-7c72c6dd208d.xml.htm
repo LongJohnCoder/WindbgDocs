@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!memusage</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !memusage"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_e5a27ddd-3d24-48ce-9076-7c72c6dd208d.xml"/>
+<META NAME="MS-HKWD" CONTENT="!memusage extension">
+<META NAME="MS-HKWD" CONTENT="memory, Memory Usage (!memusage) extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_e5a27ddd-3d24-48ce-9076-7c72c6dd208d.xml"></A>!memusage</H1>
+<P><P>The <b>!memusage</b> extension displays summary statistics about physical memory use.</P>
+</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!memusage</b> <BR></nobr></P>
+<P>Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!memusage </b>[<i>Flags</i>]<BR></nobr></P>
+<P></P>
+<P></P>
+<DL><DT><i>Flags</i></DT>
+<DD>(<i>Windows XP and later only)  </i>Can be any one of the following values. The default is 0x0.<DL><DT>0x0</DT>
+<DD>Displays general summary information, along with a more detailed description of the pages in the PFN database. See the Comments section for an example of this type of output. </DD>
+<DT>0x1</DT>
+<DD>Displays only summary information about the modified no-write pages in the PFN database..</DD>
+<DT>0x2</DT>
+<DD>Displays only detailed information about the modified no-write pages in the PFN database.</DD>
+<DT>0x8</DT>
+<DD>Displays only general summary information about memory use.</DD>
+<P></P>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Physical memory statistics are collected from the Memory Manager's page frame number (PFN) database table.</P>
+<P>This command takes a long time to run, especially if the target computer is running in 64-bit mode, due to the greater amount of data to obtain. While it is loading the PFN database, a counter shows its progress. To speed up this loading, increase the COM port speed with the <a href="r23_keys_5e94e92d-e89a-40df-8030-190b68a181e5.xml.htm">CTRL+A (Toggle Baud Rate)</a> key, or use the <a href="r19_metacmds_a_f283d0a1-e577-4429-9ab3-001663afd9f3.xml.htm"><b>.cache (Set Cache Size)</b></a> command to increase the cache size (perhaps to around 10 MB).</P>
+<P>The <b>!memusage</b> command can also be used while performing <a href="r07_use_operation_fabb9469-404e-4883-950a-5f35a09c27a2.xml.htm">local kernel debugging</a>.</P>
+<P>Here is an example of the output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!memusage</b><BR> loading PFN database<BR>loading (98% complete)<BR><BR>Compiling memory usage data (100% Complete).<BR>             Zeroed:     49 (   196 kb)<BR>               Free:      5 (    20 kb)<BR>            Standby:   5489 ( 21956 kb)<BR>           Modified:    714 (  2856 kb)<BR>    ModifiedNoWrite:      1 (     4 kb)<BR>       Active/Valid:  10119 ( 40476 kb)<BR>         Transition:      6 (    24 kb)<BR>            Unknown:      0 (     0 kb)<BR>              TOTAL:  16383 ( 65532 kb)<BR><BR>  Building kernel map<BR>  Finished building kernel map<BR>Scanning PFN database - (99% complete) <BR><BR>  Usage Summary (in Kb):<BR><BR><BR>Control Valid Standby Dirty Shared Locked PageTables  name<BR><BR>8251a258    12    108     0     0     0     0  mapped_file( cscui.dll )<BR>827ab1b8     8   1708     0     0     0     0  mapped_file( $Mft )<BR>8263c408   908     48     0     0     0     0  mapped_file( win32k.sys )<BR>8252dda8     0    324     0     0     0     0  mapped_file( ShellIconCache )<BR>8272f638   128    112     0   116     0     0  mapped_file( advapi32.dll )<BR>......<BR>82755958     0      4     0     0     0     0  mapped_file( $Directory )<BR>8250b518     0      4     0     0     0     0    No Name for File<BR>8254d8d8     0      4     0     0     0     0  mapped_file( $Directory )<BR>82537be8     0      4     0     0     0     0  mapped_file( Windows Explorer.lnk )<BR><BR>--------  1348      0     0 ----- -----   904  process ( System )<BR>--------   492      0     0 ----- -----    72  process ( winmine.exe )<BR>--------  3364   1384  1396 ----- -----   188  process ( explorer.exe )<BR>--------   972      0     0 ----- -----    88  process ( services.exe )<BR>--------   496   1456   384 ----- -----   164  process ( winmgmt.exe )<BR>--------  1144      0     0 ----- -----   120  process ( svchost.exe )<BR>--------   944      0     0 ----- -----   156  process ( winlogon.exe )<BR>--------   412      0     0 ----- -----    64  process ( csrss.exe )<BR>......<BR>--------    12      0     0 ----- -----     8  process ( wmiadap.exe )<BR><BR>--------   316      0     0 ----- -----     0  pagefile section (346e)<BR>--------  4096      0     0 ----- -----     0  pagefile section (9ad)<BR><BR>--------   884    280    36 -----     0 -----  driver ( ntoskrnl.exe )<BR>--------    88      8     0 -----     0 -----  driver ( hal.dll )<BR>--------     8      0     0 -----     0 -----  driver ( kdcom.dll )<BR>--------    12      0     0 -----     0 -----  driver ( BOOTVID.dll )<BR>......<BR>--------     8      0     0 -----     0 -----  driver ( ndisuio.sys )<BR>--------    16      0     0 -----     0 -----  driver ( dump_scsiport.sys )<BR>--------    56      0     0 -----     0 -----  driver ( dump_aic78xx.sys )<BR>--------  2756   1060   876 -----     0 -----  driver ( Paged Pool )<BR>--------  1936    128   148 -----     0 -----  driver ( Kernel Stacks )<BR>--------     0      0     0 -----     0 -----  driver ( NonPaged Pool )<BR><BR></nobr></P>
+<P>The first column displays the address of the control area structure that describes each mapped structure. Use the <a href="r26_exts_kernel_a_427bcd04-6114-4787-9666-afced580462c.xml.htm"><b>!ca</b></a> extension command to display these control areas.</P>
+<H4>Comments</H4>
+<P>You can use the <a href="r30_exts_kernel_u_f7bac801-e399-4fab-af3e-ad2c1effce20.xml.htm"><b>!vm</b></a> extension command to analyze virtual memory use. This extension is typically more useful than <b>!memusage</b>. For more information about memory management, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P>The <a href="r28_exts_kernel_n_2e92f05e-6ac8-4ebb-9a15-dfa5361d0091.xml.htm"><b><u>!pfn</u></b></a> extension command can be used to display a particular page frame entry in the PFN database.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !memusage RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

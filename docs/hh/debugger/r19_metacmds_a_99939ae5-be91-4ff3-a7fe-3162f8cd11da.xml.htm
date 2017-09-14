@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.call (Call Function)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .call (Call Function)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_99939ae5-be91-4ff3-a7fe-3162f8cd11da.xml"/>
+<META NAME="MS-HKWD" CONTENT=".call (Call Function) command">
+<META NAME="MS-HKWD" CONTENT="Call Function (.call) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_99939ae5-be91-4ff3-a7fe-3162f8cd11da.xml"></A>.call (Call Function)</H1>
+<P>The <b>.call</b> command causes the target process to execute a function.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.call</b> [<b>/v</b>] <i>Function</i><b>(</b> <i>Arguments</i> <b>)</b> <BR><b>.call /s</b> <i>Prototype</i> <i>Function</i><b>(</b> <i>Arguments</i> <b>)</b> <BR><b>.call</b> <b>/c</b> <BR><b>.call</b> <b>/C</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>/v</b></DT>
+<DD>Verbose information about the call and its arguments is displayed.</DD>
+<DT><b>/s </b><i>Prototype</i></DT>
+<DD>Allows you to call the function that is specified by <i>Function</i> even though you do not have the correct symbols.  In this case, you must have symbols for another function that has the same calling prototype as the function you are trying to call.  The <i>Prototype</i> parameter is the name of this prototype function.</DD>
+<DT><i>Function</i></DT>
+<DD>Specifies the function being called. This can be the name of the function (preferably qualified with a module name), or any other expression that evaluates to the function address. If you need to call a constructor or destructor, you must supply the address &#8212; or else use a C++ expression to evaluate named syntax for the operators (see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a> for details).</DD>
+<DT><i>Arguments</i></DT>
+<DD>Specifies the arguments passed to the function. If you are calling a method, the first argument must be <b>this</b>, and all other arguments follow it. Arguments should be separated with commas and should match the usual argument syntax. Variable-length argument lists are supported. Expressions within an argument are parsed by the C++ expression evaluator; see <a href="r13_syntax_372599d3-a780-4c57-9219-05575c604059.xml.htm">C++ Numbers and Operators</a> for details. You cannot enter a literal string as an argument, but you can use a pointer to a string, or any other memory accessible to the target process.</DD>
+<DT><b>/c</b></DT>
+<DD>Clears any existing call on the current thread.</DD>
+<DT><b>/C</b></DT>
+<DD>Clears any existing call on the current thread, and resets the context of the current thread to the context stored by the outstanding call. </DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode only  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">x86 and x64 only </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The specified function is called by the current thread of the current process.  </P>
+<P>Only the <b>cdecl</b>, <b>stdcall</b>, <b>fastcall</b>, and <b>thiscall</b> calling conventions are supported. Managed code cannot be called by this command.</P>
+<P>After <b>.call</b> is used, the debugger will update the stack, change the instruction pointer to point to the beginning of the called function, and then stop. Use <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> to resume execution, or <b>~. g</b> to execute just the thread making the call.</P>
+<P>When the function returns, a break occurs and the debugger displays the return value of the function. The return value is also stored in the <b>$callret</b> pseudo-register, which acquires the type of the return value.</P>
+<P>If you have broken into the target using CTRL+C or CTRL+BREAK, the current thread is an additional thread created to handle the breakin. If you issue a <b>.call</b> command at this point, the extra thread will be used for the called function.</P>
+<P>If you have reached a predefined breakpoint, there is no extra breakin thread. If you use <b>.call</b> while at a breakpoint in user mode, you could use <b>g</b> to execute the entire process, or <b>~. g</b> to execute just the current thread. Using <b>g</b> may distort your program's behavior, since you have taken one thread and diverted it to this new function. On the other hand, this thread will still have its locks and other attributes, and thus <b>~. g</b> may risk deadlocks.</P>
+<P>The safest way to use <b>.call</b> is to set a breakpoint in your code at a location where a certain function could be safely called. When that breakpoint is hit, you can use <b>.call</b> if you desire that function to run. If you use <b>.call</b> at a point where this function could not normally be called, a deadlock or target corruption could result.</P>
+<P>It may be useful to add extra functions to your source code that are not called by the existing code, but are intended to be called by the debugger. For example, you could add functions that are used to investigate the current state of your code and its environment and store information about the state in a known memory location. Be sure not to optimize your code, or these functions may be removed by the compiler.  Use this technique only as a last resort, because if your application crashes <b>.call</b> will not be available when debugging the dump file.</P>
+<P>The <b>.call /c</b> and <b>.call /C</b> commands should only be used if an attempt to use <b>.call</b> has failed, or if you changed your mind before entering the <b>g</b> command. These should not be used casually, since abandoning an uncompleted call can lead to a corrupted target state.</P>
+<P>The following code example shows how the <b>.call /s</b> command is used.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>.call /s KnownFunction UnknownFunction( 1 )</b><BR></nobr></P>
+<P>In this example, you have private symbols for <b>KnownFunction</b>, which takes an integer as its only argument and returns, for example, a pointer to an array.  You do not have symbols, or possibly you only have public symbols for <b>UnknownFunction</b>, but you do know that it takes an integer as its only argument and returns a pointer to an array.  By using the <b>/s</b> option, you can specify that <b>UnknownFunction</b> will work the same way that <b>KnownFunction</b> does.  Thus, you can successfully generate a call to <b>UnknownFunction</b>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .call (Call Function) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

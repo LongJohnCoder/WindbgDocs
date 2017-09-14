@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_SYMBOL_ENTRY</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_SYMBOL_ENTRY"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbghelp.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_SYMBOL_ENTRY"/>
+<MSHelp:Keyword Index="A" Term="Structures_5673550e-274a-429f-9a31-88e401bca68e.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_SYMBOL_ENTRY structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_5673550e-274a-429f-9a31-88e401bca68e.xml"></A>DEBUG_SYMBOL_ENTRY</H1>
+<P><P>The DEBUG_SYMBOL_ENTRY structure describes a symbol in a symbol group.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_SYMBOL_ENTRY</b><BR><b>{</b><BR><b>    ULONG64  ModuleBase;</b><BR><b>    ULONG64  Offset;</b><BR><b>    ULONG64  Id;</b><BR><b>    ULONG64  Arg64;</b><BR><b>    ULONG  Size;</b><BR><b>    ULONG  Flags;</b><BR><b>    ULONG  TypeId;</b><BR><b>    ULONG  NameSize;</b><BR><b>    ULONG  Token;</b><BR><b>    ULONG  Tag;</b><BR><b>    ULONG  Arg32;</b><BR><b>    ULONG  Reserved;</b><BR><b>} DEBUG_SYMBOL_ENTRY, * PDEBUG_SYMBOL_ENTRY;</b><BR><BR></P>
+<DL><H4>Members</H4>
+<DT><b>ModuleBase</b></DT>
+<DD>The base address of the <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> in the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>'s virtual address space.</DD>
+<DT><b>Offset</b></DT>
+<DD>The location of the symbol in the target's virtual address space.</DD>
+<DT><b>Id</b></DT>
+<DD>The symbol ID of the symbol.  If the symbol ID is not known, <b>Id</b> is DEBUG_INVALID_OFFSET.</DD>
+<DT><b>Arg64</b></DT>
+<DD>The interpretation of <b>Arg64</b> depends on the type of the symbol.  If the value is not known, <b>Arg64</b> is zero.</DD>
+<DT><b>Size</b></DT>
+<DD>The size, in bytes, of the symbol's value.  This might not be known or might not completely represent all of the data for a symbol.  For example, a function's code might be split among multiple regions and the size only describes one region.</DD>
+<DT><b>Flags</b></DT>
+<DD>Symbol entry flags.  Currently, no flags are defined.</DD>
+<DT><b>TypeId</b></DT>
+<DD>The type ID of the symbol.</DD>
+<DT><b>NameSize</b></DT>
+<DD>The size, in characters, of the symbol's name.  If the size is not known, <b>NameSize</b> is zero.</DD>
+<DT><b>Token</b></DT>
+<DD>The managed token of the symbol.  If the token value is not known or the symbol does not have a token, <b>Token</b> is zero.</DD>
+<DT><b>Tag</b></DT>
+<DD>The symbol tag for the type of the symbol.  This is a value from the <b>SymTagEnum</b> enumeration.</DD>
+<DT><b>Arg32</b></DT>
+<DD>The interpretation of <b>Arg32</b> depends on the type of the symbol.  Currently, the value of <b>Arg32</b> is the register that holds the value or a pointer to the value of the symbol. If the symbol is not held in a register, or the register is not known, <b>Arg32</b> is zero.</DD>
+<DT><b>Reserved</b></DT>
+<DD>Set to zero.</DD>
+</DL>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.  <b>SymTagEnum</b> is defined in <i>DbgHelp.h</i>.  Include <i>DbgHelp.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="comother_b34e6d42-3da1-43bd-954d-0aaf0da5a3a8.xml.htm"><b>IdebugSymbolGroup2::GetSymbolEntryInformation</b></a>, <a href="idebugsymbols_a1ac4d9f-172c-4697-937d-a59c88bb8778.xml.htm"><b>IdebugSymbols3::GetSymbolEntryInformation</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_SYMBOL_ENTRY RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

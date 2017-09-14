@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Boot Options in Windows Vista and Later</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Boot Options in Windows Vista and Later"><xml><MSHelp:Keyword Index="A" Term="bootini_1a0c1be6-ad98-4a1b-abb7-a4ba559b2d92.xml"/>
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], Windows Vista">
+<META NAME="MS-HKWD" CONTENT="editing boot options">
+<META NAME="MS-HKWD" CONTENT="multiboot systems [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="legacy boot entries [WDK]">
+<META NAME="MS-HKWD" CONTENT="Boot Configuration Data [WDK]">
+<META NAME="MS-HKWD" CONTENT="BCD [WDK]">
+<META NAME="MS-HKWD" CONTENT="BCDEdit tool">
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], editing">
+<META NAME="MS-HKWD" CONTENT="ntldr tool">
+<META NAME="MS-HKWD" CONTENT="Windows Boot Manager [WDK]">
+<META NAME="MS-HKWD" CONTENT="Bootmgr tool">
+<META NAME="MS-HKWD" CONTENT="system-specific boot loaders [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot loaders [WDK]">
+<META NAME="MS-HKWD" CONTENT="firmware-independent boot options [WDK]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_1a0c1be6-ad98-4a1b-abb7-a4ba559b2d92.xml"></A>Boot Options in Windows Vista and Later</H1>
+<P>Windows Vista introduced a new boot loader architecture, a new firmware-independent boot configuration and storage system called <i>Boot Configuration Data</i> (BCD), and a new boot option editing tool, BCDEdit (<i>BCDEdit.exe</i>). </P>
+<H4>Boot Loading Architecture in Windows Vista and Later</H4>
+<P>Windows Vista and later versions of Windows include boot loader components that are designed to load Windows quickly and securely. The previous Windows NT boot loader, <i>ntldr</i>, is replaced by three components:</P><B></B><UL type="disc">
+<LI>Windows Boot Manager (<i>Bootmgr.exe</i>)</LI>
+<LI>Windows operating system loader (<i>Winload.exe</i>)</LI>
+<LI>Windows resume loader (<i>Winresume.exe</i>)</LI>
+</UL>
+<P></P>
+<P>In this configuration, the Windows Boot Manager is generic and unaware of the specific requirements for each operating system while the system-specific boot loaders are optimized for the system that they load.</P>
+<P>When a computer with multiple boot entries includes at least one entry for Windows Vista or a later version of Windows, the Windows Boot Manager, which resides in the root directory, starts the system and interacts with the user. It displays the boot menu, loads the selected system-specific boot loader, and passes the boot parameters to the boot loader.</P>
+<P>The boot loaders reside in the root directory of each Windows partition. Once selected, the boot loaders take over the boot process and load the operating system in accordance with the selected boot parameters.</P>
+<H4>Boot Configuration Data</H4>
+<P>On Windows Vista and later versions of Windows, boot options are stored in the Boot Configuration Data (BCD) store on BIOS-based and EFI-based computers.</P>
+<P>BCD replaces the traditional <i>Boot.ini</i> text file in BIOS-based systems. Storing boot parameters in a text file, however simple, was considered to be too vulnerable to malicious attacks to justify its use. On EFI-based computers, where boot options are stored in NVRAM, you use the same BCD methods to edit boot options as you would use on a BIOS-based computer, instead of accessing NVRAM directly using Windows APIs or specialized tools.</P>
+<P>BCD provides a common, firmware-independent boot option interface for all computers running Windows Vista and later versions of Windows. It is more secure than previous boot option storage configurations, because it permits secure lockdown of the BCD store and lets Administrators assign rights for managing boot options. BCD is available at run time and during all phases of setup. You can even call BCD during power state transitions and use it to define the boot process for resuming after hibernation. </P>
+<P>You can manage BCD remotely and manage BCD when the system boots from media other than the media on which the BCD store resides. This feature is extremely important for debugging and troubleshooting, especially when a BCD store must be restored while running Startup Repair from a CD, from USB-based storage media, or even remotely.</P>
+<P>BCD is easy to use. The BCD store, with its familiar object-and-element architecture, uses GUIDs to precisely identify boot-related applications.</P>
+<P>This new data format for BCD uses a new set of boot options. Most of the Windows boot options that were used in pre-Vista versions of Windows, such as <b>/debug</b>, <b>/maxmem</b>, and <b>/pae</b>, have been preserved; however, in some cases, the names of the options might have changed to better suite their function. For more information about these boot options, see <a href="bootini_651f2026-cf0b-40d1-a910-24023aa80cd8.xml.htm">BCD Boot Options Reference</a>.</P>
+<H4>Multiboot Scenarios</H4>
+<P>If multiple Windows operating systems are installed on the computer, and one of the them is Windows Vista, or a later version of Windows, the Windows Boot Manager works with the booting components for older ("legacy") versions of Windows to interact with the user and start the selected operating system. </P>
+<P>When a multiboot computer is started, the following scenario occurs:</P><B></B><UL type="disc">
+<LI>The Windows Boot Manager displays a menu with the boot entries for Windows Vista and later versions of Windows, and a <b>Legacy</b> option.</LI>
+<LI>If you select a boot entry for Windows Vista or a later version of Windows, the Windows Boot Manager loads the system-specific boot loader for that operating system and passes the parameters for that boot entry to the system-specific boot loader. The system-specific boot loader loads the operating system in accordance with the boot parameters.</LI>
+<LI>If you select <b>Legacy</b>, the Windows Boot Manager starts Ntldr, the boot manager for NT-based Windows operating systems prior to Windows Vista. From this point forward, the boot process proceeds as it did prior to Windows Vista. <P>If the computer includes multiple installations of pre-Windows Vista Windows, Ntldr displays a boot menu consisting of the entries for  Windows Server 2003, Windows XP, Windows 2000, and Windows NT operating systems. This boot menu is generated from the entries in the <i>Boot.ini</i> file on BIOS-based systems and the boot entries stored in EFI-NVRAM on EFI-based systems. When you select a boot entry, Ntldr loads the operating system in accordance with the boot parameters.</P>
+</LI>
+</UL>
+<P></P>
+<H4>Editing Boot Options in Windows Vista</H4>
+<P>To edit boot options in Windows Vista and later versions of Windows, use BCDEdit (<i>BCDEdit.exe</i>), a tool included in these versions of Windows. You cannot use Bootcfg or NvrBoot to edit boot options on Windows Vista and later versions of Windows, although you can continue to use them to edit boot options on prior versions of Windows.</P>
+<P>To use BCDEdit, you must be a member of the Administrators group on the computer. BCDEdit is documented in Windows Help and Support. </P>
+<P>To change boot options programmatically on Windows Vista and later versions of Windows, use the Windows Management Instrument (WMI) interface to boot options. This BCD WMI interface is the best method to programmatically change the boot options. For information about the BCD WMI interface, see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=74322" target="_blank">Boot Configuration Data</a> in the Windows SDK documentation.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Boot Options in Windows Vista and Later RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

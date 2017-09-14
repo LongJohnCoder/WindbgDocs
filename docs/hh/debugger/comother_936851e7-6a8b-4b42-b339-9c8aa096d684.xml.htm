@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>AddSymbol</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, AddSymbol"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="AddSymbol"/>
+<MSHelp:Keyword Index="A" Term="ComOther_936851e7-6a8b-4b42-b339-9c8aa096d684.xml"/>
+<META NAME="MS-HKWD" CONTENT="AddSymbol (IDebugSymbolGroup) method">
+<META NAME="MS-HKWD" CONTENT="IDebugSymbolGroup::AddSymbol method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ComOther_936851e7-6a8b-4b42-b339-9c8aa096d684.xml"></A>AddSymbol</H1>
+<P><P>The <b>AddSymbol</b> and <b>AddSymbolWide</b> methods add a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35">symbol</a> to a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#827759d9-ce19-46ff-a648-973ba876d8e7">symbol group</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbolGroup::AddSymbol(</b><BR><b>    IN PCSTR  </b><i>Name</i><b>,</b><BR><b>    IN OUT PULONG  </b><i>Index</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugSymbolGroup2::AddSymbolWide(</b><BR><b>    IN PCWSTR  </b><i>Name</i><b>,</b><BR><b>    IN OUT PULONG  </b><i>Index</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define AddSymbolT AddSymbolWide</b><BR><b>#else</b><BR><b>#define AddSymbolT AddSymbol</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Name</i></DT>
+<DD>The symbol's name.  <i>Name</i> is examined as an expression to determine the symbol's <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#5b36cd55-3c8b-4586-a9b8-5a1c7d44bee3">type</a>.  This expression can include pointer, array, and structure dereferencing (for example, <b>*my_pointer</b>, <b>my_array[1]</b>, or <b>my_struct.some_field</b>).</DD>
+<DT><i>Index</i></DT>
+<DD>The index of the entry in the symbol group.  When you are calling <b>AddSymbol</b> or <b>AddSymbolWide</b>, <i>Index</i> should point to the index of the symbol that you want. Or, if <i>Index</i> points to DEBUG_ANY_ID, the symbol is appended to the end of the list.   <P>When this method returns, <i>Index</i> points to the actual index of the symbol.  The index of a symbol is an identification number. The index ranges from zero through the number of symbols in the symbol group minus one.</P>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<P><b>AddSymbol</b> and <b>AddSymbolWide</b> might return one of the following values:</P>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method might also return error values.  For more information about possible return values, see <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a>.</P>
+<H4>Comments</H4>
+<P>The symbol name in <i>Name</i> is evaluated by the <a href="r13_syntax_372599d3-a780-4c57-9219-05575c604059.xml.htm"><b>C++ expression evaluator</b></a> and can contain any C++ expression (for example, <b>x+y</b>).</P>
+<P>If the index that you want is less than the size of the symbol group, the new symbol is added at the desired index.  If the desired index is larger than the size of the symbol group, the new symbol is added to the end of the list (as in the case of DEBUG_ANY_ID).</P>
+<P>For more information about symbol groups, see <a href="engine_dg_8c597bf6-d707-45da-94c9-c88a4199c329.xml.htm">Scopes and Symbol Groups</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Versions: AddSymbol</b> is available in all versions of <b>IDebugSymbolGroup</b>.  <b>AddSymbolWide</b> is available in <b>IDebugSymbolGroup2</b> and later versions.</p>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="comother_e355317f-ba58-4d2a-a8f7-ad3cf4b17607.xml.htm"><b>GetNumberSymbols</b></a>, <a href="comother_d532b37e-11c9-4cff-a619-0b9dffef0af1.xml.htm"><b>RemoveSymbolByIndex</b></a>, <a href="comother_894176f1-bf26-4780-b287-a97993dd6e79.xml.htm"><b>RemoveSymbolByName</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: AddSymbol RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

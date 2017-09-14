@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>BCDEdit /dbgsettings</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, BCDEdit /dbgsettings"><xml><MSHelp:Keyword Index="A" Term="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml"/>
+<META NAME="MS-HKWD" CONTENT="BCDEdit /dbgsettings"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml"></A>BCDEdit /dbgsettings</H1>
+<P></P>
+<P>The <b>/dbgsettings</b> option sets or displays the current global debugger settings for the computer. To enable or disable the kernel debugger, use the <a href="bootini_4164b1eb-4436-42f3-9462-e31c06b892cc.xml.htm"><b>BCDEdit /debug</b></a> option.<P></P>
+</P>
+<P></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>bcdedit /dbgsettings SERIAL</b> [<b>DEBUGPORT:</b><i>port</i>] [<b>BAUDRATE:</b><i>baud</i>] [<b>/start</b> <i>startpolicy</i>] [<b>/noumex</b>] <BR><BR><b>bcdedit /dbgsettings 1394</b> [<b>CHANNEL:</b><i>channel</i>] [<b>/start</b> <i>startpolicy</i>] [<b>/noumex</b>] <BR><BR><b>bcdedit /dbgsettings USB</b> <b>TARGETNAME:</b><i>targetname</i> [<b>/start</b> <i>startpolicy</i>] [<b>/noumex</b>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>SERIAL</b></DT>
+<DD>Specifies that the target machine and the host machine will use a serial connection for debugging.  When this option is used, the <b>DEBUGPORT</b> and <b>BAUDRATE</b> parameters can be included as well.</DD>
+<DT><b>1394</b></DT>
+<DD>Specifies that the target machine and the host machine will use an IEEE 1394 (FireWire) connection for debugging.  When this option is used, the <b>CHANNEL</b> parameter can be included as well. </DD>
+<DT><b>USB</b></DT>
+<DD>Specifies that the target machine and the host machine will use a USB 2.0 connection for debugging.  When this option is used, the <b>TARGETNAME</b> parameter must be included as well. </DD>
+<DT><b>DEBUGPORT:</b><i>port</i></DT>
+<DD>(Only used when the connection type is <b>SERIAL</b>.)  Specifies the serial port to use as the debugging port. This is an optional setting. The default port is <b>1</b> (COM 1). </DD>
+<DT><b>BAUDRATE:</b><i>baud</i></DT>
+<DD>(Only used when the connection type is <b>SERIAL</b>.)  Specifies the baud rate to use. This parameter is optional. Valid values for <i>baud</i> are 9600, 19200, 38400, 57600, and 115200. The default baud rate is 115200 bps. <P class="note"><b>Note</b>  If the Windows Special Administration Console (SAC) application is running on a target machine that is configured for kernel mode debug through a serial port, the SAC application may cause the debugger connection to drop. This event occurs because the COM port baud value changes after the debugger connection is established. Either close the SAC application before running the debugger or change the debugger COM port baud value to 9600. </P>
+</DD>
+<DT><b>CHANNEL:</b><i>channel</i></DT>
+<DD>(Only used when the connection type is <b>1394</b>.)  Specifies the 1394 channel to use. The value for <i>channel</i> must be a decimal integer between 0 and 62, inclusive, and must match the channel number used by the host computer. The channel specified in this parameter does not depend on the physical 1394 port chosen on the adapter. The default value for <i>channel</i> is 0. </DD>
+<DT><b>TARGETNAME:</b><i>targetname</i></DT>
+<DD>(Only used when the connection type is <b>USB</b>.)  Specifies a string value to use for the target name. This string can be any value. </DD>
+<DT><b>/start </b><i>startpolicy</i></DT>
+<DD>This option specifies the debugger start policy. The following table shows the options for the <i>startpolicy</i>.<B></B><table>
+<TR valign="top">
+<TD Width=""><i>startpolicy</i></TD>
+<TD Width=""><b>Description</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ACTIVE</b></TD>
+<TD Width="">Specifies that the kernel debugger is active. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>AUTOENABLE</b></TD>
+<TD Width="">Specifies that the kernel debugger is enabled automatically when an exception or other critical event occurs. Until then, the debugger is active but is disabled.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>DISABLE</b>.</TD>
+<TD Width="">Specifies that the kernel debugger is enabled when you type <b>kdbgctrl</b> to clear the enable block. Until then, the debugger is active but is disabled.</TD>
+</TR>
+</table>
+<P></P>
+<P>If a start policy is not specified, ACTIVE is the default.  </P>
+</DD>
+<DT><b>/noumex</b></DT>
+<DD>Specifies that the kernel debugger ignores user-mode exceptions. By default, the kernel debugger breaks for certain user-mode exceptions, such as STATUS_BREAKPOINT and STATUS_SINGLE_STEP. The <b>/noumex</b> parameter is effective only when there is no user-mode debugger attached to the process. </DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>/dbgsettings</b> option configures the global debugging settings, but does not enable debugging. You must use the <b>/debug</b> option to enable debugging for a specific boot entry. If there are no debugging settings specified for a particular boot entry, the global debug settings are used. To override the global settings, you must use the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDEdit /set</b></a> command and specify the ID of the boot entry along with the debug parameter and value pair. </P>
+<P>The default values for the global settings are serial communications using COM1, at a baud rate of 115,200.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">/dbgsetting parameter</TH>
+<TH Width="">Default value</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Connection type </TD>
+<TD Width="">Serial</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>DEBUGPORT:</b> <i>port</i></TD>
+<TD Width="">1</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>BAUDRATE:</b><i>rate</i></TD>
+<TD Width="">115200</TD>
+</TR>
+</table>
+<P></P>
+<H4>Examples</H4>
+<P>The following example configures the global debugger settings to use serial communications using COM2 and a baud rate of 115,200. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /dbgsettings serial debugport:2 baudrate:115200<BR></nobr></P>
+<P></P>
+<P>In the following example, the first command sets the global debugger settings for USB 2.0 and names the target myVistaTarget. The second command enables the debugger for the current session. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /dbgsettings usb targetname:myVistaTarget <BR>bcdedit /debug ON <BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: BCDEdit /dbgsettings RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

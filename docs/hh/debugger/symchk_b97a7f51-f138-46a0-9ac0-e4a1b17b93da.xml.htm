@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Language Specification 1</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Language Specification 1"><xml><MSHelp:Keyword Index="A" Term="SymChk_b97a7f51-f138-46a0-9ac0-e4a1b17b93da.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_b97a7f51-f138-46a0-9ac0-e4a1b17b93da.xml"></A>Language Specification 1</H1>
+<P>The first version of SrcSrv works as follows.  (This behavior may change in future versions.)</P>
+<P>First, the client calls <b>SrcSrvInit</b> with the target path to be used as a base for all source file extractions.  This path is stored in the special variable TARG.</P>
+<P>When DbgHelp loads a module&#8217;s <i>.pdb </i>file, it extracts the SrcSrv stream from the <i>.pdb</i> file and passes this data block to SrcSrv by calling <b>SrcSrvLoadModule</b>.</P>
+<P>Then when DbgHelp needs to obtain a source file, it calls <b>SrcSrvGetFile</b> to retrieve a specified source file from version control.</P>
+<P>SrcSrv reviews all the source file entries in the data block for an entry that matches exactly the requested source specification.  This match is  found in VAR1.</P>
+<P>After SrcSrv finds the entry, it fills in the special variables (VAR1, VAR2, etc.) with the contents of this source file entry.  Then the SRCSRVTRG variable is resolved using these special variables. </P>
+<P>The following shows how the SRCSRVTRG variable is resolved using the special variables.  We assume that the source path is still:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>c:\proj\src\file.cpp*TOOLS_PRJ*tools/mytool/src/file.cpp*3 <BR></nobr></P>
+<P>Each line shows the resolution of one more special variable.  The resolved variables are bold.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>SRCSRVTRG=%sdtrg% <BR>SDTRG=%targ%\%var2%\%fnbksl%(%var3%)\%var4%\%fnfile%(%var1%)<BR><b>c:\src</b>\%var2%\%fnbksl%(%var3%)\%var4%\%fnfile%(%var1%)<BR><b>c:\src\WIN_SDKTOOLS</b>\%fnbksl%(%var3%)\%var4%\%fnfile%(%var1%)<BR><b>c:\src\WIN_SDKTOOLS</b>\%fnbksl%( <b>sdktools/debuggers/srcsrv/shell.cpp</b> )\%var4%\%fnfile%(%var1%)<BR><b>c:\src\WIN_SDKTOOLS\ sdktools\debuggers\srcsrv\shell.cpp</b>\%var4%\%fnfile%(%var1%)<BR><b>c:\src\WIN_SDKTOOLS\sdktools\debuggers\srcsrv\shell.cpp\3\</b>%fnfile%(%var1%)<BR><b>c:\src\WIN_SDKTOOLS\sdktools\debuggers\srcsrv\shell.cpp\3</b>\%fnfile%( <b>c:\db\srcsrv\shell.cpp</b>)<BR><b>c:\src\WIN_SDKTOOLS\sdktools\debuggers\srcsrv\shell.cpp\3\shell.cpp</b><BR></nobr></P>
+<P>Notice how this generated target path is unique and does not allow two versions of the same file to be extracted to the same location.</P>
+<P>SrcSrv now looks to see if the file is already there.  If it is, SrcSrv returns the location to the caller.  Otherwise, SrcSrv builds the execution command to extract the file by resolving SRCSRVCMD.</P>
+<P>In the following example, each line shows the resolution of one more special variable.  The resolved variables are bold.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>DEPOT=//depot <BR>WIN_SDKTOOLS= sserver.microsoft.com:4444 <BR>SRCSRVCMD=%sdcmd% <BR>SDCMD=sd.exe -p %fnvar%(%var2%) print -o %srcsrvtrg% -q %depot%/%var3%#%var4% <BR>sd.exe -p %fnvar%(<b>WIN_SDKTOOLS</b>) print -o %srcsrvtrg% -q %depot%/%var3%#%var4% <BR>sd.exe -p <b>sserver.microsoft.com:4444</b>  print -o %srcsrvtrg% -q %depot%/%var3%#%var4% <BR>sd.exe -p <b>sserver.microsoft.com:4444</b>  print -o <b>c:\src\WIN_SDKTOOLS\sdktools\debuggers\srcsrv\shell.cpp\3\shell.cpp</b> -q %depot%/%var3%#%var4% <BR>sd.exe -p <b>sserver.microsoft.com:4444</b>  print -o <b>c:\src\WIN_SDKTOOLS\sdktools\debuggers\srcsrv\shell.cpp\3\shell.cpp -q //depot</b>/%var3%#%var4% <BR>sd.exe -p <b>sserver.microsoft.com:4444</b>  print -o <b>c:\src\WIN_SDKTOOLS\sdktools\debuggers\srcsrv\shell.cpp\3\shell.cpp -q //depot/ sdktools/debuggers/srcsrv/shell.cpp</b>#%var4% <BR>sd.exe -p <b>sserver.microsoft.com:4444</b>  print -o <b>c:\src\WIN_SDKTOOLS\sdktools\debuggers\srcsrv\shell.cpp\3\shell.cpp</b> -q <b>//depot/</b> <b>sdktools/debuggers/srcsrv/shell.cpp#3</b> <BR></nobr></P>
+<P>Now SrcSrv executes this command.  If the result of this command is a file in the expected location, this path is returned to the caller.</P>
+<P>Note that if a variable cannot be resolved, an attempt is made to look it up as an OS environment variable.  If that fails, the variable name is deleted from the text being processed.</P>
+<P>Two consecutive percent sign characters are interpreted as a single percent sign.</P>
+<P></P>
+<H4>Source Server Data Blocks</H4>
+<P>SrcSrv relies on two blocks of data within the <i>.pdb</i> file, the source file list and the data block.</P>
+<P>The source file list is created automatically when a module is built.  This list contains fully qualified paths to the source files used to build the module.</P>
+<P>The data block is created during source indexing.  At this time, an alternative stream named "srcsrv" is added to the <i>.pdb</i> file.  The script that inserts this data is dependent on the specific build process and source control system in use.</P>
+<P>The data block is divided into three sections: ini, variables, and source files. The data block has the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>SRCSRV: ini ------------------------------------------------ <BR>VERSION=1<BR>VERCTRL=&lt;source_control_str&gt;<BR>DATETIME=&lt;date_time_str&gt;<BR>SRCSRV: variables ------------------------------------------ <BR>SRCSRVTRG=%sdtrg% <BR>SRCSRVCMD=%sdcmd% <BR>SRCSRVENV=var1=string1\bvar2=string2 <BR>DEPOT=//depot <BR>SDCMD=sd.exe -p %fnvar%(%var2%) print -o %srcsrvtrg% -q %depot%/%var3%#%var4% <BR>SDTRG=%targ%\%var2%\%fnbksl%(%var3%)\%var4%\%fnfile%(%var1%) <BR>WIN_SDKTOOLS= sserver.microsoft.com:4444 <BR>SRCSRV: source files --------------------------------------- <BR>&lt;path1&gt;*&lt;var2&gt;*&lt;var3&gt;*&lt;var4&gt; <BR>&lt;path2&gt;*&lt;var2&gt;*&lt;var3&gt;*&lt;var4&gt; <BR>&lt;path3&gt;*&lt;var2&gt;*&lt;var3&gt;*&lt;var4&gt; <BR>&lt;path4&gt;*&lt;var2&gt;*&lt;var3&gt;*&lt;var4&gt; <BR>SRCSRV: end ------------------------------------------------<BR></nobr></P>
+<P></P>
+<P>All text is interpreted literally, except for text enclosed in percent signs (%). Text enclosed in percent signs is treated as a variable name to be resolved recursively, unless it is one of the following functions:</P>
+<DL><DT><b>%fnvar%() </b></DT>
+<DD>The parameter text should be enclosed in percent signs and treated as a variable to be resolved. </DD>
+<DT><b>%fnbksl%() </b></DT>
+<DD>All forward slashes (/) in the parameter text should be replaced with backward slashes (\). </DD>
+<DT><b>%fnfile%() </b></DT>
+<DD>All path information in the parameter text should be stripped out, leaving only the file name. </DD>
+</DL>
+<P></P>
+<P>The [ini] section of the data block contains variables that describe the requirements. The indexing script can add any number of variables to this section. The following are examples:</P>
+<DL><DT><b>VERSION</b></DT>
+<DD>The language specification version. This variable is required.   If you develop a script based on the current language specification, set this value to 1.  The SrcSrv client code does not attempt to execute any script that has a value greater than its own.  Current versions of SrcSrv<i> </i>use a value of 2. </DD>
+<DT><b>VERCTL</b></DT>
+<DD>A string that describes the source version control system. This variable is optional. </DD>
+<DT><b>DATETIME</b></DT>
+<DD>A string that indicates the date and time the <i>.pdb</i> file was processed. This variable is optional. </DD>
+</DL>
+<P></P>
+<P>The [variables] section of the data block contains variables that describe how to extract a file from source control. It can also be used to define commonly used text as variables to reduce the size of the data block.</P>
+<DL><DT><b>SRCSRV</b></DT>
+<DD>Describes how to build the target path for the extracted file. This is a required variable. </DD>
+<DT><b>SRCSRVCMD</b></DT>
+<DD>Describes how to build the command to extract the file from source control. This includes the name of the executable file and its command-line parameters. This is required if any extraction command must be executed.</DD>
+<DT><b>SRCSRVENV</b></DT>
+<DD>Lists environment variables to be created during the file extraction. This is a string.  Separate multiple entries with a backspace character (\b). This is an optional variable. <P></P>
+</DD>
+<DT><b>SRCSRVVERCTRL</b></DT>
+<DD>Specifies the version control system in use.  For Perforce, this is <i>perforce</i>.  For Visual SourceSafe, this is <i>vss</i>.  For Team Foundation Server, this is <i>tfs</i>.  This variable is used to persist server errors. This is an optional variable.</DD>
+<DT><b>SRCSRVVERRDESC</b></DT>
+<DD>Specifies the text to display when the version control client is unable to contact the server that contains the source files to extract.  SrcSrv uses this value to check for connection problems. This is an optional variable.</DD>
+<DT><b>SRCSRVERRVAR</b></DT>
+<DD>Indicates which variable in a file entry corresponds to a version control server.  It is used by SrcSrv to identify commands that do not work, based on previous failures.  The format of the text is <b>var</b><I><B>X</B></I> where<i> <B>X</B></I> is the number of the variable being indicated.  This is an optional variable.</DD>
+</DL>
+<P></P>
+<P>The [source files] section of the data block contains an entry for each source file that has been indexed. The contents of each line are interpreted as variables with the names VAR1, VAR2, VAR3, and so on until VAR10. The variables are separated by asterisks. VAR1 must specify the fully qualified path to the source file as listed elsewhere in the <i>.pdb</i> file. For example: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>c:\proj\src\file.cpp*TOOLS_PRJ*tools/mytool/src/file.cpp*3 <BR></nobr></P>
+<P>is interpreted as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>VAR1=c:\proj\src\file.cpp<BR>VAR2=TOOLS_PRJ<BR>VAR3=tools/mytool/src/file.cpp<BR>VAR4=3<BR></nobr></P>
+<P>In this example, VAR4 is a revision number. However, most source control systems support labeling files in such a way that the source state for a given build can be restored. Therefore, you could instead use the label for the build. The sample data block could be modified to contain a variable such as the following:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>LABEL=BUILD47 <BR></nobr></P>
+<P>Then, presuming the source control system uses the at sign (@) to indicate a label, you could modify the SRCSRVCMD variable as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>sd.exe -p %fnvar%(%var2%) print -o %srcsrvtrg% -q %depot%/%var3%@%label%<BR></nobr></P>
+<P></P>
+<H4>Handling Server Errors</H4>
+<P>Sometimes a client is unable to extract any files at all from a single version control server.  This can be because the server is down and off the network or because the user does not have appropriate privileges to access the source.  However, the time consumed attempting to get this source can slow things down significantly.  In this situation, it is best to disable any attempt to extract from a source that has been proven to be unavailable.</P>
+<P>Whenever SrcSrv fails to extract a file, it examines the output text produced by the command.  If any part of this command contains an exact match for the contents of the SRCSRVERRDESC, all future commands to the same version control server are skipped.  Note that you can define multiple error strings by adding numbers or arbitrary text to the end of the SRCSRVERRDESC variable name.  Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>SRCSRVERRDESC=lime: server not found<BR>SRCSRVERRDESC_2=pineapple: network error<BR></nobr></P>
+<P>The identity of the server is acquired from SRCSRVERRVAR. So if SRCSRVERRVAR contains &#8220;var2&#8221; and the file entry in the <i>.pdb</i> file looks like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>c:\proj\src\file.cpp*TOOLS_PRJ*tools/mytool/src/file.cpp*3<BR></nobr></P>
+<P>all future attempts to obtain source using a file entry that contains &#8220;TOOLS_PRJ&#8221; in variable 2 are bypassed.</P>
+<P>You can also add error indicators on the debugger client by editing <a href="symchk_e64e8848-6e99-4ced-af83-199b6c35c2dd.xml.htm"><i>Srcsrv.ini</i></a>.  See the included sample version of <i>srcsrv.ini</i> for details.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Language Specification 1 RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

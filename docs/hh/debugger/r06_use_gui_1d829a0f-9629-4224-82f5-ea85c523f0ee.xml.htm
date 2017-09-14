@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Themes Provided in Debugging Tools for Windows</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Themes Provided in Debugging Tools for Windows"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_1d829a0f-9629-4224-82f5-ea85c523f0ee.xml"/>
+<META NAME="MS-HKWD" CONTENT="themes, provided"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_1d829a0f-9629-4224-82f5-ea85c523f0ee.xml"></A>Using Themes Provided in Debugging Tools for Windows</H1>
+<P>This topic shows screen shots of the configurations from each of the four themes provided in Debugging Tools for Windows.  Those themes are <i>Standard.reg</i>, <i>Standardvs.reg</i>, <i>Srcdisassembly.reg</i>, and <i>Multimon.reg</i>.</P>
+<H4><i>Standard.reg</i></H4>
+<P>The <i>Standard.reg</i> theme can be used for most debugging purposes.  In this arrangement, the lower third of the WinDbg window is taken by the Debugger Command window.  The upper two-thirds is divided roughly in half.  The left half is taken up by a placeholder window that indicates where the Source windows open in a tabbed collection.  The right half is further divided into halves vertically.  The upper half contains a tabbed collection that includes the Watch, Locals, Registers, and Disassembly windows.  The lower half contains a tabbed collection that includes the Calls and Processes and Threads windows.</P>
+<P>In each docking location, a placeholder window is also included as a point of reference for the other windows.  The placeholder windows should not be closed because closing them may change the configuration of the windows.  All of the windows in this arrangement are docked.</P>
+<P></P>
+<P></P>
+<p><img src="theme_standard.jpg"><p><b><i>Standard.reg</i> Theme</b></p>
+</p>
+<P></P>
+<H4><i>Standardvs.reg</i></H4>
+<P>The <i>Standardvs.reg</i> theme can be used for most debugging purposes, but is more similar in layout to Visual Studio.  In this arrangement, the WinDbg window is divided horizontally into thirds.  The upper third is further divided vertically into halves.  The left half of the upper third contains a tabbed collection that includes the Watch, Locals, Registers, Memory, Disassembly, and Scratchpad windows.  The right half of the upper third contains a tabbed collection that includes the Calls and Processes and Threads windows.  The lower third of the WinDbg window is taken by the Debugger Command window.  The middle third is filled by a placeholder window that indicates where the Source windows are opened in a tabbed collection.  </P>
+<P>In each docking location, a placeholder window is also included as a point of reference for the other windows.  The placeholder windows should not be closed because closing them may change the configuration of the windows.  All of the windows in this arrangement are docked.</P>
+<P></P>
+<P></P>
+<p><img src="theme_standardvs.jpg"><p><b><i>Standardvs.reg</i> Theme</b></p>
+</p>
+<P></P>
+<H4><i>Srcdisassembly.reg</i></H4>
+<P>The <i>Srcdisassembly.reg</i> theme includes a Disassembly window, for debugging in assembly mode.  In this arrangement, the WinDbg window is divided in half vertically, and each half formed is further divided into thirds horizontally.  On the right half, the upper third is a tabbed collection of the Locals and Watch windows, the middle third is the Debugger Command window, and the lower third is a tabbed collection of the Processes and Threads and Calls windows.  On the left half, the upper two-thirds are taken by a placeholder window that indicates where the Source windows opens in a tabbed collection; the lower third is taken up by the Disassembly window.  </P>
+<P>In each docking location, a placeholder window is also included as a point of reference for the other windows.  The placeholder windows should not be closed because closing them may change the configuration of the windows.  All of the windows in this arrangement are docked.</P>
+<P></P>
+<P></P>
+<p><img src="theme_srcdisassembly.jpg"><p><b><i>Srcdisassembly.reg</i> Theme</b></p>
+</p>
+<P></P>
+<H4><i>Multimon.reg</i></H4>
+<P>The <i>Multimon.reg</i> theme is set up for debugging with multiple monitors.  In this arrangement, a new dock is created so that the WinDbg window can be viewed on one monitor and the new dock can be viewed on the other monitor.  The WinDbg window is filled by a placeholder window that indicates where the Source windows open in a tabbed collection.  The new dock is divided into fourths.  The upper left contains a tabbed collection that includes the Watch and Locals windows.  The upper right contains a tabbed collection that includes the Registers, Memory, Disassembly, Scratchpad, and Processes and Threads windows.  The lower left contains the Debugger Command window.  The lower right contains the Calls window.</P>
+<P>In each docking location, a placeholder window is also included as a point of reference for the other windows.  The placeholder windows should not be closed because closing them may change the configuration of the windows.  All of the windows in this arrangement are docked.</P>
+<P></P>
+<P></P>
+<p><img src="theme_multimon.jpg"><p><b><i>Multimon.reg</i> Theme</b></p>
+</p>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Themes Provided in Debugging Tools for Windows RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

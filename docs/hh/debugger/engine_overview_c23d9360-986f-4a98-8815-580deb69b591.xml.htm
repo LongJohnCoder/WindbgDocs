@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Breakpoints</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Breakpoints"><xml><MSHelp:Keyword Index="A" Term="Engine_Overview_c23d9360-986f-4a98-8815-580deb69b591.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine, breakpoints"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_Overview_c23d9360-986f-4a98-8815-580deb69b591.xml"></A>Breakpoints</H1>
+<P>The <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> can create and monitor <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44"><i>breakpoints</i></a> in the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>.</P>
+<P>There are two types of breakpoints that the engine can insert into a target: software breakpoints and processor breakpoints.</P><B></B><UL type="disc">
+<LI><i>Software breakpoints</i> are inserted into the target's code by modifying the processor instruction at the breakpoint's location.  The debugger engine keeps track of such breakpoints; they are invisible to the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">clients</a> reading and writing memory at that location.  A software breakpoint is triggered when the target executes the modified instruction.</LI>
+<LI><i>Processor breakpoints</i> are inserted into the target's processor by the debugger engine.  A processor breakpoint can be triggered by different actions, for example, executing an instruction at the location (like software breakpoints), or reading or writing memory at the breakpoint's location.  Support for processor breakpoints is dependent on the processor in the target's computer.</LI>
+</UL>
+<P>A breakpoint's address can be specified by an explicit address, by an expression that evaluates to an address, or by an expression that might evaluate to an address at a future time.  In the last case, each time a <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> is loaded or unloaded in the target, the engine will attempt to reevaluate the expression and insert the breakpoint if it can determine the address; this makes it possible to set breakpoints in modules before they are loaded.</P>
+<P>A number of parameters can be associated with a breakpoint to control its behavior:</P><B></B><UL type="disc">
+<LI>A breakpoint can be associated with a particular <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#a5a5985a-10e6-4a13-8a11-d9935f5661b9">thread</a> in the target and will only be triggered by that thread.</LI>
+<LI>A breakpoint can have debugger commands associated with it; these commands will automatically be executed when the breakpoint is triggered.</LI>
+<LI>A breakpoint can be flagged as inactive until the target has passed it a specified number of times.</LI>
+<LI>A breakpoint can be automatically removed the first time it is triggered.</LI>
+</UL>
+<H4>Additional Information</H4>
+<P>For details about using breakpoints, see <a href="engine_dg_127dfdf0-b01d-405e-a25c-511830d82cc0.xml.htm">Using Breakpoints</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Breakpoints RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ExtRemoteTyped::SetPrint</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ExtRemoteTyped::SetPrint"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="ExtRemoteTyped::SetPrint"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_5987e1b0-7415-4004-b949-76b3edc02d9a.xml"/>
+<META NAME="MS-HKWD" CONTENT="ExtRemoteTyped::SetPrint">
+<META NAME="MS-HKWD" CONTENT="SetPrint (ExtRemoteTyped)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_5987e1b0-7415-4004-b949-76b3edc02d9a.xml"></A>ExtRemoteTyped::SetPrint</H1>
+<P><P>The <b>SetPrint</b> method sets the typed data represented by the <a href="engextcpp_ref_04970dac-e759-4a04-a1e0-8dab752c1418.xml.htm"><b>ExtRemoteTyped</b></a> object by formatting an expression and then evaluating that expression.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>void</b><BR><b>  ExtRemoteData::SetPrint(</b><BR><b>    IN PCSTR  </b><i>Format</i><b>,</b><BR><b>    </b><i>...</i><BR><b>    ) throw(...)</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Format</i></DT>
+<DD>The format string used to create the expression.  This is the same as the format string used by the C <b>printf</b> function.<P class="note"><b>Note</b> While other methods and functions in the debugger engine API provide additional, debugger-specific conversion characters, <b>SetPrint</b> only supports the conversion characters used by <b>printf</b>.</P>
+</DD>
+<DT><i>&#8230;</i></DT>
+<DD>The arguments for the format string, as in <b>printf</b>.  The arguments should match the conversion characters in <i>Format</i>.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>None</P>
+<H4>Requirements</H4>
+<p><b>Headers:</b> Defined in <i>Engextcpp.hpp</i>.  Include <i>Engextcpp.hpp</i>.</p>
+<H4>See Also</H4>
+<P><a href="engextcpp_ref_04970dac-e759-4a04-a1e0-8dab752c1418.xml.htm"><b>ExtRemoteTyped</b></a>, <a href="engextcpp_ref_8eec6840-f460-44cd-87dc-c04df2bd477b.xml.htm"><b>ExtRemoteTyped::Set</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ExtRemoteTyped::SetPrint RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>IG_LOWMEM_CHECK</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, IG_LOWMEM_CHECK"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="IG_LOWMEM_CHECK"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_958f146b-889a-4a89-9e02-a1bab5f0db54.xml"/>
+<META NAME="MS-HKWD" CONTENT="IG_LOWMEM_CHECK Ioctl operation"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_958f146b-889a-4a89-9e02-a1bab5f0db54.xml"></A>IG_LOWMEM_CHECK</H1>
+<P><P>The IG_LOWMEM_CHECK <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation looks for memory corruption in the low 4 GB of memory.</P>
+<P>This <b>Ioctl</b> operation does not take any parameters and the <i>lpvData</i> and <i>cbSizeOfContext</i> parameters should be set to NULL and zero respectively.</P>
+</P>
+<H4>Return Value</H4>
+<P>If no corrupt memory was found, the return value is TRUE; otherwise, it is FALSE.</P>
+<H4>Comments</H4>
+<P>This operation is only available in <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>, and is only useful when the <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#ddf5e2eb-aa21-42cb-b18c-9621029f2e6e">kernel</a> was started using the <b>/nolowmem</b> option.</P>
+<P>When the kernel is started with the <b>/nolowmem</b> option, the kernel, drivers, operating system, and applications are loaded in memory above 4 GB, while the low 4 GB of memory is filled with a unique pattern. The IG_LOWMEM_CHECK <b>Ioctl</b> operation checks this pattern for corruption.</P>
+<P>This can be used to verify that a driver works correctly when using physical addresses greater than 32 bits in length. See <i>Physical Address Extension (PAE)</i>, <b>/pae</b>,  and <b>/nolowmem</b> in the Windows Driver Kit.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Declared in <i>wdbgexts.h</i>. If you are writing a DbgEng extension that uses this <b>Ioctl</b> operation, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: IG_LOWMEM_CHECK RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

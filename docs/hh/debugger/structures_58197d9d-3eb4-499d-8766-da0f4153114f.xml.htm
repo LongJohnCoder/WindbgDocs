@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>HRESULT Values</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, HRESULT Values"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="HRESULT Values"/>
+<MSHelp:Keyword Index="A" Term="Structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml"/>
+<META NAME="MS-HKWD" CONTENT="Return Values"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml"></A>HRESULT Values</H1>
+<P><P>The following is a list of common return values for functions and methods, and their usual meanings.</P>
+</P>
+<P><b>Successful results.</b>  These values are defined in <i>WinError.h</i>.</P>
+<DL><DT>S_OK</DT>
+<DD>Successful completion.</DD>
+<DT>S_FALSE</DT>
+<DD>Completed without error, but only partial results were obtained.<P>If a buffer is not large enough to hold the information that is returned to it, the returned information is often truncated to fit into the buffer and S_FALSE is returned from the method.</P>
+</DD>
+</DL>
+<P><b>Error results.</b>  These values are defined in <i>WinError.h</i>.</P>
+<DL><DT>E_FAIL</DT>
+<DD>The operation could not be performed.</DD>
+<DT>E_INVALIDARG</DT>
+<DD>One of the arguments passed in was invalid.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>The object searched for was not found.</DD>
+<DT>E_OUTOFMEMORY</DT>
+<DD>A memory allocation attempt failed.</DD>
+<DT>E_UNEXPECTED</DT>
+<DD>The <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a> was not <a href="dbg_glossary_f75f2990-56bc-4632-bcba-2e994cbb39af.xml.htm#2d32ad4b-74a0-4e63-adc1-3821143d25aa">accessible</a>, or the engine was not in a state where the function or method could be processed.</DD>
+<DT>E_NOTIMPL</DT>
+<DD>Not implemented.</DD>
+<DT>HRESULT_FROM_WIN32(ERROR_ACCESS_DENIED)</DT>
+<DD>The operation was denied because the debugger is in <a href="r11_security_c67f1beb-2dab-4e98-aa23-02facc89a8f1.xml.htm">Secure Mode</a>.</DD>
+</DL>
+<P><b>NT error results.</b>  Other error codes, such as STATUS_CONTROL_C_EXIT and STATUS_NO_MORE_ENTRIES, can sometimes occur.  These results are passed to the HRESULT_FROM_NT macro that is defined in <i>WinError.h</i> before being returned.</P>
+<P><b>Win32 error results.</b>  Other error codes, such as ERROR_READ_FAULT and ERROR_WRITE_FAULT, can sometimes occur.  These results are passed to the HRESULT_FROM_WIN32 macro that is defined in <i>WinError.h</i> before being returned.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: HRESULT Values RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

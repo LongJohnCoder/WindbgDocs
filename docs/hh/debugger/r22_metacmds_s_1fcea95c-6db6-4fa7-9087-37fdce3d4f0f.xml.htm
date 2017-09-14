@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.symopt (Set Symbol Options)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .symopt (Set Symbol Options)"><xml><MSHelp:Keyword Index="A" Term="r22_metacmds_S_1fcea95c-6db6-4fa7-9087-37fdce3d4f0f.xml"/>
+<META NAME="MS-HKWD" CONTENT=".symopt (Set Symbol Options) command">
+<META NAME="MS-HKWD" CONTENT="Set Symbol Options (.symopt) command">
+<META NAME="MS-HKWD" CONTENT="symbols, Set Symbol Options (.symopt) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r22_metacmds_S_1fcea95c-6db6-4fa7-9087-37fdce3d4f0f.xml"></A>.symopt (Set Symbol Options)</H1>
+<P>The <b>.symopt</b> command sets or displays the symbol options.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.symopt+</b> <i>Flags</i> <BR><b>.symopt-</b> <i>Flags</i> <BR><b>.symopt</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>+</b></DT>
+<DD>Causes the symbol options specified by <i>Flags</i> to be set. If <b>.symopt</b> is used with <i>Flags</i> but no plus or minus sign, a plus sign is assumed. </DD>
+<DT><b>-</b></DT>
+<DD>Causes the symbol options specified by <i>Flags</i> to be cleared.</DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies the symbol options to be changed. <i>Flags</i> must be the sum of the bit flags of these symbol options.</DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Without any arguments, <b>.symopt</b> displays the current symbol options.</P>
+<H4>Additional Information</H4>
+<P>For a list and description of each symbol option, its bit flag, and other methods of setting and clearing these options, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm">Setting Symbol Options</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .symopt (Set Symbol Options) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

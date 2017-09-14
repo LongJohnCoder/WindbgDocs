@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>S</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, glossary, S"><xml><MSHelp:Keyword Index="A" Term="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml"/>
+<META NAME="MS-HKWD" CONTENT="scope">
+<META NAME="MS-HKWD" CONTENT="second-chance exception">
+<META NAME="MS-HKWD" CONTENT="smart client">
+<META NAME="MS-HKWD" CONTENT="specific exception filter">
+<META NAME="MS-HKWD" CONTENT="specific event filter">
+<META NAME="MS-HKWD" CONTENT="specific filter">
+<META NAME="MS-HKWD" CONTENT="software breakpoint">
+<META NAME="MS-HKWD" CONTENT="stack">
+<META NAME="MS-HKWD" CONTENT="stack frame">
+<META NAME="MS-HKWD" CONTENT="stop code">
+<META NAME="MS-HKWD" CONTENT="stop error">
+<META NAME="MS-HKWD" CONTENT="stop screen">
+<META NAME="MS-HKWD" CONTENT="subregister">
+<META NAME="MS-HKWD" CONTENT="suspended thread">
+<META NAME="MS-HKWD" CONTENT="suspended process">
+<META NAME="MS-HKWD" CONTENT="NULL">
+<META NAME="MS-HKWD" CONTENT="symbol file">
+<META NAME="MS-HKWD" CONTENT="symbol group">
+<META NAME="MS-HKWD" CONTENT="symbol type">
+<META NAME="MS-HKWD" CONTENT="synthetic module">
+<META NAME="MS-HKWD" CONTENT="synthetic symbol">
+<META NAME="MS-HKWD" CONTENT="system crash"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>    <H1><A NAME="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml"></A>S</H1>
+<P></P>
+<DL><DT><B><A NAME="be0d4db2-659d-4b78-b64c-d192fdbb1684"></A>scope</B></DT>
+<DD>The context that defines the local variables.  The scope has three components: a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#ab5b362b-84d0-4128-bd43-7e3d5014f81f">stack frame</a>, a current instruction, and a <a href="dbg_glossary_67e8768c-0585-41a5-ab7c-f8d2b5978663.xml.htm#203060b3-930a-4f3b-9173-348c463917c7">register context</a>.<P>Sometimes referred to as <i>local context</i> or <i>lexical scope</i>.</P>
+</DD>
+<P>For more information, see the topics <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a> and <a href="engine_dg_8c597bf6-d707-45da-94c9-c88a4199c329.xml.htm">Scopes and Symbol Groups</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="a48a7a88-0cc3-46d0-a1c9-2ccfeebb4c01"></A>second-chance exception</B></DT>
+<DD>The second opportunity to handle an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exception</a>.  This opportunity is only provided if the exception was not handled on the <a href="dbg_glossary_115ca2a1-47f8-405f-a4f7-a7446892d897.xml.htm#721095c2-e24a-4306-b08a-12feea466aa2">first chance</a>.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="e969f84e-cb68-450e-bec4-6995463722ed"></A>smart client</B></DT>
+<DD>An instance of the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> acting as a <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#77205ddc-d81d-483c-ab52-47eb6d613eac">host</a>.  The smart client is connected to a <a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#927cdf63-ac0c-4f34-af24-1cdc17ca8d68">process server</a>. or a <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#51c238eb-bf11-4a5e-8fe6-ae86b29808d9">KD connection server</a>. </DD>
+<P><i>See also</i> <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cab89f06-8d34-430d-b047-ea48e96aac1b">debugging client</a>.<P>For more information, see <a href="r08_use_remote_0828c18f-b042-4288-9b58-a56e3076eb2e.xml.htm">Process Servers (User Mode)</a>, <a href="r08_use_remote_da274d6a-0dd9-43db-98cf-5c84038694db.xml.htm">KD Connection Servers (Kernel Mode)</a>, and <a href="engine_dg_403e6a06-76ae-4dfc-a475-4e8a77318c95.xml.htm#2198fa25-e6ef-4e68-b715-3a32968b560c">Process Server and Smart Client</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="98344738-8c89-457f-96a5-428053fcf5f2"></A>specific exception filter</B></DT>
+<DD>An <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8c64ad6b-a845-4f5d-b862-f4e23db322a2">event filter</a> for an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exception</a> for which the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> has a built-in filter.  Most specific exception filters refer to specific types of exceptions (identified by <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#0b476356-a48f-4e4f-84af-936458a97797">exception code</a>), but the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#f4208f30-1b1c-4b79-90ba-7fe7fb240c6d">default exception filter</a> also qualifies as a specific exception filter.</DD>
+<P><i>See also</i> <a href="dbg_glossary_f75f2990-56bc-4632-bcba-2e994cbb39af.xml.htm#ac40e553-dd44-4cd0-aa79-5d58865fbb5f">arbitrary exception filter</a>, <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#42e1b548-244d-4d27-9ba3-1cdd167d75eb">specific event filter</a>, <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#881e2e22-4799-498c-88ee-45fb367a0a6b">specific filter</a>, <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8998765a-accc-4fd3-b1fd-cb82527e37b9">exception filter</a>.<P>For more information, see <a href="engine_dg_feda793f-b9e8-402f-9953-409e0e94247f.xml.htm">Event Filters</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="42e1b548-244d-4d27-9ba3-1cdd167d75eb"></A>specific event filter</B></DT>
+<DD>An <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8c64ad6b-a845-4f5d-b862-f4e23db322a2">event filter</a> for an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> which is not an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exception</a>.  The specific event filters are listed in <a href="structures_a6679c9f-e984-42f4-b033-26ad9256c373.xml.htm">DEBUG_FILTER_<i>XXX</i></a>.</DD>
+<P><i>See also</i> <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#98344738-8c89-457f-96a5-428053fcf5f2">specific exception filter</a>, <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#881e2e22-4799-498c-88ee-45fb367a0a6b">specific filter</a>.<P>For more information, see <a href="engine_dg_feda793f-b9e8-402f-9953-409e0e94247f.xml.htm">Event Filters</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="881e2e22-4799-498c-88ee-45fb367a0a6b"></A>specific filter</B></DT>
+<DD>An <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8c64ad6b-a845-4f5d-b862-f4e23db322a2">event filter</a> for an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> for which the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> has a built-in filter.</DD>
+<P><i>See also</i> <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#42e1b548-244d-4d27-9ba3-1cdd167d75eb">specific event filter</a>, <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#98344738-8c89-457f-96a5-428053fcf5f2">specific exception filter</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="966bf102-d48c-4c87-9dea-3bed91a69ee0"></A>software breakpoint</B></DT>
+<DD>A <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoint</a> that is implemented by the debugger engine temporarily modifying the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>'s executable code.  The breakpoint is triggered when the code is executed.  The code modification is invisible to users of the debugger or the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#98ac5bd2-076f-48f9-94e6-2a4518471d3c">debugger engine API</a>.</DD>
+<P><i>See also</i> <a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#4d5a4a35-a0a2-49c3-87f8-97d78cb0284a">processor breakpoint</a>.<P>For more information, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a> or <a href="engine_dg_4f9c88b1-f2a7-4a25-b1ff-ac050eb5c42d.xml.htm">Breakpoints</a>. </P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="e4818b1a-945b-4d8b-af23-af5d982f0f58"></A>stack</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#81c37228-c201-48ad-9f7a-85d8b1ade52c">call stack</a>.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="ab5b362b-84d0-4128-bd43-7e3d5014f81f"></A>stack frame</B></DT>
+<DD>The memory in the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#81c37228-c201-48ad-9f7a-85d8b1ade52c">call stack</a> containing the data for a single function call.  This includes the return address, parameters passed to the function, and local variables.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="3b9b4f3a-48ba-4e90-bb64-f4fb94d542f0"></A>stop code</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#f30154fb-999c-411b-84e4-bd4a11326afb">bug check code</a>.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="c5f76f43-9f8c-43e8-9b26-dd5510d417ac"></A>stop error</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#e61a9a8d-e7fc-41be-9614-0ba8da7e1a4a">bug check</a>.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="9a9b08c3-e322-4efd-a995-ddbf005bc1cf"></A>stop screen</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#d72903ad-6078-4767-80d7-ee1c3fdf4922">blue screen</a>.</DD>
+</DL>
+<P></P>
+<P></P>
+<DL><DT><B><A NAME="bc60aae0-7ae8-4a07-84ce-cd7cd778d15e"></A>subregister</B></DT>
+<DD>A <a href="dbg_glossary_67e8768c-0585-41a5-ab7c-f8d2b5978663.xml.htm#14df9d28-2548-44c6-b68f-410607212d6c">register</a> that is contained within another register.  When the subregister changes, the portion of the register that contains the subregister also changes.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="0a6b6a99-2d54-46ab-99eb-d47231b221e6"></A>suspended</B></DT>
+<DD>A <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>, process, or thread is suspended if it has been blocked it from executing. </DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="986a5629-886b-417b-a52e-7352511b0e35"></A>symbol</B></DT>
+<DD><P>A unit of debugging information which provides interpretive information about the target in a debugging session.  Examples of symbols include variables (local and global), functions, types and function entries.  Information about symbols can include the name, <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#5b36cd55-3c8b-4586-a9b8-5a1c7d44bee3">type</a> (if applicable), and the address or <a href="dbg_glossary_67e8768c-0585-41a5-ab7c-f8d2b5978663.xml.htm#14df9d28-2548-44c6-b68f-410607212d6c">register</a> where it is stored, as well as any <a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#7dc89772-522e-4eea-a539-82ca282e5612">parent</a> or <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#7f417d30-b6ae-4ff1-9f31-80f6515c818c">child symbols</a>.  This information is stored in <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#ee431472-4429-4f7a-b2e1-da9fe9759455">symbol files</a> and is typically not available in the module itself.</P>
+<P>The debugger engine can synthesize certain symbols when symbol files are not available (for example, exported symbols), but these symbols generally provide only minimal information. </P>
+</DD>
+<P></P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="ee431472-4429-4f7a-b2e1-da9fe9759455"></A>symbol file</B></DT>
+<DD>A supplemental file created when an application, library, driver, or operating system is built.  A symbol file contains data which is not actually needed when running the binaries, but which is very useful in the debugging process.</DD>
+<P>For more information, see <a href="r09_symbols_2725b901-b583-4abb-83cd-cbb72f6851a3.xml.htm">Symbol Files: Overview</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="827759d9-ce19-46ff-a648-973ba876d8e7"></A>symbol group</B></DT>
+<DD>A group of <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35"><u>symbols</u></a>, typically representing all the local variables in a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#be0d4db2-659d-4b78-b64c-d192fdbb1684"><u>scope</u></a>.</DD>
+<P>For more information, see <a href="engine_dg_8c597bf6-d707-45da-94c9-c88a4199c329.xml.htm">Scopes and Symbol Groups</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="5b36cd55-3c8b-4586-a9b8-5a1c7d44bee3"></A>symbol type</B></DT>
+<DD><P>Descriptive information about a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35">symbol</a>&#8217;s representation, such as its layout in memory.  This is part of the information a compiler uses to generate code to manipulate the symbol.  It is also used by the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> to manipulate symbols.  The symbol type is distributed in <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#ee431472-4429-4f7a-b2e1-da9fe9759455">symbol files</a>.</P>
+</DD>
+<P></P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="ee28acb0-9eac-4a3b-92f9-6f33162b568c"></A>synthetic module</B></DT>
+<DD>A region of memory that the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2dbaa658-dbfe-47de-8266-97ed86c41aea">engine</a> treats like a <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a>.  A synthetic module may contain <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#646e34af-cd66-4cec-a6ae-85fdb99f690e">synthetic symbols</a>.</DD>
+<P>For more information, see <a href="engine_dg_7c681050-ba73-4e87-818f-a9fac75a720b.xml.htm">Modules</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="646e34af-cd66-4cec-a6ae-85fdb99f690e"></A>synthetic symbol</B></DT>
+<DD>A memory address that the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2dbaa658-dbfe-47de-8266-97ed86c41aea">engine</a> treats like a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35">symbol</a>.</DD>
+<P>For more information, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Symbols</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="e5b5a2c4-a04b-408f-8caa-ac3406f24ae1"></A>system crash</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#e61a9a8d-e7fc-41be-9614-0ba8da7e1a4a">bug check</a>.</DD>
+</DL>
+<P></P>  <DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: S RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

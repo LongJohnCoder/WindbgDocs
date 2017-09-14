@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Example 1: Displaying Global Flags</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Example 1:  Displaying Global Flags"><xml><MSHelp:Keyword Index="A" Term="GFlags_73547edc-0b92-4de3-917c-01e7e2f90184.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_73547edc-0b92-4de3-917c-01e7e2f90184.xml"></A>Example 1:  Displaying Global Flags</H1>
+<P>The commands demonstrated in this example display the system-wide flags set in the registry, the system flags set for the session (kernel mode), and the flags set for an image file. </P>
+<P>The following GFlags command displays the current value of the system-wide flags set in the registry. It uses the <b>/r</b> parameter to specify the system-wide registry entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /r </b><BR><BR></nobr></P>
+<P>In response, GFlags displays a single hexadecimal value representing the sum of all flags set and a list of the flags set.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Current Boot Registry Settings are: 40001400<BR>    ptg - Enable pool tagging<BR>    ust - Create user mode stack trace database<BR>    bhd - Enable bad handles detection<BR><BR></nobr></P>
+<P>In this example, the results show that there are three tags set, with a combined value of 0x40001400.</P><B></B><UL type="disc">
+<LI><a href="gflags_c858b070-5a5e-4afc-9cfa-f933c81c8793.xml.htm"><b>Enable pool tagging</b></a> (ptg) = 0x400 </LI>
+<LI><a href="gflags_afe6f8c7-152a-45fb-ba04-ef3ea84b2199.xml.htm"><b>Create user mode stack trace database</b></a> (ust) = 0x1000 </LI>
+<LI><a href="gflags_10f43bfa-20dd-4416-b0b3-9916d33c546d.xml.htm"><b>Enable bad handles detection</b></a> (bhd) = 0x40000000 </LI>
+</UL>
+<P></P>
+<P>The following command displays the flags set for the current session. It uses the <b>/k</b> parameter to indicate kernel mode.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /k</b> <BR><BR></nobr></P>
+<P>The following command displays flags set in the registry for the image file <i>notepad.exe</i>. It uses the <b>/i</b> parameter to indicate image file mode and specifies the image file.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /i notepad.exe</b> <BR><BR></nobr></P>
+<P>Remember that the flag value displayed might not be the current, effective flag value. Changes to the system-wide flags are not effective until you restart Windows. Changes to image file flag settings are not effective until you restart the program.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Example 1:  Displaying Global Flags RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

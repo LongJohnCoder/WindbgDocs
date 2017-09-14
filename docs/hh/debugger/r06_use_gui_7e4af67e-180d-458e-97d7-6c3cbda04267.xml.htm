@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Workspace Contents</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Workspace Contents"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_7e4af67e-180d-458e-97d7-6c3cbda04267.xml"/>
+<META NAME="MS-HKWD" CONTENT="workspaces, contents of workspaces">
+<META NAME="MS-HKWD" CONTENT="workspaces, automatically starting a session">
+<META NAME="MS-HKWD" CONTENT="workspaces, breakpoints in workspaces">
+<META NAME="MS-HKWD" CONTENT="breakpoints, and workspaces"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_7e4af67e-180d-458e-97d7-6c3cbda04267.xml"></A>Workspace Contents</H1>
+<P></P>
+<P>Each workspace preserves the following information about the current debugging session. This information is applied cumulatively, starting with the base workspace and ending with the most recently-loaded workspace.</P><B></B><UL type="disc">
+<LI>All break and handling information for exceptions and events. For more information about the break and handling information, see <a href="#67a223d1-61aa-410c-85f6-353bfd082346">Breakpoints in Workspaces</a>.  </LI>
+<LI>All open source files.  If a source file is not found, an error message appears. You can close these error messages individually or by using the <a href="r37_gui_2_78d1e136-16b8-489d-ab0e-24037eebca39.xml.htm"><b>Window | Close All Error Windows</b></a> command.</LI>
+<LI>All user-defined aliases. </LI>
+</UL>
+<P></P>
+<P>Each workspace preserves the following information about the debugger configuration settings. This information is applied cumulatively, starting with the base workspace and ending with the most recently-loaded workspace.</P><B></B><UL type="disc">
+<LI>The symbol path.  </LI>
+<LI>The executable image path.  </LI>
+<LI>The source path. (In remote debugging, the main source path and the local source path are saved.)  </LI>
+<LI>The current source options that were set with <a href="r17_cmds_i_11dcb4d0-b005-46df-b006-79397ff26e7e.xml.htm"><b>l+, l- (Set Source Options)</b></a>. </LI>
+<LI>Log file settings.  </LI>
+<LI>The COM or 1394 kernel connection settings, if the connection was started by using the graphical interface.</LI>
+<LI>The most recent paths in each <b>Open</b> dialog box (except for the workspace file and text file paths, which are not saved).</LI>
+<LI>The current <a href="r20_metacmds_e_9485abdb-48eb-4cbd-a410-76ac2f4ad2bd.xml.htm"><b>.enable_unicode</b></a>, <a href="r20_metacmds_e_6ecddf08-b9b9-4677-bc82-328776009dbd.xml.htm"><b>.force_radix_output</b></a>, and <a href="r20_metacmds_e_c15fcdd0-2668-465e-b455-98469d929bd6.xml.htm"><b>.enable_long_status</b></a> settings.</LI>
+</UL>
+<P></P>
+<P>All default workspaces and named workspaces preserve the following information about the WinDbg graphical interface. This information is loaded cumulatively, starting with the base workspace and ending with the most recently-loaded workspace.</P><B></B><UL type="disc">
+<LI>The title of the WinDbg window</LI>
+<LI>The <a href="r37_gui_2_e8257b73-be67-4d7a-b87b-f2a7fcf9caaf.xml.htm"><b>Automatically Open Disassembly</b></a> setting</LI>
+<LI>The default font  </LI>
+</UL>
+<P></P>
+<P>All default workspaces and named workspaces preserve the following information about the WinDbg graphical interface. This information is <i>not</i> applied cumulatively. It depends only on the most recently-loaded workspace.</P><B></B><UL type="disc">
+<LI>The size and position of the WinDbg window on the desktop.</LI>
+<LI>Which debugging information windows are open.  </LI>
+<LI>The size and position of each open window, including the window's size, its floating or docked status, whether it is tabbed with other windows, and all of the related settings in its shortcut menu. </LI>
+<LI>The location of the pane boundary in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a> and the word wrap setting in that window.</LI>
+<LI>Whether the toolbar and status bar, and the individual toolbars on each debugging information window, are visible.</LI>
+<LI>The customization of the <a href="r36_gui_1_1cc07c74-c19c-41ff-954e-8d74472ff458.xml.htm">Registers window</a>.</LI>
+<LI>The flags in the <a href="r36_gui_1_b6fb163f-531c-4403-aa9d-100772f42189.xml.htm">Calls window</a>, Locals window, and Watch window. </LI>
+<LI>The items that were viewed in the <a href="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml.htm">Watch window</a>.</LI>
+<LI>The cursor location in each <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a>. </LI>
+</UL>
+<P></P>
+<H4>Named Workspaces</H4>
+<P>Named workspaces contain additional information that is not stored in default workspaces.</P>
+<P>This additional information includes information about the current session state. When a named workspace is saved, the current session is saved. If this workspace is later opened, this session is automatically restarted.</P>
+<P>You can start only kernel debugging, dump file debugging, and debugging of spawned user-mode processes in this manner. Remote sessions and user-mode processes that the debugger attached to do not have this session information saved in their workspaces.</P>
+<P>You cannot open this kind of named workspace if another session is already active.</P>
+<P></P>
+<H4>Debugging Clients and Workspaces</H4>
+<P>When you use WinDbg as a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cab89f06-8d34-430d-b047-ea48e96aac1b">debugging client</a>, its workspace saves only values that you set through the graphical interface. Changes that you make through the Debugger Command window are not saved. (This restriction guarantees that only changes that the local client made are reflected, because the Debugger Command window accepts input from all clients and the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#098e09f5-d7db-435e-9403-16661d6693b5">debugging server</a>.) For more information, see <a href="r08_use_remote_6a360dc5-a228-4746-a24e-13fc94f80fe2.xml.htm">Controlling a Remote Debugging Session</a>.</P>
+<H3><A NAME="67a223d1-61aa-410c-85f6-353bfd082346"></A>Breakpoints in Workspaces</H3>
+<P>In addition, breakpoint information is saved in workspaces, including the break address and status. Breakpoints that are active when a session ends are active when the next session is started. However, some of these breakpoints might be unresolved if the proper modules have not yet been loaded.</P>
+<P>Breakpoints that you specify by a symbol expression, by a line number, by a numeric address, or by using the mouse in a Source window are all saved in workspaces. Breakpoints that you specify by using the mouse in a Disassembly or Calls window are <i>not</i> saved in workspaces.</P>
+<P>If you are debugging multiple user-mode processes, only breakpoints that are associated with process zero are saved.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Workspace Contents RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>as, aS (Set Alias)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, as, aS (Set Alias)"><xml><MSHelp:Keyword Index="A" Term="r15_cmds_A_55827b17-9e6d-45ce-8f48-a2a78000a00c.xml"/>
+<META NAME="MS-HKWD" CONTENT="as (Set Alias) command">
+<META NAME="MS-HKWD" CONTENT="aS (Set Alias) command">
+<META NAME="MS-HKWD" CONTENT="Set Alias (as - aS) command">
+<META NAME="MS-HKWD" CONTENT="aliases, Set Alias (as) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r15_cmds_A_55827b17-9e6d-45ce-8f48-a2a78000a00c.xml"></A>as, aS (Set Alias)</H1>
+<P>The <b>as</b> and <b>aS</b> commands define a new alias or redefine an existing one.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>as</b> <i>Name</i> <i>EquivalentLine</i> <BR><b>aS</b> <i>Name</i> <i>EquivalentPhrase</i> <BR><b>aS</b> <i>Name</i> <b>"</b><i>EquivalentPhrase</i><b>"</b> <BR><b>as</b> <b>/e</b> <i>Name</i> <i>EnvironmentVariable</i> <BR><b>as</b> <b>/ma</b> <i>Name</i> <i>Address</i> <BR><b>as</b> <b>/mu</b> <i>Name</i> <i>Address</i> <BR><b>as</b> <b>/msa</b> <i>Name</i> <i>Address</i> <BR><b>as</b> <b>/msu</b> <i>Name</i> <i>Address</i> <BR><b>as</b> <b>/x</b> <i>Name</i> <i>Expression</i> <BR><b>aS /f</b> <i>Name</i> <i>File</i> <BR><b>as /c</b> <i>Name</i> <i>CommandString</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Name</i></DT>
+<DD>Specifies the alias name. This name can be any text string that does not contain a space or the ENTER keystroke and does not begin with "al", "as", "aS", or "ad". <i>Name</i> is case sensitive.</DD>
+<DT><i>EquivalentLine</i></DT>
+<DD>Specifies the alias equivalent. <i>EquivalentLine</i> is case sensitive. You must add at least one space between <i>Name</i> and <i>EquivalentLine</i>. The number of spaces between these two parameters is not important. The alias equivalent never contains leading spaces. After these spaces, <i>EquivalentLine</i> includes the rest of the line. Semicolons, quotation marks, and spaces are treated as literal characters, and trailing spaces are included.</DD>
+<DT><i>EquivalentPhrase</i></DT>
+<DD>Specifies the alias equivalent. <i>EquivalentPhrase</i> is case sensitive. You must add at least one space between <i>Name</i> and <i>EquivalentPhrase</i>. The number of spaces between these two parameters is not important. The alias equivalent never contains leading spaces. <P>You can enclose <i>EquivalentPhrase</i> in quotation marks (<b>"</b>). Regardless of whether you use quotation marks, <i>EquivalentPhrase</i> can contain spaces, commas, and single quotation marks (<b>'</b>). If you enclose <i>EquivalentPhrase</i> in quotation marks, it can include semicolons, but not additional quotation marks. If you do not enclose <i>EquivalentPhrase</i> in quotation marks, it can include quotation marks in any location other than the first character, but it cannot include semicolons. Trailing spaces are included regardless of whether you use quotation marks.</P>
+</DD>
+<DT><b>/e</b></DT>
+<DD>Sets the alias equivalent equal to the environment variable that <i>EnvironmentVariable </i>specifies.</DD>
+<DT><i>EnvironmentVariable</i></DT>
+<DD>Specifies the environment variable that is used to determine the alias equivalent. The debugger's environment is used, not the target's. If you started the debugger at a Command Prompt window, the environment variables in that window are used.</DD>
+<DT><b>/ma</b></DT>
+<DD>Sets the alias equivalent equal to the null-terminated ASCII string that begins at <i>Address</i>.</DD>
+<DT><b>/mu</b></DT>
+<DD>Sets the alias equivalent equal to the null-terminated Unicode string that begins at <i>Address</i>.</DD>
+<DT><b>/msa</b></DT>
+<DD>Sets the alias equivalent equal to the ANSI_STRING structure that is located at <i>Address</i>.</DD>
+<DT><b>/msu</b></DT>
+<DD>Sets the alias equivalent equal to the UNICODE_STRING that is structure located at <i>Address</i>.</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the location of the virtual memory that is used to determine the alias equivalent.</DD>
+<DT><b>/x</b></DT>
+<DD>Sets the alias equivalent equal to the 64-bit value of <i>Expression</i>.</DD>
+<DT><i>Expression</i></DT>
+<DD>Specifies the expression to evaluate. This value becomes the alias equivalent. For more information about the syntax, see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a>.</DD>
+<DT><b>/f</b></DT>
+<DD>Sets the alias equivalent equal to the contents of the <i>File</i> file. You should always use the <b>/f</b> switch together with <b>aS</b>, not with <b>as</b>.   </DD>
+<DT><i>File</i></DT>
+<DD>Specifies the file whose contents become the alias equivalent. <i>File</i> can contain spaces, but you should never enclose <i>File</i> in quotation marks. If you specify an invalid file, you receive an "Out of memory" error message.</DD>
+<DT><b>/c</b></DT>
+<DD>Sets the alias equivalent equal to the output of the commands that <i>CommandString</i> specify. The alias equivalent includes carriage returns if they are present within the command display and a carriage return at the end of the display of each command (even if you specify only one command). </DD>
+<DT><i>CommandString</i></DT>
+<DD>Specifies the commands whose outputs become the alias equivalent. This string can include any number of commands that are separated by semicolons.</DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If you do not use any switches, the <b>as</b> command uses the rest of the line as the alias equivalent. </P>
+<P>You can end the <b>aS</b> command by a semicolon. This technique is useful in a script when you have to put all commands on a single line. Note that if the portion of the line after the semicolon requires expansion of the alias, you must enclose that second portion of the line in a new block. The following example produces the expected output, 0x6.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; aS /x myAlias 5 + 1; .block{.echo myAlias}<BR>0x6<BR><BR></nobr></P>
+<P>If you omit the new block, you do not get the expected output. That is because the expansion of a newly set alias does not happen until a new code block is entered. In the following example, the new block is omitted, and the output is the text "myAlias" instead of the expected value 0x6.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; aS /x myAlias 5 + 1; .echo myAlias<BR>myAlias<BR><BR></nobr></P>
+<P>For more information about using aliases in scripts, see <a href="r05_use_start_ba4aca87-0103-4e86-9e6c-f3d6a44b3578.xml.htm">Using Aliases</a>.</P>
+<P>If you use a <b>/e</b>, <b>/ma</b>, <b>/mu</b>, <b>/msa</b>, <b>/msu</b>, or <b>/x</b> switch, the <b>as</b> and <b>aS</b> commands work the same and the command ends if a semicolon is encountered.</P>
+<P>If <i>Name</i> is already the name of an existing alias, that alias is redefined.</P>
+<P>You can use the <b>as</b> or <b>aS</b> command to create or change any user-named alias. But you cannot use the command to control a fixed-name alias (<b>$u0</b> to <b>$u9</b>).</P>
+<P>You can use the <b>/ma</b>, <b>/mu</b>, <b>/msa</b>, <b>/msu</b>, <b>/f</b>, and <b>/c</b> switches to create an alias that contains carriage returns. However, you cannot use an alias that contains carriage returns to execute multiple commands in sequence. Instead, you must use semicolons.</P>
+<H4>Additional Information</H4>
+<P>For more information about how to use aliases, see <a href="r05_use_start_ba4aca87-0103-4e86-9e6c-f3d6a44b3578.xml.htm">Using Aliases</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: as, aS (Set Alias) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

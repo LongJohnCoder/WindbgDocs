@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ks.forcedump</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ks.forcedump"><xml><MSHelp:Keyword Index="A" Term="r33~b_exts_KS_086f70e5-59dc-4d37-9638-defcdd9ac86b.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ks.forcedump extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~b_exts_KS_086f70e5-59dc-4d37-9638-defcdd9ac86b.xml"></A>!ks.forcedump</H1>
+<P>The <b>!ks.forcedump</b> command displays information about memory contents at a caller-supplied address.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ks.forcedump</b> <i>Object</i> <i>Type</i> [<i>Level</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Object</i></DT>
+<DD>Specifies a pointer to the object for which to display information. </DD>
+<DT><i>Type</i></DT>
+<DD>Specifies the type of object. <P>For AVStream/KS objects, <i>Type</i> must be one of the following values: <b>CKsQueue</b>, <b>CKsDevice</b>, <b>CKsFilterFactory</b>, <b>CKsFilter</b>, <b>CKsPin</b>, <b>CKsRequestor</b>, <b>CKsSplitter</b>, <b>CKsSplitterBranch</b>, <b>CKsPipeSection</b>, <b>KSPIN</b>, <b>KSFILTER</b>, <b>KSFILTERFACTORY</b>, <b>KSDEVICE</b>, <b>KSSTREAM_POINTER</b>, <b>KSPFRAME_HEADER</b>, <b>KSIOBJECT_HEADER</b>, <b>KSPDO_EXTENSION</b>, <b>KSIDEVICE_HEADER</b>, <b>KSSTREAM_HEADER</b>, <b>KSPIN_DESCRIPTOR_EX</b>, <b>CKsProxy</b>, <b>CKsInputPin</b>, <b>CKsOutputPin</b>, <b>CasyncItemHandler</b>.</P>
+<P>For Port Class objects, <i>Type</i> must be one of the following values: <b>DEVICE_CONTEXT</b>, <b>CPortWaveCyclic</b>, <b>CPortPinWaveCyclic</b>, <b>CPortTopology</b>, <b>CPortDMus</b>, <b>CIrpStream</b>, <b>CKsShellRequestor</b>, <b>CPortFilterWaveCyclic</b>, <b>CDmaChannel</b>, <b>CPortWavePci</b>, <b>CportPinWavePci</b>. </P>
+</DD>
+<DT><i>Level</i></DT>
+<DD>Optional. Specifies the level of detail to display on a 0-7 scale with progressively more information displayed for higher values.  To display all available details, supply a value of 7.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>winxp\Ks.dll </i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ks.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Normally, you can use <a href="r33~b_exts_ks_9116ca53-f889-4849-b200-270e37aef1d3.xml.htm"><b>!ks.dump</b></a> to display data structures.</P>
+<P>However, if symbols are loaded incorrectly or too much information is paged out, the type identification logic in the <b>!ks.dump</b> command may fail to identify the type of structure at a given address.</P>
+<P>If this happens, try using the <b>!ks.forcedump</b> command.  This command works just like <b>!ks.dump</b> except that the user specifies the type of the object.</P>
+<P class="note"><b>Note</b>  The <b>!ks.forcedump</b> command does not verify that <i>Type</i> is the correct type of structure found at the address provided in <i>Object</i>. The command assumes that this is the type of structure found at <i>Object</i> and displays data accordingly.</P>
+<P>A listing of all supported objects can be retrieved by issuing a <b>!ks.forcedump</b> command with no arguments.</P>
+<P>Here are two examples of the output from <b>!ks.forcedump</b>, using the address of a filter for the <i>Object</i> argument but with different levels of detail:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!forcedump 829493c4 KSFILTER</b><BR>WARNING: I am dumping 829493c4 as a KSFILTER.<BR>         No checking has been performed to ensure that it is this type!!!<BR><BR>Filter object 829493c4 [CKsFilter = 82949350]<BR>    Descriptor     f7a233c8:<BR>    Context        829dce28<BR><BR>kd&gt; <b>!forcedump 829493c4 KSFILTER 7</b><BR>WARNING: I am dumping 829493c4 as a KSFILTER.<BR>         No checking has been performed to ensure that it is this type!!!<BR><BR>Filter object 829493c4 [CKsFilter = 82949350]<BR>    Descriptor     f7a233c8:<BR>    Filter Category GUIDs:<BR>        Video<BR>        Capture<BR>    Context        829dce28<BR>    INTERNAL INFORMATION:<BR>        Public Parent Factory   829782dc<BR>        Aggregated Unknown      00000000<BR>        Device Interface        823b83c8<BR>        Control Mutex           829493f8 is not held<BR>    Object Event List:<BR>        None<BR>    CKsFilter object 82949350 [KSFILTER = 829493c4]<BR>        Processing Mutex         82949484 is not held<BR>        Gate &amp;                   82949464<BR>        Gate.Count               1<BR>        Pin Factories:<BR>            Pin ID 0 [Video/General Capture Out]:<BR>                Child Count        1<BR>                Bound Child Count  1<BR>                Necessary Count    0<BR>                Specific Instances:<BR>                    8293f580 <BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~b_ks_b4eb1677-2223-49b7-8562-fdcfe42da3da.xml.htm">Kernel Streaming Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ks.forcedump RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

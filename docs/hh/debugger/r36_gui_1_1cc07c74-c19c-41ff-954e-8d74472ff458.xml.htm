@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Registers Window</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Registers Window"><xml><MSHelp:Keyword Index="A" Term="r36_gui_1_1cc07c74-c19c-41ff-954e-8d74472ff458.xml"/>
+<META NAME="MS-HKWD" CONTENT="debugging information windows, Registers window">
+<META NAME="MS-HKWD" CONTENT="Registers window">
+<META NAME="MS-HKWD" CONTENT="registers, Registers window"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_WINDOW_REGISTERS"></a><H1><A NAME="r36_gui_1_1cc07c74-c19c-41ff-954e-8d74472ff458.xml"></A>Registers Window</H1>
+<P></P>
+<P>The Registers window displays the registers and flags from the current target processor.</P>
+<H4>Opening the Registers Window</H4>
+<P>To open or switch to the Registers window, in the WinDbg window, on the <b>View</b> menu, click <b>Registers</b>. (You can also press ALT+4 or click the <b>Registers (Alt+4)</b> button (<img src="tbreg.bmp">) on the toolbar.  ALT+SHIFT+4 will close the Registers window.)</P>
+<P>The following figure shows an example of a Registers window.</P>
+<p><img src="window-registers.bmp"></p>
+<P>The Registers window contains two columns. The <b>Reg</b> column lists all of the registers for the target processor. The <b>Value</b> column displays the current value of each register. This window also contains a <b>Customize</b> button on the toolbar that opens the <b>Customize Register List</b> dialog box.</P>
+<H4>Using the Registers Window</H4>
+<P>In the Registers window, you can do the following:</P><B></B><UL type="disc">
+<LI>The <b>Value</b> column displays the current value of each register. The value of the most recently changed register is displayed in red text.<B></B><UL type="circle">
+<LI>To enter a new value, double-click a <b>Value</b> cell, and then type a new value or edit the old value. (The cut, copy, and paste commands are available to use for editing.)</LI>
+<LI>To save the new value, press ENTER. </LI>
+<LI>To discard the new value, press ESC. </LI>
+<LI>If you type an invalid value, the old value will reappear when you press ENTER.</LI>
+</UL>
+</LI>
+<P></P>
+<LI>Register values are displayed in the current radix and you must type new values in the same radix. To change the current radix, use the <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>.</LI>
+<LI>In user mode, the Registers window displays the registers that are associated with the current thread. For more information about the current thread, see <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">Controlling Processes and Threads</a>.</LI>
+<LI>In kernel mode, the Registers window displays the registers that are associated with the current <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb"><i>register context</i></a>. You can set the register context to match a specific thread, context record, or trap frame. Only the most important registers for the specified register context are actually displayed; you cannot change their values.</LI>
+</UL>
+<H4>Toolbar and Shortcut Menu</H4>
+<P>The Registers window has a toolbar that contains a <b>Customize</b> button and has a shortcut menu with additional commands. To access the menu, right-click the title bar or click the icon near the upper-right corner of the window (<img src="tbreg.bmp">). The toolbar and menu contain the following button and commands:</P><B></B><UL type="disc">
+<LI><i>(Toolbar and menu) </i><b>Customize</b> opens the <b>Customize Register List</b> dialog box, which is described in the following section within this topic.</LI>
+<LI><i>(Menu only)</i>  <b>Toolbar</b> turns the toolbar on and off.</LI>
+<LI><i>(Menu only)</i>  <b>Dock</b> or <b>Undock</b> causes the window to enter or leave the docked state.</LI>
+<LI><i>(Menu only)</i>  <b>Move to new dock</b> closes the Registers window and opens it in a new dock.</LI>
+<LI><i>(Menu only)</i> <b>Set as tab-dock target for window type</b> is unavailable for the Registers window.  This option is only available for Source or Memory windows.</LI>
+<LI><i>(Menu only)</i>  <b>Always floating</b> causes the window to remain undocked even if it is dragged to a docking location.</LI>
+<LI><i>(Menu only)</i>  <b>Move with frame</b> causes the window to move when the WinDbg frame is moved, even if the window is undocked. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>.</LI>
+<LI><i>(Menu only)</i>  <b>Help</b> opens this topic in the Debugging Tools for Windows documentation.</LI>
+<LI><i>(Menu only)</i>  <b>Close</b> closes this window.</LI>
+</UL>
+<P></P>
+<H4>Customize Register List Dialog Box</H4>
+<P>To change the list of registers that are displayed, click the <b>Customize</b> button. The <b>Customize Register List</b> dialog box will appear.</P>
+<P>In this dialog box, you can edit the list of registers to change the order in which registers are displayed. (You cannot actually delete a register from the list; if you do, it will reappear at the end.) There must be a space between register names.</P>
+<P>If you select the <b>Display modified register values first</b> check box, the register whose values have been changed most recently appears at the top.     </P>
+<P>If you select the <b>Do not display subregisters</b> check box, subregisters are not displayed. For example, <b>eax</b> will be displayed, but not <b>ax</b>, <b>ah</b>, or <b>al</b>.</P>
+<P>Click <b>OK</b> to save your changes or <b>Cancel</b> to discard your changes.</P>
+<P>If you are debugging a multi-processor computer with more than one kind of processor, WinDbg stores the customization settings for each processor type separately. This separation enables you to customize the display of each processor's registers simultaneously.</P>
+<H4>Additional Information</H4>
+<P>For more information about registers and their manipulation, see <a href="r07_use_operation_5cbc4ff1-b5f4-4308-b937-4343876eaaa8.xml.htm">Reading and Writing Registers and Flags</a>. For more information about the register context and other context settings, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>. For more information about all techniques that you can use to control debugging information windows, see <a href="r06_use_gui_35306de1-d9fb-45e6-800f-e3ee00114421.xml.htm">Using Debugging Information Windows</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Registers Window RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

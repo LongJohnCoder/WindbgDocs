@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using KDbgCtrl</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using KDbgCtrl"><xml><MSHelp:Keyword Index="A" Term="r02~a_setup_1a_eecafec5-45df-4944-8b73-c27a452f33db.xml"/>
+<META NAME="MS-HKWD" CONTENT="KDbgCtrl">
+<META NAME="MS-HKWD" CONTENT="KDbgCtrl, basic use">
+<META NAME="MS-HKWD" CONTENT="DbgPrint buffer, changing buffer size">
+<META NAME="MS-HKWD" CONTENT="DbgPrint buffer, KDbgCtrl utility"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r02~a_setup_1a_eecafec5-45df-4944-8b73-c27a452f33db.xml"></A>Using KDbgCtrl</H1>
+<P>The KDbgCtrl (Kernel Debugging Control, <i>kdbgctrl.exe</i>) tool can be used to control the kernel debugging connection from the target computer.</P>
+<P>To use this tool, your target computer must be running Windows Server 2003 or a later version of Windows.</P>
+<P>KDbgCtrl can control four different settings: Full Kernel Debugging, Automatic Kernel Debugging, User-Mode Error Handling, and the size of the DbgPrint buffer.</P>
+<P>To use KDbgCtrl, you must have already enabled kernel debugging in the boot settings of the target computer before the last boot. KDbgCtrl cannot be used to enable kernel debugging if this was not done.  See <a href="bootini_7a4cbe01-a9e7-4b00-9c85-7bac20c73286.xml.htm">Boot Parameters to Enable Debugging</a>  for details on these boot settings.</P>
+<H4>Full Kernel Debugging</H4>
+<P>When Full Kernel Debugging is enabled, a kernel debugger running on the host computer can break into the target computer. The target computer will break into the kernel debugger if a kernel-mode exception is hit. Messages from the target to the host, such as <b>DbgPrint</b> output, symbol load messages, and redirected user-mode debuggers, are also allowed.</P>
+<P>If this setting is disabled, all signals from the host computer will be ignored by the target.</P>
+<P>Full Kernel Debugging is enabled by default. To check the current setting value, use <b>kdbgctrl -c</b>. To disable this setting, use <b>kdbgctrl -d</b>. To enable this setting, use <b>kdbgctrl -e</b>.</P>
+<P>If you wish to check the current setting and use it to control execution within a batch file, you can use the <b>kdbgctrl -cx</b> command. For details on this command, see <a href="r12_cmdline_a9393ea1-02b9-4fd2-9e74-ee7db7287a66.xml.htm">KDbgCtrl Command-Line Options</a>.</P>
+<H4>Automatic Kernel Debugging</H4>
+<P>If Full Kernel Debugging is enabled, the current setting for Automatic Kernel Debugging is immaterial &#8212; all communication is permitted.</P>
+<P>When Full Kernel Debugging is disabled and Automatic Kernel Debugging is enabled, only the target computer can initiate a debugging connection.</P>
+<P>In this case, only a kernel-mode exception, breakpoint, or other kernel-mode event will cause a connection to be established. The connection will <i>not</i> be established for <b>DbgPrint</b> output, symbol load messages, redirected user-mode debugger input and output, or other similar messages &#8212; these will be stored in the DbgPrint buffer instead of being sent to the kernel debugger.</P>
+<P>If an exception or event causes the target to break into the kernel debugger, then Full Kernel Debugging will be automatically turned on, just as if you had executed <b>kdbgctrl -e</b>.</P>
+<P>Automatic Kernel Debugging is disabled by default (although this is immaterial unless Full Kernel Debugging is disabled as well). To check the current setting value, use <b>kdbgctrl -ca</b>. To disable this setting, use <b>kdbgctrl -da</b>. To enable this setting, use <b>kdbgctrl -ea</b>.</P>
+<H4>User-Mode Error Handling</H4>
+<P>When User-Mode Error Handling is enabled, some user-mode events will cause the target computer to break into the kernel debugger. </P>
+<P>Specifically, all <b>int 3</b> interrupts &#8212; such as breakpoints inserted into the code by a debugger or calls to <b>DbgBreakPoint</b> &#8212; will cause a break into the kernel debugger. However, standard exceptions &#8212; such as access violations and division by zero &#8212; will usually not be sent to the kernel debugger.</P>
+<P>If a user-mode debugger is already attached to the process, this debugger will capture all user-mode errors, and the kernel debugger will not be alterted. For the precedence ranking of the various user-mode error handlers, see <a href="r04_setup_3_40cc08bd-c0da-4d75-90cd-f677b4f63d68.xml.htm">Enabling Postmortem Debugging</a>.</P>
+<P>For User-Mode Error Handling to function, either Full Kernel Debugging or Automatic Kernel Debugging must be enabled as well.</P>
+<P>User-Mode Error Handling is enabled by default. To check the current setting value, use <b>kdbgctrl -cu</b>. To disable this setting, use <b>kdbgctrl -du</b>. To enable this setting, use <b>kdbgctrl -eu</b>.</P>
+<H4>The DbgPrint Buffer Size</H4>
+<P>The DbgPrint buffer stores messages that the target computer has sent to the kernel debugger.</P>
+<P>If Full Kernel Debugging is enabled, these messages will automatically appear in the kernel debugger. But if this option is disabled, these messages will be stored in the buffer. At a later point in time, you can enable kernel debugging, connect to a kernel debugger, and use the <a href="r26_exts_kernel_a_da744a34-04ee-4dd7-8bdc-a0419cdb60c1.xml.htm"><b>!dbgprint</b></a> extension to see the contents of this buffer. For more information about this buffer, see <a href="t02_debugfns_7757121f-3370-467e-9ec3-e3fdde749f81.xml.htm#83ba7bbd-e84e-4148-afb3-8e7f539bcde1">The DbgPrint Buffer</a>.</P>
+<P>The default size of the DbgPrint buffer is 4 KB on a free build of Windows, and 32 KB on a checked build of Windows. To determine the current buffer size, use <b>kdbgctrl -cdb</b>. To change the buffer size, use <b>kdbgctrl -sdb </b><i>Size</i>, where <i>Size</i> specifies the new buffer size. For syntax details, see <a href="r12_cmdline_a9393ea1-02b9-4fd2-9e74-ee7db7287a66.xml.htm">KDbgCtrl Command-Line Options</a>.</P>
+<H4>Examples</H4>
+<P>To display all the current settings, use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kdbgctrl -c -ca -cu -cdb</b> <BR><BR></nobr></P>
+<P>To restore the default settings, use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kdbgctrl -e -da -eu -sdb 0x1000</b> <BR><BR></nobr></P>
+<P>To lock out the host computer so that it only is contacted on exceptions, use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kdbgctrl -d -ea -eu</b> <BR><BR></nobr></P>
+<P>To disable all kernel debugging, use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kdbgctrl -d -da</b> <BR><BR></nobr></P>
+<P>If you are disabling all kernel debugging, you may also wish to increase the size of the DbgPrint buffer. This insures that all messages will be saved in case you need to see them later. If you have a megabyte of memory to spare, you might use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kdbgctrl -sdb 0x1000000</b> <BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using KDbgCtrl RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

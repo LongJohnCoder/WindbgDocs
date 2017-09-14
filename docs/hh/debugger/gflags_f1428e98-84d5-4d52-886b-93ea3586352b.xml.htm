@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Example 10: Detecting a Heap Memory Leak in a Process</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Example 10:  Detecting a Heap Memory Leak in a Process"><xml><MSHelp:Keyword Index="A" Term="GFlags_f1428e98-84d5-4d52-886b-93ea3586352b.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_f1428e98-84d5-4d52-886b-93ea3586352b.xml"></A>Example 10:  Detecting a Heap Memory Leak in a Process</H1>
+<P>This example uses GFlags and User Mode Dump Heap (UMDH, <i>umdh.exe</i>), a tool included in Microsoft Debugging Tools for Windows. For information about UMDH, see the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=8708" target="_blank">Debugging Tools</a> Web site.</P><B>To detect a leak in heap memory in notepad.exe</B><OL type="1">
+<LI>Set the <a href="gflags_afe6f8c7-152a-45fb-ba04-ef3ea84b2199.xml.htm"><b>Create user mode stack trace database</b></a> (<b>ust</b>) flag for the <i>notepad.exe</i> image file. <P>The following command uses GFlags to set the <b>Create user mode stack trace database</b> flag. It uses the <b>/i</b> parameter to identify the image file and the <b>ust</b> abbreviation for the flag.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /i Notepad.exe +ust</b> <BR></nobr></P>
+<P>As a result of this command, a user-mode stack trace is created for all new instances of the Notepad process.</P>
+</LI>
+<LI>Set the symbol file path. <P>The following command creates an environment variable that stores the path to the directory of symbol files:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>set _NT_SYMBOL_PATH=C:\Windows\symbols</b><BR></nobr></P>
+</LI>
+<LI>Start Notepad. </LI>
+<LI>Find the process identifier (PID) of the Notepad process. <P>You can find the PID of any running process from Task Manager or Tasklist (<i>tasklist.exe</i>), a tool included in Windows XP Professional and Windows Server 2003 operating systems. In this example, the Notepad PID is 1228.</P>
+</LI>
+<LI>Run UMDH.<P>The following command runs UMDH (<i>umdh.exe</i>). It uses the <b>-p:</b> parameter to specify the PID that, in this example, is 1228. It uses the <b>/f:</b> parameter to specify the name and location of the output file for the heap dump, <i>notepad.dmp</i>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>umdh -p:1228 -f:notepad.dmp</b> <BR></nobr></P>
+<P>In response, UMDH writes a complete dump of all active heaps to the <i>notepad.dmp</i> file.</P>
+</LI>
+</OL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Example 10:  Detecting a Heap Memory Leak in a Process RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

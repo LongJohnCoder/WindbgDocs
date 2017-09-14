@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SetSpecificFilterParameters</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SetSpecificFilterParameters"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="SetSpecificFilterParameters"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_9bf01d08-9fc1-4ddf-b8dd-c6db0b568f83.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::SetSpecificFilterParameters method">
+<META NAME="MS-HKWD" CONTENT="SetSpecificFilterParameters (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_9bf01d08-9fc1-4ddf-b8dd-c6db0b568f83.xml"></A>SetSpecificFilterParameters</H1>
+<P><P>The <b>SetSpecificFilterParameters</b> method changes the <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#f661734a-d279-4ca5-b9bd-802dad9782af">break status</a> and <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#2ed842be-ebe1-40fa-8a33-cf3a9364b7ee">handling status</a> for some <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#42e1b548-244d-4d27-9ba3-1cdd167d75eb">specific event filters</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::SetSpecificFilterParameters(</b><BR><b>    IN ULONG  </b><i>Start</i><b>,</b><BR><b>    IN ULONG  </b><i>Count</i><b>,</b><BR><b>    IN DEBUG_SPECIFIC_FILTER_PARAMETERS *  </b><i>Params</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Start</i></DT>
+<DD>Specifies the index of the first specific event filter whose parameters will be changed.</DD>
+<DT><i>Count</i></DT>
+<DD>Specifies the number of specific event filters whose parameters will be changed.</DD>
+<DT><i>Params</i></DT>
+<DD>Specifies an array of specific event filter parameters of type <a href="structures_b0152b9b-4809-46c8-81a7-5f571720eca1.xml.htm">DEBUG_SPECIFIC_FILTER_PARAMETERS</a>.  Only the <b>ExecutionOption</b> and <b>ContinueOption</b> members are used.  <b>ExceptionOption</b> specifies the new break status and <b>ContinueOption</b> specifies the new handling status.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>SetSpecificFilterParameters</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>For more information about <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8c64ad6b-a845-4f5d-b862-f4e23db322a2">event filters</a>, see <a href="engine_dg_feda793f-b9e8-402f-9953-409e0e94247f.xml.htm">Event Filters</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>sx, sxd, sxe, sxi, sxn (Set Exceptions)</b></a>, <a href="idebugcontrol_ebe245a7-c76c-4b31-aa58-ccad250ed92a.xml.htm"><b>GetSpecificFilterParameters</b></a>, <a href="idebugcontrol_4e60bce4-e40d-46b6-83ad-55559b97fbad.xml.htm"><b>SetExceptionFilterParameters</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SetSpecificFilterParameters RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

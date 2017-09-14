@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DebugConnect</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DebugConnect"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DebugConnect"/>
+<MSHelp:Keyword Index="A" Term="ClientFns_7beeb350-b8bd-44ea-b5c9-ca0da15146ae.xml"/>
+<META NAME="MS-HKWD" CONTENT="DebugConnect function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ClientFns_7beeb350-b8bd-44ea-b5c9-ca0da15146ae.xml"></A>DebugConnect</H1>
+<P><P>The <b>DebugConnect</b> and <b>DebugConnectWide</b> functions create a new <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> and return an interface pointer to it.  The client object will be connected to a remote <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#cbcea8c0-0b79-48e7-b98a-f4ec14fac0b8">host</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  DebugConnect(</b><BR><b>    IN PCSTR  </b><i>RemoteOptions</i><b>,</b><BR><b>    IN REFIID  </b><i>InterfaceId</i><b>,</b><BR><b>    OUT PVOID *  </b><i>Interface</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  DebugConnectWide(</b><BR><b>    IN PCWSTR  </b><i>RemoteOptions</i><b>,</b><BR><b>    IN REFIID  </b><i>InterfaceId</i><b>,</b><BR><b>    OUT PVOID *  </b><i>Interface</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define DebugConnectT DebugConnectWide</b><BR><b>#else</b><BR><b>#define DebugConnectT DebugConnect</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>RemoteOptions</i></DT>
+<DD>Specifies how the debugger engine will connect to the remote host.  These are the same options that get passed to the <b>-remote</b> option on the command line.  For details on the syntax of this string, see <a href="r08_use_remote_d737f4f5-2c99-44cf-b276-0fda82be08c8.xml.htm">Activating a Debugging Client</a>.</DD>
+<DT><i>InterfaceId</i></DT>
+<DD>Specifies the interface identifier (IID) of the desired debugger engine client interface.  This is the type of the interface that will be returned in <i>Interface</i>. For information about the interface identifier, see <a href="engine_dg_4902f2ee-669d-4691-b52b-bf48e4e84f40.xml.htm">COM Interfaces</a>.</DD>
+<DT><i>Interface</i></DT>
+<DD>Receives an interface pointer for the new client.  The type of this interface is specified by <i>InterfaceId</i>.<P></P>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Comments</H4>
+<P>As with <b>IUnknown::QueryInterface</b>, when the returned interface is no longer needed, its <b>IUnknown::Release</b> method should be called.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="engine_overview_2838c538-1dc7-4494-b92d-49e58a4ad2aa.xml.htm">Client Objects</a>, <a href="engine_dg_403e6a06-76ae-4dfc-a475-4e8a77318c95.xml.htm#2198fa25-e6ef-4e68-b715-3a32968b560c">Process Server and Smart Client</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DebugConnect RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>f, fp (Fill Memory)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, f, fp (Fill Memory)"><xml><MSHelp:Keyword Index="A" Term="r16_cmds_C_8a73604a-382c-4d01-ba56-871a7675f6bc.xml"/>
+<META NAME="MS-HKWD" CONTENT="f (Fill Memory) command">
+<META NAME="MS-HKWD" CONTENT="fp (Fill Physical Memory) command">
+<META NAME="MS-HKWD" CONTENT="Fill Memory (f) command">
+<META NAME="MS-HKWD" CONTENT="memory, Fill Memory (f) command">
+<META NAME="MS-HKWD" CONTENT="Fill Physical Memory (fp) command">
+<META NAME="MS-HKWD" CONTENT="memory, Fill Physical Memory (fp) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r16_cmds_C_8a73604a-382c-4d01-ba56-871a7675f6bc.xml"></A>f, fp (Fill Memory)</H1>
+<P>The <b>f</b> and <b>fp</b> commands fill the specified memory range with a repeating pattern.<P>These commands should not be confused with the <a href="r15_cmds_a_ca44b90e-9364-48d1-80d6-71504a2ac1d6.xml.htm"><b>~F (Freeze Thread)</b></a> command.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>f</b> <i>Range</i> <i>Pattern</i> <BR><b>fp</b> [<i>MemoryType]</i> <i>PhysicalRange</i> <i>Pattern</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Range</i></DT>
+<DD>Specifies the range in virtual memory to fill. For more syntax details, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+<DT><i>PhysicalRange</i></DT>
+<DD><i>(Kernel mode only)</i>  Specifies the range in physical memory to fill. The syntax of <i>PhysicalRange</i> is the same as that of a virtual memory range, except that no symbol names are permitted.</DD>
+<DT><i>MemoryType</i></DT>
+<DD><i>(Kernel mode only)</i> Specifies the type of physical memory, which can be one of the following:<DL><DT><b>[c]</b></DT>
+<DD>Cached memory.</DD>
+<DT><b>[uc]</b></DT>
+<DD>Uncached memory.</DD>
+<DT><b>[wc]</b></DT>
+<DD>Write-combined memory.</DD>
+</DL>
+<P></P>
+</DD>
+<DT><i>Pattern</i></DT>
+<DD>Specifies one or more byte values with which to fill memory.<P></P>
+</DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width=""><b>f:</b> user mode, kernel mode<BR><b>fp:</b> kernel mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>This command fills the memory area specified by <i>range</i> with the specified <i>pattern</i>, repeated as many times as necessary.</P>
+<P></P>
+<P>The <i>pattern</i> parameter must be input as a series of bytes. These can be entered as numeric or as ASCII characters.</P>
+<P>Numeric values will be interpreted as numbers in the current radix (16, 10, or 8). To change the default radix, use the <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command. The default radix can be overridden by specifying the <b>0x</b> prefix (hexadecimal), the <b>0n</b> prefix (decimal), the <b>0t</b> prefix (octal), or the <b>0y</b> prefix (binary).</P>
+<P class="note"><b>Note</b>  The default radix behaves differently when C++ expressions are being used. For more information, see the <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a> topic.</P>
+<P>If ASCII characters are used, each character must be enclosed in single straight quotation marks. C-style escape characters (such as '\0' or '\n') may not be used.   </P>
+<P>If multiple bytes are specified, they must be separated by spaces.</P>
+<P>If <i>pattern</i> has more values than the number of bytes in the range, the debugger ignores the extra values.</P>
+<P>Here are some examples. Assuming the current radix is 16, the following command will fill memory locations 0012FF40 through 0012FF5F with the pattern "ABC", repeated several times:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>f 0012ff40 L20 'A' 'B' 'C'</b><BR><BR></nobr></P>
+<P>The following command has the exact same effect:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>f 0012ff40 L20 41 42 43</b><BR><BR></nobr></P>
+<P>The following examples show how you can use the physical memory types (<b>c</b>, <b>uc</b>, and <b>wc</b>) with the <b>fp</b> command in kernel mode:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kd&gt; fp [c] 0012ff40 L20 'A' 'B' 'C'</b><BR><BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kd&gt; fp [uc] 0012ff40 L20 'A' 'B' 'C'</b><BR><BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kd&gt; fp [wc] 0012ff40 L20 'A' 'B' 'C'</b><BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For an overview of memory manipulation and a description of other memory-related commands, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: f, fp (Fill Memory) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

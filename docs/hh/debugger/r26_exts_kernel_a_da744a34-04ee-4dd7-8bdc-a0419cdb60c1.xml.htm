@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!dbgprint</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !dbgprint"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_da744a34-04ee-4dd7-8bdc-a0419cdb60c1.xml"/>
+<META NAME="MS-HKWD" CONTENT="!dbgprint extension">
+<META NAME="MS-HKWD" CONTENT="DbgPrint buffer, !dbgprint extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_da744a34-04ee-4dd7-8bdc-a0419cdb60c1.xml"></A>!dbgprint</H1>
+<P>The <b>!dbgprint</b> extension displays a string that was previously sent to the <b>DbgPrint</b> buffer.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!dbgprint</b> <BR></nobr></P>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The kernel-mode routines <b>DbgPrint</b>, <b>KdPrint</b>, <b>DbgPrintEx</b>, and <b>KdPrintEx</b> send a formatted string to a buffer on the target computer. The string is automatically displayed in the Debugger Command window on the host computer unless such printing has been disabled.</P>
+<P>Generally, messages sent to this buffer are displayed automatically in the Debugger Command window. However, this display can be disabled through the Global Flags (<i>gflags.exe</i>) utility. Moreover, this display does not automatically appear during local kernel debugging. For more information, see <a href="t02_debugfns_7757121f-3370-467e-9ec3-e3fdde749f81.xml.htm#83ba7bbd-e84e-4148-afb3-8e7f539bcde1">The DbgPrint Buffer</a>. </P>
+<P>The <b>!dbgprint</b> extension causes the contents of this buffer to be displayed (regardless of whether automatic printing has been disabled). It will not show messages that have been filtered out based on their component and importance level. (For details on this filtering, see <a href="t02_debugfns_7757121f-3370-467e-9ec3-e3fdde749f81.xml.htm">Reading and Filtering Debugging Messages</a>.)</P>
+<H4>Additional Information</H4>
+<P>For information about <b>DbgPrint</b>, <b>KdPrint</b>, <b>DbgPrintEx</b>, and <b>KdPrintEx</b>, see <a href="t02_debugfns_b8f888cc-bbbb-4f27-aeed-ac63da0ddcd9.xml.htm">Sending Output to the Debugger</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !dbgprint RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

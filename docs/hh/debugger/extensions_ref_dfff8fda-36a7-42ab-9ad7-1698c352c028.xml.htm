@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>KnownStructOutput</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, KnownStructOutput"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="KnownStructOutput"/>
+<MSHelp:Keyword Index="A" Term="Extensions_Ref_dfff8fda-36a7-42ab-9ad7-1698c352c028.xml"/>
+<META NAME="MS-HKWD" CONTENT="KnownStructOutput callback function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Extensions_Ref_dfff8fda-36a7-42ab-9ad7-1698c352c028.xml"></A>KnownStructOutput</H1>
+<P>The <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> calls the <b>KnownStructOutput</b> callback function once after the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#9625e841-0468-4bf3-940b-56f3f5831a12">DLL</a> is initialized to obtain a list of structures the DLL can print, and again each time the engine wants to print a summary of one of these structures.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>CALLBACK</b><BR><b>  KnownStructOutput (</b><BR><b>    IN ULONG  </b><i>Flag</i><b>,</b><BR><b>    IN ULONG64  </b><i>Address</i><b>,</b><BR><b>    IN PSTR  </b><i>StructName</i><b>,</b><BR><b>    OUT PSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN OUT PULONG  </b><i>BufferSize</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flag</i></DT>
+<DD>Can be either of the following values, depending on which action the engine wants the function to perform.<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_KNOWN_STRUCT_GET_NAMES</TD>
+<TD Width="">Get a list of names of known structures.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_KNOWN_STRUCT_GET_SINGLE_LINE_OUTPUT</TD>
+<TD Width="">Format a structure for printing on a single line.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>Address</i></DT>
+<DD><i>When getting names:</i>  Unused.<P><i>When printing a structure:</i>  Specifies the location in the target's memory address space of the structure to be printed.</P>
+</DD>
+<DT><i>StructName</i></DT>
+<DD><i>When getting names:</i>  Unused.<P><i>When printing a structure:</i>  Specifies the name of the structure to be printed.  This is one of the names returned from the DEBUG_KNOWN_STRUCT_GET_NAMES query.</P>
+</DD>
+<DT><i>Buffer</i></DT>
+<DD><i>When getting names:</i>  Receives a list of the names of each structure that the extension knows how to print.  One null character must appear between each pair of names.  The list must be terminated with two null characters.<P><i>When printing a structure:</i>  Receives a representation  of the structure, identified by <i>StructName</i> and <i>Address</i>, as a string.</P>
+<P>In each case, the number of characters written to this buffer must not exceed the value of <i>BufferSize</i>.</P>
+</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size in characters of the buffer <i>Buffer</i>.<P><i>When getting names:</i>  If the buffer is too small to contain the list of names, this should return the required size of the buffer.</P>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD><i>Buffer</i> contains the requested information.</DD>
+<DT>S_FALSE</DT>
+<DD><i>When getting names:</i>  <i>BufferSize</i> was too small.  Its new value is the size required to hold the list of structure names.  The engine will call the function again passing in a new buffer of this size.</DD>
+</DL>
+<P>All other return values indicate that the function failed.  The engine will continue ignoring the contents of <i>Buffer</i>.</P>
+<H4>Comments</H4>
+<P>This function is optional.  An extension DLL only needs to export <b>KnownStructOutput</b> if it has the ability to format special structures for printing on a single line.  The engine looks for this function by name in the extension DLL.</P>
+<P>After initializing the extension DLL, the engine calls this function to query the DLL for the list of structure names it knows how to print.  Then, whenever the engine prints a summary of one of the structures whose name is in the list, it calls this function to format the structure for printing.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>The function type is defined as PDEBUG_EXTENSION_KNOWNSTRUCT in <i>dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="extensions_ref_e260c42c-8299-4578-8919-3b2167701275.xml.htm"><b>DebugExtensionInitialize</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: KnownStructOutput RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

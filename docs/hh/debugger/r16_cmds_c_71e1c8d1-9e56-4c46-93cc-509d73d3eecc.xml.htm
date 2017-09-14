@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>dg (Display Selector)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, dg (Display Selector)"><xml><MSHelp:Keyword Index="A" Term="r16_cmds_C_71e1c8d1-9e56-4c46-93cc-509d73d3eecc.xml"/>
+<META NAME="MS-HKWD" CONTENT="dg (Display Selector) command">
+<META NAME="MS-HKWD" CONTENT="Display Selector (dg) command">
+<META NAME="MS-HKWD" CONTENT="selector"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r16_cmds_C_71e1c8d1-9e56-4c46-93cc-509d73d3eecc.xml"></A>dg (Display Selector)</H1>
+<P>The <b>dg</b> command shows the segment descriptor for the specified selector.<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>dg</b> <i>FirstSelector</i> [<i>LastSelector</i>] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>FirstSelector</i></DT>
+<DD>Specifies the hexadecimal selector value of the first selector to be displayed.</DD>
+<DT><i>LastSelector</i></DT>
+<DD>Specifies the hexadecimal selector value of the last selector to be displayed. If this is omitted, only one selector will be displayed. <P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">x86, Itanium    </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>No more than 256 selectors can be displayed by this command.</P>
+<P>Common selector values are:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Id</TH>
+<TH Width="">decimal</TH>
+<TH Width="">hex</TH>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_NULL</TD>
+<TD Width="">0</TD>
+<TD Width="">0x00</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_R0_CODE</TD>
+<TD Width="">8</TD>
+<TD Width="">0x08</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_R0_DATA</TD>
+<TD Width="">16</TD>
+<TD Width="">0x10</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_R3_CODE</TD>
+<TD Width="">24</TD>
+<TD Width="">0x18</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_R3_DATA</TD>
+<TD Width="">32</TD>
+<TD Width="">0x20</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_TSS</TD>
+<TD Width="">40</TD>
+<TD Width="">0x28</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_R0_PCR</TD>
+<TD Width="">48</TD>
+<TD Width="">0x30</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_R3_TEB</TD>
+<TD Width="">56</TD>
+<TD Width="">0x38</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_VDM_TILE</TD>
+<TD Width="">64</TD>
+<TD Width="">0x40</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_LDT</TD>
+<TD Width="">72</TD>
+<TD Width="">0x48</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_DF_TSS</TD>
+<TD Width="">80</TD>
+<TD Width="">0x50</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KGDT_NMI_TSS</TD>
+<TD Width="">88</TD>
+<TD Width="">0x58</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: dg (Display Selector) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using the DECLARE_API Macro</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using the DECLARE_API Macro"><xml><MSHelp:Keyword Index="A" Term="WdbgExts_DG_953e82e6-d3d2-4f9c-af82-605495e82c11.xml"/>
+<META NAME="MS-HKWD" CONTENT="WdbgExts extensions, DECLARE_API macro">
+<META NAME="MS-HKWD" CONTENT="DECLARE_API macro (WdbgExts)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_DG_953e82e6-d3d2-4f9c-af82-605495e82c11.xml"></A>Using the DECLARE_API Macro</H1>
+<P>Each extension command in a WdbgExts extension DLL is declared using the DECLARE_API macro. This macro is defined in <i>wdbgexts.h</i>.</P>
+<P>The basic format of the code for an extension command is:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>DECLARE_API(</b> <i>myextension </i><b>)</b><BR><b>{</b><BR><i>    code for myextension</i><BR><b>}</b><BR><BR></nobr></P>
+<P>The DECLARE_API macro sets up a standard interface for extension commands. For example, if the user passed any arguments to the extension command, the entire argument string will be stored as a string, and a pointer to this string (PCSTR) will be passed to the extension function as <b>args</b>.</P>
+<P>If you are using 64-bit pointers, the DECLARE_API macro is defined as follows:</P>
+<P></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>#define DECLARE_API(s)                             \<BR>    CPPMOD VOID                                    \<BR>    s(                                             \<BR>        HANDLE                 hCurrentProcess,    \<BR>        HANDLE                 hCurrentThread,     \<BR>        ULONG64                dwCurrentPc,        \<BR>        ULONG                  dwProcessor,        \<BR>        PCSTR                  args                \<BR>     )<BR><BR></nobr></P>
+<P>If you are using 32-bit pointers, DECLARE_API remains the same, except that <b>dwCurrentPc</b> will be of the type ULONG instead of ULONG64. However, 64-bit pointers are recommended for any extension that you are writing. See <a href="wdbgexts_dg_850413ea-f120-4037-9556-72dbd34764ba.xml.htm">32-Bit Pointers and 64-Bit Pointers</a> for details.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using the DECLARE_API Macro RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

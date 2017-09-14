@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>WdbgExts Memory Access</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, WdbgExts Memory Access"><xml><MSHelp:Keyword Index="A" Term="WdbgExts_DG_74a148ab-2b3c-46e5-a8c8-99c3c48fcd69.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_DG_74a148ab-2b3c-46e5-a8c8-99c3c48fcd69.xml"></A>WdbgExts Memory Access</H1>
+<P>This topic provides a brief overview of how memory access can be performed using the WdbgExts API.  For an overview of memory access in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a>, see <a href="engine_overview_3f66104f-72bb-4046-89cc-9a0be2d30318.xml.htm">Memory</a> in the <a href="engine_overview_a9228fb3-172b-458a-9781-00ab1470afe8.xml.htm">Debugger Engine Overview</a> section of this documentation.</P>
+<H4>Virtual Memory</H4>
+<P>The virtual memory of the target can be read by using the <a href="wdbgexts_ref_53e869bc-03c9-4818-80fd-ca1bdafe2b96.xml.htm"><b>ReadMemory</b></a> function and written using the <a href="wdbgexts_ref_72933b84-f8ce-432e-b89c-09c2668aa90e.xml.htm"><b>WriteMemory</b></a> function.  Pointers in the target's memory can be read and written by using the <a href="wdbgexts_ref_3d78e28a-910f-4b82-a262-28d83d87c6f1.xml.htm"><b>ReadPointer</b></a>, <a href="wdbgexts_ref_4eaec659-6522-4d7f-b64a-ad771f93eb56.xml.htm"><b>ReadPtr</b></a>, and <a href="wdbgexts_ref_ab18dbae-3a69-43a1-97dd-d0711e4db54e.xml.htm"><b>WritePointer</b></a> functions.</P>
+<P>To search the virtual memory for a pattern of bytes, use the <a href="wdbgexts_ref_4eb909e5-edfd-487c-851c-812b15274c66.xml.htm"><b>SearchMemory</b></a> function.</P>
+<P>The <a href="wdbgexts_ref_ec3ff314-8800-4f77-a40e-e127e6cf0133.xml.htm"><b>TranslateVirtualToPhysical</b></a> function can be used to convert a virtual memory address to a physical memory address.</P>
+<P>The <a href="wdbgexts_ref_787ab353-1829-4111-8931-2192bfb9cd0c.xml.htm"><b>Disasm</b></a> function can be used to disassemble a single assembly instruction on the target.</P>
+<P>To check the low 4 GB of memory for corruption when using physical address extension (PAE), use the <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation <a href="wdbgexts_ref_958f146b-889a-4a89-9e02-a1bab5f0db54.xml.htm"><b>IG_LOWMEM_CHECK</b></a>.</P>
+<H4>Physical Memory</H4>
+<P>Physical memory can only be directly accessed in <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>.</P>
+<P>The physical memory on the target can be read by using the <a href="wdbgexts_ref_4eaa6edb-2297-4454-b4aa-ea69aa5a073c.xml.htm"><b>ReadPhysical</b></a> and <a href="wdbgexts_ref_cf166083-f21a-4cfd-8daa-90c3f6bbcdcb.xml.htm"><b>ReadPhysicalWithFlags</b></a> functions, and written by using the <a href="wdbgexts_ref_4c6663a7-4fbf-4d4a-9c86-cfa51218a470.xml.htm"><b>WritePhysical</b></a> and <a href="wdbgexts_ref_7ef1e63e-87e2-4bf3-a432-78639684a18c.xml.htm"><b>WritePhysicalWithFlags</b></a> functions.</P>
+<P>To search the physical memory for pointers to locations within a specified range, use the <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation <a href="wdbgexts_ref_ce742570-c023-4e34-a8e2-aef530e61c04.xml.htm"><b>IG_POINTER_SEARCH_PHYSICAL</b></a>.</P>
+<H4>Other Data Spaces</H4>
+<P>In kernel-mode debugging, it is possible to read and write data to a variety of data spaces in addition to the main memory.  The following data spaces can be accessed:</P>
+<DL><DT>Control-Space Memory</DT>
+<DD>The functions <a href="wdbgexts_ref_8337344a-4a97-4f74-9be4-8fdd771d8bbf.xml.htm"><b>ReadControlSpace</b></a>, <a href="wdbgexts_ref_3327dad4-903c-4285-b3cc-fe408d15f129.xml.htm"><b>ReadControlSpace64</b></a>, <a href="wdbgexts_ref_8d855fe0-ab66-4ba0-bed8-0a79a2f953d4.xml.htm"><b>ReadTypedControlSpace32</b></a>, and <a href="wdbgexts_ref_7dacba07-9543-4198-a16d-b519f6195889.xml.htm"><b>ReadTypedControlSpace64</b></a> will read data from a control space. The <a href="wdbgexts_ref_ee59dfdc-d138-4f1b-8f5c-fb9e1d47bef2.xml.htm"><b>WriteControlSpace</b></a> function will write data to a control space.</DD>
+<DT>I/O Memory</DT>
+<DD>The functions <a href="wdbgexts_ref_e34c76a6-de5d-4347-90a7-959d5392680e.xml.htm"><b>ReadIoSpace</b></a>, <a href="wdbgexts_ref_5e2a7cc2-0dc4-4970-9d6a-c9a2c5130577.xml.htm"><b>ReadIoSpace64</b></a>, <a href="wdbgexts_ref_5e2a7cc2-0dc4-4970-9d6a-c9a2c5130577.xml.htm"><b>ReadIoSpace64</b></a>, <a href="wdbgexts_ref_5d81517c-f30d-4f8c-b4fe-e3487ad6c49e.xml.htm"><b>ReadIoSpaceEx64</b></a> will read data from system I/O memory and bus I/O memory. The functions <a href="wdbgexts_ref_1aa4429d-9d99-4c7c-8870-7a75ccaad6e5.xml.htm"><b>WriteIoSpace</b></a>, <a href="wdbgexts_ref_81d45454-9dd4-46f1-823b-1a2345890106.xml.htm"><b>WriteIoSpace64</b></a>, <a href="wdbgexts_ref_53bdc758-08b1-4103-9732-5b7b72c80fdd.xml.htm"><b>WriteIoSpaceEx</b></a>, and <a href="wdbgexts_ref_378f5c2e-fcbc-4401-8527-f6e98bfa6257.xml.htm"><b>WriteIoSpaceEx64</b></a> will write data to system I/O memory and bus I/O memory.</DD>
+<DT>Model Specific Register (MSR)</DT>
+<DD>The functions <a href="wdbgexts_ref_37577d05-a60b-4064-850a-d73616d93f37.xml.htm"><b>ReadMsr</b></a> and <a href="wdbgexts_ref_faeb78e1-24a2-4210-94f9-4e468ba69181.xml.htm"><b>WriteMsr</b></a> read and write MSRs.</DD>
+<DT>System Bus</DT>
+<DD>The <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operations <a href="wdbgexts_ref_090ca26a-5955-40c6-82c3-310a02a9d64d.xml.htm"><b>IG_GET_BUS_DATA</b></a> and <a href="wdbgexts_ref_090ca26a-5955-40c6-82c3-310a02a9d64d.xml.htm"><b>IG_SET_BUS_DATA</b></a> read and write system bus data.</DD>
+</DL>
+<H4>Additional Information</H4>
+<P>For a more powerful memory access API, see <a href="engine_dg_0552e376-f3fd-49c8-b1a0-52f4be375e08.xml.htm">Memory Access</a> in the <a href="engine_dg_d8e9e675-c026-46b5-b182-4da8b2e1f9a6.xml.htm">Using the Debugger Engine API</a> section of this documentation.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: WdbgExts Memory Access RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

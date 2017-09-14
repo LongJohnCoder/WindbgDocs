@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>x86 Architecture</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, x86 Architecture"><xml><MSHelp:Keyword Index="A" Term="t09_arch_x86_689f0355-a582-450a-bd6c-f17c3167882f.xml"/>
+<META NAME="MS-HKWD" CONTENT="x86 processor, architecture">
+<META NAME="MS-HKWD" CONTENT="registers, on an x86 processor">
+<META NAME="MS-HKWD" CONTENT="x86 processor, registers">
+<META NAME="MS-HKWD" CONTENT="x86 processor, calling conventions">
+<META NAME="MS-HKWD" CONTENT="x86 processor, data types">
+<META NAME="MS-HKWD" CONTENT="x86 processor, flags">
+<META NAME="MS-HKWD" CONTENT="flags, x86"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t09_arch_x86_689f0355-a582-450a-bd6c-f17c3167882f.xml"></A>x86 Architecture</H1>
+<P>The Intel x86 processor uses complex instruction set computer (CISC) architecture, which means there is a modest number of special-purpose registers instead of large quantities of general-purpose registers. It also means that complicated special-purpose instructions will predominate.</P>
+<P>The x86 processor traces its heritage at least as far back as the 8-bit Intel 8080 processor. Many peculiarities in the x86 instruction are due to the backward compatibility with that processor (and with its Zilog Z-80 variant).</P>
+<P>Microsoft Win32 uses the x86 processor in <i>32-bit flat mode</i>. This documentation will focus only on the flat mode.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="57886f4a-5743-4ee4-a5f8-e7511e5c5340"></A>Registers</H3>
+<P>The x86 architecture consists of the following unprivileged integer registers:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>eax </b></TD>
+<TD Width="">Accumulator</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ebx </b></TD>
+<TD Width="">Base register</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ecx </b></TD>
+<TD Width="">Count register</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>edx </b></TD>
+<TD Width="">Double-precision register</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>esi </b></TD>
+<TD Width="">Source index register</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>edi </b></TD>
+<TD Width="">Destination index register</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ebp </b></TD>
+<TD Width="">Base pointer register</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>esp </b></TD>
+<TD Width="">Stack pointer</TD>
+</TR>
+</table>
+<P></P>
+<P>All integer registers are 32 bit. However, many of them have 16-bit or 8-bit subregisters.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>ax </b></TD>
+<TD Width="">Low 16 bits of <b>eax</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>bx </b></TD>
+<TD Width="">Low 16 bits of <b>ebx</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>cx </b></TD>
+<TD Width="">Low 16 bits of <b>ecx</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dx </b></TD>
+<TD Width="">Low 16 bits of <b>edx</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>si </b></TD>
+<TD Width="">Low 16 bits of <b>esi</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>di </b></TD>
+<TD Width="">Low 16 bits of <b>edi</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>bp </b></TD>
+<TD Width="">Low 16 bits of <b>ebp</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sp </b></TD>
+<TD Width="">Low 16 bits of <b>esp</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>al </b></TD>
+<TD Width="">Low 8 bits of <b>eax</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ah </b></TD>
+<TD Width="">High 8 bits of <b>ax</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>bl </b></TD>
+<TD Width="">Low 8 bits of <b>ebx</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>bh </b></TD>
+<TD Width="">High 8 bits of <b>bx</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>cl </b></TD>
+<TD Width="">Low 8 bits of <b>ecx</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ch </b></TD>
+<TD Width="">High 8 bits of <b>cx</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dl </b></TD>
+<TD Width="">Low 8 bits of <b>edx</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dh </b></TD>
+<TD Width="">High 8 bits of <b>dx</b></TD>
+</TR>
+</table>
+<P></P>
+<P>Operating on a subregister affects only the subregister and none of the parts outside the subregister. For example, storing to the <b>ax</b> register leaves the high 16 bits of the <b>eax</b> register unchanged.</P>
+<P>When using the <a href="r15_cmds_a_c6ea44eb-73b8-451d-8054-ded9b17ac2bd.xml.htm"><b>? (Evaluate Expression)</b></a> command, registers should be prefixed with an "at" sign ( <b>@</b> ). For example, you should use <b>? @ax</b> rather than <b>? ax</b>. This ensures that the debugger recognizes <b>ax</b> as a register rather than a symbol.</P>
+<P>However, the (@) is not required in the <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command. For instance, <b>r ax=5</b> will always be interpreted correctly.</P>
+<P>Two other registers are important for the processor's current state.  </P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>eip </b></TD>
+<TD Width="">instruction pointer</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>flags </b></TD>
+<TD Width="">flags</TD>
+</TR>
+</table>
+<P></P>
+<P>The instruction pointer is the address of the instruction being executed.</P>
+<P>The flags register is a collection of single-bit flags. Many instructions alter the flags to describe the result of the instruction. These flags can then be tested by conditional jump instructions. See <a href="#68843a37-9f12-425d-87d4-eaa96cf8fb31">x86 Flags</a> for details.</P>
+<H3><A NAME="2fc046f6-7cd2-4c4f-bdde-037cafd49a66"></A>Calling Conventions</H3>
+<P>The x86 architecture has several different calling conventions. Fortunately, they all follow the same register preservation and function return rules:</P><B></B><UL type="disc">
+<LI>Functions must preserve all registers, except for <b>eax</b>, <b>ecx</b>, and <b>edx</b>, which can be changed across a function call, and <b>esp</b>, which must be updated according to the calling convention.</LI>
+<LI>The <b>eax</b> register receives function return values if the result is 32 bits or smaller. If the result is 64 bits, then the result is stored in the <b>edx:eax</b> pair.</LI>
+</UL>
+<P></P>
+<P>The following is a list of calling conventions used on the x86 architecture:</P><B></B><UL type="disc">
+<LI>Win32 (<b>__stdcall</b>)<P>Function parameters are passed on the stack, pushed right to left, and the callee cleans the stack.</P>
+</LI>
+<LI>Native C++ method call (also known as thiscall)<P>Function parameters are passed on the stack, pushed right to left, the "this" pointer is passed in the <b>ecx</b> register, and the callee cleans the stack.</P>
+</LI>
+<LI>COM (<b>__stdcall</b> for C++ method calls)<P>Function parameters are passed on the stack, pushed right to left, then the "this" pointer is pushed on the stack, and then the function is called. The callee cleans the stack.</P>
+</LI>
+<LI><b>__fastcall</b><P>The first two DWORD-or-smaller arguments are passed in the <b>ecx</b> and <b>edx</b> registers.  The remaining parameters are passed on the stack, pushed right to left. The callee cleans the stack. </P>
+</LI>
+<LI><b>__cdecl</b><P>Function parameters are passed on the stack, pushed right to left, and the caller cleans the stack. The <b>__cdecl</b> calling convention is used for all functions with variable-length parameters.</P>
+</LI>
+</UL>
+<P></P>
+<H3><A NAME="cbb9f4c4-d563-4460-a25e-03e2377025e3"></A>Debugger Display of Registers and Flags</H3>
+<P>Here is a sample debugger register display:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>eax=00000000 ebx=008b6f00 ecx=01010101 edx=ffffffff esi=00000000 edi=00465000<BR>eip=77f9d022 esp=05cffc48 ebp=05cffc54 iopl=0         nv up ei ng nz na po nc<BR>cs=001b  ss=0023  ds=0023  es=0023  fs=0038  gs=0000             efl=00000286<BR><BR></nobr></P>
+<P>In user-mode debugging, you can ignore the <b>iopl</b> and the entire last line of the debugger display.</P>
+<P></P>
+<H3><A NAME="68843a37-9f12-425d-87d4-eaa96cf8fb31"></A>x86 Flags</H3>
+<P></P>
+<P></P>
+<P></P>
+<P>In the preceding example, the two-letter codes at the end of the second line are <i>flags</i>. These are single-bit registers and have a variety of uses.</P>
+<P>The following table lists the x86 flags:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Flag<BR>Code</TH>
+<TH Width="">Flag Name</TH>
+<TH Width="">Value</TH>
+<TH Width="">Flag<BR>Status</TH>
+<TH Width="">Status Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>of</b></TD>
+<TD Width="">Overflow Flag</TD>
+<TD Width="">0<BR>1</TD>
+<TD Width=""><b>nv<BR>ov</b></TD>
+<TD Width="">No overflow<BR>Overflow</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>df</b></TD>
+<TD Width="">Direction Flag</TD>
+<TD Width="">0<BR>1</TD>
+<TD Width=""><b>up<BR>dn</b></TD>
+<TD Width="">Direction up<BR>Direction down</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>if</b></TD>
+<TD Width="">Interrupt Flag</TD>
+<TD Width="">0<BR>1</TD>
+<TD Width=""><b>di<BR>ei</b></TD>
+<TD Width="">Interrupts disabled<BR>Interrupts enabled</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sf</b></TD>
+<TD Width="">Sign Flag</TD>
+<TD Width="">0<BR>1</TD>
+<TD Width=""><b>pl<BR>ng</b></TD>
+<TD Width="">Positive (or zero)<BR>Negative</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>zf</b></TD>
+<TD Width="">Zero Flag</TD>
+<TD Width="">0<BR>1</TD>
+<TD Width=""><b>nz<BR>zr</b></TD>
+<TD Width="">Nonzero<BR>Zero</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>af</b></TD>
+<TD Width="">Auxiliary Carry Flag</TD>
+<TD Width="">0<BR>1</TD>
+<TD Width=""><b>na<BR>ac</b></TD>
+<TD Width="">No auxiliary carry<BR>Auxiliary carry</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>pf</b></TD>
+<TD Width="">Parity Flag</TD>
+<TD Width="">0<BR>1</TD>
+<TD Width=""><b>pe<BR>po</b></TD>
+<TD Width="">Parity even<BR>Parity odd</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>cf</b></TD>
+<TD Width="">Carry Flag</TD>
+<TD Width="">0<BR>1</TD>
+<TD Width=""><b>nc<BR>cy</b></TD>
+<TD Width="">No carry<BR>Carry</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>tf</b></TD>
+<TD Width="">Trap Flag</TD>
+<TD colspan="3" Width="">If <b>tf</b> equals 1, the processor will raise a STATUS_SINGLE_STEP exception after the execution of one instruction. This flag is used by a debugger to implement single-step tracing. It should not be used by other applications.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>iopl</b></TD>
+<TD Width="">I/O Privilege Level </TD>
+<TD colspan="3" Width="">This is a two-bit integer, with values between zero and 3. It is used by the operating system to control access to hardware. It should not be used by applications.</TD>
+</TR>
+</table>
+<P></P>
+<P>When registers are displayed as a result of some command in the Debugger Command window, it is the <i>flag status</i> that is displayed. However, if you want to change a flag using the <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command, you should refer to it by the <i>flag code</i>.</P>
+<P>In the Registers window of WinDbg, the flag code is used to view or alter flags. The flag status is not supported.</P>
+<P>Here is an example. In the preceding register display, the flag status <b>ng</b> appears. This means that the sign flag is currently set to 1. To change this, use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>r sf=0<BR><BR></nobr></P>
+<P>This sets the sign flag to zero. If you do another register display, the <b>ng</b> status code will not appear. Instead, the <b>pl</b> status code will be displayed.</P>
+<P>The Sign Flag, Zero Flag, and Carry Flag are the most commonly-used flags.</P>
+<H3><A NAME="e6d4723d-b4ec-4dee-a2d5-ebdc3fa3398d"></A>Conditions</H3>
+<P>A <i>condition</i> describes the state of one or more flags.  All conditional operations on the x86 are expressed in terms of conditions.</P>
+<P>The assembler uses a one or two letter abbreviation to represent a condition.  A condition can be represented by multiple abbreviations.  For example, AE ("above or equal") is the same condition as NB ("not below").   The following table lists some common conditions and their meaning.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Condition Name</TH>
+<TH Width="">Flags</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Z </TD>
+<TD Width="">ZF=1</TD>
+<TD Width="">Result of last operation was zero. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">NZ </TD>
+<TD Width="">ZF=0</TD>
+<TD Width="">Result of last operation was not zero. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">C </TD>
+<TD Width="">CF=1</TD>
+<TD Width="">Last operation required a carry or borrow.  (For unsigned integers, this indicates overflow.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">NC </TD>
+<TD Width="">CF=0</TD>
+<TD Width="">Last operation did not require a carry or borrow.   (For unsigned integers, this indicates overflow.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">S </TD>
+<TD Width="">SF=1</TD>
+<TD Width="">Result of last operation has its high bit set. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">NS </TD>
+<TD Width="">SF=0</TD>
+<TD Width="">Result of last operation has its high bit clear. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">O </TD>
+<TD Width="">OF=1</TD>
+<TD Width="">When treated as a signed integer operation, the last operation caused an overflow or underflow.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""> NO </TD>
+<TD Width="">OF=0</TD>
+<TD Width="">When treated as signed integer operation, the last operation did not cause an overflow or underflow.  </TD>
+</TR>
+</table>
+<P></P>
+<P>Conditions can also be used to compare two values.  The <b>cmp</b> instruction compares its two operands, and then sets flags as if subtracted one operand from the other.  The following conditions can be used to check the result of <b>cmp</b> <i>value1</i>, <i>value2</i>.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Condition Name</TH>
+<TH Width="">Flags</TH>
+<TH Width="">Meaning after a CMP operation.</TH>
+</TR>
+<TR valign="top">
+<TD Width="">E </TD>
+<TD Width="">ZF=1</TD>
+<TD Width=""><i>value1</i> == <i>value2</i>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">NE </TD>
+<TD Width="">ZF=0 </TD>
+<TD Width=""><i>value1</i> != <i>value2</i>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">GE<BR>NL </TD>
+<TD Width="">SF=OF </TD>
+<TD Width=""><i>value1</i> &gt;= <i>value2</i>.  <BR>Values are treated as signed integers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">LE<BR>NG </TD>
+<TD Width="">ZF=1 or SF!=OF </TD>
+<TD Width=""><i>value1</i> &lt;= <i>value2</i>.  Values are treated as signed integers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">G<BR>NLE </TD>
+<TD Width="">ZF=0 and SF=OF </TD>
+<TD Width=""><i>value1</i> &gt; <i>value2</i>.  Values are treated as signed integers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">L<BR>NGE </TD>
+<TD Width="">SF!=OF </TD>
+<TD Width=""><i>value1</i> &lt; <i>value2</i>.  Values are treated as signed integers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">AE<BR>NB </TD>
+<TD Width="">CF=0 </TD>
+<TD Width=""><i>value1</i> &gt;= <i>value2</i>.  Values are treated as unsigned integers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">BE<BR>NA </TD>
+<TD Width="">CF=1 or ZF=1</TD>
+<TD Width=""><i>value1</i> &lt;= <i>value2</i>.  Values are treated as unsigned integers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">A<BR>NBE </TD>
+<TD Width="">CF=0 and ZF=0</TD>
+<TD Width=""><i>value1</i> &gt; <i>value2</i>.  Values are treated as unsigned integers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">B<BR>NAE</TD>
+<TD Width="">CF=1</TD>
+<TD Width=""><i>value1</i> &lt; <i>value2</i>.  Values are treated as unsigned integers.</TD>
+</TR>
+</table>
+<P></P>
+<P>Conditions are typically used to act on the result of a <b>cmp</b> or <b>test</b> instruction. For example,</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>cmp eax, 5<BR>jz equal<BR><BR></nobr></P>
+<P>compares the <b>eax</b> register against the number 5 by computing the expression (<b>eax</b> - 5) and setting flags according to the result. If the result of the subtraction is zero, then the <b>zr</b> flag will be set, and the <b>jz</b> condition will be true so the jump will be taken.</P>
+<H3><A NAME="b1ab4409-482f-4f40-b9c9-7e081945b0b1"></A>Data Types</H3><B></B><UL type="disc">
+<LI>byte: 8 bits </LI>
+<LI>word: 16 bits </LI>
+<LI>dword: 32 bits </LI>
+<LI>qword: 64 bits (includes floating-point doubles) </LI>
+<LI>tword: 80 bits (includes floating-point extended doubles) </LI>
+<LI>oword: 128 bits</LI>
+</UL>
+<P></P>
+<H3><A NAME="aaba3831-d1f1-49f1-bf8f-e069a3afa4b5"></A>Notation</H3>
+<P>The following table indicates the notation used to describe assembly language instructions. </P><B></B><table>
+<TR valign="top">
+<TH Width="">Notation</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r</b>, <b>r1</b>, <b>r2</b>...</TD>
+<TD Width="">Registers</TD>
+</TR>
+<TR valign="top">
+<TD Width="">m </TD>
+<TD Width="">Memory address (see the succeeding Addressing Modes section for more information.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">#n </TD>
+<TD Width="">Immediate constant</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r</b>/m </TD>
+<TD Width="">Register or memory</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r</b>/#n </TD>
+<TD Width="">Register or immediate constant</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r</b>/m/#n </TD>
+<TD Width="">Register, memory, or immediate constant</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>cc</i> </TD>
+<TD Width="">A condition code listed in the preceding Conditions section.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>T </i></TD>
+<TD Width="">"B", "W", or "D" (byte, word or dword)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">acc<i>T</i> </TD>
+<TD Width="">Size <i>T</i> accumulator: <b>al</b> if <i>T</i> = "B", <b>ax</b> if <i>T</i> = "W", or <b>eax</b> if <i>T</i> = "D"</TD>
+</TR>
+</table>
+<P></P>
+<H3><A NAME="c4bf2fbf-9ffd-461d-a9ea-8d9a3bc4d45f"></A>Addressing Modes</H3>
+<P>There are several different addressing modes, but they all take the form <b>T ptr [expr]</b>, where <b>T</b> is some data type (see the preceding Data Types section) and <b>expr</b> is some expression involving constants and registers.</P>
+<P>The notation for most modes can be deduced without much difficulty. For example, <b>BYTE PTR [esi+edx*8+3]</b> means "take the value of the <b>esi</b> register, add to it eight times the value of the <b>edx</b> register, add three, then access the byte at the resulting address."</P>
+<H3><A NAME="4f78f757-4ce3-4f08-95bf-b5706f556b18"></A>Pipelining</H3>
+<P>The Pentium is dual-issue, which means that it can perform up to two actions in one clock tick. However, the rules on when it is capable of doing two actions at once (known as <i>pairing</i>) are very complicated.</P>
+<P>Because x86 is a CISC processor, you do not have to worry about jump delay slots.</P>
+<H3><A NAME="9d4e542c-0528-49e6-bbe9-621cbfef1231"></A>Synchronized Memory Access</H3>
+<P>Load, modify, and store instructions can receive a <b>lock</b> prefix, which modifies the instruction as follows:</P><B></B><OL type="1">
+<LI>Before issuing the instruction, the CPU will flush all pending memory operations to ensure coherency. All data prefetches are abandoned.</LI>
+<LI>While issuing the instruction, the CPU will have exclusive access to the bus. This ensures the atomicity of the load/modify/store operation.</LI>
+</OL>
+<P></P>
+<P>The <b>xchg</b> instruction automatically obeys the previous rules whenever it exchanges  a value with memory.</P>
+<P>All other instructions default to nonlocking.</P>
+<H3><A NAME="3ecb5560-4665-471b-b6eb-d6eb5a4f97e2"></A>Jump Prediction</H3>
+<P>Unconditional jumps are predicted to be taken.</P>
+<P>Conditional jumps are predicted to be taken or not taken, depending on whether they were taken the last time they were executed. The cache for recording jump history is limited in size.</P>
+<P>If the CPU does not have a record of whether the conditional jump was taken or not taken the last time it was executed, it predicts backward conditional jumps as taken and forward conditional jumps as not taken.</P>
+<H3><A NAME="27f7fb2c-9409-4a72-8508-049ed9e24252"></A>Alignment</H3>
+<P>The x86 processor will automatically correct unaligned memory access, at a performance penalty. No exception is raised.</P>
+<P>A memory access is considered aligned if the address is an integer multiple of the object size. For example, all BYTE accesses are aligned (everything is an integer multiple of 1), WORD accesses to even addresses are aligned, and DWORD addresses must be a multiple of 4 in order to be aligned.</P>
+<P>The <b>lock</b> prefix should not be used for unaligned memory accesses.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: x86 Architecture RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

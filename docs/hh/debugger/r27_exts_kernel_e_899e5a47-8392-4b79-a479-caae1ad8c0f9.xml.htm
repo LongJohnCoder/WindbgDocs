@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!job</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !job"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_899e5a47-8392-4b79-a479-caae1ad8c0f9.xml"/>
+<META NAME="MS-HKWD" CONTENT="!job extension">
+<META NAME="MS-HKWD" CONTENT="job object"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_899e5a47-8392-4b79-a479-caae1ad8c0f9.xml"></A>!job</H1>
+<P>The <b>!job</b> extension displays a job object.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!job</b> [<i>Process</i> [<i>Flags</i>]] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Process</i></DT>
+<DD>Specifies the hexadecimal address of a process or a thread whose associated job object is to be examined. If this is omitted, or equal to -1 (in Windows 2000), or equal to zero (in Windows XP and later), the job associated with the current process is displayed.</DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies what the display should contain. This can be a sum of any of the following bit values. The default is 0x1:<DL><DT>Bit 0 (0x1)</DT>
+<DD>Causes the display to include job settings and statistics.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Causes the display to include a list of all processes in the job.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example of the output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!process 52c</b><BR>Searching for Process with Cid == 52c<BR>PROCESS 8276c550  SessionId: 0  Cid: 052c    Peb: 7ffdf000  ParentCid: 0060<BR>    DirBase: 01289000  ObjectTable: 825f0368  TableSize:  24.<BR>    Image: cmd.exe<BR>    VadRoot 825609e8 Vads 30 Clone 0 Private 77. Modified 0. Locked 0.<BR>    DeviceMap e1733f38<BR>    Token                             e1681610<BR>    ElapsedTime                       0:00:12.0949<BR>    UserTime                          0:00:00.0359<BR>    .....<BR>    CommitCharge                      109<BR>    Job                               8256e1f0<BR><BR>kd&gt; <b>!job 8256e1f0</b><BR>Job at ffffffff8256e1f0<BR>  TotalPageFaultCount      0<BR>  TotalProcesses           1<BR>  ActiveProcesses          1<BR>  TotalTerminatedProcesses 0<BR>  LimitFlags               0<BR>  MinimumWorkingSetSize    0<BR>  MaximumWorkingSetSize    0<BR>  ActiveProcessLimit       0<BR>  PriorityClass            0<BR>  UIRestrictionsClass      0<BR>  SecurityLimitFlags       0<BR>  Token                    00000000<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about job objects, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !job RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

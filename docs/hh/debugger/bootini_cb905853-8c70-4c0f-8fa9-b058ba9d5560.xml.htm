@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Backing up Boot Options in EFI</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Backing up Boot Options in EFI"><xml><MSHelp:Keyword Index="A" Term="bootini_cb905853-8c70-4c0f-8fa9-b058ba9d5560.xml"/>
+<META NAME="MS-HKWD" CONTENT="back ups [WDK boot options], EFI">
+<META NAME="MS-HKWD" CONTENT="NVRAM boot options [WDK], backing up">
+<META NAME="MS-HKWD" CONTENT="EFI NVRAM boot options [WDK], backing up">
+<META NAME="MS-HKWD" CONTENT="copying boot options">
+<META NAME="MS-HKWD" CONTENT="saving boot options">
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], backing up">
+<META NAME="MS-HKWD" CONTENT="Nvrboot tool"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_cb905853-8c70-4c0f-8fa9-b058ba9d5560.xml"></A>Backing up Boot Options in EFI</H1>
+<P>When you install a 64-bit version of Windows, Setup automatically creates  a boot entry for the installation and saves a backup copy of the boot entry to a binary file named Boot<i>xxxx</i>, where Boot<i>xxxx</i> is the NVRAM ID for the boot entry. Setup stores the boot entry backup copy in a new directory on the EFI partition, along with the EFI boot loader for the new installation.By default, the installation directory is in the \EFI\Microsoft\ subdirectory.</P>
+<P>However, the system does not save backup copies of the boot entries that you create and it does not update backup copies of boot entries after you edit them.</P>
+<P>To save backup copies of boot entries that you create and edit, and to save extra backup copies of the entries that Setup creates, use Nvrboot (nvrboot.efi). Nvrboot saves the entries in the binary format that Setup and the EFI components use. Then, if the boot entry for an installation is lost or corrupted, you can use the import command (<b>nvrboot i</b>) in Nvrboot to import the backup copy of the boot entry into NVRAM.</P>
+<P>This section includes:</P><B></B><div class="indent1">
+<P><a href="bootini_dcf0b002-1075-4899-9774-9827faf7c5f4.xml.htm">Exporting and Importing Boot Entries in EFI</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_de366c07-3ebc-443b-8e38-260e6cb616be.xml.htm">Identifying Backup Files for Existing Boot Entries</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_38a53cb9-5c1e-4706-b42f-f39379f39048.xml.htm">Identifying Backup Files for Deleted Boot Entries</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_845869a7-0901-4b43-b670-780034bf89cc.xml.htm">Recognizing Unusable Boot Entry Backup Files</a> </P>
+</div>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Backing up Boot Options in EFI RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

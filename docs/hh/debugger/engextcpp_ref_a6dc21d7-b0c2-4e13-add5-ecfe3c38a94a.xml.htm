@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>EXT_COMMAND</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, EXT_COMMAND"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="EXT_COMMAND"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml"/>
+<META NAME="MS-HKWD" CONTENT="EXT_COMMAND macro"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml"></A>EXT_COMMAND</H1>
+<P>The EXT_COMMAND macro is used to define an extension command that was declared by using the <a href="engextcpp_ref_a4a0b264-50e1-457b-a962-ca691509ea36.xml.htm">EXT_COMMAND_METHOD</a> macro.</P>
+<P>An extension command is defined as follows</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>EXT_COMMAND(</b><i>_Name</i><b>, </b><i>_Desc</i><b>, </b><i>_Args</i><b>)</b><BR><b>{</b><BR><b>    ...</b><BR><b>}</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>_Name</i></DT>
+<DD>The name of the extension command.  This must be the same as the <i>_Name</i> parameter that is used to declare the extension command by using <a href="engextcpp_ref_a4a0b264-50e1-457b-a962-ca691509ea36.xml.htm">EXT_COMMAND_METHOD</a>.<P>Because EXT_COMMAND is a macro, <i>_Name</i> must be the bare name of the extension command and should not be enclosed in quotation marks or be a variable.</P>
+</DD>
+<DT><i>_Desc</i></DT>
+<DD>A string describing the extension command.</DD>
+<DT><i>_Args</i></DT>
+<DD>A string describing the arguments that are expected by the extension command.<P class="note"><b>Note</b>  The format of the <i>_Args</i> string is not yet documented.  <i>EngExtCpp.hpp</i> has comments that describe exactly how to specify the argument syntax for a command.  Alternatively, the string "{{custom}}" can be used to indicate that the extension command will parse the arguments itself.  The method <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>GetRawArgStr</b></a> can be used to fetch the raw argument for parsing.</P>
+</DD>
+</DL>
+<H4>Comments</H4>
+<P>The body of the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#a1e40118-1d4c-4ebf-8adc-4fe9a9d1a90f">extension command</a> does not take any arguments.  However, because the extension command is declared as a method of the <a href="engextcpp_ref_731f5b1a-bf23-4c78-8c2e-663dd7c35793.xml.htm">EXT_CLASS</a> class, it has access to all the members of the <a href="engextcpp_ref_3a533353-f008-4887-b937-2098acf1c68e.xml.htm"><b>ExtExtension</b></a> base class, some of which are initialized for the execution of the extension command.</P>
+<P>The macro <a href="engextcpp_ref_a4a0b264-50e1-457b-a962-ca691509ea36.xml.htm">EXT_COMMAND_METHOD</a> should be used to declare the extension command.  As with all C++ declarations, the EXT_COMMAND_METHOD declaration should appear in the source files before the EXT_COMMAND definition.</P>
+<P>When the debugger engine calls an extension command method, it wraps the call in a <b>try / except</b> block.  This protects the engine from some types of bugs in the extension code; but, since the extension calls are executed in the same thread as the engine, they can still cause it to crash.</P>
+<P>This macro also creates a function called <i>_Name</i> (which calls the method defined by the macro).  In order for the engine to call the extension, this function must be exported from the extension library DLL.</P>
+<H4>Requirements</H4>
+<p><b>Headers:</b> Defined in <i>Engextcpp.hpp</i>.  Include <i>Engextcpp.hpp</i>.</p>
+<H4>See Also</H4>
+<P><a href="engextcpp_ref_731f5b1a-bf23-4c78-8c2e-663dd7c35793.xml.htm">EXT_CLASS</a>, <a href="engextcpp_ref_a4a0b264-50e1-457b-a962-ca691509ea36.xml.htm">EXT_COMMAND_METHOD</a>, <a href="engextcpp_ref_3a533353-f008-4887-b937-2098acf1c68e.xml.htm"><b>ExtExtension</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: EXT_COMMAND RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

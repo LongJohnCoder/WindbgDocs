@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Accessing Memory by Physical Address</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Accessing Memory by Physical Address"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_11d1ff6e-a2e4-4a79-b037-f05bb3801593.xml"/>
+<META NAME="MS-HKWD" CONTENT="physical address, accessing memory"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_11d1ff6e-a2e4-4a79-b037-f05bb3801593.xml"></A>Accessing Memory by Physical Address</H1>
+<P>To read from a physical address, use the <a href="r26_exts_kernel_a_cfc39aa4-b8b1-4ff0-b867-3f0a6b9a1c82.xml.htm"><b>!db</b></a>, <a href="r26_exts_kernel_a_cfc39aa4-b8b1-4ff0-b867-3f0a6b9a1c82.xml.htm"><b>!dc</b></a>, <a href="r26_exts_kernel_a_cfc39aa4-b8b1-4ff0-b867-3f0a6b9a1c82.xml.htm"><b>!dd</b></a>, <a href="r26_exts_kernel_a_cfc39aa4-b8b1-4ff0-b867-3f0a6b9a1c82.xml.htm"><b>!dp</b></a>, <a href="r26_exts_kernel_a_cfc39aa4-b8b1-4ff0-b867-3f0a6b9a1c82.xml.htm"><b>!du</b></a>, and <a href="r26_exts_kernel_a_cfc39aa4-b8b1-4ff0-b867-3f0a6b9a1c82.xml.htm"><b>!dw</b></a> extension commands.</P>
+<P>To write to a physical address, use the <a href="r27_exts_kernel_e_f013ab0d-2301-4fa9-8567-d94677aae8df.xml.htm"><b>!eb</b></a> and <a href="r27_exts_kernel_e_f013ab0d-2301-4fa9-8567-d94677aae8df.xml.htm"><b>!ed</b></a> extension commands.</P>
+<P>The <a href="r16_cmds_c_8a73604a-382c-4d01-ba56-871a7675f6bc.xml.htm"><b>fp (Fill Physical Memory)</b></a> command writes a pattern to a physical memory range, repeating it until the range is full.</P>
+<P>When you are using WinDbg in kernel mode, you can also read or write to physical memory directly from the <a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory window</a>.</P>
+<P>To search physical memory for a piece of data or a range of data, use the <a href="r29_exts_kernel_q_03368e4e-514b-495c-a575-39570394bb36.xml.htm"><b>!search</b></a> extension command.</P>
+<P>Also, for more information about physical addresses, see <a href="t01_basic_d3a32249-4872-4355-acf2-45e4743c4d66.xml.htm">Converting Virtual Addresses to Physical Addresses</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Accessing Memory by Physical Address RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

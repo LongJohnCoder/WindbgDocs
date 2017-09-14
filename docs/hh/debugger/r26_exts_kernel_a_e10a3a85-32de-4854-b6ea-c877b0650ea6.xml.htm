@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!deadlock</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !deadlock"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_e10a3a85-32de-4854-b6ea-c877b0650ea6.xml"/>
+<META NAME="MS-HKWD" CONTENT="!deadlock extension">
+<META NAME="MS-HKWD" CONTENT="Deadlock Detection (Driver Verifier)">
+<META NAME="MS-HKWD" CONTENT="Driver Verifier, !deadlock extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_e10a3a85-32de-4854-b6ea-c877b0650ea6.xml"></A>!deadlock</H1>
+<P><P>The <b>!deadlock</b> extension displays information about deadlocks collected by the <b>Deadlock Detection</b> option of Driver Verifier.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!deadlock</b> <BR><b>!deadlock</b> <b>1</b> <BR></nobr></P>
+<P></P>
+<P></P>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension will only provide useful information if Driver Verifier's <b>Deadlock Detection</b> option has detected a lock hierarchy violation and  issued <a href="t06_bugs_b0_77bda7e9-4f41-49e9-86db-04446dc9c7b7.xml.htm">bug check 0xC4</a> (DRIVER_VERIFIER_DETECTED_VIOLATION).  </P>
+<P>Without any arguments, the <b>!deadlock</b> extension causes the basic lock hierarchy topology to be displayed. If the problem is not a simple cyclical deadlock, this command will describe the situation that has occurred.</P>
+<P>The <b>!deadlock 1</b> extension causes stack traces to be displayed. The stacks displayed will be the ones active at the time the locks were acquired.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:kd&gt; <b>!deadlock</b><BR><BR>Deadlock detected (2 resources in 2 threads):<BR><BR>Thread 0: A B<BR>Thread 1: B A<BR><BR>Where:<BR>Thread 0 = 8d3ba030<BR>Thread 1 = 8d15c030<BR>Lock A =   bba2af30 Type 'Spinlock'<BR>Lock B =   dummy!GlobalLock Type 'Spinlock'<BR><BR></nobr></P>
+<P>This tells you which threads and which locks are involved. However, it is intended to be a summary and may not be enough information to adequately debug the situation.</P>
+<P>Use <b>!deadlock 1</b> to print out the contents of the call stacks at the time that each lock participating in the deadlock was acquired. Because these are run-time stack traces, they will be more complete if a checked build is being used. On a free build, they may be truncated after as little as one line.</P>
+<P></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:kd&gt; <b>!deadlock 1</b><BR><BR>Deadlock detected (2 resources in 2 threads):<BR><BR>Thread 0 (8D14F750) took locks in the following order:<BR><BR>    Lock A -- b7906f30 (Spinlock)<BR>    Stack:   dummy!DummyActivateVcComplete+0x63<BR>             dummy!dummyOpenVcChannels+0x2E1<BR>             dummy!DummyAllocateRecvBufferComplete+0x436<BR>             dummy!DummyAllocateComplete+0x55<BR>             NDIS!ndisMQueuedAllocateSharedHandler+0xC9<BR>             NDIS!ndisWorkerThread+0xEE<BR><BR>    Lock B -- dummy!GlobalLock (Spinlock)<BR>    Stack:   dummy!dummyQueueRecvBuffers+0x2D<BR>             dummy!DummyActivateVcComplete+0x90<BR>             dummy!dummyOpenVcChannels+0x2E1<BR>             dummy!DummyAllocateRecvBufferComplete+0x436<BR>             dummy!DummyAllocateComplete+0x55<BR><BR>Thread 1 (8D903030) took locks in the following order:<BR><BR>    Lock B -- dummy!GlobalLock (Spinlock)<BR>    Stack:   dummy!dummyRxInterruptOnCompletion+0x25D<BR>             dummy!DummyHandleInterrupt+0x32F<BR>             NDIS!ndisMDpcX+0x3C<BR>             ntkrnlpa!KiRetireDpcList+0x5D<BR><BR>    Lock A -- b7906f30 (Spinlock)<BR>    Stack:   &lt;&lt; Current stack &gt;&gt;<BR><BR></nobr></P>
+<P>With this information, you have almost everything you need, except the current stack:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>k</b><BR>ChildEBP RetAddr<BR>f78aae6c 80664c58 ntkrnlpa!DbgBreakPoint<BR>f78aae74 8066523f ntkrnlpa!ViDeadlockReportIssue+0x2f<BR>f78aae9c 806665df ntkrnlpa!ViDeadlockAnalyze+0x253<BR>f78aaee8 8065d944 ntkrnlpa!VfDeadlockAcquireResource+0x20b<BR>f78aaf08 bfd6df46 ntkrnlpa!VerifierKeAcquireSpinLockAtDpcLevel+0x44<BR>f78aafa4 b1bf2d2d dummy!dummyRxInterruptOnCompletion+0x2b5<BR>f78aafc4 bfde9d8c dummy!DummyHandleInterrupt+0x32f<BR>f78aafd8 804b393b NDIS!ndisMDpcX+0x3c<BR>f78aaff4 804b922b ntkrnlpa!KiRetireDpcList+0x5d<BR><BR></nobr></P>
+<P>From this you can see which locks were involved and where they were acquired. This should be enough information for you to debug the deadlock. If the source code is available, you can use the debugger to see exactly where the problem occurred:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>.lines</b><BR>Line number information will be loaded<BR><BR>0: kd&gt; <b>u dummy!DummyActivateVcComplete+0x63 l1</b><BR>dummy!DummyActivateVcComplete+63 [d:\nt\drivers\dummy\vc.c @ 2711]:<BR>b1bfe6c9 837d0c00         cmp     dword ptr [ebp+0xc],0x0<BR><BR>0: kd&gt; <b>u dummy!dummyQueueRecvBuffers+0x2D l1</b><BR>dummy!dummyQueueRecvBuffers+2d [d:\nt\drivers\dummy\receive.c @ 2894]:<BR>b1bf4e39 807d0c01         cmp     byte ptr [ebp+0xc],0x1<BR><BR>0: kd&gt; <b>u dummy!dummyRxInterruptOnCompletion+0x25D l1</b><BR>dummy!dummyRxInterruptOnCompletion+25d [d:\nt\drivers\dummy\receive.c @ 1424]:<BR>b1bf5d05 85f6             test    esi,esi<BR><BR>0: kd&gt;<b> u dummy!dummyRxInterruptOnCompletion+0x2b5 l1</b><BR>dummy!dummyRxInterruptOnCompletion+2b5 [d:\nt\drivers\dummy\receive.c @ 1441]:<BR>b1bf5d5d 8b4648           mov     eax,[esi+0x48]<BR><BR></nobr></P>
+<P>Now you know the name of the source file and the line number where the acquisition took place. In this case, the source files will show that the threads behaved as follows:</P><B></B><UL type="disc">
+<LI><b>Thread 1:</b> <b>DummyActivateVcComplete</b> took the <b>dummy</b> miniport lock. It then called <b>dummyQueueRecvBuffers</b>, which took the <b>dummy</b> global lock.</LI>
+<LI><b>Thread 2:</b> <b>dummyRxInterruptOnCompletion</b> took the global lock. Then, a few lines later, it took the miniport lock.</LI>
+</UL>
+<P></P>
+<P>At this point, the deadlock becomes entirely clear.</P>
+<H4>Additional Information</H4>
+<P>For information about Driver Verifier, see the Windows Driver Kit (WDK) documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !deadlock RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

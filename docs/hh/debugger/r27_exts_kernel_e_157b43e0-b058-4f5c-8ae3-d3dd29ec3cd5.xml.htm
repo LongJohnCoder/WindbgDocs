@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!exqueue</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !exqueue"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_157b43e0-b058-4f5c-8ae3-d3dd29ec3cd5.xml"/>
+<META NAME="MS-HKWD" CONTENT="!exqueue extension">
+<META NAME="MS-HKWD" CONTENT="work queue">
+<META NAME="MS-HKWD" CONTENT="ExWorkerQueue"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_157b43e0-b058-4f5c-8ae3-d3dd29ec3cd5.xml"></A>!exqueue</H1>
+<P><P>The <b>!exqueue</b> extension displays a list of items currently queued in the <b>ExWorkerQueue</b> work queues.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!exqueue</b> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Can be any combination of the following values. The default is 0x0, which will display only a limited amount of information.<B></B><table>
+<TR valign="top">
+<TD Width="">Bit 0 (0x1)</TD>
+<TD Width="">Adds time and priority statistics to the display, unless 0x2 is also set.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 1 (0x2)</TD>
+<TD Width="">Adds to the display a list of threads and events associated with the work queue and their wait states.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 2 (0x4)</TD>
+<TD Width="">Adds to the display a list of threads associated with the work queue. If ussed without 0x2, each thread is displayed on a single line. If used with 0x2, each thread is displayed with a stack trace.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 3 (0x8)</TD>
+<TD Width=""><i>(Windows XP and later)</i>  Adds the return address, the stack pointer, and (on Itanium systems) the <b>bsp</b> register value to the display of each thread in the queue. The display of function arguments is suppressed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 4 (0x10)</TD>
+<TD Width="">Displays only the critical work queue.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 5 (0x20)</TD>
+<TD Width="">Displays only the delayed work queue.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 6 (0x40)</TD>
+<TD Width="">Displays only the hypercritical work queue.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If <i>Flags</i> does not include <nobr>bits 4, 5, or 6,</nobr> the display includes the critical work queue, the delayed work queue, and the hypercritical work queue.</P>
+<P>Here is an sample of the output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!exqueue</b><BR>Dumping ExWorkerQueue: 8046A5C0<BR><BR>**** Critical WorkQueue( current = 0 maximum = 1 )<BR>THREAD fe502940  Cid 8.c  Teb: 00000000  Win32Thread: 00000000 WAIT<BR>THREAD fe5026c0  Cid 8.10  Teb: 00000000  Win32Thread: 00000000 WAIT<BR>THREAD fe502440  Cid 8.14  Teb: 00000000  Win32Thread: 00000000 WAIT<BR>THREAD fe5021c0  Cid 8.18  Teb: 00000000  Win32Thread: 00000000 WAIT<BR>THREAD fe501020  Cid 8.1c  Teb: 00000000  Win32Thread: 00000000 WAIT<BR><BR>**** Delayed WorkQueue( current = 0 maximum = 1 )<BR>THREAD fe501da0  Cid 8.20  Teb: 00000000  Win32Thread: 00000000 WAIT<BR>THREAD fe501b20  Cid 8.24  Teb: 00000000  Win32Thread: 00000000 WAIT<BR>THREAD fe5018a0  Cid 8.28  Teb: 00000000  Win32Thread: 00000000 WAIT<BR><BR>**** HyperCritical WorkQueue( current = 0 maximum = 1 )<BR>THREAD fe501620  Cid 8.2c  Teb: 00000000  Win32Thread: 00000000 WAIT<BR><BR></nobr></P>
+<P>The important information in the <b>!exqueue</b> display is:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>current</b></TD>
+<TD Width="">The number of running threads in the queue; that is, the number of threads in the queue that are not in a wait state.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>maximum</b></TD>
+<TD Width="">The number of running threads allowed in the queue at any given point in time. This is usually based on the number of processors in the system.</TD>
+</TR>
+</table>
+<P></P>
+<P>The system will execute work items in any queue in which the <b>current</b> value is less than its <b>maximum</b> value. The system will not execute any new work items in a queue in which the <b>current</b> value is greater than or equal to its <b>maximum</b> value until the  excess queue threads have either completed execution or entered a wait state. This rule can delay the system when a CPU-intensive work item is being executed without entering a wait state, because it prevents new work items from being executed, even though the queue seems to have free threads.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about worker threads, see <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !exqueue RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

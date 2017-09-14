@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetNotifyEventHandle</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetNotifyEventHandle"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetNotifyEventHandle"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_73931ad2-ace6-4d38-ad22-c322f2e3c13c.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetNotifyEventHandle method">
+<META NAME="MS-HKWD" CONTENT="GetNotifyEventHandle (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_73931ad2-ace6-4d38-ad22-c322f2e3c13c.xml"></A>GetNotifyEventHandle</H1>
+<P><P>The <b>GetNotifyEventHandle</b> method receives the handle of the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> that will be signaled after the next <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exception</a> in a <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::GetNotifyEventHandle(</b><BR><b>    OUT PULONG64  </b><i>Handle</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Handle</i></DT>
+<DD>Receives the handle of the event that will be signaled.  If <i>Handle</i> is NULL, no event will be signaled.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetNotifyEventHandle</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>If an event to be signaled was set and an exception occurs in a target, when the engine resumes execution in the target again, the event will be signaled.</P>
+<P>The event will only be signaled once.  After it has been signaled, this method will return NULL to <i>Handle</i>, unless <a href="idebugcontrol_9934efa7-aed4-4706-8885-71d78f6950a8.xml.htm"><b>SetNotifyEventHandle</b></a> is called to set another event to signal.<b> </b></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_9934efa7-aed4-4706-8885-71d78f6950a8.xml.htm"><b>SetNotifyEventHandle</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetNotifyEventHandle RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Remote.exe Batch Files</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Remote.exe Batch Files"><xml><MSHelp:Keyword Index="A" Term="r08_use_remote_316cad9d-3fbf-4c0a-bf09-185b5d3a8c0c.xml"/>
+<META NAME="MS-HKWD" CONTENT="remote debugging through remote.exe, batch files"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r08_use_remote_316cad9d-3fbf-4c0a-bf09-185b5d3a8c0c.xml"></A><i>Remote.exe</i> Batch Files</H1>
+<P>As a more detailed example of remote debugging with <i>remote.exe</i>, assume the following about a local host computer in a three-computer kernel debugging scenario:</P><B></B><UL type="disc">
+<LI>Debugging needs to take place over a null-modem cable on COM2.</LI>
+<LI>The symbol files are in the folder <i>c:\winnt\symbols</i>.</LI>
+<LI>A log file called <i>debug.log</i> is created in <i>c:\temp</i>. </LI>
+</UL>
+<P></P>
+<P>The log file holds a copy of everything you see on the Debug screen during your debug session. All input from the person doing the debugging, and all output from the kernel debugger on the target system, is written to that log file.</P>
+<P>A sample batch file for running a debugging session on the local host is:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>set _NT_DEBUG_PORT=com2<BR>set _NT_DEBUG_BAUD_RATE=19200<BR>set _NT_SYMBOL_PATH=c:\winnt\symbols<BR>set _NT_LOG_FILE_OPEN=c:\temp\debug.log<BR>remote /s "KD -v" debug<BR><BR></nobr></P>
+<P class="note"><b>Note</b>  If this batch file is not in the same directory as <i>Remote.exe</i>, and <i>Remote.exe</i> is not in a directory listed in the system path, then you should give the full path to the utility when invoking <i>Remote.exe</i> in this batch file.</P>
+<P>After this batch file is run, anyone with a Windows computer that is networked to the local host computer can connect to the debug session by using the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>remote /c</b> <i>computername</i> <b>debug</b> <BR><BR></nobr></P>
+<P>where <i>computername</i> is the NetBIOS name of the local host computer. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Remote.exe Batch Files RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

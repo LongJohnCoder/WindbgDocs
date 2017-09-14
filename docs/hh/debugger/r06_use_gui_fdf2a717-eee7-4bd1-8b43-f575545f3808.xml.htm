@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Cutting and Pasting Text</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Cutting and Pasting Text"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_fdf2a717-eee7-4bd1-8b43-f575545f3808.xml"/>
+<META NAME="MS-HKWD" CONTENT="cutting text">
+<META NAME="MS-HKWD" CONTENT="pasting text">
+<META NAME="MS-HKWD" CONTENT="copying text">
+<META NAME="MS-HKWD" CONTENT="debugging information windows, cutting and pasting text">
+<META NAME="MS-HKWD" CONTENT="text">
+<META NAME="MS-HKWD" CONTENT="text, editing">
+<META NAME="MS-HKWD" CONTENT="mouse (right button)">
+<META NAME="MS-HKWD" CONTENT="right mouse button"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_fdf2a717-eee7-4bd1-8b43-f575545f3808.xml"></A>Cutting and Pasting Text</H1>
+<P>WinDbg uses many common methods of manipulating text and several methods that are less familiar.</P>
+<H4>Selecting Text</H4>
+<P>To select text in a <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a>, in the <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a>, in either pane of the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>, or in a dialog box, point to one end of the text, press and hold the left mouse button, and drag the pointer to the other end of the text.</P>
+<P>To select all of the text in a window, you can also click <a href="r37_gui_2_f80b281c-5c69-4ae5-9741-d341f00ed135.xml.htm"><b>Select All</b></a> on the <b>Edit</b> menu or press CTRL+A.</P>
+<P>In the <a href="r36_gui_1_b6fb163f-531c-4403-aa9d-100772f42189.xml.htm">Calls window</a>, <a href="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml.htm">Watch window</a>, <a href="r36_gui_1_e05d85f5-f61e-41e4-b80a-f72b4fc0bdd7.xml.htm">Locals window</a>, <a href="r36_gui_1_1cc07c74-c19c-41ff-954e-8d74472ff458.xml.htm">Registers window</a>, and <a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory window</a>, you cannot select an arbitrary span of text, but you can select a whole line or cell. Click in the desired line or cell to select its text.</P>
+<P>While you are entering text, press the DELETE and BACKSPACE keys to delete the text to the right or left of the cursor, respectively. If you select text, you can press these keys to delete the selection. If you select text and then type any characters, the new characters replace what you selected.</P>
+<H4>Copying Text</H4>
+<P>To copy text, select that text and then do one of the following:</P><B></B><UL type="disc">
+<LI>Press the right mouse button. (This method works only in some locations. For more information about how to use the right mouse button, see <a href="#dbbda199-9b05-4dcc-999b-eccf7b3f8984">The Right Mouse Button</a>.)</LI>
+<LI>Press CTRL+C.</LI>
+<LI>Press CTRL+INSERT.</LI>
+<LI><i>(Docked and tabbed windows only)</i>  Click <b>Copy</b> on the <b>Edit </b>menu.</LI>
+<LI>Click the <b>Copy (Ctrl+C) </b>button (<img src="tbcopy.bmp">) on the toolbar.</LI>
+</UL>
+<P></P>
+<H4>Cutting Text</H4>
+<P>To cut text and move it to the clipboard, select the text and then do one of the following:</P><B></B><UL type="disc">
+<LI>Press CTRL+X.</LI>
+<LI>Press SHIFT+DELETE.</LI>
+<LI><i>(Docked and tabbed windows only)</i>  Click<b> Cut</b> on the <b>Edit </b>menu.</LI>
+<LI>Click the <b>Cut (Ctrl+X) </b>button (<img src="tbcut.bmp">) on the toolbar.</LI>
+</UL>
+<P></P>
+<P>You can cut text from the bottom pane of the Debugger Command window, from the left column of the Watch window, and from any dialog box (that is, from any location that supports text entry).</P>
+<H4>Pasting Text</H4>
+<P>To paste text from the clipboard, put the cursor where you want to insert the text (or select the text that you want to replace) and then do one of the following:</P><B></B><UL type="disc">
+<LI>Press the right mouse button. (This method works only in some locations, and you cannot use this method to replace text. For more inormation about how to use this method, see <a href="#dbbda199-9b05-4dcc-999b-eccf7b3f8984">The Right Mouse Button</a>.)</LI>
+<LI>Press CTRL+V.</LI>
+<LI>Press SHIFT+INSERT.</LI>
+<LI><i>(Docked and tabbed windows only)</i>  Click<b> Paste</b> on the <b>Edit </b>menu.</LI>
+<LI>Click the <b>Paste (Ctrl+V) </b>button (<img src="tbpaste.bmp">) on the tooblar.</LI>
+</UL>
+<P></P>
+<P>You can paste text into the bottom pane of the Debugger Command window, into the left column of the Watch window, and into any dialog box (that is, into any location that supports text entry).</P>
+<H3><A NAME="dbbda199-9b05-4dcc-999b-eccf7b3f8984"></A>Right Mouse Button</H3>
+<P>The right mouse button has several effects that can make copying and pasting much quicker:</P><B></B><UL type="disc">
+<LI>If you select text in either pane of the Debugger Command window, in the Scratch Pad, in the Disassembly window, or in any Source window, and then you press the right mouse button, the text is copied to the clipboard.  However, if <b>QuickEdit Mode</b> has been deselected in <a href="r37_gui_2_1be1d2c8-bb5f-4c06-b2a6-7bc84ba4ec56.xml.htm"><b>View | Options</b></a>, right-clicking in these locations will pop up the menu most relevant to the current location. </LI>
+<LI>If you put the cursor (without selecting any text) in either pane of the Debugger Command window, in the Scratch Pad, or in the text entry space of the Watch window, and then you press the right mouse button, the contents of the clipboard are pasted into the window. However, if <b>QuickEdit Mode</b> has been deselected in <a href="r37_gui_2_1be1d2c8-bb5f-4c06-b2a6-7bc84ba4ec56.xml.htm"><b>View | Options</b></a>, right-clicking in these locations will pop up the menu most relevant to the current location. </LI>
+<LI>If you put the cursor in any box and then press the right mouse button, a menu with <b>Undo</b>, <b>Cut</b>, <b>Copy</b>, <b>Paste</b>, and <b>Select All</b> options appears. You can choose any of these options.</LI>
+</UL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Cutting and Pasting Text RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

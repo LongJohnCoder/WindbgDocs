@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Boot Parameters to Configure DEP and PAE</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Boot Parameters to Configure DEP and PAE"><xml><MSHelp:Keyword Index="A" Term="bootini_29e11bdf-06dc-489d-af10-27a8c03d3a62.xml"/>
+<META NAME="MS-HKWD" CONTENT="boot parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot entry parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="DEP [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="Data Execution Prevention [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="Physical Address Extention [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="PAE [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="hardware-enforced DEP [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="software-enforced DEP [WDK boot parameters]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_29e11bdf-06dc-489d-af10-27a8c03d3a62.xml"></A>Boot Parameters to Configure DEP and PAE</H1>
+<P>This topic explains how to use boot parameters to enable, disable, and configure Data Execution Prevention (DEP) and Physical Address Extension (PAE) on operating systems that support these features.</P>
+<P>For information about the boot parameters for DEP on operating systems prior to Windows Vista, including operating system support and the default values of the parameters, see <a href="bootini_aff45176-bd02-43cf-9895-c212fa392de2.xml.htm"><b>/noexecute</b></a> and <a href="bootini_3d0f852c-df3d-4b82-a30d-de9cba86e8e1.xml.htm"><b>/execute</b></a>. For similar information about PAE, see <a href="bootini_17b4305e-23ac-40ea-99db-4858b29a5d66.xml.htm"><b>/pae</b></a> and <a href="bootini_37644df1-f3ea-4e1b-9ea6-c5ea00a1164b.xml.htm"><b>/nopae</b></a>.</P>
+<P>For information about the boot parameters for DEP and PAE on Windows Vista and later, see the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDEdit /set</b></a> command and the <b>nx</b> and <b>pae</b> options.</P>
+<P class="note"><b>Important  </b>DEP is a highly effective security feature that should not be disabled unless you have no alternative. The default settings for DEP and PAE are optimal for most systems. Do not change the default settings unless they interfere with essential processing tasks. This section is included to show you how to configure these features, but it should not be interpreted as a recommendation to change the default settings.</P>
+<H4>DEP and PAE Boot Parameters</H4>
+<P>On operating systems prior to Windows Vista, DEP and PAE are enabled at boot time and are configured by using the following four boot parameters:</P><B></B><UL type="disc">
+<LI><a href="bootini_aff45176-bd02-43cf-9895-c212fa392de2.xml.htm"><b>/noexecute</b></a> enables and configures DEP.</LI>
+<LI><a href="bootini_3d0f852c-df3d-4b82-a30d-de9cba86e8e1.xml.htm"><b>/execute</b></a> disables DEP and PAE.</LI>
+<LI><a href="bootini_17b4305e-23ac-40ea-99db-4858b29a5d66.xml.htm"><b>/pae</b></a> enables PAE.</LI>
+<LI><a href="bootini_37644df1-f3ea-4e1b-9ea6-c5ea00a1164b.xml.htm"><b>/nopae</b></a> disables PAE.</LI>
+</UL>
+<P></P>
+<P>On Windows Vista and later, DEP and PAE are enabled at boot time and are configured by setting values for the <b>nx</b> and <b>pae</b> parameters using the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDEdit /set</b></a> command. </P>
+<P></P>
+<P></P>
+<P>These boot parameters have conflicting effects. To configure DEP and PAE, use only the parameter combinations that are described in the documentation for each parameter and discussed in this topic. Do not experiment with conflicting parameters, especially on a production system.</P>
+<H4>The Interaction of DEP and PAE Boot Parameters</H4>
+<P>There are two types of DEP:</P><B></B><UL type="disc">
+<LI><i>Hardware-enforced DEP</i> enables DEP for both kernel-mode and user-mode processes. It must be supported by the processor and the operating system.</LI>
+</UL><B></B><UL type="disc">
+<LI><i>Software-enforced DEP</i> enables DEP only on user-mode processes. It must be supported by the operating system.</LI>
+</UL>
+<P></P>
+<P>DEP is supported by Windows XP with SP2, Windows Server 2003 with SP1, Windows Vista, and later versions of Windows.</P>
+<P>On 32-bit versions of Windows, <i>hardware-enforced DEP</i> requires PAE, which is supported by all Windows operating systems that support DEP. When DEP is enabled on a computer with a processor that supports hardware-enforced DEP, Windows automatically enables PAE and ignores the boot parameter values that disable it. </P>
+<P>The parameter combinations for each Windows operating system are summarized in the following section.</P>
+<H4>DEP and PAE Parameter Combinations</H4>
+<P>The following list describes the boot parameter combinations that can be used to configure DEP and PAE.</P>
+<P class="note"><b>Note</b>  In the examples for Windows Vista and later, the optional <b>{</b><i>ID</i><b>}</b> is the GUID for the specific Windows boot loader boot entry that you want to configure. If you do not specify an <b>{</b><i>ID</i><b>}</b>, the command modifies the current operating system boot entry. For more information, see the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDEdit /set</b></a> command .</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Action</TH>
+<TH Width="">Prior to Windows Vista</TH>
+<TH Width="">Windows Vista and later</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>To enable DEP</b><BR><BR>(Select one parameter combination)<BR><BR>When DEP is enabled on computers that support hardware-enforced DEP, these parameter combinations also enable PAE.<BR><BR></TD>
+<TD Width=""><b>/noexecute=alwayson<BR>/noexecute=optin<BR>/noexecute=optout</b></TD>
+<TD Width=""><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> nx AlwaysOn</b><BR><BR><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> nx OptIn</b><BR><BR><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> nx OptOut</b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>To enable DEP and PAE on systems with software-enforced DEP</b><BR><BR>(Select one parameter combination)<BR><BR>On computers that support hardware-enforced DEP, PAE is automatically enabled when you enable DEP.<BR><BR></TD>
+<TD Width=""><b>/noexecute=alwayson /pae</b><BR><b>/noexecute=optin /pae</b><BR><b>/noexecute=optout /pae</b></TD>
+<TD Width=""><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> nx AlwaysOn</b><BR><BR><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> pae default</b><BR><BR><BR><BR><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> nx OptIn</b><BR><BR><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> pae default</b><BR><BR><BR><BR><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> nx OptOut</b><BR><BR><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> pae default</b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>To disable DEP, but enable PAE</b> </TD>
+<TD Width=""><b>/noexecute=alwaysoff /pae</b><BR><BR>(Windows XP with SP2)<BR><BR></TD>
+<TD Width=""><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> nx AlwaysOff</b><BR><BR><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> pae ForceEnable</b><BR><BR><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>To disable DEP, but enable PAE</b> </TD>
+<TD Width=""><b>/noexecute=alwayoff</b><BR><b>/noexecute=alwaysoff /pae</b><BR><BR>(Windows Server 2003 with SP1 only)<BR><BR>(These parameter combinations are equivalent.)<BR><BR></TD>
+<TD Width=""><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> nx AlwaysOff</b><BR><BR><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> pae ForceEnable</b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>To disable both DEP and PAE</b> </TD>
+<TD Width=""><b>/noexecute=alwaysoff</b><BR><b>/noexecute=alwaysoff /nopae</b><BR><BR>(Windows XP with SP2) <BR><BR>(These parameter combinations are equivalent.)<BR><BR></TD>
+<TD Width=""><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> nx AlwaysOff</b><BR><BR><b>/set </b>[<b>{</b><i>ID</i><b>}</b>]<b> pae ForceDisable</b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>To disable both DEP and PAE</b> </TD>
+<TD Width=""><b>/execute</b><BR><BR>(Windows Server 2003 with SP1 only)<BR><BR></TD>
+<TD Width=""></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Boot Parameters to Configure DEP and PAE RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

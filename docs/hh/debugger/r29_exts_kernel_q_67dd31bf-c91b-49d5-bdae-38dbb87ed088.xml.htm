@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!tz</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !tz"><xml><MSHelp:Keyword Index="A" Term="r29_exts_kernel_Q_67dd31bf-c91b-49d5-bdae-38dbb87ed088.xml"/>
+<META NAME="MS-HKWD" CONTENT="!tz extension">
+<META NAME="MS-HKWD" CONTENT="thermal zone"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r29_exts_kernel_Q_67dd31bf-c91b-49d5-bdae-38dbb87ed088.xml"></A>!tz</H1>
+<P><P>The <b>!tz</b> extension displays the specified power thermal zone structure.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!tz</b> [<i>Address</i>]<i> </i><BR></nobr></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>The address of a power thermal zone that you want to display. If this parameter is omitted, the display includes all thermal zones on the target computer.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>To stop execution at any time, press CTRL+BREAK (in WinDbg) or CTRL+C (in KD).</P>
+<H4>Additional Information</H4>
+<P>To view the system's power capabilities, use the <a href="r28_exts_kernel_n_2aab5a42-5bac-4b27-858f-bc664fa14f76.xml.htm"><b>!pocaps</b></a> extension command. To view the system's power policy, use the <a href="r28_exts_kernel_n_47ffdd7b-0dfd-4c8a-a612-bc9a93bdb5c6.xml.htm"><b>!popolicy</b></a> extension command. For information about power capabilities and power policy, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !tz RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

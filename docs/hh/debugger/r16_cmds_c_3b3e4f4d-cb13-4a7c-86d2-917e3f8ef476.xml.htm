@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>dda, ddp, ddu, dpa, dpp, dpu, dqa, dqp, dqu (Display Referenced Memory)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, dda, ddp, ddu, dpa, dpp, dpu, dqa, dqp, dqu (Display Referenced Memory)"><xml><MSHelp:Keyword Index="A" Term="r16_cmds_C_3b3e4f4d-cb13-4a7c-86d2-917e3f8ef476.xml"/>
+<META NAME="MS-HKWD" CONTENT="dda (Display Referenced Memory) command">
+<META NAME="MS-HKWD" CONTENT="ddp (Display Referenced Memory) command">
+<META NAME="MS-HKWD" CONTENT="ddu (Display Referenced Memory) command">
+<META NAME="MS-HKWD" CONTENT="dpa (Display Referenced Memory) command">
+<META NAME="MS-HKWD" CONTENT="dpp (Display Referenced Memory) command">
+<META NAME="MS-HKWD" CONTENT="dpu (Display Referenced Memory) comman"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r16_cmds_C_3b3e4f4d-cb13-4a7c-86d2-917e3f8ef476.xml"></A>dda, ddp, ddu, dpa, dpp, dpu, dqa, dqp, dqu (Display Referenced Memory)</H1>
+<P>The <b>dda</b>, <b>ddp</b>, <b>ddu</b>, <b>dpa</b>, <b>dpp</b>, <b>dpu</b>, <b>dqa</b>, <b>dqp</b>, and <b>dqu</b> commands display the pointer at the specified location, dereference that pointer, and then display the memory at the resulting location in a variety of formats.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>ddp</b> [<i>Options</i>] [<i>Range</i>] <BR><b>dqp</b> [<i>Options</i>] [<i>Range</i>] <BR><b>dpp</b> [<i>Options</i>] [<i>Range</i>] <BR><b>dda</b> [<i>Options</i>] [<i>Range</i>] <BR><b>dqa</b> [<i>Options</i>] [<i>Range</i>] <BR><b>dpa</b> [<i>Options</i>] [<i>Range</i>] <BR><b>ddu</b> [<i>Options</i>] [<i>Range</i>] <BR><b>dqu</b> [<i>Options</i>] [<i>Range</i>] <BR><b>dpu</b> [<i>Options</i>] [<i>Range</i>] <BR><BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Specifies one or more display options. Any of the following options can be included, except that no more than one <b>/p</b>* option can be indicated:<DL><DT><b>/c</b> <i>Width</i></DT>
+<DD>Specifies the number of columns to use in the display. If this is omitted, the default number of columns depends on the display type. Because of the way pointers are displayed by these commands, it is usually best to use the default of only one data column.</DD>
+<DT><b>/p</b></DT>
+<DD><i>(Kernel-mode only)</i>  Uses physical memory addresses for the display. The range specified by <i>Range</i> will be taken from physical memory rather than virtual memory.</DD>
+<DT><b>/p[c]</b></DT>
+<DD><i>(Kernel-mode only)</i>  Same as <b>/p</b>, except that cached memory will be read. The brackets around <b>c</b> must be included.</DD>
+<DT><b>/p[uc]</b></DT>
+<DD><i>(Kernel-mode only)</i>  Same as <b>/p</b>, except that uncached memory will be read. The brackets around <b>uc</b> must be included.</DD>
+<DT><b>/p[wc]</b></DT>
+<DD><i>(Kernel-mode only)</i>  Same as <b>/p</b>, except that write-combined memory will be read. The brackets around <b>wc</b> must be included.</DD>
+</DL>
+</DD>
+<DT><i>Range</i></DT>
+<DD>Specifies the memory area to display. For more syntax details, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>. If you omit <i>Range</i>, the command will display memory starting at the ending location of the last display command. If <i>Range</i> is omitted and no previous display command has been used, the display begins at the current instruction pointer. If a simple address is given, the default range length is 128 bytes.</DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The second and third characters of this command are case-sensitive.</P>
+<P>The second character of this command determines the pointer size used:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Display</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dd*</b></TD>
+<TD Width="">32-bit pointers used</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dq*</b></TD>
+<TD Width="">64-bit pointers used</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dp*</b></TD>
+<TD Width="">Standard pointer sizes used:  32-bit or 64-bit, depending on the target's processor architecture</TD>
+</TR>
+</table>
+<P></P>
+<P>The third character of this command determines how the dereferenced memory is displayed:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Display</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>d*p</b></TD>
+<TD Width="">Displays the contents of the memory referenced by the pointer in DWORD or QWORD format, depending on the pointer size of the target's processor architecture. If this value matches any known symbol, this symbol is displayed as well.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>d*a</b></TD>
+<TD Width="">Displays the contents of the memory referenced by the pointer in ASCII character format.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>d*u</b></TD>
+<TD Width="">Displays the contents of the memory referenced by the pointer in Unicode character format.</TD>
+</TR>
+</table>
+<P></P>
+<P>If line number information has been enabled, source file names and line numbers will be displayed when available.</P>
+<H4>Additional Information</H4>
+<P>For an overview of memory manipulation and a description of other memory-related commands, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: dda, ddp, ddu, dpa, dpp, dpu, dqa, dqp, dqu (Display Referenced Memory) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

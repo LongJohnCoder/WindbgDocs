@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Determining Whether a Leak Exists</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Determining Whether a Leak Exists"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_4f1c5fa2-e124-4555-8f5e-b0636e5ece4b.xml"/>
+<META NAME="MS-HKWD" CONTENT="memory leak, detection"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_4f1c5fa2-e124-4555-8f5e-b0636e5ece4b.xml"></A>Determining Whether a Leak Exists</H1>
+<P>If Windows performance is degrading over time and you suspect that a memory leak may be involved, the technique described in this section can indicate whether there is a memory leak. It will not tell you what the source of the leak is, nor whether it is user mode or kernel mode.</P>
+<P>Begin by launching Performance Monitor. Add the following counters:</P><B></B><UL type="disc">
+<LI><b>Memory</b>&#8212;&gt;<b>Pool Nonpaged Bytes </b></LI>
+<LI><b>Memory</b>&#8212;&gt;<b>Pool Paged Bytes </b></LI>
+<LI><b>Paging File</b>&#8212;&gt;<b>% Usage </b></LI>
+</UL>
+<P></P>
+<P>Change the update time to 600 seconds to capture a graph of the leak over time. You might also want to log the data to a file for later examination.</P>
+<P>Start the application or test that you believe is causing the leak. Allow the application or test to run undisturbed for some time; do not use the target computer during this time. Leaks are usually slow and may take hours to detect. Wait for a few hours before deciding whether a leak has occurred.</P>
+<P>Monitor the Performance Monitor counters. After  the test has started, the counter values will change rapidly, and it may take some time for the memory pools values to reach a steady state. </P>
+<P>User-mode memory leaks are always located in pageable pool and cause both the <b>Pool Paged Bytes</b> counter and the page file <b>Usage</b> counter to increase steadily over time. Kernel-mode memory leaks usually deplete nonpaged pool, causing the <b>Pool Nonpaged Bytes</b> counter to increase, although pageable memory can be affected as well.  Occasionally these counters may show false positives because an application is caching data. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Determining Whether a Leak Exists RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>StartSymbolMatch</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, StartSymbolMatch"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="StartSymbolMatch"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_4b000f13-0dc1-4a2c-8de3-3bf5384172c3.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::StartSymbolMatch method">
+<META NAME="MS-HKWD" CONTENT="StartSymbolMatch (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_4b000f13-0dc1-4a2c-8de3-3bf5384172c3.xml"></A>StartSymbolMatch</H1>
+<P><P>The <b>StartSymbolMatch</b> and <b>GetNextSymbolMatchWide</b> methods initialize a search for symbols whose names match a given pattern.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbols::GetNextSymbolMatch(</b><BR><b>    IN PCSTR  </b><i>Pattern</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Handle</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugSymbols3::GetNextSymbolMatchWide(</b><BR><b>    IN PCWSTR  </b><i>Pattern</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Handle</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetNextSymbolMatchT GetNextSymbolMatchWide</b><BR><b>#else</b><BR><b>#define GetNextSymbolMatchT GetNextSymbolMatch</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Pattern</i></DT>
+<DD>Specifies the pattern for which to search.  The search will return all symbols whose names match this pattern.  For details of the syntax of the pattern, see <a href="r09_symbols_6e5fcfbf-08a6-481b-9df4-23e19ee7559d.xml.htm">Symbol Syntax and Symbol Matching</a> and <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a>.</DD>
+<DT><i>Handle</i></DT>
+<DD>Receives the handle identifying the search.  This handle can be passed to <a href="idebugsymbols_9918b348-5b29-4b38-849e-3a36414b773d.xml.htm"><b>GetNextSymbolMatch</b></a> and <a href="idebugsymbols_1661cc8a-ad5c-4cd3-83fe-f829bd07e453.xml.htm"><b>EndSymbolMatch</b></a>.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>The specified module was not found.</DD>
+</DL>
+<P>This method may also return other error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>StartSymbolMatch</b> is available in all versions of <b>IDebugSymbols</b>.  <b>StartSymbolMatchWide</b> is available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4>Comments</H4>
+<P>These methods initialize a symbol search.  The results of the search can be obtained by repeated calls to <a href="idebugsymbols_9918b348-5b29-4b38-849e-3a36414b773d.xml.htm"><b>GetNextSymbolMatch</b></a>.  When all the desired results have been found, use <a href="idebugsymbols_1661cc8a-ad5c-4cd3-83fe-f829bd07e453.xml.htm"><b>EndSymbolMatch</b></a> to release resources the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> holds for the search.</P>
+<P>For more information about symbols, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Symbols</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugsymbols_1661cc8a-ad5c-4cd3-83fe-f829bd07e453.xml.htm"><b>EndSymbolMatch</b></a>, <a href="idebugsymbols_9918b348-5b29-4b38-849e-3a36414b773d.xml.htm"><b>GetNextSymbolMatch</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: StartSymbolMatch RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

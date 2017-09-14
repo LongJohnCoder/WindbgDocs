@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging an Itanium Firmware Failure</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging an Itanium Firmware Failure"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_cdefa08d-4db4-47b7-8017-d12634344dae.xml"/>
+<META NAME="MS-HKWD" CONTENT="Itanium firmware debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_cdefa08d-4db4-47b7-8017-d12634344dae.xml"></A>Debugging an Itanium Firmware Failure</H1>
+<P>If a computer running an Itanium-based processor crashes, it is possible that the cause is a firmware failure.</P>
+<P>Use the following procedure to analyze this problem:</P><B></B><OL type="1">
+<LI>Get a stack trace.  If the stack trace hangs partway through, that is a sign that a firmware failure may have occurred:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt;  <b>kb </b><BR><b>...</b><BR>e0000165`993b2c50 e0000165`993b4840 e0000000`8306e8c0 ntkrnlmp!DbgBreakPointWithStatus+0x8<BR>e0000165`993b2c50 e0000165`993b4840 e0000000`8306ffe0 ntkrnlmp!KiBugCheckDebugBreak+0x40<BR>e0000165`993b2c90 e0000165`993b4718 e0000000`83070640 ntkrnlmp!KeBugCheck2+0x980<BR>e0000165`993b3800 e0000165`993b46e0 e0000000`83090310 ntkrnlmp!KeBugCheckEx+0x20<BR>e0000165`993b3800 e0000165`993b4680 e0000000`83087d40 ntkrnlmp!KiMemoryFault+0x3f0<BR>e0000165`993b3800 e0000165`993b4678 e0000165`985b63a4 ntkrnlmp!KiGenericExceptionHandler+0x290<BR>e0000165`993b3b40 e0000165`993b4648 e0000165`985b6360 0xe0000165`985b63a4<BR>e0000165`993b3b40 e0000165`993b4648 e0000165`985b6360 0xe0000165`985b6360<BR><BR>DBGHELP: Can't find runtime function entry info for e0000165`985b6360, results might be unreliable!<BR></nobr></P>
+<P>In this example, the stack trace failed in the middle of a C++ runtime function.</P>
+</LI>
+<LI>Take a look at the bug check information:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>.bugcheck</b> <BR>Bugcheck code 000000D1<BR>Arguments 60000165`97ec42d5 00000000`0000000f 00000000`00000001 e0000165`985b63a0<BR></nobr></P>
+</LI>
+<LI>Look up the bug check code parameters  in the <a href="t03_bug_intro_2552b67e-0b4f-4950-8bd1-6fb6c0d5c90d.xml.htm">Bug Check Code Reference</a> section.   Pay particular attention to any parameters that specify the address of the fault.  In this case,  you have <a href="t06_bugs_b0_47f8ea65-f2fc-418d-8faa-76c9e23caaf0.xml.htm">bug check code 0xD1</a> (DRIVER_IRQL_NOT_LESS_OR_EQUAL),  whose fourth parameter indicates the address that caused the failure.<P>Notice that this address, 0xE0000165`985B63A0, is within a few bytes of the address at which the stack trace failed. </P>
+<P>Also notice that the DbgHelp error message indicates that symbol information is unavailable at this same address.</P>
+</LI>
+<LI>To further investigate this address, use the <a href="r25_exts_general_he_736a1eee-5c20-404f-9fa3-58ae28617a47.xml.htm"><b>ln (List Nearest Symbols)</b></a> command:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>ln e0000165`985b63a0</b> <BR></nobr></P>
+<P>In this example, the <b>ln</b> command has returned no nearby symbols.</P>
+</LI>
+<LI>Use the <a href="r25_exts_general_he_736a1eee-5c20-404f-9fa3-58ae28617a47.xml.htm"><b>!lmi</b></a> extension to investigate the module containing this address:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!lmi e0000165`985b63a0</b> <BR>Loaded Module Info: [e0000165`985b63a0]<BR>e0000165985b63a0 is not a valid address.<BR></nobr></P>
+<P>This address does not appear to be contained in a loaded module.</P>
+</LI>
+<LI>Use the <a href="r17_cmds_i_2360e197-1deb-4e41-98ff-d2c7e6c7d8f3.xml.htm"><b>lm (List Loaded Modules)</b></a> command to list all of the loaded modules, sorted by address. From the resulting display (not shown here), you see that this address is not present in a loaded module but falls between the following two modules:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>e0000165`9793c000 e0000165`979b2fe0   ks           (deferred)<BR>e0000165`98644000 e0000165`98693e60   mup          (deferred)<BR></nobr></P>
+<P>By subtracting the end address of the <i>ks</i> module from the starting address of the <i>mup</i> module, you see that the size of the gap between these two modules is over 1 MB, which is large. </P>
+</LI>
+<LI>Determine if the memory contains valid instructions by unassembling the code with the <a href="r18_cmds_s_51dda883-e059-4b86-9406-a1f16ebd3fc1.xml.htm"><b>u (Unassemble)</b></a> command: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>u e0000165`985b63a0 L3</b> <BR>e0000165`985b63a0        mov.m  ar.ccv=r0 ;;<BR>e0000165`985b63a4        cmpxchg1.acq ret1=[r36], ret0, ar.ccv<BR>e0000165`985b63a8        nop.i  0 ;;<BR></nobr></P>
+<P>The address does contain valid instructions. In particular, it contains a memory dereference.  Unassemble the commands prior to this address:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>ub e0000165`985b63a0 L30</b> <BR>...<BR>e0000165`985b6340        alloc  r34=ar.pfs, 5, 0, 1, 0<BR>e0000165`985b6344        nop.f  0<BR>e0000165`985b6348        mov    r33=rp ;;<BR>...<BR></nobr></P>
+<P>You have found a function entry point. </P>
+</LI>
+</OL>
+<P></P>
+<P>Thus, you see that valid instructions in kernel address space that do not belong to any loaded module were executing. This can be explained in one of the following ways: </P><B></B><UL type="disc">
+<LI>Memory was allocated, raw code was written to that memory, the memory was marked executable, and then the memory was referenced. </LI>
+<LI>A firmware failure has occurred. </LI>
+</UL>
+<P></P>
+<P>Because the first option is extremely improbable, the cause must be an Itanium-based-firmware failure.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging an Itanium Firmware Failure RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

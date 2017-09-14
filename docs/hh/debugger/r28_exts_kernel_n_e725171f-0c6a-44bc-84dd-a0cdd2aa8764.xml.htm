@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!pte</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !pte"><xml><MSHelp:Keyword Index="A" Term="r28_exts_kernel_N_e725171f-0c6a-44bc-84dd-a0cdd2aa8764.xml"/>
+<META NAME="MS-HKWD" CONTENT="!pte extension">
+<META NAME="MS-HKWD" CONTENT="page table entry (PTE)">
+<META NAME="MS-HKWD" CONTENT="PTE (page table entry)">
+<META NAME="MS-HKWD" CONTENT="page directory entry (PDE)">
+<META NAME="MS-HKWD" CONTENT="PDE (page directory entry)">
+<META NAME="MS-HKWD" CONTENT="page table entry (PTE), !pte extension">
+<META NAME="MS-HKWD" CONTENT="PTE (page table entry), !pte extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r28_exts_kernel_N_e725171f-0c6a-44bc-84dd-a0cdd2aa8764.xml"></A>!pte</H1>
+<P><P>The <b>!pte</b> extension displays the page table entry (PTE) and page directory entry (PDE) for the specified address.</P>
+</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!pte</b> <i>VirtualAddress</i> <BR><b>!pte</b> <i>PTE</i> <BR><b>!pte</b> <i>LiteralAddress</i> <b>1</b> <BR><b>!pte</b> <i>StartAddress</i> <i>EndAddress</i> <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!pte</b> <i>VirtualAddress</i> <BR><b>!pte</b> <i>PTE</i> <BR><b>!pte</b> <i>LiteralAddress</i> <b>1</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>VirtualAddress</i></DT>
+<DD>Specifies the virtual address whose page table is desired.</DD>
+<DT><i>PTE</i></DT>
+<DD>Specifies the address of an actual PTE.</DD>
+<DT><i>LiteralAddress</i> <b>1</b></DT>
+<DD>Specifies the address of an actual PTE or PDE.</DD>
+<DT><i>StartAddress</i></DT>
+<DD><i>(x86 or x64 target computer only; Windows 2000 only)</i>  Specifies the first virtual address in a range. All page tables in this range will be displayed.</DD>
+<DT><i>EndAddress</i></DT>
+<DD><i>(x86 or x64 target computer only; Windows 2000 only)</i>  Specifies the last virtual address in a range. All page tables in this range will be displayed.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If one parameter is supplied and this parameter is an address in the region of memory where the page tables are stored, the debugger treats this as the <i>PTE</i> parameter. This parameter is taken as the actual address of the desired PTE, and the debugger will display this PTE and the corresponding PDE.</P>
+<P>If one parameter is supplied and this parameter is not an address in this region, the debugger treats this as the <i>VirtualAddress</i> parameter. The PTE and PDE that hold the mapping for this address are displayed.</P>
+<P>If two parameters are supplied and the second parameter is <b>1</b> (or any other small number), the debugger treats the first parameter as <i>LiteralAddress</i>. This address is interpreted as the actual address of a PTE and also as the actual address of a PDE, and the corresponding (and possibly invalid) data will be shown.</P>
+<P><i>(x86 or x64 target computer only)</i>  If two parameters are supplied and the second parameter is greater than the first, the debugger treats the two parameters as <i>StartAddress</i> and <i>EndAddress</i>. The command then displays the PTEs for each page in the specified memory range.</P>
+<P>For a list of all system PTEs, use the <a href="r29_exts_kernel_q_d8bb5cc1-b88c-49dd-b74a-0b0acfb2a943.xml.htm"><b>!sysptes</b></a> extension.</P>
+<P></P>
+<P>Here is an example from an x86 target computer:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!pte 801544f4</b><BR>801544F4  - PDE at C0300800        PTE at C0200550<BR>          contains 0003B163      contains 00154121<BR>        pfn 3b G-DA--KWV    pfn 154 G--A--KRV<BR><BR></nobr></P>
+<P>The first line of this example restates the virtual address being investigated. It then gives the virtual address of the PDE and the PTE, which contain information about the virtual-physical mapping of this address.</P>
+<P>The second line gives the actual contents of the PDE and the PTE.</P>
+<P>The third line takes these contents and analyzes them, breaking them into the page frame number (PFN) and the status bits.</P>
+<P>See the <a href="r28_exts_kernel_n_2e92f05e-6ac8-4ebb-9a15-dfa5361d0091.xml.htm"><b>!pfn</b></a> extension or the <a href="t01_basic_d3a32249-4872-4355-acf2-45e4743c4d66.xml.htm">Converting Virtual Addresses to Physical Addresses</a> section for information about how to interpret and use the PFN.</P>
+<P>On an x86 or x64 target computer, the status bits for the PDE and the PTE are shown in the following table. The <b>!pte</b> display indicates these bits with capital letters or dashes, and adds additional information as well.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Bit</TH>
+<TH Width="">Display<BR>when set</TH>
+<TH Width="">Display<BR>when clear</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x200</TD>
+<TD Width=""><b>C</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Copy on write.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x100 </TD>
+<TD Width=""><b>G</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Global.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x80 </TD>
+<TD Width=""><b>L</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Large page. This only occurs in PDEs, never in PTEs. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x40 </TD>
+<TD Width=""><b>D</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Dirty.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x20 </TD>
+<TD Width=""><b>A</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Accessed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10 </TD>
+<TD Width=""><b>N</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Cache disabled.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8 </TD>
+<TD Width=""><b>T</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Write-through.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4 </TD>
+<TD Width=""><b>U</b> </TD>
+<TD Width=""><b>K</b> </TD>
+<TD Width="">Owner (user mode or kernel mode).  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2 </TD>
+<TD Width=""><b>W</b> </TD>
+<TD Width=""><b>R</b> </TD>
+<TD Width="">Writeable or read-only. Only on multiprocessor computers and any computer running Windows Vista or later.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1 </TD>
+<TD Width=""><b>V</b> </TD>
+<TD Width=""></TD>
+<TD Width="">Valid.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""> </TD>
+<TD Width=""><b>E</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Executable page. For platforms that do not support a hardware execute/noexecute bit, including many x86 systems, the <b>E</b> is always displayed.  </TD>
+</TR>
+</table>
+<P></P>
+<P>  </P>
+<P></P>
+<P>On an Itanium target computer, the status bits for the PDE and the PTE are slightly different from those of the PPE. The Itanium PPE bits are as follows:</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Display<BR>when set</TH>
+<TH Width="">Display<BR>when clear</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>V</b> </TD>
+<TD Width=""></TD>
+<TD Width="">Valid.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>U</b> </TD>
+<TD Width=""><b>K</b> </TD>
+<TD Width="">Owner (user mode or kernel mode). </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>D</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Dirty. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>A</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Accessed. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>W</b> </TD>
+<TD Width=""><b>R</b> </TD>
+<TD Width="">Writeable or read-only. Only on multiprocessor computers and any computer running Windows Vista or later. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>E</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Execute. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>C</b> </TD>
+<TD Width=""><b>-</b> </TD>
+<TD Width="">Copy on write. </TD>
+</TR>
+</table>
+<P></P>
+<P>  </P>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about page tables, page directories, and an explanation of the status bits, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !pte RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

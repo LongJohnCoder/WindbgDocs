@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ExtRemoteTyped::ExtRemoteTyped</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ExtRemoteTyped::ExtRemoteTyped"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="ExtRemoteTyped::ExtRemoteTyped"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_b3699ec7-ccc8-4f98-985d-cd8bad0c0e23.xml"/>
+<META NAME="MS-HKWD" CONTENT="ExtRemoteTyped::ExtRemoteTyped">
+<META NAME="MS-HKWD" CONTENT="ExtRemoteTyped (ExtRemoteTyped)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_b3699ec7-ccc8-4f98-985d-cd8bad0c0e23.xml"></A>ExtRemoteTyped::ExtRemoteTyped</H1>
+<P><P>The <b>ExtRemoteTyped</b> constructors create a new instance of the <b>ExtRemoteTyped</b> class.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>  ExtRemoteTyped(</b><BR><b>    void</b><BR><b>    )</b><BR><BR><b>  ExtRemoteTyped(</b><BR><b>    IN PCSTR  </b><i>Expr</i><BR>    <b>) throw(...)</b><BR><BR><b>  ExtRemoteTyped(</b><BR><b>    IN const DEBUG_TYPED_DATA *  </b><i>Typed</i><BR><b>    ) throw(...)</b><BR><BR><b>  ExtRemoteTyped(</b><BR><b>    IN const ExtRemoteTyped &amp;  </b><i>Typed</i><BR><b>    ) throw(...)</b><BR><BR><b>  ExtRemoteTyped(</b><BR><b>    IN PCSTR  </b><i>Expr</i><b>,</b><BR><b>    IN ULONG64  </b><i>Offset</i><BR><b>    ) throw(...)</b><BR><BR><b>  ExtRemoteTyped(</b><BR><b>    IN PCSTR  </b><i>Type</i><b>,</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN bool  </b><i>PtrTo</i><b>,</b><BR><b>    IN OUT OPTIONAL PULONG64  </b><i>CacheCookie</i><b> = NULL,</b><BR><b>    IN OPTIONAL PCSTR  </b><i>LinkField</i><b> = NULL</b><BR><b>    ) throw(...)</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Expr</i></DT>
+<DD>An expression that evaluates to the desired symbol.  This expression is evaluated by the default expression evaluator.</DD>
+<DT><i>Offset</i></DT>
+<DD>When used with <i>Expr</i>, specifies an additional parameter that can be used when evaluating the <i>Expr</i> expression.  This additional parameter is available in the expression as the <b>$extin</b> pseudo-register.  For example, to specify a process environment block (PEB) at a particular location, you could set <i>Expr</i> to the C++ expression <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>(ntdll!_PEB *)@$extin</b></span>. This casts the pseudo-register <b>$extin</b> to a pointer to a PEB. Then, set <i>Offset</i> to the location of the PEB structure.<P>When used with <i>Type</i>, <i>Offset</i> specifies the location of the data in the target's virtual address space.</P>
+</DD>
+<DT><i>Typed</i></DT>
+<DD>The typed data represented by the <b>RemoteExtTyped</b>.  This can be either a <a href="structures_6e8e758c-2c5d-4590-8908-3e1734ea2c7d.xml.htm">DEBUG_TYPED_DATA</a> structure that describes the data and type to be represented by this object, or, for the copy constructor, an existing <b>ExtRemoteTyped</b> object.</DD>
+<DT><i>Type</i></DT>
+<DD>The type name of the type.  <i>Type</i> can include a module qualifier (for example, <b>mymodule!mytype</b>).  The module qualifier can be omitted, but it is recommended that it be included if the module is known.</DD>
+<DT><i>PtrTo</i></DT>
+<DD>Specifies whether or not to set the <b>ExtRemoteTyped</b> instance to the specified typed data, or to a pointer to the specified typed data.  If <i>PtrTo</i> is <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">true</span>, the <b>ExtRemoteTyped</b> instance will contain a pointer to the typed data.</DD>
+<DT><i>CacheCookie</i></DT>
+<DD>The cache cookie to use for caching type information.  If <i>CacheCookie</i> is NULL, the debugger engine will search for type information each time.<P>For more information about <i>CacheCookie</i>, see <a href="engextcpp_ref_8eec6840-f460-44cd-87dc-c04df2bd477b.xml.htm"><b>ExtRemoteTyped::Set</b></a>.</P>
+</DD>
+<DT><i>LinkField</i></DT>
+<DD>The name of a field in the typed data that contains the pointer to the next item in a list.  <i>LinkField</i> should be set if <i>CacheCookie</i> is being used for the first time and will later be used with <a href="engextcpp_ref_5e1242e6-5704-4b87-85e1-b02a41fc4243.xml.htm"><b>ExtRemoteTypedList</b></a>.  </DD>
+</DL>
+<H4>Comments</H4>
+<P>The typed data can also be set or changed using the <a href="engextcpp_ref_8eec6840-f460-44cd-87dc-c04df2bd477b.xml.htm"><b>ExtRemoteTyped::Set</b></a> method.</P>
+<H4>Requirements</H4>
+<p><b>Headers:</b> Defined in <i>Engextcpp.hpp</i>.  Include <i>Engextcpp.hpp</i>.</p>
+<H4>See Also</H4>
+<P><a href="structures_6e8e758c-2c5d-4590-8908-3e1734ea2c7d.xml.htm">DEBUG_TYPED_DATA</a>, <a href="engextcpp_ref_e84c03ce-1156-481b-a429-f0a918797565.xml.htm"><b>ExtRemoteData</b></a>, <a href="engextcpp_ref_8eec6840-f460-44cd-87dc-c04df2bd477b.xml.htm"><b>ExtRemoteTyped::Set</b></a>, <a href="engextcpp_ref_5e1242e6-5704-4b87-85e1-b02a41fc4243.xml.htm"><b>ExtRemoteTypedList</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ExtRemoteTyped::ExtRemoteTyped RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

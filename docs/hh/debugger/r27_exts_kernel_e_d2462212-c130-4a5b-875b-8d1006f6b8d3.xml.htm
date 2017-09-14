@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!idt</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !idt"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_d2462212-c130-4a5b-875b-8d1006f6b8d3.xml"/>
+<META NAME="MS-HKWD" CONTENT="!idt extension">
+<META NAME="MS-HKWD" CONTENT="ISR (interrupt service routine)">
+<META NAME="MS-HKWD" CONTENT="IDT (interrupt dispatch table)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_d2462212-c130-4a5b-875b-8d1006f6b8d3.xml"></A>!idt</H1>
+<P><P>The <b>!idt </b>extension displays the interrupt service routines (ISRs) for a specified interrupt dispatch table (IDT). </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!idt</b> <i>IDT</i> <BR><b>!idt </b>[<b>-a</b>] <BR><b>!idt</b> -<b>?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>IDT</i></DT>
+<DD>Specifies the IDT to display.</DD>
+<DT><b>-a</b></DT>
+<DD>When <i>IDT</i> is not specified, the debugger displays the IDTs of all processors on the target computer in an abbreviated format. If <b>-a</b> is specified, the ISRs for each IDT are also displayed.</DD>
+<DT><b>-?</b></DT>
+<DD>Displays  help for this extension in the Debugger Command window. </DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension command can only be used with an x64-based or x86-based target computer.</P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example of the output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!idt</b><BR><BR>Dumping IDT:<BR><BR>37:806ba78c hal!PicSpuriousService37<BR>3d:806bbc90 hal!HalpApcInterrupt<BR>41:806bbb04 hal!HalpDispatchInterrupt<BR>50:806ba864 hal!HalpApicRebootService<BR>63:8641376c VIDEOPRT!pVideoPortInterrupt (KINTERRUPT 86413730)<BR>73:862aa044 portcls!CInterruptSyncServiceRoutine (KINTERRUPT 862aa008)<BR>82:86594314 atapi!IdePortInterrupt (KINTERRUPT 865942d8)<BR>83:86591bec SCSIPORT!ScsiPortInterrupt (KINTERRUPT 86591bb0)<BR>92:862b53dc serial!SerialCIsrSw (KINTERRUPT 862b53a0)<BR>93:86435844 i8042prt!I8042KeyboardInterruptService (KINTERRUPT 86435808)<BR>a3:863b366c i8042prt!I8042MouseInterruptService (KINTERRUPT 863b3630)<BR>a4:8636bbec USBPORT!USBPORT_InterruptService (KINTERRUPT 8636bbb0)<BR>b1:86585bec ACPI!ACPIInterruptServiceRoutine (KINTERRUPT 86585bb0)<BR>b2:863c0524 serial!SerialCIsrSw (KINTERRUPT 863c04e8)<BR>b4:86391a54 NDIS!ndisMIsr (KINTERRUPT 86391a18)<BR>         USBPORT!USBPORT_InterruptService (KINTERRUPT 863ae890)<BR>c1:806ba9d0 hal!HalpBroadcastCallService<BR>d1:806b9dd4 hal!HalpClockInterrupt<BR>e1:806baf30 hal!HalpIpiHandler<BR>e3:806baca8 hal!HalpLocalApicErrorService<BR>fd:806bb460 hal!HalpProfileInterrupt<BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about ISRs and IDTs, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. </P>
+<P>For more information about how to display the interrupt vector tables on an Itanium target computer, see <a href="r27_exts_kernel_e_60a75f07-ea4c-4a4f-8962-e0bb8fe175c6.xml.htm"><b>!ivt</b></a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !idt RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

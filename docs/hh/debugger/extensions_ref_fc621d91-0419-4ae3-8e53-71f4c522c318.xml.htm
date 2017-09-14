@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>PDEBUG_EXTENSION_CALL</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, PDEBUG_EXTENSION_CALL"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="PDEBUG_EXTENSION_CALL"/>
+<MSHelp:Keyword Index="A" Term="Extensions_Ref_fc621d91-0419-4ae3-8e53-71f4c522c318.xml"/>
+<META NAME="MS-HKWD" CONTENT="PDEBUG_EXTENSION_CALL"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Extensions_Ref_fc621d91-0419-4ae3-8e53-71f4c522c318.xml"></A>PDEBUG_EXTENSION_CALL</H1>
+<P>Callback functions of the type PDEBUG_EXTENSION_CALL are called by the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> to execute <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#5f0c1329-ded4-4373-bde8-f2b4e9d8499b">extension commands</a>. You can give these functions any name you want, as long as it contains no uppercase letters.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>CALLBACK</b><BR><b>  (* PDEBUG_EXTENSION_CALL)(</b><BR><b>    IN IDebugClient *  </b><i>Client</i><BR><b>    IN OPTIONAL PCSTR  </b><i>Args</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Client</i></DT>
+<DD>Specifies an interface pointer to the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client</a>.  This can be used to interact with the engine.  Typically, this is the client through which the extension command was issued.</DD>
+<DT><i>Args</i></DT>
+<DD>Specifies the arguments passed to the extension command.  In particular, if the extension command was called from a command line, <i>Args</i> contains the rest of the command line.  It can be NULL or empty.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The function was successful.</DD>
+<DT>DEBUG_EXTENSION_CONTINUE_SEARCH</DT>
+<DD>Indicates that the function cannot handle the command, or that other implementations of the same command in other <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#9625e841-0468-4bf3-940b-56f3f5831a12">extension DLLs</a> should also run.  The engine should continue searching other extension DLLs for another function to handle the command. For example, this can be used to have all help functions run if each one returns CONTINUE_SEARCH.</DD>
+</DL>
+<P>All other return values are ignored by the engine.</P>
+<H4>Comments</H4>
+<P>The name of the function becomes the name of the extension command.  When executing an extension command, the engine searches through each of the loaded extension DLLs in turn, looking for an exported function that has the same name as the command.  For example, when executing the command <b>!stack</b>, the engine will look for an exported function named <b>stack</b> in each loaded extension DLL. For information about the order in which extension DLLs are searched, see <a href="r08_use_remote_8493d413-185c-4d40-be6b-bd00cb61cc03.xml.htm">Using Debugger Extension Commands</a>.</P>
+<P>The extension function should use the client that was passed to it in <i>Client</i> for all interaction with the engine, unless it has a specific reason to use another client.  The extension function should not maintain the pointer to the client object after it has finished.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>The function type is defined in <i>dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugclient_3f5f6372-0e7d-4050-b09a-b7776ff8bf7c.xml.htm"><b>IDebugClient</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: PDEBUG_EXTENSION_CALL RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

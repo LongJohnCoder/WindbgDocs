@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.readmem (Read Memory from File)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .readmem (Read Memory from File)"><xml><MSHelp:Keyword Index="A" Term="r21_metacmds_L_352bd527-28ac-4ff8-9276-9e6bf6335ff3.xml"/>
+<META NAME="MS-HKWD" CONTENT=".readmem (Read Memory from File) command">
+<META NAME="MS-HKWD" CONTENT="Read Memory from File (.readmem) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r21_metacmds_L_352bd527-28ac-4ff8-9276-9e6bf6335ff3.xml"></A>.readmem (Read Memory from File)</H1>
+<P>The <b>.readmem</b> command reads raw binary data from the specified file and copies the data to the target computer&#8217;s memory.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.readmem</b> <i>FileName</i> <i>Range</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>FileName</i></DT>
+<DD>Specifies the name of the file to read. You can specify a full path or only the file name. If the file name contains spaces, enclose <i>FileName</i> in quotation marks. If you do not specify a path, the debugger uses the current directory.</DD>
+<DT><i>Range</i></DT>
+<DD>Specifies the address range for putting the data in memory. This parameter can contain a starting and ending address or a starting address and an object count. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The memory data is copied literally to the target computer. The debugger does not parse the data in any way.  For example, the <b>.readmem myfile 1000 10 </b>command copies 10 bytes from the <i>Myfile</i> file and stores them in the target computer&#8217;s memory, starting at address 1000.</P>
+<P>The <b>.readmem</b> command is the opposite of the <a href="r22_metacmds_s_b995b7e0-6845-4ad1-81f9-2f66b611d19b.xml.htm"><b>.writemem</b> (Write Memory to File)</a> command.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .readmem (Read Memory from File) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.formats (Show Number Formats)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .formats (Show Number Formats)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_231f22c0-4744-4c01-ac46-372b490bab6e.xml"/>
+<META NAME="MS-HKWD" CONTENT=".formats (Show Number Formats) command">
+<META NAME="MS-HKWD" CONTENT="Show Number Formats (.formats) command">
+<META NAME="MS-HKWD" CONTENT="number formats">
+<META NAME="MS-HKWD" CONTENT="expressions, Show Number Formats (.formats) command">
+<META NAME="MS-HKWD" CONTENT="timestamp format"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_231f22c0-4744-4c01-ac46-372b490bab6e.xml"></A>.formats (Show Number Formats)</H1>
+<P>The <b>.formats</b> command evaluates an expression or symbol in the context of the current thread and process and displays it in multiple numeric formats.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.formats</b> <i>expression</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>expression</i></DT>
+<DD>Specifies the expression to evaluate. For more information about the syntax, see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a>.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The evaluated expression is displayed in hexadecimal, decimal, octal, and binary formats, as well as single-precision and double-precision floating-point format. ASCII character formats are also displayed when the bytes correspond to standard ASCII characters. The expression is also interpreted as a time stamp if it is in the allowed range.</P>
+<P>The following example shows a <b>.formats</b> command.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.formats 1c407e62</b><BR>Evaluate expression:<BR>  Hex:     1c407e62<BR>  Decimal: 473988706<BR>  Octal:   03420077142<BR>  Binary:  00011100 01000000 01111110 01100010<BR>  Chars:   .@~b<BR>  Time:    Mon Jan 07 15:31:46 1985<BR>  Float:   low 6.36908e-022 high 0<BR>  Double:  2.34182e-315<BR></nobr></P>
+<P>The <b>Time</b> field displays a 32-bit value in CRT time stamp format and displays a 64-bit value in FILETIME format. You can distinguish these formats because the FILETIME format includes milliseconds and the CRT format does not.</P>
+<H4>See Also</H4>
+<P><a href="r15_cmds_a_c6ea44eb-73b8-451d-8054-ded9b17ac2bd.xml.htm"><b>? (Evaluate Expression)</b></a>, <a href="r15_cmds_a_5452eb2e-975c-4151-9bc0-890b163f004d.xml.htm"><b>?? (Evaluate C++ Expression)</b></a> </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .formats (Show Number Formats) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

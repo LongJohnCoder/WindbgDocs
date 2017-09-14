@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Source Path</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Source Path"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_b85f4b8e-eb5f-4502-9a0e-92d84cd3d8f1.xml"/>
+<META NAME="MS-HKWD" CONTENT="source files and paths">
+<META NAME="MS-HKWD" CONTENT="source files and paths, overview">
+<META NAME="MS-HKWD" CONTENT="source path">
+<META NAME="MS-HKWD" CONTENT="source path, [See &quot;source files and paths&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_b85f4b8e-eb5f-4502-9a0e-92d84cd3d8f1.xml"></A>Source Path</H1>
+<P>The <i>source path</i> specifies the directories where the C and C++ source files are located.</P>
+<P>If you are debugging a user-mode process on the computer where the executable file was built, and if the source files are still in their original location, the debugger can automatically locate the source files.</P>
+<P>In most other situations, you have to set the source path or load the individual source files.</P>
+<P>When you are performing <a href="r08_use_remote_e8049dea-474e-411d-8286-ec4a646480f7.xml.htm">remote debugging through the debugger</a>, the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#098e09f5-d7db-435e-9403-16661d6693b5">debugging server</a> uses the source path. If you are using WinDbg as your debugger, each <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cab89f06-8d34-430d-b047-ea48e96aac1b">debugging client</a> also has its own <i>local source path</i>. All source-related commands access the source files on the local computer. You have to set the proper paths on any client or server that you want to use source commands.</P>
+<P>This multiple-path system also enables a debugging client to use source-related commands without actually sharing the source files with other clients or with the server. This system is useful if there are private or confidential source files that one of the users has access to.</P>
+<P>You can also load source files at any time, regardless of the source path.</P>
+<H4>Source Path Syntax</H4>
+<P>The debugger's source path is a string that consists of multiple directory paths, separated by semicolons. </P>
+<P>Relative paths are supported. However, unless you always start the debugger from the same directory, you should add a drive letter or a network share before each path. Network shares are also supported.</P>
+<P class="note"><b>Note</b>  If you are connected to a corporate network, the most efficient way to access source files is to use a source server. You can use a source server by using the <b>srv*</b> string within your source path. For more information about source servers, see <a href="r06_use_gui_9f858c04-aa3a-4c3b-a747-45d9d46c3a62.xml.htm">Using a Source Server</a>. </P>
+<H4>Controlling the Source Path</H4>
+<P>To control the source path and local source path, you can do one of the following:</P><B></B><UL type="disc">
+<LI>Before you start the debugger, use the _NT_SOURCE_PATH <a href="r12_cmdline_53f400f6-9ae2-427a-85d7-82b0cab41a96.xml.htm">environment variable</a> to set the source path. If you try to add an invalid directory through this environment variable, the debugger ignores this directory.</LI>
+<LI>When you start the debugger, use the <b>-srcpath</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> to set the source path.</LI>
+<LI>Use the <a href="r22_metacmds_s_e9022e5e-5e3a-4e2c-8642-92f2eb79d503.xml.htm"><b>.srcpath (Set Source Path)</b></a> command to display, set, change, or append to the source path. If you are using a source server, <a href="r22_metacmds_s_7aa8be7d-3947-4880-9823-91395c6cd8d0.xml.htm"><b>.srcfix (Use Source Server)</b></a> is slightly easier.</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r22_metacmds_s_e9022e5e-5e3a-4e2c-8642-92f2eb79d503.xml.htm"><b>.lsrcpath (Set Local Source Path)</b></a> command to display, set, change, or append to the local source path. If you are using a source server, <a href="r22_metacmds_s_7aa8be7d-3947-4880-9823-91395c6cd8d0.xml.htm"><b>.lsrcfix (Use Local Source Server)</b></a> is slightly easier. You can also use the WinDbg Command-Line with the parameter <nobr><b>&#8211;lscrpath</b></nobr>. For more information, see <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm"><b>WinDbg Command-Line Options</b></a>.</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r36_gui_1_013d072a-b01b-4154-849d-bdae1bc4d673.xml.htm"><b>File | Source File Path</b></a> command or press CTRL+P to display, set, change, or append to the source path or the local source path.</LI>
+</UL>
+<P></P>
+<P>You can also directly open or close a source file by doing one of the following:</P><B></B><UL type="disc">
+<LI>Use the <a href="r17_cmds_i_93998d71-8deb-44fc-89fe-04e32f29e101.xml.htm"><b>lsf (Load or Unload Source File)</b></a> command to open or close a source file.</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r21_metacmds_l_2bf63e00-f90a-4416-a13a-b4d4153e12dd.xml.htm"><b>.open (Open Source File)</b></a> command to open a source file.</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r36_gui_1_6cfde3ed-776a-497e-9cc4-903c10a6a4bf.xml.htm"><b>File | Open Source File</b></a> command or press CTRL+O to open a source file. You can also use the <b>Open source file (Ctrl+O) </b>button (<img src="tbopen.bmp">) on the toolbar.<P class="note"><b>Note</b>  When you use <b>File | Open Source File</b> (or its shortcut menu or button equivalents) to open a source file, the path of that file is automatically appended to the source path.</P>
+<P></P>
+</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r36_gui_1_759bae7f-4142-4bc0-8514-a171e3cfb3c3.xml.htm"><b>File | Recent Files</b></a> command to open one of the four source files that you most recently opened in WinDbg.</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r36_gui_1_4b5aa2c1-ecd2-40f7-b100-4792aa6ba912.xml.htm"><b>File | Close Current Window</b></a> command or click the <b>Close</b> button in the corner of the <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a> to close a source file.</LI>
+<P></P>
+</UL>
+<P>For more information about how to use source files, see <a href="r07_use_operation_6f6332fb-7207-429d-8a27-a2ff0bf02bbb.xml.htm">Debugging in Source Mode</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Source Path RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

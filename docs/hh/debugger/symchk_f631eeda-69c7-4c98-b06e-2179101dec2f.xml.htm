@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DBH Command-Line Options</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DBH Command-Line Options"><xml><MSHelp:Keyword Index="A" Term="SymChk_f631eeda-69c7-4c98-b06e-2179101dec2f.xml"/>
+<META NAME="MS-HKWD" CONTENT="command-line options, DBH">
+<META NAME="MS-HKWD" CONTENT="DBH, command-line options"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_f631eeda-69c7-4c98-b06e-2179101dec2f.xml"></A>DBH Command-Line Options</H1>
+<P>The DBH command line uses the following syntax.<P></P>
+<P></P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>dbh</b> [<i>Options</i>] <b>-p:</b><i>PID</i> [<i>Command</i>] <BR><BR><b>dbh</b> [<i>Options</i>] <i>ExecutableName</i> [<i>Command</i>] <BR><BR><b>dbh</b> [<i>Options</i>] <i>SymbolFileName</i> [<i>Command</i>] <BR><BR><b>dbh -?</b> <BR><BR><b>dbh -??</b>  <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-p:</b><i>PID</i></DT>
+<DD>Specifies the process ID of the process whose symbols are to be loaded.</DD>
+<DT><i>ExecutableName</i></DT>
+<DD>Specifies the executable file whose symbols are to be loaded, including the file name extension (usually <i>.exe</i> or <i>.sys</i>).  You should include a relative or absolute directory path; if no path is included, the current working directory is assumed.  If the specified file is not found in this location, DBH searches for it using <b>SymLoadModuleEx</b>. </DD>
+<DT><i>SymbolFileName</i></DT>
+<DD>Specifies the symbol file whose symbols are to be loaded, including the file name extension (<i>.pdb</i> or <i>.dbg</i>).  You should include a relative or absolute directory path; if no path is included, the current working directory is assumed. </DD>
+<DT><i>Options</i></DT>
+<DD>Any combination of the following options.<DL><DT><b>-d</b></DT>
+<DD>Causes decorated names to be used when displaying symbols and searching for symbols.  When this option is used, <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#d550a737-bff7-4175-a4bd-ef354cb12fb7">SYMOPT_PUBLICS_ONLY</a> is turned on, and both <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#d8974df2-0d92-4406-b818-8adba87cae13">SYMOPT_UNDNAME</a> and <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#fa4f74ce-fe78-49dc-94cc-3070af1c8010">SYMOPT_AUTO_PUBLICS</a> are turned off.  This is equivalent to issuing the command <nobr><b>symopt +4000</b></nobr> followed by <nobr><b>symopt -10002</b></nobr> after DBH is running. </DD>
+<DT><b>-s:</b><i>Path</i></DT>
+<DD>Sets the symbol path to the specified <i>Path</i> value.</DD>
+<DT><b>-n </b> </DT>
+<DD>Turns on <i>noisy symbol loading</i>.  Additional information is displayed about the search for symbols.  The name of each symbol file is displayed as it is loaded.  If the debugger cannot load a symbol file, it displays an error message.  Error messages for <i>.pdb</i> files are displayed in text.  Error messages for <i>.dbg</i> files are in the form of an error code, explained in the <i>winerror.h</i> file.  Not all of these messages are useful, but some of them may be helpful to analyze why a symbol file cannot be found or matched.  If an image file is loaded solely to recover symbolic header information, this is displayed as well.  </DD>
+</DL>
+<P></P>
+</DD>
+<DT><i>Command</i></DT>
+<DD>Causes DBH to run, execute the specified <i>Command</i>, and then exit. For a list of possible commands, see <a href="symchk_57318acb-a1c1-4b17-82c3-1760cb7bca17.xml.htm">DBH Commands</a>.</DD>
+<DT><b>-?</b></DT>
+<DD>Displays help text for the DBH command line.</DD>
+<DT><b>-??</b></DT>
+<DD>Displays help text for the DBH command line, and displays a list of all DBH commands.</DD>
+</DL>
+<H4>Additional Information</H4>
+<P>    </P>
+<P>For more information about the DBH tool, see <a href="symchk_f9e919d7-c05c-4f74-9972-bb1e1870da84.xml.htm">Using DBH</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DBH Command-Line Options RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Elements of a Debugger Command Program</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Elements of a Debugger Command Program"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_262edb22-df18-4102-a408-04f482aaac86.xml"/>
+<META NAME="MS-HKWD" CONTENT="debugger command program, elements"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_262edb22-df18-4102-a408-04f482aaac86.xml"></A>Elements of a Debugger Command Program</H1>
+<P>A <i>debugger command program</i> is a small application that consists of debugger commands and control flow tokens, such as <b>.if</b>, <b>.for</b>, and <b>.while</b>. (For a full list of control flow tokens and their syntax, see <a href="r05_use_start_1131a34b-0ce3-4629-8c88-0ec60c5f64c6.xml.htm">Control Flow Tokens</a>.)</P>
+<P>You can use braces ( <b>{ }</b> ) to enclose a block of statements within a larger command block. When you enter each block, all aliases within the block are evaluated. If you later alter the value of an alias within a command block, commands after that point do not use the new alias value unless they are within a subordinate block.</P>
+<P>You cannot create a block by using a pair of braces. You must add a control flow token before the opening brace. If you want to create a block only to evaluate aliases, you should use the <a href="r14_tokens_29186615-1b0f-4874-9980-0423286ec296.xml.htm"><b>.block</b></a> token before the opening brace.</P>
+<P>A debugger command program can use <a href="r05_use_start_ba4aca87-0103-4e86-9e6c-f3d6a44b3578.xml.htm">user-named aliases or fixed-name aliases</a> as its local variables. If you want to use numeric or typed variables, you can use the <b>$t</b><I><B>n</B></I> <a href="r13_syntax_c05da1f3-3310-46cb-8e56-da3d670e05f3.xml.htm">pseudo-registers</a>.</P>
+<P>User-named aliases are evaluated only if they are not next to other text. If you want to evaluate an alias that is next to other text, use the <a href="r14_tokens_6d97cf2f-9194-42d4-a7bb-b7316c117802.xml.htm"><b>${ }  (Alias Interpreter)</b></a> token. This token has optional switches that enable you to evaluate the alias in a variety of ways.</P>
+<P>You can add comments to a debugger command program by using two dollar signs (<a href="r14_tokens_a3068665-cb8d-44d6-b392-d0ddfad8583c.xml.htm"><b>$$  (Comment Specifier)</b></a>). You should not insert a comment between a token and its elements (such as braces or conditions).</P>
+<P class="note"><b>Note</b>  You should not use an asterisk (<a href="r14_tokens_b6aec954-2042-4d63-9351-88be964c23a7.xml.htm"><b>*  (Comment Line Specifier)</b></a>). Because comments that are specified with an asterisk do not end with a semicolon, the rest of the program is disregarded.</P>
+<P>Typically, you should use MASM syntax within a debugger command program. When you have to use C++ elements (such as specifying a member of a structure or class), you can use the <b>@@c++( )</b> token to switch to C++ syntax for that clause. </P>
+<P>The <b>$scmp</b>, <b>$sicmp</b>, and <b>$spat</b> string operators in MASM syntax are particularly useful. For more information about these operators, see <a href="r13_syntax_eac65e6b-f13f-4fcb-8973-e64ba0ac8865.xml.htm">MASM Numbers and Operators</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Elements of a Debugger Command Program RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

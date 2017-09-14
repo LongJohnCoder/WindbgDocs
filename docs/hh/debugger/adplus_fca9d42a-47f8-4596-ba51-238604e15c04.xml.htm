@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ADPlus Command-Line Options</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ADPlus Command-Line Options"><xml><MSHelp:Keyword Index="A" Term="ADPlus_fca9d42a-47f8-4596-ba51-238604e15c04.xml"/>
+<META NAME="MS-HKWD" CONTENT="command-line options, ADPlus">
+<META NAME="MS-HKWD" CONTENT="ADPlus, command-line options"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_fca9d42a-47f8-4596-ba51-238604e15c04.xml"></A>ADPlus Command-Line Options</H1>
+<P>ADPlus uses the following syntax. </P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>adplus.vbs</b> [<b>-quiet</b>] [<b>-c</b> <i>ConfigurationFile</i>] { <b>-hang</b> | <b>-crash</b> } <BR>   { <b>-iis</b> | <b>-pn</b> <i>Process</i> | <b>-p</b> <i>PID</i> | <b>-sc</b> <i>SpawningCommandLine</i> } <BR>   [<b>-notify</b> <i>Name</i>] [<b>-o</b> <i>Directory</i>] [<b>-cdh</b>] [<b>-cdc</b>] <BR>   [<b>-cdj</b>] [<b>-gs</b> <i>ScriptName</i>] [ <b>-ce</b> <i>CustomExceptionCode</i>] <BR>   [<b>-bp</b> <i>BreakpointParameters</i>] [<b>-y</b> <i>SymbolPath</i>] <BR>   [<b>-yp</b> <i>SymbolPathToAdd</i>] [<b>-FullOnFirst</b>] [<b>-MiniOnSecond</b>] <BR>   [<b>-NoDumpOnFirst</b>] [<b>-NoDumpOnSecond</b>] [<b>-NoTlist</b>] <BR>   [<b>-NoTsCheck</b>] [<b>-dbg</b> <i>Debugger</i>] [<b>-r </b><i>Repeats IntervalInSeconds</i>]<BR>   [<b>-lcq</b>] [<b>-lcg</b>] [<b>-lcgn</b>] [<b>-lcv</b>]<BR><BR><b>adplus.vbs -Help</b> <BR></nobr></P>
+<P></P>
+<P>The command is parsed from left to right. When you specify a target, ADPlus uses all of the options that it has parsed up to that point. This kind of parsing enables you to create a long command that has multiple targets and to specify different options for each target. To specify options easily, you can store them in configuration files and use the <b>-c</b> parameter to point to these files.</P>
+<DL><H4>Parameters</H4>
+<DT><b>-quiet</b></DT>
+<DD>Suppresses all modal dialog boxes. This option is useful if you are running ADPlus in a remote command shell where modal dialog boxes can cause ADPlus to wait indefinitely for a user to press OK.<P>For best results, make sure that this option is the first option that is passed to <i>Adplus.vbs</i>. </P>
+</DD>
+<DT><b>-c</b> <i>ConfigurationFile</i></DT>
+<DD>Enables you to provide an external configuration file that has additional information. You can use more than one configuration file by using several <b>-c</b> switches, as follows.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>adplus -c c:\t\file1.cfg  -c c:\t\file2.cfg<BR></nobr></P>
+<P>You can omit a required switch at the command prompt if you specify the equivalent setting in the configuration file. For more information about these files, see <a href="adplus_75cb775e-c52e-4c05-85a6-aa7be34270c5.xml.htm">ADPlus Configuration Files</a>.</P>
+</DD>
+<DT><b>-hang</b></DT>
+<DD>Configures ADPlus to run in <a href="adplus_503a3c03-7ffb-4999-b99c-3ca4b9f69b06.xml.htm">hang mode</a>. When ADPlus is running in hang mode, you must start ADPlus after a process stops responding (that is, <i>hangs</i>) or is consuming high CPU utilization.</DD>
+<DT><b>-crash</b></DT>
+<DD>Configures ADPlus to run in <a href="adplus_5c0245b0-d5f8-47aa-b73f-86b8d8c6111c.xml.htm">crash mode</a>. When ADPlus is running in crash mode, you must start ADPlus before the process fails (that is, <i>crashes</i>) or becomes unstable.</DD>
+<DT><b>-iis</b></DT>
+<DD>Debugs Internet Information Server (IIS) 4.0 or later. When you use ADPlus with the <b>-iis</b> option, ADPlus monitors all of the IIS in-process (<i>Inetinfo.exe</i>) and out-of-process (<i>Mtx.exe</i> and <i>Dllhost.exe</i>) applications. You can use this option in addition to the <b>-pn</b> or <b>-p</b> options, or you can use <b>-iis</b> by itself to analyze IIS and all running MTS or COM+ applications in crash mode or hang mode.<P>If you are trying to analyze IIS 3.0 (or earlier), you should use the <b>-pn</b> option and specify <i>Inetinfo.exe</i> as the process to monitor.</P>
+</DD>
+<DT><b>-pn</b> <i>Process</i></DT>
+<DD>Specifies a process name that ADPlus should analyze. <i>Process</i> should include the file name extension. To specify more than one process, use multiple <b>-pn</b> options (for example, <b>-pn process1.exe -pn process2.exe</b>).</DD>
+<DT><b>-p</b> <i>PID</i></DT>
+<DD>Specifies the process ID (PID) of a process that ADPlus should analyze. To specify more than one process, use multiple <b>-p</b> options (for example, <b>-p 1896 -p 1702</b>).</DD>
+<DT><b>-sc</b> <i>SpawningCommandLine</i></DT>
+<DD>Enables you to provide a command. The debugger creates the process inside the debugger and starts monitoring it. This option is available only in crash mode, and you must add the <b>-sc</b> switch as the last option, because everything that is provided after this option is considered to be the command to use to create the selected process. If you want to create more than one process, use the <b>-c</b> switch and a configuration file.</DD>
+<DT><b>-notify</b> <i>Name</i></DT>
+<DD><i>(Crash mode only)</i> Sends a message if a failure occurs. <i>Name</i> is the computer or user who receives the message. Whenever the debugger detaches from the process because of a second-chance exception, or whenever you press CTRL+C to stop debugging, a notification is sent to this computer or remote user or computer through the local messenger service. The local messenger service must be running on the target computer for this message to work.</DD>
+<DT><b>-o</b> <i>Directory</i></DT>
+<DD>Tells ADPlus where to put the debug output files. You should put long file names and file names that contain spaces in double quotation marks. If you use a UNC path (<i>\\server\share</i>), ADPlus creates a new folder immediately below the UNC path that is specified with the name of the server that ADPlus is running on (for example, <i>\\server\share\Web1</i> or <i>\\server\share\Web2</i>). This option is useful if ADPlus is running on multiple computers in a Web farm that are all putting their output on the same network share.</DD>
+<DT><b>-cdh</b></DT>
+<DD>Signals ADPlus to use the default configuration file for hang mode. You should name the default configuration file <i>ADP_Default_Hang.cfg</i> and you must store it in the same directory as <i>Adplus.vbs</i>.</DD>
+<DT><b>-cdc</b></DT>
+<DD>Signals ADPlus to use the default configuration file for crash mode. You should name the default configuration file <i>ADP_Default_Crash.cfg</i> and you must store it in the same directory as <i>Adplus.vbs</i>.</DD>
+<DT><b>-cdj</b></DT>
+<DD>Signals ADPlus to use the default configuration file for postmortem debugging mode. You should name the default configuration file <i>ADP_Default_JIT.cfg</i> and you must store it in the same directory as <i>Adplus.vbs</i>. This file is typically used if you decide to use ADPlus as the default postmortem debugger. The configuration for this mode should be similar to hang mode.</DD>
+<DT><b>-gs </b><i>ScriptName</i></DT>
+<DD>Creates a script named <i>ScriptName </i>to use together with the debugger ADPlus save the script to a file. When you use this switch, you do not have to select any process to debug.</DD>
+<DT><b>-ce</b> <i>CustomExceptionCode</i></DT>
+<DD>Enables you to add custom exceptions for the debugger to monitor.</DD>
+<DT><b>-bp</b> <i>BreakpointParameters</i></DT>
+<DD>Enables you to define breakpoints for the debugger to monitor. <i>BreakpointParameters</i> has the syntax of <i>address</i><b>;</b><i>parameters</i>. You must separate the additional parameters by semicolons and the parameters cannot contain spaces. You can use any of the following parameters:<DL><DT><b>MiniDump</b>, <b>FullDump</b> or <b>NoDump</b></DT>
+<DD>Indicates whether you want a dump. By default, there is no dump.</DD>
+<DT><i>Integer</i></DT>
+<DD>Indicates the number of passes to ignore.</DD>
+<DT><b>Q</b> or <b>QD</b> or <b>G</b></DT>
+<DD>Indicates whether you want to quit, quit and detach, or go after the action. The default value is <b>G</b>.</DD>
+<DT><b>BP</b> or <b>BU</b> or <b>BM</b></DT>
+<DD>Indicates the type of debugger command that was used to create the breakpoint. The default value is <b>BP</b>. If you use <b>BM</b>, you can define multiple breakpoints by using wildcard characters in the address.<P>If you do not include any optional parameters, the default behavior is to create a log, list the call stack, and then let the target run.</P>
+</DD>
+</DL>
+</DD>
+<DT><b>-y</b> <i>SymbolPath</i></DT>
+<DD>Enables you to define the symbol path. This option accepts multiple folders separated by semicolons, including references to symbol servers.</DD>
+<DT><b>-yp</b> <i>SymbolPathToAdd</i></DT>
+<DD>Enables you to add a symbol path of the path that is already defined in the debugger . This option accepts multiple folders separated by semicolons, including references to symbol servers.</DD>
+<DT><b>-FullOnFirst</b></DT>
+<DD>Creates full dumps on first chance for all defined exceptions. The default behavior is to have minidumps created on first chance. If several first-chance exceptions of the same type occur, the dump files are overwritten. If you want another type of behavior, you can use the configuration file for additional options.</DD>
+<DT><b>-MiniOnSecond</b></DT>
+<DD>Creates minidumps on second chance for all defined exceptions. The default behavior is to have full dumps created on second chance.</DD>
+<DT><b>-NoDumpOnFirst</b></DT>
+<DD>Creates no dumps on first chance for all defined exceptions. The default behavior is to have minidumps created on first chance.</DD>
+<DT><b>-NoDumpOnSecond</b></DT>
+<DD>Creates no dumps on second chance for all defined exceptions. The default behavior is to have full dumps created on second chance.</DD>
+<DT><b>-NoTlist</b></DT>
+<DD>Does not use the TList tool to obtain the list of running processes. You should use this option only if you are experiencing problems with ADPlus that are related to the TList tool.<P>If you use <b>-NoTlist</b>, you cannot use the <b>-pn</b> switch. In addition, the dump file names do not include the package name for COM+ applications.</P>
+</DD>
+<DT><b>-NoTsCheck</b></DT>
+<DD>Enables ADPlus to attach to a target in a Terminal Server session, if you started the target in the same session as ADPlus. You have to use this switch only in Microsoft Windows 2000. If this switch is not included in those operating systems, you cannot use ADPlus in a Terminal Server session. In Windows XP and later versions of Windows, ADPlus can freely attach to targets in Terminal Server, regardless of what session they were started on, and you do not have to use this switch. </DD>
+<DT><b>-dbg</b> <i>Debugger</i></DT>
+<DD>Enables you to select the debugger to use. The default debugger is CDB, but you can select WinDbg or NTSD instead. <i>Debugger</i> should include the debugger name and the <i>.exe</i> extension.</DD>
+<DT><b>-r</b> <i>Repeats IntervalInSeconds</i></DT>
+<DD>Enables you to do repeated hang attachments. This option is ignored in crash mode. <i>Repeats</i> specifies the number of times that you want ADPlus to run in hang mode. <i>IntervalInSeconds</i> specifies the interval, in seconds, between each run.</DD>
+<DT><b>-lcq</b></DT>
+<DD>Sets the last script command to <b>Q</b> (quit).</DD>
+<DT><b>-lcg</b></DT>
+<DD>Sets the last script command to <b>G</b> (go).</DD>
+<DT><b>-lcgn</b></DT>
+<DD>Sets the last script command to <b>GN</b> (go not handled).</DD>
+<DT><b>-lcv</b></DT>
+<DD>Sets the last script command to void (no command; waits for user input).</DD>
+<DT><b>-Help</b></DT>
+<DD>Displays help information for ADPlus.</DD>
+</DL>
+<H4>Additional Information</H4>
+<P>For more information about ADPlus, see <a href="adplus_72325de3-b07d-49a6-82b2-0ba6bb376416.xml.htm">ADPlus</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ADPlus Command-Line Options RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

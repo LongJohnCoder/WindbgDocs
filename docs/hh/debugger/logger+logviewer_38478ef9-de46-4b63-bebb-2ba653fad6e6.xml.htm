@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Manifest File Format</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Manifest File Format"><xml><MSHelp:Keyword Index="A" Term="Logger+LogViewer_38478ef9-de46-4b63-bebb-2ba653fad6e6.xml"/>
+<META NAME="MS-HKWD" CONTENT="LogViewer, manifest, file format"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Logger+LogViewer_38478ef9-de46-4b63-bebb-2ba653fad6e6.xml"></A>Manifest File Format</H1>
+<P>The file format for the manifest files borrows as much from C++ and IDL as possible. As a result, it is fairly easy to take a normal C++ SDK header file and modify it to be a manifest file. The parser fully supports C and C++ style comments to help you organize and document the file.</P>
+<P>If you are attempting to add a manifest file or make alterations to an existing file, the best way to do it is to just experiment. When you issue a <b>!logexts.logi</b> or <b>!logexts.loge</b> command in the debugger, Logger will attempt to parse the manifest files. If it encounters a problem, it will produce an error message which might indicate the mistake.</P>
+<P>A manifest file is made up of the following basic elements: <a href="#c529ac56-ad26-4d54-8ed2-5968b9476cf9">module labels</a>, <a href="#88c644e2-8d93-46f5-b45e-d50a08f68dbd">category labels</a>, <a href="#056845c5-3c2b-4957-883e-698e465f9432">function declarations</a>, <a href="#be7fb343-226a-4142-abc4-eea2f6e038c0">COM interface definitions</a>, and <a href="#b2b8a7d8-f87b-4803-aaad-fb9734ab6d1b">type definitions</a>. Other types of elements exist as well, but these are the most important.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="c529ac56-ad26-4d54-8ed2-5968b9476cf9"></A>Module Labels</H3>
+<P>A module label simply declares what DLL exports the functions that are declared thereafter. For example, if your manifest file is for logging a group of functions from <i>Comctl32.dll</i>, you would include the following module label before declaring any function prototypes:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>module COMCTL32.DLL:<BR><BR></nobr></P>
+<P>A module label must appear before any function declarations in a manifest file. A manifest file can contain any number of module labels.</P>
+<H3><A NAME="88c644e2-8d93-46f5-b45e-d50a08f68dbd"></A>Category Labels</H3>
+<P>Similar to a module label, a category label identifies which "category" all subsequent functions and/or COM interfaces belong to. For example, if you are creating a <i>Comctl32.dll</i> manifest file, you can use the following as your category label:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>category CommonControls:<BR><BR></nobr></P>
+<P>A manifest file can contain any number of category labels.</P>
+<H3><A NAME="056845c5-3c2b-4957-883e-698e465f9432"></A>Function Declarations</H3>
+<P></P>
+<P>A function declaration is what actually prompts Logger to log something. It is nearly identical to a function prototype found in a C/C++ header file. There are a few notable additions to the format, which can be best illustrated by the following example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HANDLE [gle] FindFirstFileA(<BR>       LPCSTR lpFileName,<BR>       [out] LPWIN32_FIND_DATAA lpFindFileData);<BR><BR></nobr></P>
+<P>The function <b>FindFirstFileA</b> takes two parameters. The first is <b>lpFileName</b>, which is a full path (usually with wildcards) defining where to search for a file or files. The second is a pointer to a WIN32_FIND_DATAA structure that will be used to contain the search results. The returned HANDLE is used for future calls to <b>FindNextFileA</b>. If <b>FindFirstFileA</b> returns INVALID_HANDLE_VALUE, then the function call failed and an error code can be procured by calling the <b>GetLastError</b> function.</P>
+<P>The HANDLE type is declared as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>value DWORD HANDLE<BR>{<BR>#define NULL                       0 [fail]<BR>#define INVALID_HANDLE_VALUE      -1 [fail]<BR>};<BR><BR></nobr></P>
+<P>If the value returned by this function is 0 or -1 (0xFFFFFFFF), Logger will assume that the function failed, because such values have a [fail] modifier in the value declaration. (See the Value Types section later in this section.) Since there is a [gle] modifier right before the function name, Logger recognizes that this function uses <b>GetLastError</b> to return error codes, so it captures the error code and logs it to the log file.</P>
+<P>The [out] modifier on the <b>lpFindFileData</b> parameter informs Logger that the data structure is filled in by the function and should be logged when the function returns.</P>
+<H3><A NAME="be7fb343-226a-4142-abc4-eea2f6e038c0"></A>COM Interface Definitions</H3>
+<P>A COM interface is basically a vector of functions that can be called by a COM object's client. The manifest format borrows heavily from the Interface Definition Language (IDL) used in COM to define interfaces.</P>
+<P>Consider the following example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>interface IDispatch : IUnknown<BR>{<BR>    HRESULT GetTypeInfoCount( UINT pctinfo  );<BR>    <BR>    HRESULT GetTypeInfo(<BR>        UINT iTInfo,<BR>        LCID lcid,<BR>        LPVOID ppTInfo );<BR>    <BR>    HRESULT GetIDsOfNames(<BR>        REFIID riid,<BR>        LPOLECHAR* rgszNames,<BR>        UINT cNames,<BR>        LCID lcid,<BR>        [out] DISPID* rgDispId );<BR>    <BR>    HRESULT Invoke( <BR>        DISPID  dispIdMember,      <BR>        REFIID  riid,              <BR>        LCID  lcid,                <BR>        WORD  wFlags,              <BR>        DISPPARAMS*  pDispParams,  <BR>        VARIANT*  pVarResult,  <BR>        EXCEPINFO*  pExcepInfo,  <BR>        UINT*  puArgErr );<BR>};<BR><BR></nobr></P>
+<P>This declares an interface called <b>IDispatch</b> that is derived from <b>IUnknown</b>. It contains four member functions, which are declared in specific order within the interface's braces. Logger will intercept and log these member functions by replacing the function pointers in the interface's vtable (the actual binary vector of function pointers used at run time) with its own. See the COM_INTERFACE_PTR Types section later in this section for more details on how Logger captures interfaces as they are handed out.</P>
+<H3><A NAME="b2b8a7d8-f87b-4803-aaad-fb9734ab6d1b"></A>Type Definitions</H3>
+<P>Defining data types is the most important (and most tedious) part of manifest file development. The manifest language allows you to define human-readable labels for numeric values that are passed in or returned from a function.</P>
+<P>For example, <i>Winerror.h</i> defines a type called "WinError" that is a list of error values returned by most Microsoft Win32 functions and their corresponding human-readable labels. This allows Logger and LogViewer to replace uninformative error codes with meaningful text.</P>
+<P>You can also label individual bits within a bit mask to allow Logger and LogViewer to break a DWORD bit mask into its components.</P>
+<P>There are 13 basic types supported by the manifest. They are listed in the following table.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Type</TH>
+<TH Width="">Length</TH>
+<TH Width="">Display Example</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Pointer</TD>
+<TD Width="">4 bytes</TD>
+<TD Width="">0x001AF320</TD>
+</TR>
+<TR valign="top">
+<TD Width="">VOID</TD>
+<TD Width="">0 bytes</TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">BYTE</TD>
+<TD Width="">1 byte</TD>
+<TD Width="">0x32</TD>
+</TR>
+<TR valign="top">
+<TD Width="">WORD</TD>
+<TD Width="">2 bytes</TD>
+<TD Width="">0x0A23</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DWORD</TD>
+<TD Width="">4 bytes</TD>
+<TD Width="">-234323</TD>
+</TR>
+<TR valign="top">
+<TD Width="">BOOL</TD>
+<TD Width="">1 byte</TD>
+<TD Width="">TRUE</TD>
+</TR>
+<TR valign="top">
+<TD Width="">LPSTR</TD>
+<TD Width="">Length byte plus any number of characters</TD>
+<TD Width="">"Quick brown fox"</TD>
+</TR>
+<TR valign="top">
+<TD Width="">LPWSTR</TD>
+<TD Width="">Length byte plus any number of Unicode characters</TD>
+<TD Width="">"Jumped over the lazy dog"</TD>
+</TR>
+<TR valign="top">
+<TD Width="">GUID</TD>
+<TD Width="">16 bytes</TD>
+<TD Width="">{0CF774D0-F077-11D1-B1BC-00C04F86C324}</TD>
+</TR>
+<TR valign="top">
+<TD Width="">COM_INTERFACE_PTR</TD>
+<TD Width="">4 bytes</TD>
+<TD Width="">0x0203404A</TD>
+</TR>
+<TR valign="top">
+<TD Width="">value</TD>
+<TD Width=""><i>Dependent on base type</i></TD>
+<TD Width="">ERROR_TOO_MANY_OPEN_FILES</TD>
+</TR>
+<TR valign="top">
+<TD Width="">mask</TD>
+<TD Width=""><i>Dependent on base type</i></TD>
+<TD Width="">WS_MAXIMIZED | WS_ALWAYSONTOP</TD>
+</TR>
+<TR valign="top">
+<TD Width="">struct</TD>
+<TD Width=""><i>Dependent on size of encapsulated types</i></TD>
+<TD Width="">+ lpRect<BR>   nLeft 34<BR>   nRight 54<BR>   nTop 100<BR>   nBottom 300</TD>
+</TR>
+</table>
+<P></P>
+<P>Type definitions in manifest files work like C/C++ typedefs. For example, the following statement defines PLONG as a pointer to a LONG:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>typedef LONG *PLONG;<BR><BR></nobr></P>
+<P>Most basic typedefs have already been declared in <i>Main.h</i>. You should only have to add typedefs that are specific to your component. Structure definitions have the same format as C/C++ struct types.</P>
+<P>There are four special types: value, mask, GUID, and COM_INTERFACE_PTR.</P>
+<DL><DT>Value Types</DT>
+<DD>A value is a basic type that is broken out into human-readable labels. Most function documentation only refers to the <b>#define</b> value of a particular constant used in a function. For example, most programmers are unaware of what the actual value is for all the codes returned by <b>GetLastError</b>, making it unhelpful to see a cryptic numerical value in LogViewer. The manifest value overcomes this by allowing value declarations like as in the following example:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>value LONG ChangeNotifyFlags<BR>{<BR>#define SHCNF_IDLIST      0x0000        // LPITEMIDLIST<BR>#define SHCNF_PATHA       0x0001        // path name<BR>#define SHCNF_PRINTERA    0x0002        // printer friendly name<BR>#define SHCNF_DWORD       0x0003        // DWORD<BR>#define SHCNF_PATHW       0x0005        // path name<BR>#define SHCNF_PRINTERW    0x0006        // printer friendly name<BR>};<BR><BR></nobr></P>
+<P>This declares a new type called "ChangeNotifyFlags" derived from LONG. If this is used as a function parameter, the human-readable aliases will be displayed instead of the raw numbers.</P>
+</DD>
+<DT>Mask Types</DT>
+<DD>Similar to value types, a mask type is a basic type (usually a DWORD) that is broken out into human-readable labels for each of the bits that have meaning. Take the following example:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>mask DWORD DirectDrawOptSurfaceDescCapsFlags<BR>{<BR>#define DDOSDCAPS_OPTCOMPRESSED                 0x00000001<BR>#define DDOSDCAPS_OPTREORDERED                  0x00000002<BR>#define DDOSDCAPS_MONOLITHICMIPMAP              0x00000004<BR>};<BR><BR></nobr></P>
+<P>This declares a new type derived from DWORD that, if used as a function parameter, will have the individual values broken out for the user in LogViewer. So, if the value is 0x00000005, LogViewer will display:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>DDOSDCAPS_OPTCOMPRESSED | DDOSDCAPS_MONOLITHICMIPMAP<BR><BR></nobr></P>
+</DD>
+<DT>GUID Types</DT>
+<DD>GUIDs are 16-byte globally-unique identifiers that are used extensively in COM. They are declared in two ways:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>struct __declspec(uuid("00020400-0000-0000-C000-000000000046")) IDispatch;<BR><BR></nobr></P>
+<P>or</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>class __declspec(uuid("11219420-1768-11D1-95BE-00609797EA4F")) ShellLinkObject;<BR><BR></nobr></P>
+<P>The first method is used to declare an interface identifier (IID). When displayed by LogViewer, "IID_" is appended to the beginning of the display name. The second method is used to declare a class identifier (CLSID). LogViewer appends "CLSID_" to the beginning of the display name.</P>
+<P>If a GUID type is a parameter to a function, LogViewer will compare the value against all declared IIDs and CLSIDs. If a match is found, it will display the IID friendly name. If not, it will display the 32-hexadecimal-character value in standard GUID notation.</P>
+</DD>
+<DT>COM_INTERFACE_PTR Types</DT>
+<DD>The COM_INTERFACE_PTR type is the base type of a COM interface pointer. When you declare a COM interface, you are actually defining a new type that is derived from COM_INTERFACE_PTR. As such, a pointer to such a type can be a parameter to a function. If a COM_INTERFACE_PTR basic type is declared as an OUT parameter to a function and there is a separate parameter that has an [iid] label, Logger will compare the passed in IID against all declared GUIDs. If there is a match and a COM interface was declared that has the same name as the IID, Logger will hook all the functions in that interface and log them.<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>STDAPI CoCreateInstance(<BR>  REFCLSID rclsid,     //Class identifier (CLSID) of the object<BR>  LPUNKNOWN pUnkOuter, //Pointer to controlling IUnknown<BR>  CLSCTX dwClsContext, //Context for running executable code<BR>  [iid] REFIID riid,   //Reference to the identifier of the interface<BR>  [out] COM_INTERFACE_PTR * ppv<BR>                       //Address of output variable that receives <BR>                       //the interface pointer requested in riid<BR>);<BR><BR></nobr></P>
+<P>In this example, <b>riid</b> has an [iid] modifier. This indicates to Logger that the pointer returned in <b>ppv</b> is a COM interface pointer for the interface identified by <b>riid</b>.</P>
+<P>It is also possible to declare a function as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>DDRESULT DirectDrawCreateClipper( DWORD dwFlags, [out] LPDIRECTDRAWCLIPPER *lplpDDClipper, IUnknown *pUnkOuter );<BR><BR></nobr></P>
+<P>In this example, LPDIRECTDRAWCLIPPER is defined as a pointer to the <b>IDirectDrawClipper</b> interface. Since Logger can identify which interface type is being returned in the <b>lplpDDClipper</b> parameter, there is no need for an [iid] modifier on any of the other parameters.</P>
+</DD>
+</DL>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Manifest File Format RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

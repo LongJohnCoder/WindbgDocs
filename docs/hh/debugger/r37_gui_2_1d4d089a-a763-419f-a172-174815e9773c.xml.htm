@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Toolbar Buttons</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Toolbar Buttons"><xml><MSHelp:Keyword Index="A" Term="r37_gui_2_1d4d089a-a763-419f-a172-174815e9773c.xml"/>
+<META NAME="MS-HKWD" CONTENT="toolbar (WinDbg), button descriptions">
+<META NAME="MS-HKWD" CONTENT="buttons (WinDbg Toolbar), descriptions"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r37_gui_2_1d4d089a-a763-419f-a172-174815e9773c.xml"></A>Toolbar Buttons</H1>
+<P>Except for the breakpoint button, each button on the toolbar is equivalent to a menu command. For a full description of each button's effects, see the page for the corresponding menu command.</P>
+<P>The buttons on the toolbar have the following effects.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Button</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbopen.bmp"></p> </TD>
+<TD Width="">Opens a source file as a read-only file. Equivalent to <a href="r36_gui_1_6cfde3ed-776a-497e-9cc4-903c10a6a4bf.xml.htm"><b>File | Open Source File</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbcut.bmp"></p> </TD>
+<TD Width="">Removes the selected text from the active window and puts it on the clipboard. Equivalent to <a href="r37_gui_2_a565dc1d-e896-4493-9587-e12fcdfd7b85.xml.htm"><b>Edit | Cut</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbcopy.bmp"></p> </TD>
+<TD Width="">Copies the selected text from the active window to the clipboard. Equivalent to <a href="r37_gui_2_24cafcfa-4144-41cb-866e-268675658b63.xml.htm"><b>Edit | Copy</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbpaste.bmp"></p> </TD>
+<TD Width="">Pastes the text on the clipboard to where the cursor is located. Equivalent to <a href="r37_gui_2_a10582ed-b4c5-41f8-b74d-4e698b943ae2.xml.htm"><b>Edit | Paste</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbgo.bmp"></p> </TD>
+<TD Width="">Starts or resumes execution. Execution continues until a breakpoint is reached, an exception or event occurs, the process ends, or the debugger breaks into the target. Equivalent to <a href="r37_gui_2_34401f19-4711-4af0-a368-4003d0e4c790.xml.htm"><b>Debug | Go</b></a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbrestart.bmp"></p> </TD>
+<TD Width="">Restarts execution at the beginning of the process. Equivalent to <a href="r37_gui_2_38583e2c-aeb2-425a-8e88-4308b68f0157.xml.htm"><b>Debug | Restart</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbstop.bmp"></p> </TD>
+<TD Width="">Stops execution and terminates the target process permanently. Equivalent to <a href="r37_gui_2_b5acf3a0-cf4a-4664-9c1c-53e8f8c9b1c5.xml.htm"><b>Debug | Stop Debugging</b></a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbbreak.bmp"></p> </TD>
+<TD Width="">In user mode, this button stops the process and its threads. In kernel mode, this button breaks into the target computer. Control is returned to the debugger. This button is also useful for cutting off long <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a> displays. Equivalent to <a href="r37_gui_2_94482ad8-41d6-46e7-9a18-40dce2459d10.xml.htm"><b>Debug | Break</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbinto.bmp"></p> </TD>
+<TD Width="">Executes a single instruction. If the instruction is a function call, the debugger steps into the function. Equivalent to <a href="r37_gui_2_5c02f91a-b263-4ac8-9fe0-1f8f16265c51.xml.htm"><b>Debug | Step Into</b></a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbover.bmp"></p> </TD>
+<TD Width="">Executes a single instruction. If the instruction is a function call, the debugger executes the whole function in one step. Equivalent to <a href="r37_gui_2_6d36f140-250b-40f6-ab62-fe9920078271.xml.htm"><b>Debug | Step Over</b></a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbout.bmp"></p> </TD>
+<TD Width="">Executes the rest of the current function, and breaks when the function return is completed. Equivalent to <a href="r37_gui_2_fe97789d-bf23-4201-9b27-809ce458f910.xml.htm"><b>Debug | Step Out</b></a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbcursor.bmp"></p> </TD>
+<TD Width="">Executes all instructions from the current instruction up to the instruction marked in the active <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a> or <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a>. Equivalent to <a href="r37_gui_2_bcb62bb5-2c9c-4313-b0b5-ee2d28257632.xml.htm"><b>Debug | Run to Cursor</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbbp.bmp"></p> </TD>
+<TD Width=""><i>If the active window is a Source or Disassembly window:</i>  Inserts a breakpoint at the current line. (If there already is a breakpoint set at the current line, this button removes the breakpoint.)<BR><BR><i>Otherwise:</i>  Opens the <b>Breakpoints</b> dialog box like <a href="r37_gui_2_5abe2105-cf44-4d1e-a4ae-f4d44409ed58.xml.htm"><b>Edit | Breakpoints</b></a>. <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbcmd.bmp"></p> </TD>
+<TD Width="">Opens or activates the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>. Equivalent to <a href="r37_gui_2_f26dd098-5101-4c21-961e-69bcc4cc9266.xml.htm"><b>View | Command</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbwatch.bmp"></p> </TD>
+<TD Width="">Opens or activates the <a href="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml.htm">Watch window</a>. Equivalent to <a href="r37_gui_2_8d25f451-c734-4307-9121-83248ffe0034.xml.htm"><b>View | Watch</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tblocal.bmp"></p> </TD>
+<TD Width="">Opens or activates the <a href="r36_gui_1_e05d85f5-f61e-41e4-b80a-f72b4fc0bdd7.xml.htm">Locals window</a>. Equivalent to <a href="r37_gui_2_1425c7be-dfb4-479d-bcf4-58677adc763e.xml.htm"><b>View | Locals</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbreg.bmp"></p> </TD>
+<TD Width="">Opens or activates the <a href="r36_gui_1_1cc07c74-c19c-41ff-954e-8d74472ff458.xml.htm">Registers window</a>. Equivalent to <a href="r37_gui_2_4acd9e8e-998a-412d-b990-a29ce80b5b9d.xml.htm"><b>View | Registers</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbmem.bmp"></p> </TD>
+<TD Width="">Opens a new <a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory window</a>. Equivalent to <a href="r37_gui_2_1aeb5fcf-91aa-4e89-9760-10609b2402fd.xml.htm"><b>View | Memory</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbcall.bmp"></p> </TD>
+<TD Width="">Opens or activates the <a href="r36_gui_1_b6fb163f-531c-4403-aa9d-100772f42189.xml.htm">Calls window</a>. Equivalent to <a href="r37_gui_2_9a5ad9da-ec3a-4019-87d5-f2f019345e2c.xml.htm"><b>View | Call Stack</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbdisasm2.bmp"></p> </TD>
+<TD Width="">Opens or activates the <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a>. Equivalent to <a href="r37_gui_2_00464960-5e1d-4dbf-9781-038233f26ee5.xml.htm"><b>View | Disassembly</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbspad.bmp"></p> </TD>
+<TD Width="">Opens or activates the <a href="r36_gui_1_19b6daa6-7c24-4279-883b-1790c32a1b9c.xml.htm">Scratch Pad</a>. Equivalent to <a href="r37_gui_2_7ccfb4a9-095b-4558-9a87-a47bf61f780f.xml.htm"><b>View | Scratch Pad</b></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbsrcasm.bmp"></p> </TD>
+<TD Width="">Switches between source-mode and assembly-mode debugging. Equivalent to selecting or clearing <a href="r37_gui_2_5848ade1-c3f0-467a-8cf2-494b08ac1a19.xml.htm"><b>Debug | Source Mode</b></a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbfont.bmp"></p> </TD>
+<TD Width="">Enables you to change the font that is used in the debugging information windows. Equivalent to <a href="r37_gui_2_c301964b-02da-45c7-b9fc-e253fb87a32f.xml.htm"><b>View | Font</b></a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">
+<p><img src="tbopt.bmp"></p> </TD>
+<TD Width="">Displays the <b>Options</b> dialog box. Equivalent to <a href="r37_gui_2_1be1d2c8-bb5f-4c06-b2a6-7bc84ba4ec56.xml.htm"><b>View | Options</b></a>.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Toolbar Buttons RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

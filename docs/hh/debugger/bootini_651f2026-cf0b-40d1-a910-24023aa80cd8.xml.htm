@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>BCD Boot Options Reference</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, BCD Boot Options Reference"><xml><MSHelp:Keyword Index="A" Term="bootini_651f2026-cf0b-40d1-a910-24023aa80cd8.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_651f2026-cf0b-40d1-a910-24023aa80cd8.xml"></A>BCD Boot Options Reference</H1>
+<P><i>Boot entry parameters</i>, or <i>boot parameters</i>, are optional, system-specific settings that represent configuration options. You can add boot parameters to a boot entry for an operating system.</P>
+<P>This section describes the boot options for Windows Vista and later versions of Windows that are related to developing, testing, and debugging drivers on computers with x86-based, x64-based, and Itanium-based processors. You can add these parameters to the boot entries for Windows operating systems.</P><B></B><div class="indent1">
+<P><a href="bootini_1b7477e9-580d-46e8-a37d-9f715ef4e5fa.xml.htm">BCDEdit /bootdebug</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml.htm">BCDEdit /dbgsettings</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_4164b1eb-4436-42f3-9462-e31c06b892cc.xml.htm">BCDEdit /debug</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_3b1c9007-f570-4547-bf12-90a0738285bd.xml.htm">BCDEdit /ems</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_05ddabd3-37a0-4622-b1f3-c9fcd1f51c5d.xml.htm">BCDEdit /emssettings</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm">BCDEdit /set</a> </P>
+</div>
+<P></P>
+<H4>Mapping Boot.ini Options to BCDEdit Options and Elements</H4>
+<P>The following table provides a mapping from the boot options used in operating systems prior to Windows Vista (in Boot.ini), to the BCDEdit options and the BCD elements used in Windows Vista and later versions of Windows. For information about the BCD boot elements see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=56420" target="_blank">BCD Reference</a> on MSDN. </P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="" style="background-color:#auto;">Boot.ini</TH>
+<TH Width="" style="background-color:#auto;">BCDEdit option </TH>
+<TH Width="" style="background-color:#auto;">BCD element type</TH>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/3GB</TD>
+<TD Width="" style="background-color:#auto;"><b>increaseuserva</b> </TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderInteger_IncreaseUserVa</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/BASEVIDEO</TD>
+<TD Width="" style="background-color:#auto;"><b>vga</b><BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderBoolean_UseVgaDriver</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/BOOTLOG</TD>
+<TD Width="" style="background-color:#auto;"><b>bootlog</b> <BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderBoolean_BootLogInitialization</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/BREAK</TD>
+<TD Width="" style="background-color:#auto;"><b>halbreakpoint</b> <BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderBoolean_DebuggerHalBreakpoint</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/CRASHDEBUG</TD>
+<TD Width="" style="background-color:#auto;"><b>/dbgsettings</b> <b>/start</b> <BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;"></TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/DEBUG, BOOTDEBUG</TD>
+<TD Width="" style="background-color:#auto;"><b>/debug </b><BR><BR><b>/bootdebug</b> <BR><BR> <BR><BR></TD>
+<TD Width="" style="background-color:#auto;"><BR><BR>BcdLibraryBoolean_DebuggerEnabled<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/DEBUG</TD>
+<TD Width="" style="background-color:#auto;"><b>/debug </b><BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderBoolean_KernelDebuggerEnabled</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/DEBUG, /DEBUGPORT=</TD>
+<TD Width="" style="background-color:#auto;"><b>/dbgsettings</b> <BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdLibraryInteger_DebuggerType</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/DEBUGPORT=</TD>
+<TD Width="" style="background-color:#auto;"><b>/dbgsettings</b> <i>DebugType</i> [<b>debugport</b>:<i>Port</i>] [<b>baudrate</b>:<i>Baud</i>] [<b>channel:</b><i>Channel</i>] [<b>targetname</b>:<i>TargetName</i>] [<b>/start</b> {<b>Active</b> |<b>Autoenable</b> |<b>Disable</b>} <b>/noemux</b>]<BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdLibraryInteger_SerialDebuggerPort <BR><BR>BcdLibraryInteger_SerialDebuggerBaudRate<BR><BR>BcdLibraryInteger_1394DebuggerChannel<BR><BR>BcdLibraryString_UsbDebuggerTargetName<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/EXECUTE</TD>
+<TD Width="" style="background-color:#auto;"><b>nx</b> <BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderInteger_NxPolicy</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/FASTDETECT</TD>
+<TD Width="" style="background-color:#auto;"></TD>
+<TD Width="" style="background-color:#auto;"></TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/HAL=</TD>
+<TD Width="" style="background-color:#auto;"><b>hal</b><BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderString_HalPath</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/KERNEL=</TD>
+<TD Width="" style="background-color:#auto;"><b>kernel</b><BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderString_KernelPath</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/MAXMEM=</TD>
+<TD Width="" style="background-color:#auto;"><b>truncatememory</b><BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdLibraryInteger_TruncatePhysicalMemory</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/NODEBUG</TD>
+<TD Width="" style="background-color:#auto;"><b>/debug</b> <BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;"></TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/NOEXECUTE</TD>
+<TD Width="" style="background-color:#auto;"><b>nx</b> {<BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderInteger_NxPolicy</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/NOGUIBOOT</TD>
+<TD Width="" style="background-color:#auto;"><b>quietboot</b><BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderBoolean_DisableBootDisplay</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/NOLOWMEM</TD>
+<TD Width="" style="background-color:#auto;"><b>nolowmem</b> <BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderBoolean_NoLowMemory</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/NOPAE</TD>
+<TD Width="" style="background-color:#auto;"><b>pae</b></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderInteger_PAEPolicy</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/ONECPU</TD>
+<TD Width="" style="background-color:#auto;"><b>onecpu</b><BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderBoolean_UseBootProcessorOnly</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/PAE</TD>
+<TD Width="" style="background-color:#auto;"><b>pae</b></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderInteger_PAEPolicy</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/PCILOCK</TD>
+<TD Width="" style="background-color:#auto;"><b>usefirmwarepcisettings</b><BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderInteger_UseFirmwarePciSettings</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/REDIRECT</TD>
+<TD Width="" style="background-color:#auto;"><b>/ems</b> <BR><BR><BR><BR><b>/emssettings</b> [ <b>BIOS</b> ] | <BR><BR>[ <b>EMSPORT:</b>{<i>port</i>} | [<b>EMSBAUDRATE:</b> {<i>baudrate</i>}] ]<BR><BR><BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;">BcdOSLoaderBoolean_EmsEnabled</TD>
+</TR>
+<TR valign="top">
+<TD Width="" style="background-color:#auto;">/SOS</TD>
+<TD Width="" style="background-color:#auto;"><b>sos</b><BR><BR><BR><BR></TD>
+<TD Width="" style="background-color:#auto;"></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: BCD Boot Options Reference RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

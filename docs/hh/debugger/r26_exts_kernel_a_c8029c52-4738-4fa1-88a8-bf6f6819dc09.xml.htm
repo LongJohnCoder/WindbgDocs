@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!drivers</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !drivers"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_c8029c52-4738-4fa1-88a8-bf6f6819dc09.xml"/>
+<META NAME="MS-HKWD" CONTENT="!drivers extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_c8029c52-4738-4fa1-88a8-bf6f6819dc09.xml"></A>!drivers</H1>
+<P>In operating systems prior to Windows XP, the <b>!drivers</b> extension displays a list of all drivers loaded on the target computer, along with summary information about their memory use.<P>In Windows XP and later versions of Windows, the <b>!drivers</b> extension is obsolete. To display information about loaded drivers and other modules, use the <a href="r17_cmds_i_2360e197-1deb-4e41-98ff-d2c7e6c7d8f3.xml.htm"><b>lm</b></a> command. The command <b>lm t n</b> displays information in a format very similar to the old <b>!drivers</b> extension.  However, this command will not display the memory usage of the drivers as the <b>!drivers</b> extension did. It will only display the drivers' start and end addresses, image names, and timestamps.  The <a href="r30_exts_kernel_u_f7bac801-e399-4fab-af3e-ad2c1effce20.xml.htm"><b>!vm</b></a> and <a href="r27_exts_kernel_e_e5a27ddd-3d24-48ce-9076-7c72c6dd208d.xml.htm"><b>!memusage</b></a> extensions can be used to display memory usage statistics.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!drivers</b> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Can be any combination of the following values. (The default is 0x0.)<DL><DT>Bit 0 (0x1)</DT>
+<DD>Causes the display to include information about resident and standby memory.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>If this bit is set and bit 2 (0x4) is not set, the display will include information about resident, standby, and locked memory, as well as the loader entry address. If bit 2 is set, this causes the display to be a much longer and more detailed list of the driver image.  Information about the headers is included, as is section information.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>Causes the display to be a much longer and more detailed list of the driver image. Information about each section is included. If bit 1 (0x2) is set, this will also include header information.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>An explanation of this command's display is given in the following table:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Column</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Base</TD>
+<TD Width="">The starting address of the device driver code, in hexadecimal. When the memory address used by the code that causes a stop falls between the base address for a driver and the base address for the next driver in the list, that driver is frequently the cause of the fault. For instance, the base for <i>Ncrc810.sys</i> is 0x80654000. Any address between that and 0x8065a000 belongs to this driver.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Code Size</TD>
+<TD Width="">The size, in kilobytes, of the driver code, in both hexadecimal and decimal.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Data Size</TD>
+<TD Width="">The amount of space, in kilobytes, allocated to the driver for data, in both hexadecimal and decimal.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Locked</TD>
+<TD Width=""><i>(Only when Flag 0x2 is used)</i>  The amount of memory locked by the driver.   </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Resident</TD>
+<TD Width=""><i>(Only when Flag 0x1 or 0x2 is used)</i>  The amount of the driver's memory that actually resides in physical memory.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Standby</TD>
+<TD Width=""><i>(Only when Flag 0x1 or 0x2 is used)</i>  The amount of the driver's memory that is on standby.   </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Loader Entry</TD>
+<TD Width=""><i>(Only when Flag 0x2 is used)</i>  The loader entry address.   </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Driver Name</TD>
+<TD Width="">The driver file name.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Creation Time</TD>
+<TD Width="">The link date of the driver. Do not confuse this with the file date of the driver, which can be set by external tools. The link date is set by the compiler when a driver or executable file is compiled. It should be close to the file date, but it is not always the same.</TD>
+</TR>
+</table>
+<P></P>
+<P>The following is a truncated example of this command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!drivers</b><BR>Loaded System Driver Summary<BR>Base     Code Size      Data Size      Driver Name  Creation Time<BR>80080000 f76c0 (989 kb) 1f100 (124 kb) ntoskrnl.exe Fri May 26 15:13:00<BR>80400000 d980  ( 54 kb) 4040  ( 16 kb) hal.dll      Tue May 16 16:50:34<BR>80654000 3f00  ( 15 kb) 1060   ( 4 kb) ncrc810.sys  Fri May 05 20:07:04<BR>8065a000 a460  ( 41 kb) 1e80   ( 7 kb) SCSIPORT.SYS Fri May 05 20:08:05<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>See <a href="t12_drivers_ba75fa45-397b-473d-88dc-c5e0d598456a.xml.htm">Plug and Play Debugging</a> for applications of this extension command. For information about drivers and their memory use, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !drivers RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

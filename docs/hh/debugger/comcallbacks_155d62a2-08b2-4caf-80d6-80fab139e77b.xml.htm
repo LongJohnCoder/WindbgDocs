@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>IDebugInputCallbacks::StartInput</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, IDebugInputCallbacks::StartInput"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="IDebugInputCallbacks::StartInput"/>
+<MSHelp:Keyword Index="A" Term="ComCallbacks_155d62a2-08b2-4caf-80d6-80fab139e77b.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugInputCallbacks, StartInput">
+<META NAME="MS-HKWD" CONTENT="StartInput (IDebugInputCallbacks)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ComCallbacks_155d62a2-08b2-4caf-80d6-80fab139e77b.xml"></A>IDebugInputCallbacks::StartInput</H1>
+<P><P>The <b>StartInput</b> callback method is called by the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> to indicate that it is waiting for a line of input.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugInputCallbacks::StartInput(</b><BR><b>    IN ULONG  </b><i>BufferSize</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the number of characters requested.  Any input longer than this size will be truncated.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>The return value is ignored by the engine unless it indicates a remote procedure call error; in this case the client, with which this <b>IDebugEventCallbacks</b> object is registered, is disabled.</P>
+<H4>Comments</H4>
+<P>This method indicates that the engine is waiting for a line of input from any <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client</a>.  This can occur if, for example, the <a href="idebugcontrol_10615761-d032-439f-955b-220def3835a9.xml.htm"><b>Input</b></a> method was called on a client.</P>
+<P>After calling this method, the engine waits until it receives some input.  When it does receive input, it calls <a href="comcallbacks_3e06dd1c-483b-4934-83d5-b00241d9d88b.xml.htm"><b>IDebugInputCallbacks::EndInput</b></a> to inform all the <b>IDebugInputCallbacks</b> objects that are registered with clients that it is no longer waiting for input.</P>
+<P>The <b>IDebugInputCallbacks</b> object can provide the engine with a line of input by calling either the <a href="idebugcontrol_e060c1a6-43cd-46a1-ba4c-e9aa69bcf205.xml.htm"><b>ReturnInput</b></a> or <b>ReturnInputWide</b> methods.</P>
+<P>For more information about debugger engine input, see <a href="engine_dg_ce5dd9cd-7068-4ca7-95d9-f4985a9812c2.xml.htm">Input and Output</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: IDebugInputCallbacks::StartInput RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

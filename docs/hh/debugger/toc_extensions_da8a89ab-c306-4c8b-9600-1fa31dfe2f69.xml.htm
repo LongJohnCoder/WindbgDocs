@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Introduction</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Introduction"><xml><MSHelp:Keyword Index="A" Term="TOC_Extensions_da8a89ab-c306-4c8b-9600-1fa31dfe2f69.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="TOC_Extensions_da8a89ab-c306-4c8b-9600-1fa31dfe2f69.xml"></A>Introduction</H1>
+<P>This documentation describes how to use the debugger engine and how to write extensions that will run in WinDbg, KD, CDB, and NTSD. These debugger extensions can be used when performing user-mode or kernel-mode debugging on Microsoft Windows.</P>
+<H4>Incomplete Documentation</H4>
+<P>This is a preliminary document and is currently incomplete.</P>
+<P>For many concepts relating to the debuggers and the debugger engine that are not yet documented here, look in the <a href="toc_debuggers_1d6dda4d-fb55-407b-9627-2916beac1bc9.xml.htm">Debuggers</a> and <a href="t01_basic_7ac759e5-535f-4bee-b871-1a624807eacf.xml.htm">Debugging Techniques</a> sections of this documentation.</P>
+<P>To obtain some of the currently undocumented functionality of the debugger engine API, use the <a href="idebugcontrol_d49bfbf9-c9e1-4a43-8f2c-8778ef51db79.xml.htm"><b>Execute</b></a> method to execute individual debugger commands.</P>
+<H4>Debugger Engine</H4>
+<P>The debugger engine provides an interface for examining and manipulating debugging targets in user-mode and kernel-mode on Microsoft Windows.</P>
+<P>The debugger engine can acquire targets, set breakpoints, monitor events, query symbols, read and write memory, and control threads and processes in a target.</P>
+<P>You can use the debugger engine to write both debugger extension libraries and stand-alone applications.  Such applications are <i>debugger engine applications</i>.  A debugger engine application that uses the full functionality of the debugger engine is a <i>debugger</i>. For example, WinDbg, CDB, NTSD, and KD are debuggers; the debugger engine provides the core of their functionality.</P>
+<P>The debugger engine API is specified by the prototypes in the header file <i>dbgeng.h</i>.</P>
+<H4>Extensions</H4>
+<P>You can create your own debugging commands by writing and building an extension DLL. For example, you might want to write an extension command to display a complex data structure. </P>
+<P>There are three different types of debugger extension DLLs:</P><B></B><UL type="disc">
+<LI><i>DbgEng extension DLLs</i>.  These are based on the prototypes in the <i>dbgeng.h</i> header file.  Each DLL of this type may export DbgEng extension commands.  These extension commands use the Debugger Engine API and may also use the WdbgExts API.</LI>
+<LI><i>EngExtCpp extension DLLs</i>.  These are based on the prototypes in the <i>engextcpp.h</i> and <i>dbgeng.h</i> header files.  Each DLL of this type may export DbgEng extension commands.  These extension commands use both the Debugger Engine API and the EngExtCpp extension framework, and may also use the WdbgExts API.</LI>
+<LI><i>WdbgExts extension DLLs</i>. These are based on the prototypes in the <i>wdbgexts.h</i> header file.  Each DLL of this type exports one or more WdbgExts extension commands.  These extension commands use the WdbgExts API exclusively.</LI>
+</UL>
+<P></P>
+<P>The DbgEng API can be used to create extensions or stand-alone applications.  The WdbgExts API contains a subset of the functionality of the debugger engine API and can be used only by extensions.  </P>
+<P>All debugger extensions should be compiled and built by using the Build utility. The Build utility is included in the Windows Driver Kit (WDK).</P>
+<P>Extension code samples are installed as part of the Debugging Tools for Windows package if you perform a custom installation and select the <b>SDK</b> component and all its subcomponents.  They can be found in the sdk\samples subdirectory of the Debugging Tools for Windows installation directory.</P>
+<P>The easiest way to write new debugger extensions is to study the sample extensions. Each sample extension includes <i>makefile</i> and <i>sources</i> files for use with the Build utility. Both types of extensions are represented in the samples.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Introduction RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

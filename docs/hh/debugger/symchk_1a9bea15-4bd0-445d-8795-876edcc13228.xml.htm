@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Additional DBH Examples</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Additional DBH Examples"><xml><MSHelp:Keyword Index="A" Term="SymChk_1a9bea15-4bd0-445d-8795-876edcc13228.xml"/>
+<META NAME="MS-HKWD" CONTENT="DBH, displaying symbols">
+<META NAME="MS-HKWD" CONTENT="DBH, symbol decorations">
+<META NAME="MS-HKWD" CONTENT="DBH, data types">
+<META NAME="MS-HKWD" CONTENT="DBH, imaginary symbols">
+<META NAME="MS-HKWD" CONTENT="Determining the Decorations of a Specific Symbol"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_1a9bea15-4bd0-445d-8795-876edcc13228.xml"></A>Additional DBH Examples</H1>
+<P>Here are additional examples of commands that can be issued at the DBH prompt.</P>
+<P></P>
+<H4>Displaying Private Symbols and Public Symbols</H4>
+<P></P>
+<P>If the target is a full symbol file, then each public symbol appears twice in the file:  in the public symbol table, and in the private symbol data.  The copy in the public symbol table often contains various decorations (prefixes and suffixes).  For details, see <a href="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml.htm">Public and Private Symbols</a>.</P>
+<P>DBH can display information about this symbol from the private symbol data, from the public symbol table without decorations, and from the public symbol table with decorations.  Here is an example in which all three of these are displayed, using the command <b>addr 414fe0</b> each time.</P>
+<P>The first time this command appears in this example, DBH uses the default symbol options, so the resulting information comes from the private symbol data.  Note that this information includes the address, size, and data type of the function <b>fgets</b>.  Then, the command <nobr><b>symopt +4000</b></nobr> is used, which turns on the <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#d550a737-bff7-4175-a4bd-ef354cb12fb7">SYMOPT_PUBLICS_ONLY</a> option. This causes DBH to ignore the private symbol data, and therefore when the <b>addr 414fe0</b> command is run the second time, DBH uses the public symbol table, and no size or data type information is shown for the function <b>fgets</b>.  Finally, the command <nobr><b>symopt -2</b></nobr> is used, turning off the <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#d8974df2-0d92-4406-b818-8adba87cae13">SYMOPT_UNDNAME</a> option and causing DBH to include decorations.  When the <b>addr 414fe0</b> runs this final time, it shows the decorated version of the function name, <b>_fgets</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>pid:4308 mod:TimeTest[400000]: <b>addr 414fe0</b><BR><BR>fgets<BR>   name : fgets<BR>   addr :   414fe0<BR>   size : 113<BR>  flags : 0<BR>   type : 7e<BR>modbase :   400000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagFunction (5)<BR>  index : 7d<BR><BR>pid:4308 mod:TimeTest[400000]: <b>symopt +4000</b><BR><BR>Symbol Options: 0x10c13<BR>Symbol Options: 0x14c13<BR><BR>pid:4308 mod:TimeTest[400000]: <b>addr 414fe0</b><BR><BR>fgets<BR>   name : fgets<BR>   addr :   414fe0<BR>   size : 0<BR>  flags : 0<BR>   type : 0<BR>modbase :   400000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagPublicSymbol (a)<BR>  index : 7f<BR><BR>pid:4308 mod:TimeTest[400000]: <b>symopt -2</b><BR><BR>Symbol Options: 0x14c13<BR>Symbol Options: 0x14c11<BR><BR>pid:4308 mod:TimeTest[400000]: <b>addr 414fe0</b><BR><BR>_fgets<BR>   name : _fgets<BR>   addr :   414fe0<BR>   size : 0<BR>  flags : 0<BR>   type : 0<BR>modbase :   400000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagPublicSymbol (a)<BR>  index : 7f  <BR></nobr></P>
+<P>If the <nobr><b>-d</b></nobr> command-line option had been used, the results would have shown the decorated public name from the beginning.</P>
+<P></P>
+<H4><A NAME="475300b2-9e03-47da-b83b-2c8187bfbc6d"></A>Determining the Decorations of a Specific Symbol</H4>
+<P>DBH can determine the decorations on a specific symbol.  This can be useful when used in conjunction with a program that requires symbols to be specified with their decorations, such as <a href="symchk_ba009a20-0795-4188-9cb2-7d7dd6119202.xml.htm">PDBCopy</a>.</P>
+<P>For example, suppose you know that the symbol file <i>mysymbols.pdb</i> contains a symbol whose undecorated name is <b>MyFunction1</b>.  To find the decorated name, use the following procedure.</P>
+<P>First, start DBH without the <nobr><b>-d</b></nobr> command-line option, and then use the <nobr><b>symopt +4000</b></nobr> command so that all information comes from the public symbol table:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>C:\&gt; <b>dbh c:\mydir\mysymbols.pdb</b><BR><BR>mysymbols [1000000]: <b>symopt +4000</b><BR><BR>Symbol Options: 0x10c13<BR>Symbol Options: 0x14c13 <BR></nobr></P>
+<P>Next, use the <b>name</b> command or the <b>enum</b> command to display the address of the desired symbol:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>mysymbols [1000000]: <b>enum myfunction1</b> <BR><BR> index            address     name<BR>   2ab            102cb4e :   MyFunction1<BR><BR> <BR></nobr></P>
+<P>Now use <nobr><b>symopt -2</b></nobr> to make symbol decorations visible, and then use the <b>addr</b> command with the address of this symbol:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>mysymbols [1000000]: <b>symopt -2</b><BR><BR>Symbol Options: 0x14c13<BR>Symbol Options: 0x14c11<BR><BR>mysymbols [1000000]: <b>addr 102cb4e</b><BR><BR>_MyFunction1@4<BR>   name : _InterlockedIncrement@4<BR>   addr :  102cb4e<BR>   size : 0<BR>  flags : 0<BR>   type : 0<BR>modbase :  1000000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagPublicSymbol (a)<BR>  index : 2ab  <BR></nobr></P>
+<P>This reveals that the decorated name of the symbol is <b>_MyFunction1@4</b>.</P>
+<P></P>
+<H4>Decoding Symbol Decorations</H4>
+<P>The <b>undec</b> command can be used to reveal the meaning of C++ symbol decorations.  In the following example, the decorations attached to ??_C@_03GGCAPAJC@Sep?$AA@ are decoded to indicate that it is a string:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>dbh: <b>undec ??_C@_03GGCAPAJC@Sep?$AA@</b><BR><BR>??_C@_03GGCAPAJC@Sep?$AA@ =<BR>`string' <BR></nobr></P>
+<P>The following examples decode the decorations attached to three function names, revealing their prototypes:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>dbh: <b>undec ?gcontext@@3_KA</b><BR><BR>?gcontext@@3_KA =<BR>unsigned __int64 gcontext<BR><BR><BR>dbh: <b>undec ?pathcpy@@YGXPAGPBG1K@Z</b><BR><BR>?pathcpy@@YGXPAGPBG1K@Z =<BR>void __stdcall pathcpy(unsigned short *,unsigned short const *,unsigned short const *,unsigned long)<BR><BR><BR>dbh: <b>undec ?_set_new_handler@@YAP6AHI@ZP6AHI@Z@Z</b><BR><BR>?_set_new_handler@@YAP6AHI@ZP6AHI@Z@Z =<BR>int (__cdecl*__cdecl _set_new_handler(int (__cdecl*)(unsigned int)))(unsigned int) <BR></nobr></P>
+<P>The <b>undec</b> command does not display information about initial underscores, the prefix <b>__imp_</b>, or trailing "<b>@</b><i>address</i>" decorations, which are commonly found attached to function names.</P>
+<P>You can use the <b>undec</b> command with any string, not just the name of a symbol in the currently loaded module.</P>
+<P></P>
+<H4>Sorting a List of Symbols by Address</H4>
+<P>If you simply want a list of symbols, sorted in address order, you can run DBH in batch mode and pipe the results to a <b>sort</b> command.  The address values typically begin in the 18th column of each line, so the following command sorts the results by address:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>dbh &#8211;p:4672 enum mymodule!* | sort /+18<BR></nobr></P>
+<P></P>
+<H4>Displaying Source Line Information</H4>
+<P>When you use a full symbol file, DBH can display source line information.  This does not require access to any source files, since this information is stored in the symbol files themselves.</P>
+<P>Here, the <b>line</b> command displays the hexadecimal address of the binary instructions corresponding to the specified source line, and it displays the symbols associated with that line.  (In this example, there are no symbols associated with the line.) </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>dbh [1000000]: <b>line myprogram.cpp#767</b><BR><BR>   file : e:\mydirectory\src\myprogram.cpp<BR>   line : 767<BR>   addr :  1006191<BR>    key : 0000000000000000<BR>disp : 0<BR></nobr></P>
+<P>Here, the <b>srclines</b> command displays the object files associated with the specified source line:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>dbh [1000000]: <b>srclines myprogram.cpp 767</b><BR><BR>0x1006191: e:\mydirectory\objchk\amd64\myprogram.obj<BR>line 767 e:\mydirectory\src\myprogram.cpp<BR></nobr></P>
+<P>Note that the output of <b>srclines</b> is similar to that of the <a href="r17_cmds_i_9b6813c3-7868-43c4-94fb-42e3488dd53a.xml.htm"><b>ln (List Nearest Symbols)</b></a> debugger command.</P>
+<P></P>
+<P></P>
+<H4>Displaying a Data Type</H4>
+<P>The <b>type</b> command can be used to display information about a data type.  Here it displays data about the CMDPROC type:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>dbh [1000000]: <b>type CMDPROC</b><BR><BR>   name : CMDPROC<BR>   addr :        0<BR>   size : 8<BR>  flags : 0<BR>   type : c<BR>modbase :  1000000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagTypedef (11)<BR>  index : c<BR></nobr></P>
+<P>The value listed after "tag" specifies the nature of this data type.  In this case, <b>SymTagTypedef</b> indicates that this type was defined using a <b>typedef</b> statement.</P>
+<P></P>
+<H4>Using Imaginary Symbols</H4>
+<P>The <b>add</b> command can add an imaginary symbol to the loaded module.  The actual symbol file is not altered; only the image of that file in DBH's memory is changed.</P>
+<P>The <b>add</b> command can be useful if you wish to temporarily override which symbols are associated with a given address range. In the following example, a portion of the address range associated with <b>MyModule!main</b> is overridden by the imaginary symbol <b>MyModule!magic.</b></P>
+<P>Here is how the module appears before the imaginary symbol is added.  Note that the <b>main</b> function begins at 0x0042CC56, and has size 0x42B.  So when the <b>addr</b> command is used with the address 0x0042CD10, it recognizes this address as lying within the boundaries of the <b>main</b> function:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>pid:6040 mod:MyModule[400000]: <b>enum timetest!ma*</b><BR><BR> index            address     name<BR>     1             42cc56 :   main<BR>     3             415810 :   malloc<BR>     5             415450 :   mainCRTStartup<BR><BR>pid:6040 mod:MyModule[400000]: <b>addr 42cc56</b><BR><BR>main<BR>   name : main<BR>   addr :   42cc56<BR>   size : 42b<BR>  flags : 0<BR>   type : 2<BR>modbase :   400000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagFunction (5)<BR>  index : 1<BR><BR>pid:6040 mod:MyModule[400000]: <b>addr 42cd10</b><BR><BR>main+ba<BR>   name : main<BR>   addr :   42cc56<BR>   size : 42b<BR>  flags : 0<BR>   type : 2<BR>modbase :   400000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagFunction (5)<BR>  index : 1 <BR></nobr></P>
+<P>Now the symbol <b>magic</b> is added at the address 0x0042CD00, with size 0x10 bytes.  When the <b>enum</b> command is used, the high bit in the index is set, showing that this is an imaginary symbol: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>pid:6040 mod:MyModule[400000]: <b>add magic 42cd00 10</b><BR><BR><BR>pid:6040 mod:MyModule[400000]: <b>enum timetest!ma*</b><BR><BR> index            address     name<BR>     1             42cc56 :   main<BR>     3             415810 :   malloc<BR>     5             415450 :   mainCRTStartup<BR>  80000001             42cd00 :   magic <BR></nobr></P>
+<P>When the <b>addr</b> command is used, it looks for any symbols whose ranges include the specified address.  Since this search begins with the specified address and runs backward, the address 0x004CD10 is now associated with <b>magic</b>.  On the other hand, the address 0x004CD40 is still associated with <b>main</b>, because it lies outside the range of the <b>magic</b> symbol.  Note also that the tag <b>SymTagCustom</b> indicates an imaginary symbol:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>pid:6040 mod:MyModule[400000]: <b>addr 42cd10</b><BR><BR>magic+10<BR>   name : magic<BR>   addr :   42cd00<BR>   size : 10<BR>  flags : 1000<BR>   type : 0<BR>modbase :   400000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagCustom (1a)<BR>  index : 80000001<BR><BR>pid:6040 mod:MyModule[400000]: <b>addr 42cd40</b><BR><BR>main+ea<BR>   name : main<BR>   addr :   42cc56<BR>   size : 42b<BR>  flags : 0<BR>   type : 2<BR>modbase :   400000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagFunction (5)<BR>  index : 1 <BR></nobr></P>
+<P>Finally, the <b>del</b> command can delete the symbol <b>magic</b>, returning all the symbols to their original ranges:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>pid:6040 mod:MyModule[400000]: <b>del magic</b><BR><BR><BR>pid:6040 mod:MyModule[400000]: <b>enum timetest!ma*</b><BR><BR> index            address     name<BR>     1             42cc56 :   main<BR>     3             415810 :   malloc<BR>     5             415450 :   mainCRTStartup  <BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Additional DBH Examples RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

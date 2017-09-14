@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>E</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, glossary, E"><xml><MSHelp:Keyword Index="A" Term="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml"/>
+<META NAME="MS-HKWD" CONTENT="effective processor type">
+<META NAME="MS-HKWD" CONTENT="engine">
+<META NAME="MS-HKWD" CONTENT="event">
+<META NAME="MS-HKWD" CONTENT="event filter">
+<META NAME="MS-HKWD" CONTENT="event callback objects">
+<META NAME="MS-HKWD" CONTENT="event callbacks">
+<META NAME="MS-HKWD" CONTENT="event process">
+<META NAME="MS-HKWD" CONTENT="event target">
+<META NAME="MS-HKWD" CONTENT="event thread">
+<META NAME="MS-HKWD" CONTENT="executing processor type">
+<META NAME="MS-HKWD" CONTENT="exception">
+<META NAME="MS-HKWD" CONTENT="exception code">
+<META NAME="MS-HKWD" CONTENT="exception filter">
+<META NAME="MS-HKWD" CONTENT="extension">
+<META NAME="MS-HKWD" CONTENT="extension command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>    <H1><A NAME="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml"></A>E</H1>
+<P></P>
+<DL><DT><B><A NAME="ba5af89e-695c-44ee-98cc-bdb218ce8d1c"></A>effective processor type</B></DT>
+<DD>The processor type the debugger uses when dealing with the target computer.  The effective processor type affects how the debugger sets breakpoints, accesses registers, gets stack traces, and performs other processor-specific actions.</DD>
+<P><i>See also</i> <a href="dbg_glossary_f75f2990-56bc-4632-bcba-2e994cbb39af.xml.htm#42d7c512-17f5-4339-9806-ca7e621b0016">actual processor type</a>, <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#d3b5cb1b-9df2-43c2-8b7f-80f5886d9760">executing processor type</a>.<P>For more information, see <a href="engine_dg_e6d71f34-178f-47ae-ab7c-7e7dc07927d9.xml.htm">Target Information</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="2dbaa658-dbfe-47de-8266-97ed86c41aea"></A>engine</B></DT>
+<DD><i>See </i><a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a>.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="5fd797d1-51e0-444c-bc98-94c230c53a52"></A>event</B></DT>
+<DD>The <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> monitors some of the events that occur in its <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">targets</a>.  These include a <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoint</a> being triggered, an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exception</a>, thread and process creation, <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> loading, and internal debugger engine changes.</DD>
+<P><i>See also</i> <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#b82b8e27-44ea-4267-932f-0ed8f937939c">event callbacks</a>.<P>For more information, see the topics <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a> and <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="8c64ad6b-a845-4f5d-b862-f4e23db322a2"></A>event filter</B></DT>
+<DD>A collection of rules that influence how the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> proceeds after an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> has occurred in a <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>.  There are three types of event filters: <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#42e1b548-244d-4d27-9ba3-1cdd167d75eb">specific event filters</a>, <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#98344738-8c89-457f-96a5-428053fcf5f2">specific exception filters</a>, and <a href="dbg_glossary_f75f2990-56bc-4632-bcba-2e994cbb39af.xml.htm#ac40e553-dd44-4cd0-aa79-5d58865fbb5f">arbitrary exception filters</a>.</DD>
+<P><i>See also</i> <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#881e2e22-4799-498c-88ee-45fb367a0a6b">specific filters</a>, <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8998765a-accc-4fd3-b1fd-cb82527e37b9">exception filters</a>, <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#b82b8e27-44ea-4267-932f-0ed8f937939c">event callbacks</a>.<P>For more information, see the topics <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a> and <a href="engine_dg_feda793f-b9e8-402f-9953-409e0e94247f.xml.htm">Event Filters</a></P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="b82b8e27-44ea-4267-932f-0ed8f937939c"></A>event callback objects</B></DT>
+<DD>Instances of the <a href="comcallbacks_72745555-ec34-41fa-9305-cf23357bcd17.xml.htm"><b>IDebugEventCallbacks</b></a> interface which have been registered with a <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client</a>.  The engine notifies the event callbacks whenever an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurs.</DD>
+<P>For more information, see <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a> and <a href="engine_dg_f76855d1-672f-4a0e-b4da-a2b4c2ac4e5d.xml.htm#2916ff82-f256-421c-ad08-e67335774140">Event Callbacks</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="9cea8dd1-5074-4cca-9465-9b3b56e4804e"></A>event callbacks</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#b82b8e27-44ea-4267-932f-0ed8f937939c">event callback objects</a>.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="2b2e563b-fb4f-400e-835f-b883e485b0b3"></A>event process</B></DT>
+<DD>The <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#869bfa55-1556-4c4d-90ed-7b36f8f114b3">process</a> for which the last <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurred.</DD>
+<P><i>See also</i> <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#25bafc55-cacc-4ea1-83d5-3550f9879fde">event target</a> and <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#e61456d2-3bac-4156-9a64-7093e642c95d">event thread</a>.<P>For more information, see the topics <a href="engine_dg_1442c778-acca-4b77-a596-6863ab5c8279.xml.htm">Threads and Processes</a>, <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a>, and <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="25bafc55-cacc-4ea1-83d5-3550f9879fde"></A>event target</B></DT>
+<DD>The <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a> for which the last <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurred.</DD>
+<P><i>See also</i> <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2b2e563b-fb4f-400e-835f-b883e485b0b3">event process</a> and <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#e61456d2-3bac-4156-9a64-7093e642c95d">event thread</a>.<P>For more information, see the topics <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a> and <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="e61456d2-3bac-4156-9a64-7093e642c95d"></A>event thread</B></DT>
+<DD>The <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#a5a5985a-10e6-4a13-8a11-d9935f5661b9">thread</a> for which the last <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurred.</DD>
+<P><i>See also</i> <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2b2e563b-fb4f-400e-835f-b883e485b0b3">event process</a> and <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#25bafc55-cacc-4ea1-83d5-3550f9879fde">event target</a>.<P>For more information, see the topics <a href="engine_dg_1442c778-acca-4b77-a596-6863ab5c8279.xml.htm">Threads and Processes</a>, <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a>, and <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="d3b5cb1b-9df2-43c2-8b7f-80f5886d9760"></A>executing processor type</B></DT>
+<DD>The type of the processor in the current processor context.</DD>
+<P><i>See also</i> <a href="dbg_glossary_f75f2990-56bc-4632-bcba-2e994cbb39af.xml.htm#42d7c512-17f5-4339-9806-ca7e621b0016">actual processor type</a>, <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#ba5af89e-695c-44ee-98cc-bdb218ce8d1c">effective processor type</a>.<P>For more information, see <a href="engine_dg_e6d71f34-178f-47ae-ab7c-7e7dc07927d9.xml.htm">Target Information</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="7b03b5a5-20cd-4590-bd5e-727d81c47690"></A>exception</B></DT>
+<DD>An error condition resulting from the execution of a particular machine instruction or from the target indicating that it has encountered an error. Exceptions can be hardware or software-related errors.<P>An exception is an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> and is identified by its <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#0b476356-a48f-4e4f-84af-936458a97797"><u>exception code</u></a>.</P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="0b476356-a48f-4e4f-84af-936458a97797"></A>exception code</B></DT>
+<DD>An identifier which determines the type of an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exception event</a>.</DD>
+<P><i>See also</i> <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8998765a-accc-4fd3-b1fd-cb82527e37b9">exception filter</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="8998765a-accc-4fd3-b1fd-cb82527e37b9"></A>exception filter</B></DT>
+<DD>An <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8c64ad6b-a845-4f5d-b862-f4e23db322a2">event filter</a> for an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exception event</a> specified by <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#0b476356-a48f-4e4f-84af-936458a97797"><u>exception code</u></a>.</DD>
+<P><i>See also</i> <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#98344738-8c89-457f-96a5-428053fcf5f2">specific exception filter</a>, <a href="dbg_glossary_f75f2990-56bc-4632-bcba-2e994cbb39af.xml.htm#ac40e553-dd44-4cd0-aa79-5d58865fbb5f">arbitrary exception filter</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="071f0a18-538d-41e6-9ced-8fa73e369c80"></A>extension</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#a1e40118-1d4c-4ebf-8adc-4fe9a9d1a90f">debugger extension</a>.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="6132f51a-a5d2-42b6-9075-c8a79be7c82f"></A>extension command</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#a1e40118-1d4c-4ebf-8adc-4fe9a9d1a90f">debugger extension</a>.</DD>
+</DL>
+<P></P>  <DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: E RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

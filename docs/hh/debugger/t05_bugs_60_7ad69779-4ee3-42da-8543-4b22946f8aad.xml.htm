@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x7B: INACCESSIBLE_BOOT_DEVICE</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x7B: INACCESSIBLE_BOOT_DEVICE"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_7ad69779-4ee3-42da-8543-4b22946f8aad.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x7B: INACCESSIBLE_BOOT_DEVICE">
+<META NAME="MS-HKWD" CONTENT="INACCESSIBLE_BOOT_DEVICE"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_7ad69779-4ee3-42da-8543-4b22946f8aad.xml"></A>Bug Check 0x7B: INACCESSIBLE_BOOT_DEVICE</H1>
+<P>The INACCESSIBLE_BOOT_DEVICE bug check has a value of 0x0000007B. This bug check indicates that the Microsoft Windows operating system has lost access to the system partition during startup.</P>
+<H4>Parameters</H4>
+<P>The following parameters appear in the message.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">The address of a UNICODE_STRING structure, or the address of the device object that could not be mounted</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">0</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">0</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">0</TD>
+</TR>
+</table>
+<P></P>
+<P>To determine the meaning of Parameter 1, look at the data that it points to. If the first word (USHORT) at this address is even, Parameter 1 is the beginning of a Unicode string. If the first word (USHORT) at this address is 0x3, Parameter 1 is the first field (Type) of a device object.</P><B></B><UL type="disc">
+<LI>If this parameter points to a device object, the file system that was supposed to read the boot device failed to initialize or simply did not recognize the data on the boot device as a file system structure. In this situation, the specified device object is the object that could not be mounted.</LI>
+<LI>If this parameter points to a Unicode string, you must read the first 8 bytes at this address. These bytes form the UNICODE_STRING structure, which is defined as follows:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>USHORT Length;<BR>USHORT MaximumLength;<BR>PWSTR Buffer;<BR></nobr></P>
+<P>The <b>Length</b> field gives the actual length of the string. The <b>Buffer</b> field points to the beginning of the string (<b>Buffer</b> is always be at least 0x80000000.)</P>
+<P>The actual string contains the Advanced RISC Computing (ARC) specification name of the device that the boot was being attempted from. ARC names are a generic way to identify devices in the ARC environment.</P>
+</LI>
+</UL>
+<H4>Cause</H4>
+<P>The INACCESSIBLE_BOOT_DEVICE bug check frequently occurs because of a boot device failure. During I/O system initialization, the boot device driver might have failed to initialize the boot device (typically a hard disk). File system initialization might have failed because it did not recognize the data on the boot device. Also, repartitioning the system partition or installing a new SCSI adapter or disk controller might induce this error. </P>
+<P>This error can also occur because of incompatible disk hardware. If the error occurred at the initial setup of the system, the system might have been installed on an unsupported disk or SCSI controller. Some controllers are supported only by drivers that are in the Windows Driver Library (WDL). (These drivers require the user to do a custom installation.)</P>
+<H4>Resolving the Problem</H4>
+<P>This error always occurs while the system is starting. This error frequently occurs before the debugger connection is established, so debugging can be difficult or impossible.</P>
+<P><i>Resolving a failed boot device problem:</i> If a boot device is at fault, you must edit the boot options.For more information about changing these options, see <a href="bootini_pageone_dbg_06095f76-d8a9-4397-880e-d9d461b84904.xml.htm">Configuring Software on the Target Computer</a> .</P>
+<P><i>Resolving an incompatible disk hardware problem:</i> If Setup autodetects the controller, you might have to skip detection and use a specific manufacturer's disk to load the driver. Also, check the availability of updates for the system BIOS and SCSI controller firmware. Updates of this kind are typically available on the Web site or BBS of the hardware manufacturer.</P>
+<P>Remove any recently added hardware, especially hard disk drives or controllers, to see if the error is resolved. If the problematic hardware is a hard disk drive, the disk firmware version might be incompatible with your version of the Windows operating system. Contact the manufacturer for updates. If you removed another piece of hardware and the error is resolved, IRQ or I/O port conflicts likely exist. Reconfigure the new device according to the manufacturer's instructions.</P>
+<P>Confirm that all hard disk drivers, hard disk controllers, and SCSI adapters are listed in the Microsoft Windows Marketplace Tested Products List.</P>
+<P>If you recently added a driver, restart your computer, and press F8 at the character-based menu that displays the operating system choices. In the <b>Advanced Options</b> menu, select the <b>Last Known Good Configuration</b> option. This option is most effective when you add only one driver or service at a time.</P>
+<P>In addition, check your computer for viruses by using any up-to-date, commercial virus scanning software that examines the Master Boot Record of the hard disk. All Windows file systems can be infected by viruses.</P>
+<P>This error can also occur because of hard disk corruption. Run <b>Chkdsk /f /r</b> on the system partition. You must restart the computer before the disk scan begins. If you cannot start the computer because of the error, use the Recovery Console and run <b>Chkdsk /r</b>.  </P>
+<P>If you cannot start the system in the last known good configuration, you should try to start off the Windows CD. Then, you can run <b>Chkdsk</b> from the Repair Console.</P>
+<P class="note"><b>Warning</b>  If your system partition is formatted with the FAT file system, the long file names that the Windows operating system uses might be damaged if you use Scandisk or another MS-DOS-based hard disk tool to verify the integrity of your hard disk drive from MS-DOS. Always use the version of Chkdsk that matches your version of Windows.</P>
+<P>If your system has SCSI adapters, contact the adapter manufacturer to obtain updated Windows drivers. Try disabling sync negotiation in the SCSI BIOS, checking the cabling and the SCSI IDs of each device, and confirming proper termination. For IDE devices, define the onboard IDE port as Primary only. Also check each IDE device for the proper <b>master/subordinate/stand alone</b> setting. Try removing all IDE devices except for hard disks. Finally, check the System Log in Event Viewer for additional error messages that might help identify the device or driver that is causing the error.</P>
+<P><i>To analyze this error:</i> Run an <a href="r17_cmds_i_2360e197-1deb-4e41-98ff-d2c7e6c7d8f3.xml.htm"><b>lm (List Loaded Modules)</b></a> command in the debugger. Verify that the following drivers were loaded: <i>disk</i>, <i>classpnp</i>, <i>ftdisk</i>, <i>partmgr</i>, and <i>FAT</i> or <i>NTFS</i>. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>lm</b> <BR><BR>start    end        module name<BR>80001000 80016000   hal          (deferred)<BR>80016000 80018c40   bootvid      (deferred)<BR>80019000 8001dfc0   pciidex      (deferred)<BR>8001e000 8001ff60   dmload       (deferred)<BR>80086000 80086980   pciide       (deferred)<BR>802c1000 802cc000   pci          (deferred)<BR>802cc000 802d39a0   isapnp       (deferred)<BR>802d4000 802ed000   ftdisk       (deferred)<BR>802ed000 802f3820   mountmgr     (deferred)<BR>802f4000 802fad40   fdc          (deferred)<BR>802fb000 802fdc20   partmgr      (deferred)<BR>802fe000 802fef00   wmilib       (deferred)<BR>8039b000 803b8000   dmio         (deferred)<BR>803b8000 803cb000   atapi        (deferred)<BR>803cb000 803d1560   disk         (deferred)<BR>803d2000 803d8e80   classpnp     (deferred)<BR>803d9000 803fa000   fastfat      (deferred)<BR>80400000 80540000   nt           (pdb symbols)   \\localsymbols\symbols\exe\ntoskrnl.dbg<BR>80540000 80546f20   ksecdd       (deferred)<BR>80547000 80554620   cnss         (deferred)<BR>80555000 80579000   ndis         (deferred)<BR></nobr></P>
+<P>You probably have <i>pci </i>or <i>isapnp</i> loaded. Also make sure your controller drivers are loaded. That is, make sure <i>Atapi.sys</i> is loaded with the channel drivers (<i>pciide</i> and <i>pciidex</i> or <i>intelid</i>) or <i>scsiport.sys</i> is loaded with the appropriate miniport driver.</P>
+<P>It is helpful to know as much as possible about the boot device that Windows is installed on. For example, you can investigate the following items:</P><B></B><UL type="disc">
+<LI>Find out what type of controller the boot device is connected to (SCSI, IDE, 1394, etc). Find the manufacturer of non-IDE controllers (Adaptec, Symbios, and so on).</LI>
+<LI>Note the SCSI ID of the boot device if you are using SCSI.</LI>
+<LI>Indicate if other devices are attached to the same controller that the boot device is on (CD-ROM drives, zip drives, and so on).</LI>
+<LI>Note the file system that is used on the drive.</LI>
+</UL>
+<P></P>
+<P>The <a href="r26_exts_kernel_a_87ee2749-b028-4ab8-b0c0-d4a6fc734488.xml.htm"><b>!devnode</b></a> extension gives you more information, if you know what your boot devices are. </P>
+<P>Typically Plug and Play cannot assign resources to the boot device. You can verify this restriction by finding an entry for the service. If the status flags include DNF_INSUFFICIENT_RESOURCES or do not include DNF_STARTED or DNF_ENUMERATED, you have found the problem. Try <b>!devnode 0 1 scsi</b> or <b>!devnode 0 1 atapi</b> to save some time instead of dumping the whole device tree.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x7B: INACCESSIBLE_BOOT_DEVICE RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

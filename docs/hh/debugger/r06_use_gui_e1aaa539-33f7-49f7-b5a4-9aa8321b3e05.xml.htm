@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using a Symbol Server</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using a Symbol Server"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_e1aaa539-33f7-49f7-b5a4-9aa8321b3e05.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_e1aaa539-33f7-49f7-b5a4-9aa8321b3e05.xml"></A>Using a Symbol Server</H1>
+<P>A symbol server enables the debugger to automatically retrieve the correct symbol files from a symbol store &#8211; an indexed collection of symbol files &#8211; without the user needing to know product names, releases, or build numbers.  The Debugging Tools for Windows package includes the symbol server <a href="r09_symbols_657d92f2-20a6-4ddb-8669-cd4e431bb668.xml.htm">SymSrv</a> (<i>symsrv.exe)</i>.</P>
+<H4>Using SymSrv with a Debugger</H4>
+<P>SymSrv can be used with WinDbg, KD, NTSD, or CDB.</P>
+<P>To use this symbol server with the debugger, simply include the text <b>srv*</b> in the symbol path.  For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>set _NT_SYMBOL_PATH</b> = <b>srv*</b><i>DownstreamStore</i><b>*</b><i>SymbolStoreLocation</i><BR></nobr></P>
+<P></P>
+<P>where <i>DownstreamStore</i> specifies the local directory or network share that will be used to cache individual symbol files, and <i>SymbolStoreLocation</i> is the location of the symbol store either in the form <i>\\server\share</i> or as an internet address.  For more syntax options, see <a href="r09_symbols_9b636a39-5e64-4046-9e72-b12fdfc36cb1.xml.htm">Advanced SymSrv Use</a>.</P>
+<P>Microsoft has a Web site that makes Windows symbols publicly available. You can refer directly to this site in your symbol path in the following manner:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>set _NT_SYMBOL_PATH=srv*</b><i>DownstreamStore</i><b>*http://msdl.microsoft.com/download/symbols</b><BR></nobr></P>
+<P></P>
+<P>where, again, <i>DownstreamStore</i> specifies the local directory or network share that will be used to cache individual symbol files.  For more information, see <a href="r09_symbols_7bd43120-4e98-4568-a44f-0fe75ee0ac12.xml.htm">Microsoft Public Symbols</a>.</P>
+<P>If you plan to create a symbol store, configure a symbol store for web (HTTP) access, or write your own symbol server or symbol store, see <a href="r09_symbols_cf2471ca-ad4b-4a54-b8cf-534539691b4c.xml.htm">Symbol Stores and Symbol Servers</a>.</P>
+<H4>Using AgeStore to Reduce the Cache Size</H4>
+<P>Any symbol files downloaded by SymSrv will remain on your hard drive after the debugging session is over.  To control the size of the symbol cache, the AgeStore tool can be used to delete cached files that are older than a specified date, or to reduce the contents of the cache below a specified size.  For details, see <a href="symchk_578d84f8-168a-40be-84c7-44815ac942c5.xml.htm">AgeStore</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using a Symbol Server RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

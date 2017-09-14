@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Itanium Architecture</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Itanium Architecture"><xml><MSHelp:Keyword Index="A" Term="t10_arch_ia64_058d30c8-b157-4fed-8317-371ffe0d0942.xml"/>
+<META NAME="MS-HKWD" CONTENT="Itanium processor, architecture">
+<META NAME="MS-HKWD" CONTENT="registers, on an Itanium processor">
+<META NAME="MS-HKWD" CONTENT="Itanium processor, registers"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t10_arch_ia64_058d30c8-b157-4fed-8317-371ffe0d0942.xml"></A>Itanium Architecture</H1>
+<P>The Intel Itanium processor has several features that do not appear on the x86 processor:</P><B></B><UL type="disc">
+<LI>Explicit Parallel Instruction Computation (EPIC). </LI>
+<LI>A large number of registers. (Doing as much as possible in registers gets you better performance.) </LI>
+<LI>Dedicated register usage (integer registers, branch registers, floating-point registers). </LI>
+<LI>Conditional execution (predication) on almost all instructions. </LI>
+<LI>Modulo scheduling for software pipelining. </LI>
+</UL>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="2cef8723-a763-4eea-bd22-a060ac368cc9"></A>Registers</H3>
+<P>The Itanium has a large number of registers.</P><B></B><UL type="disc">
+<LI>128 integer registers, each with a NaT bit (<b>r0</b> - <b>r127</b>) </LI>
+<LI>128 floating-point registers (<b>f0</b> - <b>f127</b>) </LI>
+<LI>64 predicate registers (<b>p0</b> - <b>p63</b>) </LI>
+<LI>8 branch registers (<b>b0</b> - <b>b7</b>) </LI>
+<LI>An instruction pointer (the debugger calls this <b>iip</b>)</LI>
+<LI>128 other special-purpose registers (not all of which have yet been given meanings). These are called the "application register set," or "<b>ar</b>" registers. (They are not covered in this documentation.) </LI>
+<LI>A number of miscellaneous registers, not covered in this documentation.</LI>
+</UL>
+<P></P>
+<P>Many of the registers are further subdivided into categories such as <i>static</i>, <i>stacked</i>, and <i>rotating</i>.</P>
+<P>When discussing register preservation conventions, the term <i>preserved</i> refers to a register whose value must be preserved by a function, and <i>scratch</i> refers to a register whose value can be modified by a function.</P>
+<P>When using the <a href="r15_cmds_a_c6ea44eb-73b8-451d-8054-ded9b17ac2bd.xml.htm"><b>? (Evaluate Expression)</b></a> command, registers should be prefixed with an "at" sign ( <b>@</b> ). For example, you should use <b>? @f0</b> rather than <b>? f0</b>. This ensures that the debugger recognizes <b>f0</b> as a register, rather than as a hexadecimal number or a symbol.</P>
+<P>However, the "at" sign is not required in the <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command. For instance, <b>r r32 = 5</b> will always be interpreted correctly.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="4b574093-5897-4f7e-80ee-177d12681353"></A>Integer Registers</H3>
+<P>The 128 integer registers are named <b>r0</b> through <b>r127</b> and break down as follows:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>r0</b> &#8722; <b>r31 </b></TD>
+<TD Width="">Static general registers</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r32</b> &#8722; <b>r127</b></TD>
+<TD Width="">Stacked general registers</TD>
+</TR>
+</table>
+<P></P>
+<P>Some of the registers have special meaning, most of which are assigned by convention rather than hardware requirement. (The only one that is a hardware requirement is <b>r0</b>.)</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>r0 </b></TD>
+<TD Width="">Reads as zero (writing will AV)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>gp </b></TD>
+<TD Width="">Global pointer (<b>r1</b>)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ret0</b> &#8722; <b>ret3</b></TD>
+<TD Width="">Function return values go here (<b>r8</b> through <b>r11</b>).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sp </b></TD>
+<TD Width="">Stack pointer (<b>r12</b>)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r13 </b></TD>
+<TD Width="">TEB</TD>
+</TR>
+</table>
+<P></P>
+<P>By convention, registers <b>r4</b> through <b>r7</b> are preserved. You also should not change the TEB pointer.</P>
+<P>The <b>gp</b> register points to your global variables. To access a global variable, you have to indirect OFF the <b>gp</b> register. The <b>gp</b> register is kept up-to-date when you jump from one DLL to another (by means described later).</P>
+<P>The other static registers are scratch.</P>
+<P>All integer registers are 64 bits, with a magic <b>NaT</b> bit attached to each one. <b>NaT</b> stands for "not a thing" and is used by speculative execution to indicate that the register values are undefined.</P>
+<P>The static integer registers do not participate in register stacking. The behavior of the stacked registers (including their preservation rules) will be described in Procedure Calls and the Register Stack subsection of this section.</P>
+<P>The return value registers hold function return values and therefore can be destroyed across a function call. Notice that there are four integer return value registers at 64 bits each, for a total of 256 bits or 32 bytes of data that can be returned from a function (twice the size of a GUID).</P>
+<H3><A NAME="f253b041-5b05-408b-8ab0-64a9944cea36"></A>Floating-Point Registers</H3><B></B><table>
+<TR valign="top">
+<TD Width=""><b>f0 </b></TD>
+<TD Width="">Reads as 0.0 (writing to it will cause an access violation).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>f1 </b></TD>
+<TD Width="">Reads as 1.0 (writing to it will cause an access violation).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>f2</b> &#8722; <b>f31 </b></TD>
+<TD Width="">Static floating-point registers.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>f32</b> &#8722; <b>f127</b></TD>
+<TD Width="">Rotating floating-point registers</TD>
+</TR>
+</table>
+<P></P>
+<P>This document does not discuss floating-point code.</P>
+<P>By convention, floating-point registers <b>f2</b> through <b>f5</b> and <b>f16</b> through <b>f31</b> are preserved across calls; the rest are scratch.</P>
+<H3><A NAME="4e792b44-a1f2-4458-b31f-71f91cb6b329"></A>Predicate Registers</H3><B></B><table>
+<TR valign="top">
+<TD Width=""><b>pr0 </b></TD>
+<TD Width="">Reads as TRUE (writes are ignored).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>pr1</b> &#8722; <b>pr15 </b></TD>
+<TD Width="">Static predicate registers.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>pr16</b> &#8722; <b>pr63</b></TD>
+<TD Width="">Rotating predicate registers.</TD>
+</TR>
+</table>
+<P></P>
+<P>Predicate registers act as flags. They record the result of comparison instructions, and you can test them later to perform some sort of conditional action (called "predication"). You can predicate almost any instruction, not just jump instructions. For example,</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>(p1)    add      ret0 = r32, r33<BR><BR></nobr></P>
+<P>instruction means "set register <b>ret0</b> equal to register <b>r32</b> plus register <b>r33</b> if register <b>p1</b> is TRUE; otherwise, do nothing." Allowing arbitrary predication helps performance significantly: You have fewer jump instructions and therefore less misprediction You can also pack your instructions more compactly, because jump targets must begin on a bundle boundary, but predicated instructions can go anywhere.</P>
+<P>The parenthesized predicate register is called the <i>qualifying predicate</i> (abbreviated as "qp"). Because predicate register zero is always TRUE, unconditional instructions are internally encoded as conditional on <b>p0</b>.</P>
+<P>By convention, predicate registers <b>pr6</b> through <b>pr15</b> are scratch; the rest are preserved.</P>
+<P>There is a special pseudo-register called <b>pr</b> (called <b>preds</b> by the debugger) that consists of the 64 predicate registers combined to form a single 64-bit value. This lets you read and write all the predicate registers so you can preserve them across a call.</P>
+<H3><A NAME="acb1b46f-5d20-40ae-98e8-864ccfb90b87"></A>Branch Registers</H3>
+<P>The branch registers <b>b0</b> through <b>b7</b> are used for computed jump instructions. These are dedicated to computed jumps so the processor can optimize more efficiently for them.</P>
+<P>By convention, the following meanings are assigned to the branch registers.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>br </b></TD>
+<TD Width="">Return address (<b>b0</b>)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>b1</b> &#8722; <b>b5 </b></TD>
+<TD Width="">Preserved across procedure calls</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>b6</b> &#8722; <b>b7 </b></TD>
+<TD Width="">Scratch</TD>
+</TR>
+</table>
+<P></P>
+<H3><A NAME="fe6507e0-bb4d-4b62-9232-fddbf98509ee"></A>Application Registers</H3>
+<P>Of the application registers, <b>ar.unat</b> and <b>ar.lc</b> must be preserved across calls.</P>
+<H3><A NAME="5cef5c28-c3bc-4225-a084-b2bfa911af62"></A>Procedure Calls and the Register Stack</H3>
+<P>Each procedure declares how many parameters it has (input registers), how many private registers it needs (local registers), and the maximum number of parameters of any function it calls (output registers). The input registers plus the local registers together are called the "local region." The input registers plus the local registers plus the output registers together are called the "register stack frame".</P>
+<P>For example, this function</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>int sampleFunction(int a, int b)<BR>{<BR>    int c;<BR>    c = someFunction(0) + otherFunction(a, b);<BR>    return c;<BR>}<BR><BR></nobr></P>
+<P>would specify two input registers, some number of local registers, and two output registers.</P>
+<P>When control enters a procedure, the <b>alloc</b> instruction shuffles the registers around.</P>
+<P>Suppose the calling function uses five local registers (<b>r32</b> through <b>r36</b>) and it wants to execute a <i>sampleFunction(3,4)</i>.</P>
+<P>Before calling the function, the registers would be arranged like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr> static         local rgn   output<BR> r0   ...   r31 r32     r36 r37 r38 r39 ...<BR>+--------------+-----------+-------+-------------<BR>| 0   ...   aaa|bbb ... ccc|  3   4|??? ...<BR>+--------------+-----------+-------+-------------<BR><BR></nobr></P>
+<P>Registers <b>r37</b> and <b>r38</b> are the output registers and contain the parameters to the function.</P>
+<P>When <i>sampleFunction</i> gets control, it executes an <b>alloc</b> instruction.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>    alloc   r34 = ar.pfs, 2, 2, 2, 0<BR><BR></nobr></P>
+<P>Essentially, this means: Set up the register stack frame as follows: 2 input registers, 2 local register, 2 output registers, and zero rotating registers. Save the previous register frame state (pfs) in register <b>r34</b> so it can be restored later.</P>
+<P></P>
+<P>This instruction shuffles the registers like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr> static         local rgn       output<BR> r0   ...   r31 r32 r33 r34 r35 r36 r37 ...<BR>+--------------+---------------+-------+----------<BR>| 0   ...   aaa|  3   4 pfs ???|??? ???|...<BR>+--------------+---------------+-------+----------<BR><BR></nobr></P>
+<P>The static registers did not change. What used to be the output registers are now the input registers; the local registers are uninitialized (except for register <b>r34,</b> which was explicitly set to <b>ar.pfs</b> by the first parameter of the <b>alloc</b> instruction). What used to be in the local variables got pushed onto the register stack; they are not accessible to the called function.</P>
+<P class="note"><b>Note</b>  The distinction between input and local registers is purely semantic. It makes no difference for the processor. The only important thing to the encoding of the instruction is the size of the local region, so when you read the instruction in disassembly, the first number is the size of the local region and the second number is always zero. Thus, the preceding <b>alloc</b> instruction will be disassembled as<P class="note">    alloc   r34 = ar.pfs, 4, 0, 2, 0</P>
+<P class="note"></P>
+<P class="note"><b>Note</b>  In reality, this register shuffling process happens in two stages. The <b>br.call</b> instruction is the one that renumbers the registers. The <b>alloc</b> instruction is the one that describes the layout of the registers on the receiving side. However,in simple cases, you can act as if the <b>alloc</b> instruction does it all. In complicated situations, you may want to execute multiple <b>alloc</b> instructions to reinterpret all your registers.</P>
+</P>
+<P>The called function now performs its operation, maybe calls some other functions, and then when it is ready to return, the registers look like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr> static         local rgn       output<BR> r0...ret0..r31 r32 r33 r34 r35 r36 r37 ...<BR>+--------------+---------------+-------+----------<BR>| 0...rrr...aaa|xxx yyy zzz www|??? ???|...<BR>+--------------+---------------+-------+----------<BR><BR></nobr></P>
+<P>It has placed the function return value (<b>rrr</b>) into the <b>ret0</b> register. All the registers in the local region contain whatever values are left over from the computation.</P>
+<P>When control returns to the calling function, the register stack is popped and the registers look like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr> static         local rgn   output<BR> r0...ret0..r31 r32     r36 r37 r38 r39 ...<BR>+--------------+-----------+-------+-------------<BR>| 0...rrr...aaa|bbb ... ccc|??? ???|??? ...<BR>+--------------+-----------+-------+-------------<BR><BR></nobr></P>
+<P>All the old registers in the local region are restored from the register stack, and the return value is now available in the <b>ret0</b> register. Note that the values in the output registers have returned to garbage. You cannot rely on the values of output registers being preserved across a call.</P>
+<P>The hardware supports any number of output registers, but by convention, only the first eight are used to contain function parameters. Parameters beyond eight are passed on the stack.</P>
+<P>The register stack is itself limited in size. If you push too many registers onto the register stack, it spills into regular memory.</P>
+<H3><A NAME="afd38f98-f01c-4d7d-9fba-0fd817da41a7"></A>The gp Register</H3>
+<P>The <b>gp</b> register is used to access global variables in your module. The rules for its management are complicated:</P><B></B><UL type="disc">
+<LI>On entry to a function, <b>gp</b> is assumed to be properly initialized. </LI>
+<LI>When you call a function within your module, <b>gp</b> must be properly initialized. </LI>
+<LI>When you call a function outside your module, the <b>gp</b> register can be destroyed on return. </LI>
+<LI>When you return from a function, <b>gp</b> must contain the value it did when your function started.</LI>
+</UL>
+<P></P>
+<P>These rules allow for the following procedure call paradigms:</P><B></B><UL type="disc">
+<LI>Call to function in same module: Simply call it, there is no need to use <b>gp</b>. The <b>gp</b> register will still be valid on return. </LI>
+<LI>Call to function in other module: Set up <b>gp</b> appropriate for the module you are calling, then restore it after the function returns.</LI>
+</UL>
+<P></P>
+<P>So how do you set up <b>gp</b> for the target? A function pointer on the Itanium is really a pointer to a block of data that describes the target function. One of the items in that block of data is the value of <b>gp</b> that the target function expects.</P>
+<P>Return to the <i>sampleFunction</i> example. Assume this is an exported function. In this case, the code to call it would be:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>        mov     r37 = 3             // set up the function parameters<BR>        mov     r38 = 4<BR>        addl    r31 = 0x108, gp;;   // r31 -&gt; import table entry<BR>        ld8     r30 = [r31];;       // r30 -&gt; sampleFunction descriptor<BR>        ld8     r41 = [r30], 8;;    // r41 = actual address of function<BR>        ld8     gp = [r30]          // set up gp for sampleFunction<BR>        mov     b6 = r41            // set up the branch register<BR>        br.call rp = b6;;           // call the function<BR>        mov     gp = ...            // restore gp to original value<BR><BR></nobr></P>
+<P>This means that if you try to disassemble at <i>sampleFunction,</i> you will end up just looking at the function descriptor rather than the function itself. The function itself begins with a dot, so if you want to see the code for <i>sampleFunction</i> you have to type <a href="r18_cmds_s_51dda883-e059-4b86-9406-a1f16ebd3fc1.xml.htm"><b>u .sampleFunction</b></a>.</P>
+<H3><A NAME="3adf7df7-b458-49bd-8eaa-e465a62e7446"></A>Debugger Register Dump</H3>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>     dbi0 =                0         dbi1 =                0<BR>     dbi2 =                0         dbi3 =                0<BR>     dbi4 =                0         dbi5 =                0<BR>     dbi6 =                0         dbi7 =                0<BR>     dbd0 =                0         dbd1 =                0<BR>     dbd2 =                0         dbd3 =                0<BR>     dbd4 =                0         dbd5 =                0<BR>     dbd6 =                0         dbd7 =                0<BR><BR>       gp =         77560000 0         r2 =      6fbffc90bf0 0<BR>       r3 = c000000000000309 0         r4 =         78190000 0<BR>       r5 =          1010aa0 0         r6 =      6fbfffde000 0<BR>       r7 =                0 0         r8 =      6fbffe8d948 0<BR>       r9 = ffffffffffffffff 0        r10 =                0 0<BR>      r11 =         ffffffff 0         sp =      6fbffe8d520 0<BR>      r13 =      6fbfffdc000 0        r14 =      6fbffc90be8 0<BR>      r15 =                0 0        r16 = e0000165e11ae7f0 0<BR>      r17 = e0000165e11ae910 0        r18 =      6fbffc90bec 0<BR>      r19 =                0 0        r20 =    9804c8a70033f 0<BR>      r21 = e000000086b8ee20 0        r22 = e000000086b96040 0<BR>      r23 =                1 0        r24 =             7f05 0<BR>      r25 =               2f 0        r26 =              14e 0<BR>      r27 =                6 0        r28 =      6fb000006fb 0<BR>      r29 =            6fbff 0        r30 =              103 0<BR>      r31 =                0 0    intnats =                0<BR><BR>    preds =             8941<BR><BR>       b0 =         772b43b0           b1 = e0000000ffa005c0<BR>       b2 =         766e9e88           b3 =                0<BR>       b4 =                0           b5 =                0<BR>       b6 =         772ba2e0           b7 =                0<BR><BR>     unat =                0           lc =                0<BR>       ec =                0          ccv = e000000086c577b0<BR>      dcr =             7f05          pfs = c000000000000309<BR>      bsp =      6fbffe90cc8     bspstore =      6fbffe90cc8<BR>      rsc =                f         rnat =                0<BR>     ipsr =     1013082a6018          iip =         772b4310<BR>      ifs = 8000000000000204          fcr =               40<BR>    eflag =              202          csd = cfbfffff00000000<BR>      ssd = cf3fffff00000000        cflag =              111<BR>      fsr =                0          fir =                0<BR>      fdr =                0<BR><BR>      r32 =      6fbffe8d948 0        r33 =      6fb000006fb 0<BR>      r34 =              104 0        r35 =             8941 0<BR><BR></nobr></P>
+<P>At the top of this display are eight instruction debug registers (<b>dbi</b>) and eight data debug registers (<b>dbd</b>).</P>
+<P>Next come the static integer registers, followed by <b>intnats</b>, which consists of all the NaT bits combined to form a 32-bit integer.</P>
+<P>Then <b>preds</b>, which is all the predicate registers combined into a 64-bit integer.</P>
+<P>Next are all the branch registers.</P>
+<P>Then there are several special-purpose registers. Of these, the following two  are probably the only ones you will need to deal with:</P><B></B><UL type="disc">
+<LI><b>ar.pfs</b> describes the stack frame of the previous function. </LI>
+<LI><b>ar.ccv</b> is an implicit parameter for the <b>cmpxchg</b> instruction. </LI>
+</UL>
+<P></P>
+<P>Finally shown are the registers for the current register stack frame. You happen to be in a function that has four registers in its frame, so the debugger showed the first four stacked registers, <b>r32</b> through <b>r35</b>. If the function used more registers, this part would have been larger.</P>
+<H3><A NAME="e30a742e-1dcc-4fab-966c-0088f93efb0d"></A>Notation</H3><B></B><table>
+<TR valign="top">
+<TD Width=""><i>x</i> </TD>
+<TD Width="">1 (byte), 2 (word), 4 (long) or 8 (quad)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Ra</b>, <b>Rb</b>, <b>Rc</b>...</TD>
+<TD Width="">Registers</TD>
+</TR>
+<TR valign="top">
+<TD Width="">imm<sub>n</sub> </TD>
+<TD Width="">Signed <i>n</i>-bit constant</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Rb</b>/imm<sub>n</sub></TD>
+<TD Width="">Register or a constant</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Ba</b>/addr </TD>
+<TD Width="">Branch register or an address</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>cc </i></TD>
+<TD Width="">Condition (such as <b>eq</b> or <b>ne</b>)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Rb</b>&lt;n1, n2&gt;</TD>
+<TD Width=""><i>n</i>2 bits from <b>Rb</b> starting at position <i>n</i>1.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>f </i></TD>
+<TD Width="">Floating-point type (s, d, e)</TD>
+</TR>
+</table>
+<P></P>
+<P>For example, <b>Rb</b>&lt;5, 4&gt; means "extract 4 bits from <b>Rb</b> starting at position 5," which is the value <b>(Rb &gt;&gt; 5) &amp; 0x0F</b>.</P>
+<P>Many instructions can be modified by suffixes called <i>completers</i>.</P>
+<H3><A NAME="8e77e8bc-01a3-4a72-a7fa-bc44b43d747c"></A>Addressing Modes</H3>
+<P>Unlike the x86 instruction set, which has a significant number of addressing modes, the Itanium instruction set has only one addressing mode: Register indirect. The notation for register indirect is "[<b>r</b>]" which means "the value stored at memory location <b>r</b>." The thing inside the brackets is always a register.</P>
+<H3><A NAME="25347ed9-6daa-4d08-b50e-bd7c42bb74f6"></A>Instruction Format and Pipelining</H3>
+<P>Instructions are packaged into groups of three called <i>bundles</i>. If you execute an <a href="r19_metacmds_a_45ed0606-0809-4a40-82bb-d8a34fb02fd2.xml.htm"><b>.asm verbose</b></a> command, the instructions that belong to a bundle will be surrounded by curly brackets. Bundles always start on 16-byte boundaries (in other words, the last digit of the hexadecimal address is zero).</P>
+<P>You cannot jump into the middle of a bundle.</P>
+<P>There are restrictions on what type of instruction can be put into a particular <i>slot</i> in a bundle. For example, one valid bundle type is MII, which means that slot 0 (zero) is a memory access, slot 1 is an integer instruction, and slot 2 is another integer instruction.</P>
+<P>Valid instruction types are:</P><B></B><UL type="disc">
+<LI>M - Memory/Move instruction </LI>
+<LI>I - Complex Integer/Multimedia instruction </LI>
+<LI>A - Simple Integer/Logic/Multimedia instruction </LI>
+<LI>F - Floating-Point instruction (Normal/SIMD) </LI>
+<LI>B - Branch instruction </LI>
+</UL>
+<P></P>
+<P>Many instructions can be used in multiple slot types, in which case a completer is specified to disambiguate them. For example, there are five different <b>nop</b> instructions (<b>nop.m</b>, <b>nop.i</b>, <b>nop.f</b>, <b>nop.b</b>, <b>nop.x</b>) depending on which type of slot it was placed into.</P>
+<P>Each valid combination of instruction categories is called a <i>template</i>. There are 32 different templates. Some of the templates differ only in the placement of stops.</P>
+<P>A <i>stop</i> is used to indicate that instructions after the stop depend on instructions before the stop. For example, if you have the following series of instructions</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>    mov r3 = r2<BR>    add r1 = r2,r4 ;;<BR>    add r2 = r1,r3<BR><BR></nobr></P>
+<P>there is no dependency between the first two instructions, but the third instruction cannot execute until after the first two have completed. Therefore, the compiler inserts a stop, represented by a double semicolon, after the second instruction.</P>
+<P>Note that a stop does not have to go at the end of a bundle. There are some bundle templates that have stops in the middle and some that have more than one stop. For example, template 11 is an M|MI| instruction. Slot 0 (zero) is a memory access, then there is a stop after slot 0 (zero), then slot 1 is another memory access, then slot 2 is an integer instruction, then there is another stop after slot 2.</P>
+<P>An <i>instruction group</i> is a sequence of instructions up to the next stop, taken branch, interrupt, or exception. The instructions within an instruction group cannot have dependencies among them. This allows the processor to execute them in parallel.</P>
+<P>There are some exceptions to the no dependencies rule.</P><B></B><UL type="disc">
+<LI>A branch instruction is allowed to depend on a predicate register and branch register set elsewhere in the group. </LI>
+<LI>You can use the result of a successful <b>ld.c</b> without an intervening stop. </LI>
+<LI>Instructions after a branch will implicitly depend on whether the branch was taken; this is acceptable. However, instructions after a branch cannot interfere with instructions before the branch. </LI>
+<LI>Comparison instructions <b>.and</b>, <b>.andcm</b>, <b>.or</b> and <b>.orcm </b>are allowed to combine with others of the same type into the same target registers. (This means you cannot combine an <b>.and</b> with an <b>.or</b>.) </LI>
+<LI>You are allowed to write to a register after a previous instruction reads it, with rare exceptions. </LI>
+<LI>Two instructions in the group cannot both write to the same register, with the exception of combined comparison instructions as already noted.</LI>
+</UL>
+<P></P>
+<P>This description omits a number of details that are important only to compiler-writers or people hand-writing Itanium assembly. When reading disassembly, you can assume that the compiler or author generated correct code, unless you are tracking a compiler bug.</P>
+<H3><A NAME="689459ec-019f-4f33-b81c-3b3537803a06"></A>Speculative Execution</H3>
+<P>The <b>ld</b> instruction (load from memory) supports an <b>.s</b> completer, which means that execution of the instruction is speculated. (You cannot speculatively write to memory.)</P>
+<P>An instruction that can be speculated is called a <i>speculative instruction</i>, rather than a <i>speculatable instruction</i>. Consequently, this documentation will use the word "speculated" to refer to the <b>.s</b> variant of the <b>ld</b> instruction.</P>
+<P>A speculated load is just like a regular load, except that if an exception occurs, the processor sets the NaT bit in the destination register instead of raising the exception.</P>
+<P>If any input to an integer computation instruction has the NaT bit set, then the result of the computation will also have the NaT bit set. If any input to a comparison instruction has the NaT bit set, then the result of the comparison is always FALSE.</P>
+<P>You can also speculate floating-point instructions, but instead of setting the NaT bit, the entire floating-point register is set to a special NaT-like value called <b>NaTVal</b>. As with the integer case, <b>NaTVal</b> infects all subsequent computations.</P>
+<P>Perhaps you realize that the speculated execution was not necessary. (Maybe you started going down the TRUE branch of an IF statement, only to discover that the value is FALSE.) In which case, you just ignore the registers that you changed with the speculated execution and continue on your way. (Don't look at them, of course, because they might be NaT.)</P>
+<P>If you decide that the speculated execution was worthwhile, execute a <b>chk.s</b> instruction, which means "verify that this register contains an actual value. If it is a NaT, then jump to the recovery code." The recovery code typically just consists of all the speculated instructions re-executed normally, so the exception can be raised.</P>
+<P>Aside from the instructions previously mentioned, which can handle NaTs and a few other special instructions, attempting to use the value of a NaT register will cause an exception. This is not useful in general because you cannot tell which speculated instruction caused the exception.</P>
+<H3><A NAME="0dc8774f-ab95-4ffe-9583-2f506e39a39e"></A>Advanced Loads</H3>
+<P>The Itanium contains special techniques to optimize in the face of aliased pointers. For example, consider this code snippet:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>int MyNewFcn(int *p1, int *p2)<BR>{<BR>    *p1 = 1;<BR>    *p2 = 2;<BR>    return *p1;<BR>}<BR><BR></nobr></P>
+<P>This function usually returns <b>1</b>, but if p1 and p2 both point to the same address, then it will return <b>2</b>.</P>
+<P>The advanced load instruction <b>ld.a</b> means "load this value from memory and remember the access as successful." If there is a subsequent write to that address, it is removed from the list, rendering the advance load unsucessful. (Other events can remove an entry from the list; for example, if you ask it to remember too many advanced loads, it starts forgetting the older ones.)</P>
+<P>Later on, you can check whether the advance load is still valid. If it is not, it means that the value was modified and you have to reload it.</P>
+<P>There are two types of checks. The simplest check is <b>ld.c.nc</b> or <b>ld.c.clr</b>. This says, "Check if that advanced load is still valid. If not, then reload the value." The <b>.clr</b> completer means that this advanced load is not important anymore, so the processor can free up the entry for recording new advanced loads; the <b>.nc</b> completer means that this advanced load is still valuable, so do not clear it from the table.</P>
+<P>Here is an example that uses <b>ld.c.clr</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>    ld8.a   r6 = [r8]       ;;      // read memory at r8, remember the address<BR>    ...                             // perform operation that might modify memory...<BR>    ld8.c.clr r6 = [r8]             // reload r6 from [r8] if necessary<BR>    ...                             // perform operations with the value in r6<BR><BR></nobr></P>
+<P>In order to avoid a stall, the compiler requested that register <b>r6</b> be loaded from the memory address specified by register <b>r8</b> in advance of when it actually needed the result. Then, the compiler wanted to use the value in <b>r6</b>, but had not determined if, in the meantime, some pointer dereference had modified the value, thus rendering the prefetched value in <b>r6</b> useless.</P>
+<P>The <b>ld8.c.clr</b> instruction checks if anything has written to that address (even on another processor). If not, then the instruction does nothing. However, if something has indeed written to the address, then the instruction refetches the value (taking the memory stall).</P>
+<P>The second type of check is if you need more complicated recovery than just reloading the value.</P>
+<P>Here is an example that uses <b>chk.a.clr</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>    ld8.a   r6 = [r8]       ;;      // read memory at r8, remember the address<BR>    add     r5 = r6, r7     ;;      // precompute based on advanced read<BR>    ...                             // perform operations that might modify memory...<BR>    chk.a.clr r6, failed            // memory was modified<BR>continue:<BR>    ...                             // perform operations with the value in r5<BR><BR>failed:<BR>    ld8     r6 = [r8]       ;;      // load the correct value<BR>    add     r5 = r6, r7             // redo the precomputation<BR>    br      continue                // and then continue as if nothing was wrong<BR><BR></nobr></P>
+<P>After doing some precomputation with the value you read from <b>r8</b>, you execute a <b>chk.a.clr</b> instruction, which checks if your advanced load is still valid. If not, you jump to <b>failed</b>, where you reload the value and redo the precomputation, then jump back to continue normal execution.</P>
+<H3><A NAME="e389d1ae-51cf-47da-8dbb-6b99f3eefc8f"></A>Speculated Advanced Loads</H3>
+<P>You can combine the preceding two techniques. The <b>ld.sa</b> instruction performs a speculated advance load.</P>
+<H3><A NAME="266224ca-506c-46f9-afe7-c57ec9a21ce3"></A>Register Rotation</H3>
+<P>Register rotation is an advanced technique where the registers renumber themselves each time they go through a loop. It is not covered in this documentation.</P>
+<H3><A NAME="8ddbabb8-8b50-4e65-a1cc-c1d300cfe975"></A>Control Flow</H3>
+<P>The types of control flow you will see most of the time are<i> jump</i> (<b>br.cond</b>), <i>call</i> (<b>br.call</b>), and <i>return</i> (<b>br.ret</b>). (Conditional jumps are just regular jump instructions with a qualifying predicate attached in front.)</P>
+<P>The jump and call instructions also have long versions (<b>brl</b>) if the target of the jump is really far away.</P>
+<P>The <b>brl</b> instruction is actually emulated on Itanium, so do not expect it to be fast.</P>
+<H3><A NAME="75be3e2b-f756-4607-b9fd-abed24ecdf72"></A>Branch Prediction</H3>
+<P>Each of the standard jump instructions also includes a group of completers. The first completer determines whether the jump should be predicted taken or not taken.</P><B></B><UL type="disc">
+<LI><b>.spnt</b>: Static predict not taken. Always predict not taken. </LI>
+<LI><b>.sptk</b>: Static predict taken. Always predict taken. </LI>
+<LI><b>.dpnt</b>: Dynamic predict not taken. Use the prediction hardware. If prediction hardware cannot tell, then predict not taken. </LI>
+<LI><b>.dptk</b>: Dynamic predict taken. Use the prediction hardware. If prediction hardware cannot tell, then predict taken.</LI>
+</UL>
+<P></P>
+<P>Prediction hardware might not be able to tell, because this instruction was never encountered before, or it was last encountered so long ago that it fell out of the cache.</P>
+<P>The second completer specifies how aggressively you should prefetch after the cache. In other words, how sure are you that the prediction is correct.</P><B></B><UL type="disc">
+<LI><b>.few</b>: Prefetch a few instructions. Your prediction could be wrong, or it is not worth prefetching.</LI>
+<LI><b>.many</b>: Prefetch several instructions. You are confident that your prediction is correct.</LI>
+</UL>
+<P></P>
+<P>Most jumps within a procedure will be marked <b>.few</b>, whereas unconditional subroutine calls and unconditional return instructions are usually marked <b>.many</b>.</P>
+<P>Finally, there is an optional completer.</P><B></B><UL type="disc">
+<LI><b>.clr</b>: Clear this entry. </LI>
+</UL>
+<P></P>
+<P>If you clear the entry, the processor will wipe out any knowledge of this jump instruction. Do this if you know the instruction will not be encountered again for a long time.</P>
+<P>There is also a bonus instruction <b>brp</b> whose sole purpose is to indicate to the processor: "That computed jump instruction ahead is going to jump to here."</P>
+<P></P>
+<H3><A NAME="e6d89118-9c48-4326-ac9a-649df550a1f6"></A>Comparisons</H3>
+<P>In its simplest form, the comparison instruction compares two values and stores the result into two predicate registers; one gets the the result of the comparison, and the other gets the opposite of the result. For example,</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>    cmp.eq      p1, p2 = r32, r33<BR><BR></nobr></P>
+<P>compares the two registers for equality and stores the result into <b>p1</b>. Meanwhile, the <b>p2</b> register gets the opposite value. For example, if they were equal, then <b>p1</b> would be TRUE and <b>p2</b> would be FALSE.</P>
+<P>The next most complicated comparison instruction is called the <i>unconditional</i> comparison and it is always used with a qualifying predicate. Here is a sample unconditional comparison:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>(p3)  cmp.eq.unc p1, p2 = r32, r33<BR><BR></nobr></P>
+<P>If the qualifying predicate <b>p3</b> is TRUE, then this acts just like a regular comparison instruction. However, if the qualifying predicate is FALSE, then <i>both</i> the <b>p1</b> and <b>p2</b> registers are set to FALSE. This is a rare case where a qualifying predicate has an effect even though it is FALSE. (Normally, if a qualifying predicate is FALSE, the entire instruction is ignored.)</P>
+<P>The next most complicated comparisons are the <i>parallel </i>comparisons. These are used when you have a chain of "a &amp;&amp; b &amp;&amp; c" or "a || b || c" results. Here is a sample AND parallel comparison:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>    cmp.eq.and p1, p2 = r32, r33<BR><BR></nobr></P>
+<P>This is expressible in C as</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>    p1 = p1 &amp;&amp; (r32 == r33)<BR>    p2 = p2 &amp;&amp; (r32 == r33)<BR><BR></nobr></P>
+<P>In other words, if the comparison is false, then both predicate registers are set to FALSE; otherwise, they are left alone.</P>
+<P>The other variations of parallel comparisons are:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>    cmp.eq.andcm p1, p2 = r32, r33<BR><BR>        p1 = p1 &amp;&amp; !(r32 == r33)<BR>        p2 = p2 &amp;&amp; !(r32 == r33)<BR>    cmp.eq.or p1, p2 = r32, r33<BR><BR>        p1 = p1 || (r32 == r33)<BR>        p2 = p2 || (r32 == r33)<BR>    cmp.eq.orcm p1, p2 = r32, r33<BR><BR>        p1 = p1 || !(r32 == r33)<BR>        p2 = p2 || !(r32 == r33)<BR><BR></nobr></P>
+<P>and the DeMorgan operators...</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>    cmp.eq.or.andcm p1, p2 = r32, r33<BR><BR>        p1 = p1 || (r32 == r33)<BR>        p2 = p2 &amp;&amp; !(r32 == r33)<BR>    cmp.eq.and.orcm p1, p2 = r32, r33<BR><BR>        p1 = p1 &amp;&amp; (r32 == r33)<BR>        p2 = p2 || !(r32 == r33)<BR><BR></nobr></P>
+<P>For example, the expression <b>p5 = (r4 == 0) || (r5 == r6)</b> can be computed as follows (assuming that <b>p5</b> is preinitialized to FALSE):</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>    cmp.eq.or   p5, p0 = r0, r4<BR>    cmp.eq.or   p5, p0 = r5, r6<BR><BR></nobr></P>
+<P>Notice that because these are both OR type comparisons, they can be combined into a single instruction group and, therefore, executed in parallel.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Itanium Architecture RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

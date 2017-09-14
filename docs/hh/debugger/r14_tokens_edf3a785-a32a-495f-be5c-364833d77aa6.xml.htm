@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.foreach</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .foreach"><xml><MSHelp:Keyword Index="A" Term="r14_tokens_edf3a785-a32a-495f-be5c-364833d77aa6.xml"/>
+<META NAME="MS-HKWD" CONTENT=".foreach token"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r14_tokens_edf3a785-a32a-495f-be5c-364833d77aa6.xml"></A>.foreach</H1>
+<P>The <b>.foreach</b> token parses the output of one or more debugger commands and uses each value in this output as the input to one or more additional commands.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.foreach</b> [<i>Options</i>] <b>(</b> <i>Variable</i><b>  {</b> <i>InCommands</i> <b>} ) {</b> <i>OutCommands</i> <b>}</b> <BR><BR><b>.foreach </b>[<i>Options</i>] <b>/s (</b> <i>Variable</i><b>  "</b><i>InString</i>" <b>) {</b> <i>OutCommands</i> <b>}</b> <BR><BR><b>.foreach </b>[<i>Options</i>] <b>/f (</b> <i>Variable</i><b>  "</b><i>InFile</i>" <b>) {</b> <i>OutCommands</i> <b>}</b> <BR></nobr></P>
+<DL><H4>Syntax Elements</H4>
+<DT><i>Options</i></DT>
+<DD>Can be any combination of the following options:<DL><DT><b>/pS</b> <i>InitialSkipNumber</i></DT>
+<DD>Causes some initial tokens to be skipped.  <i>InitialSkipNumber</i> specifies the number of output tokens that will not be passed to the specified <i>OutCommands</i>.</DD>
+<DT><b>/ps</b> <i>SkipNumber</i></DT>
+<DD>Causes tokens to be skipped repeatedly each time a command is processed.  After each time a token is passed to the specified <i>OutCommands</i>, a number of tokens equal to the value of <i>SkipNumber</i> will be ignored.</DD>
+</DL>
+<P></P>
+</DD>
+<DT><i>Variable</i></DT>
+<DD>Specifies a variable name. This variable will be used to hold the output from each command in the <i>InCommands</i> string; you can reference <i>Variable</i> by name in the parameters passed to the <i>OutCommands</i>. Any alphanumeric string can be used, although using a string that can also pass for a valid hexadecimal number or debugger command is not recommended. If the name used for <i>Variable</i> happens to match an existing global variable, local variable, or alias, their values will not be affected by the <b>.foreach</b> command.</DD>
+<DT><i>InCommands</i></DT>
+<DD>Specifies one or more commands whose output will be parsed; the resulting tokens will be passed to <i>OutCommands</i>. The output from <i>InCommands</i> is not displayed.</DD>
+<DT><i>InString</i></DT>
+<DD>Used with <b>/s</b>.  Specifies a string that will be parsed; the resulting tokens will be passed to <i>OutCommands</i>.</DD>
+<DT><i>InFile</i></DT>
+<DD>Used with <b>/f</b>.  Specifies a text file that will be parsed; the resulting tokens will be passed to <i>OutCommands</i>. The file name <i>InFile</i> must be enclosed in quotation marks.</DD>
+<DT><i>OutCommands</i></DT>
+<DD>Specifies one or more commands which will be executed for each token. Whenever the <i>Variable</i> string occurs it will be replaced by the current token.<P class="note"><b>Note</b>  When the string <i>Variable</i> appears within <i>OutCommands</i>, it must be surrounded by spaces. If it is adjacent to any other text &#8212; even a parenthesis &#8212; it will not be replaced by the current token value, unless you use the <a href="r14_tokens_6d97cf2f-9194-42d4-a7bb-b7316c117802.xml.htm"><b>${ }  (Alias Interpreter)</b></a> token.</P>
+</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>When the output from <i>InCommands</i>, the <i>InString</i> string, or the <i>InFile</i> file is parsed, any number of spaces, tabs, or carriage returns is treated as a single delimiter. Each of the resulting pieces of text is used to replace <i>Variable</i> when it appears within <i>OutCommands</i>.</P>
+<P>Here is an example of a <b>.foreach</b> statement that uses the <b>dds</b> command on each token found in the file <i>myfile.txt</i>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.foreach /f ( place "g:\myfile.txt") { dds place }</b> <BR><BR></nobr></P>
+<P>The <b>/pS</b> and <b>/ps</b> flags can be used to pass only certain tokens to the specified <i>OutCommands</i>.  For example, the following statement will skip the first two tokens in the <i>myfile.txt</i> file and then pass the third to <b>dds</b>.  After each token that is passed, it will skip four tokens.  The result is that <b>dds</b> will be used with the 3rd, 8th, 13th, 18th, and 23rd tokens, and so on:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.foreach /pS 2 /ps 4 /f ( place "g:\myfile.txt") { dds place }</b> <BR><BR></nobr></P>
+<P>For more examples that use the <b>.foreach</b> token, see <a href="r05_use_start_3ec65a26-7891-478c-aec7-85a67cdbb3a4.xml.htm">Debugger Command Program Examples</a>.</P>
+<H4>Additional Information</H4>
+<P>For information about other control flow tokens and their use in debugger command programs, see <a href="r05_use_start_81070bdc-2ffb-4a22-a785-0935553fb4c4.xml.htm">Using Debugger Command Programs</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .foreach RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

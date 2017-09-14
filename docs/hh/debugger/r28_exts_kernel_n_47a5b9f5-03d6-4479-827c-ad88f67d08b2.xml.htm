@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!poolused</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !poolused"><xml><MSHelp:Keyword Index="A" Term="r28_exts_kernel_N_47a5b9f5-03d6-4479-827c-ad88f67d08b2.xml"/>
+<META NAME="MS-HKWD" CONTENT="!poolused extension">
+<META NAME="MS-HKWD" CONTENT="memory, Pool Used (!poolused) extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r28_exts_kernel_N_47a5b9f5-03d6-4479-827c-ad88f67d08b2.xml"></A>!poolused</H1>
+<P><P>The <b>!poolused</b> extension displays memory use summaries, based on the tag used for each pool allocation.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!poolused</b> [<i>Flags</i> [<i>TagString</i>]] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Specifies the amount of output to be displayed and the method of sorting the output. This can be any combination of the following bit values, except that bits 1 (0x2) and 2 (0x4) cannot be used together. The default is 0x0, which produces summary information, sorted by pool tag.<DL><DT>Bit 0 (0x1)</DT>
+<DD>Displays more detailed (verbose) information.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Sorts the display by the amount of nonpaged memory use.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>Sorts the display by the amount of paged memory use.</DD>
+<DT>Bit 3 (0x8)</DT>
+<DD><i>(Windows Server 2003 and later)</i>  Displays the session pool instead of the standard pool.   </DD>
+</DL>
+</DD>
+<DT><i>TagString</i></DT>
+<DD>Specifies the pool tag. <i>TagString</i> is a case-sensitive ASCII string. The asterisk (<b>*</b>) can be used to represent any number of characters; the question mark (<b>?</b>) can be used to represent exactly one character. Unless an asterisk is used, <i>TagString</i> must be exactly four characters in length.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!poolused </b>extension gathers data from the pool tagging feature of Windows. Pool tagging is permanently enabled on Windows Server 2003 and later versions of Windows. On Windows XP and earlier versions of Windows, you must enable pool tagging by using <a href="gflags_ea035958-0ade-4e07-856e-cfd1ed0b4df0.xml.htm">Gflags</a>. </P>
+<P>If you stop executing the extension before it completes, the debugger displays partial results.</P>
+<P>The display for this command shows the memory use for each tag in paged pool and nonpaged pool. In both cases, the display includes the number of currently outstanding allocations for the given tag and the number of bytes being consumed by those allocations.</P>
+<P>Here is a partial example of the output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!poolused</b><BR>   Sorting by  Tag<BR><BR>  Pool Used:<BR>            NonPaged            Paged<BR> Tag    Allocs     Used    Allocs     Used<BR> 1394        1      520         0        0UNKNOWN pooltag '1394', please update pooltag.txt<BR> 1MEM        1     3368         0        0UNKNOWN pooltag '1MEM', please update pooltag.txt<BR> 2MEM        1     3944         0        0UNKNOWN pooltag '2MEM', please update pooltag.txt<BR> 3MEM        3      248         0        0UNKNOWN pooltag '3MEM', please update pooltag.txt<BR> 8042        4     3944         0        0PS/2 kb and mouse , Binary: i8042prt.sys<BR> AGP         1      344         2      384UNKNOWN pooltag 'AGP ', please update pooltag.txt<BR> AcdN        2     1072         0        0TDI AcdObjectInfoG <BR> AcpA        3      192         1      504ACPI Pooltags , Binary: acpi.sys<BR> AcpB        0        0         4      576ACPI Pooltags , Binary: acpi.sys<BR> AcpD       40    13280         0        0ACPI Pooltags , Binary: acpi.sys<BR> AcpF        6      240         0        0ACPI Pooltags , Binary: acpi.sys<BR> AcpM        0        0         1      128ACPI Pooltags , Binary: acpi.sys<BR> AcpO        4      208         0        0ACPI Pooltags , Binary: acpi.sys<BR><BR>...<BR><BR> WmiG       30     6960         0        0Allocation of WMIGUID <BR> WmiR       63     4032         0        0Wmi Registration info blocks <BR> Wmip      146     3504       182    18600Wmi General purpose allocation <BR> Wmit        1     4096         7    49480Wmi Trace <BR> Wrpa        2      720         0        0WAN_ADAPTER_TAG <BR> Wrpc        1       72         0        0WAN_CONN_TAG <BR> Wrpi        1      120         0        0WAN_INTERFACE_TAG <BR> Wrps        2      128         0        0WAN_STRING_TAG <BR> aEoP        1      672         0        0UNKNOWN pooltag 'aEoP', please update pooltag.txt<BR> fEoP        1       16         0        0UNKNOWN pooltag 'fEoP', please update pooltag.txt<BR> hSVD        0        0         1       40Shared Heap Tag , Binary: mrxdav.sys<BR> hibr        0        0         1    24576UNKNOWN pooltag 'hibr', please update pooltag.txt<BR> iEoP        1       24         0        0UNKNOWN pooltag 'iEoP', please update pooltag.txt<BR> idle        2      208         0        0Power Manager idle handler <BR> jEoP        1       24         0        0UNKNOWN pooltag 'jEoP', please update pooltag.txt<BR> mEoP        1       88         0        0UNKNOWN pooltag 'mEoP', please update pooltag.txt<BR> ohci        1      136         0        01394 OHCI host controller driver <BR> rx..       3     1248         0        0UNKNOWN pooltag '  rx', please update pooltag.txt<BR> sidg        2       48         0        0GDI spooler events <BR> thdd        0        0         1    20480DirectDraw/3D handle manager table <BR> usbp       18    77056         2       96UNKNOWN pooltag 'usbp', please update pooltag.txt<BR> vPrt        0        0        18    68160UNKNOWN pooltag 'vPrt', please update pooltag.txt<BR> TOTAL     3570214 209120008     38769 13066104<BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about memory pools and pool tags, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !poolused RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

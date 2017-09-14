@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Visual SourceSafe</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Visual SourceSafe"><xml><MSHelp:Keyword Index="A" Term="SymChk_31a3896b-b22d-459b-b75a-9ec46ef5c8fa.xml"/>
+<META NAME="MS-HKWD" CONTENT="Visual SourceSafe">
+<META NAME="MS-HKWD" CONTENT="source servers, Visual SourceSafe">
+<META NAME="MS-HKWD" CONTENT="SrcSrv, Visual SourceSafe">
+<META NAME="MS-HKWD" CONTENT="Visual SourceSafe, SrcSrv">
+<META NAME="MS-HKWD" CONTENT="Visual SourceSafe, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_31a3896b-b22d-459b-b75a-9ec46ef5c8fa.xml"></A>Using Visual SourceSafe</H1>
+<P>Visual SourceSafe is an x86-based application, and the source indexing scripts and tools associated with it are installed only with the x86 package of Debugging Tools for Windows.</P>
+<P>To successfully use Visual SourceSafe with SrcSrv, several defaults must be set in the system, including the Visual SourceSafe default database, the current project, and the working folder.  You must also stamp each build project with a label so that Visual SourceSafe can differentiate between versions of a given file.  Finally, you must set up any credentials needed to access the Visual SourceSafe database.</P>
+<H4>Visual SourceSafe Database</H4>
+<P>The default Visual SourceSafe database can be set with the SSDIR environment variable.  If it is not set there, the SrcSrv indexing script can usually determine this from the registry.  If it cannot, the script prompts you to set SSDIR.  Regardless, this database value must be listed in your <a href="symchk_e64e8848-6e99-4ced-af83-199b6c35c2dd.xml.htm"><i>Srcsrv.ini</i></a> file along with a simple alias to identify the database.  More instructions can be found in the comments in <i>Srcsrv.ini</i>.  You should add the entry in the variables section of <i>Srcsrv.ini</i> using the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>MYDATABASE=<i>\\server\VssShare</i><BR></nobr></P>
+<P></P>
+<H4>Current Project</H4>
+<P>Visual SourceSafe uses the concept of a <i>current project</i>.  The SrcSrv indexing script respects this value and limits processing to those source files that are part of the current project.  To display the current project, use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ss.exe project</b><BR></nobr></P>
+<P></P>
+<P>To change the current project, use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ss.exe cp </b><i>Project</i><BR></nobr></P>
+<P></P>
+<P>where <i>Project </i>indicates the current project.  For example, to process all projects, set the current project to the root:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ss.exe cp </b>$/<BR></nobr></P>
+<P></P>
+<H4>Working Folder</H4>
+<P>Visual SourceSafe projects are associated with <i>working folders</i>.  A working folder is the location on the client computer that corresponds to the root of a project.  However it is possible for such a computer to obtain and build source without a working folder being specified, usually when creating projects through the Visual Studio interface or by using the command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ss.exe get -R</b><BR></nobr></P>
+<P></P>
+<P>However, this mode of operation is incompatible with SrcSrv indexing.  SrcSrv requires that a working folder be specified. To set the working folder, use the command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ss.exe workfold </b><i>Project Folder</i><BR></nobr></P>
+<P></P>
+<P>where <i>Project</i> indicates the current project and <i>Folder</i> indicates the location corresponding to the root of the project.</P>
+<P></P>
+<H4>Labels</H4>
+<P>Visual SourceSafe cannot determine what version of a file exists within the working directory of a build machine.  Consequently, you must use labels to stamp the project with an identifier that is used to extract source files on the debugger client.  Thus, before indexing, you must verify that all changes are checked into the database and then apply a label to the project.  Labels can be applied using the command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ss.exe label</b> <i>Project</i><BR></nobr></P>
+<P></P>
+<P>where <i>Project</i> indicates the current project.</P>
+<P>In the following example, the label &#8220;VERSION_3&#8221; is applied to a project called &#8220;$/sdktools&#8221;:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>E:\nt\user&gt;<b>ss.exe label</b> $/sdktools<BR>Label for $/sdktools: <i>VERSION_3</i><BR>Comment for $/sdktools:<BR><i>This is a comment.</i><BR></nobr></P>
+<P></P>
+<P>After the label is applied, you can specify this label to the SrcSrv indexing script by setting the environment variable, SSLABEL, or by passing it as a command-line parameter, as in the following example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>vssindex.cmd &#8211;label=</b>VERSION_3<BR></nobr></P>
+<P></P>
+<P>Again, this label is required for SrcSrv indexing to work.  Note that if you pass a label that does not exist in the project, it can take a long time for the script to complete and the results are of no use.</P>
+<P></P>
+<H4>Credentials</H4>
+<P>If your Visual SourceSafe database requires a user and optional password for access, these values must be set through the SSUSER and SSPWD environment variables.  This applies not only at the time the build is indexed, but also on the debugger client.  </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Visual SourceSafe RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

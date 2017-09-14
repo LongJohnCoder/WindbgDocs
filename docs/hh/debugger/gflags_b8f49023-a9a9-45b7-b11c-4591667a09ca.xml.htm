@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Maintain a list of objects for each type</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Maintain a list of objects for each type"><xml><MSHelp:Keyword Index="A" Term="GFlags_b8f49023-a9a9-45b7-b11c-4591667a09ca.xml"/>
+<META NAME="MS-HKWD" CONTENT="Maintain a list of objects for each type (global flag)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_b8f49023-a9a9-45b7-b11c-4591667a09ca.xml"></A>Maintain a list of objects for each type</H1>
+<P>The <b>Maintain a list of objects for each type</b> flag collects and maintains a list of active objects by object type, for example, event, mutex, and semaphore.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Abbreviation</b></TD>
+<TD Width="">otl</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Hexadecimal value</b></TD>
+<TD Width="">0x4000</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Symbolic Name</b></TD>
+<TD Width="">FLG_MAINTAIN_OBJECT_TYPELIST</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Destination</b></TD>
+<TD Width="">System-wide registry entry</TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>To display the object list, use Open Handles (<i>oh.exe</i>), a tool included in the Windows 2000 Resource Kit, and now available for download from the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=11233" target="_blank">Microsoft Windows 2000 Resource Kit</a> Web site. Because Open Handles automatically sets the OTL flag, but does not clear it, use <b>GFlags -otl</b> to clear the flag.</P>
+<P class="note"><b>Note</b>  The linked lists created when you set this flag use eight bytes of overhead for each object. Remember to clear this flag when your analysis is complete.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Maintain a list of objects for each type RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

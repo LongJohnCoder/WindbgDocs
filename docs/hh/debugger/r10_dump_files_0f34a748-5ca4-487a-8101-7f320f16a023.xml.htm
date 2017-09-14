@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Forcing a System Crash from the Keyboard</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Forcing a System Crash from the Keyboard"><xml><MSHelp:Keyword Index="A" Term="r10_dump_files_0f34a748-5ca4-487a-8101-7f320f16a023.xml"/>
+<META NAME="MS-HKWD" CONTENT="boot process, causing system crash from keyboard">
+<META NAME="MS-HKWD" CONTENT="CTRL+SCROLL LOCK">
+<META NAME="MS-HKWD" CONTENT="system crash, causing from keyboard">
+<META NAME="MS-HKWD" CONTENT="bug check, causing from keyboard">
+<META NAME="MS-HKWD" CONTENT="keyboard-caused system crash">
+<META NAME="MS-HKWD" CONTENT="USB keyboard and system crash">
+<META NAME="MS-HKWD" CONTENT="PS/2 keyboard and system crash">
+<META NAME="MS-HKWD" CONTENT="forcing system crash from keyboard"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r10_dump_files_0f34a748-5ca4-487a-8101-7f320f16a023.xml"></A>Forcing a System Crash from the Keyboard</H1>
+<P></P>
+<P>Most of the following keyboards can cause a system crash directly:</P>
+<DL><DT><b>PS/2 keyboards connected on i8042prt ports</b></DT>
+<DD>This feature is available in Windows 2000 and later versions of Windows operating system.</DD>
+<DT><b>USB keyboards</b></DT>
+<DD>This feature is available in:<B></B><UL type="disc">
+<LI>Windows Server 2003 Service Pack 1 if the hotfix available with <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=106065" target="_blank">KB 244139</a> is installed.</LI>
+<LI>Windows Server 2003 (with Service Pack 2 or later).</LI>
+<LI>Windows 7 and later versions of Windows operating system.</LI>
+</UL>
+</DD>
+</DL>
+<P>You must ensure the following three settings before the keyboard can cause a system crash:</P><B></B><OL type="1">
+<LI>If you wish a crash dump file to be written, you must enable such dump files, choose the path and file name, and select the size of the dump file. For more information, see <a href="r10_dump_files_d9e8043c-8489-4bd3-8f95-b76c2f8a4bf9.xml.htm">Enabling a Kernel-Mode Dump File</a>.</LI>
+<LI>With PS/2 keyboards, you must enable the keyboard-initiated crash in the registry. In the registry key <b>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\i8042prt\Parameters</b>, create a value named <b>CrashOnCtrlScroll</b>, and set it equal to a REG_DWORD value of 0x01.</LI>
+<LI>With USB keyboards, you must enable the keyboard-initiated crash in the registry. In the registry key <b>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\kbdhid\Parameters,</b> create a value named <b>CrashOnCtrlScroll</b>, and set it equal to a REG_DWORD value of 0x01.</LI>
+</OL>
+<P>You must restart the system for these settings to take effect.</P>
+<P>After this is completed, the keyboard crash can be initiated by using the following hotkey sequence: Hold down the <i>rightmost </i>CTRL key, and press the SCROLL LOCK<i> </i>key twice.</P>
+<P>The system then calls <b>KeBugCheck</b> and  issues <a href="t07_bugs_e0_84753fee-8a24-4049-bb27-aa07a5fc60de.xml.htm">bug check 0xE2</a> (MANUALLY_INITIATED_CRASH).   Unless crash dumps have been disabled, a crash dump file is written at this point.</P>
+<P>If a kernel debugger is attached to the crashed machine, the machine will break into the kernel debugger after the crash dump file has been written.</P>
+<P>For more information on using this feature, refer to the article <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=106065" target="_blank">Generate a memory dump file by using the keyboard (KB 244139)</a>.</P>
+<H4>Defining Alternate Keyboard Shortcuts to Force a System Crash from the Keyboard</H4>
+<P>You can configure values under the following registry subkeys for different keyboard shortcut sequences to generate the memory dump file: </P><B></B><UL type="disc">
+<LI>For PS/2 keyboards:<P><b>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\crashdump</b></P>
+</LI>
+<LI>For USB keyboards:<P><b>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdhid\crashdump</b></P>
+</LI>
+</UL>
+<P>You must create the following registry REG_DWORD values under these subkeys: </P>
+<DL><DT><b>Dump1Keys</b></DT>
+<DD>The <b>Dump1Keys</b> registry value is a bit map of the first hot key to use. For example, instead of using the <i>rightmost </i>CTRL key to initiate the hot key sequence, you can set the first hot key to be the <i>leftmost</i> SHIFT key. <P>The values for the first hot key are described in the following table. </P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">First key used in the keyboard shortcut sequence</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x01</TD>
+<TD Width="">Rightmost SHIFT key</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x02</TD>
+<TD Width="">Rightmost CTRL key</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x04</TD>
+<TD Width="">Rightmost ALT key</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10</TD>
+<TD Width="">Leftmost SHIFT key</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x20</TD>
+<TD Width="">Leftmost CTRL key</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x40</TD>
+<TD Width="">Leftmost ALT key</TD>
+</TR>
+</table>
+<P class="note"><b>Note  </b>You can assign <b>Dump1Keys</b> a value that enables one or more keys as the first key used in the keyboard shortcut sequence. For example, assign <b>Dump1Keys</b> a value of 0x11 to define both the <i>rightmost </i>and<i> leftmost </i>SHIFT keys as the first key in the keyboard shortcut sequence.</P>
+</DD>
+<DT><b>Dump2Key</b></DT>
+<DD>The <b>Dump2Key</b> registry value is the index into the scancode table for the keyboard layout of the target computer. The following is the actual table in the driver. <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>const UCHAR keyToScanTbl[134] = { <BR>        0x00,0x29,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,<BR>        0x0A,0x0B,0x0C,0x0D,0x7D,0x0E,0x0F,0x10,0x11,0x12,<BR>        0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x00,<BR>        0x3A,0x1E,0x1F,0x20,0x21,0x22,0x23,0x24,0x25,0x26,<BR>        0x27,0x28,0x2B,0x1C,0x2A,0x00,0x2C,0x2D,0x2E,0x2F,<BR>        0x30,0x31,0x32,0x33,0x34,0x35,0x73,0x36,0x1D,0x00,<BR>        0x38,0x39,0xB8,0x00,0x9D,0x00,0x00,0x00,0x00,0x00,<BR>        0x00,0x00,0x00,0x00,0x00,0xD2,0xD3,0x00,0x00,0xCB,<BR>        0xC7,0xCF,0x00,0xC8,0xD0,0xC9,0xD1,0x00,0x00,0xCD,<BR>        0x45,0x47,0x4B,0x4F,0x00,0xB5,0x48,0x4C,0x50,0x52,<BR>        0x37,0x49,0x4D,0x51,0x53,0x4A,0x4E,0x00,0x9C,0x00,<BR>        0x01,0x00,0x3B,0x3C,0x3D,0x3E,0x3F,0x40,0x41,0x42,<BR>        0x43,0x44,0x57,0x58,0x00,0x46,0x00,0x00,0x00,0x00,<BR>        0x00,0x7B,0x79,0x70 };<BR></nobr></P>
+<P class="note"><b>Note</b>  Index 124 (sysreq) is a special case because an 84-key keyboard has a different scan code. </P>
+</DD>
+</DL>
+<P>If you define alternate keyboard shortcuts to force a system crash from a USB or PS/2 keyboard, you must either set the <b>CrashOnCtrlScroll</b> registry value to 0 or remove it from the registry.</P>
+<H4>Limitations</H4>
+<P>It is possible for a system to freeze in such a way that the keyboard shortcut sequence will not work. However, this should be a very rare occurrence. Using the keyboard shortcut sequence to initiate a crash will work even in many instances where CTRL+ALT+DELETE does not work.</P>
+<P>Forcing a system crash from the keyboard does not work if the computer stops responding at a high interrupt request level (IRQL). This limitation exists because the <i>Kbdhid.sys</i> driver, which allows the memory dump process to run, operates at a lower IRQL than the <i>i8042prt.sys</i> driver. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Forcing a System Crash from the Keyboard RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_FORMAT_XXX</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_FORMAT_XXX"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_FORMAT_XXX"/>
+<MSHelp:Keyword Index="A" Term="Structures_028478d4-21bb-446c-bb20-579405e62fb0.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_FORMAT_XXX bit-flags"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_028478d4-21bb-446c-bb20-579405e62fb0.xml"></A>DEBUG_FORMAT_<i>XXX</i></H1>
+<P>The DEBUG_FORMAT_<i>XXX</i> bit-flags are used by <a href="idebugclient_6ce4aeba-f7a6-4872-9ff2-baf3b3165471.xml.htm">WriteDumpFile2</a> and <a href="idebugclient_cbae8215-df5f-484c-9b0a-8a5dc1564a00.xml.htm">WriteDumpFileWide</a> to determine the format of a <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#d02ecf5e-605d-42e2-9aea-a3ea60e2defb">crash dump file</a> and, for user-mode Minidumps, what information to include in the file.</P>
+<P>The following bit-flags apply to all crash dump files.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_WRITE_CAB</TD>
+<TD Width="">Package the crash dump file in a CAB file.  The supplied file name or file handle is used for the CAB file; the crash dump is first created in a temporary file before being moved into the CAB file.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_CAB_SECONDARY_FILES</TD>
+<TD Width="">Include the current symbols and mapped images in the CAB file.<BR>If DEBUG_FORMAT_WRITE_CAB is not set, this flag is ignored.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_NO_OVERWRITE</TD>
+<TD Width="">Do not overwrite existing files.</TD>
+</TR>
+</table>
+<P></P>
+<P>The following bit-flags can also be included for user-mode Minidumps.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_FULL_MEMORY</TD>
+<TD Width="">Add full memory data.  All accessible committed pages owned by the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#997fd309-38d4-4217-9777-65e9f2af4377">target application</a> will be included.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_HANDLE_DATA</TD>
+<TD Width="">Add data about the handles that are associated with the target application.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_UNLOADED_MODULES</TD>
+<TD Width="">Add unloaded <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> information.  This information is available only in Windows Server 2003 and later versions of Windows.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_INDIRECT_MEMORY</TD>
+<TD Width="">Add indirect memory.  A small region of memory that surrounds any address that is referenced by a pointer on the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#81c37228-c201-48ad-9f7a-85d8b1ade52c">stack</a> or backing store is included.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_DATA_SEGMENTS</TD>
+<TD Width="">Add all data segments within the executable images.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_FILTER_MEMORY</TD>
+<TD Width="">Set to zero all of the memory on the stack and in the backing store that is not useful for recreating the stack trace.  This can make compression of the Minidump more efficient and increase privacy by removing unnecessary information.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_FILTER_PATHS</TD>
+<TD Width="">Remove the module paths, leaving only the module names.  This is useful for protecting privacy by hiding the directory structure (which may contain the user&#8217;s name).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_PROCESS_THREAD_DATA</TD>
+<TD Width="">Add the process environment block (PEB) and thread environment block (TEB).  This flag can be used to provide Windows system information for threads and processes.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_PRIVATE_READ_WRITE_MEMORY</TD>
+<TD Width="">Add all committed private read-write memory pages.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_NO_OPTIONAL_DATA</TD>
+<TD Width="">Prevent privacy-sensitive data from being included in the Minidump.  Currently, this flag excludes from the Minidump data that would have been added due to the following flags being set:<BR>DEBUG_FORMAT_USER_SMALL_PROCESS_THREAD_DATA,<BR>DEBUG_FORMAT_USER_SMALL_FULL_MEMORY,<BR>DEBUG_FORMAT_USER_SMALL_INDIRECT_MEMORY,<BR>DEBUG_FORMAT_USER_SMALL_PRIVATE_READ_WRITE_MEMORY.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_FULL_MEMORY_INFO</TD>
+<TD Width="">Add all basic memory information.  This is the information returned by the <a href="idebugdataspaces_45524d69-d9be-4eb0-971c-3ae6bb6089b2.xml.htm"><b>QueryVirtual</b></a> method.  The information for all memory is included, not just valid memory, which allows the debugger to reconstruct the complete virtual memory layout from the Minidump.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_THREAD_INFO</TD>
+<TD Width="">Add additional <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#a5a5985a-10e6-4a13-8a11-d9935f5661b9">thread</a> information, which includes execution time, start time, exit time, start address, and exit status.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FORMAT_USER_SMALL_CODE_SEGMENTS</TD>
+<TD Width="">Add all code segments with the executable images.</TD>
+</TR>
+</table>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_FORMAT_XXX RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

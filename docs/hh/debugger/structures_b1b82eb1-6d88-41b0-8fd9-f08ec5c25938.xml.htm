@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_TYPEOPTS_XXX</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_TYPEOPTS_XXX"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_TYPEOPTS_XXX"/>
+<MSHelp:Keyword Index="A" Term="Structures_b1b82eb1-6d88-41b0-8fd9-f08ec5c25938.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_TYPEOPTS_XXX options"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_b1b82eb1-6d88-41b0-8fd9-f08ec5c25938.xml"></A>DEBUG_TYPEOPTS_<i>XXX</i></H1>
+<P>The type options affect how the engine formats numbers and strings for output.</P>
+<P>The options are represented by a bit-set with the following bit flags.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TYPEOPTS_UNICODE_DISPLAY</TD>
+<TD Width="">When this bit is set, USHORT pointers and arrays are output as Unicode characters.<BR><BR>This is equivalent to the debugger command <b>.enable_unicode 1</b>.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TYPEOPTS_LONGSTATUS_DISPLAY</TD>
+<TD Width="">When this bit is set, LONG integers are output in the default base instead of decimal.<BR><BR>This is equivalent to the debugger command <b>.enable_long_status 1</b>.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TYPEOPTS_FORCERADIX_OUTPUT</TD>
+<TD Width="">When this bit is set, integers (except for LONG integers) are output in the default base instead of decimal.<BR><BR>This is equivalent to the debugger command <b>.force_radix_output 1</b>.<BR><BR></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>By default, all of the type formatting options are turned off.</P>
+<P>For more information about types, see <a href="engine_dg_20e559a0-525c-4e47-ba69-b70d3576e059.xml.htm">Types</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_TYPEOPTS_XXX RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

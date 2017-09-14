@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Initialize</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Initialize"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="Initialize"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_e6893e43-8573-4f07-baee-e9f4adcde156.xml"/>
+<META NAME="MS-HKWD" CONTENT="ExtExtension::Initialize method">
+<META NAME="MS-HKWD" CONTENT="Initialize (ExtExtension) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_e6893e43-8573-4f07-baee-e9f4adcde156.xml"></A>Initialize</H1>
+<P><P>The <b>Initialize</b> method is called by the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2dbaa658-dbfe-47de-8266-97ed86c41aea">engine</a> to initialize an EngExtCpp extension library after loading it.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>virtual HRESULT</b><BR><b>  ExtExtension::Initialize(</b><BR><b>    void</b><BR><b>    )</b><BR></P>
+<DL><H4>Parameters</H4>None</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The extension library was successfully initialized.</DD>
+</DL>Any other value indicates that the extension DLL was unable to initialize and the engine will unload it.<H4>Comments</H4>
+<P>The extension library version number should be set by this method.  This can be done by setting the members <b>m_ExtMajorVersion</b> and <b>m_ExtMinorVersion</b> of the base class <a href="engextcpp_ref_3a533353-f008-4887-b937-2098acf1c68e.xml.htm"><b>ExtExtension</b></a>.</P>
+<P>The <b>ExtExtension</b> member <b>m_KnownStructs</b> should be set by this method to indicate to the engine which structures the extension library is capable of formatting for output.</P>
+<P>If this method is defined in the extension library class <a href="engextcpp_ref_731f5b1a-bf23-4c78-8c2e-663dd7c35793.xml.htm">EXT_CLASS</a>, it can be used by the extension library to initialize any variables it requires.</P>
+<P>There may or may not be a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugging session</a> active when this function is called, so you should not assume that the extension can query session information.</P>
+<H4>Requirements</H4>
+<p><b>Headers:</b> Defined in <i>Engextcpp.hpp</i>.  Include <i>Engextcpp.hpp</i>.</p>
+<H4>See Also</H4>
+<P><a href="engextcpp_ref_731f5b1a-bf23-4c78-8c2e-663dd7c35793.xml.htm">EXT_CLASS</a>, <a href="engextcpp_ref_3a533353-f008-4887-b937-2098acf1c68e.xml.htm"><b>ExtExtension</b></a>, <a href="engextcpp_ref_614648b0-a948-4066-bec1-0840e2cf08ec.xml.htm"><b>Uninitialize</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Initialize RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

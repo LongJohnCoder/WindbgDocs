@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Synchronizing with the Target Computer</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Synchronizing with the Target Computer"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_0852c58a-21b9-435f-b95a-da31251d1517.xml"/>
+<META NAME="MS-HKWD" CONTENT="synchronizing with the target computer">
+<META NAME="MS-HKWD" CONTENT="synchronizing with the target computer, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_0852c58a-21b9-435f-b95a-da31251d1517.xml"></A>Synchronizing with the Target Computer</H1>
+<P>Sometimes during kernel-mode debugging, the target computer stops responding to the debugger.</P>
+<P>In KD, you can press <a href="r23_keys_0f90911c-d4cf-4a2e-9811-5945a2db09fe.xml.htm"><b>CTRL+R (Re-synchronize)</b></a> and then press ENTER to synchronize with the target computer. In WinDbg, use <a href="r37_gui_2_056658d2-3ff6-4418-83b2-327602f6c786.xml.htm">CTRL+ALT+R</a> or <a href="r37_gui_2_056658d2-3ff6-4418-83b2-327602f6c786.xml.htm"><b>Debug | Kernel Connection | Resynchronize</b></a>. </P>
+<P>These commands frequently restore communication between the host and the target. However, resynchronization might not always be successful, especially if you are using a 1394 kernel connection.</P>
+<P>The <a href="r21_metacmds_l_f69b1b8a-144b-4099-9ef6-0ba58a7db533.xml.htm"><b>.restart (Restart Kernel Connection)</b></a> command provides a more powerful method of resynchronization. This command is equivalent to exiting the debugger and then attaching a new debugger to the existing session. This command is available only in KD, not in WinDbg.</P>
+<P>The <b>.restart</b> command is most useful when you are performing <a href="r08_use_remote_73c4c537-42b6-451d-b928-2ec0a1357640.xml.htm">remote debugging through <i>remote.exe</i></a>. (In this kind of debugging, it might be difficult to end and restart the debugger.) However, you cannot use <b>.restart </b>from a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cab89f06-8d34-430d-b047-ea48e96aac1b">debugging client</a> if you are performing remote debugging through the debugger.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Synchronizing with the Target Computer RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

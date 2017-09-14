@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Introduction to Boot Options</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Introduction to Boot Options"><xml><MSHelp:Keyword Index="A" Term="bootini_08d86912-57de-439d-b3d5-2a3ad7b8ad17.xml"/>
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], about boot options">
+<META NAME="MS-HKWD" CONTENT="storing boot options">
+<META NAME="MS-HKWD" CONTENT="boot loaders [WDK]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_08d86912-57de-439d-b3d5-2a3ad7b8ad17.xml"></A>Introduction to Boot Options</H1>
+<P>The concept and content of boot options are very similar on all computers that run Microsoft Windows operating systems. However, prior to Windows Vista, computers with different processor firmware store boot options differently and require different tools to view and edit the options on each system. Computers with BIOS firmware, namely those with x86 and x64 processors, store boot options in a <i>Boot.ini</i> text file that can be edited in Notepad. Computers with EFI firmware, primarily computers with Itanium processors, store their options in non-volatile RAM that must be edited by using specialized tools.</P>
+<P>Windows Vista, and later versions of Windows, store boot option in a firmware-independent storage and configuration system. Windows Vista also introduces a new Boot Manager and system-specific boot loaders. For more information, see <a href="bootini_1a0c1be6-ad98-4a1b-abb7-a4ba559b2d92.xml.htm">Boot Options in Windows Vista and Later</a>.</P>
+<P>This section includes:</P><B></B><div class="indent1">
+<P><a href="bootini_b6707f0b-f96b-48f1-a8ff-ce2d9675dc22.xml.htm">Boot Options in a <i>Boot.ini</i> File</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_e22b37a4-4813-47cc-a0b2-cf6d510ac72c.xml.htm">Boot Options in EFI NVRAM</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_1a0c1be6-ad98-4a1b-abb7-a4ba559b2d92.xml.htm">Boot Options in Windows Vista and Later</a> </P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Introduction to Boot Options RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

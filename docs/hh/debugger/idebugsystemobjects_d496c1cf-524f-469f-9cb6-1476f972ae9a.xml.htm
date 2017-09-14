@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetCurrentThreadTeb</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetCurrentThreadTeb"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetCurrentThreadTeb"/>
+<MSHelp:Keyword Index="A" Term="IDebugSystemObjects_d496c1cf-524f-469f-9cb6-1476f972ae9a.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSystemObjects::GetCurrentThreadTeb method">
+<META NAME="MS-HKWD" CONTENT="GetCurrentThreadTeb (IDebugSystemObjects) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSystemObjects_d496c1cf-524f-469f-9cb6-1476f972ae9a.xml"></A>GetCurrentThreadTeb</H1>
+<P><P>The <b>GetCurrentThreadTeb</b> method returns the location of the thread environment block (TEB) for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#e79fad75-e3ff-41d6-9f36-896e7b1ce5bb">current thread</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSystemObjects::GetCurrentThreadTeb(</b><BR><b>    OUT PULONG64  </b><i>Offset</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Offset</i></DT>
+<DD>Receives the location in the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>'s virtual address space of the TEB for the current thread.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetCurrentThreadTeb</b> is available in all versions of <b>IDebugSystemObjects</b>.</P>
+<H4>Comments</H4>
+<P>In <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#1a7518e7-05c9-4be8-baf0-63b4024f4e30">user-mode debugging</a>, this method provides the same information as <a href="idebugsystemobjects_5d09a9f7-d6a3-49ed-b872-1b9ee5173d28.xml.htm"><b>GetCurrentThreadDataOffset</b></a>.</P>
+<P>In <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>, the location returned is of the TEB structure of the system thread that was executing on the processor represented by the current thread when the last <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurred.</P>
+<P class="note"><b>Note</b>  In kernel mode, the current thread is always a <a href="dbg_glossary_70b9b003-ee7a-401b-b0e3-bd8d3f9c3250.xml.htm#7fa3d938-d090-42d1-b248-63d8e65760a6">virtual thread</a> the debugger created for a processor in the target computer.  Because events may occur in different system threads, the TEB location for a virtual thread may change.</P>
+<P>For more information about threads, see <a href="engine_dg_1442c778-acca-4b77-a596-6863ab5c8279.xml.htm">Threads and Processes</a>.  For details on the TEB structure, see <i>Microsoft Windows Internals</i> by David Solomon and Mark Russinovich.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetCurrentThreadTeb RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

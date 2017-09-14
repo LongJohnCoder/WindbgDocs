@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Assemble</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Assemble"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="Assemble"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_99336950-ba0b-46e1-871d-582f08ab5519.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::Assemble method">
+<META NAME="MS-HKWD" CONTENT="Assemble (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_99336950-ba0b-46e1-871d-582f08ab5519.xml"></A>Assemble</H1>
+<P>The <b>Assemble</b> and <b>AssembleWide</b> methods assemble a single processor instruction.  The assembled instruction is placed in the target's memory.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::Assemble(</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN PCSTR  </b><i>Instr</i><b>,</b><BR><b>    OUT PULONG64  </b><i>EndOffset</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::AssembleWide(</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN PCWSTR  </b><i>Instr</i><b>,</b><BR><b>    OUT PULONG64  </b><i>EndOffset</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define AssembleT AssembleWide</b><BR><b>#else</b><BR><b>#define AssembleT Assemble</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Offset</i></DT>
+<DD>Specifies the location in the target's memory to place the assembled instruction.</DD>
+<DT><i>Instr</i></DT>
+<DD>Specifies the instruction to assemble.  The instruction is assembled according to the target's effective processor type (returned by <a href="idebugcontrol_284f54f4-897e-4329-b588-5eae0c638179.xml.htm"><b>SetEffectiveProcessorType</b></a>).</DD>
+<DT><i>EndOffset</i></DT>
+<DD>Receives the location in the target's memory immediately following the assembled instruction.  <i>EndOffset</i> can be used when assembling multiple instructions.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>These methods can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<P></P>
+<H4>Interface Version</H4>
+<P><b>Assemble</b> is available in all versions of <b>IDebugControl</b>.  <b>AssembleWide</b> is available in <b>IDebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>The assembly language depends on the effective processor type of the target machine.  For information about the assembly language, see the processor documentation.</P>
+<P class="note"><b>Note:</b> The <b>Assemble</b> and<b> AssembleWide</b> methods are not supported on some architectures, and on some other architectures not all instructions are supported.</P>
+<P>The assembly language options&#8212;returned by <a href="idebugcontrol_600ee4dc-0a79-42a9-a394-2ff053874f00.xml.htm"><b>GetAssemblyOptions</b></a>&#8212;affect the operation of this method.</P>
+<P>For an overview of using assembly in <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#75adb4be-6841-48ba-8227-9b322bfa7dd4">debugger applications</a>, see <a href="r07_use_operation_9afb8c89-95fa-499e-bc4e-98f0365df573.xml.htm">Debugging in Assembly Mode</a>.  For more information about using assembly with the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#98ac5bd2-076f-48f9-94e6-2a4518471d3c">debugger engine API</a>, see <a href="engine_dg_8c5b4c23-1d98-4736-be58-777a5a30520c.xml.htm">Assembling and Disassembling Instructions</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_7eb9fdc3-f2a0-4239-a035-9abb8e85cd28.xml.htm"><b>Disassemble</b></a>, <a href="idebugcontrol_600ee4dc-0a79-42a9-a394-2ff053874f00.xml.htm"><b>GetAssemblyOptions</b></a>, <b>a (Assemble)</b></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Assemble RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>User Space and System Space</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, User Space and System Space"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_d08cb60d-2986-48e8-87a7-ebbfec447f93.xml"/>
+<META NAME="MS-HKWD" CONTENT="system space">
+<META NAME="MS-HKWD" CONTENT="system space, addresses">
+<META NAME="MS-HKWD" CONTENT="system space, breakpoints">
+<META NAME="MS-HKWD" CONTENT="kernel space">
+<META NAME="MS-HKWD" CONTENT="kernel space, addresses">
+<META NAME="MS-HKWD" CONTENT="kernel space, breakpoints">
+<META NAME="MS-HKWD" CONTENT="user space">
+<META NAME="MS-HKWD" CONTENT="user space, addresses">
+<META NAME="MS-HKWD" CONTENT="user space, breakpoints">
+<META NAME="MS-HKWD" CONTENT="breakpoints, user space">
+<META NAME="MS-HKWD" CONTENT="breakpoints, system space"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_d08cb60d-2986-48e8-87a7-ebbfec447f93.xml"></A>User Space and System Space</H1>
+<P>Windows gives each user-mode application a block of virtual addresses. This is known as the <i>user space</i> of that application. The other large block of addresses, known as <i>system space</i> or <i>kernel space</i>, cannot be directly accessed by the application. </P>
+<P>When WinDbg or CDB sets a <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">breakpoint</a> in user space, this breakpoint is set at the specified address in the user space of a single process. During user-mode debugging, the current process determines the meaning of virtual addresses. For more information, see <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">Controlling Processes and Threads</a>.</P>
+<P>In kernel mode, you can set breakpoints in user space with the <b>bp</b>, <b>bu</b>, and <b>ba</b> commands or with the <b>Breakpoints</b> dialog box. You must first use the <i>process context</i> to specify the user-mode process that owns that address space by using <b>.process</b> <b>/i</b> (or a process-specific breakpoint on some kernel-space function) to switch the target to the correct <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#e761ea09-6dde-4444-9472-9e71933f4e71">process context</a>. </P>
+<P>Breakpoints in user space are always associated with the process whose process context was active when the breakpoints were set. If a user-mode debugger is debugging this process and if a kernel debugger is debugging the computer that the process is running on, this breakpoint breaks into the user-mode debugger, even though the breakpoint was actually set from the kernel debugger. You can break into the system from the kernel debugger at this point, or use the <a href="r19_metacmds_a_d3f65c1e-657b-4ead-8fe0-7f20503cb30f.xml.htm"><b>.breakin (Break to the Kernel Debugger)</b></a> command from the user-mode debugger to transfer control to the kernel debugger.</P>
+<H4>Determining the Range of User Space and System Space</H4>
+<P>If you need to determine the extent of user space and system space on the target computer, you can use the <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>dp (Display Memory)</b></a> command from a kernel debugger to display the Windows global variable <b>MmHighestUserAddress</b>. This variable contains the address of the top of user space. Since system space addresses are always higher than user space addresses, this value allows you to determine whether any given address is in user space or in kernel space. </P>
+<P>For example, on a 32-bit target computer with an x86 processor and standard boot parameters, this command will show the following result: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>dp nt!mmhighestuseraddress L1</b> <BR>81f71864  7ffeffff <BR></nobr></P>
+<P></P>
+<P>This indicates that user space ranges from the address 0x00000000 to 0x7FFEFFFF, and system space therefore ranges from 0x80000000 up to the highest possible address (which is 0xFFFFFFFF on a standard 32-bit Windows installation). </P>
+<P>With a 64-bit target computer, different values will occur.  For example, this command might show the following: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>dp nt!mmhighestuseraddress L1</b> <BR>fffff800`038b4010  000007ff`fffeffff <BR></nobr></P>
+<P></P>
+<P>This indicates that user space ranges from 0x00000000`00000000 to 0x000007FF`FFFEFFFF. Therefore, system space includes all addresses from 0x00000800`00000000 upward. </P>
+<P>For more information about Windows memory management, see <i>Microsoft Windows Internals</i> by David Solomon and Mark Russinovich (4th edition, Microsoft Press, 2005). </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: User Space and System Space RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

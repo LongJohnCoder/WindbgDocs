@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.time (Display System Time)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .time (Display System Time)"><xml><MSHelp:Keyword Index="A" Term="r22_metacmds_S_46c12602-4619-461b-aeca-4e806eb61911.xml"/>
+<META NAME="MS-HKWD" CONTENT=".time (Display System Time) command">
+<META NAME="MS-HKWD" CONTENT="Display System Time (.time) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r22_metacmds_S_46c12602-4619-461b-aeca-4e806eb61911.xml"></A>.time (Display System Time)</H1>
+<P>The <b>.time</b> command displays information about the system time variables.<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.time</b> [<b>-h</b> <i>Hours</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-h </b><i>Hours</i></DT>
+<DD>Specifies the offset from Greenwich Mean Time, in hours. A negative value of <i>Hours</i> must be enclosed in parentheses. </DD>
+<DT></DT>
+<DD></DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The system time variables control performance counter behavior.</P>
+<P>Here is an example in kernel mode:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>.time</b><BR>Debug session time: Wed Jan 31 14:47:08 2001<BR>System Uptime: 0 days 2:53:56 <BR><BR></nobr></P>
+<P>Here is an example in user mode:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.time</b><BR>Debug session time: Mon Apr 07 19:10:50 2003<BR>System Uptime: 4 days 4:53:56.461<BR>Process Uptime: 0 days 0:00:08.750<BR>  Kernel time: 0 days 0:00:00.015<BR>  User time: 0 days 0:00:00.015<BR><BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .time (Display System Time) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

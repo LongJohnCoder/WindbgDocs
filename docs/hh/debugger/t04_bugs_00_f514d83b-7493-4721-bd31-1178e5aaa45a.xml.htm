@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x3F: NO_MORE_SYSTEM_PTES</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x3F: NO_MORE_SYSTEM_PTES"><xml><MSHelp:Keyword Index="A" Term="t04_bugs_00_f514d83b-7493-4721-bd31-1178e5aaa45a.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x3F: NO_MORE_SYSTEM_PTES">
+<META NAME="MS-HKWD" CONTENT="NO_MORE_SYSTEM_PTES"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t04_bugs_00_f514d83b-7493-4721-bd31-1178e5aaa45a.xml"></A>Bug Check 0x3F: NO_MORE_SYSTEM_PTES</H1>
+<P>The NO_MORE_SYSTEM_PTES bug check has a value of 0x0000003F. This is the result of a system which has performed too many I/O actions. This has resulted in fragmented system page table entries (PTE).</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width=""><b>0:</b> system expansion PTE type<BR><BR><b>1:</b> nonpaged pool expansion PTE type<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">Size of memory request</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">Total free system PTEs</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Total system PTEs</TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>In almost all cases, the system is not actually out of PTEs. Rather, a driver has requested a large block of memory, but there is no contiguous block of sufficient size to satisfy this request.</P>
+<P>Often video drivers will allocate large amounts of kernel memory that must succeed. Some backup programs do the same.</P>
+<H4>Resolving the Problem</H4>
+<P><i>A possible work-around:  </i>Modify the registry to increase the total number of system PTEs. If this does not help, remove any recently-installed software, especially backup utilities or disk-intensive applications.</P>
+<P><i>Debugging the problem:</i> The following method can be used to debug bug check 0x3F.   </P>
+<P>First, get a stack trace, and use the <a href="r29_exts_kernel_q_d8bb5cc1-b88c-49dd-b74a-0b0acfb2a943.xml.htm"><b>!sysptes 3</b></a> extension command.</P>
+<P>Then set <b>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\TrackPtes</b> equal to DWORD 1, and reboot. This will cause the system to save stack traces. </P>
+<P>This allows you to display more detailed information about the PTE owners. For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!sysptes 4</b><BR><BR>0x2c47 System PTEs allocated to mapping locked pages<BR><BR>VA       MDL     PageCount  Caller/CallersCaller<BR>f0e5db48 eb6ceef0        1 ntkrpamp!MmMapLockedPages+0x15/ntkrpamp!IopfCallDriver+0x35<BR>f0c3fe48 eb634bf0        1 netbt!NbtTdiAssociateConnection+0x1f/netbt!DelayedNbtProcessConnect+0x17c<BR>f0db38e8 eb65b880        1 mrxsmb!SmbMmAllocateSessionEntry+0x89/mrxsmb!SmbCepInitializeExchange+0xda<BR>f8312568 eb6df880        1 rdbss!RxCreateFromNetRoot+0x3d7/rdbss!RxCreateFromNetRoot+0x93<BR>f8363908 eb685880        1 mrxsmb!SmbMmAllocateSessionEntry+0x89/mrxsmb!SmbCepInitializeExchange+0xda<BR>f0c54248 eb640880        1 rdbss!RxCreateFromNetRoot+0x3d7/rdbss!RxCreateFromNetRoot+0x93<BR>f0ddf448 eb5f3160        1 mrxsmb!MrxSmbUnalignedDirEntryCopyTail+0x387/mrxsmb!MRxSmbCoreInformation+0x36<BR>f150bc08 eb6367b0        1 mrxsmb!MrxSmbUnalignedDirEntryCopyTail+0x387/mrxsmb!MRxSmbCoreInformation+0x36<BR>f1392308 eb6fba70        1 netbt!NbtTdiOpenAddress+0x1fb/netbt!DelayedNbtProcessConnect+0x17c<BR>eb1bee64 edac5000      200 VIDEOPRT!pVideoPortGetDeviceBase+0x118/VIDEOPRT!VideoPortMapMemory+0x45<BR>f139b5a8 edd4b000       12 rdbss!FsRtlCopyWrite2+0x34/rdbss!RxDriverEntry+0x149<BR>eb41f400 ede92000       20 VIDEOPRT!pVideoPortGetDeviceBase+0x139/VIDEOPRT!VideoPortGetDeviceBase+0x1b<BR>eb41f198 edf2a000       20 NDIS!NdisReadNetworkAddress+0x3a/NDIS!NdisFreeSharedMemory+0x58<BR>eb41f1e4 eb110000       10 VIDEOPRT!pVideoPortGetDeviceBase+0x139/VIDEOPRT!VideoPortGetDeviceBase+0x1b<BR>......<BR><BR></nobr></P>
+<P>If the system runs out of PTEs again after the <b>TrackPtes</b> registry value has been set, <a href="t06_bugs_b0_36940fb9-208d-4455-9f83-2d24fb643457.xml.htm">bug check 0xD8</a> (DRIVER_USED_EXCESSIVE_PTES) will be issued instead of 0x3F. The name of the driver causing this error will be displayed as well.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x3F: NO_MORE_SYSTEM_PTES RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

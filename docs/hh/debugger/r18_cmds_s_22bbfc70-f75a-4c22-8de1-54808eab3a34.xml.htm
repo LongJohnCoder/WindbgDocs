@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ur (Unassemble Real Mode BIOS)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ur (Unassemble Real Mode BIOS)"><xml><MSHelp:Keyword Index="A" Term="r18_cmds_S_22bbfc70-f75a-4c22-8de1-54808eab3a34.xml"/>
+<META NAME="MS-HKWD" CONTENT="ur (Unassemble Real Mode BIOS) command">
+<META NAME="MS-HKWD" CONTENT="Unassemble Real Mode BIOS (ur) command">
+<META NAME="MS-HKWD" CONTENT="BIOS debugging, Unassemble Real Mode BIOS (ur) command">
+<META NAME="MS-HKWD" CONTENT="Itanium processor, Unassemble Real Mode BIOS (ur) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r18_cmds_S_22bbfc70-f75a-4c22-8de1-54808eab3a34.xml"></A>ur (Unassemble Real Mode BIOS)</H1>
+<P>The <b>ur</b> command displays an assembly translation of the specified 16-bit real-mode code.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>ur</b> <i>Range</i> <BR><b>ur</b> <i>Address</i><BR><b>ur</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Range</i></DT>
+<DD>Specifies the memory range that contains the instructions to disassemble. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the beginning of the memory range to disassemble. Eight instructions (on an x86-based processor) or nine instructions (on an Itanium-based processor) are unassembled. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If you do not specify <i>Range</i> or <i>Address</i>, the disassembly begins at the current address and extends eight instructions (on an x86-based processor) or nine instructions (on an Itanium-based processor).</P>
+<P>If you are examining 16-bit real-mode code on an x86-based processor, both the <b>ur</b> command and the <a href="r18_cmds_s_51dda883-e059-4b86-9406-a1f16ebd3fc1.xml.htm"><b>u (Unassemble)</b></a> command give correct results.</P>
+<P>However, if real-mode code exists in a location where the debugger is not  expecting it (for example, a non-x86 computer that is running or emulating x86-based BIOS code from a plug-in card), you must use <b>ur</b> to correctly disassemble this code.</P>
+<P>If you use <b>ur</b> on 32-bit or 64-bit code, the command tries to disassemble the code as if it were 16-bit code. This situation produces meaningless results.</P>
+<H4>Additional Information</H4>
+<P>For more information about how to debug BIOS code, see <a href="r07_use_operation_89b2c296-6e86-45cc-86b6-511f423f8989.xml.htm">Debugging BIOS Code</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ur (Unassemble Real Mode BIOS) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

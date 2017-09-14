@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x79: MISMATCHED_HAL</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x79: MISMATCHED_HAL"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_b500a98d-9fcf-41d7-830c-7afd5e0de11a.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x79: MISMATCHED_HAL">
+<META NAME="MS-HKWD" CONTENT="MISMATCHED_HAL"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_b500a98d-9fcf-41d7-830c-7afd5e0de11a.xml"></A>Bug Check 0x79: MISMATCHED_HAL</H1>
+<P>The MISMATCHED_HAL bug check has a value of 0x00000079. This bug check indicates that the Hardware Abstraction Layer (HAL) revision level or configuration does not match that of the kernel or the computer.</P>
+<H4>Parameters</H4>
+<P>The following parameters appear on the blue screen. Parameter 1 indicates the type of mismatch.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause.</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">The major processor control block (PRCB) level of <i>Ntoskrnl.exe</i>.</TD>
+<TD Width="">The major PRCB level of <i>Hal.dll</i>.</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The PRCB release levels are mismatched.  (Something is out of date.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">The build type of <i>Ntoskrnl.exe</i>.</TD>
+<TD Width="">The build type of <i>Hal.dll</i>.</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The build types are mismatched.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">The size of the loader parameter extension.</TD>
+<TD Width="">The major version of the loader parameter extension.</TD>
+<TD Width="">The minor version of the loader parameter extension.</TD>
+<TD Width="">The loader (<i>ntldr</i>) and HAL versions are mismatched.</TD>
+</TR>
+</table>
+<P></P>
+<P>When Parameter 1 equals 0x2, the following build type codes are used:</P><B></B><UL type="disc">
+<LI>0: Multiprocessor-enabled free build</LI>
+<LI>1: Multiprocessor-enabled checked build</LI>
+<LI>2: Single-processor free build</LI>
+<LI>3: Single-processor checked build</LI>
+</UL>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>The MISMATCHED_HAL bug check often occurs when a user manually updates <i>Ntoskrnl.exe </i>or <i>Hal.dll</i>.</P>
+<P>The error can also indicate that one of those two files is out of date. For example, the HAL might be designed for Microsoft Windows 2000 and the kernel is designed for Windows XP. Or the computer might erroneously have a multiprocessor HAL and a single-processor kernel installed, or vice versa.</P>
+<P>The <i>Ntoskrnl.exe</i> kernel file is for single-processor systems and <i>Ntkrnlmp.exe </i>is for multiprocessor systems. However, these file names correspond to the files on the installation media.After you have installed the Windows operating system, the file is renamed to <i>Ntoskrnl.exe</i>, regardless of the source file that is used. The HAL file also uses the name<i> Hal.dll</i> after installation, but there are several possible HAL files on the installation media. For more information, see "Installing the Checked Build" in the Windows Driver Kit (WDK).  </P>
+<H4>Resolving the Problem</H4>
+<P>Restart the computer by using the product CD or the Windows Setup disks. At the Welcome screen, press F10 to start the Recovery Console. Use the <b>Copy</b> command to copy the correct HAL or kernel file from the original CD into the appropriate folder on the hard disk. The <b>Copy</b> command detects whether the file that you are copying is in the Microsoft compressed file format. If so, it automatically expands the file that is copied on the target drive.  </P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x79: MISMATCHED_HAL RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

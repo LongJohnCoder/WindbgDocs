@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Modules</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Modules"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_7c681050-ba73-4e87-818f-a9fac75a720b.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, symbols, modules">
+<META NAME="MS-HKWD" CONTENT="Synthetic Modules"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_7c681050-ba73-4e87-818f-a9fac75a720b.xml"></A>Modules</H1>
+<P>An <i>image</i> is an executable, DLL, or driver that Windows has loaded as part of a <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#b9622678-468c-4b90-a002-a3d4280796f0">user-mode</a> process or the <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#ddf5e2eb-aa21-42cb-b18c-9621029f2e6e">kernel</a>.  The file from which the image was loaded is referred to as its <i>image file</i>.</P>
+<P>The <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> caches a list of <i>modules</i> for each process (or, in kernel-mode, the virtual process).  Typically each module in this list represents an image in the process.  The engine's module list can be synchronized with the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a> using <b>Reload</b>.</P>
+<P class="note"><b>Note</b>  In <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>, the engine's module list for the <a href="dbg_glossary_70b9b003-ee7a-401b-b0e3-bd8d3f9c3250.xml.htm#29bd5b67-5855-469b-a8d6-822d65629990">virtual process</a> contains both the system-wide <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#c2dfd7a9-249b-4018-9789-2b3d6268346b">kernel-mode</a> modules and the current process's <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#b9622678-468c-4b90-a002-a3d4280796f0">user-mode</a> modules.</P>
+<P>A module can be specified by its base address in the target's virtual address space, or by its index in the list of modules the engine maintains for the target.  The module's index equals its position in the list of modules, and therefore this index will change if a module with a lower index is unloaded. All unloaded modules have indexes; these are always higher than the indexes of loaded modules.  The base address of a module will not change as long as it remains loaded; in some cases it may change if the module is unloaded and then reloaded.</P>
+<P>The index is a number between zero and the number of modules in the target minus one.  The number of modules in the current process can be found by calling <a href="idebugsymbols_151a5c5e-ec01-4801-9ba2-86f26506410c.xml.htm"><b>GetNumberModules</b></a>.</P>
+<P>The index can be used to find the base address by calling <a href="idebugsymbols_0406a71f-e9eb-4acd-93e8-1637ee2506df.xml.htm"><b>GetModuleByIndex</b></a>.  The base address of a module owning a symbol with a given name can be found using <a href="idebugsymbols_a680615c-bc2a-4fa3-a83a-6960ed64c1e9.xml.htm"><b>GetSymbolModule</b></a>.</P>
+<P>The following methods return both the index and base address of the specified module:</P><B></B><UL type="disc">
+<LI>To find a module with a given module name, use <a href="idebugsymbols_1a407f12-64e8-43a3-b831-ef8c9b701537.xml.htm"><b>GetModuleByModuleName</b></a>.</LI>
+<LI>The module whose virtual address range contains a given address is returned by <a href="idebugsymbols_2f5375ce-a9f1-4e86-ab82-7f35edc716c2.xml.htm"><b>GetModuleByOffset</b></a>.  This method can be used to find the module index given the base address of the module.</LI>
+</UL>
+<P>The following methods return information about modules specified either by base address or index:</P><B></B><UL type="disc">
+<LI>The names of a module are returned by <a href="idebugsymbols_b200104b-e0e6-4470-80f9-d6904c346737.xml.htm"><b>GetModuleNames</b></a> and <a href="idebugsymbols_e00a93fb-08c4-4f37-9915-577a22d9c889.xml.htm"><b>GetModuleNameString</b></a>.</LI>
+<LI>Version information for the module is returned by <a href="idebugsymbols_a325db82-91a3-48d9-b189-8971cd5eaf75.xml.htm"><b>GetModuleVersionInformation</b></a>.</LI>
+<LI>Some of the parameters used to describe a module are returned by <a href="idebugsymbols_0a78fd64-15b7-4032-83a8-9867037e5081.xml.htm"><b>GetModuleParameters</b></a>.  For details on the parameters returned by this method, see <a href="structures_6e7366d2-9f49-4b7e-a277-d788808e4c40.xml.htm">DEBUG_MODULE_PARAMETERS</a>.</LI>
+</UL>
+<H4>Unloaded Modules</H4>
+<P>During user-mode debugging, unloaded modules are tracked only in Windows Server 2003 and later versions of Windows. Earlier versions of Windows only tracked unloaded modules in kernel mode.  When they are tracked, they are indexed after the loaded modules.  Hence any method that searches the target's modules will search all the loaded modules and then the unloaded modules.  Unloaded modules can be used to analyze failures caused by an attempt to call unloaded code.</P>
+<H4><A NAME="2531e9d1-70f3-4cca-b196-009fa0bf5dda"></A>Synthetic Modules</H4>
+<P><i>Synthetic modules</i> can be created as a way to label a region of memory.  These modules cannot contain real symbols, but they can contain <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">synthetic symbols</a>.  The method <a href="idebugsymbols_ecccfdc4-2942-480c-9f78-c21c4ed46c90.xml.htm"><b>AddSyntheticModule</b></a> creates a new synthetic module.  Synthetic modules can be removed using <a href="idebugsymbols_f1ed1ce4-53ad-469f-9ab8-17900b6870e8.xml.htm"><b>RemoveSyntheticModule</b></a>. Reloading all the modules in the target deletes all synthetic modules.</P>
+<H4>Image Path</H4>
+<P>The <i>executable image path</i> is used by the engine when searching for executable images.</P>
+<P>The executable image path can consist of several directories separated by semicolons (<b>;</b>).  These directories are searched in order.</P>
+<P>For an overview of the executable image path, see Executable Image Path.</P>
+<P>To add a directory to the executable image path, use the method <a href="idebugsymbols_ea3dc04a-42d9-4457-830d-5544f50c5a97.xml.htm"><b>AppendImagePath</b></a>.  The whole executable image path is returned by <a href="idebugsymbols_9d38f509-e800-4090-901b-6dc78710c15f.xml.htm"><b>GetImagePath</b></a> and can be changed using <a href="idebugsymbols_062aa9c4-33c9-4a73-a11f-7d5e6b94e96c.xml.htm"><b>SetImagePath</b></a>.</P>
+<H4>Additional Information</H4>
+<P>For more information about processes and virtual processes, see <a href="engine_dg_1442c778-acca-4b77-a596-6863ab5c8279.xml.htm"><b>Threads and Processes</b></a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Modules RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

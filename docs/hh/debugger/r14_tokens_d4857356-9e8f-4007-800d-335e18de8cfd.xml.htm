@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.printf</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .printf"><xml><MSHelp:Keyword Index="A" Term="r14_tokens_d4857356-9e8f-4007-800d-335e18de8cfd.xml"/>
+<META NAME="MS-HKWD" CONTENT=".printf token"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r14_tokens_d4857356-9e8f-4007-800d-335e18de8cfd.xml"></A>.printf</H1>
+<P>The <b>.printf</b> token behaves like the <b>printf</b> statement in C.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.printf </b>[<i>Option</i>] <b>"</b><i>FormatString</i><b>" [</b><i>Arguments</i><b> </b>...<b>]</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Syntax Elements</H4>
+<DT><i>Option</i></DT>
+<DD>(<i>WinDbg only)</i>  Specifies the type of text message that WinDbg should interpret the <i>FormatString</i> as.  WinDbg assigns each type of Debugger Command window message a background and text color; choosing one of these options causes the message to be displayed in the appropriate colors.  The default is to display the text as a normal-level message.  For more information on message colors and how to set them, see <a href="r37_gui_2_1be1d2c8-bb5f-4c06-b2a6-7bc84ba4ec56.xml.htm"><b>View | Options</b></a>.<P>The following options are available:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><I><B>Option</B></I></TD>
+<TD Width=""><I><B>Type of m</B><B>essage</B></I></TD>
+<TD Width=""><I><B>Title of c</B><B>olors in </B><B>Options d</B><B>ialog</B><B> </B><B>b</B><B>ox</B></I></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/od</b></TD>
+<TD Width="">debuggee</TD>
+<TD Width="">Debuggee level command window</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/oD</b></TD>
+<TD Width="">debuggee prompt</TD>
+<TD Width="">Debuggee prompt level command window</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/oe</b></TD>
+<TD Width="">error</TD>
+<TD Width="">Error level command window</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/on</b></TD>
+<TD Width="">normal</TD>
+<TD Width="">Normal level command window</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/op</b></TD>
+<TD Width="">prompt</TD>
+<TD Width="">Prompt level command window</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/oP</b></TD>
+<TD Width="">prompt registers</TD>
+<TD Width="">Prompt registers level command window</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/os</b></TD>
+<TD Width="">symbols</TD>
+<TD Width="">Symbol message level command window</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/ov</b></TD>
+<TD Width="">verbose</TD>
+<TD Width="">Verbose level command window</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/ow</b></TD>
+<TD Width="">warning</TD>
+<TD Width="">Warning level command window</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>FormatString</i></DT>
+<DD>Specifies the format string, as in <b>printf</b>.  In general, conversion characters work exactly as in C. For the floating-point conversion characters the 64-bit argument is interpreted as a 32-bit floating-point number unless the <b>l</b>  modifier is used.<P>The <b>%p</b> conversion character is supported, but it represents a pointer in the target's virtual address space.  It may not have any modifiers and it uses the debugger's internal address formatting.  The following additional conversion characters are supported:</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width=""><i>Character</i></TH>
+<TH Width=""><i>Argument Type</i></TH>
+<TH Width=""><i>Argument</i></TH>
+<TH Width=""><i>Text printed</i></TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%p</b> </TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Pointer in the target's virtual address space </TD>
+<TD Width="">The value of the pointer. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%N</b> </TD>
+<TD Width="">DWORD_PTR (32 or 64 bits, depending on the <i>host's</i> architecture) </TD>
+<TD Width="">Pointer in the host's virtual address space </TD>
+<TD Width="">The value of the pointer.  (This is equivalent to the standard C <b>%p</b> character.) </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%I</b>  </TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Any 64-bit value </TD>
+<TD Width="">The specified value.  If this is greater than 0xFFFFFFFF it is printed as a 64-bit address, otherwise it is printed as a 32-bit address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%ma</b> </TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address of a NULL-terminated ASCII string in the target's virtual address space </TD>
+<TD Width="">The specified string.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%mu</b> </TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address of a NULL-terminated Unicode string in the target's virtual address space </TD>
+<TD Width="">The specified string.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%msa</b> </TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address of an ANSI_STRING structure in the target's virtual address space</TD>
+<TD Width="">The specified string.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%msu</b> </TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address of a UNICODE_STRING structure in the target's virtual address space </TD>
+<TD Width="">The specified string.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%y</b></TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address of a debugger symbol in the target's virtual address space. </TD>
+<TD Width="">String containing the name of the specified symbol (and displacement, if any). </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%ly</b></TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address of a debugger symbol in the target's virtual address space </TD>
+<TD Width="">String containing the name of the specified symbol (and displacement, if any), as well as any available source line information. </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+</DD>
+<DT><i>Arguments</i></DT>
+<DD>Specifies arguments for the format string, as in <b>printf</b>. The number of arguments specified should match the number of conversion characters in <i>FormatString</i>. Each argument is an expression that will be evaluated by the default expression evaluator (MASM or C++). For details, see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a>.</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>The color settings that can be chosen using the <i>Options</i> parameter are by default all set to black text on a white background. To make best use of these options, you must first use <a href="r37_gui_2_1be1d2c8-bb5f-4c06-b2a6-7bc84ba4ec56.xml.htm"><b>View | Options</b></a> to open the <b>Options </b>dialog box and change the color settings for Debugger Command window messages.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about other control flow tokens and their use in debugger command programs, see <a href="r05_use_start_81070bdc-2ffb-4a22-a785-0935553fb4c4.xml.htm">Using Debugger Command Programs</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .printf RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

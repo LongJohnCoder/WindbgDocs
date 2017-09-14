@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using CVS</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using CVS"><xml><MSHelp:Keyword Index="A" Term="SymChk_e0a42899-cb48-4ee2-a80c-bf69c34ba59c.xml"/>
+<META NAME="MS-HKWD" CONTENT="Concurrent Versions System (CVS)">
+<META NAME="MS-HKWD" CONTENT="source servers, CVS">
+<META NAME="MS-HKWD" CONTENT="SrcSrv, CVS">
+<META NAME="MS-HKWD" CONTENT="Concurrent Versions System (CVS), overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_e0a42899-cb48-4ee2-a80c-bf69c34ba59c.xml"></A>Using CVS</H1>
+<P>The CVS module for Source Server was developed using Concurrent Versions System (CVS) 1.11.17 (client).  It has not been tested with any other versions of CVS.  Furthermore, the current version of the module is a beta version.  </P>
+<P></P>
+<H4>CVSROOT</H4>
+<P>On the computer on which you source index the build, CVSROOT cannot contain password and user information.  Use <i>cvs.exe</i> to set your credentialing information. </P>
+<P>To prepare the <a href="symchk_e64e8848-6e99-4ced-af83-199b6c35c2dd.xml.htm"><i>Srcsrv.ini</i></a><i> </i>file for CVS indexing you must enter an alias for your repository that uniquely distinguishes it from any others in your network.  This repository must match the value of CVSROOT in your environment.  There is no need to set this value in the copy of <i>Srcsrv.ini</i> that you keep with your debugger clients because the alias is defined in the source indexed <i>.pdb</i> file.</P>
+<H4>Client Computer</H4>
+<P>The client computer that extracts files during debugging does not need a CVS sandbox or CVSROOT set.  It does need CVS binaries in the path, and if the repository is locked, you must set the username and password with <i>Cvs.exe</i>.</P>
+<H4>Revision Tags</H4>
+<P>CVS is unable to extract a file by its version number.  Instead, it must be done using what is known as a <i>tag</i>.  When indexing a CVS-based system, you must ensure that all changes are checked into the repository and then apply a tag using the &#8220;cvs tag&#8221; command.  Then, when indexing the file, make certain you use the &#8220;label&#8221; command-line parameter to specify the tag that you want to associate with the build you are indexing. You can achieve the same result by setting CVS_LABEL in the environment.  Other values can be set from the environment or the command line.  Use the <b>-??</b> command-line option with SSIndex to examine your choices and to verify that all was configured correctly:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ssindex.cmd &#8211;system=cvs -??</b><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using CVS RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

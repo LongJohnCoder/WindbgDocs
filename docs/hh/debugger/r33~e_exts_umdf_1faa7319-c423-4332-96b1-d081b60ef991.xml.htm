@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wudfext.umirp</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wudfext.umirp"><xml><MSHelp:Keyword Index="A" Term="r33~e_exts_umdf_1faa7319-c423-4332-96b1-d081b60ef991.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wudfext.umirp extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~e_exts_umdf_1faa7319-c423-4332-96b1-d081b60ef991.xml"></A>!wudfext.umirp</H1>
+<P>The <b>!wudfext.umirp</b> extension displays information about a host user-mode I/O request packet (UM IRP). </P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wudfext.umirp</b> <i>Address</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the UM IRP to display information about. </DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Wudfext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>You can use the <a href="r33~e_exts_umdf_95c40bd6-f77f-4371-9a85-399cfcadc977.xml.htm"><b>!wudfext.umirps</b></a> extension command to display a list of all outstanding UM IRPs in the host process. </P>
+<P>Each UM IRP has one or more stack locations. Each stack location corresponds to the parameters that a single driver in the device stack will receive when it is called to handle a request. </P>
+<P><b>!wudfext.umirp</b> dumps all of the stack locations and marks the current location with a right angle bracket (&gt;). The current location corresponds to the driver that currently owns the request. The current location changes when a driver forwards a request to the next lower driver in the stack, or when the driver completes a request that the driver owns.</P>
+<P>The following is an example of the <b>!wudfext.umirp</b> display:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!umirp 3dd480</b> <BR>UM IRP: 0x003dd480  UniqueId: 0xde  Kernel Irp: 0x0x85377850<BR>  Type: WudfMsg_READ<BR>  ClientProcessId: 0x338<BR>  Device Stack: 0x0034e4e0<BR>  IoStatus<BR>    hrStatus: 0x0<BR>    Information: 0x0<BR>  Driver/Framework created IRP: No<BR>  Data Buffer: 0x00000000 / 0<BR>  IsFrom32BitProcess: Yes<BR>  CancelFlagSet: No<BR>  Cancel callback: 0x01102224<BR>  Total number of stack locations: 2<BR>  CurrentStackLocation: 2 (StackLocation[ 1 ])<BR>    StackLocation[ 0 ]<BR>      UNINITIALIZED<BR>  &gt; StackLocation[ 1 ]<BR>      IWDFRequest:  ????<BR>      IWDFDevice:   0x000f2f80<BR>      IWDFFile:     0x003a7648<BR>      Completion:<BR>        Callback:   0x00000000<BR>        Context:    0x00000000<BR>      Parameters: (RequestType: WdfRequestRead)<BR>        Buffer length:        0x400<BR>        Key:                  0x00000000<BR>        Offset:               0x0<BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~e_umdf_274b4c46-4590-4992-9646-2353377d7549.xml.htm">User-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wudfext.umirp RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

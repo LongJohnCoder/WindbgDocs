@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!psr</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !psr"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_c4de21d1-15d3-455e-9b5f-6be83651f164.xml"/>
+<META NAME="MS-HKWD" CONTENT="!psr extension">
+<META NAME="MS-HKWD" CONTENT="PSR (processor status word)">
+<META NAME="MS-HKWD" CONTENT="processor status word (PSR)">
+<META NAME="MS-HKWD" CONTENT="Itanium processor, !psr extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_c4de21d1-15d3-455e-9b5f-6be83651f164.xml"></A>!psr</H1>
+<P>The <b>!psr</b> extension displays an Itanium processor status word (PSR).</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!psr</b> <i>PSR</i> [<i>DisplayLevel</i>] <BR><b>!psr @ipsr</b> [<i>DisplayLevel</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>PSR</i></DT>
+<DD>Specifies the hexadecimal address of the PSR to be displayed.</DD>
+<DT><b>@ipsr</b></DT>
+<DD>Causes the <b>ipsr</b> register to be displayed.</DD>
+<DT><i>DisplayLevel</i></DT>
+<DD>Can be any one of the following options:<DL><DT><b>0</b></DT>
+<DD>This causes only the values of each PSR field to be displayed.  This is the default.</DD>
+<DT><b>1</b></DT>
+<DD>This causes the display to include more in-depth information on each of the PSR fields that are not reserved or ignored.</DD>
+<DT><b>2</b></DT>
+<DD>This causes the display to include more in-depth information on all of the PSR fields, including those that are ignored or reserved.</DD>
+</DL>
+</DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Exts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension command can only be used with an Itanium target computer.</P>
+<P></P>
+<H4>Comments</H4>
+<P>Here are a couple of examples:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; !psr @ipsr<BR>psr:ia bn ed ri ss dd da id it mc is cpl rt tb lp db<BR> 0  1  0  0  0  0  0  0  1  0  0  3   1  0  0  0<BR>si di pp sp dfh dfl dt pk i ic | mfh mfl ac up be<BR> 0  0  1  0  0   0   1  0 1  1 |  0   1   0  0  0<BR><BR>kd&gt; <b>!psr @ipsr 1</b><BR><BR>  be : 0 : Big-Endian<BR>  up : 0 : User Performance monitor enable<BR>  ac : 1 : Alignment Check<BR> mfl : 1 : Lower floating-point registers written<BR> mfh : 0 : Upper floating-point registers written<BR>  ic : 1 : Interruption Collection<BR>   i : 0 : Interrupt enable<BR>  pk : 0 : Protection Key enable<BR>  dt : 1 : Data Address Translation enable<BR> dfl : 0 : Disabled Floating-point Low  register set<BR> dfh : 1 : Disabled Floating-point High register set<BR>  sp : 0 : Secure Performance monitors<BR>  pp : 1 : Privileged Performance monitor enable<BR>  di : 0 : Disable Instruction set transition<BR>  si : 0 : Secure Interval timer<BR>  db : 0 : Debug Breakpoint fault enable<BR>  lp : 0 : Lower Privilege transfer trap enable<BR>  tb : 0 : Taken Branch trap enable<BR>  rt : 1 : Register stack translation enable<BR> cpl : 0 : Current Privilege Level<BR>  is : 0 : Instruction Set<BR>  mc : 0 : Machine Abort Mask delivery disable<BR>  it : 1 : Instruction address Translation enable<BR>  id : 0 : Instruction Debug fault disable<BR>  da : 0 : Disable Data Access and Dirty-bit faults<BR>  dd : 0 : Data Debug fault disable<BR>  ss : 0 : Single Step enable<BR>  ri : 0 : Restart Instruction<BR>  ed : 0 : Exception Deferral<BR>  bn : 1 : register Bank<BR>  ia : 0 : Disable Instruction Access-bit faults<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t10_arch_ia64_058d30c8-b157-4fed-8317-371ffe0d0942.xml.htm">Itanium Architecture</a>, or consult an Intel architecture manual.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !psr RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

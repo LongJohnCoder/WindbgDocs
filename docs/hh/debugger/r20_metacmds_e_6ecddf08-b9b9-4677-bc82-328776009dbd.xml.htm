@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.force_radix_output (Use Radix for Integers)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .force_radix_output (Use Radix for Integers)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_6ecddf08-b9b9-4677-bc82-328776009dbd.xml"/>
+<META NAME="MS-HKWD" CONTENT=".force_radix_output (Use Radix for Integers) command">
+<META NAME="MS-HKWD" CONTENT="Use Radix for Integers (.force_radix_output) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_6ecddf08-b9b9-4677-bc82-328776009dbd.xml"></A>.force_radix_output (Use Radix for Integers)</H1>
+<P>The <b>.force_radix_output</b> command specifies whether integers are displayed in decimal format or in the default radix.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.force_radix_output 0</b> <BR><b>.force_radix_output 1</b> <BR></nobr></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>0</b></DT>
+<DD>Displays all integers (except for long integers) in decimal format. This is the default behavior for the Debugger.</DD>
+<DT><b>1</b></DT>
+<DD>Displays all integers (except for long integers) in the default radix.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>.force_radix_output</b> command affects the output of the <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a> command.</P>
+<P>In WinDbg, <b>.force_radix_output</b> also affects the display in the <a href="r36_gui_1_e05d85f5-f61e-41e4-b80a-f72b4fc0bdd7.xml.htm">Locals window</a> and the <a href="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml.htm">Watch window</a>. You can select or clear <b>Always display numbers in default radix</b> on the shortcut menu of the Locals or Watch window to have the same effect as <b>.force_radix_output</b>. These windows are automatically updated after you issue this command.</P>
+<P>The <b>.force_radix_output</b> command affects only the display of standard integers. To specify whether long integers are displayed in decimal format or the default radix, use the <a href="r20_metacmds_e_c15fcdd0-2668-465e-b455-98469d929bd6.xml.htm"><b>.enable_long_status (Enable Long Integer Display)</b></a> command.</P>
+<P>To change the default radix, use the <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .force_radix_output (Use Radix for Integers) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

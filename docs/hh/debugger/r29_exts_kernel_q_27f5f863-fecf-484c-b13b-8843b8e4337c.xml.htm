@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!sysinfo</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !sysinfo"><xml><MSHelp:Keyword Index="A" Term="r29_exts_kernel_Q_27f5f863-fecf-484c-b13b-8843b8e4337c.xml"/>
+<META NAME="MS-HKWD" CONTENT="!sysinfo extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r29_exts_kernel_Q_27f5f863-fecf-484c-b13b-8843b8e4337c.xml"></A>!sysinfo</H1>
+<P><P>The <b>!sysinfo </b>extension reads and displays specified SMBIOS, Advanced Configuration and Power Interface (ACPI), and CPU information from a dump file or live system.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!sysinfo cpuinfo </b>[<b>-csv </b>[<b>-noheaders</b>]]<BR><b>!sysinfo cpumicrocode </b>[<b>-csv </b>[<b>-noheaders</b>]]<BR><b>!sysinfo cpuspeed </b>[<b>-csv </b>[<b>-noheaders</b>]]<BR><b>!sysinfo gbl </b>[<b>-csv </b>[<b>-noheaders</b>]]<BR><b>!sysinfo machineid </b>[<b>-csv </b>[<b>-noheaders</b>]]<BR><b>!sysinfo registers</b><BR><b>!sysinfo smbios </b>[<b>-csv </b>[<b>-noheaders</b>]]<b> </b>{<b>-debug </b>| <b>-devices </b>|<b> -memory </b>|<b> -power </b>|<b> -processor </b>|<b> -system </b>|<b> -v</b>}<b> </b><BR><b>!sysinfo</b> -<b>?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>cpuinfo</b></DT>
+<DD>Displays information about the processor.</DD>
+<DT><b>cpumicrocode</b></DT>
+<DD>(<i>GenuineIntel processors only)  </i>Displays the initial and cached microcode processor versions. </DD>
+<DT><b>cpuspeed</b></DT>
+<DD>Displays the maximum and current processor speeds.</DD>
+<DT><b>gbl</b></DT>
+<DD>Displays the BIOS list of ACPI tables.</DD>
+<DT><b>machineid</b></DT>
+<DD>Displays machine ID information for the SMBIOS, BIOS, firmware, system, and baseboard.</DD>
+<DT><b>registers</b></DT>
+<DD>Displays machine-specific registers (MSRs).</DD>
+<DT><b>smbios</b></DT>
+<DD>Displays the SMBIOS table. </DD>
+<DT><b>-csv</b></DT>
+<DD>Displays all data in comma-separated, variable-length (CSV) format.</DD>
+<DT><b>-noheaders</b></DT>
+<DD>Suppresses the header for the CSV format.</DD>
+<DT><b>-debug</b></DT>
+<DD>Displays output in standard format and CSV format.</DD>
+<DT><b>-devices</b></DT>
+<DD>Displays the device entries in the SMBIOS table. </DD>
+<DT><b>-memory</b></DT>
+<DD>Displays the memory entries in the SMBIOS table.</DD>
+<DT><b>-power</b></DT>
+<DD>Displays the power entries in the SMBIOS table.</DD>
+<DT><b>-processor</b></DT>
+<DD>Displays the processor entries in the SMBIOS table.</DD>
+<DT><b>-system</b></DT>
+<DD>Displays the system entries in the SMBIOS table.</DD>
+<DT><b>-v</b></DT>
+<DD>Verbose. Displays the details of entries in the SMBIOS table.</DD>
+<DT><b>-?</b></DT>
+<DD>Displays help for this extension in the Debugger Command window.</DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP base system<BR>Windows 2003 base system</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP, Service Pack 2 and later<BR>Windows 2003, Service Pack 1 and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension is useful only when the dump file is a System Crash File <nobr>(.dmp)</nobr> that has not been converted to a minidump file from a kernel or full dump file, or the live system has finished starting and is online (for example, at the log-in prompt).</P>
+<P></P>
+<P>You can use any combination of the <b>-debug</b>, <b>-devices</b>, <b>memory</b>, <b>-power</b>, <b>-processor</b>, <b>-system</b>,  and <b>-v</b> parameters in a single extension command.</P>
+<P></P>
+<P>The following parameters are supported only on particular systems: </P><B></B><UL type="disc">
+<LI>The <b>gbl </b>parameter works only when the target computer supports ACPI. </LI>
+<LI>The <b>smbios</b> parameter works only when the target computer supports SMBIOS. </LI>
+<LI>The <b>registers </b>parameter does not work on Itanium-based target computers, because they do not collect MSRs.</LI>
+</UL>
+<P>Microsoft makes every effort to remove personally identifiable information (PII) from these records. All PII is removed from dump files. However, on a live system, some PII may not yet be removed. As a result, PII fields will be reported as 0 or blank, even if they actually contain information. </P>
+<P></P>
+<P>To stop execution of commands that include the <b>cpuinfo</b>, <b>gbl</b>, <b>registers</b>, or <b>smbios</b> parameters at any time, press CTRL+BREAK (in WinDbg) or CTRL+C (in KD).</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !sysinfo RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

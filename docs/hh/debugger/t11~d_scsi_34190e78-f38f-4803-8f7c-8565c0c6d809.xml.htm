@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Checks for SCSI Miniport Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Checks for SCSI Miniport Debugging"><xml><MSHelp:Keyword Index="A" Term="t11~d_scsi_34190e78-f38f-4803-8f7c-8565c0c6d809.xml"/>
+<META NAME="MS-HKWD" CONTENT="SCSI Miniport debugging, bug checks"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~d_scsi_34190e78-f38f-4803-8f7c-8565c0c6d809.xml"></A>Bug Checks for SCSI Miniport Debugging</H1>
+<P>There are primarily two bug checks that arise in the course of debugging a SCSI miniport driver: bug check 0x77 (KERNEL_STACK_INPAGE_ERROR) and bug check 0x7A (KERNEL_DATA_INPAGE_ERROR).  For full details of their parameters,  see <a href="t05_bugs_60_2bb65949-533f-4dde-b9c4-1a3058b900f4.xml.htm">Bug Check 0x77</a> and <a href="t05_bugs_60_0b233b52-160a-482d-9a51-c53f2b3843b6.xml.htm">Bug Check 0x7A</a>.  </P>
+<P>Each of these bug checks indicates that a paging error has occurred. There are three main causes for these bug checks:</P><B></B><UL type="disc">
+<LI>Full bus reset due to a timeout on a particular device or no activity on an adapter  </LI>
+<LI>Selection time-out  </LI>
+<LI>Controller errors  </LI>
+</UL>
+<P></P>
+<P>To determine the precise cause of the failure, begin by using the <a href="r33~d_exts_scsi_ad29f3d3-49d6-45e4-97cb-c905a0a66646.xml.htm"><b>!scsikd.classext</b></a> extension, which displays information about recently failed requests, including the SRB status, SCSI status, and sense data of the request.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!scsikd.classext 816e96b0</b><BR>Storage class device 816e96b0 with extension at 816e9768<BR><BR>Classpnp Internal Information at 817b4008<BR><BR>    Failed requests:<BR><BR>           Srb    Scsi<BR>    Opcode Status Status Sense Code  Sector   Time  Stamp<BR>    ------ ------ ------ ---------- -------- ------------<BR>      2a     0a     02    03 0c 00  0000abcd 23:01:07.453  Retried<BR>      28     0a     02    03 04 00  0000abcd 23:01:07.984  Retried<BR><BR>dt classpnp!_CLASS_PRIVATE_FDO_DATA 817b4008 &#8211;<BR><BR>...<BR></nobr></P>
+<P>In the previous example, opcode 0x2A indicates a write operation, and 0x28 indicates a read operation. The SCSI status in the example is 02, which indicates a check condition. The sense codes provide more error information. </P>
+<P>As always, miniport driver developers are responsible for associating error codes from their hardware to the SRB status codes. Typically, timeouts are associated with SRB 0x0A, the code for a selection timeout. SRB 0x0e is typically associated with a full bus reset, but it can also be associated with controller errors. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Checks for SCSI Miniport Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

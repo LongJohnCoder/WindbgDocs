@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>AttachKernel</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, AttachKernel"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="AttachKernel"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_9008538b-3492-4952-a18f-b1dd346e887e.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::AttachKernel method">
+<META NAME="MS-HKWD" CONTENT="AttachKernel (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_9008538b-3492-4952-a18f-b1dd346e887e.xml"></A>AttachKernel</H1>
+<P><P>The <b>AttachKernel</b> and <b>AttachKernelWide</b> methods connect the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> to a kernel target.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient::AttachKernel(</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    IN OPTIONAL PCSTR  </b><i>ConnectOptions</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugClient5::AttachKernelWide(</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    IN OPTIONAL PCWSTR  </b><i>ConnectOptions</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define AttachKernelT AttachKernelWide</b><BR><b>#else</b><BR><b>#define AttachKernelT AttachKernel</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Specifies the flags that control how the debugger attaches to the kernel target.  The possible values are:<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_ATTACH_KERNEL_CONNECTION</TD>
+<TD Width="">Attach to the kernel on the target computer.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_ATTACH_LOCAL_KERNEL</TD>
+<TD Width="">Attach to the local kernel.  To check whether this option is available, use <a href="idebugclient_05c5446d-28b4-4d9b-bb20-7dc1746545d6.xml.htm"><b>IsKernelDebuggerEnabled</b></a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_ATTACH_EXDI_DRIVER</TD>
+<TD Width="">Attach to a kernel by using an eXDI driver.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>ConnectOptions</i></DT>
+<DD>Specifies the connection settings for communicating with the computer running the kernel target.  The interpretation of <i>ConnectOptions</i> depends on the value of <i>Flags</i>.<DL><DT>DEBUG_ATTACH_KERNEL_CONNECTION</DT>
+<DD><i>ConnectOptions</i> will be interpreted the same way as the options that follow the <b>-k</b> switch on the WinDbg and KD command lines.  Environment variables affect <i>ConnectOptions</i> in the same way they affect the <b>-k</b> switch.  For details on the syntax of this string, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>.</DD>
+<DT>DEBUG_ATTACH_LOCAL_KERNEL</DT>
+<DD>Set to NULL.</DD>
+<DT>DEBUG_ATTACH_EXDI_DRIVER</DT>
+<DD>eXDI drivers are not described in this documentation.  If you have an eXDI interface to your hardware probe or hardware simulator, please contact Microsoft for debugging information.</DD>
+</DL>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>AttachKernel</b> is available in all versions of <b>IDebugClient</b>.  <b>AttachKernelWide</b> is available in <b>IDebugClient5</b> and later versions.</P>
+<H4>Comments</H4>
+<P><a href="dbg_glossary_bf550fa0-6430-4ba8-8ea4-50277d85224d.xml.htm#25608ae4-c0f1-40d1-bacd-68f65b74d497">Local debugging</a> and debugging over an IEEE 1394 cable are supported only on Windows XP and later versions of Windows. Both the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#592a23b6-7f7d-434c-b4f6-5e1470b41393">target computer</a> and the <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#77205ddc-d81d-483c-ab52-47eb6d613eac">host computer</a> must be running one of these Windows versions, but not necessarily the same one.</P>
+<P class="note"><b>Note</b>  The engine doesn't completely attach to the kernel until the <a href="idebugcontrol_19a7d8b3-1f16-400e-bf8f-c782d48b2cf5.xml.htm"><b>WaitForEvent</b></a> method has been called.  Only after the kernel has generated an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> &#8212; for example, the initial breakpoint &#8212; does it become available in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugger session</a>.</P>
+<P>For more information about connecting to live kernel-mode targets, see <a href="engine_dg_d08297b5-3efa-4b7b-864b-c76133c62431.xml.htm">Live Kernel-Mode Targets</a>.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugclient_5a7fe06a-42e4-4bdd-935c-8130cdfef568.xml.htm"><b>GetKernelConnectionOptions</b></a>, <a href="idebugclient_032236c1-3072-4226-919b-3f6f95635a20.xml.htm"><b>AttachProcess</b></a>, <a href="idebugclient_05c5446d-28b4-4d9b-bb20-7dc1746545d6.xml.htm"><b>IsKernelDebuggerEnabled</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: AttachKernel RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

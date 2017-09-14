@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging a Failed Driver Unload</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging a Failed Driver Unload"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_e5790e3a-eff5-4532-8cb5-18f315537a05.xml"/>
+<META NAME="MS-HKWD" CONTENT="failed driver unload">
+<META NAME="MS-HKWD" CONTENT="driver unload debugging">
+<META NAME="MS-HKWD" CONTENT="unload failures"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_e5790e3a-eff5-4532-8cb5-18f315537a05.xml"></A>Debugging a Failed Driver Unload</H1>
+<P>A driver will not unload if there is a leaked reference to <b>DeviceObject</b> or <b>DriverObject</b>. This is a common cause of failed driver unloads.</P>
+<P>Apart from <b>IoCreateDevice</b>, there are several functions that take reference to <b>DriverObject</b> and <b>DeviceObject</b>. If you do not follow the guidelines for using the functions, you will end up leaking the reference.</P>
+<P>Here is an example of how to debug this problem. Although <b>DeviceObject</b> is used in this example, this technique works for all objects.</P><B>Fixing a driver that fails to unload</B><OL type="1">
+<LI>Put a breakpoint right after the driver calls <b>IoCreateDevice</b>. Get the <b>DeviceObject</b> address.</LI>
+<LI>Find the object header by using the <a href="r28_exts_kernel_n_ce7c0939-9122-41e1-bffb-27f4e5855af6.xml.htm"><b>!object</b></a> extension on this object address:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!object 81a578c0</b>  <BR>Object: 81a578c0  Type: (81bd0e70) Device<BR>    ObjectHeader: 81a578a8<BR>    HandleCount: 0  PointerCount: 3<BR>    Directory Object: e1001208  Name: Serial0 <BR></nobr></P>
+<P>The first variable in the <b>ObjectHeader</b> is the <i>pointer count</i> or <i>reference count</i>.</P>
+</LI>
+<LI>Put a write breakpoint on the pointer count, using the <b>ObjectHeader</b>'s address:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>ba w4 81a578a8 "k;g"</b> <BR></nobr></P>
+</LI>
+<LI>Use <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a>. The debugger will produce a log.</LI>
+<LI>Look for the mismatched reference/dereference pair &#8212; specifically, a missing dereference. (Note that <b>ObReferenceObject</b> is implemented as a macro inside the kernel.)</LI>
+</OL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging a Failed Driver Unload RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

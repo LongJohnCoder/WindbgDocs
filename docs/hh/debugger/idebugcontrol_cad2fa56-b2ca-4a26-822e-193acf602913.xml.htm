@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetLogFile</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetLogFile"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetLogFile"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_cad2fa56-b2ca-4a26-822e-193acf602913.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetLogFile method">
+<META NAME="MS-HKWD" CONTENT="GetLogFile (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_cad2fa56-b2ca-4a26-822e-193acf602913.xml"></A>GetLogFile</H1>
+<P>The <b>GetLogFile</b> and <b>GetLogFileWide</b> methods return the name of the currently open log file.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::GetLogFile(</b><BR><b>    OUT OPTIONAL PSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FileSize</i><b>,</b><BR><b>    OUT PBOOL  </b><i>Append</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::GetLogFileWide(</b><BR><b>    OUT OPTIONAL PWSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FileSize</i><b>,</b><BR><b>    OUT PBOOL  </b><i>Append</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetLogFileT GetLogFileWide</b><BR><b>#else</b><BR><b>#define GetLogFileT GetLogFile</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Buffer</i></DT>
+<DD>Receives the name of the currently open log file.  If <i>Buffer</i> is NULL, this information is not returned.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size, in characters, of the <i>Buffer</i> buffer.</DD>
+<DT><i>FileSize</i></DT>
+<DD>Receives the size, in characters, of the name of the log file.  If <i>FileSize</i> is NULL, this information is not returned.</DD>
+<DT><i>Append</i></DT>
+<DD>Receives TRUE if log messages are appended to the log file, or FALSE if the contents of the log file were discarded when the file was opened.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful.  However, the name of the log file was too long to fit in the <i>Buffer</i> buffer so the name was truncated.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>There is no currently open log file.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetLogFile</b> is available in all versions of <b>IDebugControl</b>.  <b>GetLogFileWide</b> is available in <b>IDebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P><b>GetLogFile</b> and <b>GetLogFileWide</b> behave the same way as <a href="idebugcontrol_9822bd84-b8ee-4d36-a66f-e38567d23646.xml.htm"><b>GetLogFile2</b></a> and <a href="idebugcontrol_9822bd84-b8ee-4d36-a66f-e38567d23646.xml.htm"><b>GetLogFile2Wide</b></a> with <i>Append</i> receiving only the information about the DEBUG_LOG_APPEND flag.</P>
+<P>For more information about log files, see <a href="engine_dg_ce5dd9cd-7068-4ca7-95d9-f4985a9812c2.xml.htm">Using Input and Output</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_984f684e-c1c0-4819-b8ac-02718581c6ad.xml.htm"><b>OpenLogFile</b></a>, <a href="idebugcontrol_9822bd84-b8ee-4d36-a66f-e38567d23646.xml.htm"><b>GetLogFile2</b></a>, <a href="idebugcontrol_988fe3ac-a51d-4757-995d-40fe9d66aa02.xml.htm"><b>CloseLogFile</b></a>, <a href="idebugcontrol_a3ef306a-5134-49c7-b589-65a4afaa90ac.xml.htm"><b>GetLogMask</b></a>, <b>.logfile</b></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetLogFile RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

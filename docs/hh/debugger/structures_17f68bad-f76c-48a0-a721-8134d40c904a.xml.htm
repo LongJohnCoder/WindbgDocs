@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Specific Exceptions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Specific Exceptions"><xml><MSHelp:Keyword Index="A" Term="Structures_17f68bad-f76c-48a0-a721-8134d40c904a.xml"/>
+<META NAME="MS-HKWD" CONTENT="specific exception filter, exception codes">
+<META NAME="MS-HKWD" CONTENT="exception codes"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_17f68bad-f76c-48a0-a721-8134d40c904a.xml"></A>Specific Exceptions</H1>
+<P>The following table lists the exception codes for the <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#98344738-8c89-457f-96a5-428053fcf5f2">specific exception filters</a>.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Exception Code</TH>
+<TH Width="">Exception</TH>
+<TH Width="">Header file or value</TH>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_ACCESS_VIOLATION</TD>
+<TD Width="">Access violation</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_ASSERTION_FAILURE</TD>
+<TD Width="">Assertion failure</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_APPLICATION_HANG</TD>
+<TD Width="">Application hang</TD>
+<TD Width="">0xCFFFFFFF</TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_BREAKPOINT</TD>
+<TD Width="">Break instruction exception</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_CPP_EH_EXCEPTION</TD>
+<TD Width="">C++ exception handling exception</TD>
+<TD Width="">0xE06D7363</TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_CLR_EXCEPTION</TD>
+<TD Width="">Common language runtime (CLR) exception</TD>
+<TD Width="">0xE0434f4D</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_CONTROL_BREAK</TD>
+<TD Width="">CTRL+Break exception</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_CONTROL_C</TD>
+<TD Width="">CTRL+C exception</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_DATATYPE_MISALIGNMENT</TD>
+<TD Width="">Data misaligned</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_COMMAND_EXCEPTION</TD>
+<TD Width="">Debugger command exception</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_GUARD_PAGE_VIOLATION</TD>
+<TD Width="">Guard page violation</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_ILLEGAL_INSTRUCTION</TD>
+<TD Width="">Illegal instruction</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_IN_PAGE_ERROR</TD>
+<TD Width="">In-page I/O error</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_INTEGER_DIVIDE_BY_ZERO</TD>
+<TD Width="">Integer divide-by-zero</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_INTEGER_OVERFLOW</TD>
+<TD Width="">Integer overflow</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_INVALID_HANDLE</TD>
+<TD Width="">Invalid handle</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_INVALID_LOCK_SEQUENCE</TD>
+<TD Width="">Invalid lock sequence</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_INVALID_SYSTEM_SERVICE</TD>
+<TD Width="">Invalid system call</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_PORT_DISCONNECTED</TD>
+<TD Width="">Port disconnected</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_SINGLE_STEP</TD>
+<TD Width="">Single-step exception</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_STACK_BUFFER_OVERRUN</TD>
+<TD Width="">Stack buffer overflow</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_STACK_OVERFLOW</TD>
+<TD Width="">Stack overflow</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_VERIFIER_STOP</TD>
+<TD Width="">Application Verifier stop</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">STATUS_WAKE_SYSTEM_DEBUGGER</TD>
+<TD Width="">Wake debugger</TD>
+<TD Width=""><i>NtStatus.h</i></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Specific Exceptions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

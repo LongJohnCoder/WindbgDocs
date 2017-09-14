@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>dds, dps, dqs (Display Words and Symbols)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, dds, dps, dqs (Display Words and Symbols)"><xml><MSHelp:Keyword Index="A" Term="r16_cmds_C_4865ae85-0c91-47f6-ad21-fa4c1db674be.xml"/>
+<META NAME="MS-HKWD" CONTENT="dds (Display Words and Symbols) command">
+<META NAME="MS-HKWD" CONTENT="dps (Display Words and Symbols) command">
+<META NAME="MS-HKWD" CONTENT="dqs (Display Words and Symbols) command">
+<META NAME="MS-HKWD" CONTENT="Display Words and Symbols (dds - dps - dqs) command">
+<META NAME="MS-HKWD" CONTENT="memory, Display Words and Symbols (d*s) command">
+<META NAME="MS-HKWD" CONTENT="symbols, Display"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r16_cmds_C_4865ae85-0c91-47f6-ad21-fa4c1db674be.xml"></A>dds, dps, dqs (Display Words and Symbols)</H1>
+<P>The <b>dds</b>, <b>dps</b>, and <b>dqs</b> commands display the contents of memory in the given range. This memory is assumed to be a series of addresses in the symbol table. The corresponding symbols are displayed as well.     </P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>dds</b> [<i>Options</i>] [<i>Range</i>] <BR><b>dqs</b> [<i>Options</i>] [<i>Range</i>] <BR><b>dps</b> [<i>Options</i>] [<i>Range</i>] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Specifies one or more display options. Any of the following options can be included, except that no more than one <b>/p</b>* option can be indicated:<DL><DT><b>/c</b> <i>Width</i></DT>
+<DD>Specifies the number of columns to use in the display. If this is omitted, the default number of columns depends on the display type. Because of the way symbols are displayed by these commands, it is usually best to use the default of only one data column.</DD>
+<DT><b>/p</b></DT>
+<DD><i>(Kernel-mode only)</i>  Uses physical memory addresses for the display. The range specified by <i>Range</i> will be taken from physical memory rather than virtual memory.</DD>
+<DT><b>/p[c]</b></DT>
+<DD><i>(Kernel-mode only)</i>  Same as <b>/p</b>, except that cached memory will be read. The brackets around <b>c</b> must be included.</DD>
+<DT><b>/p[uc]</b></DT>
+<DD><i>(Kernel-mode only)</i>  Same as <b>/p</b>, except that uncached memory will be read. The brackets around <b>uc</b> must be included.</DD>
+<DT><b>/p[wc]</b></DT>
+<DD><i>(Kernel-mode only)</i>  Same as <b>/p</b>, except that write-combined memory will be read. The brackets around <b>wc</b> must be included.</DD>
+</DL>
+</DD>
+<DT><i>Range</i></DT>
+<DD>Specifies the memory area to display. For more syntax details, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>. If you omit <i>Range</i>, the command will display memory starting at the ending location of the last display command. If <i>Range</i> is omitted and no previous display command has been used, the display begins at the current instruction pointer. If a simple address is given, the default range length is 128 bytes.<P></P>
+<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The second character of <b>dds</b> is case-sensitive. The third character of all these commands is case-sensitive.</P>
+<P>The <b>dds</b> command displays double-word (4 byte) values like the <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>dd</b></a> command. The <b>dqs</b> command displays quad-word (8 byte) values like the <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>dq</b></a> command. The <b>dps</b> command displays pointer-sized values (4 byte or 8 byte, depending on the target computer's architecture) like the <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>dp</b></a> command.</P>
+<P>Each of these words is treated as an address in the symbol table. The corresponding symbol information is displayed for each word.</P>
+<P>If line number information has been enabled, source file names and line numbers will be displayed when available.</P>
+<H4>Additional Information</H4>
+<P>For an overview of memory manipulation and a description of other memory-related commands, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: dds, dps, dqs (Display Words and Symbols) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

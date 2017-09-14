@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Windows 2000 Server Configuration</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Windows 2000 Server Configuration"><xml><MSHelp:Keyword Index="A" Term="ADPlus_29dac7c2-0b66-4fff-ac68-6230aeb8723a.xml"/>
+<META NAME="MS-HKWD" CONTENT="ADPlus, Windows Server configuration"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_29dac7c2-0b66-4fff-ac68-6230aeb8723a.xml"></A>Windows 2000 Server Configuration</H1>
+<P>Before you run ADPlus in <a href="adplus_5c0245b0-d5f8-47aa-b73f-86b8d8c6111c.xml.htm">crash mode</a> on Microsoft Windows 2000 Server, you should prepare the server to retrieve the most information out of the ADPlus crash-mode debugging sessions. </P>
+<P>To prepare the server, you must do the following:</P><B></B><OL type="1">
+<LI>Install the Windows 2000 with Service Pack 1 (SP1) or Windows 2000 with Service Pack 2 (SP2) symbols (<i>Sp1sym.exe</i> or <i>Sp2sym.exe</i>) to the <i>C:\WINNT\Symbols</i> folder on your servers. You can download the symbols from the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=17363" target="_blank">Windows Symbols</a> Web site.</LI>
+<LI>After you download <i>Sp1sym.exe</i> or <i>Sp2sym.exe</i>, run the file from the designated folder.</LI>
+<LI>When you are prompted, extract the files to a new temporary folder (such as <i>C:\Sp1sym</i> or <i>C:\Sp2sym</i>) or to a drive or folder that has sufficient disk space.</LI>
+<LI>Run <i>C:\Sp1sym\Support\Debug\Symbols\i386\Symbolsx.exe</i> or <i>C:\Sp2sym\Support\Debug\Symbols\i386\Symbolsx.exe</i> (where <i>C:\Sp1sym</i> or <i>C:\Sp2sym</i> is the folder where you extracted the files in the preceding step).</LI>
+<LI>Read the license agreement and then click <b>Yes</b>.</LI>
+<LI>When you are prompted for a directory where you can extract the files to, select <i>C:\WINNT\Symbols</i>, and then click <b>OK</b>. A new <i>C:\WINNT\Symbols</i> directory appears with various subdirectories named <i>DLL</i>, <i>EXE</i>, and so on.</LI>
+<LI>Copy the symbols for your custom DLLs and any hotfixes that came after the service packs (SP1 and SP2) to the <i>C:\WINNT\Symbols\DLL</i> folder.</LI>
+<LI>Copy the symbols for your custom <i>.exe</i> files to the <i>C:\WINNT\Symbols\EXE</i> folder and obtain any <i>.pdb</i> or <i>.dbg</i> files that are related to the target application and put these files in the <i>C:\WINNT\Symbols\DLL</i> folder.</LI>
+<LI>Overwrite any <i>.dbg</i> or <i>.pdb</i> files that already exist in the <i>C:\WINNT\Symbols\DLL</i> directory with versions from your hotfixes.<P>You can use the latest version of WinZip to open hotfix packages. You can extract the symbols from the <i>\Debug</i> subdirectory, which is contained in each hotfix self-installer.</P>
+</LI>
+<LI>Create an _NT_SYMBOL_PATH environment variable, and set it equal to "C:\WINNT\Symbols". This variable can be a system environment variable or a user environment variable.</LI>
+</OL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Windows 2000 Server Configuration RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

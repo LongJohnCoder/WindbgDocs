@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Basic AML Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Basic AML Debugging"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_4de764b0-bf54-4d66-a30f-b5d79fcb10e3.xml"/>
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, basic use"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_4de764b0-bf54-4d66-a30f-b5d79fcb10e3.xml"></A>Basic AML Debugging</H1>
+<P>The AMLI Debugger supports two types of specialized commands: <i>AMLI Debugger extensions</i> and <i>AMLI Debugger commands</i>.</P>
+<P>When you are performing AML debugging, you should carefully distinguish between two different kinds of prompts that will appear in the Debugger Command window:</P><B></B><UL type="disc">
+<LI>When you see the <b>kd&gt;</b> prompt, you are controlling the kernel debugger. All the standard kernel debugger commands and extensions are available. In addition, the AMLI Debugger extensions are also available. In Windows 2000, these extensions have a syntax of <b>!acpikd.amli </b><I><B>command</B></I>. In Windows XP and later versions of Windows, these extensions have a syntax of <b>!amli </b><I><B>command</B></I>. The AMLI Debugger commands are not available in this mode.</LI>
+<LI>When you see the <b>AMLI(? for help)-&gt;</b> prompt, you are controlling the AMLI Debugger. (When you are using WinDbg, this prompt will appear in the top pane of the Debugger Command window, and an <b>Input&gt;</b> prompt will appear in the bottom pane.) From this prompt, you can enter any AMLI Debugger command. You can also enter any AMLI Debugger extension; these extensions should <i>not</i> be prefixed with <b>!amli</b>. The standard kernel debugging commands are not available in this mode.</LI>
+<LI>When you see no prompt at all, the target computer is running.</LI>
+</UL>
+<P></P>
+<P>At the beginning of any debugging session, you should set your AMLI Debugger options with the <a href="r33_exts_acpi_d7069173-5282-4e7f-8685-163c13340c28.xml.htm"><b>!amli set</b></a> extension. The <b>verboseon</b>, <b>traceon</b>, and <b>errbrkon</b> options are also very useful. When your target computer is running Windows XP or later, you should <i>always</i> activate the <b>spewon</b> option. See the extension reference page for details.</P>
+<P>There are several ways for the AMLI Debugger to become active:</P><B></B><UL type="disc">
+<LI>If a breakpoint in AML code is encountered, ACPI will break into the AMLI Debugger.</LI>
+<LI>If a serious error or exception occurs within AML code (such as an <b>int 3</b>), ACPI will break into the AMLI Debugger.</LI>
+<LI>If the <b>errbrkon</b> option has been set, <i>any</i> AML error will cause ACPI to break into the AMLI Debugger.</LI>
+<LI>If you want to deliberately break into the AMLI Debugger, use the <a href="r33_exts_acpi_1e2ac77d-055f-497d-be71-59204cda8b1c.xml.htm"><b>!amli debugger</b></a> extension and then the <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command. The next time any AML code is executed by the interpreter, the AMLI Debugger will take over.</LI>
+</UL>
+<P></P>
+<P>When you are at the AMLI Debugger prompt, you can type <b>q</b> to return to the kernel debugger, or type <b>g</b> to resume normal execution.</P>
+<P></P>
+<P>The following extensions are especially useful for AML debugging:</P><B></B><UL type="disc">
+<LI>The <a href="r33_exts_acpi_6053e299-7e6a-4401-a760-385611d5c8d4.xml.htm"><b>!amli dns</b></a> extension displays the ACPI namespace for a particular object, the namespace tree subordinate to that object, or even the entire namespace tree. This command is especially useful in determining what a particular namespace object is &#8212; whether it is a method, a fieldunit, a device, or another type of object.</LI>
+<LI>The <a href="r33_exts_acpi_132c0e42-aa75-46c1-932d-9e83dcc7f913.xml.htm"><b>!amli find</b></a> extension takes the name of any namespace object and returns its full path.</LI>
+<LI>The <a href="r33_exts_acpi_6c7a3353-9abf-4735-8c63-0e70ccfe5db2.xml.htm"><b>!amli u</b></a> extension unassembles AML code.</LI>
+<LI>The <a href="r33_exts_acpi_916a102a-d94c-4152-adfc-e6bfdf9071c0.xml.htm"><b>!amli lc</b></a> extension displays brief information about all active ACPI contexts.</LI>
+<LI>The <a href="r33_exts_acpi_cbd0459e-74f3-4c10-bbb4-efe5bb46893e.xml.htm"><b>!amli r</b></a> extension displays detailed information about the current context of the interpreter. This is useful when the AMLI Debugger prompt appears after an error is detected.</LI>
+<LI>Breakpoints can be set and controlled within AML code. Use <a href="r33_exts_acpi_bb8ffbca-031d-4ed3-b933-a368071d90e9.xml.htm"><b>!amli bp</b></a> to set a breakpoint, <a href="r33_exts_acpi_f7662a54-f9d8-4737-89f2-29a5ac304364.xml.htm"><b>!amli bc</b></a> to clear a breakpoint, <a href="r33_exts_acpi_3a87773d-e8b2-4ffd-816a-5b84014af463.xml.htm"><b>!amli bd</b></a> to disable a breakpoint, <a href="r33_exts_acpi_4188af5c-e31c-4e9a-a5e0-c6b4796551da.xml.htm"><b>!amli be</b></a> to re-enable a breakpoint, and <a href="r33_exts_acpi_657d1fc1-6417-4178-81d2-12c0e9102fdb.xml.htm"><b>!amli bl</b></a> to list all breakpoints.</LI>
+<LI>The AMLI Debugger is able to run, step, and trace through AML code. Use the <b>run</b>, <b>p</b>, and <b>t</b> commands to perform these actions.</LI>
+</UL>
+<P></P>
+<P>For a full list of extensions and commands, see <a href="t11_rpc_acpi_568f3787-95ad-41ea-9eb5-d5fd9d9bca0c.xml.htm">Using AMLI Debugger Extensions</a> and <a href="t11_rpc_acpi_e408a736-88ba-4b9e-80df-58d9f1164c19.xml.htm">Using AMLI Debugger Commands</a> .</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Basic AML Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

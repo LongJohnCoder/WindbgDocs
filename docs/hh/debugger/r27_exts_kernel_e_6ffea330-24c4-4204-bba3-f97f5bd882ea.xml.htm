@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!irp</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !irp"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_6ffea330-24c4-4204-bba3-f97f5bd882ea.xml"/>
+<META NAME="MS-HKWD" CONTENT="!irp extension">
+<META NAME="MS-HKWD" CONTENT="I/O Request Packet (IRP), !irp extension">
+<META NAME="MS-HKWD" CONTENT="IRP">
+<META NAME="MS-HKWD" CONTENT="IRP, [See &quot;I/O Request Packet (IRP)&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_6ffea330-24c4-4204-bba3-f97f5bd882ea.xml"></A>!irp</H1>
+<P><P>The <b>!irp</b> extension displays information about an I/O request packet (IRP).</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!irp</b> <i>Address </i>[<i>Detail</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the hexadecimal address of the IRP. </DD>
+<P></P>
+<DT><i>Detail</i></DT>
+<DD>If this parameter is included with <i>any</i> value, such as <b>1</b>, the output includes the status of the IRP, the address of its memory descriptor list (MDL), its owning thread, and stack information for all of its I/O stacks, and information about each stack location for the IRP, including hexadecimal versions of the major function code and the minor function code. If this parameter omitted, the output includes only a summary of the information.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The following information is included to help you interpret the output from this extension command.</P>
+<P>The IRP major function codes are as follows:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Major Function Code</b></TD>
+<TD Width=""><b>Hexadecimal Code</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_CREATE</TD>
+<TD Width="">0x00</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_CREATE_NAMED_PIPE</TD>
+<TD Width="">0x01</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_CLOSE</TD>
+<TD Width="">0x02</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_READ</TD>
+<TD Width="">0x03</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_WRITE</TD>
+<TD Width="">0x04</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_QUERY_INFORMATION</TD>
+<TD Width="">0x05</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_SET_INFORMATION</TD>
+<TD Width="">0x06</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_QUERY_EA</TD>
+<TD Width="">0x07</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_SET_EA</TD>
+<TD Width="">0x08</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_FLUSH_BUFFERS</TD>
+<TD Width="">0x09</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_QUERY_VOLUME_INFORMATION</TD>
+<TD Width="">0x0A</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_SET_VOLUME_INFORMATION</TD>
+<TD Width="">0x0B</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_DIRECTORY_CONTROL</TD>
+<TD Width="">0x0C</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_FILE_SYSTEM_CONTROL</TD>
+<TD Width="">0x0D</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_DEVICE_CONTROL</TD>
+<TD Width="">0x0E</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_INTERNAL_DEVICE_CONTROL<BR>IRP_MJ_SCSI</TD>
+<TD Width="">0x0F</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_SHUTDOWN</TD>
+<TD Width="">0x10</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_LOCK_CONTROL</TD>
+<TD Width="">0x11</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_CLEANUP</TD>
+<TD Width="">0x12</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_CREATE_MAILSLOT</TD>
+<TD Width="">0x13</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_QUERY_SECURITY</TD>
+<TD Width="">0x14</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_SET_SECURITY</TD>
+<TD Width="">0x15</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_POWER</TD>
+<TD Width="">0x16</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_SYSTEM_CONTROL</TD>
+<TD Width="">0x17</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_DEVICE_CHANGE</TD>
+<TD Width="">0x18</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_QUERY_QUOTA</TD>
+<TD Width="">0x19</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_SET_QUOTA</TD>
+<TD Width="">0x1A</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MJ_PNP<BR>IRP_MJ_MAXIMUM_FUNCTION</TD>
+<TD Width="">0x1B</TD>
+</TR>
+</table>
+<P></P>
+<P>The Plug and Play minor function codes are as follows:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Minor Function Code</b></TD>
+<TD Width=""><b>Hexadecimal Code</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_START_DEVICE</TD>
+<TD Width="">0x00</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_REMOVE_DEVICE</TD>
+<TD Width="">0x01</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_REMOVE_DEVICE</TD>
+<TD Width="">0x02</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_CANCEL_REMOVE_DEVICE</TD>
+<TD Width="">0x03</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_STOP_DEVICE</TD>
+<TD Width="">0x04</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_STOP_DEVICE</TD>
+<TD Width="">0x05</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_CANCEL_STOP_DEVICE</TD>
+<TD Width="">0x06</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_DEVICE_RELATIONS</TD>
+<TD Width="">0x07</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_INTERFACE</TD>
+<TD Width="">0x08</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_CAPABILITIES</TD>
+<TD Width="">0x09</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_RESOURCES</TD>
+<TD Width="">0x0A</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_RESOURCE_REQUIREMENTS</TD>
+<TD Width="">0x0B</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_DEVICE_TEXT</TD>
+<TD Width="">0x0C</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_FILTER_RESOURCE_REQUIREMENTS</TD>
+<TD Width="">0x0D</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_READ_CONFIG</TD>
+<TD Width="">0x0F</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_WRITE_CONFIG</TD>
+<TD Width="">0x10</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_EJECT</TD>
+<TD Width="">0x11</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_SET_LOCK</TD>
+<TD Width="">0x12</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_ID</TD>
+<TD Width="">0x13</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_PNP_DEVICE_STATE</TD>
+<TD Width="">0x14</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_BUS_INFORMATION</TD>
+<TD Width="">0x15</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_DEVICE_USAGE_NOTIFICATION</TD>
+<TD Width="">0x16</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_SURPRISE_REMOVAL</TD>
+<TD Width="">0x17</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_LEGACY_BUS_INFORMATION</TD>
+<TD Width="">0x18</TD>
+</TR>
+</table>
+<P></P>
+<P>The WMI minor function codes are as follows:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Minor Function Code</b></TD>
+<TD Width=""><b>Hexadecimal Code</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_ALL_DATA</TD>
+<TD Width="">0x00</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_SINGLE_INSTANCE</TD>
+<TD Width="">0x01</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_CHANGE_SINGLE_INSTANCE</TD>
+<TD Width="">0x02</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_CHANGE_SINGLE_ITEM</TD>
+<TD Width="">0x03</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_ENABLE_EVENTS</TD>
+<TD Width="">0x04</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_DISABLE_EVENTS</TD>
+<TD Width="">0x05</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_ENABLE_COLLECTION</TD>
+<TD Width="">0x06</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_DISABLE_COLLECTION</TD>
+<TD Width="">0x07</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_REGINFO</TD>
+<TD Width="">0x08</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_EXECUTE_METHOD</TD>
+<TD Width="">0x09</TD>
+</TR>
+</table>
+<P></P>
+<P>The power management minor function codes are as follows:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Minor Function Code</b></TD>
+<TD Width=""><b>Hexadecimal Code</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_WAIT_WAKE</TD>
+<TD Width="">0x00</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_POWER_SEQUENCE</TD>
+<TD Width="">0x01</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_SET_POWER</TD>
+<TD Width="">0x02</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_QUERY_POWER</TD>
+<TD Width="">0x03</TD>
+</TR>
+</table>
+<P></P>
+<P>The SCSI minor function codes are as follows:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Minor Function Code</b></TD>
+<TD Width=""><b>Hexadecimal Code</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IRP_MN_SCSI_CLASS</TD>
+<TD Width="">0x01</TD>
+</TR>
+</table>
+<P></P>
+<P>The output also indicates under what conditions the completion routine for each stack location will be called once the IRP has completed and the stack location is processed. There are three possibilities:</P>
+<DL><DT><b>Success</b></DT>
+<DD>Indicates that the completion routine will be called when the IRP is completed with a success code.</DD>
+<DT><b>Error</b></DT>
+<DD>Indicates that the completion routine will be called when the IRP is completed with an error code.</DD>
+<DT><b>Cancel</b></DT>
+<DD>Indicates that the completion routine will be called if an attempt was made to cancel the IRP.</DD>
+</DL>
+<P>Any combination of these three may appear, and if any of the conditions shown are satisfied, the completion routine will be called. The appropriate values are listed at the end of the first row of information about each stack location, immediately after the <b>Completion-Context</b> entry. </P>
+<P>Here is an example of the output from this extension from Windows XP:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>!irp 81183468</b><BR>Irp is active with 2 stacks 2 is current (= 0x811834fc)<BR> No Mdl Thread 00000000: Irp stack trace.<BR>     Cmd  flg cl Device   File     Completion-Context<BR> [  0, 0]   0  0 8145f470 00000000 00000000-00000000<BR>                \Driver\E100B<BR>                        Args: 00000000 00000000 00000000 00000000<BR> [ 16, 2]   0 e1 8145f470 00000000 8047f744-814187a8 Success Error Cancel pending<BR>                \Driver\E100B    ntoskrnl!PopCompleteSystemPowerIrp<BR>                        Args: 00000000 00000000 00000002 00000002<BR><BR></nobr></P>
+<P>In the second stack location entry of the Windows XP example, the major function code is <b>16</b>, indicating that this IRP has been sent to the power stack. The minor function code is <b>2</b>, so the power stack recognizes it as a set request. The IRP is pending, and when it completes, <b>ntoskrnl!PopCompleteSystemPowerIrp</b> will be called regardless of the return code as both Success and Error are specified.</P>
+<P>Here is an example of the output from this extension from Windows Vista.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!irp 0x831f4a00</b><BR>Irp is active with 8 stacks 5 is current (= 0x831f4b00)<BR> Mdl = 82b020d8 Thread 8c622118:  Irp stack trace.<BR>     cmd  flg cl Device   File     Completion-Context<BR> [  0, 0]   0  0 00000000 00000000 00000000-00000000<BR><BR>                        Args: 00000000 00000000 00000000 00000000<BR> [  0, 0]   0  0 00000000 00000000 00000000-00000000<BR><BR>                        Args: 00000000 00000000 00000000 00000000<BR> [  0, 0]   0  0 00000000 00000000 00000000-00000000<BR><BR>                        Args: 00000000 00000000 00000000 00000000<BR> [  0, 0]   0  0 00000000 00000000 00000000-00000000<BR><BR>                        Args: 00000000 00000000 00000000 00000000<BR>&gt;[  3,34]  40 e1 828517a8 00000000 842511e0-00000000 Success Error Cancel pending<BR>               \Driver\disk     partmgr!PmReadWriteCompletion<BR>                        Args: 00007000 00000000 fe084e00 00000004<BR> [  3, 0]  40 e0 82851450 00000000 842414d4-82956350 Success Error Cancel<BR>               \Driver\PartMgr  volmgr!VmpReadWriteCompletionRoutine<BR>                        Args: 129131bb 000000de fe084e00 00000004<BR> [  3, 0]   0 e0 82956298 00000000 847eeed0-829e2ba8 Success Error Cancel<BR>               \Driver\volmgr   Ntfs!NtfsMasterIrpSyncCompletionRoutine<BR>                        Args: 00007000 00000000 1bdae400 00000000<BR> [  3, 0]   0  0 82ac2020 8e879410 00000000-00000000<BR>               \FileSystem\Ntfs<BR>                        Args: 00007000 00000000 00018400 00000000<BR><BR></nobr></P>
+<P>Note that the completion routine next to the driver name is set on that stack location, and it was set by the driver in the line below. In the preceding example, <b>Ntfs!NtfsMasterIrpSyncCompletionRoutine </b>was set by <b>\FileSystem\Ntfs</b>. The <b>Completion-Context</b> entry above <b>Ntfs!NtfsMasterIrpSyncCompletionRoutine</b>, <b>847eeed0-829e2ba8</b>, indicates the address of the completion routine, as well as the context that will be passed to <b>Ntfs!NtfsMasterIrpSyncCompletionRoutine</b>. From this we can see that the address of <b>Ntfs!NtfsMasterIrpSyncCompletionRoutine</b> is <b>847eeed0</b>, and the context that will be passed to this routine when it is called is <b>829e2ba8</b>.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>See <a href="t12_drivers_ba75fa45-397b-473d-88dc-c5e0d598456a.xml.htm">Plug and Play Debugging</a> and <a href="t13_advanced_6f4cdf6e-826d-436d-9b10-9865703b154e.xml.htm">Debugging Interrupt Storms</a> for applications of this extension command. For information about IRPs, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. For further information on the major and minor function codes, see the Windows Driver Kit (WDK) documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !irp RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

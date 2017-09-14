@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Process Hangs or Consumes 100 Percent of CPU</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Process Hangs or Consumes 100 Percent of CPU"><xml><MSHelp:Keyword Index="A" Term="ADPlus_b7897f20-cd2a-4d8c-82a2-be81ef5773ff.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_b7897f20-cd2a-4d8c-82a2-be81ef5773ff.xml"></A>Process Hangs or Consumes 100 Percent of CPU</H1>
+<P>You can use ADPlus to diagnose a process that has stopped responding (that is, <i>hung</i>) or is consuming 100 % CPU (for sustained periods of time, or indefinitely). If you want to diagnose this problem after it has begun, you should run ADPlus in <a href="adplus_503a3c03-7ffb-4999-b99c-3ca4b9f69b06.xml.htm">hang mode</a> to obtain a memory dump of the process.</P>
+<P>If you run ADPlus in hang mode during the 100 % CPU condition, ADPlus creates memory dumps of the process or processes that are specified at the command prompt.</P>
+<P>For example, use one of the following command syntaxes.</P>
+<P>The following command runs ADPlus in hang mode and produces a full memory dump of a process with PID 1896.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ADPlus -hang -p 1896</b><BR></nobr></P>
+<P></P>
+<P>The following command runs ADPlus in hang mode and produces full memory dumps of all processes that are named <i>Myapp.exe</i>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ADPlus -hang -pn myapp.exe</b><BR></nobr></P>
+<P></P>
+<P>The following command runs ADPlus in hang mode and produces full memory dumps of IIS, all instances of <i>Mtx.exe</i> or <i>Dllhost.exe</i>, and all processes that are named <i>Myapp.exe</i>. The command then puts the memory dumps in the <i>C:\Temp</i> folder.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ADPlus -hang -iis -pn myapp.exe -o c:\temp</b><BR></nobr></P>
+<P></P>
+<H4>Unable to Attach in Hang Mode</H4>
+<P>In rare situations, the debugger cannot attach to the process after the 100 % CPU condition or hang has occurred. And if you run ADPlus in hang mode after the problem occurs, ADPlus might not produce memory dumps. </P>
+<P>In these situations, you should attach the debugger before the problem occurs. To attach the debugger in this manner, run ADPlus in <a href="adplus_5c0245b0-d5f8-47aa-b73f-86b8d8c6111c.xml.htm">crash mode</a> as follows: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ADPlus -crash -p 1896</b><BR></nobr></P>
+<P>This command runs ADPlus in crash mode for a process with PID 1896 and waits for an exception or a user to press CTRL+C in the minimized debugger window to generate a memory dump and detach the debugger.</P>
+<P>The following command runs ADPlus in crash mode for the process named <i>Myapp.exe</i> and waits for an exception or a user to press CTRL+C in the minimized debugger window to generate a memory dump and detach the debugger.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ADPlus -crash -pn myapp.exe</b><BR></nobr></P>
+<P>The following command runs ADPlus in crash mode for all instances of the process named <i>Myapp.exe</i>, in addition to <i>Inetinfo.exe</i> and all instances of <i>Mtx.exe</i> or <i>Dllhost.exe</i>. The minimized debugger then waits for an exception or a user to press CTRL+C in the minimized debugger window to generate a memory dump and detach the debugger. The memory dumps and log files are then put in the <i>C:\Temp</i> folder.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ADPlus -crash -iis -pn myapp.exe -o c:\temp</b><BR></nobr></P>
+<P></P>
+<H4>Reconfiguring ADPlus</H4>
+<P>By default, ADPlus produces minidump files only when you press CTRL+C. (This restriction conserves disk space.) </P>
+<P>If a process stops responding or consumes 100 % CPU, you might want to configure ADPlus to generate a full memory dump when the user presses CTRL+C. For more information about this configuration, see <a href="adplus_fca9d42a-47f8-4596-ba51-238604e15c04.xml.htm">ADPlus Command-Line Options</a> and <a href="adplus_75cb775e-c52e-4c05-85a6-aa7be34270c5.xml.htm">ADPlus Configuration Files</a>.</P>
+<P>In addition, it might help to capture a performance or system monitor log file for the time up to and including the 100 % CPU condition. At a minimum, this log file should capture the following objects at 1-5 second intervals:</P><B></B><UL type="disc">
+<LI>Memory </LI>
+<LI>Process </LI>
+<LI>Processor </LI>
+<LI>System </LI>
+<LI>Thread </LI>
+</UL>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about how to debug a process that is consuming 100% of CPU, see <a href="t01_basic_5b71a690-1b6a-45cc-ae7f-dff9b493b1b9.xml.htm">Tracking Down a Processor Hog</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Process Hangs or Consumes 100 Percent of CPU RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

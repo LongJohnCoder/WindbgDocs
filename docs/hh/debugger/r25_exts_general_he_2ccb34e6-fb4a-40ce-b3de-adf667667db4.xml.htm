@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!version</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !version"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_2ccb34e6-fb4a-40ce-b3de-adf667667db4.xml"/>
+<META NAME="MS-HKWD" CONTENT="!version extension">
+<META NAME="MS-HKWD" CONTENT="extension commands (! commands), extension DLL version (!version)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_2ccb34e6-fb4a-40ce-b3de-adf667667db4.xml"></A>!version</H1>
+<P>The <b>!version</b> extension displays the version information for the extension DLL.<P>This extension command should not be confused with the <a href="r18_cmds_s_8007c886-a00b-4bb7-aa8b-9f486fceeb2e.xml.htm"><b>version (Show Debugger Version)</b></a> command.</P>
+<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!</b>[<i>ExtensionDLL</i><b>.</b>]<b>version</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>ExtensionDLL</i></DT>
+<DD>Specifies the extension DLL whose version number is to be displayed.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P>This extension is available in most extension DLLs.</P>
+<P></P>
+<H4>Comments</H4>
+<P>If the extension DLL version does not match the debugger version, error messages will be displayed.</P>
+<P>This extension command will not work on Windows XP and later versions of Windows.  To display version information, use the <a href="r18_cmds_s_8007c886-a00b-4bb7-aa8b-9f486fceeb2e.xml.htm"><b>version (Show Debugger Version)</b></a> command.</P>
+<P>The original purpose of this extension was to ensure that the DLL version matched the target version, since a mismatch would result in inaccurate results for many extensions.  Newer DLLs are no longer restricted to working with only one version of Windows, so this extension is obsolete.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !version RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

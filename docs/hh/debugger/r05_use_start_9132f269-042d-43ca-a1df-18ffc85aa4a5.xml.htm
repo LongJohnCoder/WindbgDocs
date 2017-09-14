@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Attaching to a Target Computer (Kernel Mode)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Attaching to a Target Computer (Kernel Mode)"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml"/>
+<META NAME="MS-HKWD" CONTENT="attaching to a target computer">
+<META NAME="MS-HKWD" CONTENT="local kernel debugging, starting the session"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml"></A>Attaching to a Target Computer (Kernel Mode)</H1>
+<P>Before you can begin kernel debugging with KD or WinDbg, you must specify how the connection to the target computer is to be made.</P>
+<P>The following sections in this topic describe several ways to begin a debugging session by attaching to a target computer, organized by the location from which the session is started. </P>
+<H4>KD Command Line</H4>
+<P>To begin a kernel debugging session from the KD command line, use one of the following commands.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kd </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k com:port=</b><i>ComPort</i><b>,baud=</b><i>BaudRate</i> <BR><b>kd </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k 1394:channel=</b><i>1394Channel</i>[<b>,symlink=</b><i>1394Protocol</i>] <BR><b>kd </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k usb2:targetname=</b><i>String</i> <BR><b>kd </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k com:modem</b> <BR><b>kd </b>[-<b>y</b> <i>SymbolPath</i>] <b>-kl</b> <BR><b>kd </b>[-<b>y</b> <i>SymbolPath</i>] <BR></nobr></P>
+<P>If you do not include the <b>-k</b> command-line option, the connection settings are based on the values of certain environment variables. For more information about the kernel connection options and the restrictions on their use, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>. For more information about other options, see <a href="r12_cmdline_1ce8da81-b62c-4064-9bd7-c4380884b1b0.xml.htm">KD Command-Line Options</a>.</P>
+<P>You can change the kernel debugging baud rate after the session has begun by using <a href="r23_keys_5e94e92d-e89a-40df-8030-190b68a181e5.xml.htm">CTRL+A</a>.</P>
+<H4>WinDbg Command Line</H4>
+<P>To begin a kernel debugging session from the WinDbg command line, use one of the following commands.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k com:port=</b><i>ComPort</i><b>,baud=</b><i>BaudRate</i> <BR><b>windbg </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k 1394:channel=</b><i>1394Channel</i>[<b>,symlink=</b><i>1394Protocol</i>] <BR><b>windbg </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k usb2:targetname=</b><i>String</i> <BR><b>windbg </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k com:modem</b> <BR><b>windbg </b>[-<b>y</b> <i>SymbolPath</i>] <b>-kl</b> <BR><b>windbg </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k</b> <BR></nobr></P>
+<P>If you do not include the <b>-k</b> command-line option, the connection settings are based on the values of certain environment variables. For more information about the kernel connection options and the restrictions on their use, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>. For more information about other options, see <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">WinDbg Command-Line Options</a>.</P>
+<P>You can change the kernel debugging baud rate after the session has begun by clicking the <a href="r37_gui_2_e66b21a1-a52f-4ae5-b7dd-692b532e603e.xml.htm"><b>Debug | Kernel Connection | Cycle Baud Rate</b></a> command or pressing CTRL+ALT+A.</P>
+<H4>WinDbg Menu</H4>
+<P>When WinDbg is in dormant mode, you can begin a kernel debugging session by clicking <b>Kernel Debug</b> on the <b>File </b>menu or by pressing CTRL+K.</P>
+<P>When the <b>Kernel Debugging</b> dialog box appears, click the <b>COM</b> tab, the <b>1394</b> tab, or the <b>Local</b> tab. Each tab specifies a different connection method. For more information about the dialog box and its entries, see <a href="r36_gui_1_fe3f56e8-09fe-496d-a26e-8a692a70bc25.xml.htm"><b>File | Kernel Debug</b></a>.</P>
+<P>If you leave the boxes in the <b>Kernel Debugging</b> dialog box blank, the connection settings are based on the values of certain environment variables. For more information about these settings, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>.</P>
+<H4>Beginning the Session</H4>
+<P>After the debugger on the host side has started and is waiting to connect, start the target computer. If the target computer is debugger-enabled  (as described in <a href="bootini_7a4cbe01-a9e7-4b00-9c85-7bac20c73286.xml.htm">Boot Parameters to Enable Debugging</a>),  the target computer&#8217;s debugger will connect automatically, early in the startup process.</P>
+<P>If the target computer has stopped responding, the target computer is still stopped because of an earlier kernel debugging action, or you used the <b>-b</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>, the debugger breaks into the target computer immediately.</P>
+<P>Otherwise, the target computer continues running until the debugger orders it to break.</P>
+<P>For more information about the next steps, see <a href="r06_use_gui_4b24004a-3b77-4692-b369-dbb122feba7a.xml.htm">Debugger Configuration</a>, <a href="r09_symbols_750b8c7c-1e41-4116-b7d3-ecd4c7fe42ce.xml.htm">Symbols</a>, <a href="r07_use_operation_265193af-6b7a-4832-8785-b58a645547e5.xml.htm">Debugger Operation (General)</a> and <a href="r07_use_operation_3c307117-9a8a-4597-8a52-6bedbefa7864.xml.htm">Debugger Operation (Kernel Mode)</a>.</P>
+<H4>1394 Configuration</H4>
+<P>When you first start the kernel debugger after enabling debugging over a 1394 connection, a driver is installed on your host computer. You must be logged on as an Administrator on the host computer during this debugging session. For more information about this driver, see <a href="r03_setup_2_d48986aa-46cb-41a8-9be9-925545754d3a.xml.htm">Installing the 1394 Virtual Driver</a>.</P>
+<P>You must also configure the target computer for kernel debugging over a 1394 cable. For more information about this configuration, see <a href="r02~a_setup_1a_fcdec49c-b16c-4f8e-b1df-c1ceea0815f3.xml.htm">Disabling the 1394 Host Controller</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Attaching to a Target Computer (Kernel Mode) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

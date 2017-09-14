@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using a Log File</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using a Log File"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_8de5bdb2-e273-490d-b44f-359fa85f28da.xml"/>
+<META NAME="MS-HKWD" CONTENT="log file">
+<META NAME="MS-HKWD" CONTENT="log file, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_8de5bdb2-e273-490d-b44f-359fa85f28da.xml"></A>Using a Log File</H1>
+<P>The debugger can write a log file that records the debugging session. This log file contains all of the contents of the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>, including the commands that you type and the responses from the debugger.</P>
+<P>In WinDbg, some menu and toolbar actions cause a display to appear in the Debugger Command window. The log file does not record actions that do not generate text in this window.</P>
+<H4>Opening a New Log File</H4>
+<P>To open a new log file, or to overwrite a previous log file, do one of the following:</P><B></B><UL type="disc">
+<LI><i>(CDB and KD only)</i> Before you start the debugger, set the _NT_DEBUG_LOG_FILE_OPEN <a href="r12_cmdline_53f400f6-9ae2-427a-85d7-82b0cab41a96.xml.htm">environment variable</a>.</LI>
+<LI>When you start the debugger, use the <b>-logo</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>.</LI>
+<LI>Use the <a href="r21_metacmds_l_ffa5a430-48cf-43b6-a6b3-2bd5692337c2.xml.htm"><b>.logopen (Open Log File)</b></a> command. If you use the <b>/t</b> option, the date and time are appended to your specified file name. If you use the <b>/u</b> option, the log file is written in Unicode instead of in ASCII.</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r37_gui_2_7fae2f23-2db3-4490-b332-44ca2fa20231.xml.htm"><b>Edit | Open/Close Log File</b></a> command.</LI>
+</UL>
+<P></P>
+<H4>Appending to an Existing Log File</H4>
+<P>To append command window text to a log file, do one of the following:</P><B></B><UL type="disc">
+<LI><i>(CDB and KD only)</i>  Before you start the debugger, set the _NT_DEBUG_LOG_FILE_APPEND <a href="r12_cmdline_53f400f6-9ae2-427a-85d7-82b0cab41a96.xml.htm">environment variable</a>.</LI>
+<LI>When you start the debugger, use the <b>-loga</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>.</LI>
+<LI>Use the <a href="r21_metacmds_l_050495d8-7b34-4e19-be5a-d1d87c6911fc.xml.htm"><b>.logappend (Append Log File)</b></a> command. If you are appending to a Unicode log file, you must use the <b>/u</b> option.</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r37_gui_2_7fae2f23-2db3-4490-b332-44ca2fa20231.xml.htm"><b>Edit | Open/Close Log File</b></a> command, and then selct <b>Append</b>.</LI>
+</UL>
+<P></P>
+<H4>Closing a Log File</H4>
+<P>To close  an open log file, do one of the following:</P><B></B><UL type="disc">
+<LI>Use the <a href="r21_metacmds_l_5a820dbf-9214-4ab0-8b67-64b56db8c039.xml.htm"><b>.logclose (Close Log File)</b></a> command.</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r37_gui_2_7fae2f23-2db3-4490-b332-44ca2fa20231.xml.htm"><b>Edit | Open/Close Log File</b></a> command, and then select <b>Close Open Log File</b>.</LI>
+</UL>
+<P></P>
+<H4>Checking Log File Status</H4>
+<P>To determine the log file status, do one the following:</P><B></B><UL type="disc">
+<LI>Use the <a href="r21_metacmds_l_bb687955-3f4a-417c-80dd-b8771446e09a.xml.htm"><b>.logfile (Display Log File Status)</b></a> command.</LI>
+<LI><i>(WinDbg only)</i>  Open the <a href="r37_gui_2_7fae2f23-2db3-4490-b332-44ca2fa20231.xml.htm"><b>Edit | Open/Close Log File</b></a> command and see whether a log file is listed.</LI>
+</UL>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using a Log File RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

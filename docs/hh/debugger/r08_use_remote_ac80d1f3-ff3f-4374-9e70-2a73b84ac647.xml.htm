@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Loading Debugger Extension DLLs</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Loading Debugger Extension DLLs"><xml><MSHelp:Keyword Index="A" Term="r08_use_remote_ac80d1f3-ff3f-4374-9e70-2a73b84ac647.xml"/>
+<META NAME="MS-HKWD" CONTENT="extension commands (! commands), loading">
+<META NAME="MS-HKWD" CONTENT="loading extension commands">
+<META NAME="MS-HKWD" CONTENT="nt4fre directory">
+<META NAME="MS-HKWD" CONTENT="nt4chk directory">
+<META NAME="MS-HKWD" CONTENT="w2kfre directory">
+<META NAME="MS-HKWD" CONTENT="w2kchk directory">
+<META NAME="MS-HKWD" CONTENT="winxp directory">
+<META NAME="MS-HKWD" CONTENT="winext directory"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r08_use_remote_ac80d1f3-ff3f-4374-9e70-2a73b84ac647.xml"></A>Loading Debugger Extension DLLs</H1>
+<P>There are several methods of loading debugger extension DLLs, as well as controlling the default debugger extension DLL and the default debugger extension path:</P><B></B><UL type="disc">
+<LI><i>(Before starting the debugger)</i>  Use the _NT_DEBUGGER_EXTENSION_PATH <a href="r12_cmdline_53f400f6-9ae2-427a-85d7-82b0cab41a96.xml.htm">environment variable</a> to set the default path for extension DLLs. This can be a number of directory paths, separated by semicolons.</LI>
+<LI>Use the <a href="r21_metacmds_l_18a19258-9936-47ac-9411-35abc0c29895.xml.htm"><b>.load (Load Extension DLL)</b></a> command to load a new DLL.</LI>
+<LI>Use the <a href="r22_metacmds_s_81cae912-930b-4e1a-bc8e-925eb6a898fb.xml.htm"><b>.unload (Unload Extension DLL)</b></a> command to unload a DLL.</LI>
+<LI>Use the <a href="r22_metacmds_s_ab48d1c9-4c0b-451b-b5e2-8801b2a8cbb6.xml.htm"><b>.unloadall (Unload All Extension DLLs)</b></a> command to unload all debugger extensions.</LI>
+<LI><i>(Before starting the debugger; CDB only)</i>  Use the <a href="r04_setup_3_0b710f80-3d76-456f-8081-6db088c4422e.xml.htm"><i>tools.ini</i></a> file to set the default extension DLL.</LI>
+<LI><i>(Before starting the debugger)</i>  Use the <b>-a</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> to set the default extension DLL.</LI>
+<LI>Use the <a href="r20_metacmds_e_c6a14a6e-13e7-4e85-9f41-8c9b5ba0967e.xml.htm"><b>.extpath (Set Extension Path)</b></a> command to set the extension DLL search path.</LI>
+<LI>Use the <a href="r22_metacmds_s_505955dc-f0fc-4835-9f56-0e0eabda4bef.xml.htm"><b>.setdll (Set Default Extension DLL)</b></a> command to set the default extension DLL.</LI>
+<LI>Use the <a href="r19_metacmds_a_567f77fe-498c-42a5-8155-21ffea0c0fb2.xml.htm"><b>.chain (List Debugger Extensions)</b></a> command to display all loaded debugger extension modules, in their default search order.</LI>
+</UL>
+<P></P>
+<P>You can also load an extension DLL simply by using the full <b>!</b><I><B>module</B></I><b>.</b><I><B>extension</B></I> syntax the first time you issue a command from that module. See <a href="r08_use_remote_8493d413-185c-4d40-be6b-bd00cb61cc03.xml.htm">Using Debugger Extension Commands</a> for details.</P>
+<P>The extension DLLs that you are using must match the operating system of the target computer. The extension DLLs that ship with the Debugging Tools for Windows package are each placed in a different subdirectory of the installation directory:</P><B></B><UL type="disc">
+<LI>The <i>w2kfre</i> directory contains extensions that can be used with the free build of Microsoft Windows 2000. </LI>
+<LI>The <i>w2kchk</i> directory contains extensions that can be used with the checked build of Windows 2000. </LI>
+<LI>The <i>winxp</i> directory contains extensions that can be used with Windows XP and later versions of Windows.</LI>
+<LI>The <i>winext</i> directory contains extensions that can be used with any version of Windows. The <i>dbghelp.dll</i> module, located in the base directory of Debugging Tools for Windows, also contains extensions of this type.</LI>
+</UL>
+<P></P>
+<P>If you write your own debugger extensions, you can place them in any directory. However, it is advised that you place them in a new directory and add that directory to the debugger extension path.</P>
+<P>There can be as many as 32 extension DLLs loaded.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Loading Debugger Extension DLLs RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

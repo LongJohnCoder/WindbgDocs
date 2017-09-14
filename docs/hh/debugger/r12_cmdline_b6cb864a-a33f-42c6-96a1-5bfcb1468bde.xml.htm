@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DbgSrv Command-Line Options</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DbgSrv Command-Line Options"><xml><MSHelp:Keyword Index="A" Term="r12_cmdline_b6cb864a-a33f-42c6-96a1-5bfcb1468bde.xml"/>
+<META NAME="MS-HKWD" CONTENT="command-line options, DbgSrv">
+<META NAME="MS-HKWD" CONTENT="DbgSrv, command-line options"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_COMMAND_LINE_DBGSRV"></a><H1><A NAME="r12_cmdline_b6cb864a-a33f-42c6-96a1-5bfcb1468bde.xml"></A>DbgSrv Command-Line Options</H1>
+<P><P></P>
+<P></P>
+<P>The DbgSrv command line uses the following syntax.</P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>dbgsrv -t</b><i> ServerTransport </i>[-<b>sifeo</b> <i>image.ext</i>] <b>-c</b>[<b>s</b>] <i>AppCmdLine</i> [-<b>x</b> | <b>-pc</b>] <BR><BR><b>dbgsrv -? </b><BR></nobr></P>
+<P></P>
+<P>All options are case-sensitive.</P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-t</b> <i>ServerTransport</i></DT>
+<DD>Specifies the transport protocol. For a list of the possible protocols and the syntax for <i>ServerTransport</i> in each case, see <a href="r08_use_remote_33648b79-ab94-4cba-97b1-6865130e9de8.xml.htm">Activating a Process Server</a>.</DD>
+<DT><b>-sifeo</b> <i>Executable</i></DT>
+<DD>Suspends the Image File Execution Option (IFEO) value for the given image.  <i>Executable</i> should include the file name of the executable image, including the file name extensions. The <nobr><b>-sifeo</b></nobr> option allows DbgSrv to be set as the IFEO debugger for an image created by the <nobr><b>-c</b></nobr> option, without causing recursive invocation due to the IFEO setting. This option can be used only if <nobr><b>-c</b></nobr> is used. </DD>
+<DT><b>-c</b></DT>
+<DD>Causes DbgSrv to create a new process. You can use this to create a process that you intend to debug. This is similar to <a href="r05_use_start_77acc3de-f774-4eba-8804-ae878cd5e99d.xml.htm">spawning a new process</a> from the debugger, except that this process will <i>not</i> be debugged when it is created. To debug this process, determine its PID and use the <b>-p</b> option when starting the smart client to debug this process. </DD>
+<DT><b>s</b></DT>
+<DD>Causes the newly-created process to be immediately suspended. If you are using this option, it is recommended that you use CDB as your smart client, and that you start the smart client with the <nobr><b>-pb</b></nobr> command-line option, in conjunction with <nobr><b>-p </b><i>PID</i>.</nobr> If you include the <nobr><b>-pb</b></nobr> option on the command line, the process will resume when the debugger attaches to it; otherwise you can resume the process with the <a href="r15_cmds_a_ead644bb-5361-45bb-9d42-0b17adf19347.xml.htm"><b>~*m</b></a> command. </DD>
+<DT><i>AppCmdLine</i></DT>
+<DD>Specifies the full command line of the process to be created. <i>AppCmdLine</i> can be either a Unicode or ASCII string, and can include any printable character. All text that appears after the <b>-c</b>[<b>s</b>] parameter will be taken to form the string <i>AppCmdLine</i>.</DD>
+<DT><b>-x</b></DT>
+<DD>Causes the remainder of the command line to be ignored. This option is useful if you are launching DbgSrv from an application that may append unwanted text to its command line.</DD>
+<DT><b>-pc</b></DT>
+<DD>Causes the remainder of the command line to be ignored. This option is useful if you are launching DbgSrv from an application that may append unwanted text to its command line. A syntax error results if <nobr><b>-pc</b></nobr> is the final element on the DbgSrv command line. Aside from this restriction, <nobr><b>-pc</b></nobr> is identical to <nobr><b>-x</b></nobr>.   </DD>
+<DT><b>-?</b></DT>
+<DD>Displays a message box with help text for the DbgSrv command line.<P></P>
+<P>For information about using DbgSrv, see <a href="r08_use_remote_0828c18f-b042-4288-9b58-a56e3076eb2e.xml.htm">Process Servers (User Mode)</a>.</P>
+<P></P>
+</DD>
+</DL>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DbgSrv Command-Line Options RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

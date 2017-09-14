@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Executable Image Path</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Executable Image Path"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_8f9c224f-0972-4b0f-941d-cfaac48c608c.xml"/>
+<META NAME="MS-HKWD" CONTENT="executable files and paths">
+<META NAME="MS-HKWD" CONTENT="executable files and paths, overview">
+<META NAME="MS-HKWD" CONTENT="image">
+<META NAME="MS-HKWD" CONTENT="image, [See &quot;executable files&quot;]">
+<META NAME="MS-HKWD" CONTENT="executable image">
+<META NAME="MS-HKWD" CONTENT="executable image, [See &quot;executable files&quot;]">
+<META NAME="MS-HKWD" CONTENT="module">
+<META NAME="MS-HKWD" CONTENT="module, [See &quot;executable files&quot;]">
+<META NAME="MS-HKWD" CONTENT="module name">
+<META NAME="MS-HKWD" CONTENT="executable path">
+<META NAME="MS-HKWD" CONTENT="executable path, [See &quot;executable files and paths&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_8f9c224f-0972-4b0f-941d-cfaac48c608c.xml"></A>Executable Image Path</H1>
+<P>An <i>executable file</i> is a binary file that the processor can run. These files typically have the <i>.exe</i>, <i>.dll</i>, or <i>.sys</i> file name extension. Executable files are also known as <i>modules</i>, especially when executable files are described as units of a larger application. Before the Microsoft Windows operating system runs an executable file, it loads it into memory. The copy of the executable file in memory is called the <i>executable image</i> or the <i>image</i>.</P>
+<P class="note"><b>Note</b>  These terms are sometimes used imprecisely. For example, some documents might use "image" for the actual file on the disk. Also, Windows-based applications refer to the <i>executable name</i>, which typically includes the file name extension. But these applications refer to the <i>module name</i>, which does not include the file name extension. <P class="note">Also, the Windows kernel and HAL have special module names. For example, the <b>nt</b> module corresponds to the <i>Ntoskrnl.exe</i> file.</P>
+</P>
+<P>The <i>executable image path</i> specifies the directories that the binary executable files are located in.</P>
+<P>In most situations, the debugger knows the location of the executable files, so you do not have to set the path for this file. </P>
+<P>However, there are situations when this path is required. For example, kernel-mode <a href="r10_dump_files_1c793f2b-a711-4e06-9c87-99be8f297556.xml.htm">small memory dump</a> files do not contain all of the executable files that exist in memory at the time of a stop error (that is, a <i>crash</i>). Similarly, user-mode minidump files do not contain the application binaries. If you set the path of the executable files, the debugger can find these binary files.</P>
+<P></P>
+<H4>Executable Image Path Syntax</H4>
+<P>The debugger's executable image path is a string that consists of multiple directory paths, separated by semicolons. </P>
+<P>Relative paths are supported. However, unless you always start the debugger from the same directory, you should add a drive letter or a network share before each path. Network shares are also supported.</P>
+<P>The debugger searches the executable image path recursively. That is, the debugger searches the subdirectories of each directory that is listed in this path.</P>
+<P></P>
+<H4>Controlling the Executable Image Path</H4>
+<P>To control the executable image path, you can do one of the following:</P><B></B><UL type="disc">
+<LI>Before you start the debugger, use the _NT_EXECUTABLE_IMAGE_PATH <a href="r12_cmdline_53f400f6-9ae2-427a-85d7-82b0cab41a96.xml.htm">environment variable</a> to set the path. If you try to add an invalid directory through this environment variable, the debugger ignores this directory.</LI>
+<LI>When you start the debugger, use the <b>-i</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> to set the path.</LI>
+<LI>Use the <a href="r20_metacmds_e_290ad5e1-0718-436d-a14d-b316c4c9a069.xml.htm"><b>.exepath</b></a> command to display, set, change, or append to the path.</LI>
+<LI><i>(WinDbg only)</i>  Use the <a href="r36_gui_1_bcde2078-3459-4555-8ef6-d5bf4dfe22fc.xml.htm"><b>File | Image File Path</b></a> command or press CTRL+I to display, set, change, or append to the path.</LI>
+</UL>
+<P></P>
+<P>If you use the <b>-sins</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>, the debugger ignores the executable image path environment variable.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Executable Image Path RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

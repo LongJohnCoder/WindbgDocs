@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>OpenLogFile2</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, OpenLogFile2"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="OpenLogFile2"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_93e0a810-9b23-43c2-b714-99a39c398f1e.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::OpenLogFile2 method">
+<META NAME="MS-HKWD" CONTENT="OpenLogFile2 (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_93e0a810-9b23-43c2-b714-99a39c398f1e.xml"></A>OpenLogFile2</H1>
+<P>The <b>OpenLogFile2</b> and <b>OpenLogFile2Wide</b> methods open a log file that will receive output from the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client objects</a>.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl4::OpenLogFile2(</b><BR><b>    IN PCSTR  </b><i>File</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::OpenLogFile2Wide(</b><BR><b>    IN PCWSTR  </b><i>File</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define OpenLogFile2T OpenLogFile2Wide</b><BR><b>#else</b><BR><b>#define OpenLogFile2T OpenLogFile2</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>File</i></DT>
+<DD>Specifies the name of the log file.  <i>File</i> can include a relative or absolute path; relative paths are relative to the directory in which the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#84783e5c-aa71-4d1c-be03-f4cc8ce3d72f">debugger </a> was started.  If the file does not exist, it will be created.</DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies the bit-flags that control the nature of the log file.  <i>Flags</i> can contain flags from the following table.<B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Effect when set</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_LOG_APPEND</TD>
+<TD Width="">Output will be appended to the log file instead of discarding the contents of the log file.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_LOG_UNICODE</TD>
+<TD Width="">The format of the log file will be Unicode instead of ASCII.</TD>
+</TR>
+</table>
+<P>Alternatively, <i>Flags</i> can be set to DEBUG_LOG_DEFAULT for the default set of options that contains none of the flags.</P>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>OpenLogFile2</b> and <b>OpenLogFile2Wide</b> are available in <b>IDebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>Only one log file can be open at a time.  If there is already a log file open, it will be closed.</P>
+<P>For more information about log files, see <a href="engine_dg_ce5dd9cd-7068-4ca7-95d9-f4985a9812c2.xml.htm">Using Input and Output</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_984f684e-c1c0-4819-b8ac-02718581c6ad.xml.htm"><b>OpenLogFile</b></a>, <a href="idebugcontrol_9822bd84-b8ee-4d36-a66f-e38567d23646.xml.htm"><b>GetLogFile2</b></a>, <a href="idebugcontrol_988fe3ac-a51d-4757-995d-40fe9d66aa02.xml.htm"><b>CloseLogFile</b></a>, <a href="idebugcontrol_a3ef306a-5134-49c7-b589-65a4afaa90ac.xml.htm"><b>GetLogMask</b></a>, <a href="idebugcontrol_b1c44a2b-d2fd-407b-8994-00f5e53af10d.xml.htm"><b>SetLogMask</b></a>, <a href="r21_metacmds_l_ffa5a430-48cf-43b6-a6b3-2bd5692337c2.xml.htm"><b>.logopen (Open Log File)</b></a>, <a href="r21_metacmds_l_050495d8-7b34-4e19-be5a-d1d87c6911fc.xml.htm"><b>.logappend (Append Log File)</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: OpenLogFile2 RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

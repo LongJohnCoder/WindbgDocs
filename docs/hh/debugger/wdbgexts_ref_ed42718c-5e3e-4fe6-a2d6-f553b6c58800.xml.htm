@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetInputLine</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetInputLine"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetInputLine"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_ed42718c-5e3e-4fe6-a2d6-f553b6c58800.xml"/>
+<META NAME="MS-HKWD" CONTENT="GetInputLine function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_ed42718c-5e3e-4fe6-a2d6-f553b6c58800.xml"></A>GetInputLine</H1>
+<P><P>The <b>GetInputLine</b> function requests an input string from the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#84783e5c-aa71-4d1c-be03-f4cc8ce3d72f">debugger</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>ULONG</b><BR><b>GetInputLine(</b><BR><b>    PCSTR  </b><i>Prompt</i><b>,</b><BR><b>    PSTR  </b><i>Buffer</i><b>,</b><BR><b>    ULONG  </b><i>BufferSize</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Prompt</i></DT>
+<DD>Specifies a prompt to indicate what input is being requested.  The prompt is printed to the debugger's output before the input is gathered.  If <i>Prompt</i> is NULL, no prompt is printed.</DD>
+<DT><i>Buffer</i></DT>
+<DD>Specifies the buffer to receive the input.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size, in characters, of the buffer <i>Buffer</i>.</DD>
+</DL>
+<H4>Return Value</H4>
+<P><b>GetInputLine returns </b>the size, in characters, of the input returned to the <i>Buffer</i> buffer, or zero, if no input was returned.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this function, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetInputLine RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

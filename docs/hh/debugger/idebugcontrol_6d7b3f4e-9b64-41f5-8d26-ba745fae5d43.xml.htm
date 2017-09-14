@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>OutputContextStackTrace</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, OutputContextStackTrace"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="ntddk.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="OutputContextStackTrace"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_6d7b3f4e-9b64-41f5-8d26-ba745fae5d43.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::OutputContextStackTrace method">
+<META NAME="MS-HKWD" CONTENT="OutputContextStackTrace (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_6d7b3f4e-9b64-41f5-8d26-ba745fae5d43.xml"></A>OutputContextStackTrace</H1>
+<P><P>The <b>OutputContextStackTrace</b> method prints the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#81c37228-c201-48ad-9f7a-85d8b1ade52c">call stack</a> specified by an array of <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#ab5b362b-84d0-4128-bd43-7e3d5014f81f">stack frames</a> and corresponding <a href="dbg_glossary_67e8768c-0585-41a5-ab7c-f8d2b5978663.xml.htm#203060b3-930a-4f3b-9173-348c463917c7">register contexts</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl4::OutputContextStackTrace(</b><BR><b>    IN ULONG  </b><i>OutputControl</i><b>,</b><BR><b>    IN PDEBUG_STACK_FRAME  </b><i>Frames</i><b>,</b><BR><b>    IN ULONG  </b><i>FramesSize</i><b>,</b><BR><b>    IN PVOID  </b><i>FrameContexts</i><b>,</b><BR><b>    IN ULONG  </b><i>FrameContextsSize</i><b>,</b><BR><b>    IN ULONG  </b><i>FrameContextsEntrySize</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>OutputControl</i></DT>
+<DD>Specifies where to send the output.  For possible values, see <a href="structures_498e4f9e-99c5-4fec-8aaf-0d84d2d097d0.xml.htm">DEBUG_OUTCTL_<i>XXX</i></a>.</DD>
+<DT><i>Frames</i></DT>
+<DD>Specifies the array of stack frames to output.  The number of elements in this array is <i>FramesSize</i>.  If <i>Frames</i> is NULL, the current stack frame is used.</DD>
+<DT><i>FramesSize</i></DT>
+<DD>Specifies the number of frames to output.</DD>
+<DT><i>FrameContexts</i></DT>
+<DD>Specifies the register context for each frame in the stack.  The entries in this array correspond to the entries in the <i>Frames</i> array.  The type of the thread context is the CONTEXT structure for the target's <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#ba5af89e-695c-44ee-98cc-bdb218ce8d1c">effective processor</a>.</DD>
+<DT><i>FrameContextsSize</i></DT>
+<DD>Specifies the size, in bytes, of the memory pointed to by <i>FrameContexts</i>.  The number of stack frames must equal the number of contexts, and <i>FrameContextsSize</i> must equal <i>FramesSize</i> multiplied by <i>FrameContextsEntrySize</i>.</DD>
+<DT><i>FrameContextsEntrySize</i></DT>
+<DD>Specifies the size, in bytes, of each frame context in <i>FrameContexts</i>.</DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies bit flags that determine what information to output for each frame.  <i>Flags</i> can be any combination of values from the following table.<B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_ARGUMENTS</TD>
+<TD Width="">Displays the first three pieces of stack memory at the frame of each call.  On platforms where arguments are passed on the stack, and the code for the frame uses stack arguments, these values will be the arguments to the function.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_FUNCTION_INFO</TD>
+<TD Width="">Displays information about the function that corresponds to the frame.  This includes calling convention and frame pointer omission (FPO) information.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_SOURCE_LINE</TD>
+<TD Width="">Displays source line information for each frame of the stack trace.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_FRAME_ADDRESSES</TD>
+<TD Width="">Displays the return address, previous frame address, and other relevant addresses for each frame.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_COLUMN_NAMES</TD>
+<TD Width="">Displays column names.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_NONVOLATILE_REGISTERS</TD>
+<TD Width="">Displays the non-volatile register context for each frame.  This is only meaningful for some platforms.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_FRAME_NUMBERS</TD>
+<TD Width="">Displays frame numbers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_PARAMETERS</TD>
+<TD Width="">Displays parameter names and values as given in symbol information.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_FRAME_ADDRESSES_RA_ONLY</TD>
+<TD Width="">Displays just the return address in the stack frame addresses.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_FRAME_MEMORY_USAGE</TD>
+<TD Width="">Displays the number of bytes that separate the frames.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STACK_PARAMETERS_NEWLINE</TD>
+<TD Width="">Displays each parameter and its type and value on a new line.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>OutputContextStackTrace</b> is available in <b>IdebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>The array of stack frames can be obtained using <a href="idebugcontrol_ae12ec1a-8839-49cc-8082-c328a570188b.xml.htm"><b>GetContextStackTrace</b></a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.  CONTEXT is defined in <i>Ntddk.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_ae12ec1a-8839-49cc-8082-c328a570188b.xml.htm"><b>GetContextStackTrace</b></a>, <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>k, kb, kc, kd, kp, kP, kv (Display Stack Backtrace)</b></a>, <a href="idebugcontrol_07d53535-7d91-4771-84b1-f4ac4895a158.xml.htm"><b>OutputStackTrace</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: OutputContextStackTrace RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

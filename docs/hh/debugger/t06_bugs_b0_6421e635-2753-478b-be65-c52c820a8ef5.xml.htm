@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xC1: SPECIAL_POOL_DETECTED_MEMORY_CORRUPTION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xC1: SPECIAL_POOL_DETECTED_MEMORY_CORRUPTION"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_6421e635-2753-478b-be65-c52c820a8ef5.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xC1: SPECIAL_POOL_DETECTED_MEMORY_CORRUPTION">
+<META NAME="MS-HKWD" CONTENT="SPECIAL_POOL_DETECTED_MEMORY_CORRUPTION"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_6421e635-2753-478b-be65-c52c820a8ef5.xml"></A>Bug Check 0xC1: SPECIAL_POOL_DETECTED_MEMORY_CORRUPTION</H1>
+<P>The SPECIAL_POOL_DETECTED_MEMORY_CORRUPTION bug check has a value of 0x000000C1. This indicates that the driver wrote to an invalid section of the special pool.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen. Parameter 4 indicates the type of violation.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Address that the driver tried to free</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">0 </TD>
+<TD Width="">0x20</TD>
+<TD Width="">A driver attempted to free pool which was not allocated.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address that the driver tried to free</TD>
+<TD Width="">Bytes requested</TD>
+<TD Width="">Bytes calculated (actually given to the caller)</TD>
+<TD Width="">0x21,<BR>0x22</TD>
+<TD Width="">A driver attempted to free a bad address.   </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address that the driver tried to free</TD>
+<TD Width="">Address where bits are corrupted</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">0x23</TD>
+<TD Width="">A driver freed an address, but nearby bytes within the same page have been corrupted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address that  the driver tried to free</TD>
+<TD Width="">Address where bits are corrupted</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">0x24</TD>
+<TD Width="">A driver freed an address, but bytes occurring after the end of the allocation have been overwritten.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Current IRQL</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Number of bytes</TD>
+<TD Width="">0x30</TD>
+<TD Width="">A driver attempted to allocate pool at an incorrect IRQL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Current IRQL</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Address that the driver tried to free</TD>
+<TD Width="">0x31</TD>
+<TD Width="">A driver attempted to free pool at an incorrect IRQL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address that the driver tried to free</TD>
+<TD Width="">Address where one bit is corrupted</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">0x32</TD>
+<TD Width="">A driver freed an address, but nearby bytes within the same page have a single bit error. </TD>
+</TR>
+</table>
+<P></P>
+<P>The _POOL_TYPE codes are enumerated in <i>ntddk.h</i>. In particular, zero indicates nonpaged pool and one indicates paged pool.</P>
+<H4>Cause</H4>
+<P>A driver has written to an invalid section of the special pool.</P>
+<H4>Resolving the Problem</H4>
+<P>Obtain a backtrace of the current thread. This backtrace will usually reveal the source of the error.</P>
+<P>For information about the special pool, consult the Driver Verifier section of the Windows Driver Kit.  </P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xC1: SPECIAL_POOL_DETECTED_MEMORY_CORRUPTION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

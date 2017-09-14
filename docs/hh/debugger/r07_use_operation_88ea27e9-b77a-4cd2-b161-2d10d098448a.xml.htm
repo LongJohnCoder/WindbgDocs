@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Controlling Processes and Threads</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Controlling Processes and Threads"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml"/>
+<META NAME="MS-HKWD" CONTENT="process">
+<META NAME="MS-HKWD" CONTENT="process, choosing">
+<META NAME="MS-HKWD" CONTENT="thread">
+<META NAME="MS-HKWD" CONTENT="thread, choosing">
+<META NAME="MS-HKWD" CONTENT="thread, freezing">
+<META NAME="MS-HKWD" CONTENT="thread, unfreezing (thawing)">
+<META NAME="MS-HKWD" CONTENT="thread, suspending">
+<META NAME="MS-HKWD" CONTENT="suspend count of threads">
+<META NAME="MS-HKWD" CONTENT="freezing threads"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml"></A>Controlling Processes and Threads</H1>
+<P>When you are performing user-mode debugging, you activate, display, freeze, unfreeze, suspend, and unsuspend processes and threads.</P>
+<P>The <i>current</i> or <i>active</i> process is the process that is currently being debugged. Similarly, the <i>current</i> or <i>active</i> thread is the thread that the debugger is currently controlling. The actions of many debugger commands are determined by the identity of the current process and thread. The current process also determines the virtual address mappings that the debugger uses.</P>
+<P>When debugging begins, the current process is the one that the debugger is attached to or that caused the exception that broke into the debugger. Similarly, the current thread is the one that was active when the debugger attached to the process or that caused the exception. However, you can use the debugger to change the current process and thread and to freeze or unfreeze individual threads.</P>
+<P>In kernel-mode debugging, processes and threads are not controlled by the methods that are described in this section. For more information about how processes and threads are manipulated in kernel mode, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>.</P>
+<H4>Displaying Processes and Threads</H4>
+<P>To display process and thread information, you can use the following methods:</P><B></B><UL type="disc">
+<LI>The <a href="r15_cmds_a_94a10932-6816-4202-8307-985cd46649d1.xml.htm"><b>| (Process Status)</b></a> command</LI>
+<LI>The <a href="r15_cmds_a_e8b03a38-abea-4e4f-9429-a89f4638905b.xml.htm"><b>~ (Thread Status)</b></a> command</LI>
+<LI><i>(WinDbg only)</i>  The <a href="r36_gui_1_8a25e803-69aa-49a0-b3ef-2f3334b803c5.xml.htm">Processes and Threads window</a> </LI>
+</UL>
+<P></P>
+<H4>Setting the Current Process and Thread</H4>
+<P>To change the current process or thread, you can use the following methods:</P><B></B><UL type="disc">
+<LI>The <a href="r15_cmds_a_6d7e3f3c-4a87-4737-9587-07281a371f01.xml.htm"><b>|s (Set Current Process)</b></a> command</LI>
+<LI>The <a href="r15_cmds_a_b10eaec6-a443-4cb3-8715-959477da74fa.xml.htm"><b>~s (Set Current Thread)</b></a> command</LI>
+<LI><i>(WinDbg only)</i>  The <a href="r36_gui_1_8a25e803-69aa-49a0-b3ef-2f3334b803c5.xml.htm">Processes and Threads window</a> </LI>
+</UL>
+<P></P>
+<H4>Freezing and Suspending Threads</H4>
+<P>The debugger can change the execution of a thread by <i>suspending</i> the thread or by <i>freezing</i> the thread. These two actions have somewhat different effects.</P>
+<P>Each thread has a <i>suspend count</i> that is associated with it. If this count is one or larger, the system does not run the thread. If the count is zero or lower, the system runs the thread when appropriate.</P>
+<P>Typically, each thread has a suspend count of zero. When the debugger attaches to a process, it increments the suspend counts of all threads in that process by one. If the debugger detaches from the process, it decrements all suspend counts by one. When the debugger executes the process, it temporarily decrements all suspend counts by one.</P>
+<P>You can control the suspend count of any thread from the debugger by using the following methods:</P><B></B><UL type="disc">
+<LI>The <a href="r15_cmds_a_fc52a62c-a913-4199-9736-a8ae3b058e8f.xml.htm"><b>~n (Suspend Thread)</b></a> command increments the specified thread's suspend count by one.</LI>
+<LI>The <a href="r15_cmds_a_ead644bb-5361-45bb-9d42-0b17adf19347.xml.htm"><b>~m (Resume Thread)</b></a> command decrements the specified thread's suspend count by one.</LI>
+</UL>
+<P></P>
+<P>The most common use for these commands is to raise a specific thread's suspend count from one to two. When the debugger executes or detaches from the process, the thread then has a suspend count of one and remains suspended, even if other threads in the process are executing.</P>
+<P>You can suspend threads even when you are performing <a href="r05_use_start_284e0db2-ee99-4c59-a6ef-af2557ee719b.xml.htm">noninvasive debugging</a>.    </P>
+<P>The debugger can also <i>freeze </i>a thread. This action is similar to suspending the thread in some ways. However, "frozen" is only a debugger setting. Nothing in the Windows operating system recognizes that anything is different about this thread.</P>
+<P>By default, all threads are unfrozen. When the debugger causes a process to execute, threads that are frozen do not execute. However, if the debugger detaches from the process, all threads unfreeze.</P>
+<P>To freeze and unfreeze individual threads, you can use the following methods:</P><B></B><UL type="disc">
+<LI>The <a href="r15_cmds_a_ca44b90e-9364-48d1-80d6-71504a2ac1d6.xml.htm"><b>~f (Freeze Thread)</b></a> command freezes the specified thread.</LI>
+<LI>The <a href="r15_cmds_a_f576f95d-f1b2-41a0-95d4-aa16c1d5265f.xml.htm"><b>~u (Unfreeze Thread)</b></a> command unfreezes the specified thread.</LI>
+</UL>
+<P></P>
+<P>In any event, threads that belong to the target process never execute when the debugger has broken into the target. The suspend count of a thread affects the thread's behavior only when the debugger executes the process or detaches. The frozen status affects the thread's behavior only when the debugger executes the process.</P>
+<H4>Threads and Processes in Other Commands</H4>
+<P>You can add thread specifiers or process specifiers before many other commands. For more information, see the individual command topics.</P>
+<P>You can add the <a href="r15_cmds_a_717bf87c-c880-4b3d-9c78-d5e4d80b5ff3.xml.htm"><b>~e (Thread-Specific Command)</b></a> qualifier before many commands and extension commands. This qualifier causes the command to be executed with respect to the specified thread. This qualifier is especially useful if you want to apply a command to more than one thread. For example, the following command repeats the <a href="r24_exts_general_a_48d24819-6e92-4223-9129-ea627c616515.xml.htm"><b>!gle</b></a> extension command for every thread that is being debugged.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>~*e !gle <BR></nobr></P>
+<H4>Multiple Systems</H4>
+<P>The debugger can attach to multiple targets at the same time. When these processes include dump files or include live targets on more than one computer, the debugger references a system, process, and thread for each action. For more information about this kind of debugging, see <a href="r07_use_operation_6930fe2c-a632-474c-9f8c-5bdd3aa9349d.xml.htm">Debugging Multiple Targets</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Controlling Processes and Threads RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

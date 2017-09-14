@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Changing the Default Boot Entry</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Changing the Default Boot Entry"><xml><MSHelp:Keyword Index="A" Term="bootini_f39e3846-1f38-45bf-8ef3-dc447b2396e1.xml"/>
+<META NAME="MS-HKWD" CONTENT="default boot entries">
+<META NAME="MS-HKWD" CONTENT="Boot.ini files [WDK], default boot entries">
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], default boot entries">
+<META NAME="MS-HKWD" CONTENT="identifying boot entry">
+<META NAME="MS-HKWD" CONTENT="current boot entry [WDK]">
+<META NAME="MS-HKWD" CONTENT="NVRAM boot options [WDK], default boot entries">
+<META NAME="MS-HKWD" CONTENT="EFI NVRAM boot options [WDK], default boot entries"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_f39e3846-1f38-45bf-8ef3-dc447b2396e1.xml"></A>Changing the Default Boot Entry</H1>
+<P>The default boot entry is the entry that the boot loader selects when the boot menu time-out expires. You can change the default boot entry to ensure that the operating system configuration that you prefer is loaded automatically.</P>
+<P>For Windows Server 2003 and earlier versions of NT-based Windows, you can use Bootcfg or edit the <i>Boot.ini</i> file in Notepad to change the default boot entry in the <i>Boot.ini</i> files. To change the default boot entry in EFI NVRAM, you can use Bootcfg or Nvrboot. On either architecture, Bootcfg provides the easiest and safest method of specifying the default boot entry.</P>
+<P>For Windows Vista or later versions of Windows, you can use BCDEdit to change the default boot entry.</P>
+<H4>Using Bootcfg</H4>
+<P>Bootcfg provides the easiest method of changing the default boot entry on an all systems. However, the Bootcfg display on each system differs slightly.</P><B></B><UL type="disc">
+<LI>On computers with BIOS firmware, Bootcfg displays the boot entries in the order in which they appear in the <i>Boot.ini</i> file. In this display, the default boot entry is the first entry in the Bootcfg <b>Boot Entries</b> section that starts the default operating system. </LI>
+<LI>On computers with EFI firmware, Bootcfg displays the boot entries in boot order. Thus, the first boot entry listed is the default boot entry. (Bootcfg adds a <b>default</b> parameter to the display, but it is not stored in EFI NVRAM.)</LI>
+</UL>
+<P></P>
+<P>To change the default boot entry on either type of system, use the Bootcfg <b>/default</b> switch. The following command makes the second boot entry (line number two) the default boot entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bootcfg /default /ID 2</b><BR><BR></nobr></P>
+<P>The effect of the Bootcfg <b>/default</b> switch is slightly different on each type of system. On systems with BIOS firmware, the <b>/default</b> switch changes the value of the <i>Boot.ini</i> <b>default</b> parameter and/or reorders the boot entries as necessary to make the selected boot entry the default. On systems with EFI firmware, the Bootcfg <b>/default</b> switch changes the boot order. As a result, the specified boot entry appears first in the Bootcfg <b>Boot Entries</b> section.</P>
+<P>For complete instructions about using Bootcfg, see Help and Support Services. For examples, see <a href="bootini_eca9701d-6f34-4e1c-a9ad-f2e14ba189d5.xml.htm">Using Boot Parameters</a>.</P>
+<P class="note"><b>Note</b>  The <b>Boot entry ID</b> field in Bootcfg and the boot entry number in Nvrboot do not display the value of the EFI boot entry ID. The Bootcfg and Nvrboot IDs are line numbers that represent the order of the boot entry in the <b>Boot Entries</b> section and change when the entries are reordered.</P>
+<H4>Editing the <i>Boot.ini</i> File</H4>
+<P>Before changing the default boot entry, you have to identify the current default boot entry. The following elements of the <i>Boot.ini</i> file determine which boot entry is the default:</P><B></B><UL type="disc">
+<LI>The value of the <b>default</b> parameter.</LI>
+<LI>The order of the entries in the [operating systems] section of the <i>Boot.ini</i> file. </LI>
+</UL>
+<P></P>
+<P>The default boot entry is the first entry in the [operating systems] section that starts the default operating system.</P>
+<P>For example, the following sample <i>Boot.ini</i> file has two boot entries for Windows 2000 and two boot entries for Windows XP. The <b>default</b> parameter specifies the operating system in the WINNT directory on disk 0, partition 1, that is, Windows 2000. The default boot entry, named "Microsoft Windows 2000 Professional", is shown in bold type in the following sample. It is the first entry in the [operating systems] section that boots Windows 2000 (the operating system in the WINNT directory on disk 0, partition 1).</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR><b>default=multi(0)disk(0)rdisk(0)partition(1)\WINNT</b><BR>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(3)\WINDOWS="Microsoft Windows XP Professional" /fastdetect <BR>multi(0)disk(0)rdisk(0)partition(3)\WINDOWS="Windows XP Debug" /fastdetect /debug /debugport=COM1 /baudrate=19200 <BR><b>multi(0)disk(0)rdisk(0)partition(1)\WINNT="Microsoft Windows 2000 Professional" /fastdetect </b><BR>multi(0)disk(0)rdisk(0)partition(1)\WINNT="Microsoft Windows 2000 Debug" /fastdetect /debug /debugport=COM1 /baudrate=19200 <BR><BR></nobr></P>
+<P>Use the following procedure to change the default boot entry.</P><B>To change the default boot entry</B><OL type="1">
+<LI>Copy the operating system location from the new default entry, and then paste it in the value of the <b>default</b> parameter. </LI>
+<LI>Reorder the boot entries so that the new default entry appears before any other boot entries for that operating system.</LI>
+</OL>
+<P></P>
+<P>The following sample shows the result of these changes. In this revised <i>Boot.ini</i> file, Windows XP is the default operating system, and the "Windows XP Debug" entry is the default boot entry. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR><b>default=multi(0)disk(0)rdisk(0)partition(3)\WINDOWS</b><BR>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(1)\WINNT="Microsoft Windows 2000 Debug" /fastdetect /debug /debugport=COM1 /baudrate=19200 <BR>multi(0)disk(0)rdisk(0)partition(1)\WINNT="Microsoft Windows 2000 Professional" /fastdetect <BR><b>multi(0)disk(0)rdisk(0)partition(3)\WINDOWS="Windows XP Debug" /fastdetect /debug /debugport=COM1 /baudrate=19200 </b><BR>multi(0)disk(0)rdisk(0)partition(3)\WINDOWS="Microsoft Windows XP Professional" /fastdetect <BR><BR></nobr></P>
+<H4>Using Nvrboot</H4>
+<P>On systems that store boot options in EFI NVRAM, you can use the <b>nvrboot p</b> (push) command, which "pushes" a boot entry to the top of the boot entries list, making it the first entry in the <b>Boot Entries</b> section.</P>
+<P>Like Bootcfg, the <b>nvrboot p</b> command reorders the values in the <i>BootOrder</i> array so that the NVRAM boot ID of the specified boot entry is the first item the array.</P>
+<H4>Using BCDEdit</H4>
+<P>For Windows Vista and later versions of Windows, you can specify the default boot entry using the <b>/default</b> option. The syntax to specify the default operating system is as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /default <i>&lt;ID&gt;</i><BR></nobr></P>
+<P></P>
+<P>The <i>&lt;ID&gt;</i> is the GUID for the Windows boot loader boot entry that is associated with the operating system that you want to designate as the default. You must include the braces (<b>{ }</b>) around the GUID, for example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /default {cbd971bf-b7b8-4885-951a-fa03044f5d71}<BR></nobr></P>
+<P></P>
+<P>To change the default boot entry to the earlier Windows operating system loader on a multiboot computer, set <i>&lt;ID&gt;</i> to <b>{ntldr}</b>, which is the reserved name for the GUID that is associated with Ntldr. This might present another menu depending on entries in <i>Boot.ini</i> file.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /default {ntldr}<BR></nobr></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Changing the Default Boot Entry RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

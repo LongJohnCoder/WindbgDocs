@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetKernelConnectionOptions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetKernelConnectionOptions"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetKernelConnectionOptions"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_5a7fe06a-42e4-4bdd-935c-8130cdfef568.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::GetKernelConnectionOptions method">
+<META NAME="MS-HKWD" CONTENT="GetKernelConnectionOptions (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_5a7fe06a-42e4-4bdd-935c-8130cdfef568.xml"></A>GetKernelConnectionOptions</H1>
+<P><P>The <b>GetKernelConnectionOptions</b> and <b>GetKernelConnectionOptionsWide</b> methods return the connection options for the current kernel target.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient::GetKernelConnectionOptions(</b><BR><b>    OUT OPTIONAL PSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>OptionsSize</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugClient5::GetKernelConnectionOptionsWide(</b><BR><b>    OUT OPTIONAL PWSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>OptionsSize</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetKernelConnectionOptionsT GetKernelConnectionOptionsWide</b><BR><b>#else</b><BR><b>#define GetKernelConnectionOptionsT GetKernelConnectionOptions</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Buffer</i></DT>
+<DD>Specifies the buffer to receive the connection options.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size in characters of the buffer <i>Buffer</i>.</DD>
+<DT><i>OptionsSize</i></DT>
+<DD>Receives the size in characters of the connection options.  If <i>OptionsSize</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The size of the string was greater than the size of the buffer, so it was truncated to fit into the buffer.</DD>
+<DT>E_UNEXPECTED</DT>
+<DD>The current target is not a standard live kernel target.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetKernelConnectionOptions</b> is available in all versions of <b>IDebugClient</b>.  <b>GetKernelConnectionOptionsWide</b> is available in <b>IDebugClient5</b> and later versions.</P>
+<H4>Comments</H4>
+<P>This method is available only for live kernel targets that are not local and not connected through eXDI.</P>
+<P>The connection options returned are the same options used to connect to the <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#ddf5e2eb-aa21-42cb-b18c-9621029f2e6e">kernel</a>.  For details on the syntax of this string, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>.</P>
+<P>For more information about connecting to live kernel-mode targets, see <a href="engine_dg_d08297b5-3efa-4b7b-864b-c76133c62431.xml.htm">Live Kernel-Mode Targets</a>.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugclient_9008538b-3492-4952-a18f-b1dd346e887e.xml.htm"><b>AttachKernel</b></a>, <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetKernelConnectionOptions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

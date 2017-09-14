@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xD0: DRIVER_CORRUPTED_MMPOOL</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xD0: DRIVER_CORRUPTED_MMPOOL"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_8b929022-ae45-43d1-b689-0d12d49984c0.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xD0: DRIVER_CORRUPTED_MMPOOL">
+<META NAME="MS-HKWD" CONTENT="DRIVER_CORRUPTED_MMPOOL"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_8b929022-ae45-43d1-b689-0d12d49984c0.xml"></A>Bug Check 0xD0: DRIVER_CORRUPTED_MMPOOL</H1>
+<P>The DRIVER_CORRUPTED_MMPOOL bug check has a value of 0x000000D0. This indicates that the system attempted to access invalid memory at a process IRQL that was too high.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">Memory referenced</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">IRQL at time of reference</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width=""><b>0:</b> Read<BR><BR><b>1:</b> Write<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Address that referenced memory</TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>The kernel attempted to access pageable memory (or perhaps completely invalid memory) when the IRQL was too high. The ultimate cause of this problem is almost certainly a driver that has corrupted the system pool.</P>
+<P>In most cases, this bug check results if a driver corrupts a large allocation (PAGE_SIZE or larger). Smaller allocations result in <a href="t06_bugs_b0_9b885f0e-9721-4785-ae24-ea40ae005b3e.xml.htm">bug check 0xC5</a> (DRIVER_CORRUPTED_EXPOOL).</P>
+<H4>Resolving the Problem</H4>
+<P>If you have recently installed any new software, check to see if it is properly installed. Check for updated drivers on the manufacturer's website.</P>
+<P>To debug this error, use the special pool option of Driver Verifier. If this fails to reveal the driver that caused the error, use the Global Flags utility to enable the special pool by pool tag.</P>
+<P>For information about the special pool, consult the Driver Verifier section of the Windows Driver Kit.  </P>
+<P>An alternate method is to open the <b>\\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</b> registry key. In this key, create or edit the <b>ProtectNonPagedPool</b> value, and set it equal to DWORD 1. Then reboot. Then the system will unmap all freed nonpaged pool. This will prevent drivers from corrupting the pool. (This does not protect the pool from DMA hardware, however.)</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xD0: DRIVER_CORRUPTED_MMPOOL RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

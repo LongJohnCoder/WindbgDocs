@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Control Flow Tokens</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Control Flow Tokens"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_1131a34b-0ce3-4629-8c88-0ec60c5f64c6.xml"/>
+<META NAME="MS-HKWD" CONTENT="script file, control flow tokens">
+<META NAME="MS-HKWD" CONTENT="control flow tokens">
+<META NAME="MS-HKWD" CONTENT="debugger command program, control flow tokens"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_1131a34b-0ce3-4629-8c88-0ec60c5f64c6.xml"></A>Control Flow Tokens</H1>
+<P>You can use <i>control flow tokens</i> to create conditional execution and execution loops within debugger command programs.</P>
+<P>Control flow tokens behave like their counterparts in C and C++, with the following general exceptions:</P><B></B><UL type="disc">
+<LI>You must enclose each block of commands that is executed conditionally or repeatedly in braces, even if there is only one such command. For example, you cannot omit the braces in the following command.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.if (ebx&gt;0) { r ebx }</b><BR></nobr></P>
+</LI>
+<LI>Each condition must be a expression. Commands are not permitted.  For example, the following example produces a syntax error.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.while (r ebx) { .... }</b><BR></nobr></P>
+</LI>
+<LI>The final command before a closing brace does not have to be followed by a semicolon.</LI>
+</UL>
+<P></P>
+<P>The following control flow tokens are supported within a debugger command program. For more information about the syntax of each token, see the individual reference topics.</P><B></B><UL type="disc">
+<LI>The <a href="r14_tokens_1685a3f4-2a71-4a78-abce-d0d42efaa274.xml.htm"><b>.if</b></a> token behaves like the <b>if</b> keyword in C.</LI>
+<LI>The <a href="r14_tokens_b9798daf-9fab-4557-95b5-429cc6d23ddb.xml.htm"><b>.else</b></a> token behaves like the <b>else</b> keyword in C.</LI>
+<LI>The <a href="r14_tokens_3fa6136a-048a-48e3-989e-02b8f554da23.xml.htm"><b>.elsif</b></a> token behaves like the <b>else if</b> keyword combination in C.</LI>
+<LI>The <a href="r14_tokens_edf3a785-a32a-495f-be5c-364833d77aa6.xml.htm"><b>.foreach</b></a> token parses the output of debugger commands, a string, or a text file. This token then takes each item that it finds and uses them as the input to a specified list of debugger commands.</LI>
+<LI>The <a href="r14_tokens_2f368dfb-fa95-42f4-81bf-7aeaeea67c05.xml.htm"><b>.for</b></a> token behaves like the <b>for</b> keyword in C, except that you must separate multiple increment commands by semicolons, not by commas.</LI>
+<LI>The <a href="r14_tokens_c5ca2d62-6dd6-4103-ab3a-43f8478ca1e1.xml.htm"><b>.while</b></a> token behaves like the <b>while</b> keyword in C.</LI>
+<LI>The <a href="r14_tokens_5bfe306c-aeb4-4c36-9b12-b252d1ecac93.xml.htm"><b>.do</b></a> token behaves like the <b>do</b> keyword in C, except that you cannot use the word "while" before the condition.</LI>
+<LI>The <a href="r14_tokens_ebe92d74-eea0-4a48-a02d-442aabdc9e43.xml.htm"><b>.break</b></a> token behaves like the <b>break</b> keyword in C. You can use this token within any <b>.for</b>, <b>.while</b>, or <b>.do</b> loop.</LI>
+<LI>The <a href="r14_tokens_0fcdb845-860b-4f9a-b2ed-f7da017f6a65.xml.htm"><b>.continue</b></a> token behaves like the <b>continue</b> keyword in C. You can use this token within any <b>.for</b>, <b>.while</b>, or <b>.do</b> loop.</LI>
+<LI>The <a href="r14_tokens_019197ba-ea14-43be-9ca2-ebff396a8a09.xml.htm"><b>.catch</b></a> token prevents a program from ending if an error occurs. The <b>.catch</b> token is followed by braces that enclose one or more commands. If one of these commands generates an error, the error message is displayed, all remaining commands within the braces are ignored, and execution resumes with the first command after the closing brace.</LI>
+<LI>The <a href="r14_tokens_956e934f-e3cb-4e1f-9a7e-b73a5f8cf910.xml.htm"><b>.leave</b></a> token is used to exit from a <b>.catch</b> block.</LI>
+<LI>The <a href="r14_tokens_d4857356-9e8f-4007-800d-335e18de8cfd.xml.htm"><b><u>.printf</u></b></a> token behaves like the <b>printf</b> statement in C.</LI>
+<LI>The <a href="r14_tokens_29186615-1b0f-4874-9980-0423286ec296.xml.htm"><b>.block</b></a> token performs no action. You should use this token only to introduce a block, because you cannot create a block by only using a pair of braces. You must add a control flow token before the opening brace.</LI>
+</UL>
+<P></P>
+<P>The <a href="r24_exts_general_a_50f76fa1-c26f-418f-8cd0-4cfdecc3b07e.xml.htm"><b>!for_each_module</b></a>, <a href="r24_exts_general_a_44fdf754-c13b-478d-a077-579555087d49.xml.htm"><b>!for_each_frame</b></a>, and <a href="r24_exts_general_a_d01e96cf-88a5-4cbd-94a4-14a9f308eff2.xml.htm"><b>!for_each_local</b></a> extensions are also useful with a debugger command program.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Control Flow Tokens RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

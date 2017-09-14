@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.asm (Change Disassembly Options)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .asm (Change Disassembly Options)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_45ed0606-0809-4a40-82bb-d8a34fb02fd2.xml"/>
+<META NAME="MS-HKWD" CONTENT=".asm (Change Disassembly Options) command">
+<META NAME="MS-HKWD" CONTENT="Change Disassembly Options (.asm) command">
+<META NAME="MS-HKWD" CONTENT="assembly debugging, Change Disassembly Options (.asm) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_45ed0606-0809-4a40-82bb-d8a34fb02fd2.xml"></A>.asm (Change Disassembly Options)</H1>
+<P>The <b>.asm</b> command controls how disassembly code will be displayed. </P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.asm</b> <BR><b>.asm</b>[<b>-</b>] <i>Options</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>-</b></DT>
+<DD>Causes the specified options to be disabled. If no minus sign is used, the specified options will be enabled.</DD>
+<DT><i>Options</i></DT>
+<DD>Can be any number of the following options:<DL><DT><b>ignore_output_width</b></DT>
+<DD>Prevents the debugger from checking the width of lines in the disassembly display.</DD>
+<DT><b>no_code_bytes</b></DT>
+<DD><i>(x86 and x64 targets only)</i>  Suppresses the display of raw bytes.</DD>
+<DT><b>source_line</b></DT>
+<DD>Prefixes each line of disassembly with the line number of the source code. </DD>
+<DT><b>verbose</b></DT>
+<DD><i>(Itanium target only)</i>  Causes bundle-type information to be displayed along with the standard disassembly information.    </DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Using <b>.asm</b> by itself displays the current state of the options.</P>
+<P>This command affects the display of any disassembly instructions in the Debugger Command window. In WinDbg it also changes the contents of the Disassembly window.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For a description of assembly debugging and related commands, see <a href="r07_use_operation_9afb8c89-95fa-499e-bc4e-98f0365df573.xml.htm">Debugging in Assembly Mode</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .asm (Change Disassembly Options) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Aliases</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Aliases"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_ba4aca87-0103-4e86-9e6c-f3d6a44b3578.xml"/>
+<META NAME="MS-HKWD" CONTENT="aliases">
+<META NAME="MS-HKWD" CONTENT="macros">
+<META NAME="MS-HKWD" CONTENT="macros, [See &quot;aliases&quot;]">
+<META NAME="MS-HKWD" CONTENT="aliases, fixed-name aliases">
+<META NAME="MS-HKWD" CONTENT="fixed-name aliases">
+<META NAME="MS-HKWD" CONTENT="aliases, user-named aliases">
+<META NAME="MS-HKWD" CONTENT="user-named aliases">
+<META NAME="MS-HKWD" CONTENT="aliases, automatic aliases">
+<META NAME="MS-HKWD" CONTENT="automatic aliases">
+<META NAME="MS-HKWD" CONTENT="aliases, $u0 to $u9">
+<META NAME="MS-HKWD" CONTENT="$u0 to $u9 aliases">
+<META NAME="MS-HKWD" CONTENT="aliases, $ntnsym">
+<META NAME="MS-HKWD" CONTENT="$ntnsym alias">
+<META NAME="MS-HKWD" CONTENT="aliases, $ntwsym">
+<META NAME="MS-HKWD" CONTENT="$ntwsym alias">
+<META NAME="MS-HKWD" CONTENT="aliases, $ntsym">
+<META NAME="MS-HKWD" CONTENT="$ntsym alias">
+<META NAME="MS-HKWD" CONTENT="aliases, $CurrentDumpFile">
+<META NAME="MS-HKWD" CONTENT="$CurrentDumpFile alias">
+<META NAME="MS-HKWD" CONTENT="aliases, $CurrentDumpPath">
+<META NAME="MS-HKWD" CONTENT="$CurrentDumpPath alias">
+<META NAME="MS-HKWD" CONTENT="aliases, $CurrentDumpArchiveFile">
+<META NAME="MS-HKWD" CONTENT="$CurrentDumpArchiveFile alias">
+<META NAME="MS-HKWD" CONTENT="aliases, $CurrentDumpArchivePath">
+<META NAME="MS-HKWD" CONTENT="$CurrentDumpArchivePath alias"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_ba4aca87-0103-4e86-9e6c-f3d6a44b3578.xml"></A>Using Aliases</H1>
+<P><i>Aliases</i> are character strings that are automatically replaced with other character strings. You can use them in debugger commands and to avoid retyping certain common phrases.</P>
+<P>An alias consists of an <i>alias name</i> and an <i>alias equivalent</i>. When you use an alias name as part of a debugger command, the name is automatically replaced by the alias equivalent. This replacement occurs immediately, before the command is parsed or executed.</P>
+<P>The debugger supports three kinds of aliases:</P><B></B><UL type="disc">
+<LI>You can set and name <i>user-named aliases</i>.</LI>
+<LI>You can set <i>fixed-name aliases</i>, but they are named <b>$u0</b>, <b>$u1</b>, ..., <b>$u9</b>.</LI>
+<LI>The debugger sets and names <i>automatic aliases</i>.</LI>
+</UL>
+<P></P>
+<P></P>
+<H4>Defining a User-Named Alias</H4>
+<P>When you define a user-named alias, you can choose the alias name and the alias equivalent:</P><B></B><UL type="disc">
+<LI>The alias name can be any string that does not contain white space.</LI>
+<LI>The alias equivalent can be any string. If you enter it at the keyboard, the alias equivalent cannot contain leading spaces or carriage returns. Alternatively, you can set it equal to a string in memory, the value of a numeric expression, the contents of a file, the value of an environment variable, or the output of one or more debugger commands.</LI>
+</UL>
+<P></P>
+<P>Both the alias name and the alias equivalent are case sensitive.</P>
+<P>To define or redefine a user-named alias, use the <a href="r15_cmds_a_55827b17-9e6d-45ce-8f48-a2a78000a00c.xml.htm"><b>as (Set Alias)</b></a> or <a href="r15_cmds_a_55827b17-9e6d-45ce-8f48-a2a78000a00c.xml.htm"><b>aS (Set Alias)</b></a> command.</P>
+<P>To remove an alias, use the <a href="r15_cmds_a_e5d1c093-dce2-42e1-8d6c-d1af9082a7ba.xml.htm"><b>ad (Delete Alias)</b></a> command.</P>
+<P>To list all current user-named aliases, use the <a href="r15_cmds_a_e719a355-9f82-4f9e-97a0-20eea341313f.xml.htm"><b>al (List Aliases)</b></a> command.</P>
+<H4>Defining a Fixed-Name Alias</H4>
+<P>There are 10 fixed-name aliases. Their alias names are <b>$u0</b>, <b>$u1</b>, ..., <b>$u9</b>. Their alias equivalents can be any string that does not contain the ENTER keystroke.</P>
+<P>Use the <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command to define the alias equivalents for fixed-name aliases. When you define a fixed-name alias, you must insert a period (<b>.</b>) before the letter "u"<i>.</i> The text after the equal sign (=) is the alias equivalent. The alias equivalent can include spaces or semicolons, but leading and trailing spaces are ignored. You should not enclose the alias equivalent in quotation marks (unless you want quotation marks in the results).</P>
+<P class="note"><b>Note</b>  Do not be confused by using the <b>r (Registers)</b> command for fixed-name aliases. These aliases are not registers or pseudo-registers, even though you use the <b>r</b> command to set their alias equivalents. You do not have to add an at (<b>@</b>) sign before these aliases, and you cannot use the <b>r</b> command to <i>display</i> the value of one of these aliases.</P>
+<P>By default, if you do not define a fixed-name alias, it is an empty string.</P>
+<H4>Automatic Aliases</H4>
+<P>The debugger sets the following automatic aliases.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Alias name</TH>
+<TH Width="">Alias equivalent</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$ntnsym </b></TD>
+<TD Width="">The most appropriate module for NT symbols on the computer's native architecture. This alias can equal either <b>ntdll</b> or <b>nt</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$ntwsym </b></TD>
+<TD Width="">The most appropriate module for NT symbols during 32-bit debugging that uses <a href="dbg_glossary_39db479e-a9f5-4a31-b599-21aa77a0c60d.xml.htm#d3917b78-9dea-441e-99a1-d8cddce2b1a9">WOW64</a>. This alias could be <b>ntdll32</b> or some other 32-bit version of <i>Ntdll.dll</i>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$ntsym </b></TD>
+<TD Width="">The most appropriate module for NT symbols that match the current machine mode. When you are debugging in native mode, this alias is the same as <b>$ntnsym</b>. When you are debugging in a non-native mode, the debugger tries to find a module that matches this mode. (For example, during 32-bit debugging that uses WOW64, this alias is the same as <b>$ntwsym</b>.)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$CurrentDumpFile</b></TD>
+<TD Width="">The name of the last dump file that the debugger loaded.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$CurrentDumpPath</b></TD>
+<TD Width="">The directory path of the last dump file that the debugger loaded.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$CurrentDumpArchiveFile</b></TD>
+<TD Width="">The name of the last dump archive file (CAB file) that the debugger loaded.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$CurrentDumpArchivePath</b></TD>
+<TD Width="">The directory path of the last dump archive file (CAB file) that the debugger loaded.</TD>
+</TR>
+</table>
+<P></P>
+<P>Automatic aliases are similar to <a href="r13_syntax_c05da1f3-3310-46cb-8e56-da3d670e05f3.xml.htm">automatic pseudo-registers</a>, except that you can use automatic aliases with alias-related tokens (such as <b>${ }</b>), while you cannot use pseudo-registers with these tokens.</P>
+<H4>Using an Alias in the Debugger Command Window</H4>
+<P>After you define an alias, you can use it in any command entry. The alias name is automatically replaced with the alias equivalent. Therefore, you can use the alias as an expression or as a macro.</P>
+<P>An alias name expands correctly even if it is enclosed in quotation marks. Because the alias equivalent can include any number of quotation marks or semicolons, the alias equivalent can represent multiple commands.</P>
+<P>A user-named alias is recognized only if its name is separated from other characters by white space. The first character of its alias name must begin the line or follow a space, a semicolon, or a quotation mark. The last character of its alias name must end the line or be followed by a space, a semicolon, or a quotation mark.</P>
+<P class="note"><b>Note</b>  Any text that you enter into the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a> that begins with "as", "aS", "ad", or "al" does not receive alias replacement. This restriction prevents the alias commands from being rendered inoperable. However, this restriction also means that commands that follow <b>ad</b> or <b>al</b> on a line do not have their aliases replaced. If you want aliases to be replaced in a line that begins with one of these strings, add a semicolon before the alias.</P>
+<P>However, you can use the <b>${ }</b> token to expand a user-named alias even when it is next to other text. You can also use this token together with certain switches to prevent an alias from being expanded or to display certain alias-related values. For more information about these situations, see <a href="r14_tokens_6d97cf2f-9194-42d4-a7bb-b7316c117802.xml.htm"><b>${ }  (Alias Interpreter)</b></a>.</P>
+<P>A fixed-name alias expands correctly from <i>any</i> point within a line, regardless of how it is embedded within the text of the line.</P>
+<P>You cannot use commands that are available only in WinDbg (<a href="r21_metacmds_l_2bf63e00-f90a-4416-a13a-b4d4153e12dd.xml.htm"><b>.open</b></a>, <a href="r22_metacmds_s_c487d5ac-196c-463f-a460-76b9e77e1a9c.xml.htm"><b>.write_cmd_hist (Write Command History)</b></a>, <a href="r22_metacmds_s_e9022e5e-5e3a-4e2c-8642-92f2eb79d503.xml.htm"><b>.lsrcpath</b></a>, and <a href="r22_metacmds_s_7aa8be7d-3947-4880-9823-91395c6cd8d0.xml.htm"><b>.lsrcfix</b></a>) and a few additional commands (<a href="r20_metacmds_e_2af0efbe-e8dd-4085-92ae-92175131aa6f.xml.htm"><b>.hh</b></a>, <a href="r19_metacmds_a_b086fb22-fd89-4b62-b840-b14d4093914b.xml.htm"><b>.cls</b></a>, <a href="r22_metacmds_s_4545597b-8952-46bc-9870-d1e8e7a17648.xml.htm"><b>.wtitle</b></a>, <a href="r21_metacmds_l_09834828-8263-4a4c-8c79-2f80f1f7d609.xml.htm"><b>.remote</b></a>, kernel-mode <a href="r21_metacmds_l_f69b1b8a-144b-4099-9ef6-0ba58a7db533.xml.htm"><b>.restart</b></a>, and user-mode <a href="r21_metacmds_l_977adba8-167e-4a9e-8e9c-090b51ced28b.xml.htm"><b>.restart</b></a>) with aliases.    </P>
+<H4>Using an Alias in a Script File</H4>
+<P>When you use an alias in a script file, you must take special care to make sure that the alias is expanded at the correct time. Consider the following script:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>.foreach (value {dd 610000 L4})<BR>{<BR>   as /x ${/v:myAlias} value + 1<BR>   .echo value myAlias<BR>}<BR><BR>ad myAlias<BR><BR></nobr></P>
+<P>The first time through the loop, the <a href="r15_cmds_a_55827b17-9e6d-45ce-8f48-a2a78000a00c.xml.htm">as, aS (Set Alias)</a> command assigns a value to the myAlias. The value assigned to myAlias is 1 plus 610000 (the first output of the dd command). However, when the <a href="r20_metacmds_e_6eb44413-2b5e-423a-8a53-73546ee1e3d1.xml.htm">.echo (Echo Comment)</a> command is executed, myAlias has not yet been expanded, so instead of seeing 610001, we see the text "myAlias".</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; $$&gt;&lt; c:\Script02.txt<BR>00610000 myAlias<BR>00905a4d 0x610001<BR>00000003 0x905a4e<BR>00000004 0x4<BR>0000ffff 0x5<BR><BR></nobr></P>
+<P>The problem is that myAlias is not expanded until a new block of code is entered. The next entry to the loop is a new block, so myAlias gets expanded to 610001. But it is too late: we should have seen 610001 the first time through the loop, not the second time.We can fix this problem by enclosing the <a href="r20_metacmds_e_6eb44413-2b5e-423a-8a53-73546ee1e3d1.xml.htm">.echo (Echo Comment)</a> command in a new block as shown in the following script.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>.foreach (value {dd 610000 L4}) <BR>{<BR>   as /x ${/v:myAlias} value + 1<BR>   .block{.echo value myAlias}<BR>}<BR><BR>ad myAlias<BR><BR></nobr></P>
+<P>With the altered script, we get the following correct output.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; $$&gt;&lt; c:\Script01.txt<BR>00610000 0x610001<BR>00905a4d 0x905a4e<BR>00000003 0x4<BR>00000004 0x5<BR>0000ffff 0x10000<BR><BR></nobr></P>
+<P>For more information, see <a href="r14_tokens_29186615-1b0f-4874-9980-0423286ec296.xml.htm">.block</a> and <a href="r14_tokens_6d97cf2f-9194-42d4-a7bb-b7316c117802.xml.htm">${ }  (Alias Interpreter)</a>.</P>
+<H4>Examples</H4>
+<P>You can use aliases so that you do not have to type long or complex symbol names, as in the following example.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>as Short usersrv!NameTooLongToWantToType</b><BR>0:000&gt; <b>dw Short +8</b><BR></nobr></P>
+<P>The following example is similar to the preceding example but it uses a fixed-name alias.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>r $.u0=usersrv!NameTooLongToWantToType</b><BR>0:000&gt; <b>dw $u0+8</b><BR></nobr></P>
+<P>You can use aliases as macros for commands that you use frequently. The following example increments the <b>eax</b> and <b>ebx</b> registers two times.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>as GoUp r eax=eax+1; r ebx=ebx+1</b><BR>0:000&gt; <b>GoUp</b><BR>0:000&gt; <b>GoUp</b><BR></nobr></P>
+<P>The following example uses an alias to simplify typing of commands.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>as Cmd "dd esp 14; g"</b><BR>0:000&gt; <b>bp MyApi Cmd </b><BR></nobr></P>
+<P>The following example is similar to the preceding example but it uses a fixed-name alias.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>r $.u5="dd esp 14; g"</b><BR>0:000&gt; <b>bp MyApi $u5 </b><BR></nobr></P>
+<P>Both of the preceding examples are equivalent to the following command.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bp MyApi "dd esp 14; g"</b><BR></nobr></P>
+<H4>Recursive Aliases</H4>
+<P>You can use a fixed-name alias in the definition of any alias. You can also use a user-named alias in the definition of a fixed-name alias. However, to use a user-named alias in the definition of another user-named alias, you have to add a semicolon before the <b>as</b> or <b>aS</b> command, or else the alias replacement does not occur on that line.</P>
+<P>When you are using recursive definitions of this type, each alias is translated as soon as it is used. For example, the following example displays <b>3</b>, not <b>7</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>r $.u2=2 </b><BR>0:000&gt; <b>r $.u1=1+$u2 </b><BR>0:000&gt; <b>r $.u2=6 </b><BR>0:000&gt; <b>? $u1 </b><BR>Evaluate expression: 3 = 00000003<BR></nobr></P>
+<P>Similarly, the following example displays <b>3</b>, not <b>7</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>as fred 2 </b><BR>0:000&gt; <b>r $.u1= 1 + fred </b><BR>0:000&gt; <b>as fred 6 </b><BR>0:000&gt; <b>? $u1 </b><BR>Evaluate expression: 3 = 00000003<BR></nobr></P>
+<P>The following example is also permitted and displays <b>9</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>r $.u0=2</b> <BR>0:000&gt; <b>r $.u0=7+$u0 </b><BR>0:000&gt; <b>? $u0</b><BR>Evaluate expression: 9 = 00000009<BR></nobr></P>
+<H4><i>Tools.ini</i> File</H4>
+<P>In CDB (and <a href="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml.htm#f7997e21-d84a-4224-af71-bc393265af91">NTSD</a>), you can predefine fixed-name aliases in the <a href="r04_setup_3_0b710f80-3d76-456f-8081-6db088c4422e.xml.htm"><i>tools.ini</i></a> file. To predefine a fixed-name alias, add the <b>$u</b> fields that you want to your [NTSD] entry, as in the following example.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[NTSD]<BR>$u1:_ntdll!_RtlRaiseException<BR>$u2:"dd esp 14;g"<BR>$u9:$u1 + 42<BR></nobr></P>
+<P></P>
+<P>You cannot set user-named aliases in the <i>Tools.ini</i> file.</P>
+<H4>Fixed-Name Aliases vs. User-Named Aliases</H4>
+<P>User-name aliases are easier to use than fixed-named aliases. Their definition syntax is simpler, and you can list them by using the <a href="r15_cmds_a_e719a355-9f82-4f9e-97a0-20eea341313f.xml.htm"><b>al (List Aliases)</b></a> command.</P>
+<P>Fixed-named aliases are replaced if they are used next to other text. To make a user-named alias be replaced when it is next to other text, enclose it in the <a href="r14_tokens_6d97cf2f-9194-42d4-a7bb-b7316c117802.xml.htm"><b>${ }  (Alias Interpreter)</b></a> token.</P>
+<P>Fixed-name alias replacement occurs <i>before</i> user-named alias replacement.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Aliases RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

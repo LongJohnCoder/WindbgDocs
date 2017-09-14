@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Analyzing a User-Mode Dump File with CDB</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Analyzing a User-Mode Dump File with CDB"><xml><MSHelp:Keyword Index="A" Term="r10_dump_files_4f6d2afd-9c77-4b24-8750-75b2b73b92a6.xml"/>
+<META NAME="MS-HKWD" CONTENT="CDB, analyzing a dump file">
+<META NAME="MS-HKWD" CONTENT="CAB file containing a dump file, analyzing user-mode dump file with CDB"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r10_dump_files_4f6d2afd-9c77-4b24-8750-75b2b73b92a6.xml"></A>Analyzing a User-Mode Dump File with CDB</H1>
+<P></P>
+<P>User-mode memory dump files can be analyzed by CDB. The processor or Windows version that the dump file was created on does not need to match the platform on which CDB is being run.</P>
+<H4>Installing Symbol Files</H4>
+<P>Before analyzing the memory dump file, you will need to install the symbol files for the version of Windows that generated the dump file. These files will be used by the debugger you choose to use to analyze the dump file. For more information about the proper installation of symbol files, see <a href="r09_symbols_02a93db3-239a-4416-8bd5-2630a8eaa4f1.xml.htm">Installing Windows Symbol Files</a>.</P>
+<P>You will also need to install all the symbol files for the user-mode process, either an application or system service, that caused the system to generate the dump file. If this code was written by you, the symbol files should have been generated when the code was compiled and linked. If this is commercial code, check on the product CD-ROM or contact the software manufacturer for these particular symbol files.</P>
+<H4>Starting CDB</H4>
+<P>To analyze a dump file, start CDB with the <b>-z</b> command-line option:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>cdb -y</b> <i>SymbolPath</i> <b>-i</b> <i>ImagePath</i> <b>-z</b> <i>DumpFileName</i> <BR><BR></nobr></P>
+<P>The -<b>v</b> option (verbose mode) is also useful. For a full list of options, see <a href="r12_cmdline_3ec269e8-a2d8-43e4-8758-2201481cd323.xml.htm">CDB Command-Line Options</a>.</P>
+<P>You can also open a dump file after the debugger is running by using the <a href="r21_metacmds_l_7e3720ef-d5f9-4717-ac69-9aa308d9b576.xml.htm"><b>.opendump (Open Dump File)</b></a> command, followed with <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a>. This allows you to debug multiple dump files at the same time.</P>
+<P>It is possible to debug multiple dump files at the same time. This can be done by including multiple <b>-z</b> switches on the command line (each followed by a different file name), or by using <b>.opendump</b> to add additional dump files as debugger targets. For information about how to control a multiple-target session, see <a href="r07_use_operation_6930fe2c-a632-474c-9f8c-5bdd3aa9349d.xml.htm">Debugging Multiple Targets</a>.</P>
+<P>Dump files generally end with the extension <i>.dmp</i> or <i>.mdmp</i>. You can use network shares or Universal Naming Convention (UNC) file names for the memory dump file.</P>
+<P>It is also common for dump files to be packed into a CAB file. If you specify the file name (including the <i>.cab</i> extension) after the <b>-z</b> option or as the argument to an <b>.opendump</b> command, the debugger can read the dump files directly out of the CAB. However, if there are multiple dump files stored in a single CAB, the debugger will only be able to read one of them. The debugger will not read any additional files from the CAB, even if they are symbol files or executables associated with the dump file.</P>
+<H4>Analyzing a Full User Dump File</H4>
+<P>Analysis of a full user dump file is similar to analysis of a live debugging session. See the <a href="r13_syntax_6fe48fa9-bb8d-42aa-8ae3-9ce9341aff60.xml.htm">Debugger Commands</a> reference section for details on which commands are available for debugging dump files in user mode.</P>
+<P></P>
+<H4>Analyzing Minidump Files</H4>
+<P>Analysis of a user-mode minidump file is done in the same way as a full user dump. However, since much less memory has been preserved, you are much more limited in the actions you can perform. Commands that attempt to access memory beyond what is preserved in the minidump file will not function properly.</P>
+<H4>Additional Techniques</H4>
+<P>For techniques that can be used to read specific kinds of information from a dump file, see <a href="t01_basic_256cb03b-5fba-4e9e-a526-4c3f5f93ebc8.xml.htm">Extracting Information from a Dump File</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Analyzing a User-Mode Dump File with CDB RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

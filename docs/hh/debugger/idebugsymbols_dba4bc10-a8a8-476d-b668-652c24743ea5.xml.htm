@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetSymbolEntriesByOffset</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetSymbolEntriesByOffset"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetSymbolEntriesByOffset"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_dba4bc10-a8a8-476d-b668-652c24743ea5.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::GetSymbolEntriesByOffset method">
+<META NAME="MS-HKWD" CONTENT="GetSymbolEntriesByOffset (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_dba4bc10-a8a8-476d-b668-652c24743ea5.xml"></A>GetSymbolEntriesByOffset</H1>
+<P><P>The <b>GetSymbolEntriesByOffset</b> method returns the <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35">symbols</a> which are located at a specified address.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbols3::GetSymbolEntriesByOffset(</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    OUT OPTIONAL PDEBUG_MODULE_AND_ID  </b><i>Ids</i><b>,</b><BR><b>    OUT OPTIONAL PULONG64  </b><i>Displacements</i><b>,</b><BR><b>    IN ULONG  </b><i>IdsCount</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>Entries</i><BR><b>    );</b><BR></P>
+<DL><H4><b>Parameters</b></H4>
+<DT><i>Offset</i></DT>
+<DD>Specifies a location in the process's memory address space within the desired symbol&#8217;s range.  Not all symbols have a known range, so, for best results, use the base address of the symbol.</DD>
+<DT><i>Flags</i></DT>
+<DD>Set to zero.</DD>
+<DT><i>Ids</i></DT>
+<DD>Receives the symbols.  This is an array of <i>IdsCount</i> entries of type <a href="structures_d53c2a34-f855-45a0-918b-0a8dfb936828.xml.htm">DEBUG_MODULE_AND_ID</a>.  If <i>Ids</i> is NULL, this information is not returned.</DD>
+<DT><i>Displacements</i></DT>
+<DD>Receives the differences between the base addresses of the found symbols and the given address according to the symbol&#8217;s range.  </DD>
+<DT><i>IdsCount</i></DT>
+<DD>Specifies the number of entries that the arrays <i>Ids</i> and <i>Displacements</i> can hold.</DD>
+<DT><i>Entries</i></DT>
+<DD>Receives the number of symbols located at <i>Offset</i>.  If <i>Entries</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4><b>Return Value</b></H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetSymbolEntriesByOffset</b> is available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4><b>Comments</b></H4>
+<P>For more information about symbols, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Symbols</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="idebugsymbols_4c157d74-d5e8-43d5-87f9-5ad089adb4a0.xml.htm"><b>GetSymbolEntriesByName</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetSymbolEntriesByOffset RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

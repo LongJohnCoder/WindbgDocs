@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Installing Dr. Watson as the Postmortem Debugger</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Installing Dr. Watson as the Postmortem Debugger"><xml><MSHelp:Keyword Index="A" Term="DrWatson_1ca4b86c-fc2f-479a-840b-b9f13e054fca.xml"/>
+<META NAME="MS-HKWD" CONTENT="Dr. Watson, installing as postmortem debugger"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="DrWatson_1ca4b86c-fc2f-479a-840b-b9f13e054fca.xml"></A>Installing Dr. Watson as the Postmortem Debugger</H1>
+<P>When an application error occurs, Windows can respond in several different ways, depending on the postmortem debugging settings. If these settings instruct a debugging tool to create a dump file, a user-mode memory dump file will be created.</P>
+<P>The default postmortem setting is for a dump file to be written by Dr. Watson. This means that when an application crashes, Dr. Watson will be activated and will save a memory dump file. For details on how to alter this, see <a href="r04_setup_3_40cc08bd-c0da-4d75-90cd-f677b4f63d68.xml.htm">Enabling Postmortem Debugging</a>.</P>
+<P>If these settings have been changed, you can reinstall Dr. Watson as the postmortem debugger by running Dr. Watson with the <b>-i</b> option:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>drwtsn32 -i</b><BR><BR></nobr></P>
+<P>For details, see <a href="drwatson_6f519ccd-bd31-4d9a-8949-1134db5beda9.xml.htm">Dr. Watson Command-Line Options</a>.</P>
+<H4>Dr. Watson on Windows XP and later versions of Windows</H4>
+<P></P>
+<P>If Dr. Watson is activated on Windows XP or later, a message box will appear. This message box gives you the option of sending an error report to Microsoft. If you choose <b>Don't Send</b>, a dump file will be created and stored on your hard disk. If you choose <b>Send Error Report</b>, a dump file will be created and stored on your hard disk, and will also be transmitted to Microsoft over the Internet.</P>
+<P>However, if you have manually set the <b>\\HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\AeDebug\Auto</b> value to zero, the <b>Don't Send</b> button will simply terminate the application. The <b>Send Error Report</b> button will create a dump file and send it to Microsoft but will not store it on your hard disk. A third button, <b>Debug</b>, will create a dump file and store it on your hard disk.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Installing Dr. Watson as the Postmortem Debugger RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

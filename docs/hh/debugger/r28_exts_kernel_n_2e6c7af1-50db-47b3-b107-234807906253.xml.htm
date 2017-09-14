@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!pcm</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !pcm"><xml><MSHelp:Keyword Index="A" Term="r28_exts_kernel_N_2e6c7af1-50db-47b3-b107-234807906253.xml"/>
+<META NAME="MS-HKWD" CONTENT="!pcm extension">
+<META NAME="MS-HKWD" CONTENT="private cache map">
+<META NAME="MS-HKWD" CONTENT="cache manager"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r28_exts_kernel_N_2e6c7af1-50db-47b3-b107-234807906253.xml"></A>!pcm</H1>
+<P><P>The <b>!pcm </b>extension displays the specified private cache map. This extension is only available in Windows 2000.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!pcm</b> <i>Address</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the private cache map.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width="">Unavailable (see <b>Comments</b> section) </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension is supported only in Windows 2000. In Windows XP and later versions of Windows, use the <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt nt!_PRIVATE_CACHE_MAP </b><i>Address</i></a> command.</P>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about cache management, see the Microsoft Windows SDK documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. </P>
+<P>For information about other cache management extensions, see the <a href="r26_exts_kernel_a_6c3fa5e8-9710-4af8-8baf-e355e7c1bb5a.xml.htm"><b>!cchelp</b></a> extension reference.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !pcm RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

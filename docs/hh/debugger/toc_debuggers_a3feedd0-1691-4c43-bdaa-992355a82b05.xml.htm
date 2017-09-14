@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>List of Tools and Documentation</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, List of Tools and Documentation"><xml><MSHelp:Keyword Index="A" Term="TOC_Debuggers_a3feedd0-1691-4c43-bdaa-992355a82b05.xml"/>
+<META NAME="MS-HKWD" CONTENT="list of tools">
+<META NAME="MS-HKWD" CONTENT="tool list">
+<META NAME="MS-HKWD" CONTENT="documentation list">
+<META NAME="MS-HKWD" CONTENT="Breakin.exe">
+<META NAME="MS-HKWD" CONTENT="List.exe">
+<META NAME="MS-HKWD" CONTENT="RTList">
+<META NAME="MS-HKWD" CONTENT="dbghelp.chm (Debug Help Library documentation)">
+<META NAME="MS-HKWD" CONTENT="Debug Help Library documentation (dbghelp.chm)">
+<META NAME="MS-HKWD" CONTENT="Build utility (build.exe)">
+<META NAME="MS-HKWD" CONTENT="BinPlace (binplace.exe)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="TOC_Debuggers_a3feedd0-1691-4c43-bdaa-992355a82b05.xml"></A>List of Tools and Documentation</H1>
+<P></P>
+<P>Microsoft Debugging Tools for Windows includes a number of debuggers and other tools.  Some of them are described in this documentation, and others are described elsewhere.  The following list briefly describes each tool and where its documentation can be found.</P>
+<H4>Debuggers</H4>
+<P>Debugging Tools for Windows includes the following debuggers.  These are described throughout this documentation, and are referred to by their individual names or collectively as "the debugger":</P>
+<DL><DT>WinDbg  (<i>Windbg.exe</i>)</DT>
+<DD>A user-mode and kernel-mode debugger with a graphical interface.</DD>
+<DT>KD  (<i>Kd.exe</i>)</DT>
+<DD>A kernel-mode debugger with a console interface.</DD>
+<DT>CDB  (<i>Cdb.exe</i>)</DT>
+<DD>A user-mode debugger with a console interface.</DD>
+<DT>NTSD  (<i>Ntsd.exe</i>)</DT>
+<DD>A user-mode debugger with a console interface.  CDB and NTSD are virtually identical.  In this documentation, whenever a reference is made to "CDB", it applies to both CDB and NTSD.  When these two debuggers differ, it is noted.  (See <a href="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml.htm">CDB</a> and <a href="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml.htm#f7997e21-d84a-4224-af71-bc393265af91">NTSD</a> for details.)</DD>
+</DL>
+<P></P>
+<H4>Additional Tools and Utilities</H4>
+<P>Debugging Tools for Windows also includes the following tools and utilities:</P>
+<DL><DT>Logger  (<i>Logger.exe</i> and <i>Logexts.dll</i>)</DT>
+<DD>A tool and an extension DLL that record the function calls and other actions of a program.  Logger is described in this documentation; see <a href="logger+logviewer_04a62565-7398-4aa3-b6bb-46caea421b75.xml.htm">Logger and LogViewer</a>.</DD>
+<DT>LogViewer  (<i>Logviewer.exe</i>)</DT>
+<DD>A tool that displays the logs created by Logger.  LogViewer is described in this documentation; see <a href="logger+logviewer_04a62565-7398-4aa3-b6bb-46caea421b75.xml.htm">Logger and LogViewer</a>.</DD>
+<DT>ADPlus  (Autodump+, <i>Adplus.vbs</i>)</DT>
+<DD>A console-based Microsoft Visual Basic script that can automatically create memory dump files and log files with debug output from one or more processes.  ADPlus is described in this documentation; see <a href="adplus_72325de3-b07d-49a6-82b2-0ba6bb376416.xml.htm">ADPlus</a>.</DD>
+<DT>DbgRpc  (<i>Dbgrpc.exe</i>)</DT>
+<DD>A tool used to display Microsoft Remote Procedure Call (RPC) state information.  DbgRpc is described in this documentation; see <a href="t11_rpc_acpi_df2011c1-80e2-4ff6-83f6-340a17586c7f.xml.htm">RPC Debugging</a> and <a href="t11_rpc_acpi_ffe18735-edab-4192-8bb2-17cbfc9a0ad7.xml.htm">Using the DbgRpc Tool</a>.</DD>
+<DT>KDbgCtrl  (Kernel Debugging Control, <i>Kdbgctrl.exe</i>)</DT>
+<DD>A tool that controls and configures the kernel debugging connection.  KDbgCtrl is described in this documentation; see <a href="r02~a_setup_1a_eecafec5-45df-4944-8b73-c27a452f33db.xml.htm">Using KDbgCtrl</a>.</DD>
+<DT>SrcSrv  (<i>Srcsrv.dll</i>)</DT>
+<DD>A source server that can be used to deliver source files while debugging.  SrcSrv is described in this documentation; see <a href="symchk_c1ea56ff-ef8a-46ab-bfd8-ee049ef81d2a.xml.htm">SrcSrv</a>. </DD>
+<DT>SymSrv  (<i>Symsrv.dll</i>)</DT>
+<DD>A symbol server that the debugger can use to connect to a symbol store.  SymSrv is described in this documentation; see <a href="r09_symbols_657d92f2-20a6-4ddb-8669-cd4e431bb668.xml.htm">SymSrv</a>.</DD>
+<DT>SymStore  (<i>Symstore.exe</i>)</DT>
+<DD>A tool used to create a symbol store.  SymSrv is described in this documentation; see <a href="r09_symbols_d033164e-0b4c-4e3b-b534-b39437bc4d3b.xml.htm">Using SymStore</a>.</DD>
+<DT>SymProxy</DT>
+<DD>A tool used to create a single HTTP symbol server on your network that all your debuggers can point to.  This has the benefit of pointing to multiple symbol servers (both internal and external) with a single symbol path, handling all authentication, and increasing performance via symbol caching.  SymProxy is described in this documentation; see <a href="r09_symbols_cec36ec3-cb6f-4e9b-bc90-341a12f18995.xml.htm">SymProxy</a>. </DD>
+<DT>AgeStore  (<i>Agestore.exe</i>)</DT>
+<DD>A tool that removes old entries in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#ac594c2f-1bc6-4ee9-a628-bc146d313672">downstream store</a> of a symbol server or a source server.  AgeStore is described in this documentation; see <a href="symchk_578d84f8-168a-40be-84c7-44815ac942c5.xml.htm">AgeStore</a>.</DD>
+<DT>DBH  (<i>Dbh.exe</i>)</DT>
+<DD>A tool that displays information about the contents of a symbol file.  DBH is described in this documentation; see <a href="symchk_fe7c1f84-3a50-410a-a8fd-2fa5ec6ab4dd.xml.htm">DBH</a>.</DD>
+<DT>PDBCopy  (<i>Pdbcopy.exe</i>)</DT>
+<DD>A tool that removes private symbol information from a symbol file, and controls which public symbols are included in the file.  PDBCopy is described in this documentation; see <a href="symchk_ba009a20-0795-4188-9cb2-7d7dd6119202.xml.htm">PDBCopy</a>.</DD>
+<DT>DumpChk  (Dump File Checking Utility, <i>Dumpchk.exe</i>)</DT>
+<DD>A tool used to validate a memory dump file.  DumpChk is described in this documentation; see <a href="dumpchk_0f7d95cc-673c-4157-8c03-5ffc5a501257.xml.htm">DumpChk</a>.    </DD>
+<DT>DbgSrv  (<i>Dbgsrv.exe</i>)</DT>
+<DD>A process server used for remote debugging.  DbgSrv is described in this documentation; see <a href="r08_use_remote_0828c18f-b042-4288-9b58-a56e3076eb2e.xml.htm">Process Servers (User Mode)</a>.</DD>
+<DT>KdSrv  (<i>Kdsrv.exe</i>)</DT>
+<DD>A KD connection server used for remote debugging.  KDSrv is described in this documentation; see <a href="r08_use_remote_da274d6a-0dd9-43db-98cf-5c84038694db.xml.htm">KD Connection Servers (Kernel Mode)</a>.</DD>
+<DT>DbEngPrx  (<i>Dbengprx.exe</i>)</DT>
+<DD>A repeater (small proxy server) used for remote debugging.  DbgSrv is described in this documentation; see <a href="r08_use_remote_29b6f5a4-6e46-4699-afad-79f7953bf6a3.xml.htm">Repeaters</a>.</DD>
+<DT></DT>
+<DD></DD>
+<DT></DT>
+<DD></DD>
+<DT>The Remote tool  (<i>Remote.exe</i>)</DT>
+<DD>A remoting tool that can be used to remotely control any console program, including KD, CDB, and NTSD.  The Remote tool is described in this documentation; see <a href="remote_bf30d515-f221-4419-bea3-294e559f66ed.xml.htm">Remote Tool</a> and <a href="r08_use_remote_73c4c537-42b6-451d-b928-2ec0a1357640.xml.htm">Remote Debugging Through <i>Remote.exe</i></a>.</DD>
+<DT>GFlags  (Global Flags Editor, <i>Gflags.exe</i>)</DT>
+<DD>A tool used to control registry keys and other settings.  GFlags is described in this documentation; see <a href="gflags_ea035958-0ade-4e07-856e-cfd1ed0b4df0.xml.htm">GFlags</a>.</DD>
+<DT>The Kill tool  (<i>Kill.exe</i>)</DT>
+<DD>A tool used to terminate a process.  The Kill tool is described in this documentation; see <a href="kill_38a95b7c-6e98-45d1-8e36-f162000791e2.xml.htm">Kill Tool</a>.</DD>
+<DT>The Breakin tool  (<i>Breakin.exe</i>)</DT>
+<DD>A tool used to cause a user-mode break to occur in a process.  <i>Breakin.exe</i> is not described in this documentation.  Use the <b>breakin /?</b> command for help with this tool.</DD>
+<DT>The List tool  (File List Utility, <i>List.exe</i>)</DT>
+<DD><i>List.exe</i> is not described in this documentation.  Use the <b>list /?</b> command for help with this tool.    </DD>
+<DT>TList  (Task List Viewer, <i>Tlist.exe</i>)</DT>
+<DD>A tool used to list all running processes.  TList is described in this documentation; see <a href="tlist_d98fd688-471d-4855-aa5c-997719bd11c3.xml.htm">TList</a>.</DD>
+<DT>RTList  (Remote Task List Viewer, <i>Rtlist.exe</i>)</DT>
+<DD>A tool used to list running processes via a DbgSrv process server.  RTList is not described in this documentation.  Use the <b>rtlist /?</b> command for help with this tool.  </DD>
+<DT>UMDH  (User-Mode Dump Heap utility, <i>Umdh.exe</i>)</DT>
+<DD>A tool used to analyze heap allocations.  UMDH is described in this documentation; see <a href="umdh_dad64a92-11c2-4bda-842a-ebfddd61ca41.xml.htm">UMDH</a>.</DD>
+<DT>USBView  (Universal Serial Bus Viewer, <i>Usbview.exe</i>)</DT>
+<DD>A tool used to display the USB devices connected to a computer.  USBView is described in this documentation; see <a href="usbview_d9553e41-309d-4622-9b23-472f29f4b8e3.xml.htm">USBView</a>.</DD>
+</DL>
+<P></P>
+<P>If you peform a custom install of Debugging Tools for Windows and select the <b>SDK</b> feature and all of its subfeatures, the libraries, headers, and samples used to build debugger extensions will be installed.</P>
+<H4>Documentation</H4>
+<DL><DT>"Debugging Tools for Windows"  (<i>Debugger.chm</i>)</DT>
+<DD>This is the documentation you are currently reading.  It is the central documentation for Debugging Tools for Windows.</DD>
+<DT>"Debug Help Library"  (<i>Dbghelp.chm</i>)</DT>
+<DD>This documentation describes the DbgHelp API and the ImageHlp API, and also explains how to create your own symbol server.  <i>This is installed when you peform a custom install of Debugging Tools for Windows and select the <B>SDK</B> feature and its subfeatures.</i></DD>
+</DL>
+<P></P>
+<H4>Tools Outside the Debugging Tools for Windows Package</H4>
+<P>The following related tools are not part of the Debugging Tools for Windows package:</P>
+<DL><DT>Dr. Watson  (<i>Drwtsn32.exe</i>)</DT>
+<DD>A tool used for automatically creating dump files and sending error reports to Microsoft Online Crash Analysis (OCA).  Dr. Watson is partially described in this documentation; see <a href="drwatson_92d60a12-6577-4cd5-a02f-a1ea8204719a.xml.htm">Dr. Watson</a>.  The other features of Dr. Watson are described in the help file associated with <i>drwtsn32.exe</i>.</DD>
+<DT>Build utility  (<i>Build.exe</i>)</DT>
+<DD>A compiler and linker used to build debugger extensions and other programs.  The Build utility and its documentation can be found in the Windows Driver Kit, and in earlier versions of the Windows DDK.    </DD>
+<DT>BinPlace  (<i>Binplace.exe</i>)</DT>
+<DD>A tool used to control symbol files for build products.  BinPlace and its documentation can be found in the Windows Driver Kit, and in earlier versions of the Windows DDK.    </DD>
+<DT>Application Verifier  (<i>AppVerif.exe</i> and <b>!avrf</b>)</DT>
+<DD>A tool used to test user-mode applications.  This tool consists of two components:  the <i>AppVerif.exe</i> utility and the <b>!avrf</b> extension command.  All the features of Application Verifier that are debugger-related are described in <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=108353" target="_blank"><u>Application Verifier</u></a>.  The other features of Application Verifier are described in the help file associated with <i>AppVerif.exe</i>.</DD>
+</DL>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: List of Tools and Documentation RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

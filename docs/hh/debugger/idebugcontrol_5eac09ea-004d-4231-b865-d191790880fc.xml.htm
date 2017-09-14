@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SetTextMacro</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SetTextMacro"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="SetTextMacro"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_5eac09ea-004d-4231-b865-d191790880fc.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::SetTextMacro method">
+<META NAME="MS-HKWD" CONTENT="SetTextMacro (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_5eac09ea-004d-4231-b865-d191790880fc.xml"></A>SetTextMacro</H1>
+<P>The <b>SetTextMacro</b> and <b>SetTextMacroWide</b> methods set the value of a fixed-name alias.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::SetTextMacro(</b><BR><b>    IN ULONG  </b><i>Slot</i><b>,</b><BR><b>    IN PCSTR  </b><i>Macro</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::SetTextMacroWide(</b><BR><b>    IN ULONG  </b><i>Slot</i><b>,</b><BR><b>    IN PCWSTR  </b><i>Macro</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define SetTextMacroT SetTextMacroWide</b><BR><b>#else</b><BR><b>#define SetTextMacroT SetTextMacro</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Slot</i></DT>
+<DD>Specifies the number of the fixed-name alias.  <i>Slot</i> can take the values 0, 1, &#8230;, 9, that represent the fixed-name aliases <b>$u0</b>, <b>$u1</b>, &#8230;, <b>$u9</b>.</DD>
+<DT><i>Macro</i></DT>
+<DD>Specifies the new value of the alias specified by <i>Slot</i>.  The <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> makes a copy of this string.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>SetTextMacro</b> is available in all versions of <b>IDebugControl</b>.  <b>SetTextMacroWide</b> is available in <b>IDeubgControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>Before executing commands or evaluating expressions, the debugger engine will replace the alias specified by <i>Slot</i> with the value of the alias (specified by <i>Macro</i>).</P>
+<P>For an overview of aliases used by the debugger engine, see <a href="r05_use_start_ba4aca87-0103-4e86-9e6c-f3d6a44b3578.xml.htm">Using Aliases</a>.  For more information about using aliases with the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#98ac5bd2-076f-48f9-94e6-2a4518471d3c">debugger engine API</a>, see <a href="engine_dg_334264c4-55a9-4659-91de-3cfec6f6e5a3.xml.htm">Interacting with the Engine</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_b6408c67-fb45-4a11-94b4-24099f406a8a.xml.htm"><b>GetTextMacro</b></a>, <a href="idebugcontrol_b53cd6ec-4cc4-45b2-96a0-b830bc7f8ca9.xml.htm"><b>SetTextReplacement</b></a>, <a href="idebugcontrol_ba950bc7-3ed5-4e2e-913d-c743e1190482.xml.htm"><b>RemoveTextReplacements</b></a>, <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SetTextMacro RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

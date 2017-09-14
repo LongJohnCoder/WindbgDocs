@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!sym</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !sym"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_eb506027-9394-4d21-9b60-0b55af479e0d.xml"/>
+<META NAME="MS-HKWD" CONTENT="!sym extension">
+<META NAME="MS-HKWD" CONTENT="symbols, noisy symbol loading">
+<META NAME="MS-HKWD" CONTENT="symbols, prompts"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_eb506027-9394-4d21-9b60-0b55af479e0d.xml"></A>!sym</H1>
+<P><P>The <b>!sym</b> extension controls noisy symbol loading and symbol prompts.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!sym</b> <BR><b>!sym noisy</b> <BR><b>!sym quiet</b> <BR><b>!sym prompts</b> <BR><b>!sym prompts off</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>noisy</b></DT>
+<DD>Activates noisy symbol loading.</DD>
+<DT><b>quiet</b></DT>
+<DD>Deactivates noisy symbol loading.</DD>
+<DT><b>prompts</b></DT>
+<DD>Allows authentication dialog boxes to appear when SymSrv receives an authentication request.</DD>
+<DT><b>prompts off</b></DT>
+<DD>Suppresses all authentication dialog boxes when SymSrv receives an authentication request. This may result in SymSrv being unable to access symbols over the internet.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Dbghelp.dll </i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Dbghelp.dll </i></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If the <b>!sym</b> extension is used with no arguments, the current state of noisy symbol loading and symbol prompting is displayed.</P>
+<P>The <b>!sym noisy</b> and <b>!sym quiet</b> extensions control noisy symbol loading. For details and for other methods of displaying and changing this option, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#1be46490-3471-415d-a405-14806d2de877">SYMOPT_DEBUG</a>.</P>
+<P>The <b>!sym prompts</b> and <b>!sym prompts off</b> extensions control whether authentication dialogs are displayed when SymSrv encounters an authentication request. These commands must be followed by <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload (Reload Module)</b></a> for them to take effect. Authentication requests may be sent by proxy servers, internet firewalls, smart card readers, and secure websites. For details and for other methods of changing this option, see <a href="r09_symbols_ee8ab129-5530-41ad-af38-8a777fde7b79.xml.htm">Firewalls and Proxy Servers</a>.</P>
+<P class="note"><b>Note</b>  Noisy symbol loading should not be confused with noisy <i>source</i> loading &#8212; that is controlled by the <a href="r22_metacmds_s_feddb9ee-9663-4273-a66b-0597fec2f4bf.xml.htm"><b>.srcnoisy (Noisy Source Loading)</b></a> command.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !sym RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

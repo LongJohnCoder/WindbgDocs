@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Live User-Mode Targets</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Live User-Mode Targets"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_5e74ebf4-af57-41c3-ad2a-bd87417cd8d9.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, targets, user-mode">
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, disconnecting from a process">
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, process options"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_5e74ebf4-af57-41c3-ad2a-bd87417cd8d9.xml"></A>Live User-Mode Targets</H1>
+<P>The methods for creating and attaching to processes that are listed in this topic can be used for the local computer and for a remote computer running a <a href="engine_dg_403e6a06-76ae-4dfc-a475-4e8a77318c95.xml.htm#2198fa25-e6ef-4e68-b715-3a32968b560c">process server</a>.</P>
+<P>A <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#b9622678-468c-4b90-a002-a3d4280796f0">user-mode</a> process can be created using <a href="idebugclient_6411b416-f861-4c99-94bc-ceffd54acce0.xml.htm"><b>Create Process</b></a> or <a href="idebugclient_1cf74a01-b7bd-4899-8a17-4fc443ee0fbc.xml.htm"><b>CreateProcess2</b></a>, which execute a given command to create a process.  The method <a href="idebugclient_032236c1-3072-4226-919b-3f6f95635a20.xml.htm"><b>AttachProcess</b></a> can be used to attach the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> to an existing user-mode process.  <a href="idebugclient_5ff3afdf-164e-4f2f-a625-389f3da41d24.xml.htm"><b>CreateProcessAndAttach</b></a> and <a href="idebugclient_898e4cd4-45bf-43b8-80be-f761743e7f5c.xml.htm"><b>CreateProcessAndAttach2</b></a> create a new user-mode process and attach to it or another user-mode process on the same computer.  The <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operations <a href="idebugadvanced_873556cb-5f04-41c9-84a1-3790eb9dca5f.xml.htm">DEBUG_REQUEST_GET_ADDITIONAL_CREATE_OPTIONS</a>, <a href="idebugadvanced_935a7450-0123-4289-b615-e7037e767d28.xml.htm">DEBUG_REQUEST_SET_ADDITIONAL_CREATE_OPTIONS</a>, and <a href="idebugadvanced_bf5124cd-b4b0-4e56-865d-93e6a418f8ee.xml.htm">DEBUG_REQUEST_SET_LOCAL_IMPLICIT_COMMAND_LINE</a> can be used to set some of the default options for creating processes.</P>
+<P class="note"><b>Note</b>  The engine doesn't completely attach to the process until the <a href="idebugcontrol_19a7d8b3-1f16-400e-bf8f-c782d48b2cf5.xml.htm"><b>WaitForEvent</b></a> method has been called.  Only after the process has generated an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> &#8212; for example, the process creation event &#8212; does it become available in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugger session</a>.  See <a href="engine_overview_87d6e561-6d31-4a9e-8be3-1b5b93ebb5a3.xml.htm">Debugging Session and Execution Model</a> for more details.</P>
+<P>The method <a href="idebugclient_f1eed41f-b746-4eb6-b6db-8eef7ac89d6a.xml.htm"><b>GetRunningProcessSystemIds</b></a> will return the process IDs of all the running processes on the computer.  The process ID of a particular program can be found using <a href="idebugclient_c7e63b9d-45fe-4125-9fbf-984de939b089.xml.htm"><b>GetRunningProcessSystemIdByExecutableName</b></a>.  Given a process ID, a description of the process is returned by <a href="idebugclient_e5736881-635f-4998-809b-d210bf447a36.xml.htm"><b>GetRunningProcessDescription</b></a>.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="ca55b776-c718-4ccd-acf1-072d5d1cb73a"></A>Process Options</H3>
+<P>The process options determine part of the engine's behavior when attached to a user-mode process, including whether or not the debugger engine will automatically attach to child processes created by the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a> process and what the engine does with the target processes when it exits.  See <a href="structures_c7927253-1f89-4112-956b-c715883ff8a5.xml.htm">DEBUG_PROCESS_<i>XXX</i></a> for a description of the process options.</P>
+<P>The process options can be queried using <a href="idebugclient_5d54bc2a-5691-4a3a-b3c9-92fc577cdabb.xml.htm"><b>GetProcessOptions</b></a>.  They can be changed using <a href="idebugclient_995041c9-9380-4a66-b9f8-d74d68398a44.xml.htm"><b>AddProcessOptions</b></a>, <a href="idebugclient_eafb8a9c-18a4-4737-8ece-955596338fe5.xml.htm"><b>RemoveProcessOptions</b></a>, and <a href="idebugclient_d9936a28-08c3-4c4c-ba2b-accc9443b825.xml.htm"><b>SetProcessOptions</b></a>.</P>
+<H3><A NAME="48139d41-8c3b-4e02-a448-0f37bd40d692"></A>Disconnecting from Processes</H3>
+<P>There are three different ways for the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> to disconnect from a process.</P><B></B><OL type="1">
+<LI><i>Detach</i>.  Resume all the threads in the process so that it will continue running, no longer being debugged.  <a href="idebugclient_cee2b21f-2cbf-449d-a2c8-2006e21074db.xml.htm"><b>DetachCurrentProcess</b></a> will detach the engine from the current process and <a href="idebugclient_375aab38-2821-4154-911f-1df9e204146c.xml.htm"><b>DetachProcesses</b></a> will detach the engine from all processes.  Not all targets support detaching. The <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation <a href="idebugadvanced_b43cf757-ea07-40c0-9bdf-da88248bafdc.xml.htm">DEBUG_REQUEST_TARGET_CAN_DETACH</a> can be used to check if the target supports detaching.</LI>
+<LI><i>Terminate</i>.  Attempt to kill the process.  <a href="idebugclient_7129a1e4-f1a5-4dff-a45c-bf759ae410cf.xml.htm"><b>TerminateCurrentProcess</b></a> will terminate the current process and <a href="idebugclient_6bbf21ae-e69b-4f44-a4e7-9b5abe428903.xml.htm"><b>TerminateProcesses</b></a> will terminate all processes in the debugger session.</LI>
+<LI><i>Abandon</i>.  Remove the process from the list of processes being debugged.  The operating system will still consider the process as being debugged and it will remain suspended until another debugger attaches to it or it is killed.  <a href="idebugclient_2a3f34d6-591b-4cae-bc28-2da5f05a9548.xml.htm"><b>AbandonCurrentProcess</b></a> will abandon the current process.</LI>
+</OL>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Live User-Mode Targets RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

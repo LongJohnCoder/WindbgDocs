@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.idle_cmd (Set Idle Command)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .idle_cmd (Set Idle Command)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_d4a949c6-e66f-45aa-a576-7215696f949d.xml"/>
+<META NAME="MS-HKWD" CONTENT=".idle_cmd (Set Idle Command) command">
+<META NAME="MS-HKWD" CONTENT="Set Idle Command (.idle_cmd) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_d4a949c6-e66f-45aa-a576-7215696f949d.xml"></A>.idle_cmd (Set Idle Command)</H1>
+<P><P>The <b>.idle_cmd</b> command sets the <i>idle command</i>.  This is a command that is executed whenever control returns from the target to the debugger.  For example, when the target reaches a breakpoint, this command executes.</P>
+<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.idle_cmd</b><BR><b>.idle_cmd </b><i>String</i>  <BR><b>.idle_cmd /d</b><BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>String</i></DT>
+<DD>Specifies the string to which the idle command should be set.</DD>
+<DT><b>/d</b></DT>
+<DD>Clears the idle command.  </DD>
+<P></P>
+</DL>
+<H4>Environment</H4>
+<P>This command cannot be used in script files.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>When <b>.idle_cmd</b> is used with no parameters it displays the current idle command.</P>
+<P>In WinDbg, idle commands are stored in workspaces.</P>
+<P>Here is an example.  The idle command is set to <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r eax</b></a>.  Then, becausethe debugger is already idle, this command immediately executes, displaying the <b>eax</b> register:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>windbg&gt; <b>.idle_cmd r eax</b> <BR>Execute when idle: r eax<BR>eax=003b0de8<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .idle_cmd (Set Idle Command) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

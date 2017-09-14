@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_REQUEST_READ_CAPTURED_EVENT_CODE_STREAM</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_REQUEST_READ_CAPTURED_EVENT_CODE_STREAM"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_REQUEST_READ_CAPTURED_EVENT_CODE_STREAM"/>
+<MSHelp:Keyword Index="A" Term="IDebugAdvanced_11e6e4c8-5045-4e46-8fae-3a1198eb6c29.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_REQUEST_READ_CAPTURED_EVENT_CODE_STREAM request operation"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugAdvanced_11e6e4c8-5045-4e46-8fae-3a1198eb6c29.xml"></A>DEBUG_REQUEST_READ_CAPTURED_EVENT_CODE_STREAM</H1>
+<P>The DEBUG_REQUEST_READ_CAPTURED_EVENT_CODE_STREAM <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation returns up to 64 bytes of memory at the current event's instruction pointer.</P>
+<DL><H4>Parameters</H4>
+<DT><i>InBuffer</i></DT>
+<DD>Not used.</DD>
+<DT><i>OutBuffer</i></DT>
+<DD>The memory at the current event's instruction pointer.  Up to 64 bytes of memory may be returned.</DD>
+</DL>
+<H4>Comments</H4>
+<P>The memory returned is a snapshot of the memory taken when the event occurred.  It does not reflect any changes that may have been made to the target's memory since the event.</P>
+<P>The current event's instruction pointer is returned by the <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation <a href="idebugadvanced_e8f2931c-b213-4245-9648-53fe7384ef3d.xml.htm">DEBUG_REQUEST_GET_CAPTURED_EVENT_CODE_OFFSET</a>.</P>
+<H4>See Also</H4>
+<P><a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a>, <a href="idebugadvanced_e8f2931c-b213-4245-9648-53fe7384ef3d.xml.htm">DEBUG_REQUEST_GET_CAPTURED_EVENT_CODE_OFFSET</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_REQUEST_READ_CAPTURED_EVENT_CODE_STREAM RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

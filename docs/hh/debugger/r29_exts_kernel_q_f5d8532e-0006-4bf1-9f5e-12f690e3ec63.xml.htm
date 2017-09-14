@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!smt</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !smt"><xml><MSHelp:Keyword Index="A" Term="r29_exts_kernel_Q_f5d8532e-0006-4bf1-9f5e-12f690e3ec63.xml"/>
+<META NAME="MS-HKWD" CONTENT="!smt extension">
+<META NAME="MS-HKWD" CONTENT="simultaneous multithreaded processor">
+<META NAME="MS-HKWD" CONTENT="simultaneous multithreaded processor, !smt extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r29_exts_kernel_Q_f5d8532e-0006-4bf1-9f5e-12f690e3ec63.xml"></A>!smt</H1>
+<P><P>The <b>!smt</b> extension displays a summary of the simultaneous multithreaded processor information. </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!smt</b><BR></nobr></P>
+<P></P>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>lkd&gt; <b>!smt</b> <BR>SMT Summary:<BR>------------<BR>   KeActiveProcessors: **------------------------------ (00000003)<BR>        KiIdleSummary: -------------------------------- (00000000)<BR> No PRCB     Set Master SMT Set                                     IAID<BR>  0 820f4820 Master     **------------------------------ (00000003)  00<BR>  1 87a4d120 820f4820   **------------------------------ (00000003)  01<BR><BR>Maximum cores per physical processor:   2<BR>Maximum logical processors per core:    1<BR><BR></nobr></P>
+<P>The <b>No</b> column indicates the number of the processor.</P>
+<P>The <b>PRCB</b> column indicates the address of the processor control block for the processor.  Each logical processor is listed separately.</P>
+<P>Each physical processor has exactly one logical processor listed as the <b>Master</b> under the <b>Set Master</b> column.</P>
+<P>The <b>SMT Set</b> column lists the processor's simultaneous multithreaded processor set information.</P>
+<P>The <b>IAID</b> column lists the initial Advanced Programmable Interrupt Controller identifier (APIC ID). On a true x64 computer, each processor starts with a hard-coded initial APIC ID. This ID value can be retrieved through the CPUID instruction. On certain other computers, the initial APIC ID is not necessarily unique across all processors, so the APIC ID that is accessible through the APIC's memory-mapped input/output (MMIO) space can be modified. This technique enables software to allocate unique APIC IDs for all processors within the computer. Depending on the target computer's processors, the <b>IAID</b> column may show this ID or may be blank.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !smt RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

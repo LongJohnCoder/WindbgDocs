@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Controlling Exceptions and Events</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Controlling Exceptions and Events"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml"/>
+<META NAME="MS-HKWD" CONTENT="exceptions">
+<META NAME="MS-HKWD" CONTENT="exceptions, overview">
+<META NAME="MS-HKWD" CONTENT="exceptions, handling">
+<META NAME="MS-HKWD" CONTENT="events">
+<META NAME="MS-HKWD" CONTENT="events, overview">
+<META NAME="MS-HKWD" CONTENT="events, handling"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml"></A>Controlling Exceptions and Events</H1>
+<P>You can catch and handle exceptions in user-mode and kernel-mode applications by a variety of methods. An active debugger, a postmortem debugger, or an internal error handling routine are all common ways to handle exceptions.</P>
+<P>For more information about the precedence order of these various exception handlers, see <a href="r04_setup_3_40cc08bd-c0da-4d75-90cd-f677b4f63d68.xml.htm">Enabling Postmortem Debugging</a>.</P>
+<P>When the Microsoft Windows operating system allows a debugger to handle an exception, the application that generated the exception <i>breaks into</i> the debugger. That is, the application stops and the debugger becomes active. The debugger can then handle the exception in some way or analyze the situation. The debugger can then end the process or let it resume running.</P>
+<P>If the debugger ignores the exception and lets the application continue running, the operating system looks for other exception handlers as if no debugger was present. If the exception is handled, the application continues running. However, if the exception remains unhandled, the debugger is then given a second opportunity to deal with the situation.</P>
+<H4>Using the Debugger to Analyze an Exception</H4>
+<P>When an exception or event breaks into the debugger, you can use the debugger to examine the code that is being executed and the memory that the application is using. By altering certain quantities or jumping to a different point in the application, you might be able to remove the cause of the exception.</P>
+<P>You can resume execution by issuing a <a href="r16_cmds_c_bb7ab8a9-efe6-4feb-b234-e94d27848769.xml.htm"><b>gh (Go with Exception Handled)</b></a> or <a href="r16_cmds_c_3254135f-8902-45ee-a2dc-a52049ea903c.xml.htm"><b>gn (Go with Exception Not Handled)</b></a> command.</P>
+<P></P>
+<P>If you issue the <b>gn</b> command in the debugger's second opportunity to handle the exception, the application ends.</P>
+<H4>Kernel-Mode Exceptions</H4>
+<P>Exceptions that occur in kernel-mode code are more serious than user-mode exceptions. If kernel-mode exceptions are not handled, a <a href="t03_bug_intro_590bbf17-b7a5-4700-86fa-ba052d1bc9c5.xml.htm">bug check</a> is issued and the system stops.</P>
+<P>As with user-mode exceptions, if a kernel-mode debugger is attached to the system, the debugger is notified before the <i>bug check screen</i> (also known as a <i>blue screen</i>) appears. If no debugger is attached, the bug check screen appears. In this case, the operating system might create a <a href="r10_dump_files_fba942f0-e0f2-4644-9426-95ad5bca7c9a.xml.htm">crash dump file</a>.</P>
+<H4>Controlling Exceptions and Events from the Debugger</H4>
+<P>You can configure the debugger to react to specified exceptions and events in a specific way.</P>
+<P>The debugger can set the <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#f661734a-d279-4ca5-b9bd-802dad9782af"><i>break status</i></a> for each exception or event: </P><B></B><UL type="disc">
+<LI>The event can cause a break into the debugger as soon as it occurs (the "first chance"). </LI>
+<LI>The event can break in after other error handlers have been given an opportunity to respond (the "second chance"). </LI>
+<LI>The event can also send the debugger a message but continue executing.</LI>
+<LI>The debugger can ignore the event.</LI>
+</UL>
+<P>The debugger can also set the <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#2ed842be-ebe1-40fa-8a33-cf3a9364b7ee"><i>handling status</i></a> for each exception and event. The debugger can treat the event like a handled exception or an unhandled exception. (Of course, events that are not actually errors do not require any handling.)</P>
+<P>You can control the break status and handling status by doing one of the following:</P><B></B><UL type="disc">
+<LI>Use the <a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>SXE</b></a>, <a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>SXD</b></a>, <a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>SXN</b></a>, or <a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>SXI</b></a> command in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>.</LI>
+<LI><i>(CDB only)</i>  Use the <b>-x</b>, <b>-xe</b>, <b>-xd</b>, <b>-xn</b>, or <b>-xi</b> option on the CDB <a href="r12_cmdline_3ec269e8-a2d8-43e4-8758-2201481cd323.xml.htm">command line</a>.    </LI>
+<LI><i>(CDB only)</i>  Use the <b>sxe</b> or <b>sxd</b> keyword in the <a href="r04_setup_3_0b710f80-3d76-456f-8081-6db088c4422e.xml.htm"><i>Tools.ini</i></a> file.   </LI>
+<LI><i>(WinDbg only)</i>  Click <a href="r37_gui_2_b880b0b4-0347-4af1-b467-e2282de0406a.xml.htm"><b>Event Filters</b></a> on the <b>Debug </b>menu to open the <b>Event Filters</b> dialog box, and then choose the options that you want.</LI>
+</UL>
+<P></P>
+<P>The <b>SX*</b> command, the <b>-x*</b> command-line option, and the <b>sx*</b> <i>Tools.ini</i> keyword typically set the break status of the specified event. You can add the <b>-h</b> option to cause the handling status to be set instead.</P>
+<P>There are four special event codes (<b>cc</b>, <b>hc</b>, <b>bpec</b>, and <b>ssec</b>) that always specify handling status instead of break status.</P>
+<P>You can display the most recent exception or event by using the <a href="r21_metacmds_l_268d3d38-f9ce-4023-83cd-fb582f6acf13.xml.htm"><b>.lastevent (Display Last Event)</b></a> command.</P>
+<H4>Controlling Break Status</H4>
+<P>When you set the break status of an exception or event, you can use the following options.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Status name</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>SXE</b><BR>or<BR><b>-xe</b></TD>
+<TD Width=""><b>Break</b><BR><BR><b>(Enabled)</b><BR><BR></TD>
+<TD Width="">When this exception occurs, the target immediately breaks into the debugger. This break in occurs before any other error handlers are activated. This method is called <i>first-chance</i> <i>handling</i>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>SXD</b><BR>or<BR><b>-xd</b></TD>
+<TD Width=""><b>Second chance break</b><BR><BR><b>(Disabled)</b><BR><BR></TD>
+<TD Width="">The debugger does not break in for this kind of first-chance exception (although a message is displayed). If other error handlers cannot address this exception, execution stops and the target breaks into the debugger. This method is called <i>second-chance handling</i>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>SXN</b><BR>or<BR><b>-xn</b></TD>
+<TD Width=""><b>Output</b><BR><BR><b>(Notify)</b><BR><BR></TD>
+<TD Width="">When this exception occurs, the target application does not break into the debugger at all. However, a message is displayed that informs the user of this exception.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>SXI</b><BR>or<BR><b>-xi</b></TD>
+<TD Width=""><b>Ignore</b></TD>
+<TD Width="">When this exception occurs, the target application does not break into the debugger, and no message is displayed.</TD>
+</TR>
+</table>
+<P></P>
+<P>If an exception is not anticipated by an <b>SX</b><i>*</i> setting, the target application breaks into the debugger on the second chance. The default status for events is listed in the following "Event Definitions and Defaults" section of this topic.</P>
+<P>To set break status by using the WinDbg graphical interface, <a href="r37_gui_2_b880b0b4-0347-4af1-b467-e2282de0406a.xml.htm"><b>Event Filters</b></a> on the <b>Debug </b>menu, click the event that you want from the list in the <b>Event Filters</b> dialog box, and then select <b>Enabled</b>, <b>Disabled</b>, <b>Output</b>, or <b>Ignore</b>.</P>
+<H4>Controlling Handling Status</H4>
+<P>All events are considered unhandled, unless you use the <a href="r16_cmds_c_bb7ab8a9-efe6-4feb-b234-e94d27848769.xml.htm"><b>gh (Go with Exception Handled)</b></a> command.    </P>
+<P>All exceptions are considered unhandled, unless you use the <a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>sx*</b></a> command together with the <b>-h</b> option.</P>
+<P>Additionally, <b>SX</b><i>*</i> options can configure the handling status for invalid handles, STATUS_BREAKPOINT break instructions, and single-step exceptions. (This configuration is separate from their break configuration.) When you configure their break status, these events are named <b>ch</b>, <b>bpe</b>, and <b>sse</b>, respectively. When you configure their handling status, these events are named <b>hc</b>, <b>bpec</b>, and <b>ssec</b>, respectively. (For the full listing of events, see the following "Event Definitions and Defaults" section.)</P>
+<P>You can configure the handling status for the CTRL+C event (<b>cc</b>), but not its break status. If an application receives a CTRL+C event, the application always breaks into the debugger.</P>
+<P>When you use the <b>SX</b><i>*</i> command on <b>cc</b>, <b>hc</b>, <b>bpec</b>, and <b>ssec</b> events, or when you use the <b>SX</b><i>*</i> command together with the <b>-h</b> option on an exception, the following actions occur.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Status name</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>SXE</b></TD>
+<TD Width=""><b>Handled</b></TD>
+<TD Width="">The event is considered handled when execution resumes.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>SXD,<BR>SXN,<BR>SXI</b></TD>
+<TD Width=""><b>Not Handled</b></TD>
+<TD Width="">The event is considered not handled when execution resumes.</TD>
+</TR>
+</table>
+<P></P>
+<P>To set handling status by using the WinDbg graphical interface, click <a href="r37_gui_2_b880b0b4-0347-4af1-b467-e2282de0406a.xml.htm"><b>Event Filters</b></a> on the <b>Debug </b>menu, click the event that you want from the list in the <b>Event Filters</b> dialog box, and then select <b>Handled</b> or <b>Not Handled</b>.</P>
+<H4>Automatic Commands</H4>
+<P>The debugger also enables you to set commands that are automatically executed if the event or exception causes a break into the debugger. You can set a command string for the first-chance break and a command string for the second-chance break. You can set these strings with the <a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>SX*</b></a> command or the <a href="r37_gui_2_b880b0b4-0347-4af1-b467-e2282de0406a.xml.htm"><b>Debug | Event Filters</b></a> command. Each command string can contain multiple commands that are separated with semicolons.</P>
+<P>These commands are executed regardless of the break status. That is, if the break status is "Ignore," the command is still executed. If the break status is "Second-chance break," the first-chance command is executed when the exception first occurs, before any other exception handlers are involved. The command string can end with an execution command such as <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a>, <a href="r16_cmds_c_bb7ab8a9-efe6-4feb-b234-e94d27848769.xml.htm"><b>gh (Go with Exception Handled)</b></a>, or <a href="r16_cmds_c_3254135f-8902-45ee-a2dc-a52049ea903c.xml.htm"><b>gn (Go with Exception Not Handled)</b></a>.</P>
+<H4>Event Definitions and Defaults</H4>
+<P>You can change the break status or handling status of the following exceptions. Their default break status is indicated.</P>
+<P>The following exceptions' default handling status is always "Not Handled". Be careful about changing this status. If you change this status to "Handled", all first-chance and second-chance exceptions of this type are considered handled, and this configuration bypasses all of the exception-handling routines.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Event code</TH>
+<TH Width="">Meaning</TH>
+<TH Width="">Default break status</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>asrt</b></TD>
+<TD Width=""><b>Assertion failure</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>av</b></TD>
+<TD Width=""><b>Access violation</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dm</b></TD>
+<TD Width=""><b>Data misaligned</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dz</b></TD>
+<TD Width=""><b>Divide by zero</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>eh</b></TD>
+<TD Width=""><b>C++ EH exception</b></TD>
+<TD Width="">Second-chance break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>gp</b></TD>
+<TD Width=""><b>Guard page violation</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ii</b></TD>
+<TD Width=""><b>Illegal instruction</b></TD>
+<TD Width="">Second-chance break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>iov</b></TD>
+<TD Width=""><b>Integer overflow</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ip</b></TD>
+<TD Width=""><b>In-page I/O error</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>isc</b></TD>
+<TD Width=""><b>Invalid system call</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>lsq</b></TD>
+<TD Width=""><b>Invalid lock sequence</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sbo</b></TD>
+<TD Width=""><b>Stack buffer overflow</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sov</b></TD>
+<TD Width=""><b>Stack overflow</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>wkd</b></TD>
+<TD Width=""><b>Wake debugger</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>aph</b></TD>
+<TD Width=""><b>Application hang</b><BR><BR>This exception is triggered if the Windows operating system concludes that a process has stopped responding (that is, <i>is</i> <i>hung</i>).<BR><BR></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>3c</b></TD>
+<TD Width=""><b>Child application termination</b>  </TD>
+<TD Width="">Second-chance break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ch<BR>hc</b></TD>
+<TD Width=""><b>Invalid handle</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>Number</i></TD>
+<TD Width=""><b>Any numbered exception</b></TD>
+<TD Width="">Second-chance break</TD>
+</TR>
+</table>
+<P></P>
+<P class="note"><b>Note</b>  You can override the <b>asrt</b> break status for a specific address by using the <a href="r15_cmds_a_274a23d4-4805-4ed5-afb0-a256284f7e84.xml.htm"><b>ah (Assertion Handling)</b></a> command. The <b>ch</b> and <b>hc</b> event codes refer to the same exception. When you are controlling its break status, use <b>sx* ch</b>. When you are controlling its handling status, use <b>sx* hc</b>.</P>
+<P>You can change the break status or handling status of the following exceptions. Their default break status is indicated.</P>
+<P>The following exceptions' default handling status is always "Handled". Because these exceptions are used to communicate with the debugger, you should not typically change their status to "Not Handled". This status causes other exception handlers to catch the exceptions if the debugger ignores them.</P>
+<P>An application can use DBG_COMMAND_EXCEPTION (<b>dbce</b>) to communicate with the debugger. This exception is similar to a breakpoint, but you can use the <b>SX</b><i>*</i> command to react in a specific way when this exception occurs.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Event code</TH>
+<TH Width="">Meaning</TH>
+<TH Width="">Default break status</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dbce</b></TD>
+<TD Width=""><b>Special debugger command exception</b></TD>
+<TD Width="">Ignore</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>vcpp</b></TD>
+<TD Width=""><b>Special Visual C++ exception</b></TD>
+<TD Width="">Ignore</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>wos</b></TD>
+<TD Width=""><b>WOW64 single-step exception</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>wob</b></TD>
+<TD Width=""><b>WOW64 breakpoint exception-</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sse<BR>ssec</b></TD>
+<TD Width=""><b>Single-step exception</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>bpe<BR>bpec</b></TD>
+<TD Width=""><b>Breakpoint exception</b></TD>
+<TD Width="">Break</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>cce<BR>cc</b></TD>
+<TD Width=""><b>CTRL+C</b> or <b>CTRL+BREAK</b><BR><BR>This exception is triggered if the target is a console application and CTRL+C or CTRL+BREAK is passed to it.<BR><BR></TD>
+<TD Width="">Break</TD>
+</TR>
+</table>
+<P></P>
+<P class="note"><b>Note</b>  The final three exceptions in the preceding table have two different event codes. When you are controlling their break status, use <b>sse</b>, <b>bpe</b>, and <b>cce</b>. When you are controlling their handling status, use <b>ssec</b>, <b>bpec</b>, and <b>cc</b>.</P>
+<P>You can change the break status of the following events. Because these events are not exceptions, their handling status is irrelevant. </P><B></B><table>
+<TR valign="top">
+<TH Width="">Event code</TH>
+<TH Width="">Meaning</TH>
+<TH Width="">Default break status</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ser</b></TD>
+<TD Width=""><b>System error</b></TD>
+<TD Width="">Ignore  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>cpr</b>[<b>:</b><i>Process</i>] </TD>
+<TD Width=""><b>Process creation</b> <BR><BR>Setting the break status of this event applies only to user-mode debugging. This event does not occur in kernel mode. <BR><BR>You can control this event only if you have activated debugging of child processes in CDB or WinDbg, either through the <nobr><b>-o</b></nobr> <a href="r12_cmdline_3ec269e8-a2d8-43e4-8758-2201481cd323.xml.htm">command-line option</a> or through the <a href="r19_metacmds_a_d808ad82-440e-4b62-b2d4-453a515d094b.xml.htm"><b>.childdbg (Debug Child Processes)</b></a> command.<BR><BR>The process name can include an optional file name extension and an asterisk (<b>*</b>) or question mark (<b>?</b>) as wildcard characters. The debugger remembers only the most recent <b>cpr </b>setting. Separate settings for separate processes are not supported. Include a colon or a space between <b>cpr</b> and <i>Process</i>.<BR><BR>If <i>Process</i> is omitted, the setting applies to any child process creation.<BR><BR></TD>
+<TD Width="">Ignore  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>epr</b>[<b>:</b><i>Process</i>] </TD>
+<TD Width=""><b>Process exit</b> <BR><BR>Setting the break status of this event applies only to user-mode debugging. This event does not occur in kernel mode. <BR><BR>You can control this event only if you have activated debugging of child processes in CDB or WinDbg, either through the <nobr><b>-o</b></nobr> <a href="r12_cmdline_3ec269e8-a2d8-43e4-8758-2201481cd323.xml.htm">command-line option</a> or through the <a href="r19_metacmds_a_d808ad82-440e-4b62-b2d4-453a515d094b.xml.htm"><b>.childdbg (Debug Child Processes)</b></a> command.<BR><BR>The process name can include an optional file name extension and an asterisk (<b>*</b>) or question mark (<b>?</b>) as wildcard characters. The debugger remembers only the most recent <b>epr </b>setting. Separate settings for separate processes are not supported. Include a colon or a space between <b>epr</b> and <i>Process</i>. <BR><BR>If <i>Process</i> is omitted, the setting applies to any child process exit.<BR><BR></TD>
+<TD Width="">Ignore  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ct</b></TD>
+<TD Width=""><b>Thread creation</b> </TD>
+<TD Width="">Ignore  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>et</b></TD>
+<TD Width=""><b>Thread exit</b> </TD>
+<TD Width="">Ignore  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ld</b>[<b>:</b><i>Module</i>]</TD>
+<TD Width=""><b>Load module</b> <BR><BR>If you specify <i>Module</i>, the break occurs when the module with this name is loaded. <i>Module</i> can specify the name or the address of the module. If the name is used, <i>Module</i> might contain a variety of wildcard characters and specifiers. (For more information about the syntax, see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a>.) <BR><BR>The debugger remembers only the most recent l<b>d</b> setting. Separate settings for separate modules are not supported. Include a colon or a space between <b>ld</b> and <i>Module</i>.<BR><BR>If <i>Module</i> is omitted, the event is triggered when any module is loaded.<BR><BR></TD>
+<TD Width="">Output  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ud</b>[<b>:</b><i>Module</i>]</TD>
+<TD Width=""><b>Unload module</b> <BR><BR>If you specify <i>Module</i>, the break occurs when the module with this name, or at this base address, is unloaded. <i>Module</i> can specify the name or the address of the module.  If the name is used, <i>Module</i> can be an exact name or include wildcard characters.  If <i>Module</i> is an exact name, it is immediately resolved to a base address by using the current debugger module list and it is stored as an address.  If <i>Module</i> contains wildcard characters, the pattern string is kept for later matching when unload events occur.  <BR><BR>Rarely, the debugger does not have name information for unload events and matches only by the base address.  Therefore, if <i>Module</i> contains wildcard characters, the debugger cannot perform a name match in this particular unload case and breaks when any module is unloaded.<BR><BR>The debugger remembers only the most recent <b>ud</b> setting. Separate settings for separate modules are not supported. Include a colon or a space between <b>ld</b> and <i>Module</i>.<BR><BR>If <i>Module</i> is omitted, the event is triggered when any module is loaded.<BR><BR></TD>
+<TD Width="">Output  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>out</b>[<b>:</b><i>Output</i>]</TD>
+<TD Width=""><b>Target application output</b> <BR><BR>If you specify <i>Output</i>, the break occurs only when output that matches the specified pattern is received. <i>Output</i> can contain a variety of wildcard characters and specifiers. (For more information about the syntax, see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a>.) However, <i>Output</i> cannot contain a colon or spaces.  The match is not case sensitive. Include a colon or space between <b>out</b> and <i>Output</i>.<BR><BR></TD>
+<TD Width="">Ignore  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ibp</b></TD>
+<TD Width=""><b>Initial break point</b><BR><BR>(This event occurs at the beginning of the debug session and after you restart the target computer.) <BR><BR></TD>
+<TD Width=""><i>In user mode</i>: Break<i>.</i> You can change this status to "Ignore" by using the <b>-g</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>.  <BR><BR><i>In kernel mode</i>: Ignore. You can change this status to "Enabled" by a variety of methods. For more information about how to change this status, see <a href="r07_use_operation_8338d017-7a53-4d82-bd91-bd0eaebe319a.xml.htm">Crashing and Rebooting the Target Computer</a>.   <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>iml</b></TD>
+<TD Width=""><b>Initial module load</b><BR><BR>(Kernel mode only) <BR><BR></TD>
+<TD Width="">Ignore. You can change this status to "Break" by a variety of methods. For more information about how to change this status, see <a href="r07_use_operation_8338d017-7a53-4d82-bd91-bd0eaebe319a.xml.htm">Crashing and Rebooting the Target Computer</a>.   </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Controlling Exceptions and Events RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Forcing a System Crash</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Forcing a System Crash"><xml><MSHelp:Keyword Index="A" Term="r10_dump_files_9f03f640-4a73-4b26-ad4b-8e9e132279f2.xml"/>
+<META NAME="MS-HKWD" CONTENT="system crash, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r10_dump_files_9f03f640-4a73-4b26-ad4b-8e9e132279f2.xml"></A>Forcing a System Crash</H1>
+<P>Once kernel-mode dump files have been <a href="r10_dump_files_d9e8043c-8489-4bd3-8f95-b76c2f8a4bf9.xml.htm">enabled</a>, most system crashes should cause a crash file to be written and the blue screen to be displayed.</P>
+<P>However, there are times that a system freezes without actually initiating a kernel crash. Possible symptoms of such a freeze include:</P><B></B><UL type="disc">
+<LI>The mouse pointer moves, but can't do anything. </LI>
+<LI>All video is frozen, the mouse pointer does not move, but paging continues. </LI>
+<LI>There is no response at all to the mouse or keyboard, and no use of the disk.</LI>
+</UL>
+<P></P>
+<P>If an experienced debugging technician is present, he or she can hook up a kernel debugger and analyze the problem. For some tips on what to look for when this situation occurs, see <a href="t13_advanced_73fd075e-9d2a-44ba-823d-9e9d021c2670.xml.htm">Debugging a Stalled System</a>.</P>
+<P>However, if no technician is present, you may wish to create a kernel-mode dump file and send it to an off-site technician. This dump file can be used to analyze the cause of the error.</P>
+<P>There are two ways to deliberately cause a system crash:</P><B></B><div class="indent1">
+<P><a href="r10_dump_files_cc846010-ddd4-40b7-b140-270355a0b759.xml.htm">Forcing a System Crash from the Debugger</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r10_dump_files_0f34a748-5ca4-487a-8101-7f320f16a023.xml.htm">Forcing a System Crash from the Keyboard</a> </P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Forcing a System Crash RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

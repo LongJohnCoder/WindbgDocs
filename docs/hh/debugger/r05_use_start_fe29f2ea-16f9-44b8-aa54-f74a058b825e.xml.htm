@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Attaching to a Virtual Machine (Kernel Mode)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Attaching to a Virtual Machine (Kernel Mode)"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_fe29f2ea-16f9-44b8-aa54-f74a058b825e.xml"/>
+<META NAME="MS-HKWD" CONTENT="virtual machine debugging">
+<META NAME="MS-HKWD" CONTENT="Virtual PC debugging">
+<META NAME="MS-HKWD" CONTENT="VMware debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_fe29f2ea-16f9-44b8-aa54-f74a058b825e.xml"></A>Attaching to a Virtual Machine (Kernel Mode)</H1>
+<P>KD and WinDbg can perform kernel-mode debugging on a virtual machine. The virtual machine can be located on the same physical computer as the debugger or on a different computer that is connected to the same network.</P>
+<P>Before you begin debugging, create a named pipe on the virtual machine. The debugger connects through this pipe. For more information about how to create this pipe, see your virtual machine's documentation.</P>
+<P class="note"><b>Note  </b>If you restart the virtual machine by using the VMWare facilities (for example, the reset button), exit WinDbg, and then restart WinDbg to continue debugging.<P class="note">During virtual machine debugging, VMWare often consumes 100% of the CPU.</P>
+</P>
+<H4>Starting the Debugger</H4>
+<P>To begin a debugging session on a virtual machine that is running on the same physical computer as the debugger, use one of the following commands.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kd </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k</b> <b>com:pipe,port=\\.\pipe\</b><i>PipeName</i>[<b>,resets=0</b>][<b>,reconnect</b>] <BR><BR><b>windbg </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k</b> <b>com:pipe,port=\\.\pipe\</b><i>PipeName</i>[<b>,resets=0</b>][<b>,reconnect</b>] <BR></nobr></P>
+<P>To begin debugging a virtual machine that is running on a different computer than the debugger, use one of the following commands.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kd </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k</b> <b>com:pipe,port=\\</b><i>VMHost</i><b>\pipe\</b><i>PipeName</i>[<b>,resets=0</b>][<b>,reconnect</b>] <BR><BR><b>windbg </b>[-<b>y</b> <i>SymbolPath</i>] <b>-k</b> <b>com:pipe,port=\\</b><i>VMHost</i><b>\pipe\</b><i>PipeName</i>[<b>,resets=0</b>][<b>,reconnect</b>] <BR></nobr></P>
+<P>The commands contain the following parameters:</P>
+<DL><DT><i>VMHost</i></DT>
+<DD>Specifies the name of the computer that the virtual machine is running on. The virtual machine documentation typically refers to this computer as the <i>virtual machine host</i>. If the virtual machine is running on the same computer as the kernel debugger itself, use a single period (<b>.</b>) for <i>VMHost.</i></DD>
+<DT><i>PipeName</i></DT>
+<DD>Specifies the name of the pipe that you created on the virtual machine.</DD>
+<DT><b>resets=0</b></DT>
+<DD>Specifies that an unlimited number of reset packets can be sent to the target when the host and target are synchronizing. Use the <b>resets=0</b> parameter for Microsoft Virtual PC and other virtual machines whose pipes drop excess bytes. Do not use this parameter for VMware or other virtual machines whose pipes do not drop all excess bytes.   </DD>
+<DT><b>reconnect</b></DT>
+<DD>Causes the debugger to automatically disconnect and reconnect the pipe if a read/write failure occurs. Additionally, if the debugger does not find the named pipe when the debugger is started, the <b>reconnect</b> parameter causes the debugger to wait for a pipe that is named <i>PipeName</i> to appear. Use <b>reconnect</b> for Virtual PC and other virtual machines that destroy and re-create their pipes during a computer restart. Do not use this parameter for VMware or other virtual machines that preserve their pipes during a computer restart.</DD>
+</DL>
+<P></P>
+<P>For more information about additional command-line options, see <a href="r12_cmdline_1ce8da81-b62c-4064-9bd7-c4380884b1b0.xml.htm">KD Command-Line Options</a> or <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">WinDbg Command-Line Options</a>.</P>
+<H4>Beginning the Session</H4>
+<P>If the target computer has stopped responding, the target computer is still stopped because of an earlier kernel debugging action, or you used the <b>-b</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>, the debugger breaks into the target computer immediately.</P>
+<P>Otherwise, the target computer continues running until the debugger orders it to break.</P>
+<P>For more information about the next steps, see <a href="r06_use_gui_4b24004a-3b77-4692-b369-dbb122feba7a.xml.htm">Debugger Configuration</a>, <a href="r09_symbols_750b8c7c-1e41-4116-b7d3-ecd4c7fe42ce.xml.htm">Symbols</a>, <a href="r07_use_operation_265193af-6b7a-4832-8785-b58a645547e5.xml.htm">Debugger Operation (General)</a> and <a href="r07_use_operation_3c307117-9a8a-4597-8a52-6bedbefa7864.xml.htm">Debugger Operation (Kernel Mode)</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Attaching to a Virtual Machine (Kernel Mode) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Building ExtEngCpp Extensions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Building ExtEngCpp Extensions"><xml><MSHelp:Keyword Index="A" Term="EngExtCpp_DG_e692ac53-fab8-4532-914f-5760f68e2ae1.xml"/>
+<META NAME="MS-HKWD" CONTENT="EngExtCpp extensions, building"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_DG_e692ac53-fab8-4532-914f-5760f68e2ae1.xml"></A>Building ExtEngCpp Extensions</H1>
+<P>The ExtEngCpp extension libraries are built almost the same way as the DbgEng extension libraries (for details, see <a href="extensions_dg_11e31731-5c08-47b8-94bc-6c934c780b28.xml.htm">Building DbgEng Extensions</a>).</P>
+<P>In addition, ExtEngCpp extension libraries usually must be statically linked with the library <i>engextcpp.lib</i>.  This can be accomplished by adding the following line in the <i>sources</i> file:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>LINKLIBS = $(DBGLIB_LIB_PATH)\engextcpp.lib<BR></nobr></P>
+<P>The EngExtCpp implementation is also available in Debugging Tools for Windows package for situations where linking with the static library is inappropriate or if the static library was built with different options than the ones needed for the extension code.</P>
+<P>Because the ExtEngCpp extension framework is built on top of the DbgEng extension framework, an EngExtCpp extension DLL should export the same functions as a DbgEng extension DLL.</P>
+<P>Each extension should be exported.  When you use the <a href="engextcpp_ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml.htm">EXT_COMMAND</a> macro to define an extension function, this macro also creates a C function with the same name as the extension.  This function should be exported from the DLL.</P>
+<P>The following functions are provided by the <i>engextcpp.lib</i> library and should be exported from the ExtEngCpp DLL.</P><B></B><UL type="disc">
+<LI><b>DebugExtensionInitialize</b> &#8212; so that the <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>Initialize</b></a> method can be called to initialize the library.</LI>
+<LI><b>DebugExtensionUnitialize</b> &#8212; so that the <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>Uninitialize</b></a> method can be called to uninitialize the library.</LI>
+<LI><b>KnownStructOutputEx</b> &#8212; so that the engine can call the <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> methods to format known structures for output.</LI>
+<LI><b>DebugExtensionNotify</b> &#8212; so that the engine can call the <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>OnSessionActive</b></a>, <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>OnSessionInactive</b></a>, <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>OnSessionAccessible</b></a>, and <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>OnSessionInaccessible</b></a> methods to notify the extension library of changes to the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugging session</a>'s state.</LI>
+<LI><b>help</b> &#8212; so that the EngExtCpp extension framework can automatically provide a <b>!help</b> extension.</LI>
+</UL>
+<P>These functions can be exported even if the functionality they provide is not needed.  Moreover, if they are not exported, the functionality they provide will be lost.</P>
+<P><b>DebugExtensionInitialize</b> must be exported in order for the debugger engine to recognize the DLL as a valid DbgEng extension DLL.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Building ExtEngCpp Extensions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

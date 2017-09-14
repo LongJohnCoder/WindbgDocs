@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debug | Kernel Connection | Cycle Initial Break</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debug | Kernel Connection | Cycle Initial Break"><xml><MSHelp:Keyword Index="A" Term="r37_gui_2_7cfed5e8-7783-42c7-b6e7-5bf28313bafd.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debug | Kernel Connection | Cycle Initial Break"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r37_gui_2_7cfed5e8-7783-42c7-b6e7-5bf28313bafd.xml"></A>Debug | Kernel Connection | Cycle Initial Break</H1>
+<P>Point to <b>Kernel Conection</b> and then click <b>Cycle Initial Break</b> on the <b>Debug </b>menu to change the conditions on which the debugger automatically breaks into the target computer.</P>
+<P>This command is equivalent to pressing CTRL+ALT+K. (You can also press CTRL+K in KD.)</P>
+<P>This command causes the kernel debugger to cycle through the following three states:</P>
+<DL><DT><b>No break</b></DT>
+<DD>The debugger does not break into the target computer unless you press <a href="r37_gui_2_94482ad8-41d6-46e7-9a18-40dce2459d10.xml.htm">CTRL+BREAK</a> or <a href="r37_gui_2_94482ad8-41d6-46e7-9a18-40dce2459d10.xml.htm"><b>Debug | Break</b></a>.</DD>
+<DT><b>Break on reboot</b></DT>
+<DD>The debugger breaks into a restarted target computer after the kernel initializes. This command is equivalent to starting WinDbg with the <nobr><b>-b</b></nobr> <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">command-line option</a>.</DD>
+<DT><b>Break on first module load</b></DT>
+<DD>The debugger breaks into a restarted target computer after the first kernel module is loaded. (This action causes the break to occur <i>earlier</i> than in the <b>Break on reboot</b> state.) This command is equivalent to starting WinDbg with the <nobr><b>-d</b></nobr> <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">command-line option</a>.</DD>
+</DL>
+<P></P>
+<P>When you use the <b>Cycle Initial Break</b> command, the new break state is displayed.</P>
+<H4>Additional Information</H4>
+<P>For more information about related commands and an explanation of how the restart process affects the debugger, see <a href="r07_use_operation_8338d017-7a53-4d82-bd91-bd0eaebe319a.xml.htm">Crashing and Rebooting the Target Computer</a>. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debug | Kernel Connection | Cycle Initial Break RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

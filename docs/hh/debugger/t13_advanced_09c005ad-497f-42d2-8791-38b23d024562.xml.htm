@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging WinLogon</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging WinLogon"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_09c005ad-497f-42d2-8791-38b23d024562.xml"/>
+<META NAME="MS-HKWD" CONTENT="WinLogon debugging">
+<META NAME="MS-HKWD" CONTENT="NTSD, debugging CSRSS">
+<META NAME="MS-HKWD" CONTENT="controlling the user-mode debugger from the kernel debugger, debugging WinLogon"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_09c005ad-497f-42d2-8791-38b23d024562.xml"></A>Debugging WinLogon</H1>
+<P>WinLogon is the user-mode process that handles the task of interactive users logging on and logging off, and handles all instances of CTRL+ALT+DELETE.</P>
+<H4>Controlling NTSD from the Kernel Debugger</H4>
+<P>The easiest way to debug WinLogon is to use <a href="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml.htm#f7997e21-d84a-4224-af71-bc393265af91">NTSD</a> and <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">control it from the kernel debugger</a>.    </P>
+<H4>Enabling WinLogon Debugging</H4>
+<P>Because you will be redirecting the user-mode debugger output to the kernel debugger, you will need to set up a kernel debugging connection. See <a href="r02_setup_1_c5f2090d-a089-47ef-860b-7c03fe583de7.xml.htm">Kernel-Mode Setup</a> for details.</P>
+<P>To attach a debugger to WinLogon, you must go through the registry so the process is debugged from the time it starts up. To set up WinLogon debugging, set <b>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\WinLogon.EXE\Debugger</b> to:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ntsd -d -x -g</b> <BR></nobr></P>
+<P>The <b>-d</b> option passes control to the kernel debugger. The <b>-x</b> option causes the debugger to capture access violations as second-chance exceptions.  The <b>-g</b> option causes the WinLogon process to run after the attachment. Do not add the <b>-g</b> if you want to start debugging before <i>Winlogon.exe</i> begins (for example, if you want to set an initial breakpoint).</P>
+<P>In addition, you should set the GlobalFlag value under the <i>winlogon.exe</i> key to REG_SZ "0x000400F0". This sets heap checking and FLG_ENABLE_KDEBUG_SYMBOL_LOAD. However, since this second flag only affects the kernel debugger, symbols must also be copied to the target computer before starting the debugger. </P>
+<P>The registry change requires a reboot to take effect.</P>
+<H4>Performing the Debugging</H4>
+<P>After the next reboot, the debugger will break into WinLogon automatically.</P>
+<P>See <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a> for an explanation of how to proceed.</P>
+<P>You will have to set  your symbol path to a location on your host computer or to some other location on your network. When WinLogon is being debugged, network authentication on the target computer will not work properly.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging WinLogon RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

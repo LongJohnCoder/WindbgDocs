@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x10E: VIDEO_MEMORY_MANAGEMENT_INTERNAL</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x10E:  VIDEO_MEMORY_MANAGEMENT_INTERNAL"><xml><MSHelp:Keyword Index="A" Term="t07_bugs_E0_1755f77d-3ef6-455b-aae3-c9af15653fdf.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x10E: VIDEO_MEMORY_MANAGEMENT_INTERNAL">
+<META NAME="MS-HKWD" CONTENT="VIDEO_MEMORY_MANAGEMENT_INTERNAL"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t07_bugs_E0_1755f77d-3ef6-455b-aae3-c9af15653fdf.xml"></A>Bug Check 0x10E:  VIDEO_MEMORY_MANAGEMENT_INTERNAL</H1>
+<P>The VIDEO_MEMORY_MANAGEMENT_INTERNAL bug check has a value of 0x0000010E. This indicates that the video memory manager has encountered a condition that it is unable to recover from.  </P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen. Parameter 1 is the only parameter of interest; this identifies the exact violation.  Values for Parameter 1 that do not appear in this table must be individually examined.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">An attempt was made to rotate a non-rotate range. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">An attempt was made to destroy a non-empty process heap. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">An attempt to unmap from an aperture segment failed. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">A rotation in a must-succeed path failed. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">A deferred command failed. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6</TD>
+<TD Width="">An attempt was made to reallocate resources for an allocation that was having its eviction canceled. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7</TD>
+<TD Width="">An invalid attempt was made to defer free usage. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8</TD>
+<TD Width="">The split direct memory access (DMA) buffer contains an invalid reference. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x9</TD>
+<TD Width="">An attempt to evict an allocation failed. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xA</TD>
+<TD Width="">An invalid attempt to use a pinned allocation was made. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB</TD>
+<TD Width="">A driver returned an invalid error code from <b>BuildPagingBuffer</b>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xC</TD>
+<TD Width="">A resource leak was detected in a segment. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xD</TD>
+<TD Width="">A segment is being used improperly.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xE</TD>
+<TD Width="">An attempt to map an allocation into an aperture segment failed. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xF</TD>
+<TD Width="">A driver returned an invalid error code from <b>AcquireSwizzlingRange</b>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10</TD>
+<TD Width="">A driver returned an invalid error code from <b>ReleaseSwizzlingRange</b>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x11</TD>
+<TD Width="">An invalid attempt to use an aperture segment was made. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x12</TD>
+<TD Width="">A driver overflowed the provided DMA buffer.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x13</TD>
+<TD Width="">A driver overflowed the provided private data buffer. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x14</TD>
+<TD Width="">An attempt to purge all segments failed. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x15</TD>
+<TD Width="">An attempt was made to free a virtual address descriptor (VAD) that was still in the rotated state </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x16</TD>
+<TD Width="">A driver broke the guaranteed DMA buffer model contract. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x17</TD>
+<TD Width="">An unexpected system command failure occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x18</TD>
+<TD Width="">An attempt to release a pinned allocation's resource failed. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x19</TD>
+<TD Width="">A driver failed to patch a DMA buffer. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1A</TD>
+<TD Width="">The owner of a shared allocation was freed. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1B</TD>
+<TD Width="">An attempt was made to release an aperture range that is still in use. </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>This bug check is usually caused by a video driver behaving improperly.</P>
+<P></P>
+<H4>Resolving the Problem</H4>
+<P>If the problem persists, check Windows Update for an updated video driver.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x10E:  VIDEO_MEMORY_MANAGEMENT_INTERNAL RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Symbol Options</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Symbol Options"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml"/>
+<META NAME="MS-HKWD" CONTENT="symbols, setting symbol options">
+<META NAME="MS-HKWD" CONTENT="symbols, SYMOPT_XXXX">
+<META NAME="MS-HKWD" CONTENT="noisy symbol loading">
+<META NAME="MS-HKWD" CONTENT="CV record">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_CASE_INSENSITIVE">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_UNDNAME">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_DEFERRED_LOADS">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_NO_CPP">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_LOAD_LINES">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_OMAP_FIND_NEAREST">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_LOAD_ANYTHING">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_IGNORE_CVREC">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_NO_UNQUALIFIED_LOADS">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_FAIL_CRITICAL_ERRORS">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_EXACT_SYMBOLS">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_ALLOW_ABSOLUTE_SYMBOLS">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_IGNORE_NT_SYMPATH">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_INCLUDE_32BIT_MODULES">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_PUBLICS_ONLY">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_NO_PUBLICS">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_AUTO_PUBLICS">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_NO_IMAGE_SEARCH">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_SECURE">
+<META NAME="MS-HKWD" CONTENT="SYMOPT_DEBUG"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml"></A>Symbol Options</H1>
+<P>A number of options are available to control how symbols are loaded and used. These options can be set in a variety of ways.</P>
+<P></P>
+<P>The following table lists these symbol options:</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Option Name</TH>
+<TH Width="">Default in debugger</TH>
+<TH Width="">Default in DBH</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width=""><a href="#e6d28ff5-b369-4a92-ad03-593c059de80d">SYMOPT_CASE_INSENSITIVE</a> </TD>
+<TD Width="">On </TD>
+<TD Width="">On </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width=""><a href="#d8974df2-0d92-4406-b818-8adba87cae13">SYMOPT_UNDNAME</a> </TD>
+<TD Width="">On </TD>
+<TD Width="">On </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width=""><a href="#7a6eaf7e-2487-42a3-a66c-1ff0b87b2796">SYMOPT_DEFERRED_LOADS</a> </TD>
+<TD Width="">On </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8</TD>
+<TD Width=""><a href="#685917f5-f74d-4929-a590-e1da0cd7bbd3">SYMOPT_NO_CPP</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10</TD>
+<TD Width=""><a href="#c8bce791-aa8d-4093-afba-54839a16c21a">SYMOPT_LOAD_LINES</a> </TD>
+<TD Width="">Off in KD and CDB<BR><BR>On in WinDbg<BR><BR></TD>
+<TD Width="">On </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x20</TD>
+<TD Width=""><a href="#47f42ae4-200b-4bd1-a31d-051bbba1d951">SYMOPT_OMAP_FIND_NEAREST</a> </TD>
+<TD Width="">On </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x40</TD>
+<TD Width=""><a href="#df594b86-a965-4f24-af54-e967fe57c9e7">SYMOPT_LOAD_ANYTHING</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x80</TD>
+<TD Width=""><a href="#3d327ef3-57f6-4476-81ba-99f1536f6bf2">SYMOPT_IGNORE_CVREC</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x100</TD>
+<TD Width=""><a href="#8aebbb32-4c91-43af-ad23-2bdbcc7d5520">SYMOPT_NO_UNQUALIFIED_LOADS</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x200</TD>
+<TD Width=""><a href="#50845eb8-f7c5-46d4-b4a3-8e50d42224cc">SYMOPT_FAIL_CRITICAL_ERRORS</a> </TD>
+<TD Width="">On </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x400</TD>
+<TD Width=""><a href="#4cd85e1a-30d1-41d5-b570-ffdf1c02b441">SYMOPT_EXACT_SYMBOLS</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">On </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x800</TD>
+<TD Width=""><a href="#36a9620e-7fd9-45f0-a71b-07b5ac42c5fd">SYMOPT_ALLOW_ABSOLUTE_SYMBOLS</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">On </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1000</TD>
+<TD Width=""><a href="#dccc81ec-f693-4796-bac2-b62a28a55174">SYMOPT_IGNORE_NT_SYMPATH</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2000</TD>
+<TD Width=""><a href="#d5ff471a-d838-4685-89b3-80b6bd04515b">SYMOPT_INCLUDE_32BIT_MODULES</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4000</TD>
+<TD Width=""><a href="#d550a737-bff7-4175-a4bd-ef354cb12fb7">SYMOPT_PUBLICS_ONLY</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8000</TD>
+<TD Width=""><a href="#89cdb2bf-4f2b-48cc-9297-8359ea5bd9e6">SYMOPT_NO_PUBLICS</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10000</TD>
+<TD Width=""><a href="#fa4f74ce-fe78-49dc-94cc-3070af1c8010">SYMOPT_AUTO_PUBLICS</a> </TD>
+<TD Width="">On </TD>
+<TD Width="">On </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x20000</TD>
+<TD Width=""><a href="#d97eb346-a12f-4feb-ab08-131afd45d069">SYMOPT_NO_IMAGE_SEARCH</a> </TD>
+<TD Width="">On </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x40000</TD>
+<TD Width=""><a href="#8589c125-d8b5-4b68-83ba-abe08a707533">SYMOPT_SECURE</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x80000</TD>
+<TD Width=""><a href="#017e4628-d516-4a2f-b776-8986e10d4931">SYMOPT_NO_PROMPTS</a> </TD>
+<TD Width="">On in KD and CDB<BR><BR>Off in WinDbg<BR><BR></TD>
+<TD Width="">Off </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x80000000</TD>
+<TD Width=""><a href="#1be46490-3471-415d-a405-14806d2de877">SYMOPT_DEBUG</a> </TD>
+<TD Width="">Off </TD>
+<TD Width="">Off </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<H4>Changing the Symbol Option Settings</H4>
+<P>The <a href="r22_metacmds_s_1fcea95c-6db6-4fa7-9087-37fdce3d4f0f.xml.htm"><b>.symopt (Set Symbol Options)</b></a> command can be used to change or display the symbol option settings. In addition, a number of command-line parameters and commands are available to change these settings; these are listed in the individual SYMOPT_<i>XXX</i> sections.</P>
+<P>You can also control all the settings at once with the <b>-sflags</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>. This option can be followed with a decimal number, or with a hexadecimal number prefixed by <b>0x</b>. It is recommended that you use hexadecimal, since the symbol flags are aligned properly that way. Be cautious in using this method, since it sets the entire bitfield and will override all the symbol handler defaults. For example, <b>-sflags 0x401</b> will not only turn on SYMOPT_EXACT_SYMBOLS and SYMOPT_CASE_INSENSITIVE, but will also turn off all the other options that normally are on by default!</P>
+<P>The default value for the total flag bits is 0x30237 in WinDbg, 0xB0227 in CDB and KD, and 0x10C13 in <a href="symchk_fe7c1f84-3a50-410a-a8fd-2fa5ec6ab4dd.xml.htm">the DBH tool</a>, when these programs are launched without any symbol-related command line options. </P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="e6d28ff5-b369-4a92-ad03-593c059de80d"></A>SYMOPT_CASE_INSENSITIVE</H3>
+<P>This symbol option causes all searches for symbol names to be case-insensitive.</P>
+<P>This option is on by default in all debuggers. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x1</b> or <nobr><b>.symopt-0x1</b></nobr>, respectively.</P>
+<P>This option is on by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +1</b></nobr> or <nobr><b>symopt -1</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="d8974df2-0d92-4406-b818-8adba87cae13"></A>SYMOPT_UNDNAME</H3>
+<P>This symbol option causes public symbol names to be undecorated when they are displayed, and causes searches for symbol names to ignore symbol decorations.  Private symbol names are never decorated, regardless of whether this option is active.  For information on symbol name decorations, see <a href="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml.htm">Public and Private Symbols</a>. </P>
+<P>This option is on by default in all debuggers. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x2</b> or <nobr><b>.symopt-0x2</b></nobr>, respectively.</P>
+<P>This option is on by default in DBH.  It is turned off if the <nobr><b>-d</b></nobr> command-line option is used.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +2</b></nobr> or <nobr><b>symopt -2</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="7a6eaf7e-2487-42a3-a66c-1ff0b87b2796"></A>SYMOPT_DEFERRED_LOADS</H3>
+<P>This symbol option is called <i>deferred symbol loading</i> or <i>lazy symbol loading</i>. When it is active, symbols are not actually loaded when the target modules are loaded. Instead, symbols are loaded by the debugger as they are needed. See <a href="r09_symbols_538315dc-6582-4a76-9725-d9d53b52e4a0.xml.htm">Deferred Symbol Loading</a> for details.</P>
+<P>This option is on by default in all debuggers. In CDB and KD, the <nobr><b>-s</b></nobr> command-line option will turn this option off. It can also be turned off in CDB by using the <b>LazyLoad</b> variable in the <a href="r04_setup_3_0b710f80-3d76-456f-8081-6db088c4422e.xml.htm"><i>tools.ini</i></a> file. Once the debugger is running, this option can be turned on or off by using <b>.symopt+0x4</b> or <nobr><b>.symopt-0x4</b></nobr>, respectively.</P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +4</b></nobr> or <nobr><b>symopt -4</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="685917f5-f74d-4929-a590-e1da0cd7bbd3"></A>SYMOPT_NO_CPP</H3>
+<P>This symbol option turns off C++ translation. When this symbol option is set, <b>::</b> is replaced by <b>__</b> in all symbols.</P>
+<P>This option is off by default in all debuggers. It can be activated by using the <nobr><b>-snc</b></nobr> command-line option. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x8</b> or <nobr><b>.symopt-0x8</b></nobr>, respectively.   </P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +8</b></nobr> or <nobr><b>symopt -8</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="c8bce791-aa8d-4093-afba-54839a16c21a"></A>SYMOPT_LOAD_LINES</H3>
+<P>This symbol option allows line number information to be read from source files. This option must be on for source debugging to work correctly.</P>
+<P>In KD and CDB, this option is off by default; in WinDbg, this option is on by default. In CDB and KD, the <nobr><b>-lines</b></nobr> command-line option will turn this option on. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x10</b> or <nobr><b>.symopt-0x10</b></nobr>, respectively. It can also be toggled on and off by using the <a href="r21_metacmds_l_6a615bfe-9d01-4d00-8250-23c7b95bb0ae.xml.htm"><b>.lines (Toggle Source Line Support)</b></a> command.</P>
+<P>This option is on by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +10</b></nobr> or <nobr><b>symopt -10</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="47f42ae4-200b-4bd1-a31d-051bbba1d951"></A>SYMOPT_OMAP_FIND_NEAREST</H3>
+<P>When code has been optimized and there is no symbol at the expected location, this option causes the nearest symbol to be used instead.</P>
+<P>This option is on by default in all debuggers. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x20</b> or <nobr><b>.symopt-0x20</b></nobr>, respectively.</P>
+<P>This option is on by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +20</b></nobr> or <nobr><b>symopt -20</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="df594b86-a965-4f24-af54-e967fe57c9e7"></A>SYMOPT_LOAD_ANYTHING</H3>
+<P>This symbol option reduces the pickiness of the symbol handler when it is attempting to match symbols.</P>
+<P>This option is off by default in all debuggers. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x40</b> or <nobr><b>.symopt-0x40</b></nobr>, respectively.</P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +40</b></nobr> or <nobr><b>symopt -40</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="3d327ef3-57f6-4476-81ba-99f1536f6bf2"></A>SYMOPT_IGNORE_CVREC</H3>
+<P>This symbol option causes the symbol handler to ignore the CV record in the loaded image header when searching for symbols.</P>
+<P>This option is off by default in all debuggers. It can be activated by using the <nobr><b>-sicv</b></nobr> command-line option. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x80</b> or <nobr><b>.symopt-0x80</b></nobr>, respectively.</P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +80</b></nobr> or <nobr><b>symopt -80</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="8aebbb32-4c91-43af-ad23-2bdbcc7d5520"></A>SYMOPT_NO_UNQUALIFIED_LOADS</H3>
+<P>This symbol option disables the symbol handler's automatic loading of modules. When this option is set and the debugger attempts to match a symbol, it will only search modules which have already been loaded.</P>
+<P>This option can be used as a defense against mistyping a symbol name. Normally, a mistyped symbol will cause the debugger to pause while it searches all unloaded symbol files. When this option is active, a mistyped symbol will not be found in the loaded modules, and then the search will terminate.</P>
+<P>This option is off by default in all debuggers. It can be activated by using the <nobr><b>-snul</b></nobr> command-line option. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x100</b> or <nobr><b>.symopt-0x100</b></nobr>, respectively.</P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +100</b></nobr> or <nobr><b>symopt -100</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="50845eb8-f7c5-46d4-b4a3-8e50d42224cc"></A>SYMOPT_FAIL_CRITICAL_ERRORS</H3>
+<P>This symbol option causes file access error dialog boxes to be suppressed.</P>
+<P>If this option is off, file access errors, such as "drive not ready", encountered during symbol loading, will result in dialog boxes appearing. If this option is on, these boxes are suppressed and all access errors receive a "fail" response.</P>
+<P>This option is on by default in all debuggers. It can be deactivated by using the <nobr><b>-sdce</b></nobr> command-line option. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x200</b> or <nobr><b>.symopt-0x200</b></nobr>, respectively.  </P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +200</b></nobr> or <nobr><b>symopt -200</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="4cd85e1a-30d1-41d5-b570-ffdf1c02b441"></A>SYMOPT_EXACT_SYMBOLS</H3>
+<P>This symbol option causes the debugger to perform a strict evaluation of all symbol files.</P>
+<P>When this option is on, even the slightest discrepancy between the symbol files and the symbol handler's expectations will cause the symbols to be ignored. </P>
+<P>This option is off by default in all debuggers. It can be activated by using the <nobr><b>-ses</b></nobr> command-line option. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x400</b> or <nobr><b>.symopt-0x400</b></nobr>, respectively.</P>
+<P>The <nobr><b>-failinc</b></nobr> command-line option also turns on SYMOPT_EXACT_SYMBOLS. In addition, if you are debugging a user-mode minidump or a kernel-mode minidump, <nobr><b>-failinc</b></nobr> will prevent the debugger from loading any modules whose images can't be mapped.</P>
+<P>This option is on by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +400</b></nobr> or <nobr><b>symopt -400</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="36a9620e-7fd9-45f0-a71b-07b5ac42c5fd"></A>SYMOPT_ALLOW_ABSOLUTE_SYMBOLS</H3>
+<P>This symbol option allows DbgHelp to read symbols that are stored at an absolute address in memory. This option is not needed in the vast majority of cases.</P>
+<P></P>
+<P>This option is off by default in all debuggers. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x800</b> or <nobr><b>.symopt-0x800</b></nobr>, respectively.</P>
+<P>This option is on by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +800</b></nobr> or <nobr><b>symopt -800</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="dccc81ec-f693-4796-bac2-b62a28a55174"></A>SYMOPT_IGNORE_NT_SYMPATH</H3>
+<P>This symbol option causes the debugger to ignore the environment variable settings for the symbol path and the executable image path.</P>
+<P>This option is off by default in all debuggers. It can be activated by using the <nobr><b>-sins</b></nobr> command-line option. However, it cannot be controlled by <b>.symopt</b> once the debugger is running, because the environment variables are only read at startup.</P>
+<P>This option is off by default in DBH, and is ignored by DBH in all cases.</P>
+<P></P>
+<H3><A NAME="d5ff471a-d838-4685-89b3-80b6bd04515b"></A>SYMOPT_INCLUDE_32BIT_MODULES</H3>
+<P>This symbol option forces DbgHelp and ImageHlp to enumerate 32-bit modules on an Intel Itanium processor.</P>
+<P>This option is off by default in all debuggers. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x2000</b> or <nobr><b>.symopt-0x2000</b></nobr>, respectively.</P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +2000</b></nobr> or <nobr><b>symopt -2000</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="d550a737-bff7-4175-a4bd-ef354cb12fb7"></A>SYMOPT_PUBLICS_ONLY</H3>
+<P>This symbol option causes DbgHelp to ignore private symbol data, and search only the public symbol table for symbol information.  This emulates the behavior of DbgHelp before support for these types was added. see <a href="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml.htm">Public and Private Symbols</a>.</P>
+<P>This option is off by default in all debuggers. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x4000</b> or <nobr><b>.symopt-0x4000</b></nobr>, respectively.</P>
+<P>This option is off by default in DBH.  It is turned on if the <nobr><b>-d</b></nobr> command-line option is used.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +4000</b></nobr> or <nobr><b>symopt -4000</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="89cdb2bf-4f2b-48cc-9297-8359ea5bd9e6"></A>SYMOPT_NO_PUBLICS</H3>
+<P>This symbol option prevents DbgHelp from searching the public symbol table. This can make symbol enumeration and symbol searches much faster.  If you are concerned solely with search speed, the SYMOPT_AUTO_PUBLICS option is generally preferable to this one.  For information on the public symbol table, see <a href="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml.htm">Public and Private Symbols</a>. </P>
+<P>This option is off by default in all debuggers. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x8000</b> or <nobr><b>.symopt-0x8000</b></nobr>, respectively.  </P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +8000</b></nobr> or <nobr><b>symopt -8000</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="fa4f74ce-fe78-49dc-94cc-3070af1c8010"></A>SYMOPT_AUTO_PUBLICS</H3>
+<P>This symbol option causes DbgHelp to search the public symbol table in a <i>.pdb</i> file only as a last resort. If any matches are found when searching the private symbol data, the public symbols will not be searched. This improves symbol search speed.</P>
+<P>This option is on by default in all debuggers. It can be deactivated by using the <nobr><b>-sup</b></nobr> command-line option. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x10000</b> or <nobr><b>.symopt-0x10000</b></nobr>, respectively.</P>
+<P>This option is on by default in DBH.  It is turned off if the <nobr><b>-d</b></nobr> command-line option is used.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +10000</b></nobr> or <nobr><b>symopt -10000</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="d97eb346-a12f-4feb-ab08-131afd45d069"></A>SYMOPT_NO_IMAGE_SEARCH</H3>
+<P>This symbol option prevents DbgHelp from searching the disk for a copy of the image when symbols are loaded.</P>
+<P>This option is on by default in all debuggers. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x20000</b> or <nobr><b>.symopt-0x20000</b></nobr>, respectively.</P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +20000</b></nobr> or <nobr><b>symopt -20000</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="8589c125-d8b5-4b68-83ba-abe08a707533"></A>SYMOPT_SECURE</H3>
+<P><i>(Kernel mode only)</i>  This symbol option indicates whether <a href="r11_security_c67f1beb-2dab-4e98-aa23-02facc89a8f1.xml.htm">Secure Mode</a> is active.</P>
+<P>Secure Mode is off by default in all debuggers. It can be activated by using the <nobr><b>-secure</b></nobr> command-line option. If the debugger is running, is in dormant mode, and has not established any Debugging Servers, Secure Mode can be turned on by using <b>.symopt+0x40000</b> or <a href="r22_metacmds_s_1300bc2c-3e5b-47f2-85d5-5e65bde5049e.xml.htm"><b>.secure (Activate Secure Mode)</b></a>.</P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +40000</b></nobr> or <nobr><b>symopt -40000</b></nobr>, respectively.</P>
+<P>Secure mode can never be turned <i>off</i> once it has been activated.</P>
+<P></P>
+<H3><A NAME="017e4628-d516-4a2f-b776-8986e10d4931"></A>SYMOPT_NO_PROMPTS</H3>
+<P>This symbol option suppresses authentication dialog boxes from the proxy server. This may result in SymSrv being unable to access a symbol store on the internet.</P>
+<P>For details, see <a href="r09_symbols_ee8ab129-5530-41ad-af38-8a777fde7b79.xml.htm">Firewalls and Proxy Servers</a>.</P>
+<P>In KD and CDB, this option is on by default; in WinDbg, this option is off by default. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x80000</b> or <nobr><b>.symopt-0x80000</b></nobr>, respectively, followed by the <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload (Reload Module)</b></a> command. It can also be turned on and off by using the <a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym prompts off</b></a> and <a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym prompts</b></a> extension commands, followed by the <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload (Reload Module)</b></a> command.</P>
+<P>This option is off by default in DBH.  Once DBH is running, it can be turned on or off by using <nobr><b>symopt +80000</b></nobr> or <nobr><b>symopt -80000</b></nobr>, respectively.</P>
+<P></P>
+<H3><A NAME="1be46490-3471-415d-a405-14806d2de877"></A>SYMOPT_DEBUG</H3>
+<P>This symbol option turns on <i>noisy symbol loading</i>. This instructs the debugger to display information about its search for symbols.</P>
+<P>The name of each symbol file will be displayed as it is loaded. If the debugger cannot load a symbol file, it will display an error message. Error messages for <i>.pdb</i> files will be displayed in text. Error messages for <i>.dbg</i> files will be in the form of an error code; these codes are explained in the <i>winerror.h</i> file.</P>
+<P>If an image file is loaded solely to recover symbolic header information, this will be displayed as well.  </P>
+<P>This option is off by default in all debuggers. It can be activated by using the <nobr><b>-n</b></nobr> command-line option. Once the debugger is running, it can be turned on or off by using <b>.symopt+0x80000000</b> or <nobr><b>.symopt-0x80000000</b></nobr>, respectively. It can also be turned on and off by using the <a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym noisy</b></a> and <a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym quiet</b></a> extension commands.</P>
+<P class="note"><b>Note</b>  This option should not be confused with noisy <i>source</i> loading &#8212; that is controlled by the <a href="r22_metacmds_s_feddb9ee-9663-4273-a66b-0597fec2f4bf.xml.htm"><b>.srcnoisy (Noisy Source Loading)</b></a> command.</P>
+<P>This option is off by default in DBH.  It can be activated by using the <nobr><b>-n</b></nobr> command-line option. Once DBH is running, it can be turned on or off by using <nobr><b>symopt +80000000</b></nobr> or <nobr><b>symopt -80000000</b></nobr>, respectively. It can also be turned on and off by using the <nobr><b>verbose on</b></nobr> and <nobr><b>verbose off</b></nobr> commands.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Symbol Options RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

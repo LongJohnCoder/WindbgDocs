@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Process Ends Unexpectedly</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Process Ends Unexpectedly"><xml><MSHelp:Keyword Index="A" Term="ADPlus_b0f2758d-e3c4-44a4-b6c1-1326e7ff453f.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_b0f2758d-e3c4-44a4-b6c1-1326e7ff453f.xml"></A>Process Ends Unexpectedly</H1>
+<P>If a process randomly fails (that is, <i>crashes</i>) or shuts down unexpectedly, you can run ADPlus in <a href="adplus_5c0245b0-d5f8-47aa-b73f-86b8d8c6111c.xml.htm">crash mode</a> to obtain a memory dump of the process that is failing before the problem occurs.</P>
+<P>For example, use one of the following commands. </P>
+<P>The following command runs ADPlus in crash mode and causes it to attach the CDB debugger to <i>Inetinfo.exe</i> and all <i>Mtx.exe</i> or <i>Dllhost.exe</i> processes that are running on the computer. ADPlus then waits for any first-chance and second-chance exceptions. By default, because the <b>-o</b> option is omitted, ADPlus put all files in a subfolder below the installation folder.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ADPlus -crash -iis</b><BR></nobr></P>
+<P>The following command runs ADPlus in crash mode and causes it to attach the CDB debugger to <i>Inetinfo.exe</i> and all <i>Mtx.exe</i> or <i>Dllhost.exe</i> processes that are running on the computer. The <b>-quiet</b> option suppresses all message boxes and logs all output to the event log. Because the <b>-notify</b> option is used, the debuggers notify all users who are logged on to the computer named <i>RemoteComputer</i> whenever a failure is detected or when the process that is being monitored shuts down. Because the <b>-o</b> option is used, all output is put in the <i>C:\Temp</i> folder. If the folder does not exist, it is created.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ADPlus -quiet -crash -iis -notify </b><i>RemoteComputer</i><b> -o c:\temp</b><BR></nobr></P>
+<P>The following command is the same as the previous one except that it logs all output to a server. A new subfolder is created under <i>\\server\share</i>. The subfolder's name is based on the name of the local computer. Therefore, if you are running ADPlus on a cluster of servers, each server on which ADPlus is running logs its own unique folder under <i>\\server\share</i>. You do not have to create unique folders for each server because they are created automatically. </P>
+<H4>Running from a Local Console</H4>
+<P>If you are running ADPlus in crash mode from the local console instead of remotely, you must remain logged on to the console for the duration of the debug session.</P>
+<P>For example, when you start ADPlus by using the <b>-iis</b> option to monitor IIS, when the starting user logs out of the console, the copies of CDB that are running on the console are closed (along with all other running applications). Therefore, debugging stops, and the process that is being monitored is ended.</P>
+<P>To avoid this issue, you can lock the console session (press CTRL+ALT+DELETE and then click <b>Lock Computer</b>), or run ADPlus inside a remote command shell that has been configured not to require an interactive logon.</P>
+<P>For more information about how to schedule a remote command shell to run noninteractively, see <a href="adplus_662c9738-6925-4c36-9688-97cd038c2b18.xml.htm">Running in Crash Mode Remotely</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Process Ends Unexpectedly RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

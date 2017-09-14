@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Forcing a System Crash from the Debugger</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Forcing a System Crash from the Debugger"><xml><MSHelp:Keyword Index="A" Term="r10_dump_files_cc846010-ddd4-40b7-b140-270355a0b759.xml"/>
+<META NAME="MS-HKWD" CONTENT="system crash, causing from debugger">
+<META NAME="MS-HKWD" CONTENT="bug check, causing from debugger">
+<META NAME="MS-HKWD" CONTENT="forcing system crash from debugger"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r10_dump_files_cc846010-ddd4-40b7-b140-270355a0b759.xml"></A>Forcing a System Crash from the Debugger</H1>
+<P>If KD or WinDbg is performing kernel-mode debugging, it can force a system crash to occur. This is done by entering the <a href="r19_metacmds_a_b5a32d1f-fcb6-410b-9380-5a190599e32f.xml.htm"><b>.crash (Force System Crash)</b></a> command at the command prompt. (If the target computer does not crash immediately, follow this with the <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command.)</P>
+<P>When this command is issued, the system will call <b>KeBugCheck</b> and  issue <a href="t07_bugs_e0_84753fee-8a24-4049-bb27-aa07a5fc60de.xml.htm">bug check 0xE2</a> (MANUALLY_INITIATED_CRASH).   Unless crash dumps have been disabled, a crash dump file is written at this point.</P>
+<P>After the crash dump file has been written, the kernel debugger on the host computer will be alerted and can be used to actively debug the crashed target.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Forcing a System Crash from the Debugger RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>IDebugEventCallbacks::GetInterestMask</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, IDebugEventCallbacks::GetInterestMask"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="IDebugEventCallbacks::GetInterestMask"/>
+<MSHelp:Keyword Index="A" Term="ComCallbacks_564e7fce-ee9a-404e-9ae4-06805cb0b677.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugEventCallbacks, GetInterestMask">
+<META NAME="MS-HKWD" CONTENT="GetInterestMask (IDebugEventCallbacks)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ComCallbacks_564e7fce-ee9a-404e-9ae4-06805cb0b677.xml"></A>IDebugEventCallbacks::GetInterestMask</H1>
+<P><P>The <b>GetInterestMask</b> callback method is called to determine which <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">events</a> the <b>IDebugEventCallbacks</b> object is interested in.  The <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> calls <b>GetInterestMask</b> when the object is registered with a <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client</a> by using <a href="idebugclient_a234bf28-5dd1-4e92-ab72-aa8d9a3a282b.xml.htm"><b>SetEventCallbacks</b></a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugEventCallbacks::GetInterestMask(</b><BR><b>    OUT PULONG  </b><i>Mask</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugEventCallbacksWide::GetInterestMask(</b><BR><b>    OUT PULONG  </b><i>Mask</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define IDebugEventCallbacksT IDebugEventCallbacksWide</b><BR><b>#else</b><BR><b>#define IDebugEventCallbacksT IDebugEventCallbacks</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Mask</i></DT>
+<DD>Receives a bitmask that indicates which events the object is interested in.  The engine will call only those methods that correspond to the bit flags set by <b>GetInterestMask</b>.  For a description of the bit flags and their corresponding methods, see <a href="structures_40533232-e02e-4893-931a-14f2b0bc29e1.xml.htm">DEBUG_EVENT_<i>XXX</i></a>.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>The return value S_OK indicates the method was successful.  All other return values indicate an error occurred,  in which case the <b>SetEventCallbacks</b> call will fail and the callback object will not be used nor will it receive events.</P>
+<H4>Comments</H4>
+<P>For more information about handling events, see <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: IDebugEventCallbacks::GetInterestMask RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

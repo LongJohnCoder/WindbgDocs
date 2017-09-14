@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Registers</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Registers"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_eaa71da7-23ac-4464-9142-23c89a31e14e.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, memory, registers">
+<META NAME="MS-HKWD" CONTENT="Pseudo-Registers"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_eaa71da7-23ac-4464-9142-23c89a31e14e.xml"></A>Registers</H1>
+<P>The <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> can be used to examine and alter the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>'s registers.</P>
+<P>The registers available on the target depend on its processor architecture.  For a description of the registers for the x86 and Itanium processors, see <a href="t09_arch_x86_ef71f3fe-83ec-4c78-9482-cdf7a95eb3e5.xml.htm">Processor Architecture</a>.  For a complete description of the registers available for a processor, see that processor's documentation.</P>
+<H4>The Register Set</H4>
+<P>The <a href="idebugregisters_b2fa1d95-0331-4c27-a3af-3cc8e895e88f.xml.htm"><b>GetNumberRegisters</b></a> method can be used to find the number of registers on the target.</P>
+<P>Each register is referred to by its index.  The index of the first register is zero, and the index of the last register is the number of registers minus one.  To find the index of a register whose name is known, use <a href="idebugregisters_5b85eaa4-3c90-47e0-9f7f-7f493617fa37.xml.htm"><b>GetIndexByName</b></a>.</P>
+<P>The method <a href="idebugregisters_aa062ab9-e090-4cad-b875-b6e99a019c16.xml.htm"><b>GetDescription</b></a> returns information about a register.  This includes the register's name, the type of values it can hold, and whether it is a subregister.</P>
+<P>A <i>subregister</i> is a register that is contained within another register.  When the subregister changes, the register that contains it also changes.  For example, on an x86 processor, the <b>ax</b> subregister is the same as the low 16 bits of the 32-bit <b>eax</b> register.</P>
+<P>There are three special registers whose values may be found by using the following methods.  The interpretation of the values of these registers is platform dependent.</P><B></B><UL type="disc">
+<LI>The location of the current instruction may be found with <a href="idebugregisters_229180dd-2da4-4ff1-9284-520bef0b6843.xml.htm"><b>GetInstructionOffset</b></a> and <a href="idebugregisters_92189e99-c8f6-4422-8421-62fe194a05b6.xml.htm"><b>GetInstructionOffset2</b></a>.</LI>
+<LI>The location of the current processor stack slot may be found with <a href="idebugregisters_40c9da48-e41f-4890-ace2-b15a2e1cc4ba.xml.htm"><b>GetStackOffset</b></a> and <a href="idebugregisters_ec4e5846-b785-4b82-9670-04e7087b7d99.xml.htm"><b>GetStackOffset2</b></a>.</LI>
+<LI>The location of the stack frame for the current function may be found with  <a href="idebugregisters_c3f31f5b-76d4-4910-b1a1-f3050c20e815.xml.htm"><b>GetFrameOffset</b></a> and <a href="idebugregisters_9b3855a5-d5e4-4485-81f3-1584b707f73a.xml.htm"><b>GetFrameOffset2</b></a>.</LI>
+</UL>
+<H4>Manipulating Registers</H4>
+<P>The value of a register can be read by using the method <a href="idebugregisters_f3e89ca1-7516-476e-8c85-560d8f28f0a8.xml.htm"><b>GetValue</b></a>.  Multiple registers can be read by using <a href="idebugregisters_46e390ee-fd0c-4f5f-babc-d76c10ca2780.xml.htm"><b>GetValues</b></a> and <a href="idebugregisters_de7a1e67-5ffe-48f8-a19d-63858c500389.xml.htm"><b>GetValues2</b></a>.</P>
+<P>A value can be written to a register by using the method <a href="idebugregisters_f704c31f-5062-47d7-9f44-35bc85e0d0aa.xml.htm"><b>SetValue</b></a>.  Multiple registers can be written by using <a href="idebugregisters_0c188698-35b8-4c8f-ad8c-1218695845a8.xml.htm"><b>SetValues</b></a> and <a href="idebugregisters_4e5c8f37-a5ad-4083-adb9-e75ec18542b2.xml.htm"><b>SetValues2</b></a>.</P>
+<P>When writing a value to a register, if the value supplied has a different type to the type of the register then the value is converted into the register's type.  This conversion is the same as that performed by the method <a href="idebugcontrol_034a690e-25bb-40a1-b788-7b148ba0d9cd.xml.htm"><b>CoerceValue</b></a>.  This conversion may result in data loss if the register's type is not capable of holding the value supplied.</P>
+<H4><A NAME="3f4e138e-8f32-4497-97ec-ca6ffc25797d"></A>Pseudo-Registers</H4>
+<P><i>Pseudo-registers</i> are variables maintained by the debugger engine that hold certain values, for example, <b>$teb</b> is the name of the pseudo-register whose value is the address of the current thread's Thread Environment Block (TEB).  For more information, and a list of the pseudo-registers, see <a href="r13_syntax_c05da1f3-3310-46cb-8e56-da3d670e05f3.xml.htm">Pseudo-Register Syntax</a>.</P>
+<P>Each pseudo-register has an index.  The index is a number between zero and the number of pseudo-registers &#8211; (returned by <a href="idebugregisters_e12950ac-f9b2-4ed2-9ce1-bc3088b65ef1.xml.htm"><b>GetNumberPseudoRegisters</b></a>) minus one.  To find the index of a pseudo-register by its name, use <a href="idebugregisters_95580025-4059-4a5b-bd68-d7ebfa20607e.xml.htm"><b>GetPseudoIndexByName</b></a>.  The values of pseudo-registers can be read using <a href="idebugregisters_56a9ae8d-1ef7-4b28-bcad-e9f7025aba4f.xml.htm"><b>GetPseudoValues</b></a>, and values can be written to pseudo-registers using <a href="idebugregisters_db4bc070-c017-479f-b9ca-4b2abe513d7f.xml.htm"><b>SetPseudoValues</b></a>.  For a description of a pseudo-register, including its type, use <a href="idebugregisters_7b1f8069-32d0-4fb4-9cee-7fd045bae8d3.xml.htm"><b>GetPseudoDescription</b></a>.</P>
+<P class="note"><b>Note</b>  Not all of the pseudo-registers are available in all debugging sessions or at all times in a particular session.</P>
+<H4>Displaying Registers</H4>
+<P>The methods <a href="idebugregisters_65d62961-afc5-4609-86d2-c55757fe6ce1.xml.htm"><b>OutputRegisters</b></a> and <a href="idebugregisters_ecc2b40a-622b-4f1f-867b-2eb6b575559d.xml.htm"><b>OutputRegisters2</b></a> format the target's registers and sends them to the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">clients</a> as output.</P>
+<H4>Events</H4>
+<P>Whenever the values of the target's registers change, the engine will call the <a href="comcallbacks_a5743ecf-0b4c-41de-9384-ee0d8980a746.xml.htm"><b>IDebugEventCallbacks::ChangeDebuggeeState</b></a> callback method with the parameter <i>Flags</i> set to DEBUG_CDS_REGISTERS.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Registers RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

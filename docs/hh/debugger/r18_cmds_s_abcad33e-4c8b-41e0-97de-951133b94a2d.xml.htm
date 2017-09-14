@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>sq (Set Quiet Mode)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, sq (Set Quiet Mode)"><xml><MSHelp:Keyword Index="A" Term="r18_cmds_S_abcad33e-4c8b-41e0-97de-951133b94a2d.xml"/>
+<META NAME="MS-HKWD" CONTENT="sq (Set Quiet Mode) command">
+<META NAME="MS-HKWD" CONTENT="Set Quiet Mode (sq) command">
+<META NAME="MS-HKWD" CONTENT="quiet mode"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r18_cmds_S_abcad33e-4c8b-41e0-97de-951133b94a2d.xml"></A>sq (Set Quiet Mode)</H1>
+<P>The <b>sq</b> command turns quiet mode on or off.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>sq</b> <BR><b>sq</b>{<b>e</b>|<b>d</b>} <BR></nobr></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>sqe</b> command turns quiet mode on, and the <b>sqd</b> command turns it off. The <b>sq</b> command turns on and off quiet mode. Each of these commands also displays the new quiet mode status.</P>
+<P>You can set quiet mode in KD or kernel-mode WinDbg by using the KDQUIET <a href="r12_cmdline_a7670eb8-0ac9-4d47-ae07-97c237dc7f53.xml.htm">environment variable</a>. (Note that quiet mode exists in both user-mode and kernel-mode debugging, but the KDQUIET environment variable is only recognized in kernel mode.)</P>
+<P><i>Quiet mode</i> has three distinct effects:</P><B></B><UL type="disc">
+<LI>The debugger does not display messages every time that an extension DLL is loaded or unloaded.</LI>
+<LI>The <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command no longer requires an equal sign (=) in its syntax.</LI>
+<LI>When you break into a target computer while kernel debugging, the long warning message is suppressed.</LI>
+</UL>
+<P></P>
+<P>Do not confuse quiet mode with the effects of the <b>-myob</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> (in CDB and KD) or the <b>-Q</b> <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">command-line option</a> (in WinDbg).</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: sq (Set Quiet Mode) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

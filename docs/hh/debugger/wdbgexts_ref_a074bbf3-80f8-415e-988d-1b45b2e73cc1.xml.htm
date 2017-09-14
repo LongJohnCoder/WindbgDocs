@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>WdbgExts Functions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, WdbgExts Functions"><xml><MSHelp:Keyword Index="A" Term="WdbgExts_Ref_a074bbf3-80f8-415e-988d-1b45b2e73cc1.xml"/>
+<META NAME="MS-HKWD" CONTENT="WdbgExts extensions, functions"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_a074bbf3-80f8-415e-988d-1b45b2e73cc1.xml"></A>WdbgExts Functions</H1>
+<P>The <i>wdbgexts.h</i> header file contains prototypes for the following functions. These functions use the same prototype for both 32-bit and 64-bit extensions:</P><B></B><div class="indent1">
+<P><a href="wdbgexts_ref_52639fac-abbf-4abc-a01f-361d14e49fd0.xml.htm"><b>GetContext</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_1a94f80d-7df9-45d1-9bca-19a18a2efb22.xml.htm"><b>SetContext</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_532229fc-40f0-4226-92af-09ecc5387096.xml.htm"><b>CheckControlC</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_cf956b74-b0e4-43fa-911f-289b01dbf8c8.xml.htm"><b>GetCurrentProcessAddr</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_50cc8e27-7f7e-4ec3-ad2d-745f38e87037.xml.htm"><b>GetCurrentProcessHandle</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_03db8f68-2e64-4530-bf35-df2a6f0d7736.xml.htm"><b>GetCurrentThreadAddr</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_da3c4b36-e7b1-429a-9d63-4f92101a189a.xml.htm"><b>GetDebuggerCacheSize</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_a9b54b49-d8ac-4bee-a837-3986a250403a.xml.htm"><b>GetDebuggerData</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_787ab353-1829-4111-8931-2192bfb9cd0c.xml.htm"><b>Disasm</b></a><b>  </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_89454805-6140-4023-ba28-2d7130c73cf5.xml.htm"><b>dprintf</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_666ae7de-7842-4ba8-9352-e79aefe24ba7.xml.htm"><b>GetExpression</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_74af8a17-694a-46ec-827c-fdd2aecbf15c.xml.htm"><b>GetExpressionEx</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_ed42718c-5e3e-4fe6-a2d6-f553b6c58800.xml.htm"><b>GetInputLine</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_951ca10a-3a73-433c-bd95-f054967f0df6.xml.htm"><b>GetKdContext</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_53e869bc-03c9-4818-80fd-ca1bdafe2b96.xml.htm"><b>ReadMemory</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_4eb909e5-edfd-487c-851c-812b15274c66.xml.htm"><b>SearchMemory</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_72933b84-f8ce-432e-b89c-09c2668aa90e.xml.htm"><b>WriteMemory</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_37577d05-a60b-4064-850a-d73616d93f37.xml.htm"><b>ReadMsr</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_faeb78e1-24a2-4210-94f9-4e468ba69181.xml.htm"><b>WriteMsr</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_a51cb865-4701-4fbc-a075-7bcadd8ee8be.xml.htm"><b>GetPebAddress</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_4eaa6edb-2297-4454-b4aa-ea69aa5a073c.xml.htm"><b>ReadPhysical</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_cf166083-f21a-4cfd-8daa-90c3f6bbcdcb.xml.htm"><b>ReadPhysicalWithFlags</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_4c6663a7-4fbf-4d4a-9c86-cfa51218a470.xml.htm"><b>WritePhysical</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_7ef1e63e-87e2-4bf3-a432-78639684a18c.xml.htm"><b>WritePhysicalWithFlags</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_69ad127f-7df4-4c57-9475-55040aa02f78.xml.htm"><b>GetTebAddress</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_5ccc4adf-2b59-4373-8e4a-3bc8847c5749.xml.htm"><b>StackTrace</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_a892aa24-d1ee-43f4-8fd5-ea8d00aa678a.xml.htm"><b>GetSymbol</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_c48c63b8-6c59-42f7-8a44-78462cbf653f.xml.htm"><b>ReloadSymbols</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_66364d7b-fd3c-424a-a04d-b7bf24178039.xml.htm"><b>GetSetSympath</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_ec3ff314-8800-4f77-a40e-e127e6cf0133.xml.htm"><b>TranslateVirtualToPhysical</b></a></P>
+</div>
+<P>The <i>wdbgexts.h</i> header file contains prototypes for the following functions. These functions have different prototypes for 32-bit and 64-bit extensions:</P><B></B><div class="indent1">
+<P><a href="wdbgexts_ref_8337344a-4a97-4f74-9be4-8fdd771d8bbf.xml.htm"><b>ReadControlSpace</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_3327dad4-903c-4285-b3cc-fe408d15f129.xml.htm"><b>ReadControlSpace64</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_8d855fe0-ab66-4ba0-bed8-0a79a2f953d4.xml.htm"><b>ReadTypedControlSpace32</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_7dacba07-9543-4198-a16d-b519f6195889.xml.htm"><b>ReadTypedControlSpace64</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_ee59dfdc-d138-4f1b-8f5c-fb9e1d47bef2.xml.htm"><b>WriteControlSpace</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_e34c76a6-de5d-4347-90a7-959d5392680e.xml.htm"><b>ReadIoSpace</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_5e2a7cc2-0dc4-4970-9d6a-c9a2c5130577.xml.htm"><b>ReadIoSpace64</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_96fa3635-35d1-4d58-835a-96754480170a.xml.htm"><b>ReadIoSpaceEx</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_5d81517c-f30d-4f8c-b4fe-e3487ad6c49e.xml.htm"><b>ReadIoSpaceEx64</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_1aa4429d-9d99-4c7c-8870-7a75ccaad6e5.xml.htm"><b>WriteIoSpace</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_81d45454-9dd4-46f1-823b-1a2345890106.xml.htm"><b>WriteIoSpace64</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_53bdc758-08b1-4103-9732-5b7b72c80fdd.xml.htm"><b>WriteIoSpaceEx</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_378f5c2e-fcbc-4401-8527-f6e98bfa6257.xml.htm"><b>WriteIoSpaceEx64</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_62cb59e2-5a16-4bee-936c-6eeaa5126fbc.xml.htm"><b>SetThreadForOperation</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_8c7ef2e9-4096-4284-9878-63d90f49e227.xml.htm"><b>SetThreadForOperation64</b></a></P>
+</div>
+<P>The <i>wdbgexts.h</i> header file contains prototypes for the following functions. These functions can be used only in 64-bit extensions:</P><B></B><div class="indent1">
+<P><a href="wdbgexts_ref_898dacb4-308c-4a8f-99e2-030adf2b0eae.xml.htm"><b>GetFieldData</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_22c8a9bc-dec9-4eec-95c6-b265694b4385.xml.htm"><b>GetFieldOffset</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_68aca028-5d92-48a3-845d-f9eb480a2c40.xml.htm"><b>GetFieldValue</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_ef67af78-e72f-440c-9ef3-d84b8cca12dc.xml.htm"><b>GetShortField</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_0343858a-65d2-4c15-a1ff-7053d62b0fb9.xml.htm"><b>ReadField</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_ab7a48d6-aa2a-4ed1-a4dc-7339993ccb45.xml.htm"><b>ReadListEntry</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_3d78e28a-910f-4b82-a262-28d83d87c6f1.xml.htm"><b>ReadPointer</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_ab18dbae-3a69-43a1-97dd-d0711e4db54e.xml.htm"><b>WritePointer</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_488f3445-c3ae-4847-8e3b-cf3892dcd365.xml.htm"><b>IsPtr64</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_4eaec659-6522-4d7f-b64a-ad771f93eb56.xml.htm"><b>ReadPtr</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_f3c7edf8-5c3b-440f-ace7-2081f9923d6f.xml.htm"><b>GetTypeSize</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_ead1e7df-6fe3-4b61-a511-99993117e9d7.xml.htm"><b>InitTypeRead</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_b0221684-224c-4fa9-bdaf-ed93b7a89766.xml.htm"><b>InitTypeReadPhysical</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="wdbgexts_ref_aa50fe48-2a66-4d5e-aec7-d225966cfab2.xml.htm"><b>ListType</b></a></P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: WdbgExts Functions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

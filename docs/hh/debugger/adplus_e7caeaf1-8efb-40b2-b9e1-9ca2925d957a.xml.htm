@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Exceptions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Exceptions"><xml><MSHelp:Keyword Index="A" Term="ADPlus_e7caeaf1-8efb-40b2-b9e1-9ca2925d957a.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_e7caeaf1-8efb-40b2-b9e1-9ca2925d957a.xml"></A>Exceptions</H1>
+<P>The <b>Exceptions</b> section enables you to customize the actions to be taken when a given exception breaks into the debugger. You can also define new custom exceptions to be monitored.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>    &lt;Exceptions&gt;</b><BR><b>        &lt;!-- options act on all currently defined exceptions --&gt;</b><BR><b>       &lt;Option&gt;  FullDumpOnFirstChance  &lt;/Option&gt;</b><BR><b>       &lt;Option&gt;  MiniDumpOnSecondChance  &lt;/Option&gt;</b><BR><b>       &lt;Option&gt;  NoDumpOnFirstChance  &lt;/Option&gt;</b><BR><b>       &lt;Option&gt;  NoDumpOnSecondChance  &lt;/Option&gt;</b><BR><BR><b>        &lt;!-Defining new exceptions --&gt;</b><BR><b>       &lt;NewException&gt;</b><BR><b>           &lt;Code&gt; </b><i>ExceptionCode</i><b> &lt;/Code&gt;</b><BR><b>           &lt;Name&gt; </b><i>ExceptionName</i><b> &lt;/Name&gt;</b><BR><b>       &lt;/NewException&gt;</b><BR><BR><b>        &lt;!-Configuring already defined exceptions --&gt;</b><BR><b>       &lt;Config&gt;</b><BR><b>          &lt;Code&gt;</b> { <i>ExceptionCode</i> | <b>AllExceptions</b> } <b>&lt;/Code&gt;</b><BR><b>          &lt;Actions1&gt; </b><i>Actions</i><b>  &lt;/Actions1&gt; </b><BR><b>          &lt;CustomActions1&gt; </b><i>CustomActions</i><b>  &lt;/CustomActions1&gt; </b><BR><b>          &lt;Actions2&gt; </b><i>Actions</i><b>  &lt;/Actions2&gt; </b><BR><b>          &lt;CustomActions2&gt; </b><i>CustomActions</i><b>  &lt;/CustomActions2&gt; </b><BR><b>          &lt;ReturnAction1&gt; </b>{ <b>G</b> | <b>GN</b> | <b>GH</b> | <b>Q</b> | <b>QD</b> } <b>&lt;/ReturnAction1&gt; </b><BR><b>          &lt;ReturnAction2&gt; </b>{ <b>G</b> | <b>GN</b> | <b>GH</b> | <b>Q</b> | <b>QD</b> } <b>&lt;/ReturnAction2&gt; </b><BR><b>       &lt;/Config&gt;  </b><BR><b>    &lt;/Exceptions&gt;</b><BR><BR></nobr></P>
+<P>The <b>&lt;Option&gt;</b> tag enables you to set some global behavior options (<b>FullDumpOnFirstChance</b>, <b>MiniDumpOnSecondChance</b>, <b>NoDumpOnFirstChance</b>, and <b>NoDumpOnSecondChance</b>).</P>
+<P>The <b>&lt;NewException&gt;</b> tag enables you to define a new exception by providing an exception code and an exception name. <i>ExceptionCode</i> should be a hexadecimal number or a short abbreviation that the debugger knows. <i>ExceptionName</i> should be short and not include spaces.</P>
+<P>The following example shows <i>ExceptionCode</i> and <i>ExceptionName</i>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>           &lt;Code&gt; 0x80010005 &lt;/Code&gt;<BR>           &lt;Name&gt; My_Custom_Exception &lt;/Name&gt;<BR></nobr></P>
+<P>The <b>&lt;Config&gt;</b> tag enables you to configure the behavior of already defined exceptions. You can configure a given exception by defining its code in the <b>&lt;Code&gt;</b> tag. If you use the <b>AllExceptions</b> keyword, the behavior applies to all defined exceptions. You can also define multiple exception codes separated by semicolons.</P>
+<P><b>&lt;Config&gt;</b> has the following parameters:</P>
+<DL><DT><i>Actions</i></DT>
+<DD>The <i>Action</i> parameters that are used in the <b>&lt;Actions1&gt;</b> and <b>&lt;Actions2&gt;</b> tags define the actions to be taken on first and second chance exceptions, respectively.<P>The actions can be a set of predefined actions, separated by semicolons.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>&lt;Actions1&gt;MiniDump;Stack;Log;EventLog&lt;/Actions1&gt;<BR></nobr></P>
+<P>If you do not want any actions, use the <b>Void</b> keyword.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>&lt;Actions1&gt;Void&lt;/Actions1&gt;<BR></nobr></P>
+<P>You can use the following case-sensitive actions:</P>
+<DL><DT><b>Log</b></DT>
+<DD>Adds a log entry that is related to the exception.</DD>
+<DT><b>EventLog</b></DT>
+<DD>Adds an event log that is related to the exception.</DD>
+<DT><b>MiniDump</b></DT>
+<DD>Creates a minidump.</DD>
+<DT><b>FullDump</b></DT>
+<DD>Creates a full dump.</DD>
+<DT><b>MiniDumpOver</b></DT>
+<DD>Creates a minidump and overwrites multiple instances for the same exception.</DD>
+<DT><b>FullDumpOver</b></DT>
+<DD>Creates a full dump and overwrites multiple instances for the same exception.</DD>
+<DT><b>Stack</b></DT>
+<DD>Lists the faulting call stack into the log.</DD>
+<DT><b>Stacks</b></DT>
+<DD>Lists all thread call stacks into the log.</DD>
+<DT><b>LoadedModules</b></DT>
+<DD>Lists all loaded modules.</DD>
+<DT><b>MatchingSymbols</b></DT>
+<DD>Lists all modules that have matching symbols.</DD>
+<DT><b>Void</b></DT>
+<DD>Does nothing.</DD>
+</DL>
+</DD>
+<DT><i>CustomActions</i></DT>
+<DD>The <i>CustomAction</i> parameters that are used in the <b>&lt;CustomActions1&gt;</b> and <b>&lt;CustomActions2&gt;</b> tags define additional actions to be taken on first and second chance exceptions, respectively. You can include any debugger commands that are available in CDB. You should separate multiple commands by semicolons, as follows.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>&lt;CustomActions1&gt;!runaway;!heap&lt;/CustomActions1&gt;<BR></nobr></P>
+</DD>
+<DT>{ <b>G</b> | <b>GN</b> | <b>GH</b> | <b>Q</b> | <b>QD</b> } </DT>
+<DD>Specifies how to return from the debugger after taking the specified actions. <b>&lt;ReturnAction1&gt;</b> and <b>&lt;ReturnAction2&gt;</b> are used after first and second chance exceptions, respectively. These actions work like the <b>g</b>, <b>gn</b>, <b>gh</b>, <b>q</b>, and <b>qd </b>debugger commands. <b>QD</b> is supported only in Microsoft Windows XP and later versions of Windows.</DD>
+</DL>
+<P></P>
+<P>The following example shows a complete <b>&lt;Config&gt;</b> section.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>&lt;Config&gt;<BR>    &lt;Code&gt; AllExceptions    &lt;/Code&gt;<BR>    &lt;Actions1&gt;   Log;Stack     &lt;/Actions1&gt;<BR>    &lt;Actions2&gt;   Log;MiniDump     &lt;/Actions2&gt;<BR>    &lt;CustomActions2&gt;   !runaway     &lt;/CustomActions2&gt;<BR>    &lt;ReturnAction1&gt; GN   &lt;/ReturnAction1&gt;<BR>    &lt;ReturnAction2&gt; Q    &lt;/ReturnAction2&gt;<BR>&lt;/Config&gt;<BR>&lt;Config&gt;<BR>    &lt;Code&gt; av   &lt;/Code&gt;<BR>    &lt;Actions1&gt;   Log;Stack;MiniDump    &lt;/Actions1&gt;<BR>    &lt;Actions2&gt;   Log;Stack;FullDump     &lt;/Actions2&gt;<BR>&lt;/Config&gt;<BR></nobr></P>
+<P>The first part of this example configures all exceptions to create a log and list the faulting stack for a first chance exception and create a minidump and a log for a second chance. The second part configures the <b>av</b> exception to create a minidump on first chance and a full dump on second chance. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Exceptions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

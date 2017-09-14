@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Device Manager Problem Codes</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Device Manager Problem Codes"><xml><MSHelp:Keyword Index="A" Term="t12_drivers_344ae4e6-4038-4352-b783-92eacd28f7a8.xml"/>
+<META NAME="MS-HKWD" CONTENT="Plug and Play (PnP), device manager problem codes">
+<META NAME="MS-HKWD" CONTENT="device manager problem codes">
+<META NAME="MS-HKWD" CONTENT="CM_PROB_XXX"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t12_drivers_344ae4e6-4038-4352-b783-92eacd28f7a8.xml"></A>Device Manager Problem Codes</H1>
+<P>The Device Manager marks a device with a yellow exclamation mark (<b>!</b>) when the device has a problem. The problem codes are in the form CM_PROB_<i>XXX</i> and are defined in the header file <i>cfg.h</i>. The most important are explained here, together with their mapping to the <a href="t12_drivers_79d0e68e-d9ca-4eaa-9140-318a0836d7b3.xml.htm">Device Node Status Flags</a>.</P>
+<DL><DT><b>Code 1 (CM_PROB_NOT_CONFIGURED)</b></DT>
+<DD>Indicates that the device is not installed and was not installed previously. (Corresponds to DNF_NOT_CONFIGURED.)</DD>
+<DT><b>Code 10 (CM_PROB_FAILED_START)</b></DT>
+<DD>Indicates that the device did not start for some reason, but the I/O Manager attempted to start it with a set of resources. (Corresponds to DNF_START_FAILED.)</DD>
+<DT><b>Code 12 (CM_PROB_NORMAL_CONFLICT)</b></DT>
+<DD>Indicates that there were not sufficient resources to start this device. (Corresponds to DNF_INSUFFICIENT_RESOURCES.)</DD>
+<DT><b>Code 14 (CM_PROB_NEED_RESTART)</b></DT>
+<DD>Indicates that user mode reconfigured the device and a reboot is required for the changes to take effect. (Corresponds to DNF_NEED_RESTART.)</DD>
+<DT><b>Code 18 (CM_PROB_REINSTALL)</b></DT>
+<DD>Indicates that the device needs to be installed and was installed previously. (Corresponds to DNF_REINSTALL.)</DD>
+<DT><b>Code 21 (CM_PROB_WILL_BE_REMOVED)</b></DT>
+<DD>Indicates that the user mode uninstalled this device. (Corresponds to DNF_WILL_BE_REMOVED.)</DD>
+<DT><b>Code 22 (CM_PROB_DISABLED)</b></DT>
+<DD>Indicates that the device is disabled. (Corresponds to DNF_DISABLED.)</DD>
+<DT><b>Code 28 (CM_PROB_FAILED_INSTALL)</b></DT>
+<DD>Indicates that the installation failed and there is no driver selected for this device, although the kernel did not report a problem (and there is no DNF_XXX match for this the problem). This problem can be the result of an on-board system device (ISA timer, ISA RTC, RAM Memory, and so forth) that does not yet have an INF file.</DD>
+<DT><b>Code 31 (CM_FAILED_ADD)</b></DT>
+<DD>Indicates that the device was not added. Reasons for the failure may include: a driver's <b>AddDevice</b> routine returned an error, there is no service listed for the device in the registry, there is more than one service listed, or the controlling driver could not be loaded. (Corresponds to DNF_ADD_FAILED.)</DD>
+</DL>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Device Manager Problem Codes RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

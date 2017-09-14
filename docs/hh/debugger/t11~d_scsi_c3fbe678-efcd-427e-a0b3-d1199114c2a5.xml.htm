@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Analyzing Stalled Drivers and Time-Outs</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Analyzing Stalled Drivers and Time-Outs"><xml><MSHelp:Keyword Index="A" Term="t11~d_scsi_c3fbe678-efcd-427e-a0b3-d1199114c2a5.xml"/>
+<META NAME="MS-HKWD" CONTENT="SCSI Miniport Debugging, hangs and time-outs"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~d_scsi_c3fbe678-efcd-427e-a0b3-d1199114c2a5.xml"></A>Analyzing Stalled Drivers and Time-Outs</H1>
+<P>When debugging a SCSI miniport driver, the three most common causes for hangs and time-outs are:</P><B></B><UL type="disc">
+<LI>The SCSI miniport DPC is not running </LI>
+<LI>The SCSI miniport fails to ask for the next request  </LI>
+<LI>A request is not being completed by the SCSI miniport, usually because it is waiting for map registers. </LI>
+</UL>
+<P>If you suspect that the SCSI miniport DPC is not running, use <a href="r28_exts_kernel_n_4ab42b0e-acdd-42f1-9594-e7db30d8276b.xml.htm"><b>!pcr</b></a> to display the DPC queue for the current processor. If the SCSI port DPC routine is in the DPC queue, place a breakpoint on this routine to determine whether this routine is ever called. Otherwise, use <a href="r33~d_exts_scsi_6e78f7b5-27a6-4f72-9c7a-99e4521dde11.xml.htm"><b>!scsikd.scsiext</b></a><b> </b>on each device. Consider the following sample output from the <b>!scsikd.scsiext </b>extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!scsikd.scsiext 86353040</b> <BR>Common Extension:<BR>   &lt; ..omitted.. &gt;<BR>Logical Unit Extension:<BR>  Address (3, 0, 1, 0) Claimed  Enumerated Visible<BR>  LuFlags (0x00000000):<BR>  Retry 0x00          Key 0x008889ff<BR>  Lock 0x00000000  Pause 0x00000000   CurrentLock: 0x00000000<BR>  HwLuExt 0x862e6f00  Adapter 0x8633db28  Timeout 0x0000000a<BR>  NextLun 0x00000000  ReadyLun 0x00000000<BR>  Pending 0x00000000  Busy 0x00000000     Untagged 0x00000000<BR>  <BR>  . . .  <BR>  <BR>Request list @0x86353200:<BR>      Tick count is 2526<BR>      SrbData 8615d700  Srb 8611f4fc  Irp 8611f2b8   Key 60197  &lt;1s<BR>      SrbData 85e72868  Srb 86100c3c Irp 861009f8   Key e29dc7  &lt;1s <BR></nobr></P>
+<P>If the timeout slot is -<b>1</b> and the untagged slot is nonzero, or the time-out slot is nonzero and there are requests shown, the miniport has failed to ask for the next request. </P>
+<P>Alternatively, if the retry slot and the busy slot are nonzero, a request may not be completed by the SCSI miniport because it is waiting for map registers. Similarly, if the untagged and pending slots are nonzero, the SCSI miniport might be waiting for map registers. In either case, the address of the SCSI request block (SRB) is the address in the busy slot and the address of the request that is not being completed. For more information about the SRB, use the <a href="r33~d_exts_scsi_f692b8a1-dfb0-41eb-ae2b-4f6fcb67282e.xml.htm"><b>!minipkd.srb</b></a> extension with this address as input.</P>
+<P>The <a href="r26_exts_kernel_a_d7c58f52-7920-4308-92c8-362514c0c278.xml.htm"><b>!devobj</b></a><b> </b>extension determines whether the SCSI miniport is waiting for map registers. Use the device object address of the device that is issuing the request as input to <b>!devobj</b>. If the current IRQ is nonzero, it is highly probable that the SCSI miniport is waiting for map registers. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Analyzing Stalled Drivers and Time-Outs RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

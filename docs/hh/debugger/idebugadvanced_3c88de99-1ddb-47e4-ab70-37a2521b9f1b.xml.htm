@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>FindSourceFileAndToken</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, FindSourceFileAndToken"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="FindSourceFileAndToken"/>
+<MSHelp:Keyword Index="A" Term="IDebugAdvanced_3c88de99-1ddb-47e4-ab70-37a2521b9f1b.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugAdvanced*::FindSourceFileAndToken method">
+<META NAME="MS-HKWD" CONTENT="FindSourceFileAndToken (IDebugAdvanced*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugAdvanced_3c88de99-1ddb-47e4-ab70-37a2521b9f1b.xml"></A>FindSourceFileAndToken</H1>
+<P><P>The <b>FindSourceFileAndToken</b> and <b>FindSourceFileAndTokenWide</b> methods returns the filename of a source file on the source path or return the value of a variable associated with a file token.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugAdvanced2::FindSourceFileAndToken(</b><BR><b>    IN ULONG  </b><i>StartElement</i><b>,</b><BR><b>    IN ULONG64  </b><i>ModAddr</i><b>,</b><BR><b>    IN PCSTR  </b><i>File</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    IN OPTIONAL PVOID  </b><i>FileToken</i><b>,</b><BR><b>    IN ULONG  </b><i>FileTokenSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FoundElement</i><b>,</b><BR><b>    OUT OPTIONAL PSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FoundSize</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugAdvanced3::FindSourceFileAndTokenWide(</b><BR><b>    IN ULONG  </b><i>StartElement</i><b>,</b><BR><b>    IN ULONG64  </b><i>ModAddr</i><b>,</b><BR><b>    IN PCWSTR  </b><i>File</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    IN OPTIONAL PVOID  </b><i>FileToken</i><b>,</b><BR><b>    IN ULONG  </b><i>FileTokenSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FoundElement</i><b>,</b><BR><b>    OUT OPTIONAL PSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FoundSize</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define FindSourceFileAndTokenT FindSourceFileAndTokenWide</b><BR><b>#else</b><BR><b>#define FindSourceFileAndTokenT FindSourceFileAndToken</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>StartElement</i></DT>
+<DD>Specifies the index of an element within the source path to start searching from.  All elements in the source path before <i>StartElement</i> are excluded from the search.  The index of the first element is zero.  If <i>StartElement</i> is greater than or equal to the number of elements in the source path, the filing system is checked directly.<P>This parameter can be used with <i>FoundElement</i> to check for multiple matches in the source path.</P>
+<P><i>StartElement</i> is ignored if the flag DEBUG_FIND_SOURCE_TOKEN_LOOKUP is set in <i>Flags</i>.</P>
+</DD>
+<DT><i>ModAddr</i></DT>
+<DD>Specifies a location within the memory allocation of the module in the target to which the source file is related.  <i>ModAddr</i> is used for caching the search results and when querying source servers for the file.  <i>ModAddr</i> can be NULL.<P><i>ModAddr</i> is ignored if the flag DEBUG_FIND_SOURCE_TOKEN_LOOKUP is set in <i>Flags</i>.  And it is not used for querying source servers if <i>FileToken</i> is not NULL.</P>
+</DD>
+<DT><i>File</i></DT>
+<DD>Specifies the path and filename of the file to search for.<P>If the flag DEBUG_FIND_SOURCE_TOKEN_LOOKUP is set, the file is already specified by the token in <i>FileToken</i>.  In this case, <i>File</i> specifies the name of a variable on the source server related to the file.  The variable must begin and end with the percent sign <b>( % )</b>, for example, <b>%SRCSRVCMD%</b>.  The value of this variable is returned.</P>
+</DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies the flags that control the behavior of this method.  For a description of these flags, see <a href="structures_9f59ac34-a07a-4b08-a783-367ee98a4782.xml.htm">DEBUG_FIND_SOURCE_XXX</a>.</DD>
+<DT><i>FileToken</i></DT>
+<DD>Specifies a file token representing a file on a source server.  A file token can be obtained by setting <i>Which</i> to DEBUG_SRCFILE_SYMBOL_TOKEN in the method <a href="idebugadvanced_2f76d1fd-36fe-48c1-a131-eb4722d2af95.xml.htm"><b>GetSourceFileInformation</b></a>.<P>If the flag DEBUG_FIND_SOURCE_TOKEN_LOOKUP is set, <i>FileToken</i> must not be NULL.</P>
+</DD>
+<DT><i>FileTokenSize</i></DT>
+<DD>Specifies the size in bytes of the <i>FileToken</i> token. If <i>FileToken</i> is NULL, this parameter is ignored.</DD>
+<DT><i>FoundElement</i></DT>
+<DD>Receives the index of the element within the source path that contained the file.  If the file was found directly on the filing system (not using the source path), -1 is returned to <i>FoundElement</i>. If <i>FoundElement</i> is NULL or <i>Flags</i> contain DEBUG_SRCFILE_SYMBOL_TOKEN, this information is not returned.</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the name of the file that was found.  If the file is not on a source server, this is the name of the file in the local source cache.  If the flag DEBUG_FIND_SOURCE_FULL_PATH is set, this is the full canonical path name for the file.  Otherwise, it is the concatenation of the directory in the source path with the tail of <i>File</i> that was used to find the file.<P>If the flag DEBUG_SRCFILE_SYMBOL_TOKEN is set in <i>Flags</i>, <i>Buffer</i> receives the value of the variable named <i>File</i> associated with the file token <i>FileToken</i>.</P>
+<P>If <i>Buffer</i> is NULL, this information is not returned.</P>
+</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size in characters of the <i>Buffer</i> buffer. If <i>Buffer</i> is NULL, this parameter is ignored.</DD>
+<DT><i>FoundSize</i></DT>
+<DD>Specifies the size in characters of the name of the file.  If <i>foundSize</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful.  However, the <i>Buffer</i> buffer was too small to hold the file name or variable value, so the string was truncated to fit in the buffer.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>FindSourceFileAndToken</b> is available in <b>IDebugAdvanced2</b> and later versions.  <b>FindSourceFileAndTokenWide</b> is available in <b>IDebugAdvanved3</b> and later versions.</P>
+<H4>Comments</H4>
+<P>When the flag DEBUG_SRCFILE_SYMBOL_TOKEN is set in <i>Flags</i>, this method does not search for a file on the source path.  Instead, it looks up a variable associated with the file token provided in <i>FileToken</i>.  These variables are documented in the topic <a href="symchk_b97a7f51-f138-46a0-9ac0-e4a1b17b93da.xml.htm">Language Specification 1</a>.  For example, to retrieve the value of the variable SRCSRVCMD&#8212;the command to extract the source file from source control (also returned by the DEBUG_SRCFILE_SYMBOL_TOKEN_SOURCE_COMMAND_WIDE function of <a href="idebugadvanced_2f76d1fd-36fe-48c1-a131-eb4722d2af95.xml.htm"><b>GetSourceFileInformation</b></a>)&#8212;set <i>File</i> to <b>%SRCSRVCMD%</b>.</P>
+<P>The engine uses the following steps&#8212;in order&#8212;to search for the file:  </P><B></B><OL type="1">
+<LI>If the source path contains any source servers and the flag DEBUG_FIND_SOURCE_NO_SRCSRV is not set, the source server in the source path is searched first.<BR>The first match found is returned.</LI>
+<LI>For each directory in the source path, an attempt is made to find an overlap between the end of the directory path and the beginning of the file path.  For example, if the source path contains a directory <i>C:\a\b\c\d</i> and <i>File</i> is <i>c\d\e\foo.c</i>, the file <i>C:\a\b\<B>c\d</B>\e\foo.c</i> is a match.<BR>If the flag DEBUG_FIND_SOURCE_BEST_MATCH is set, the match with the longest overlap is returned; otherwise, the first match is returned.</LI>
+<LI>For each directory in the source path, <i>File</i> is appended to the directory.  If no match is found, this process is repeated and each time the first directory is removed from the beginning of the file path.  For example, if the source path contains a directory <i>C:\a\b</i> and <i>File</i> is <i>c\d\e\foo.c</i>, the file <i>C:\a\b\e\foo.c</i> is a match.<BR>The first match found is returned.</LI>
+<LI>The file <i>File</i> is looked up directly on the filing system.</LI>
+</OL>
+<P>For more information about source files, see <a href="engine_dg_af98271b-d06b-44e7-b0f6-928ea6579533.xml.htm">Using Source Files</a>.  For an overview of the source path and its syntax, see <a href="r06_use_gui_b85f4b8e-eb5f-4502-9a0e-92d84cd3d8f1.xml.htm">Source Path</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugsymbols_4b585dd9-8278-457d-901a-89350f6643e4.xml.htm"><b>FindSourceFile</b></a>, <a href="structures_9f59ac34-a07a-4b08-a783-367ee98a4782.xml.htm">DEBUG_FIND_SOURCE_XXX</a>, <a href="idebugadvanced_2f76d1fd-36fe-48c1-a131-eb4722d2af95.xml.htm"><b>GetSourceFileInformation</b></a>, <a href="idebugsymbols_517435f9-812c-43c2-bf82-5924de7955a2.xml.htm"><b>GetSourcePathElement</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: FindSourceFileAndToken RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

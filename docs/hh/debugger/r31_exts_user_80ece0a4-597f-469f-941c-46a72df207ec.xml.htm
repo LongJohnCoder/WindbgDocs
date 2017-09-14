@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!evlog</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !evlog"><xml><MSHelp:Keyword Index="A" Term="r31_exts_user_80ece0a4-597f-469f-941c-46a72df207ec.xml"/>
+<META NAME="MS-HKWD" CONTENT="!evlog extension">
+<META NAME="MS-HKWD" CONTENT="event log"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r31_exts_user_80ece0a4-597f-469f-941c-46a72df207ec.xml"></A>!evlog</H1>
+<P>The <b>!evlog</b> extension displays, changes, or backs up the event log.<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!evlog addsource</b> [<b>-d</b>] [<b>-s </b><i>Source</i>] [<b>-t</b> <i>Type</i>] [<b>-f</b> <i>MsgFile</i>] <BR><b>!evlog backup</b> [<b>-d</b>] [<b>-l</b> <i>EventLog</i>] [<b>-f</b> <i>BackupFile</i>] <BR><b>!evlog clear</b> [<b>-!</b>] [<b>-d</b>] [<b>-l</b> <i>EventLog</i>] [<b>-f</b> <i>BackupFile</i>] <BR><b>!evlog info</b> <BR><b>!evlog option</b> [<b>-d</b>] [<b>-!</b>] [<b>-n</b> <i>Count</i>] [ <b>-l</b> <i>EventLog</i> [ <b>-+</b> | <b>-r</b> <i>RecordBound</i> ]] [<b>-o</b> <i>Order</i>] [<b>-w</b> <i>Width</i>] <BR><b>!evlog read</b> [<b>-d</b>] [<b>-l</b> <i>EventLog</i>] [<b>-s </b><i>Source</i>] [<b>-e</b> <i>ID</i>] [<b>-c</b> <i>Category</i>] [<b>-t</b> <i>Type</i>] [<b>-n</b> <i>Count</i>] [<b>-r</b> <i>Record</i>] <BR><b>!evlog report</b> [<b>-s </b><i>Source</i>] [<b>-e</b> <i>ID</i>] [<b>-c</b> <i>Category</i>] [<b>-t</b> <i>Type</i>] <i>Message</i> <BR><b>!evlog</b> [<i>Option</i>] <b>-?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>addsource</b></DT>
+<DD>Adds an event source to the registry. By default, this only adds events from the <b>DebuggerExtensions</b> source (to support <b>!evlog report</b>).</DD>
+<DT><b>backup</b></DT>
+<DD>Makes a backup of the specified event log and writes it to a file.</DD>
+<DT><b>clear</b></DT>
+<DD>Erases the specified event log, and optionally creates a file recording its old contents.</DD>
+<DT><b>info</b></DT>
+<DD>Displays summary information about the event log.</DD>
+<DT><b>option</b></DT>
+<DD>Sets the default search options. These options will be used in future <b>!evlog read</b> commands.</DD>
+<DT><b>read</b></DT>
+<DD>Displays a list of events logged to the specified event log. Details of this display &#8212; such as the number of records displayed and the chronological order of the display &#8212; can be controlled by the <b>!evlog read</b> parameters or by a previous use of <b>!evlog option</b>.</DD>
+<DT><b>report</b></DT>
+<DD>Writes an event record to the application event log.</DD>
+<DT><b>-d</b></DT>
+<DD>Specifies that all default values should be used. The <b>-d</b> option is only required if you are omitting <i>all</i> other parameters. However, with the <b>!evlog option</b> command this option displays the existing default settings. </DD>
+<DT><b>-!</b></DT>
+<DD>With <b>!evlog option</b>, this resets all defaults. With <b>!evlog clear</b>, this prevents a backup file from being written.</DD>
+<DT><i>Source</i></DT>
+<DD>Specifies the event source. The default value is <b>DebuggerExtensions</b>.</DD>
+<DT><i>Type</i></DT>
+<DD>Specifies the success type. Possible <i>Type</i> values are 1 (Error), 2 (Warning), 4 (Information), 8 (Audit_Success), or 16 (Audit_Failure). A value of 0 represents Success. For <b>!evlog read</b> and <b>!evlog report</b>, the default is Success (0). For <b>!evlog addsource</b>, these bits can be combined, and the default is all bits (31).</DD>
+<DT><i>MsgFile</i></DT>
+<DD>Specifies the path and file name of the message file. If the path is omitted, the directory of the current <i>Uext.dll</i> is used.    </DD>
+<DT><i>EventLog</i></DT>
+<DD>For <b>!evlog read</b>, <b>!evlog backup</b>, and <b>!evlog clear</b>, <i>EventLog</i> specifies the event log from which to read. The possible values are <b>Application</b>, <b>System</b>, and <b>Security</b>. The default is <b>Application</b>.<P>For <b>!evlog option</b>, <i>EventLog</i> specifies the event log whose maximum count is to be set. The possible values are <b>All</b>, <b>Application</b>, <b>System</b>, and <b>Security</b>. The default is <b>All</b>.</P>
+</DD>
+<DT><i>BackupFile</i></DT>
+<DD>Specifies the path and file name of the backup file. The default location is the current directory. The default file name is <I><B>EventLog</B></I>_<i>backup.evt</i>, where <i>EventLog</i> is the event log used in this command. If this file already exists, the command will be terminated.</DD>
+<DT><i>Count</i></DT>
+<DD>Specifies the maximum number of records to retrieve. The default is 20.</DD>
+<DT><b>-+</b></DT>
+<DD>Specifies that the current maximum record number should be the highest record number retrieved in future <b>!evlog read</b> commands. (In other words, no records will be shown as long as the search is performed forward.)</DD>
+<DT><i>RecordBound</i></DT>
+<DD>Specifies the highest record number to retrieve in future <b>!evlog read</b> commands. If zero is specified, no bound is set &#8212; this is the default.</DD>
+<DT><i>Record</i></DT>
+<DD>If <b>-n</b> <i>Count</i> is not included, <b>-r</b> <i>Record</i> specifies the record number to retrieve. If <b>-n</b> <i>Count</i> is included, <i>Record</i> specifies the record number at which the display should begin.</DD>
+<DT><i>Order</i></DT>
+<DD>Specifies the search order, either <b>Forwards</b> or <b>Backwards</b>. The default is <b>Forwards</b>. A backward search order causes searches to start from the most recent record logged to the event log, and continue in reverse-chronological order as matching records are found.</DD>
+<DT><i>Width</i></DT>
+<DD>Specifies the data display width, in characters. This is the width displayed in the Data section. The default is 8 characters.</DD>
+<DT><i>ID</i></DT>
+<DD>Specifies the prefix to display before the event. Possible values are 0 (no prefix), 1000 (Information), 2000 (Success), 3000 (Warning), and 4000 (Error). The default is 0.</DD>
+<DT><i>Category</i></DT>
+<DD>Specifies the event category. Possible values are 0 (no category), 1 (Devices), 2 (Disk), 3 (Printers), 4 (Services), 5 (Shell), 6 (System_Event), and 7 (Network). The default is 0.</DD>
+<DT><i>Message</i></DT>
+<DD>Specifies a text message to add to the event description.</DD>
+<DT><i>Option</i></DT>
+<DD>Specifies the <b>!evlog</b> option whose help text is to be displayed.</DD>
+<DT><b>-?</b></DT>
+<DD>Displays some brief Help text for this extension or one of its options in the Debugger Command window.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Uext.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Uext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>The <b>!evlog</b> extension can only be used during live debugging.</P>
+<P></P>
+<H4>Comments</H4>
+<P>After you have added an event source to the registry with <b>!evlog addsource</b>, you can view the values with <a href="r31_exts_user_d482904d-4ea0-436c-b377-c69863fd8d7b.xml.htm"><b>!dreg</b></a>. For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!dreg hklm\system\currentcontrolset\services\eventlog\Application\&lt;source&gt;!*</b> <BR><BR></nobr></P>
+<P>The <b>!evlog option</b> command is used to set new defaults for the <b>!evlog read</b> command. This lets you avoid retyping all the parameters every time you use <b>!evlog read</b>. Setting a maximum record bound with the <b>-+</b> parameter or the <b>-r</b> <i>Records</i> parameter allows you to terminate all searches after a known record number is encountered. This can be useful if you are only interested in all records logged after a certain event.</P>
+<P>Before using <b>!evlog report</b>, you should use <b>!evlog addsource</b> to configure an event source in the registry. After this has been configured, the event viewer will recognize the various event IDs.    </P>
+<P>Here is an example of the <b>!evlog info</b> extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!evlog info -?</b><BR>--------------------------------<BR>Application Event Log:<BR>  # Records       : 4362<BR>  Oldest Record # : 1<BR>  Newest Record # : 4362<BR>  Event Log Full  : false<BR>--------------------------------<BR>System Event Log:<BR>  # Records       : 2296<BR>  Oldest Record # : 1<BR>  Newest Record # : 2296<BR>  Event Log Full  : false<BR>--------------------------------<BR>Security Event Log:<BR>  # Records       : 54544<BR>  Oldest Record # : 1<BR>  Newest Record # : 54544<BR>  Event Log Full  : false<BR>--------------------------------<BR><BR>0:000&gt; <b>!evlog option -n 4</b><BR>Default EvLog Option Settings:<BR>--------------------------------<BR>Max Records Returned: 4<BR>Search Order:         Backwards<BR>Data Display Width:   8<BR>--------------------------------<BR>Bounding Record Numbers:<BR>  Application Event Log: 0<BR>  System Event Log:      0<BR>  Security Event Log:    0<BR>--------------------------------<BR><BR>0:000&gt; <b>!evlog read -l application</b><BR>-------------- 01 --------------<BR>Record #: 4364<BR><BR>Event Type:      Error (1)<BR>Event Source:    Userenv<BR>Event Category:  None (0)<BR>Event ID:        1000 (0xC00003E8)<BR>Date:            06/06/2002<BR>Time:            18:03:17<BR>Description:     (1 strings)<BR>The Group Policy client-side extension Security was passed flags (17) and returned a failure status code of (87).<BR><BR>-------------- 02 --------------<BR>Record #: 4363<BR><BR>Event Type:      Warning (2)<BR>Event Source:    SceCli<BR>Event Category:  None (0)<BR>Event ID:        1202 (0x800004B2)<BR>Date:            06/06/2002<BR>Time:            18:03:17<BR>Description:     (1 strings)<BR>0x57 : The parameter is incorrect.<BR>Please look for more details in TroubleShooting section in Security Help.<BR><BR>-------------- 03 --------------<BR>Record #: 4362<BR><BR>Event Type:      Error (1)<BR>Event Source:    Userenv<BR>Event Category:  None (0)<BR>Event ID:        1000 (0xC00003E8)<BR>Date:            06/06/2002<BR>Time:            16:04:08<BR>Description:     (1 strings)<BR>The Group Policy client-side extension Security was passed flags (17) and returned a failure status code of (87).<BR><BR>-------------- 04 --------------<BR>Record #: 4361<BR><BR>Event Type:      Warning (2)<BR>Event Source:    SceCli<BR>Event Category:  None (0)<BR>Event ID:        1202 (0x800004B2)<BR>Date:            06/06/2002<BR>Time:            16:04:08<BR>Description:     (1 strings)<BR>0x57 : The parameter is incorrect.<BR>Please look for more details in TroubleShooting section in Security Help.<BR>WARNING: Max record count (4) exceeded, increase record count to view more<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !evlog RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Installing from a Script</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Installing from a Script"><xml><MSHelp:Keyword Index="A" Term="r02_setup_1_32fd3db3-819c-465d-9049-93eacc196a06.xml"/>
+<META NAME="MS-HKWD" CONTENT="installation, from a script">
+<META NAME="MS-HKWD" CONTENT="script installation of debuggers"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r02_setup_1_32fd3db3-819c-465d-9049-93eacc196a06.xml"></A>Installing from a Script</H1>
+<P>To install Debugging Tools for Windows from a script or a command-line prompt, you must first obtain the debugger installation file. You can find this package from any of the installation <a href="r02_setup_1_06851ef4-eab5-4780-8b1f-005f51a67541.xml.htm">sources</a> referenced in this document. Next, use the MsiExec application to install the debugger package. The general format for this instruction is: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>msiexec /i dbg_</b><i>Architecture_Version</i><b>.msi INSTDIR=</b><i>TargetDirectory</i><BR></nobr></P>
+<P><i>Architecture</i> specifies the target architecture for the debugger tools - <b>x86</b> (for the 32-bit package), <b>amd64</b> (for the x64 package), or <b>ia64</b> (for the Intel Itanium package). <i>Version</i> specifies the version of the package being installed. Typically, <i>Version</i> only appears with files that are downloaded from the Web site. Package files found on the CDs usually do not contain a <i>Version</i> number. <i>TargetDirectory</i> is the parent directory for the package installation. If <i>TargetDirectory</i> contains embedded spaces in the value, then enclose the directory path in quotation marks. If <i>TargetDirectory</i> contains no embedded spaces, the quotation marks are optional. For example, if your debugger package file is <i>dbg_x86_6.10.3.2.233.msi</i> and you want to install the debuggers under the directory <i>c:\DbgPath</i>, the command would be as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>msiexec /i dbg_x86_6.10.3.233.msi INSTDIR=c:\DbgPath</b><BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Installing from a Script RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

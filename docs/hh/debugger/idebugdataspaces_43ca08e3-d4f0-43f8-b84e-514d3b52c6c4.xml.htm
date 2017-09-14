@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ReadMultiByteStringVirtual</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ReadMultiByteStringVirtual"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="ReadMultiByteStringVirtual"/>
+<MSHelp:Keyword Index="A" Term="IDebugDataSpaces_43ca08e3-d4f0-43f8-b84e-514d3b52c6c4.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugDataSpaces::ReadMultiByteStringVirtual method">
+<META NAME="MS-HKWD" CONTENT="ReadMultiByteStringVirtual (IDebugDataSpaces) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugDataSpaces_43ca08e3-d4f0-43f8-b84e-514d3b52c6c4.xml"></A>ReadMultiByteStringVirtual</H1>
+<P><P>The <b>ReadMultiByteStringVirtual</b> method reads a null-terminated, multibyte string from the target.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugDataSpaces4::ReadMultiByteStringVirtual(</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN ULONG  </b><i>MaxBytes</i><b>,</b><BR><b>    OUT OPTIONAL PSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>StringBytes</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Offset</i></DT>
+<DD>Specifies the location of the string in the process's virtual address space.</DD>
+<DT><i>MaxBytes</i></DT>
+<DD>Specifies the maximum number of bytes to read from the target.</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the string from the target.  If <i>Buffer</i> is NULL, this information is not returned.<P class="note"><b>Note</b>  The remainder of the buffer, following the returned string, might be overwritten by this method.</P>
+</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size, in characters, of the <i>Buffer</i> buffer.</DD>
+<DT><i>StringBytes</i></DT>
+<DD>Receives the size, in bytes, of the string.  If <i>StringBytes</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful.  However <i>Buffer</i> was not large enough to hold the string and the string was truncated to fit in <i>Buffer</i>.  The truncated string is null-terminated if <i>Buffer</i> has space for at least one character.</DD>
+<DT>E_INVALIDARG</DT>
+<DD>A null-terminator was not found after reading <i>MaxBytes</i> from the target.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>ReadMultiByteStringVirtual</b> is available in <b>IDebugDataSpaces4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>The engine will read up to <i>MaxBytes</i> from the target looking for a null-terminator.  If the string has more than <i>BufferSize</i> characters, the string will be truncated to fit in <i>Buffer</i>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugdataspaces_c5a99b4a-a468-459e-acc1-f3a4f224f645.xml.htm"><b>ReadMultiByteStringVirtualWide</b></a>, <a href="idebugdataspaces_423e591f-3840-4c6c-94e0-67b06a435652.xml.htm"><b>ReadUnicodeStringVirtual</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ReadMultiByteStringVirtual RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

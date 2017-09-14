@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Choosing the Best Tool</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Choosing the Best Tool"><xml><MSHelp:Keyword Index="A" Term="r10_dump_files_59201637-1a08-4d6d-9346-06de2d09e014.xml"/>
+<META NAME="MS-HKWD" CONTENT="dump file, user-mode creation tools"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r10_dump_files_59201637-1a08-4d6d-9346-06de2d09e014.xml"></A>Choosing the Best Tool</H1>
+<P>There are five different tools that can create user-mode dump files. In most cases, ADPlus is the best tool to use.</P>
+<P>The following table shows the features of each tool.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Feature</TH>
+<TH Width=""><a href="adplus_72325de3-b07d-49a6-82b2-0ba6bb376416.xml.htm">ADPlus</a> </TH>
+<TH Width=""><a href="drwatson_92d60a12-6577-4cd5-a02f-a1ea8204719a.xml.htm">Dr. Watson</a> </TH>
+<TH Width=""><a href="r10_dump_files_ba341fb1-1c3a-4800-86dc-44e3eae60a85.xml.htm">CDB<BR>and<BR>WinDbg</a> </TH>
+<TH Width=""><a href="r10_dump_files_bbade5fe-7a72-4267-84e3-6c7c5389cd5c.xml.htm">UserDump</a> </TH>
+</TR>
+<TR valign="top">
+<TD Width="">Creating a dump file when an application crashes  (postmortem debugging)</TD>
+<TD Width="">Yes</TD>
+<TD Width="">Yes</TD>
+<TD Width="">Yes</TD>
+<TD Width="">Yes</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Creating a dump file when an application "hangs" (stops responding but does not actually crash)</TD>
+<TD Width="">Yes</TD>
+<TD Width="">No</TD>
+<TD Width="">Yes</TD>
+<TD Width="">Yes</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Creating a dump file when an application encounters an exception</TD>
+<TD Width="">Yes</TD>
+<TD Width="">Yes</TD>
+<TD Width="">Yes</TD>
+<TD Width="">Yes    </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Creating a dump file while an application is running normally</TD>
+<TD Width="">No</TD>
+<TD Width="">No</TD>
+<TD Width="">Yes</TD>
+<TD Width="">No    </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Creating a dump file from an application that fails during startup</TD>
+<TD Width="">No</TD>
+<TD Width="">No    </TD>
+<TD Width="">Yes</TD>
+<TD Width="">Yes</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Shrinking an existing dump file</TD>
+<TD Width="">No</TD>
+<TD Width="">No</TD>
+<TD Width="">Yes</TD>
+<TD Width="">No</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Choosing the Best Tool RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

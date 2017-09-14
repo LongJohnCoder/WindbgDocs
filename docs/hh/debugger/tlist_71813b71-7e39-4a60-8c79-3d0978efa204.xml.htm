@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>TList Commands</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, TList Commands"><xml><MSHelp:Keyword Index="A" Term="TList_71813b71-7e39-4a60-8c79-3d0978efa204.xml"/>
+<META NAME="MS-HKWD" CONTENT="TList, TList Commands"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="TList_71813b71-7e39-4a60-8c79-3d0978efa204.xml"></A>TList Commands</H1>
+<P>The syntax of the TList command is as follows:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>tlist</b> [<b>/p</b> <i>ProcessName</i> | <i>PID</i> | <i>Pattern</i> | <b>/t</b> | <b>/c</b> | <b>/e</b> | <b>/k</b> | <b>/m </b>[<i>Module</i>] | <b>/s</b> | <b>/v</b><BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>tlist</b></DT>
+<DD>Without additional parameters, TList displays all running processes, their process identifiers (PIDs), and the title of the window in which they are running, if any.</DD>
+<DT><b>/p</b> <i>ProcessName</i></DT>
+<DD>Displays the process identifier (PID) of the specified process. <P><i>ProcessName</i> is the name of the process (with or without file name extension), not a pattern. </P>
+<P>If the value of <i>ProcessName</i> does not match any running process, TList displays -1. If it matches more than one process name, TList displays only the PID of the first matching process. </P>
+</DD>
+<DT><i>PID</i></DT>
+<DD>Displays detailed information about the process specified by the PID. For information about the display, see the <b>Comments</b> section below. To find a process ID, type <b>tlist</b> without additional parameter.</DD>
+<DT><i>Pattern</i></DT>
+<DD>Displays detailed information about all processes whose names or window titles match the specified pattern. Pattern can be a complete name or a regular expression.</DD>
+<DT><b>/t</b></DT>
+<DD>Displays a task tree in which each process appears as a child of the process that created it.</DD>
+<DT><b>/c</b></DT>
+<DD>Displays the command line that started each process.</DD>
+<DT><b>/e</b></DT>
+<DD>Displays the session identifier for each process.</DD>
+<DT><b>/k</b></DT>
+<DD>Displays the COM components active in each process. </DD>
+<DT><b>/m</b> <i>Module</i></DT>
+<DD>Lists tasks in which the specified DLL or executable module is loaded. Module can be a complete module name or a module name pattern.</DD>
+<DT><b>/s</b></DT>
+<DD>Displays the services that are active in each process.</DD>
+<DT><b>/v</b></DT>
+<DD>Displays details of running processes including the process ID, session ID, window title, command line, and the services running in the process.<P></P>
+</DD>
+</DL>
+<H4>Comments</H4>
+<P>In its detailed display of a process (<b>tlist</b> <i>PID</i> or <b>tlist</b> <i>Pattern</i>), TList displays the following information.</P><B></B><UL type="disc">
+<LI>Process ID, executable name, friendly name of the program.</LI>
+<LI>Current working directory (CWD).</LI>
+<LI>The command line that started the process (CmdLine).</LI>
+<LI>Current virtual address space values.</LI>
+<LI>Number of threads.</LI>
+<LI>A list of threads running in the process. For each thread, TList displays the thread ID (TID), the function that the thread is running, the address of the entry point, the address of the last reported error (if any), and the thread state.</LI>
+<LI>A list of the modules loaded for the process. For each module, TList displays the version number, attributes, virtual address of the module, and the module name. </LI>
+</UL>
+<P></P>
+<P>When using the <b>/e</b> parameter, valid session identifiers appear in the process list only under the following conditions. Otherwise, the session identifier is zero (0). </P><B></B><UL type="disc">
+<LI>On Windows 2000 and Windows Server 2003, at least one user must be connected to a session other than the console session.</LI>
+<LI>On Windows XP, Fast User Switching must be enabled and more than one user must be connected to the non-console session.</LI>
+<LI>On Windows Vista, where all processes are associated with two Terminal Services sessions by default, at least one user must be connected to the non-console session.</LI>
+</UL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: TList Commands RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

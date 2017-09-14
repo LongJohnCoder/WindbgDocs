@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>HTTP Symbol Stores</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, HTTP Symbol Stores"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_a0af9a12-53b2-477f-a7aa-57a27f442437.xml"/>
+<META NAME="MS-HKWD" CONTENT="HTTP symbol stores"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_a0af9a12-53b2-477f-a7aa-57a27f442437.xml"></A>HTTP Symbol Stores</H1>
+<P>In order to make a symbol store accessible over the Internet, you must configure both the directories containing the symbol files and Internet Information Services (IIS).</P>
+<H4>Configuring the Directories</H4>
+<P>Begin by selecting the directory you will use as your symbol store.  In our  examples, we call this directory <i>c:\symstore</i> and the name of the server on the network is  <i>\SymMachineName.</i>  Permissions must be set so that users can access the site and you must add the security groups that must access the symbol content over the network.  The amount of security to enable varies from environment to environment.  For some installations, this group is &#8220;Everyone&#8221;.</P>
+<P></P><B>To set up the permissions for the directory</B><OL type="1">
+<LI>Open Windows Explorer.</LI>
+<LI>Expand <b>My Computer</b>.</LI>
+<LI>Expand the <b>C</b> drive.</LI>
+<LI>Right-click <i>c:\symstore</i> and choose <b>Sharing and Security</b>.</LI>
+<LI>Check <b>Share this folder</b>.</LI>
+<LI>Click <b>Permissions</b>.</LI>
+<LI>To ensure that the desired security groups have read access, add them under <b>Group or user names </b>and check the <b>Allow</b> box in the <b>Read</b> row.</LI>
+<LI>To exit <b>Permissions</b>, click <b>OK</b>.</LI>
+<LI>To exit <b>Symstore Properties</b>, click <b>OK</b>.</LI>
+</OL>
+<P></P>
+<P>The symbol store can now be used for debugging by another computer with a symbol path of <i>srv*\\SymMachineName\symstore</i>, or it can be further configured for use with authentication or with <a href="r09_symbols_cec36ec3-cb6f-4e9b-bc90-341a12f18995.xml.htm">SymProxy</a>. </P>
+<P>For details on how to populate your symbol store, see <a href="r09_symbols_d033164e-0b4c-4e3b-b534-b39437bc4d3b.xml.htm">SymStore</a>. </P>
+<H4>Configuring IIS</H4>
+<P>Internet Information Services (IIS) must be configured to serve the symbols by creating a virtual directory and configuring MIME types. After this has been done, the authentication method may be chosen.</P><B>To create a virtual directory</B><OL type="1">
+<LI>From <b>Administrative Tools</b> open <b>Internet Information Services (IIS) Manager</b>.</LI>
+<LI>Expand <b>Web Sites</b>.</LI>
+<LI>Right-click <b>Default Web Site</b> or the name of the site being used.</LI>
+<LI>Select <b>New Virtual Director...</b>.</LI>
+<LI>Click <b>Next</b> on the <b>Welcome</b> screen.</LI>
+<LI>Type <b>Symbols</b> for <b>Alias</b> and click <b>Next</b>.</LI>
+<LI>For the <b>Path</b> enter <i>c:\SymStore</i> and click <b>Next</b>.</LI>
+<LI>Uncheck <b>Run scripts</b> (recommended).</LI>
+<LI>Check <b>Browse</b> (optional).</LI>
+<LI>To complete the virtual directory wizard, click <b>Next</b> and <b>Finish.</b></LI>
+</OL>
+<P></P><B>To configure MIME types</B><OL type="1">
+<LI>Right-click the <b>Symbols</b> virtual directory and choose <b>Properties</b>.</LI>
+<LI>Select <b>HTTP Headers</b>.</LI>
+<LI>Click <b>MIME Types</b>.</LI>
+<LI>Click <b>New</b>.</LI>
+<LI>For <b>Extension</b>, type <b>*</b>.</LI>
+<LI>For <b>MIME type</b>, type <b>application/octet-stream</b>.</LI>
+<LI>To exit the <b>MIME Types</b> dialog box, click <b>OK</b>.</LI>
+<LI>To exit <b>Symbols Properties</b>, click <b>OK</b>.</LI>
+</OL>
+<P></P>
+<P>At this point, IIS is now ready to serve the files in your symbol store using anonymous authentication.  It is also possible to configure IIS to use Integrated Windows Authentication (IWA) so that clients such as WinDbg can automatically authenticate against IIS without prompting the end-user for credetials.  However, SymSrv does not currently support Kerberos authentication when connecting to IIS, so Kerberos must be removed as an option.</P><B>To configure the authentication method</B><OL type="1">
+<LI>From <b>Administrative Tools</b>, open <b>Internet Information Services (IIS) Manager</b>.</LI>
+<LI>Right-click the <b>Symbols</b> virtual directory and select <b>Properties</b>.</LI>
+<LI>Click the <b>Directory Security</b> tab.</LI>
+<LI>Under <b>Authentication and access control</b> click <b>Edit</b>.</LI>
+<LI>Verify that only <b>Integrated Windows Authentication</b> is checked.</LI>
+<LI>Verify that <b>Enable anonymous acceess</b> is unchecked.</LI>
+<LI>To exit the <b>Authentication Methods</b> dialog box, click <b>OK</b>.</LI>
+<LI>To exit <b>Symbols Properties</b>, click <b>OK</b>.</LI>
+</OL>
+<P></P>
+<P>To remove the option for Kerberos authentication, the Web site identifier is needed.  If you are not using the default Web site (which is site "1"), you must determine the correct Web site identifier by highlighting the <b>Web Sites</b> folder and looking at the identifier listed in the right-hand panel for the appropriate Web site.  Replace "1" in these directions with the correct identifier number.</P><B>To force NTLM authentication, thus removing Kerberos authentication</B><OL type="1">
+<LI>Open a Command Prompt window</LI>
+<LI>Navigate to the directory <i>c:\inetpub\AdminScripts.</i></LI>
+<LI>Type the following, including the quotation marks:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>cscript adsutil.vbs set W3SVC/1/root/Symbols/NtAuthenticationProviders "NTLM"<BR></nobr></P>
+</LI>
+</OL>
+<P></P>
+<P>IIS is now ready to serve files from the symbol store.  </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: HTTP Symbol Stores RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

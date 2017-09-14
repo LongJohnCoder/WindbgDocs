@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Ioctl</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Ioctl"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="Ioctl"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml"/>
+<META NAME="MS-HKWD" CONTENT="Ioctl function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml"></A>Ioctl</H1>
+<P><P>The <b>Ioctl</b> function performs a variety of different operations. Much of its functionality mirrors the functionality of other functions in <i>wdbgexts.h</i>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>ULONG </b><BR><b>  Ioctl (</b><BR><b>    USHORT</b> <i>IoctlType</i><b>,</b><BR><b>    PVOID</b> <i>lpvData</i><b>,</b><BR>    <b>ULONG</b> <i>cbSizeOfContext</i><BR><i>    </i><b>);</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>IoctlType</i></DT>
+<DD>Specifies which <b>Ioctl</b> operation to perform. For a list of possible <i>IoctlType</i> values, see the <b>Comments</b> section. </DD>
+<DT><i>lpvData</i></DT>
+<DD>Points to the address of a data structure. The type of structure that is required depends on the value of <i>IoctlType</i>.</DD>
+<DT><i>cbSizeOfContext</i></DT>
+<DD>Specifies the size of the structure that <i>lpvData</i> points to.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>The meaning of return value depends on <i>IoctlType</i>.  See the page for the corresponding <b>Ioctl</b> operation for the meaning of the return value.  </P>
+<H4>Comments</H4>
+<P>The <b>Ioctl</b> function is the entry point for many of the functionalities supplied for WdbgExts extensions. Many of the other functions in <i>wdbgexts.h</i> are simply wrappers for calls to <b>Ioctl</b>.</P>
+<P>The following table lists the possible <i>IoctlType</i> values.  If the <i>IoctlType</i> corresponds to another function, that function is provided; otherwise, a link to the page describing the <b>Ioctl</b> operation is provided.</P><B></B><table>
+<TR valign="top">
+<TH Width=""><i>IoctlType</i> constant</TH>
+<TH Width="">Equivalent function</TH>
+</TR>
+<TR valign="top">
+<TD Width="">IG_KD_CONTEXT</TD>
+<TD Width=""><a href="wdbgexts_ref_951ca10a-3a73-433c-bd95-f054967f0df6.xml.htm"><b>GetKdContext</b></a><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_READ_CONTROL_SPACE</TD>
+<TD Width=""><a href="wdbgexts_ref_8337344a-4a97-4f74-9be4-8fdd771d8bbf.xml.htm"><b>ReadControlSpace</b></a><b> </b><BR><BR><b>ReadControlSpace64 </b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_WRITE_CONTROL_SPACE</TD>
+<TD Width=""><b>WriteControlSpace </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_READ_IO_SPACE</TD>
+<TD Width=""><a href="wdbgexts_ref_e34c76a6-de5d-4347-90a7-959d5392680e.xml.htm"><b>ReadIoSpace</b></a><b> </b><BR><BR><b>ReadIoSpace64 </b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_WRITE_IO_SPACE</TD>
+<TD Width=""><a href="wdbgexts_ref_1aa4429d-9d99-4c7c-8870-7a75ccaad6e5.xml.htm"><b>WriteIoSpace</b></a><b> </b><BR><BR><b>WriteIoSpace64 </b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_READ_PHYSICAL</TD>
+<TD Width=""><a href="wdbgexts_ref_4eaa6edb-2297-4454-b4aa-ea69aa5a073c.xml.htm"><b>ReadPhysical</b></a><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_WRITE_PHYSICAL</TD>
+<TD Width=""><a href="wdbgexts_ref_4c6663a7-4fbf-4d4a-9c86-cfa51218a470.xml.htm"><b>WritePhysical</b></a><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_READ_IO_SPACE_EX</TD>
+<TD Width=""><a href="wdbgexts_ref_96fa3635-35d1-4d58-835a-96754480170a.xml.htm"><b>ReadIoSpaceEx</b></a><b> </b><BR><BR><b>ReadIoSpaceEx64 </b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_WRITE_IO_SPACE_EX</TD>
+<TD Width=""><a href="wdbgexts_ref_53bdc758-08b1-4103-9732-5b7b72c80fdd.xml.htm"><b>WriteIoSpaceEx</b></a><b> </b><BR><BR><b>WriteIoSpaceEx64 </b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_SET_THREAD</TD>
+<TD Width=""><a href="wdbgexts_ref_62cb59e2-5a16-4bee-936c-6eeaa5126fbc.xml.htm"><b>SetThreadForOperation</b></a><b> </b><BR><BR><b>SetThreadForOperation64 </b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_READ_MSR</TD>
+<TD Width=""><a href="wdbgexts_ref_37577d05-a60b-4064-850a-d73616d93f37.xml.htm"><b>ReadMsr</b></a><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_WRITE_MSR</TD>
+<TD Width=""><a href="wdbgexts_ref_faeb78e1-24a2-4210-94f9-4e468ba69181.xml.htm"><b>WriteMsr</b></a><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_DEBUGGER_DATA</TD>
+<TD Width=""><a href="wdbgexts_ref_a9b54b49-d8ac-4bee-a837-3986a250403a.xml.htm"><b>GetDebuggerData</b></a><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="wdbgexts_ref_33e7f185-3831-439b-9e92-8d942627f66b.xml.htm">IG_GET_KERNEL_VERSION</a></TD>
+<TD Width=""><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_RELOAD_SYMBOLS</TD>
+<TD Width=""><b>ReloadSymbols </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_SET_SYMPATH</TD>
+<TD Width=""><a href="wdbgexts_ref_66364d7b-fd3c-424a-a04d-b7bf24178039.xml.htm"><b>GetSetSympath</b></a><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_EXCEPTION_RECORD</TD>
+<TD Width=""><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_IS_PTR64</TD>
+<TD Width=""><b>IsPtr64 </b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="wdbgexts_ref_090ca26a-5955-40c6-82c3-310a02a9d64d.xml.htm">IG_GET_BUS_DATA</a></TD>
+<TD Width=""><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="wdbgexts_ref_090ca26a-5955-40c6-82c3-310a02a9d64d.xml.htm">IG_SET_BUS_DATA</a></TD>
+<TD Width=""><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="wdbgexts_ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml.htm">IG_DUMP_SYMBOL_INFO</a></TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="wdbgexts_ref_958f146b-889a-4a89-9e02-a1bab5f0db54.xml.htm">IG_LOWMEM_CHECK</a></TD>
+<TD Width=""><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_SEARCH_MEMORY</TD>
+<TD Width=""><b>SearchMemory </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_CURRENT_THREAD</TD>
+<TD Width=""><b>GetCurrentThreadAddr </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_CURRENT_PROCESS</TD>
+<TD Width=""><b>GetCurrentProcessAddr </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_TYPE_SIZE</TD>
+<TD Width=""><b>GetTypeSize </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_CURRENT_PROCESS_HANDLE</TD>
+<TD Width=""><b>GetCurrentProcessHandle </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_INPUT_LINE</TD>
+<TD Width=""><b>GetInputLine </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_EXPRESSION_EX</TD>
+<TD Width=""><b>GetExpressionEx </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_TRANSLATE_VIRTUAL_TO_PHYSICAL</TD>
+<TD Width=""><b>TranslateVirtualToPhysical </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_CACHE_SIZE</TD>
+<TD Width=""><b>GetDebuggerCacheSize </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_READ_PHYSICAL_WITH_FLAGS</TD>
+<TD Width=""><b>ReadPhysicalWithFlags </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_WRITE_PHYSICAL_WITH_FLAGS</TD>
+<TD Width=""><b>WritePhysicalWithFlags </b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="wdbgexts_ref_ce742570-c023-4e34-a8e2-aef530e61c04.xml.htm">IG_POINTER_SEARCH_PHYSICAL</a></TD>
+<TD Width=""><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="wdbgexts_ref_dfcc01ec-d4f4-4eba-adb5-d729f951f502.xml.htm">IG_GET_THREAD_OS_INFO</a></TD>
+<TD Width=""><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_CLR_DATA_INTERFACE</TD>
+<TD Width=""><b> </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_TEB_ADDRESS</TD>
+<TD Width=""><b>GetTebAddress </b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">IG_GET_PEB_ADDRESS</TD>
+<TD Width=""><b>GetPebAddress </b></TD>
+</TR>
+</table>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this function, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Ioctl RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

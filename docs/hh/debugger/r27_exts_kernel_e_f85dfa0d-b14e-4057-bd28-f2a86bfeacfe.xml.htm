@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!irql</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !irql"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_f85dfa0d-b14e-4057-bd28-f2a86bfeacfe.xml"/>
+<META NAME="MS-HKWD" CONTENT="!irql extension">
+<META NAME="MS-HKWD" CONTENT="Interrupt Request Level (IRQL), !irql extension">
+<META NAME="MS-HKWD" CONTENT="IRQL (Interrupt Request Level)">
+<META NAME="MS-HKWD" CONTENT="IRQL (Interrupt Request Level), [See &quot;Interrupt Request Level (IRQL)&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_f85dfa0d-b14e-4057-bd28-f2a86bfeacfe.xml"></A>!irql</H1>
+<P><P></P>
+<P>The <b>!irql</b> extension displays the interrupt request level (IRQL) of a processor on the target computer before the debugger break.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!irql</b> [<i>Processor</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Processor</i></DT>
+<DD>Specifies the a processor. Enter the processor number. If this parameter is omitted, the debugger displays the IRQL of the current processor.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P>The <b>!irql</b> extension is only available in Windows Server 2003 and later versions of Windows.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows Server 2003 and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>When the target computer breaks into the debugger, the IRQL changes, but the IRQL that was effective just before the debugger break is saved. The <b>!irql</b> extension displays the saved IRQL.</P>
+<P>Similarly, when a bug check occurs and a crash dump file is created, the IRQL saved in the crash dump file is the one immediately prior to the bug check, not the IRQL at which the <b>KeBugCheckEx</b> routine was executed.</P>
+<P>In both cases, the current IRQL is raised to DISPATCH_LEVEL, except on x86 architectures. Thus, if more than one such event occurs, the IRQL displayed will also be DISPATCH_LEVEL, making it useless for debugging purposes.</P>
+<P>The <a href="r28_exts_kernel_n_4ab42b0e-acdd-42f1-9594-e7db30d8276b.xml.htm"><b>!pcr</b></a> extension displays the current IRQL on all versions of Windows, but the current IRQL is usually not useful. The IRQL that existed just before the bug check or debugger connection is more interesting, and this is displayed only with <b>!irql</b>.</P>
+<P>If you supply an invalid processor number, or there has been kernel corruption, the debugger displays a message "Cannot get PRCB address".</P>
+<P>Here is an example of the output from this extension from a dual-processor x86 computer:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!irql 0</b><BR>Debugger saved IRQL for processor 0x0 -- 28 (CLOCK2_LEVEL)<BR><BR>kd&gt; <b>!irql 1</b><BR>Debugger saved IRQL for processor 0x1 -- 0 (LOW_LEVEL)<BR><BR></nobr></P>
+<P>If the debugger is in verbose mode, a description of the IRQL itself is included. Here is an example from an Itanium processor:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!irql</b><BR>Debugger saved IRQL for processor 0x0 -- 12 (PC_LEVEL) [Performance counter level]<BR><BR></nobr></P>
+<P>The meaning of the IRQL number often depends on the processor. Here is an example from an x64 processor. Note that the IRQL number is the same as in the previous example, but the IRQL meaning is different:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!irql</b><BR>Debugger saved IRQL for processor 0x0 -- 12 (SYNCH_LEVEL) [Synchronization level]<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about IRQLs, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !irql RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

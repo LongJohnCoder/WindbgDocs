@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DBG_DUMP_XXX</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DBG_DUMP_XXX"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DBG_DUMP_XXX"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_ab6ebd65-40be-46bd-9ecb-4c66f0e42746.xml"/>
+<META NAME="MS-HKWD" CONTENT="DBG_DUMP_XXX bit flags"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_ab6ebd65-40be-46bd-9ecb-4c66f0e42746.xml"></A>DBG_DUMP_<i>XXX</i></H1>
+<P>The DBG_DUMP_<i>XXX</i> bit flags are used by the <b>Options</b> member of the SYM_DUMP_PARAM structure to control the behavior of the <a href="wdbgexts_ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml.htm">IG_DUMP_SYMBOL_INFO</a> <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation.</P>
+<P>The following flags can be present.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_NO_INDENT</TD>
+<TD Width="">Members are not indented in the output.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_NO_OFFSET</TD>
+<TD Width="">Offsets are not printed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_VERBOSE</TD>
+<TD Width="">Verbose output.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_CALL_FOR_EACH</TD>
+<TD Width="">A callback function is called for each member.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_LIST</TD>
+<TD Width="">The symbol is an entry in a linked list and the IG_DUMP_SYMBOL_INFO <b>Ioctl</b> operation will iterate over this list.  The description of the member that points to the next item in the list is specified by the <b>linkList</b> member of the SYM_DUMP_PARAM structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_NO_PRINT</TD>
+<TD Width="">Nothing is printed (only callback functions are called and data copies are performed).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_GET_SIZE_ONLY</TD>
+<TD Width="">The <b>Ioctl</b> operation returns the size of the symbol only; it will not print member information or call callback functions.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_COMPACT_OUT</TD>
+<TD Width="">Newlines are not printed after each member.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_ARRAY</TD>
+<TD Width="">The symbol is an array.  The number of elements in the array is specified by the member <b>listLink-&gt;size </b>of the SYM_DUMP_PARAM structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_ADDRESS_OF_FIELD</TD>
+<TD Width="">The value of <b>addr</b> is actually the address of the member <b>listLink-&gt;fName</b> of the SYM_DUMP_PARAM structure and not the beginning of the symbol.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_ADDRESS_AT_END</TD>
+<TD Width="">The value of <b>addr</b> is actually the address at the end of the symbol and not the beginning of the symbol.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_COPY_TYPE_DATA</TD>
+<TD Width="">The value of the symbol is copied into the member <b>pBuffer</b>.  This can only be used for primitive types&#8212;for example, ULONG or PVOID&#8212;it cannot be used with structures.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_READ_PHYSICAL</TD>
+<TD Width="">The symbol's value will be read directly from the target's physical memory.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_FUNCTION_FORMAT</TD>
+<TD Width="">When formatting a symbol that has a function type, the function format will be used, for example,  <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><i>function</i>(<i>arg1</i>, <i>arg2</i>, ...)</span></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBG_DUMP_BLOCK_RECURSE</TD>
+<TD Width="">Recurse through nested structures; but do not follow pointers.</TD>
+</TR>
+</table>
+<P></P>
+<P>In addition, the result of the macro DBG_DUMP_RECUR_LEVEL(<i>Level</i>) can be added to the bit-set to specify how deep into structures to recurse.  <i>Level</i> can be a number between 0 and 15.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that uses these constants, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml.htm">IG_DUMP_SYMBOL_INFO</a>, <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DBG_DUMP_XXX RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!cpuid</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !cpuid"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_aeaee2fd-1952-43e0-9983-f4f5e324cc88.xml"/>
+<META NAME="MS-HKWD" CONTENT="!cpuid extension">
+<META NAME="MS-HKWD" CONTENT="multiprocessor computer, !cpuid extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_aeaee2fd-1952-43e0-9983-f4f5e324cc88.xml"></A>!cpuid</H1>
+<P><P>The <b>!cpuid</b> extension displays information about the processors on the system.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!cpuid</b> [<i>Processor</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Processor</i></DT>
+<DD>Specifies the processor whose information will be displayed. If you omit this parameter, all processors are displayed.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!cpuid</b> extension works during live user-mode or kernel-mode debugging, local kernel debugging, and debugging of dump files. However, user-mode minidump files contain only information about the active processor.   </P>
+<P>If you are debugging in user mode, the <b>!cpuid</b> extension describes the computer that the target application is running on. In kernel mode, it describes the target computer.</P>
+<P>The following example shows this extension.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!cpuid</b> <BR>CP  F/M/S  Manufacturer        MHz <BR> 0  6,5,1  GenuineIntel        700 <BR> 1  8,1,5  AuthenticAMD        700 <BR></nobr></P>
+<P>The <b>CP</b> column gives the processor number. (These numbers are always sequential, starting with zero). The <b>Manufacturer</b> column specifies the processor manufacturer. The <b>MHz</b> column specifies the processor speed, if it is available.</P>
+<P>For an x86-based processor or an x64-based processor, the <b>F</b> column displays the processor family number, the <b>M</b> column displays the processor model number, and the <b>S</b> column displays the stepping size.</P>
+<P>For an Itanium-based processor, the <b>M</b> column displays the processor model number, the <b>R</b> column displays the processor revision number, the <b>F</b> column displays the processor family number, and the <b>A</b> column displays the architecture revision number.</P>
+<H4>Additional Information</H4>
+<P>For more information about how to debug multiprocessor computers, see <a href="r13_syntax_b7eb5ea3-8cf4-420d-9461-94d4e20f38d5.xml.htm">Multiprocessor Syntax</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !cpuid RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

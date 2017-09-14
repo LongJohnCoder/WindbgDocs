@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!tp</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !tp"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_34e32d90-4794-4b65-a530-5af973be1710.xml"/>
+<META NAME="MS-HKWD" CONTENT="!tp extension">
+<META NAME="MS-HKWD" CONTENT="thread pool"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_34e32d90-4794-4b65-a530-5af973be1710.xml"></A>!tp</H1>
+<P><P>The <b>!tp</b> extension displays thread pool information.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!tp pool</b> <i>Address</i> [<i>Flags</i>] <BR><b>!tp tqueue</b> <i>Address</i> [<i>Flags</i>] <BR><b>!tp </b><i>ItemType Address</i> [<i>Flags</i>] <BR><b>!tp </b><i>ThreadType </i>[<i>Address</i>] <BR><b>!tp stats</b> <i>Address</i> [<i>Flags</i>] <BR><b>!tp wfac</b> <i>Address</i> <BR><b>!tp wqueue</b> <i>Address</i> <i>Priority Node</i> <BR><b>!tp -?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>pool</b> <i>Address</i></DT>
+<DD>Causes the entire thread pool at <i>Address </i>to be displayed.  If <i>Address</i> is 0, then all thread pools will be displayed. </DD>
+<DT><b>tqueue</b> <i>Address</i></DT>
+<DD>Causes the active timer queue at <i>Address</i> to be displayed. </DD>
+<DT><i>ItemType</i> <i>Address</i></DT>
+<DD>Causes the specified thread pool item to be displayed.  <i>Address</i> specifies the address of the item.  <i>ItemType</i> specifies the type of the item; this can include any of the following possibilities:<DL><DT><b>obj</b></DT>
+<DD>A generic pool item (such as an IO item) will be displayed<i>.</i></DD>
+<DT><b>timer</b></DT>
+<DD>A timer item will be displayed.</DD>
+<DT><b>wait</b></DT>
+<DD>A wait item will be displayed.</DD>
+<DT><b>work</b></DT>
+<DD>A work item will be displayed.</DD>
+</DL>
+</DD>
+<DT><i>ThreadType</i> [<i>Address</i>]</DT>
+<DD>Causes threads of the specified type to be displayed.  If <i>Address </i>is included and nonzero, then only the thread at this address is displayed.  If <i>Address </i>is 0, all threads matching <i>ThreadType</i> are displayed.  If <i>Address</i> is omitted, only the threads matching <i>ThreadType</i> associated with the current thread are displayed.  <i>ThreadType</i> specifies the type of the thread to be displayed; this can include any of the following possibilities:<DL><DT><b>waiter</b></DT>
+<DD>A thread pool waiter thread will be displayed<i>. </i></DD>
+<DT><b>worker</b></DT>
+<DD>A thread pool worker thread will be displayed. </DD>
+</DL>
+</DD>
+<DT><b>stats</b> [<i>Address</i>]</DT>
+<DD>Causes the debug statistics of the current thread to be displayed.  <i>Address</i> may be omitted, but if it is specified, it must equal -1 (negative one), to represent the current thread. </DD>
+<DT><b>wfac</b> <i>Address</i></DT>
+<DD><i>(</i>Windows 7<i> and later only)</i>  Causes the worker factory at <i>Address </i>to be displayed.  The specified <i>Address</i> must be a valid nonzero address. </DD>
+<DT><b>wqueue</b> <i>Address</i></DT>
+<DD><i>(</i>Windows 7<i> and later only)</i>  Causes display of a work queue and NUMA node that matche the following: a specified priority, a specified NUMA node, and the pool, at a specified address, to which the NUMA node belongs.  <i>Address</i> specifies the address of the pool. When the <b>wqueue</b> parameter is used, it must be followed by <i>Address</i>, <i>Priority</i>, and <i>Node</i>. </DD>
+<DT><i>Priority</i></DT>
+<DD><i>(</i>Windows 7<i> and later only)</i>  Specifies the priority levels of the work queues to be displayed. <i>Priority</i> can be any of the following values: <DL><DT><b>0</b></DT>
+<DD>Work queues with high priority are displayed. </DD>
+</DL>
+<DL><DT><b>1</b></DT>
+<DD>Work queues with normal priority are displayed. </DD>
+</DL>
+<DL><DT><b>2</b></DT>
+<DD>Work queues with low priority are displayed. </DD>
+</DL>
+<DL><DT><b>-1</b></DT>
+<DD>All work queues are displayed.  </DD>
+</DL>
+</DD>
+<DT><i>Node</i></DT>
+<DD><i>(</i>Windows 7<i> and later only)</i>  Specifies a NUMA node belonging to the pool specified by <i>Address</i>. If <i>Node</i> is -1 (negative one), all NUMA nodes are displayed. </DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies what the display should contain. This can be a sum of any of the following bit values (the default is 0x0):<DL><DT>Bit 0 (0x1)</DT>
+<DD>Causes the display to be single-line output.  This bit value has no effect on the output when an <i>ItemType</i> is displayed.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Causes the display to include member information.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>This flag is relevant only when the <b>pool</b> option is used.  In Windows XP, Windows Server 2003, Windows Vista, and Windows Server 2008, this flag causes the display to include the pool work queue.  In Windows 7 and later, this flag causes the display to include all the pool's work queues that are at normal priority, and all NUMA nodes. </DD>
+</DL>
+</DD>
+<DT><b>-?</b></DT>
+<DD>Displays a brief help text for this extension in the Debugger Command window.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Exts.dll</i></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about thread pooling, see the Microsoft Windows SDK documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !tp RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

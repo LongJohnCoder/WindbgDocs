@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ReadBugCheckData</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ReadBugCheckData"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="ReadBugCheckData"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_d96bd559-1a82-4d5d-8aa8-7a32242f2b68.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::ReadBugCheckData method">
+<META NAME="MS-HKWD" CONTENT="ReadBugCheckData (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_d96bd559-1a82-4d5d-8aa8-7a32242f2b68.xml"></A>ReadBugCheckData</H1>
+<P><P>The <b>ReadBugCheckData</b> method reads the kernel <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#f30154fb-999c-411b-84e4-bd4a11326afb">bug check code</a> and related parameters.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::ReadBugCheck(</b><BR><b>    OUT PULONG  </b><i>Code</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Arg1</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Arg2</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Arg3</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Arg4</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Code</i></DT>
+<DD>Receives the bug check code.</DD>
+<DT><i>Arg1</i></DT>
+<DD>Receives the first parameter associated with the bug check.  The interpretation of this parameter depends on the bug check code.</DD>
+<DT><i>Arg2</i></DT>
+<DD>Receives the second parameter associated with the bug check.  The interpretation of this parameter depends on the bug check code.</DD>
+<DT><i>Arg3</i></DT>
+<DD>Receives the third parameter associated with the bug check.  The interpretation of this parameter depends on the bug check code.</DD>
+<DT><i>Arg4</i></DT>
+<DD>Receives the fourth parameter associated with the bug check.  The interpretation of this parameter depends on the bug check code.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>ReadBugCheck</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>This method is only available in <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>.</P>
+<P>For more information about bug checks, including a list of bug check codes and their interpretations, see <a href="t03_bug_intro_590bbf17-b7a5-4700-86fa-ba052d1bc9c5.xml.htm">Bug Checks (Blue Screens)</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ReadBugCheckData RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

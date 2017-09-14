@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Choosing the Best Remote Debugging Method</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Choosing the Best Remote Debugging Method"><xml><MSHelp:Keyword Index="A" Term="r08_use_remote_e541f65e-d9ea-4dd8-8304-12a947d24e15.xml"/>
+<META NAME="MS-HKWD" CONTENT="remote debugging, choosing the best method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r08_use_remote_e541f65e-d9ea-4dd8-8304-12a947d24e15.xml"></A>Choosing the Best Remote Debugging Method</H1>
+<P>There are two primary methods of performing remote debugging, as well as several additional methods and a huge number of combination methods.</P>
+<P>Here are some tips to help you choose the best technique.</P><B></B><UL type="disc">
+<LI><a href="r08_use_remote_e8049dea-474e-411d-8286-ec4a646480f7.xml.htm"><b>Remote debugging through the debugger</b></a> is usually the best method. If you simply have one server and one client and they can freely connect to each other, the same debugger binaries are installed on both the client and the server, and the debugging technician who will be operating the client will be able to talk to someone in the room with the server, this is the recommended method.<P>The client and the server can be running any version of Windows. They do not have to be running the same version as each other. </P>
+<P>If the client is unable to send a connection request to the server, but the server is able to send a request to the client, you can use remote debugging through the debugger with a <i>reverse connection</i> by using the <b>clicon</b> parameter.</P>
+</LI>
+<LI><a href="r08_use_remote_73c4c537-42b6-451d-b928-2ec0a1357640.xml.htm"><b>Remote debugging through </b><I><B>remote.exe</B></I></a> is used to remotely control a Command Prompt window. It can be used to remotely control KD, CDB, or NTSD. It cannot be used with WinDbg.<P>If your client does not have copies of the debugger binaries, you must use the <i>remote.exe</i> method. </P>
+</LI>
+<LI><b>A process server</b> or a <b>KD connection server</b> can be used if the debugging technician will not be able to talk to someone in the room with the server. All the actual debugging work is done by the client (called the <i>smart client</i>); this removes the need to have a second person present at the server itself.<P>Process servers are used for user-mode debugging; KD connection servers are used for kernel-mode debugging. Other than this distinction, they behave in similar ways.</P>
+<P>This method is also useful if the computer where the server will be running cannot handle heavy process loads, or if the technician running the client has access to symbol files or source files that are confidential and cannot be accessed by the server. However, this method is not as fast or efficient as remote debugging through the debugger. This method cannot be used for dump-file debugging.</P>
+<P>See <a href="r08_use_remote_0828c18f-b042-4288-9b58-a56e3076eb2e.xml.htm">Process Servers (User Mode)</a> and <a href="r08_use_remote_da274d6a-0dd9-43db-98cf-5c84038694db.xml.htm">KD Connection Servers (Kernel Mode)</a> for details.</P>
+</LI>
+<LI><b>A repeater</b> is a lightweight proxy server that relays data between two computers. You can add a repeater between the client and the server if you are performing remote debugging through the debugger or if you are using a process server.<P>Using a repeater may be necessary if your client and your server are unable to talk directly to each other, but can each access an outside computer. You can use reverse-connections with repeaters as well. It is even possible to use two repeaters in a row, but this is rarely necessary.</P>
+<P>See <a href="r08_use_remote_29b6f5a4-6e46-4699-afad-79f7953bf6a3.xml.htm">Repeaters</a> for details.</P>
+</LI>
+<LI>It is also possible to control CDB (or NTSD) from the kernel debugger. This is yet another form of remote debugging. See <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a> for details.</LI>
+</UL>
+<P></P>
+<P>Variations on all of these methods are possible.</P>
+<P>It is possible to chain several computers together to take advantage of more than one transport method. You can create complicated transport sequences that take into account where the technician is, where the symbols are located, and whether there are firewalls preventing connections in certain directions. See <a href="r08_use_remote_b055f03c-c11c-49a4-8fd4-91f260eecb3b.xml.htm">Advanced Remote Debugging Scenarios</a> for some examples.</P>
+<P>You can even perform remote debugging on a single computer. For example, it might be useful to start a low-privilege process server and then connect to it with a high-privilege smart client. And on a Windows 2000 terminal server computer you can debug one session from another.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Choosing the Best Remote Debugging Method RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

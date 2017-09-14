@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using AMLI Debugger Extensions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using AMLI Debugger Extensions"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_568f3787-95ad-41ea-9eb5-d5fd9d9bca0c.xml"/>
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, AMLI Debugger extensions">
+<META NAME="MS-HKWD" CONTENT="!amli extension">
+<META NAME="MS-HKWD" CONTENT="!acpikd.amli extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_568f3787-95ad-41ea-9eb5-d5fd9d9bca0c.xml"></A>Using AMLI Debugger Extensions</H1>
+<P>In Windows XP and later versions of Windows, AMLI Debugger extension commands are contained in the extension module <i>Kdexts.dll</i> and use the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli </b><I><B>command </B></I>[<I><B>parameters</B></I>] <BR><BR></nobr></P>
+<P>In Windows 2000, these extension commands are contained in <i>Acpikd.dll</i> and use the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!acpikd.amli </b><I><B>command </B></I>[<I><B>parameters</B></I>] <BR><BR></nobr></P>
+<P>As with any extension module, after it has been loaded you can omit the <b>acpikd</b> prefix.</P>
+<P>If you are at the AMLI Debugger prompt, you can execute any of these extension commands by simply entering the <I><B>command</B></I> name without the <b>!amli</b> prefix:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>AMLI(? for help)-&gt; <I><B>command </B></I>[<I><B>parameters</B></I>] <BR><BR></nobr></P>
+<P>When you are at this prompt, the <b>!amli debugger</b> command is not available (because it would be meaningless). Also, the help command ( <b>?</b> ) at this prompt shows all AMLI Debugger extensions <i>and</i> commands, while the <b>!amli ?</b> extension only displays help on actual extensions.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Action</TH>
+<TH Width="">Extension Command</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Display Help </TD>
+<TD Width=""><a href="r33_exts_acpi_f055b8ba-6992-44bb-81ac-4c8482b42eef.xml.htm"><b>!amli ?</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Set AML Breakpoint </TD>
+<TD Width=""><a href="r33_exts_acpi_bb8ffbca-031d-4ed3-b933-a368071d90e9.xml.htm"><b>!amli bp</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">List AML Breakpoints </TD>
+<TD Width=""><a href="r33_exts_acpi_657d1fc1-6417-4178-81d2-12c0e9102fdb.xml.htm"><b>!amli bl</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Disable AML Breakpoint </TD>
+<TD Width=""><a href="r33_exts_acpi_3a87773d-e8b2-4ffd-816a-5b84014af463.xml.htm"><b>!amli bd</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Enable AML Breakpoint </TD>
+<TD Width=""><a href="r33_exts_acpi_4188af5c-e31c-4e9a-a5e0-c6b4796551da.xml.htm"><b>!amli be</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Clear AML Breakpoint </TD>
+<TD Width=""><a href="r33_exts_acpi_f7662a54-f9d8-4737-89f2-29a5ac304364.xml.htm"><b>!amli bc</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Enter AMLI Debugger </TD>
+<TD Width=""><a href="r33_exts_acpi_1e2ac77d-055f-497d-be71-59204cda8b1c.xml.htm"><b>!amli debugger</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Display Event Log </TD>
+<TD Width=""><a href="r33_exts_acpi_40fc8077-32cc-4cac-b501-e94f06321788.xml.htm"><b>!amli dl</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Clear Event Log </TD>
+<TD Width=""><a href="r33_exts_acpi_ec4b1f01-52cb-48f5-a50d-848ec0e23ce7.xml.htm"><b>!amli cl</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Display Heap</TD>
+<TD Width=""><a href="r33_exts_acpi_1a6d4c6f-c7a0-4b6f-a8f5-0283e0e4ae55.xml.htm"><b>!amli dh</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Display Data Object </TD>
+<TD Width=""><a href="r33_exts_acpi_833f8c31-6e73-4960-9844-99d910515f5b.xml.htm"><b>!amli do</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Display Stack </TD>
+<TD Width=""><a href="r33_exts_acpi_bc967d03-038c-4c8c-a6b5-130485864f61.xml.htm"><b>!amli ds</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Display Namespace Object </TD>
+<TD Width=""><a href="r33_exts_acpi_6053e299-7e6a-4401-a760-385611d5c8d4.xml.htm"><b>!amli dns</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Find Namespace Object </TD>
+<TD Width=""><a href="r33_exts_acpi_132c0e42-aa75-46c1-932d-9e83dcc7f913.xml.htm"><b>!amli find</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Display Nearest Method </TD>
+<TD Width=""><a href="r33_exts_acpi_1a02af87-276c-458a-ad9e-3ac6f39b92e0.xml.htm"><b>!amli ln</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">List All Contexts </TD>
+<TD Width=""><a href="r33_exts_acpi_916a102a-d94c-4152-adfc-e6bfdf9071c0.xml.htm"><b>!amli lc</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Display Context Information </TD>
+<TD Width=""><a href="r33_exts_acpi_cbd0459e-74f3-4c10-bbb4-efe5bb46893e.xml.htm"><b>!amli r</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Unassemble AML Code </TD>
+<TD Width=""><a href="r33_exts_acpi_6c7a3353-9abf-4735-8c63-0e70ccfe5db2.xml.htm"><b>!amli u</b></a> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Set AMLI Debugger Options </TD>
+<TD Width=""><a href="r33_exts_acpi_d7069173-5282-4e7f-8685-163c13340c28.xml.htm"><b>!amli set</b></a> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using AMLI Debugger Extensions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Spawning a New Process (User Mode)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Spawning a New Process (User Mode)"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_77acc3de-f774-4eba-8804-ae878cd5e99d.xml"/>
+<META NAME="MS-HKWD" CONTENT="spawning a new process">
+<META NAME="MS-HKWD" CONTENT="creating a new process">
+<META NAME="MS-HKWD" CONTENT="process, spawning new"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_77acc3de-f774-4eba-8804-ae878cd5e99d.xml"></A>Spawning a New Process (User Mode)</H1>
+<P>The debugger can start a user-mode application and then debug the application. The application is specified by name, as if the application was started from the command prompt or from the <b>Run</b> dialog box in the Microsoft Windows operating system.</P>
+<P>The debugger can also automatically attach to <i>child processes</i> (additional processes that the original target process started).</P>
+<P>The following sections in this topic describe several ways to start a new process. </P>
+<H4>CDB Command Line</H4>
+<P>To start a user-mode application from the CDB command line, insert the application's command at the end of the CDB command, as in the following form.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>cdb</b> [<b>-o</b>] <i>ProgramName</i> [<i>Arguments</i>] <BR></nobr></P>
+<P>The <b>-o</b> option causes the debugger to attach to child processes. There are several other useful command-line options. For more information about the command-line syntax, see <a href="r12_cmdline_3ec269e8-a2d8-43e4-8758-2201481cd323.xml.htm">CDB Command-Line Options</a>.</P>
+<H4>WinDbg Command Line</H4>
+<P>To start a user-mode application from the WinDbg command line, insert the application's command at the end of the WinDbg command, as in the following form. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg</b> [<b>-o</b>] <i>ProgramName</i> [<i>Arguments</i>] <BR></nobr></P>
+<P>The <b>-o</b> option causes the debugger to attach to child processes. There are several other useful command-line options. For more information about the command-line syntax, see <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">WinDbg Command-Line Options</a>.</P>
+<H4>WinDbg Menu</H4>
+<P>When WinDbg is in dormant mode, you can start a new process by clicking <a href="r36_gui_1_11bd83b0-34a0-44fe-be7c-1a0f16f91d80.xml.htm"><b>Open Executable</b></a> on the <b>File </b>menu or by pressing CTRL+E.</P>
+<P>When the <b>Open Executable</b> dialog box appears, enter the full path of the executable file in the <b>File name</b> box, or use the <b>Look in</b> list to select the path and file name that you want. (If you start the application from the <b>Run</b> dialog box or a Command Prompt window, Windows searches the command path for an executable file name, but the <b>Open Executable</b> dialog box requires the exact path.)</P>
+<P>If you want to use any command-line parameters with the user-mode application, enter them in the <b>Arguments</b> box. If you want to change the starting directory from the default directory, enter the directory path in the <b>Start directory</b> box. If you want WinDbg to attach to child processes, select the <b>Debug child processes also</b> check box.    </P>
+<P>After you make your selections, click <b>Open</b>.</P>
+<H4>Debugger Command Window</H4>
+<P>If the debugger is already active, you can create a new process by using the <a href="r19_metacmds_a_90b70ef1-43b7-4dd2-87cf-8f6df0d6108d.xml.htm"><b>.create (Create Process)</b></a> command in the <a href="r05_use_start_7a79993b-70e5-49ef-bca5-095e88ebca78.xml.htm">Debugger Command window</a>.</P>
+<P>You can use the <b>.create</b> command if CDB is dormant or is already debugging one or more processes. You cannot use this command if WinDbg is dormant.</P>
+<P>The debugger will always start multiple target processes simultaneously, unless some of their threads are frozen or suspended. </P>
+<P>If the <b>.create</b> command is successful, the debugger creates the specified process the next time that the debugger issues an execution command. If you use this command several times in a row, execution has to be requested by the debugger as many times as you use this command.</P>
+<P>You can control the application's starting directory by using the <a href="r19_metacmds_a_58ea59c5-e3aa-4ec4-b8cc-ec1dcd9db978.xml.htm"><b>.createdir (Set Created Process Directory)</b></a> command before <b>.create</b>. You can use the <b>.createdir -I</b> command or the <b>-noinh</b> command-line option to control whether the target application inherits the debugger's handles.</P>
+<P>On Windows XP and later versions of the Windows operating system, you can activate or deactivate the debugging of child processes by using the <a href="r19_metacmds_a_d808ad82-440e-4b62-b2d4-453a515d094b.xml.htm"><b>.childdbg (Debug Child Processes)</b></a> command.</P>
+<H4>Beginning the Debugging Session</H4>
+<P>For more information about how to begin a debugging session, see <a href="r06_use_gui_4b24004a-3b77-4692-b369-dbb122feba7a.xml.htm">Debugger Configuration</a>, <a href="r09_symbols_750b8c7c-1e41-4116-b7d3-ecd4c7fe42ce.xml.htm">Symbols</a>, <a href="r07_use_operation_265193af-6b7a-4832-8785-b58a645547e5.xml.htm">Debugger Operation (General)</a> and <a href="r07_use_operation_167942d3-b143-49df-b4f6-2ca81063bcce.xml.htm">Debugger Operation (User Mode)</a>.</P>
+<P>In Windows XP and later versions of Windows, if the debugger stops responding, you can attach a new debugger to the target process. For more information about how to attach a debugger in this situation, see <a href="r07_use_operation_1d5faf67-01fe-4837-94ec-14e2fd60dea3.xml.htm">Re-attaching to the Target Application</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Spawning a New Process (User Mode) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

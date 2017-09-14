@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using the RPC Debugger Extensions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using the RPC Debugger Extensions"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_92512c41-c70b-4bca-84a6-0a86397463f9.xml"/>
+<META NAME="MS-HKWD" CONTENT="RPC extensions (rpcexts.dll)">
+<META NAME="MS-HKWD" CONTENT="RPC debugging, extensions (rpcexts.dll)">
+<META NAME="MS-HKWD" CONTENT="rpcexts.dll (RPC extensions)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_92512c41-c70b-4bca-84a6-0a86397463f9.xml"></A>Using the RPC Debugger Extensions</H1>
+<P>A variety of RPC debugger extensions are exported from <i>Rpcexts.dll</i>.</P>
+<P>The RPC extensions used to display RPC state information will only run in user mode. They can be used from CDB (or NTSD) or from user-mode WinDbg.</P>
+<P>The user-mode debugger must have a target application, but the target is irrelevant to the RPC extensions. If the debugger is not already running, you can simply start it with an uninteresting target (for example, <b>windbg notepad</b> or <b>cdb winmine</b>). Then, use <a href="r23_keys_5e05b1f2-1c9d-4f1a-a681-4994b0fe679c.xml.htm">CTRL+C</a> in CDB or <a href="r37_gui_2_94482ad8-41d6-46e7-9a18-40dce2459d10.xml.htm"><b>Debug | Break</b></a> in WinDbg to stop the target and access the Debugger Command window.</P>
+<P></P>
+<P>If you need to analyze RPC state information from a remote computer, you should start the user-mode debugger on the computer that needs to be analyzed, and then use <a href="r08_use_remote_e6793edc-50b2-4f6b-8e7c-2bfcfe2a0396.xml.htm">Remote Debugging</a>.</P>
+<P>Accessing RPC state information through the debugger is especially useful in stress environments, or when a debugger already happens to be running.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using the RPC Debugger Extensions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

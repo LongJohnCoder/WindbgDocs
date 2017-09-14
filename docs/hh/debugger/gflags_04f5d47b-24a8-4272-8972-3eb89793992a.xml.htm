@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Example 11: Enabling Page Heap Verification</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Example 11:  Enabling Page Heap Verification"><xml><MSHelp:Keyword Index="A" Term="GFlags_04f5d47b-24a8-4272-8972-3eb89793992a.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_04f5d47b-24a8-4272-8972-3eb89793992a.xml"></A>Example 11:  Enabling Page Heap Verification</H1>
+<P>The following commands enable full and standard page heap verification for <i>myapp.exe</i>, a fictitious program.</P>
+<P>The first command enables <i>standard</i> page heap verification for <i>myapp.exe</i>. It uses the <b>/p</b> parameter to enable page heap for a process. By default, <b>/p</b> enables standard page heap.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /p /enable myapp.exe</b> <BR><BR></nobr></P>
+<P>The following commands enable <i>full</i> page heap verification for the <i>myapp.exe</i> program. Although these commands create different settings in the registry, they are all functionally equivalent to selecting the <b>Enable page heap</b> check box for the <i>myapp.exe</i> image file in the <b>Global Flags</b> dialog box. These methods can be used interchangeably.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /p /enable myapp.exe /full</b><BR><b>gflags /i myapp.exe +hpa</b><BR><b>gflags /i myapp.exe +02000000</b><BR><BR></nobr></P>
+<P>The following commands disable full or standard page heap verification for the <i>myapp.exe</i> program, regardless of the command or dialog box method used to enable page heap verification.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /p /disable myapp.exe</b><BR><b>gflags /i myapp.exe -hpa</b><BR><b>gflags /i myapp.exe -02000000</b><BR><BR></nobr></P>
+<P class="note"><b>Note</b>  When using the <b>/debug</b> or <b>/kdebug</b> parameters, use the <b>/p /disable</b> parameters to turn off the page heap verification (not the <b>/i -hpa</b> parameters). The <b>/p /disable</b> parameters disable page heap verification and delete registry entries that the debugger reads.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Example 11:  Enabling Page Heap Verification RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging BIOS Code</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging BIOS Code"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_89b2c296-6e86-45cc-86b6-511f423f8989.xml"/>
+<META NAME="MS-HKWD" CONTENT="BIOS debugging">
+<META NAME="MS-HKWD" CONTENT="BIOS debugging, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_89b2c296-6e86-45cc-86b6-511f423f8989.xml"></A>Debugging BIOS Code</H1>
+<P>BIOS code is not built from standard assembly code, so it requires different debugging techniques.</P>
+<P>On an x86-based processor, the BIOS uses 16-bit code. To disassemble this code, use the <a href="r18_cmds_s_9ecf9577-8459-4cf5-a2ad-5110dd07a5a2.xml.htm"><b>ux (Unassemble x86 BIOS)</b></a> command. To display information about the Intel Multiprocessor Specification (MPS), use the <a href="r27_exts_kernel_e_1fbb3f03-d5c7-41b6-8794-6c36035508bd.xml.htm"><b>!mps</b></a> extension.</P>
+<P>On an Itanium-based processor, the BIOS uses EFI code (32-bit) and real-mode code (16-bit). To disassemble real-mode code, use <a href="r18_cmds_s_22bbfc70-f75a-4c22-8de1-54808eab3a34.xml.htm"><b>ur (Unassemble Real Mode BIOS)</b></a>. The debuggers cannot disassemble EFI code.  </P>
+<P>If you are debugging ACPI BIOS code, the preceding commands do not work, because ACPI BIOS is written in ACPI Machine Language (AML). To disassemble this code, you should use <a href="r33_exts_acpi_6c7a3353-9abf-4735-8c63-0e70ccfe5db2.xml.htm"><b>!amli u</b></a>. For more information about this kind of debugging, see <a href="t11_rpc_acpi_9d538c13-8522-48cb-8c28-92b001d04e2c.xml.htm">ACPI Debugging</a>.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging BIOS Code RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

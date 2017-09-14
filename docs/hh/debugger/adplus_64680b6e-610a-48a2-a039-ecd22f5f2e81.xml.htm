@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ADPlus Limitations and Restrictions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ADPlus Limitations and Restrictions"><xml><MSHelp:Keyword Index="A" Term="ADPlus_64680b6e-610a-48a2-a039-ecd22f5f2e81.xml"/>
+<META NAME="MS-HKWD" CONTENT="ADPlus, limitations">
+<META NAME="MS-HKWD" CONTENT="ADPlus, restrictions">
+<META NAME="MS-HKWD" CONTENT="ADPlus, system requirements"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_64680b6e-610a-48a2-a039-ecd22f5f2e81.xml"></A>ADPlus Limitations and Restrictions</H1>
+<P>The following notes and restrictions apply to ADPlus:</P><B></B><UL type="disc">
+<LI>You must install the Microsoft Windows Script Host components before you can run ADPlus. The current version of ADPlus requires version 5.6 of the scripting host.<P>You can run ADPlus with earlier versions of the scripting host if you start ADPlus in a Command Prompt window by using the install directory of Debugging Tools for Windows as the default directory. However, the <b>-quiet</b> switch requires version 5.5 in any event.</P>
+<P>Windows Script Host components might already be installed if you have installed recent versions of certain Microsoft software products. If you want to install or upgrade the Windows Script Host, visit the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=18027" target="_blank">Windows Script</a> section of the MSDN Web site.</P>
+</LI>
+<LI>The <b>-iis</b> option requires version 4.0 or a later version of Internet Information Services (IIS), formerly known as Internet Information Server.</LI>
+<LI>If you use the <b>-quiet</b> option, ADPlus logs information to the event log on systems that are equipped with the Windows Script Host version 5.5 or later.</LI>
+<LI>If you use the <b>-o</b> option, the specified path must not contain more than one nonexistent folder. For example, if you specify <b>-o C:\Temp1\Temp2</b> and the <i>C:\Temp1</i> and <i>\Temp2</i> folders do no exist, ADPlus displays an error message and does not create these folders. If you specify <b>-o C:\Temp1</b>, ADPlus creates the <i>C:\Temp1</i> folder if it does not exist and puts all output files in that folder. If you are specifying multiple subfolders and using the <b>-o</b> option, you should make sure that all of the subfolders exist before you run ADPlus.</LI>
+<LI>In COM+, you can configure a server package to start in the debugger in the <b>Advanced</b> tab in the <b>Properties</b> dialog box of the package. If you enable the <b>Launch in Debugger</b> option, ADPlus cannot attach the CDB debugger to a process. (By default, only one debugger can be attached to a process at a time.)</LI>
+<LI>When a remote procedure call (RPC) is made from a process that ADPlus is analyzing in crash mode to another process that has failed or has been shut down, the log file that ADPlus creates for the process that is being monitored might contain one or more of the following exceptions. <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Unknown exception - code 80010105 (first chance)<BR>Unknown exception - code 800706be (first chance)<BR>Unknown exception - code 800706ba (first chance)<BR></nobr></P>
+<P>These exceptions are expected. RPC raises these exceptions when a call is made from a process that is being monitored to a nonexistent or failed process.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr></nobr></P>
+<P>This exception typically appears after IIS calls an out-of-process (high-isolation) Web site that has failed. This exception might be followed by two instances of the following exception.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Unknown exception - code 800706ba (first chance) <BR></nobr></P>
+</LI>
+</UL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ADPlus Limitations and Restrictions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

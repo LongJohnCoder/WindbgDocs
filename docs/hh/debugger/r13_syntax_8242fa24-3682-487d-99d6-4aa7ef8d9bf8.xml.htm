@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Register Syntax</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Register Syntax"><xml><MSHelp:Keyword Index="A" Term="r13_syntax_8242fa24-3682-487d-99d6-4aa7ef8d9bf8.xml"/>
+<META NAME="MS-HKWD" CONTENT="expressions, registers">
+<META NAME="MS-HKWD" CONTENT="registers, command syntax">
+<META NAME="MS-HKWD" CONTENT="@ (register prefix)">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, @ (register prefix)">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, registers"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r13_syntax_8242fa24-3682-487d-99d6-4aa7ef8d9bf8.xml"></A>Register Syntax</H1>
+<P>The debugger can control registers and floating-point registers. (For more information about commands that can control registers, see <a href="r07_use_operation_5cbc4ff1-b5f4-4308-b937-4343876eaaa8.xml.htm">Reading and Writing Registers and Flags</a>.)</P>
+<P>When you use a register in an expression, you should add an at sign ( <b>@</b> ) before the register. This at sign tells the debugger that the following text is the name of a register.</P>
+<P>If you are using MASM expression syntax, you can omit the at sign for certain very common registers. On x86-based systems, you can omit the at sign for the <b>eax</b>, <b>ebx</b>, <b>ecx</b>, <b>edx</b>, <b>esi</b>, <b>edi</b>, <b>ebp</b>, <b>eip</b>, and <b>efl</b> registers. However, if you specify a less common register without an at sign, the debugger first tries to interpret the text as a hexadecimal number. If the text contains non-hexadecimal characters, the debugger next interprets the text as a symbol. Finally, if the debugger does not find a symbol match, the debugger interprets the number as a register.</P>
+<P>If you are using C++ expression syntax, the at sign is <i>always</i> required.</P>
+<P>The <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command is an exception to this rule. The debugger always interprets its first argument as a register. (An at sign is not required or permitted.) If there is a second argument for the <b>r</b> command, it is interpreted according to the default expression syntax. If the default expression syntax is C++, you must use the following command to copy the <b>ebx</b> register to the <b>eax</b> register.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt;<b> r eax = @ebx</b><BR></nobr></P>
+<P>For more information about the registers and instructions that are specific to each processor, see <a href="t09_arch_x86_ef71f3fe-83ec-4c78-9482-cdf7a95eb3e5.xml.htm">Processor Architecture</a>.</P>
+<H4>Flags on an x86-based Processor</H4>
+<P>x86-based processors also use several 1-bit registers known as <i>flags</i>. For more information about these flags and the syntax that you can use to view or change them, see <a href="t09_arch_x86_689f0355-a582-450a-bd6c-f17c3167882f.xml.htm#68843a37-9f12-425d-87d4-eaa96cf8fb31">x86 Flags</a>.</P>
+<H4>Registers and Threads</H4>
+<P>Each thread has its own register values. These values are stored in the CPU registers when the thread is executing and in memory when another thread is executing.</P>
+<P>In user mode, any reference to a register is interpreted as the register that is associated with the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#e79fad75-e3ff-41d6-9f36-896e7b1ce5bb"><i>current thread</i></a>. For more information about the current thread, see <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">Controlling Processes and Threads</a>.</P>
+<P>In kernel mode, any reference to a register is interpreted as the register that is associated with the current <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb"><i>register context</i></a>. You can set the register context to match a specific thread, context record, or trap frame. You can display only the most important registers for the specified register context, and you cannot change their values.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Register Syntax RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x7E: SYSTEM_THREAD_EXCEPTION_NOT_HANDLED</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x7E: SYSTEM_THREAD_EXCEPTION_NOT_HANDLED"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_c5c2fde1-8dc2-424b-b175-ad150fd9bf27.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x7E: SYSTEM_THREAD_EXCEPTION_NOT_HANDLED">
+<META NAME="MS-HKWD" CONTENT="SYSTEM_THREAD_EXCEPTION_NOT_HANDLED"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_c5c2fde1-8dc2-424b-b175-ad150fd9bf27.xml"></A>Bug Check 0x7E: SYSTEM_THREAD_EXCEPTION_NOT_HANDLED</H1>
+<P>The SYSTEM_THREAD_EXCEPTION_NOT_HANDLED bug check has a value of 0x0000007E. This bug check indicates that a system thread generated an exception that the error handler did not catch.</P>
+<H4>Parameters</H4>
+<P>The following parameters appear on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">The exception code that was not handled</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">The address where the exception occurred</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">The address of the exception record</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">The address of the context record</TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>The SYSTEM_THREAD_EXCEPTION_NOT_HANDLED bug check is a very common bug check. To interpret it, you must identify which exception was generated.</P>
+<P>Common exception codes include the follwoing:</P><B></B><UL type="disc">
+<LI>0x80000002: STATUS_DATATYPE_MISALIGNMENT indicates an unaligned data reference was encountered. </LI>
+<LI>0x80000003: STATUS_BREAKPOINT indicates a breakpoint or ASSERT was encountered when no kernel debugger was attached to the system.   </LI>
+<LI>0xC0000005: STATUS_ACCESS_VIOLATION indicates a memory access violation occurred.  </LI>
+</UL>
+<P></P>
+<P>For a complete list of exception codes, see the <i>Ntstatus.h </i>file that is located in the <i>inc</i> directory of the Microsoft Windows Driver Kit (WDK).</P>
+<H4>Resolving the Problem</H4>
+<P>If you are not equipped to debug this problem, you should use some basic troubleshooting techniques. </P><B></B><UL type="disc">
+<LI>Make sure you have enough disk space. </LI>
+<LI>If a driver is identified in the bug check message, disable the driver or check with the manufacturer for driver updates. </LI>
+<LI>Try changing video adapters. </LI>
+<LI>Check with your hardware vendor for any BIOS updates. </LI>
+<LI>Disable BIOS memory options such as caching or shadowing.</LI>
+</UL>
+<P><i>If you plan to debug this problem</i>, you might find it difficult to obtain a stack trace. Parameter 2 (the exception address) should identify the driver or function that caused this problem.</P>
+<P>If exception code 0x80000003 occurs, a hard-coded breakpoint or assertion was hit, but the system was started with the <b>/NODEBUG</b> switch. This problem should rarely occur. If it occurs repeatedly, make sure that a kernel debugger is connected and the system is started with the <b>/DEBUG</b> switch.</P>
+<P>If exception code 0x80000002 occurs, the trap frame supplies additional information.</P>
+<P>If you do not know the specific cause of the exception, consider the following issues:</P><B></B><UL type="disc">
+<LI>Hardware incompatibility<i>. </i>Make sure that any new hardware that is installed is listed in the Microsoft Windows Marketplace Tested Products List.</LI>
+<LI>Faulty device driver or system service<i>. </i>A faulty device driver or system service might be responsible for this error. Hardware issues, such as BIOS incompatibilities, memory conflicts, and IRQ conflicts can also generate this error.</LI>
+</UL>
+<P>If a driver is listed by name within the bug check message, disable or remove that driver. Disable or remove any drivers or services that were recently added. If the error occurs during the startup sequence and the system partition is formatted with NTFS file system, you might be able to use Safe Mode to rename or delete the faulty driver. If the driver is used as part of the system startup process in Safe Mode, you must start the computer by using the Recovery Console to access the file. </P>
+<P>If the problem is associated with <i>Win32k.sys</i>, the source of the error might be a third-party remote control program. If such software is installed, you can remove the service by starting the computer by using the Recovery Console and then deleting the offending system service file.</P>
+<P>Check the System Log in <b>Event Viewer</b> for additional error messages that might help identify the device or driver that is causing bug check 0x7E. </P>
+<P>You can also disable memory caching of the BIOS might to try to resolve the error. You should also run hardware diagnostics, especially the memory scanner, that the system manufacturer supplies. For more information about these procedures, see the owner's manual for your computer. </P>
+<P>The error that generates this message can occur after the first restart during Windows Setup, or after Setup is finished. A possible cause of the error is lack of disk space for installation and system BIOS incompatibilities. For problems during Windows installation that are associated with lack of disk space, reduce the number of files on the target hard disk drive. Check for and delete any temporary files that you do not have to have, Internet cache files, application backup files, and <i>.chk </i>files that contain saved file fragments from disk scans. You can also use another hard disk drive with more free space for the installation. You can resolve BIOS problems by upgrading the system BIOS version.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x7E: SYSTEM_THREAD_EXCEPTION_NOT_HANDLED RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

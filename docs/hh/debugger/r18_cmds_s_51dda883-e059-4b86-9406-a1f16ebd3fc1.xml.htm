@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>u (Unassemble)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, u (Unassemble)"><xml><MSHelp:Keyword Index="A" Term="r18_cmds_S_51dda883-e059-4b86-9406-a1f16ebd3fc1.xml"/>
+<META NAME="MS-HKWD" CONTENT="u (Unassemble) command">
+<META NAME="MS-HKWD" CONTENT="Unassemble (u) command">
+<META NAME="MS-HKWD" CONTENT="assembly debugging, Unassemble (u) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r18_cmds_S_51dda883-e059-4b86-9406-a1f16ebd3fc1.xml"></A>u (Unassemble)</H1>
+<P>The <b>u</b> command displays an assembly translation of the specified program code in memory.<P>Do not confuse this command with the <a href="r15_cmds_a_f576f95d-f1b2-41a0-95d4-aa16c1d5265f.xml.htm"><b>~u (Unfreeze Thread)</b></a> command.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>u</b>[<b>b</b>] <i>Range</i> <BR><b>u</b>[<b>b</b>] <i>Address</i><BR><b>u</b>[<b>b</b>] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Range</i></DT>
+<DD>Specifies the memory range that contains the instructions to disassemble. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>. If you use the <b>b</b> flag, you must specify <i>Range</i> by using the "<i>Address </i><b>L</b><i>Length</i>" syntax, not the "<i>Address1 Address2</i>" syntax.</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the beginning of the memory range to disassemble. Eight instructions (on an x86-based processor) or nine instructions (on an Itanium-based processor) are unassembled. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+<DT><b>b</b></DT>
+<DD>Determines the memory range to disassemble by counting backward.  If <b>ub </b><i>Address</i> is used, the disassembled range will be the eight or nine byte range ending with <i>Address</i>.  If a range is specifed using the syntax <b>ub </b><i>Address</i><b> L</b><i>Length</i>, the disassembled range will be the range of the specified length ending at <i>Address</i>.</DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If you do not specify a parameter for the <b>u</b> command, the disassembly begins at the current address and extends eight instructions (on an x86-based processor) or nine instructions (on an Itanium-based processor). When you use <b>ub</b> without a parameter, the disassembly includes the eight or nine instructions before the current address.</P>
+<P>Do not confuse this command with the <a href="r18_cmds_s_76868aad-112b-4687-a435-e2714cc3b2b9.xml.htm"><b>up (Unassemble from Physical Memory)</b></a>.  The <b>u</b> command disassembles only virtual memory, while the <b>up</b> command disassembles only physical memory.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about assembly debugging and related commands, see <a href="r07_use_operation_9afb8c89-95fa-499e-bc4e-98f0365df573.xml.htm">Debugging in Assembly Mode</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: u (Unassemble) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!whea</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !whea"><xml><MSHelp:Keyword Index="A" Term="r30_exts_kernel_U_95131e12-e601-4d1d-b676-21847ce6c545.xml"/>
+<META NAME="MS-HKWD" CONTENT="!whea extension">
+<META NAME="MS-HKWD" CONTENT="Windows Hardware Error Architecture">
+<META NAME="MS-HKWD" CONTENT="Windows Hardware Error Architecture, !whea extension">
+<META NAME="MS-HKWD" CONTENT="WHEA">
+<META NAME="MS-HKWD" CONTENT="WHEA, !whea extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r30_exts_kernel_U_95131e12-e601-4d1d-b676-21847ce6c545.xml"></A>!whea</H1>
+<P><P></P>
+<P>The <b>!whea</b> extension displays top-level Windows Hardware Error Architecture (WHEA) information.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!whea</b> <BR></nobr></P>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows Server 2003</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows Vista and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension can be used only in Windows Vista and later versions of Windows.</P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The following example shows the (truncated) output of the <b>!whea</b> extension: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>3: kd&gt; <b>!whea</b> <BR>Error Source Table @ fffff800019ca250<BR>13 Error Sources<BR>Error Source 0 @ fffffa80064132c0<BR>   Notify Type      : Machine Check Exception<BR>   Type             : 0x0 (MCE)<BR>   Error Count      : 8<BR>   Record Count     : 10<BR>   Record Length    : c3e<BR>   Error Records    : wrapper @ fffffa8007cf4000  record @ fffffa8007cf4030<BR>                    : wrapper @ fffffa8007cf4c3e  record @ fffffa8007cf4c6e<BR>                    : wrapper @ fffffa8007cf587c  record @ fffffa8007cf58ac<BR>                    : wrapper @ fffffa8007cf64ba  record @ fffffa8007cf64ea<BR>                    : wrapper @ fffffa8007cf70f8  record @ fffffa8007cf7128<BR>                    : wrapper @ fffffa8007cf7d36  record @ fffffa8007cf7d66<BR>                    : wrapper @ fffffa8007cf8974  record @ fffffa8007cf89a4<BR>                    : wrapper @ fffffa8007cf95b2  record @ fffffa8007cf95e2<BR>                    : wrapper @ fffffa8007cfa1f0  record @ fffffa8007cfa220<BR>                    : wrapper @ fffffa8007cfae2e  record @ fffffa8007cfae5e<BR>                    : wrapper @ fffffa8007cfba6c  record @ fffffa8007cfba9c<BR>                    : wrapper @ fffffa8007cfc6aa  record @ fffffa8007cfc6da<BR>                    : wrapper @ fffffa8007cfd2e8  record @ fffffa8007cfd318<BR>                    : wrapper @ fffffa8007cfdf26  record @ fffffa8007cfdf56<BR>                    : wrapper @ fffffa8007cfeb64  record @ fffffa8007cfeb94<BR>                    : wrapper @ fffffa8007cff7a2  record @ fffffa8007cff7d2<BR>   Descriptor       : @ fffffa8006413328<BR>      Length                     : 3cc<BR>      Max Raw Data Length        : 392<BR>      Num Records To Preallocate : 10<BR>      Max Sections Per Record    : 3<BR>      Error Source ID            : 0<BR>      Flags                      : 00000000<BR>Error Source 1 @ fffffa8007d00bc0<BR>   Notify Type      : Corrected Machine Check<BR>   Type             : 0x1 (CMC)<BR>   Error Count      : 0<BR>   Record Count     : 10<BR>   Record Length    : c3e<BR>   Error Records    : wrapper @ fffffa8007d01000  record @ fffffa8007d01030<BR>                    : wrapper @ fffffa8007d01c3e  record @ fffffa8007d01c6e<BR>                    : wrapper @ fffffa8007d0287c  record @ fffffa8007d028ac<BR>                    : wrapper @ fffffa8007d034ba  record @ fffffa8007d034ea<BR>                    : wrapper @ fffffa8007d040f8  record @ fffffa8007d04128<BR>                    : wrapper @ fffffa8007d04d36  record @ fffffa8007d04d66<BR>                    : wrapper @ fffffa8007d05974  record @ fffffa8007d059a4<BR>                    : wrapper @ fffffa8007d065b2  record @ fffffa8007d065e2<BR>                    : wrapper @ fffffa8007d071f0  record @ fffffa8007d07220<BR>                    : wrapper @ fffffa8007d07e2e  record @ fffffa8007d07e5e<BR>                    : wrapper @ fffffa8007d08a6c  record @ fffffa8007d08a9c<BR>                    : wrapper @ fffffa8007d096aa  record @ fffffa8007d096da<BR>                    : wrapper @ fffffa8007d0a2e8  record @ fffffa8007d0a318<BR>                    : wrapper @ fffffa8007d0af26  record @ fffffa8007d0af56<BR>                    : wrapper @ fffffa8007d0bb64  record @ fffffa8007d0bb94<BR>                    : wrapper @ fffffa8007d0c7a2  record @ fffffa8007d0c7d2<BR>   Descriptor       : @ fffffa8007d00c28<BR>      Length                     : 3cc<BR>      Max Raw Data Length        : 392<BR>      Num Records To Preallocate : 10<BR>      Max Sections Per Record    : 3<BR>      Error Source ID            : 1<BR>      Flags                      : 00000000<BR>Error Source 2 @ fffffa8007d00770<BR>   Notify Type      : Non-Maskable Interrupt<BR>   Type             : 0x3 (NMI)<BR>   Error Count      : 1<BR>   Record Count     : 1<BR>   Record Length    : 1f8<BR>   Error Records    : wrapper @ fffffa800631b2c0  record @ fffffa800631b2f0<BR>   Descriptor       : @ fffffa8007d007d8<BR>      Length                     : 3cc<BR>      Max Raw Data Length        : 100<BR>      Num Records To Preallocate : 1<BR>      Max Sections Per Record    : 1<BR>      Error Source ID            : 2<BR>      Flags                      : 00000000<BR>Error Source 3 @ fffffa8007d0dbc0<BR>   Notify Type      : BOOT Error Record<BR>   Type             : 0x7 (BOOT)<BR>   Error Count      : 0<BR>   Record Count     : 1<BR>   Record Length    : 4f8<BR>   Error Records    : wrapper @ 0000000000000000  record @ 0000000000000030<BR>   Descriptor       : @ fffffa8007d0dc28<BR>      Length                     : 3cc<BR>      Max Raw Data Length        : 400<BR>      Num Records To Preallocate : 1<BR>      Max Sections Per Record    : 1<BR>      Error Source ID            : 3<BR>      Flags                      : 00000000<BR><BR>. . . . <BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>The <a href="r27_exts_kernel_e_0ca982be-b5e0-4f4a-953d-93df795592bd.xml.htm"><b>!errrec</b></a> and <a href="r27_exts_kernel_e_c6f2cb29-c517-4905-bbb9-f79ab6794579.xml.htm"><b>!errpkt</b></a> extensions can be used to display additional WHEA information.  For general information about WHEA, see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=153571" target="_blank"><u>Windows Hardware Error Architecture (WHEA)</u></a> in the Windows Driver Kit (WDK) documentation. </P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !whea RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

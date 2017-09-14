@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!amli dns</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !amli dns"><xml><MSHelp:Keyword Index="A" Term="r33_exts_ACPI_6053e299-7e6a-4401-a760-385611d5c8d4.xml"/>
+<META NAME="MS-HKWD" CONTENT="!amli dns extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33_exts_ACPI_6053e299-7e6a-4401-a760-385611d5c8d4.xml"></A>!amli dns</H1>
+<P>The <b>!amli dns</b> extension displays an ACPI namespace object.</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!acpikd.amli dns</b> [<b>/s</b>] [<i>Name</i> | <i>Address</i>] <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!amli dns</b> [<b>/s</b>] [<i>Name</i> | <i>Address</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>/s</b></DT>
+<DD>Causes the entire namespace subtree under the specified object to be displayed recursively.</DD>
+<DT><i>Name</i></DT>
+<DD>Specifies the namespace path.</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the namespace node.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Acpikd.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If neither <i>Name</i> nor <i>Address</i> is specified, the entire ACPI namespace tree is displayed recursively. The <b>/s</b> parameter is always assumed in this case, even if it is not specified.</P>
+<P>This command is useful for determining what a particular namespace object is &#8212; whether it is a method, a field unit, a device, or another type of object.</P>
+<P>Without the <b>/s</b> parameter, this extension is equivalent to the <a href="r33_exts_acpi_446101d3-76b3-4b14-a1a5-b48309a78155.xml.htm"><b>!nsobj</b></a> extension. With the <b>/s</b> parameter, it is equivalent to the <a href="r33_exts_acpi_b67c691b-677c-4f0d-bc5a-a6e3980362c2.xml.htm"><b>!nstree</b></a> extension.</P>
+<P>Here are some examples. The following command displays the namespace for the object <b>bios</b>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>AMLI(? for help)-&gt; <b>dns \bios</b><BR><BR>ACPI Name Space: \BIOS (80E5F378)<BR>OpRegion(BIOS:RegionSpace=SystemMemory,Offset=0xfcb07500,Len=2816)<BR><BR></nobr></P>
+<P>The following command displays the namespace for the object _BST, and the tree subordinate to it:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli dns /s \_sb.pci0.isa.bat1._bst</b><BR><BR>ACPI Name Space: \_SB.PCI0.ISA.BAT1._BST (c29c2044)<BR>Method(_BST:Flags=0x0,CodeBuff=c29c20a5,Len=103)<BR><BR></nobr></P>
+<P>To display the namespace for the device BAT1, type:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli dns /s \_sb.pci0.isa.bat1</b><BR><BR></nobr></P>
+<P>To display the namespace of everything subordinate to the DOCK device, type:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli dns /s \_sb.pci0.dock</b><BR><BR></nobr></P>
+<P>To display the namespace subordinate to the _DCK method, type:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli dns /s \_sb.pci0.dock._dck</b><BR><BR></nobr></P>
+<P>To display the entire namespace, type:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli dns</b><BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about related commands and their uses, see <a href="t11_rpc_acpi_26cfe8b9-d3ee-4915-b8b5-f2335c18d782.xml.htm">The AMLI Debugger</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !amli dns RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

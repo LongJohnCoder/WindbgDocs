@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>/nolowmem</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, /nolowmem"><xml><MSHelp:Keyword Index="A" Term="bootini_272231d1-5da0-4c6e-81d0-8ffc72a31635.xml"/>
+<META NAME="MS-HKWD" CONTENT="/nolowmem"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_272231d1-5da0-4c6e-81d0-8ffc72a31635.xml"></A>/nolowmem</H1>
+<P>The <b>/nolowmem</b> parameter loads the operating system, device drivers, and all applications into addresses above the 4 GB boundary, and directs Windows to allocate all memory pools at addresses above the 4 GB boundary. </P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/nolowmem</b> <BR></nobr></P>
+<P></P>
+<H4>Comments</H4>
+<P>This parameter is valid only on boot entries for 32-bit versions of Windows on computers with x86 or x64-based processors, and only when Physical Address Extension (PAE) is enabled.</P>
+<P>This boot parameter is supported only on Windows Server 2003, Windows XP, and Windows 2000.</P>
+<P>On versions of Windows prior to Windows Server 2003 with Service Pack 1, if a boot entry includes both <b>/nolowmem</b> and <b>/3GB</b>, then <b>/nolowmem</b> is ignored. These parameters can be used together in Windows Server 2003 with Service Pack 1.</P>
+<P>On Windows Vista and later versions of Windows, use the <b>NoLowMem</b> element in BCDEdit.</P>
+<H4>Example</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /nolowmem<BR><BR></nobr></P>
+<H4>Bootcfg command</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /raw "\nolowmem" /A /ID 1<BR><BR></nobr></P>
+<H4>See Also</H4>
+<P><a href="bootini_17b4305e-23ac-40ea-99db-4858b29a5d66.xml.htm"><b>/pae</b></a> </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: /nolowmem RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

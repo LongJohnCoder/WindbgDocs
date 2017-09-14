@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ExtRemoteTypedList::ExtRemoteTypedList</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ExtRemoteTypedList::ExtRemoteTypedList"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="ExtRemoteTypedList::ExtRemoteTypedList"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_c5d92879-1cfb-4ef6-b2ee-1fc4ecd7a1bd.xml"/>
+<META NAME="MS-HKWD" CONTENT="ExtRemoteTypedList::ExtRemoteTypedList">
+<META NAME="MS-HKWD" CONTENT="ExtRemoteTypedList (ExtRemoteTypedList)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_c5d92879-1cfb-4ef6-b2ee-1fc4ecd7a1bd.xml"></A>ExtRemoteTypedList::ExtRemoteTypedList</H1>
+<P><P>The <b>ExtRemoteTypedList</b> constructors create a new instance that wraps a typed singly-linked or doubly-linked list. </P>
+<P></P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>  ExtRemoteTypedList(</b><BR><b>    IN ULONG64  </b><i>Head</i><b>,</b><BR><b>    IN PCSTR  </b><i>Type</i><b>,</b><BR><b>    IN PCSTR  </b><i>LinkField</i><b>,</b><BR><b>    IN ULONG64  </b><i>TypeModBase</i><b> = 0,</b><BR><b>    IN ULONG  </b><i>TypeId</i><b> = 0,</b><BR><b>    IN OUT PULONG64  </b><i>CacheCookie</i><b> = NULL,</b><BR><b>    IN bool  </b><i>Double</i><b> = false</b><BR><b>    ) throw(...)</b><BR><BR><b>  ExtRemoteTypedList(</b><BR><b>    IN ExtRemoteData &amp;  </b><i>Head</i><b>,</b><BR><b>    IN PCSTR  </b><i>Type</i><b>,</b><BR><b>    IN PCSTR  </b><i>LinkField</i><b>,</b><BR><b>    IN ULONG64  </b><i>TypeModBase</i><b> = 0,</b><BR><b>    IN ULONG  </b><i>TypeId</i><b> = 0,</b><BR><b>    IN OUT OPTIONAL PULONG64  </b><i>CacheCookie</i><b> = NULL,</b><BR><b>    IN bool  </b><i>Double</i><b> = false</b><BR><b>    ) throw(...)</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Head</i></DT>
+<DD>The location, in the target's memory, of the head of the list.  The head is not considered to be an item in the list.  The type of the head of the list is SINGLE_LIST_ENTRY or LIST_ENTRY.</DD>
+<DT><i>Type</i></DT>
+<DD>The type name for the list items.  <i>Type</i> can include a module qualifier (for example, <b>mymodule!mytype)</b>.  If <i>TypeId</i> is not zero, <i>Type</i> is not used.</DD>
+<DT><i>LinkField</i></DT>
+<DD>The name of the field of the typed data structure that contains the pointer to the next list item.  This is either the SINGLE_LIST_ENTRY structure or the LIST_ENTRY structure embedded in the list item.</DD>
+<DT><i>TypeModBase</i></DT>
+<DD>The location in the target's memory of the base address of the module that contains the type specified by <i>TypeId</i>.  If <i>TypeId</i> is zero, <i>TypeModBase</i> is not used.</DD>
+<DT><i>TypeId</i></DT>
+<DD>The type ID of the type relative to the module specified by <i>TypeModBase</i>.  If <i>TypeId</i> is zero, <i>Type</i> is used to specify the type of the list items.</DD>
+<DT><i>CacheCookie</i></DT>
+<DD>The cache cookie to use for caching the type information.  If <i>CacheCookie</i> is NULL, the debugger engine will search for the type information each time.<P>For more information about <i>CacheCookie</i>, see <a href="engextcpp_ref_8eec6840-f460-44cd-87dc-c04df2bd477b.xml.htm"><b>ExtRemoteTyped::Set</b></a>.</P>
+</DD>
+<DT><i>Double</i></DT>
+<DD>Specifies whether the list is singly-linked or doubly-linked.  If <i>Double</i> is <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">true</span>, the list is doubly-linked.  If <i>Double</i> is <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">false</span>, the list is singly-linked.</DD>
+</DL>
+<H4>Requirements</H4>
+<p><b>Headers:</b> Defined in <i>Engextcpp.hpp</i>.  Include <i>Engextcpp.hpp</i>.</p>
+<H4>See Also</H4>
+<P><a href="engextcpp_ref_8eec6840-f460-44cd-87dc-c04df2bd477b.xml.htm"><b>ExtRemoteTyped::Set</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ExtRemoteTypedList::ExtRemoteTypedList RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

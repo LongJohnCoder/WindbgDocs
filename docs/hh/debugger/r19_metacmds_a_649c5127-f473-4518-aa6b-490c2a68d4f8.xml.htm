@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.context (Set User-Mode Address Context)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .context (Set User-Mode Address Context)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_649c5127-f473-4518-aa6b-490c2a68d4f8.xml"/>
+<META NAME="MS-HKWD" CONTENT=".context (Set User-Mode Address Context) command">
+<META NAME="MS-HKWD" CONTENT="Set User-Mode Address Context (.context) command">
+<META NAME="MS-HKWD" CONTENT="addresses, Set User-Mode Address Context (.context) command">
+<META NAME="MS-HKWD" CONTENT="context, Set User-Mode Address Context (.context) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_649c5127-f473-4518-aa6b-490c2a68d4f8.xml"></A>.context (Set User-Mode Address Context)</H1>
+<P>The <b>.context</b> command specifies which page directory of a process will be used for the user-mode address context, or displays the current user-mode address context.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.context</b> [<i>PageDirectoryBase</i>] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>PageDirectoryBase</i></DT>
+<DD>Specifies the base address for a page directory of a desired process. The user-mode address context will be set to this page directory. If <i>PageDirectoryBase</i> is zero, the user-mode address context will be set to the page directory for the current system state. If <i>PageDirectoryBase</i> is omitted, the current user-mode address context is displayed.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">kernel mode only    </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all     </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Generally, when you are doing kernel debugging, the only visible user-mode address space is the one associated with the current process.</P>
+<P>The <b>.context</b> command instructs the kernel debugger to use the specified page directory as the <i>user-mode address context</i>. After this command is executed, the debugger will have access to this virtual address space. The page tables for this address space will be used to interpret all user-mode memory addresses. This allows you to read and write to this memory.</P>
+<P>The <a href="r21_metacmds_l_b8eace76-f3f6-4f0c-96fc-0c9d8dd572cc.xml.htm"><b>.process (Set Process Context)</b></a> command has a similar effect. However, the <b>.context</b> command sets the user-mode address context to a specific page directory, while the <b>.process</b> command sets the <i>process context</i> to a specific process. On an x86 processor, these two commands have essentially the same effect. However, on an Itanium processor, a single process may have more than one page directory. In this case, the <b>.process</b> command is more powerful, because it will allow access to all the page directories associated with a process. See <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#e761ea09-6dde-4444-9472-9e71933f4e71">Process Context</a> for more details.</P>
+<P>If you are doing live debugging, you should issue a <a href="r19_metacmds_a_f283d0a1-e577-4429-9ab3-001663afd9f3.xml.htm"><b>.cache forcedecodeuser</b></a> command in addition to the <b>.context</b> command. This forces the debugger to look up the physical addresses of the memory space needed. (This can be slow, because it often means a huge amount of data must be transferred across the debug cable.)</P>
+<P>If you are doing crash dump debugging, the <b>.cache</b> command is not needed. However, you will not have access to any portions of the virtual address space of the user-mode process that were paged to disk when the crash occurred.</P>
+<P>Here is an example. Use the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a> extension to find the directory base for the desired process:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!process 0 0</b><BR>**** NT ACTIVE PROCESS DUMP ****<BR>PROCESS fe5039e0  SessionId: 0  Cid: 0008    Peb: 00000000  ParentCid: 0000<BR>    DirBase: 00030000  ObjectTable: fe529b68  TableSize:  50.<BR>    Image: System<BR><BR><b>...</b><BR><BR>PROCESS fe3c0d60  SessionId: 0  Cid: 0208    Peb: 7ffdf000  ParentCid: 00d4<BR>    <b>DirBase: 0011f000</b>  ObjectTable: fe3d0f48  TableSize:  30.<BR>    Image: regsvc.exe<BR><BR></nobr></P>
+<P>Now use the <b>.context</b> command with this page directory base.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>.context 0011f000</b><BR><BR></nobr></P>
+<P>This enables you to examine the address space in various ways. For example, here is the output of the <a href="r25_exts_general_he_c7e783ec-cfb1-42a0-8da0-fdf0334e5bbd.xml.htm"><b>!peb</b></a> extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!peb</b><BR>PEB at 7FFDF000<BR>    InheritedAddressSpace:    No<BR>    ReadImageFileExecOptions: No<BR>    BeingDebugged:            No<BR>    ImageBaseAddress:         01000000<BR>    Ldr.Initialized: Yes<BR>    Ldr.InInitializationOrderModuleList: 71f40 . 77f68<BR>    Ldr.InLoadOrderModuleList: 71ec0 . 77f58<BR>    Ldr.InMemoryOrderModuleList: 71ec8 . 77f60<BR>        01000000 C:\WINNT\system32\regsvc.exe<BR>        77F80000 C:\WINNT\System32\ntdll.dll<BR>        77DB0000 C:\WINNT\system32\ADVAPI32.dll<BR>        77E80000 C:\WINNT\system32\KERNEL32.DLL<BR>        77D40000 C:\WINNT\system32\RPCRT4.DLL<BR>        77BE0000 C:\WINNT\system32\secur32.dll<BR>    SubSystemData:     0<BR>    ProcessHeap:       70000<BR>    ProcessParameters: 20000<BR>        WindowTitle:  'C:\WINNT\system32\regsvc.exe'<BR>        ImageFile:    'C:\WINNT\system32\regsvc.exe'<BR>        CommandLine:  'C:\WINNT\system32\regsvc.exe'<BR>        DllPath:     'C:\WINNT\system32;.;C:\WINNT\System32;C:\WINNT\system;C:\WINNT;C:\WINNT\system32;C:\WINNT;C:\WINNT\System32\Wbem;C:\PROGRA~1\COMMON~1\AUTODE~1'<BR>        Environment:  0x10000<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information about the user-mode address context and other context settings, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .context (Set User-Mode Address Context) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xF5: FLTMGR_FILE_SYSTEM</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xF5: FLTMGR_FILE_SYSTEM"><xml><MSHelp:Keyword Index="A" Term="t07_bugs_E0_e653e2fb-53e2-4ce3-807e-acf239d13bbf.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xF5: FLTMGR_FILE_SYSTEM">
+<META NAME="MS-HKWD" CONTENT="FLTMGR_FILE_SYSTEM"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t07_bugs_E0_e653e2fb-53e2-4ce3-807e-acf239d13bbf.xml"></A>Bug Check 0xF5: FLTMGR_FILE_SYSTEM</H1>
+<P>The FLTMGR_FILE_SYSTEM bug check has a value of 0x000000F5. This indicates that an unrecoverable failure occurred in the Filter Manager.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen. Parameter 1 indicates the type of violation. The meaning of the other parameters depends on the value of Parameter 1.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x66</TD>
+<TD Width="">Pointer to the callback data structure for the operation.</TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width="">The minifilter returned FLT_PREOP_SUCCESS_WITH_CALLBACK or FLT_PREOP_SYNCHRONIZE from a preoperation callback, but did not register a corresponding postoperation callback.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x67</TD>
+<TD Width="">Pointer to the callback data structure for the operation.</TD>
+<TD Width="">0</TD>
+<TD Width="">Error NTSTATUS code for the operation</TD>
+<TD Width="">An internal object ran out of space, and the system is unable to allocate new space.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x68</TD>
+<TD Width="">Handle for the object.</TD>
+<TD Width="">0</TD>
+<TD Width="">NTSTATUS code returned by <b>ObReferenceObjectByHandle</b></TD>
+<TD Width="">Unexpected failure referencing an object.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6A</TD>
+<TD Width="">File object pointer for the file.</TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width="">The file-open or file-create request could not be canceled, because one or more handles have been created for the file.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6B</TD>
+<TD Width="">Frame ID</TD>
+<TD Width="">0</TD>
+<TD Width="">Thread</TD>
+<TD Width="">Invalid BACKPOCKET IRPCTRL state.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6C</TD>
+<TD Width="">Frame ID</TD>
+<TD Width="">BackPocket List</TD>
+<TD Width="">Thread</TD>
+<TD Width="">Too many nested PageFaults for BACKPOCKETED IRPCTR.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6D</TD>
+<TD Width="">Address of the minifilter's context structure</TD>
+<TD Width="">Address of the CONTEXT_NODE structure</TD>
+<TD Width="">0</TD>
+<TD Width="">The context structure was dereferenced too many times. This means that the reference count on the Filter Manager's CONTEXT_NODE structure went to zero while it was still attached to its associated object.<BR><BR><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6E</TD>
+<TD Width="">Address of the minifilter's context structure</TD>
+<TD Width="">Address of the CONTEXT_NODE structure</TD>
+<TD Width="">0</TD>
+<TD Width="">The context structure was referenced after being freed.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>The cause of the problem is indicated by the value of Parameter 1.  See the table in the Parameters section.</P>
+<H4>Resolving the Problem</H4>
+<P>If Parameter 1 equals <b>0x66</b>, you can debug this problem by verifying that your minifilter driver has registered a post-operation callback for this operation. The current operation can be found in the callback data structure. (See Parameter 2.) Use the <b>!fltkd.cbd</b> debugger extension. </P>
+<P>If Parameter 1 equals <b>0x67</b>, you should verify that you do not have a nonpaged pool leak somewhere in the system. </P>
+<P>If Parameter 1 equals <b>0x6A</b>, make sure that your minifilter driver does not reference this file object (see Parameter 2) to get a handle at any point during your minifilter's processing of this operation.</P>
+<P>If Parameter 1 equals <b>0x6B</b> or <b>0x6C</b>, then a non-recoverable internal state error has occurred which will cause the operating system to bug check.</P>
+<P>If Parameter 1 equals<b> 0x6D</b>, make sure that your minifilter driver does not call <b>FltReleaseContext</b> too many times for the given context (see Parameter 2). </P>
+<P>If Parameter 1 equals 0x6E, make sure that your minifilter driver does not call <b>FltReferenceContext</b> after the given context has been deleted (see Parameter 2).</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xF5: FLTMGR_FILE_SYSTEM RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

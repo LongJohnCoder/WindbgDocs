@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Noninvasive Debugging (User Mode)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Noninvasive Debugging (User Mode)"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_284e0db2-ee99-4c59-a6ef-af2557ee719b.xml"/>
+<META NAME="MS-HKWD" CONTENT="process, debugging noninvasively">
+<META NAME="MS-HKWD" CONTENT="noninvasive debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_284e0db2-ee99-4c59-a6ef-af2557ee719b.xml"></A>Noninvasive Debugging (User Mode)</H1>
+<P>If a user-mode application is already running, the debugger can debug it <i>noninvasively</i>. With noninvasive debugging, you do not have as many debugging actions. However, you can minimize the debugger's interference with the target application.</P>
+<P>In noninvasive debugging, the debugger does not actually <i>attach</i> to the target application. The debugger suspends all of the target's threads and has access to the target's memory, registers, and other such information. However, the debugger cannot <i>control </i>the target, so commands like <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> do not work.</P>
+<P>If you try to execute commands that are not permitted during noninvasive debugging, you receive an error message that states, "The debugger is not attached, so process execution cannot be monitored."</P>
+<P>When you end the debugging session, the debugger releases the target application, and the application continues running. You should close the session by using <a href="r17_cmds_i_27fbcb2b-e3e7-470e-bab9-29dd7a115129.xml.htm"><b>q (Quit)</b></a>, <a href="r19_metacmds_a_1174b7a4-f70a-44d2-a43d-163fbe5a8d7e.xml.htm"><b>.detach (Detach from Process)</b></a>, or WinDbg's <a href="r37_gui_2_e7b107b7-14cd-4ba8-9e0c-7930d45f664c.xml.htm"><b>Debug | Detach Debuggee</b></a> or <a href="r37_gui_2_b5acf3a0-cf4a-4664-9c1c-53e8f8c9b1c5.xml.htm"><b>Debug | Stop Debugging</b></a> command. (If you close the debugging session by closing the debugger window or by using the <b>Exit</b> command on the <b>File </b>menu in WinDbg, your target application typically stops responding.)</P>
+<P>Noninvasive debugging is useful if you do not want to end the target application at the end of the session, and the target application is running on Microsoft Windows 2000. (These operating systems do not support detaching from a target that the debugger has actually attached to.) Noninvasive debugging is also useful if the target application has stopped responding and cannot open the break thread that you need to attach.</P>
+<H4>Selecting the Process to Debug</H4>
+<P>You can specify the target application by the process ID (PID) or process name.</P>
+<P>If you specify the application by name, you should use the complete name of the process, including the file name extension. If two processes have the same name, you must use the process ID instead.</P>
+<P>For more information about how to determine the process ID and the process name, see <a href="r04_setup_3_a40111cb-c7c2-451d-b09a-8a2e579f8514.xml.htm">Finding the Process ID</a>.</P>
+<P>The following sections in this topic describe several ways to begin a noninvasive debugging session, organized by the location from which you are starting the session. </P>
+<H4>CDB Command Line</H4>
+<P>To noninvasively debug a running process from the CDB command line, specify the <b>-pv</b> option, the <b>-p</b> option, and the process ID, in the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>cdb -pv -p</b> <i>ProcessID</i> <BR></nobr></P>
+<P>Or, to noninvasively debug a running process by specifying the process name, use the following syntax instead.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>cdb -pv -pn</b> <i>ProcessName</i> <BR></nobr></P>
+<P>There are several other useful command-line options. For more information about the command-line syntax, see <a href="r12_cmdline_3ec269e8-a2d8-43e4-8758-2201481cd323.xml.htm">CDB Command-Line Options</a>.</P>
+<H4>WinDbg Command Line</H4>
+<P>To noninvasively debug a running process from the WinDbg command line, specify the <b>-pv</b> option, the <b>-p</b> option, and the process ID, in the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg -pv -p</b> <i>ProcessID</i> <BR></nobr></P>
+<P>Or, to noninvasively debug a running process by specifying the process name, use the following syntax instead.    </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg -pv -pn</b> <i>ProcessName</i> <BR></nobr></P>
+<P>There are several other useful command-line options. For more information about the command-line syntax, see <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">WinDbg Command-Line Options</a>.</P>
+<H4>WinDbg Menu</H4>
+<P>When WinDbg is in dormant mode, you can noninvasively debug a running process by clicking <b>Attach to a Process</b> on the <b>File </b>menu or by pressing F6.</P>
+<P>When the <b>Attach to Process</b> dialog box appears, select the <b>Noninvasive</b> check box. Then, select the line that contains the process ID and name that you want. (You can also enter the process ID in the <b>Process ID</b> box.) Finally, click <b>OK</b>.</P>
+<H4>Debugger Command Window</H4>
+<P>If the debugger is already active, you can noninvasively debug a running process by using the <a href="r19_metacmds_a_8c6d47be-d1e0-4d39-b0cd-14ac56c87de5.xml.htm"><b>.attach -v (Attach to Process)</b></a> command in the <a href="r05_use_start_7a79993b-70e5-49ef-bca5-095e88ebca78.xml.htm">Debugger Command window</a>.</P>
+<P>You can use the <b>.attach</b> command if the debugger is already debugging one or more processes <i>invasively</i>. You can use this command in CDB if it is dormant, but not in a dormant WinDbg.</P>
+<P>If the <b>.attach -v</b> command is successful, the debugger debugs the specified process the next time that the debugger issues an execution command. Because execution is not permitted during noninvasive debugging, the debugger cannot noninvasively debug more than one process at a time. This restriction also means that using the <b>.attach -v</b> command might make an existing invasive debugging session less useful.</P>
+<H4>Beginning the Debugging Session</H4>
+<P>For more information about how to begin a debugging session, see <a href="r06_use_gui_4b24004a-3b77-4692-b369-dbb122feba7a.xml.htm">Debugger Configuration</a>, <a href="r09_symbols_750b8c7c-1e41-4116-b7d3-ecd4c7fe42ce.xml.htm">Symbols</a>, <a href="r07_use_operation_265193af-6b7a-4832-8785-b58a645547e5.xml.htm">Debugger Operation (General)</a> and <a href="r07_use_operation_167942d3-b143-49df-b4f6-2ca81063bcce.xml.htm">Debugger Operation (User Mode)</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Noninvasive Debugging (User Mode) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

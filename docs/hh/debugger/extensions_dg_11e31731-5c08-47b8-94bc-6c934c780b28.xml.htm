@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Building DbgEng Extensions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Building DbgEng Extensions"><xml><MSHelp:Keyword Index="A" Term="Extensions_DG_11e31731-5c08-47b8-94bc-6c934c780b28.xml"/>
+<META NAME="MS-HKWD" CONTENT="DbgEng Extensions, building">
+<META NAME="MS-HKWD" CONTENT="Build utility (build.exe), building DbgEng extensions"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Extensions_DG_11e31731-5c08-47b8-94bc-6c934c780b28.xml"></A>Building DbgEng Extensions</H1>
+<P>All <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#a1e40118-1d4c-4ebf-8adc-4fe9a9d1a90f">debugger extensions</a> should be compiled and built by using the Build utility.  The Build utility is included in the Windows Driver Kit (WDK), as well as earlier versions of the Windows DDK.</P>
+<P>For documentation on the Build utility, open the WDK documentation, select the <b>Index</b> tab, and type <b>Build utility</b>.</P>
+<P>Note the following points:</P><B></B><UL type="disc">
+<LI>The WDK has several different build environment windows.  Each of these has a corresponding shortcut placed in the <b>Start</b> menu when the WDK is installed. To build a debugger extension, you must use the Windows Server 2003 build environment &#8212; regardless of what platform you will be running the extension on.</LI>
+<LI>The Build utility is usually not able to compile code that is located in a directory path containing spaces. Your extension code should be located in a directory whose full path contains no spaces.  (In particular, this means that if you install Debugging Tools for Windows to the default location &#8212; <i>Program Files\Debugging Tools for Windows</i> &#8212; you will not be able to build the sample extensions.)</LI>
+</UL>
+<P>To build an extension, use the following procedure:</P><B>To build a debugger extension</B><OL type="1">
+<LI>Open the <b>Windows 2003 Server Build Environment</b> window.  (You can choose either the "free" version or the "checked" version &#8212; they will give identical results unless you have put <b>#ifdef DBG</b> statements in your code, because DBG is set to TRUE in the checked build environments.)</LI>
+<LI>Set the %DBGSDK_INC_PATH% and %DBGSDK_LIB_PATH% environment variables to specify the paths to the debugger SDK headers and the debugger SDK libraries, respectively.  If <i>%debuggers%</i> represents the root of your Debugging Tools for Windows installation, these variables should be set as follows:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>set DBGSDK_INC_PATH=</b><i>%debuggers%</i><b>\sdk\inc</b><BR><b>set DBGSDK_LIB_PATH=</b><i>%debuggers%</i><b>\sdk\lib</b><BR><BR></nobr></P>
+<P>If you have moved these headers and libraries to a different location, specify that location instead.</P>
+<P></P>
+</LI>
+<LI>Change the current directory to the directory containing your extension's <i>dirs</i> file or <i>sources</i> file.</LI>
+<LI>Run the Build utility:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>build -cZMg</b><BR><BR></nobr></P>
+</LI>
+</OL>
+<P>For a full explanation of these steps, and for a description of how to create a <i>dirs</i> file and a <i>sources</i> file, see the Build utility documentation in the WDK.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Building DbgEng Extensions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

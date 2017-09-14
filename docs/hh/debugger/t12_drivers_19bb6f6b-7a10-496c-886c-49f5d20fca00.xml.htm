@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Determining the Status of a Device</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Determining the Status of a Device"><xml><MSHelp:Keyword Index="A" Term="t12_drivers_19bb6f6b-7a10-496c-886c-49f5d20fca00.xml"/>
+<META NAME="MS-HKWD" CONTENT="Plug and Play (PnP), device status">
+<META NAME="MS-HKWD" CONTENT="Plug and Play (PnP), device tree">
+<META NAME="MS-HKWD" CONTENT="device status">
+<META NAME="MS-HKWD" CONTENT="device tree"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t12_drivers_19bb6f6b-7a10-496c-886c-49f5d20fca00.xml"></A>Determining the Status of a Device</H1>
+<P>To display the entire device tree, starting with the root, use <b>!devnode 0 1</b>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devnode 0 1</b> <BR><BR></nobr></P>
+<P>Identify the devnode for which you are searching, either by examining the driver or the bus that exposed it.</P>
+<P>The devnode status flags describe the status of the device. For details, see <a href="t12_drivers_79d0e68e-d9ca-4eaa-9140-318a0836d7b3.xml.htm">Device Node Status Flags</a>.</P>
+<P>In the example for the <b>!devnode</b> command in the <a href="t12_drivers_fc31c715-123a-4c51-8946-4141d035fcb4.xml.htm">Extensions for Debugging Plug and Play Drivers</a> section, the on-board serial device was created by the PnP Manager, so the DNF_MADEUP (0x00000020) flag is set.</P>
+<P>The following example shows a device that was created by the PCI bus. This device does not have the DNF_MADEUP flag set.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devnode 0xff0d1588</b><BR><BR>DevNode 0xff0d1588 for PDO 0xff0d1030 at level 0x2<BR>  Parent 0xff0d2e28   Sibling 0xff0d14c8   Child 0xff0c8268<BR>  InterfaceType 0xffffffff  Bus Number 0xfffffff0<BR>  InstancePath is "PCI\VEN_9004&amp;DEV_6178\0&amp;70"<BR>  ServiceName is "aic78xx"<BR>  TargetDeviceNotify List - f 0xff0d15ec  b 0xff0d15ec<BR>  Flags (0x6000120b)  DNF_PROCESSED, DNF_STARTED,<BR>                      DNF_ENUMERATED, DNF_RESOURCE_ASSIGNED,<BR>                      DNF_ADDED, DNF_HAS_BOOT_CONFIG<BR>                      Unknown flags 0x40000000<BR>kd&gt; <b>!devobj 0xff0d1030</b><BR><BR>Device object (ff0d1030) is for:<BR> NTPNP_PCI0002 <b>\Driver\PCI</b> DriverObject ff0d2830<BR>Current Irp 00000000 RefCount 0 Type 00000022 Flags 00001040AttachedDev ff0ce710<BR><BR>DevExt ff0d10e8 DevNode ff0d1588<BR>Device queue is not busy.<BR><BR></nobr></P>
+<P><i>Examples</i></P>
+<P>1. A devnode for a device with insufficient resources:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; !devnode 0xff0d06e8 6<BR><BR>DevNode 0xff0d06e8 for PDO 0xff0d07d0 at level 0x3<BR>  Parent 0xff0d1408   Sibling 0000000000   Child 0000000000<BR>  InterfaceType 0xffffffff  Bus Number 0xfffffff0<BR>  InstancePath is "ISAPNP\SUP2171\00000067"<BR>  ServiceName is "Modem"<BR>  TargetDeviceNotify List - f 0xff0d074c  b 0xff0d074c<BR>  Flags (0x60001109)  DNF_PROCESSED, DNF_ENUMERATED,<BR>                      DNF_INSUFFICIENT_RESOURCES, DNF_ADDED,<BR>                      DNF_HAS_BOOT_CONFIG<BR>                      Unknown flags 0x40000000<BR><BR>  IoResList at 0xe133e7a8 : Interface 0x1  Bus 0  Slot 0<BR>    Alternative 0 (Version 1.1)<BR>      Preferred Descriptor 0 - NonArbitrated/ConfigData (0x80) Shared (0x3)<BR>        Flags (0000) -<BR>        Data:              : 0x0 0x61004d 0x680063<BR>      Preferred Descriptor 1 - Port (0x1) Undetermined Sharing (0)<BR>        Flags (0x11) - PORT_IO 16_BIT_DECODE<BR>        0x000008 byte range with alignment 0x000001<BR>        2f8 - 0x2ff<BR>      Preferred Descriptor 2 - Interrupt (0x2) Shared (0x3)<BR>        Flags (0x01) - LATCHED<BR>        0x3 - 0x3<BR><BR></nobr></P>
+<P>Note that the devnode has no CM Resource List, because it is not started and is not using resources, although it has requested resources.</P>
+<P>2. Note that there are no resources stored in this devnode for a legacy driver.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devnode 0xff0d1648 6</b><BR><BR>DevNode 0xff0d1648 for PDO 0xff0d22d0 at level 0x2<BR>  Parent 0xff0d2e28   Sibling 0xff0d1588   Child 0000000000<BR>  InterfaceType 0xffffffff  Bus Number 0xffffffff<BR>  InstancePath is "PCI\VEN_102B&amp;DEV_0519\0&amp;60"<BR>  ServiceName is "mga_mil"<BR>  TargetDeviceNotify List - f 0xff0d16ac  b 0xff0d16ac<BR>  Flags (0x6000500b)  DNF_PROCESSED, DNF_STARTED,<BR>                      DNF_ENUMERATED, DNF_ADDED,<BR>                      DNF_LEGACY_DRIVER, DNF_HAS_BOOT_CONFIG<BR>                      Unknown flags 0x40000000<BR><BR></nobr></P>
+<P>You can retrieve the device object list for the driver for the following types of devices:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!drvobj mga_mil</b><BR><BR>Driver object (ff0bbc10) is for:<BR> \Driver\mga_mil<BR>Driver Extension List: (id , addr)<BR><BR>Device Object list:<BR>ff0bb900<BR><BR></nobr></P>
+<P>You can then dump the data for this device object:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devobj ff0bb900</b><BR><BR>Device object (ff0bb900) is for:<BR> Video0 \Driver\mga_mil DriverObject ff0bbc10<BR>Current Irp 00000000 RefCount 1 Type 00000023 Flags 0000204c<BR>DevExt ff0bb9b8 DevNode ff0bb808<BR>Device queue is not busy.<BR><BR></nobr></P>
+<P>Finally, you can dump the devnode referred by the device object. This devnode is not linked in the device tree. It represents a "pseudo-devnode" used to claim resources for the legacy device. Note the DNF_RESOURCE_REPORTED flag that indicates the device is a reported detected device.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devnode ff0bb808 6</b><BR><BR>DevNode 0xff0bb808 for PDO 0xff0bb900 at level 0xffffffff<BR>  Parent 0xff0daf48   Sibling 0000000000   Child 0000000000<BR>  InterfaceType 0xffffffff  Bus Number 0xffffffff<BR>  TargetDeviceNotify List - f 0xff0bb86c  b 0xff0bb86c<BR>  Flags (0x00000400)  DNF_RESOURCE_REPORTED<BR>  CmResourceList at 0xe12474e8  Version 0.0  Interface 0x5  Bus #0<BR>    Entry 0 - Port (0x1) Shared (0x3)<BR>      Flags (0x01) - PORT_MEMORY PORT_IO<BR>      Range starts at 0x3c0 for 0x10 bytes<BR>    Entry 1 - Port (0x1) Shared (0x3)<BR>      Flags (0x01) - PORT_MEMORY PORT_IO<BR>      Range starts at 0x3d4 for 0x8 bytes<BR>    Entry 2 - Port (0x1) Shared (0x3)<BR>      Flags (0x01) - PORT_MEMORY PORT_IO<BR>      Range starts at 0x3de for 0x2 bytes<BR>    Entry 3 - Memory (0x3) Device Exclusive (0x1)<BR>      Flags (0000) - READ_WRITE<BR>      Range starts at 0x0000000040000000 for 0x4000 bytes<BR>    Entry 4 - Memory (0x3) Device Exclusive (0x1)<BR>      Flags (0000) - READ_WRITE<BR>      Range starts at 0x0000000040800000 for 0x800000 bytes<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Determining the Status of a Device RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

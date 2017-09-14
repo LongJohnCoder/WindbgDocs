@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!stacks</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !stacks"><xml><MSHelp:Keyword Index="A" Term="r29_exts_kernel_Q_e8bc89db-0e90-49e2-9899-99461f099edf.xml"/>
+<META NAME="MS-HKWD" CONTENT="!stacks extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r29_exts_kernel_Q_e8bc89db-0e90-49e2-9899-99461f099edf.xml"></A>!stacks</H1>
+<P><P>The <b>!stacks</b> extension displays information about the kernel stacks.</P>
+</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!stacks</b> [<i>Detail</i>] <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows XP and later:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!stacks</b> [<i>Detail</i> [<i>FilterString</i>]] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Detail</i></DT>
+<DD>Specifies the level of detail to use in the display. The following table lists the valid values for <i>Detail</i>.<B></B><table>
+<TR valign="top">
+<TD Width=""><b>0</b></TD>
+<TD Width="">Displays a summary of the current kernel stacks. This is the default value.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>1</b></TD>
+<TD Width="">Displays stacks that are currently paged out, as well as the current kernel stacks.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>2</b></TD>
+<TD Width="">Displays the full parameters for all stacks, as well as stacks that are currently paged out and the current kernel stacks.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+</DD>
+<DT><i>FilterString</i></DT>
+<DD>(<i>Windows XP and later only</i>) Displays only threads that contain the specified substring in a symbol. </DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!stacks</b> extension gives a brief summary of the state of every thread. You can use this extension instead of the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a> extension to get a quick overview of the system, especially when debugging multithread issues such as resource conflicts or deadlocks.</P>
+<P>The <a href="r31_exts_user_733b518b-1692-48a2-853a-54d192ac48f8.xml.htm"><b>!findstack</b></a> user-mode extension also displays information about particular stacks.</P>
+<P>Here is an example of the simplest <b>!stacks</b> display:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!stacks 0</b><BR>Proc.Thread  .Thread  ThreadState  Blocker<BR>                                     [System]<BR>   4.000050  827eea10  Blocked    +0xfe0343a5<BR><BR>                                     [smss.exe]<BR><BR>                                     [csrss.exe]<BR>  b0.0000a8  82723b70  Blocked    ntoskrnl!_KiSystemService+0xc4<BR>  b0.0000c8  82719620  Blocked    ntoskrnl!_KiSystemService+0xc4<BR>  b0.0000d0  827d5d50  Blocked    ntoskrnl!_KiSystemService+0xc4<BR>.....<BR><BR></nobr></P>
+<P>The first column shows the process ID and the thread ID (separated by a period).</P>
+<P>The second column is the current address of the thread's ETHREAD block.</P>
+<P>The third column shows the state of the thread (initialized, ready, running, standby, terminated, transition, or blocked).</P>
+<P>The fourth column shows the top address on the thread's stack.</P>
+<P>Here are examples of more detailed <b>!stacks</b> output:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!stacks 1</b><BR>Proc.Thread  .Thread  ThreadState  Blocker<BR>                                     [System]<BR>   4.000008  827d0030  Blocked    ntoskrnl!MmZeroPageThread+0x66<BR>   4.000010  827d0430  Blocked    ntoskrnl!ExpWorkerThread+0x189<BR>   4.000014  827cf030  Blocked    Stack paged out<BR>   4.000018  827cfda0  Blocked    Stack paged out<BR>   4.00001c  827cfb10  Blocked    ntoskrnl!ExpWorkerThread+0x189<BR>.....<BR>                                     [smss.exe]<BR>  9c.000098  82738310  Blocked    Stack paged out<BR>  9c.0000a0  826a5190  Blocked    Stack paged out<BR>  9c.0000a4  82739d30  Blocked    Stack paged out<BR><BR>                                     [csrss.exe]<BR>  b0.0000bc  826d0030  Blocked    Stack paged out<BR>  b0.0000b4  826c9030  Blocked    Stack paged out<BR>  b0.0000a8  82723b70  Blocked    ntoskrnl!_KiSystemService+0xc4<BR>.....<BR><BR>kd&gt; <b>!stacks 2</b><BR>Proc.Thread  .Thread  ThreadState  Blocker<BR>                                     [System]<BR>   4.000008  827d0030  Blocked    ntoskrnl!KiSwapThread+0xc5<BR>                                  ntoskrnl!KeWaitForMultipleObjects+0x2b4<BR>                                  ntoskrnl!MmZeroPageThread+0x66<BR>                                  ntoskrnl!Phase1Initialization+0xd82<BR>                                  ntoskrnl!PspSystemThreadStartup+0x4d<BR>                                  ntoskrnl!CreateSystemRootLink+0x3d8<BR>                                  +0x3f3f3f3f<BR>   4.000010  827d0430  Blocked    ntoskrnl!KiSwapThread+0xc5<BR>                                  ntoskrnl!KeRemoveQueue+0x191<BR>.....<BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about kernel stacks, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !stacks RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

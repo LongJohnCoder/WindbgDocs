@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Full User-Mode Dumps</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Full User-Mode Dumps"><xml><MSHelp:Keyword Index="A" Term="r10_dump_files_43030b11-0269-45e7-9b6a-34fcff1e8fe1.xml"/>
+<META NAME="MS-HKWD" CONTENT="dump file, full user-mode dump">
+<META NAME="MS-HKWD" CONTENT="full user-mode dump"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r10_dump_files_43030b11-0269-45e7-9b6a-34fcff1e8fe1.xml"></A>Full User-Mode Dumps</H1>
+<P>A <i>full user-mode dump</i> is the basic user-mode dump file.</P>
+<P>This dump file includes the entire memory space of a process, the program's executable image itself, the handle table, and other information that will be useful to the debugger.</P>
+<P>It is possible to "shrink" a full user-mode dump file into a minidump. Simply load the dump file into the debugger and then use the <a href="r19_metacmds_a_10de67ad-e8c3-42f2-ba9e-95a146a0320d.xml.htm"><b>.dump (Create Dump File)</b></a> command to save a new dump file in minidump format.</P>
+<P class="note"><b>Note</b>  Despite their names, the largest "minidump" file actually contains more information than the full user-mode dump. For example, <b>.dump /mf</b> or <b>.dump /ma</b> will create a larger and more complete file than <b>.dump /f</b>.  </P>
+<P>In user mode, <b>.dump /m</b>[<i>MiniOptions</i>] is the best choice.  The dump files created with this switch can vary in size from very small to very large.  By specifying the proper <i>MiniOptions</i> you can control exactly what information is included.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Full User-Mode Dumps RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

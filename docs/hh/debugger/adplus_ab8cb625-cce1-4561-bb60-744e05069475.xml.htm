@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>MTS or COM+ Server Application Ends Unexpectedly</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, MTS or COM+ Server Application Ends Unexpectedly"><xml><MSHelp:Keyword Index="A" Term="ADPlus_ab8cb625-cce1-4561-bb60-744e05069475.xml"/>
+<META NAME="MS-HKWD" CONTENT="MTS Server application ends unexpectedly">
+<META NAME="MS-HKWD" CONTENT="COM+ Server application ends unexpectedly">
+<META NAME="MS-HKWD" CONTENT="ADPlus, server applications"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_ab8cb625-cce1-4561-bb60-744e05069475.xml"></A>MTS or COM+ Server Application Ends Unexpectedly</H1>
+<P>Custom Component Object Model (COM) components that run inside an MTS or COM+ server application actually run inside a surrogate process (<i>Mtx.exe</i> or <i>Dllhost.exe</i>). These surrogate processes have properties and settings that you can configure through the Component Services Microsoft Management Console (MMC) snap-in.</P>
+<P>By default, MTS or COM+ server applications are configured to shut down after 3 minutes of idle time. To make sure that these processes remain running while the debugger is attached and monitoring for exceptions, you must configure them to "Leave running when idle".</P>
+<P>In addition, MTS and COM+ implement a <i>failfast</i>. This safeguard is designed to fail (or shut down) MTS or COM+ processes that generate unhandled access violations.</P>
+<P>By default, failfast is enabled in MTS or COM+ applications that raise unhandled access violation exceptions. Therefore, a failing MTS/COM+ server application can never raise a second-chance access violation exception. (That is, this application is shut down after the first-chance access violation.) By default, ADPlus is configured to produce a minidump file only on first-chance exceptions.</P>
+<P>To debug an MTS or COM+ server application, do the following:</P><B></B><OL type="1">
+<LI>Configure the MTS or COM+ server application to "Leave running when idle." </LI>
+<LI>Set ADPlus to create a full dump on a first-chance exception. For more information about this configuration, see <a href="adplus_fca9d42a-47f8-4596-ba51-238604e15c04.xml.htm">ADPlus Command-Line Options</a> and <a href="adplus_75cb775e-c52e-4c05-85a6-aa7be34270c5.xml.htm">ADPlus Configuration Files</a>.</LI>
+<LI>Run ADPlus in <a href="adplus_5c0245b0-d5f8-47aa-b73f-86b8d8c6111c.xml.htm">crash mode</a> and wait for the application to fail. </LI>
+</OL>
+<P></P>
+<P>Because MTS and COM+ shut down a server application, and because the process cannot raise a second-chance exception because of the failfast policy, you can obtain only a first-chance access violation memory dump. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: MTS or COM+ Server Application Ends Unexpectedly RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

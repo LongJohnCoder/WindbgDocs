@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>WinDbg Command-Line Options</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, WinDbg Command-Line Options"><xml><MSHelp:Keyword Index="A" Term="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml"/>
+<META NAME="MS-HKWD" CONTENT="command-line options, WinDbg">
+<META NAME="MS-HKWD" CONTENT="WinDbg, command-line options"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_COMMAND_LINE_WINDBG"></a><H1><A NAME="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml"></A>WinDbg Command-Line Options</H1>
+<P><P></P>
+<P><i>First-time users of WinDbg should begin with the </i><a href="r05_use_start_2a697bbe-caeb-49e4-ad14-ce07699d630b.xml.htm"><i>Debugger Operation</i></a><i> section.</i></P>
+<P>The WinDbg command line uses the following syntax:</P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>windbg </b>[ <b>-server</b> <i>ServerTransport</i> | <b>-remote</b> <i>ClientTransport</i> ] [<b>-lsrcpath</b> ]<BR>   [ <b>-premote</b> <i>SmartClientTransport</i> ] [<b>-?</b>] [<b>-ee</b> {<b>masm</b>|<b>c++</b>}] <BR>   [<b>-clines</b> <i>lines</i>] [<b>-b</b>] [<b>-d</b>] [<b>-a</b><i>Extension</i>] [<b>-e</b> <i>Event</i>] <BR>   [<b>-failinc</b>] [<b>-g</b>] [<b>-G</b>] [<b>-hd</b>] [<b>-j</b>] [<b>-n</b>] [<b>-noshell</b>] [<b>-o</b>] <BR>   [<b>-Q</b> | <b>-QY</b>] [<b>-QS</b> | <b>-QSY</b>] [<b>-robp</b>] [<b>-secure</b>] [<b>-ses</b>] [<b>-sdce</b>] <BR>   [<b>-sicv</b>] [<b>-sins</b>] [<b>-snc</b>] [<b>-snul</b>] [<b>-sup</b>] [<b>-sflags 0x</b><i>Number</i>] <BR>   [<b>-T</b> <i>Title</i>] [<b>-v</b>] [<b>-log</b>{<b>o</b>|<b>a</b>} <i>LogFile</i>] [<b>-noinh</b>] <BR>   [<b>-i</b> <i>ImagePath</i>] [<b>-y</b> <i>SymbolPath</i>] [<b>-srcpath</b> <i>SourcePath</i>] <BR>   [<b>-k</b> [<i>ConnectType</i>] | <b>-kl</b> | <b>-kx</b> <i>ExdiOptions</i>] [<b>-c "</b><i>command</i><b>"</b>] <BR>   [<b>-pb</b>] [<b>-pd</b>] [<b>-pe</b>] [<b>-pr</b>] [<b>-pt</b> <i>Seconds</i>] [<b>-pv</b>]<BR>   [<b>-W</b> <i>Workspace</i>] [<b>-WF</b> <i>Filename</i>] [<b>-WX</b>] [<b>-zp</b> <i>PageFile</i>] <BR>   [ <b>-p</b> <i>PID</i> | <b>-pn</b> <i>Name</i> | <b>-psn</b> <i>ServiceName</i> | <b>-z</b> <i>DumpFile</i> | <i>executable</i> ] <BR><BR><b>windbg -I</b>[<b>S</b>] <BR><BR><b>windbg -IU</b> <i>KeyString</i><BR><BR><b>windbg -IA</b>[<b>S</b>] <BR></nobr></P>
+<P></P>
+<P>Descriptions of the WinDbg command-line options follow. All command-line options are case-sensitive except for <b>-j</b>. The initial hyphen can be replaced with a forward-slash (/).</P>
+<P>If the <b>-remote</b> or <b>-server</b> option is used, it must appear before any other options on the command line. If an <i>executable</i> is specified, it must appear last on the command line; any text after the <i>executable</i> name is passed to the executable program as its own command-line parameters.</P>
+<DL><H4>Parameters</H4>
+<DT><b>-server</b> <i>ServerTransport</i></DT>
+<DD>Creates a debugging server that can be accessed by other debuggers. For an explanation of the possible <i>ServerTransport</i> values, see <a href="r08_use_remote_2cf49506-2562-4684-b843-be4726f59691.xml.htm">Activating a Debugging Server</a>. When this parameter is used, it must be the first parameters on the command line. </DD>
+<DT><b>-remote</b> <i>ClientTransport</i></DT>
+<DD>Creates a debugging client, and connects to a debugging server that is already running. For an explanation of the possible <i>ClientTransport</i> values, see <a href="r08_use_remote_d737f4f5-2c99-44cf-b276-0fda82be08c8.xml.htm">Activating a Debugging Client</a>. When this parameter is used, it must be the first parameters on the command line. </DD>
+<DT><b>-premote</b> <i>SmartClientTransport</i></DT>
+<DD>Creates a smart client, and connects to a process server that is already running. For an explanation of the possible <i>SmartClientTransport</i> values, see <a href="r08_use_remote_0ee82577-ed2a-44e7-84a7-1093b2dfa047.xml.htm">Activating a Smart Client</a>.</DD>
+<DT><b>-a</b><i>Extension</i></DT>
+<DD>Sets the default extension DLL. The default is <i>kdextx86.dll</i> or <i>kdexts.dll</i>. There must be no space after the "a", and the <i>.dll</i> file name extension must not be included. For details, and other methods of setting this default, see <a href="r08_use_remote_ac80d1f3-ff3f-4374-9e70-2a73b84ac647.xml.htm">Loading Debugger Extension DLLs</a>.</DD>
+<DT><b>-b</b></DT>
+<DD><i>(Kernel mode only)</i>  This option has two effects:<P>1. The debugger will break into the target computer immediately upon connection.</P>
+<P>2. After a reboot, the debugger will break into the target computer once the kernel is initialized. See <a href="r07_use_operation_8338d017-7a53-4d82-bd91-bd0eaebe319a.xml.htm">Crashing and Rebooting the Target Computer</a> for details and for other methods of changing this status.</P>
+</DD>
+<DT><b>-c "</b><i>command</i><b>"</b></DT>
+<DD>Specifies the initial debugger command to run at start-up. This command must be enclosed in quotation marks. Multiple commands can be separated with semicolons. (If you have a long command list, it may be easier to put them in a script and then use the <b>-c</b> option with the <a href="r15_cmds_a_85f99aae-f246-400c-8d44-625b758a0e10.xml.htm"><b>$&lt;, $&gt;&lt;, $&gt;&lt;, $$&gt;&lt; (Run Script File)</b></a> command.)   <P>If you are starting a debugging client, this command must be intended for the debugging server. Client-specific commands, such as <b>.lsrcpath</b>, are not allowed. </P>
+</DD>
+<DT><b>-clines</b><i> lines</i></DT>
+<DD>Sets the approximate number of commands in the command history which can be accessed during remote debugging. For details, and for other ways to change this number, see <a href="r05_use_start_0d2d0e09-870d-4d87-a7c7-2cac43538545.xml.htm">Using Debugger Commands</a>.</DD>
+<DT><b>-d</b></DT>
+<DD><i>(Kernel mode only)</i>  After a reboot, the debugger will break into the target computer as soon as a kernel module is loaded. (This break is <i>earlier</i> than the break from the <b>-b</b> option.) See <a href="r07_use_operation_8338d017-7a53-4d82-bd91-bd0eaebe319a.xml.htm">Crashing and Rebooting the Target Computer</a> for details and for other methods of changing this status.</DD>
+<DT><b>-e</b> <i>Event</i></DT>
+<DD>Signals the debugger that the specified event has occurred. This option is only used when starting the debugger programmatically.  </DD>
+<DT><b>-ee</b> {<b>masm</b>|<b>c++</b>}</DT>
+<DD>Sets the default expression evaluator. If <b>masm</b> is specified, MASM expression syntax will be used. If <b>c++</b> is specified, C++ expression syntax will be used. If the <b>-ee</b> option is omitted, MASM expression syntax is used as the default. See <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a> for details.</DD>
+<DT><b>-failinc</b></DT>
+<DD>Causes the debugger to ignore any questionable symbols. When debugging a user-mode or kernel-mode minidump file, this option will also prevent the debugger from loading any modules whose images can't be mapped. For details and for other methods of controlling this, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#4cd85e1a-30d1-41d5-b570-ffdf1c02b441">SYMOPT_EXACT_SYMBOLS</a>.</DD>
+<DT><b>-g</b></DT>
+<DD><i>(User mode only)</i>  Ignores the initial breakpoint in target application. This option will cause the target application to continue running after it is started or WinDbg attaches to it, unless another breakpoint has been set. See <a href="r07_use_operation_4d852e32-e333-4f48-a97f-dc9b15419af4.xml.htm">Initial Breakpoint</a> for details.</DD>
+<DT><b>-G</b></DT>
+<DD><i>(User mode only)</i>  Ignores the final breakpoint at process termination. Typically, the debugging session ends during the image run-down process. This option will cause the debugging session to end immediately when the child terminates.</DD>
+<DT><b>-hd</b></DT>
+<DD><i>(Windows XP and later, user mode only)</i>  Specifies that the debug heap should not be used. See <a href="r07_use_operation_984a2aed-0e63-432c-81fd-b03bd183da5d.xml.htm">Behavior of Spawned Processes</a> for details.</DD>
+<DT><b>-I</b>[<b>S</b>]</DT>
+<DD>Installs WinDbg as the postmortem debugger. For details, see <a href="r04_setup_3_40cc08bd-c0da-4d75-90cd-f677b4f63d68.xml.htm">Enabling Postmortem Debugging</a>. After this action is attempted, a success or failure message is displayed. If <b>S</b> is included, this procedure is done silently if it is successful; only failure messages are displayed.<P>The <b>-I</b> parameter must not be used with any other parameters. This command will not actually start WinDbg, although a WinDbg window may appear for a moment.</P>
+</DD>
+<DT><b>-IA</b>[<b>S</b>]</DT>
+<DD>Associates WinDbg with the file extensions <i>.dmp</i>, <i>.mdmp</i>, and <i>.wew</i> in the registry. After this action is attempted, a success or failure message is displayed. If <b>S</b> is included, this procedure is done silently if it is successful; only failure messages are displayed. After this association is made, double-clicking a file with one of these extensions will start WinDbg.    <P>The <b>-IA</b> parameter must not be used with any other parameters.  This command will not actually start WinDbg, although a WinDbg window may appear for a moment.</P>
+</DD>
+<DT><b>-IU </b><i>KeyString</i></DT>
+<DD>Registers debugger remoting as an URL type so that users can auto-launch a debugger remote client with an URL. <i>KeyString</i> has the format <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>remdbgeng</b>://<i>RemotingOption</i></span>. <i>RemotingOption</i> is a string that defines the transport protocol as defined in the topic <a href="r08_use_remote_d737f4f5-2c99-44cf-b276-0fda82be08c8.xml.htm">Activating a Debugging Client</a>. If this action succeeds, no message is displayed; if it fails, an error message is displayed.<P>The <b>-IU</b> parameter must not be used with any other parameters. Although a WinDbg window may appear for a moment, this command will not actually start WinDbg.</P>
+</DD>
+<DT><b>-i</b> <i>ImagePath</i></DT>
+<DD>Specifies the location of the executables that generated the fault. If the path contains spaces, it should be enclosed in quotation marks. For details, and for other ways to change this path, see <a href="r06_use_gui_8f9c224f-0972-4b0f-941d-cfaac48c608c.xml.htm">Executable Image Path</a>.</DD>
+<DT><b>-j</b></DT>
+<DD>Allow journaling.       </DD>
+<DT><b>-k</b> [<i>ConnectType</i>]</DT>
+<DD><i>(Kernel mode only)</i>  Starts a kernel debugging session. For details, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>. If <b>-k</b> is used without any <i>ConnectType</i> options following it, it must be the final entry on the command line.</DD>
+<DT><b>-kl</b></DT>
+<DD><i>(Windows XP and later, kernel mode only)</i>  Starts a kernel debugging session on the same machine as the debugger. For more details, see <a href="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml.htm">Attaching to a Target Computer (Kernel Mode)</a>.</DD>
+<DT><b>-kx</b> <i>ExdiOptions</i></DT>
+<DD><i>(Kernel mode only)</i>  Starts a kernel debugging session using an EXDI driver. EXDI drivers are not described in this documentation. If you have an EXDI interface to your hardware probe or hardware simulator, please contact Microsoft for debugging information.</DD>
+<DT><b>-log</b>{<b>o</b>|<b>a</b>} <i>LogFile</i></DT>
+<DD>Begins logging information to a log file. If the specified log file already exists, it will be overwritten if <b>-logo</b> is used. If <b>loga</b> is used, the output will be appended to the file. For more details, see <a href="r06_use_gui_8de5bdb2-e273-490d-b44f-359fa85f28da.xml.htm">Keeping a Log File</a>.</DD>
+<DT><b>-lsrcpath</b></DT>
+<DD>Sets the local source path for a remote client. This option must follow <b>-remote</b> on the command line.</DD>
+<DT><b>-n</b></DT>
+<DD><i>Noisy symbol load:</i> Enables verbose output from symbol handler. For details and for other methods of controlling this, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#1be46490-3471-415d-a405-14806d2de877">SYMOPT_DEBUG</a>.</DD>
+<DT><b>-noinh</b></DT>
+<DD><i>(User mode only)</i>  Prevents processes created by the debugger from inheriting handles from the debugger. For other methods of controlling this, see <a href="r05_use_start_77acc3de-f774-4eba-8804-ae878cd5e99d.xml.htm">Spawning a New Process (User Mode)</a>.</DD>
+<DT><b>-noprio</b></DT>
+<DD>Prevents any priority change. This parameter will prevent WinDbg from taking priority for CPU time while active.</DD>
+<DT><b>-noshell</b></DT>
+<DD>Prohibits all <b>.shell</b> commands. This prohibition will last as long as the debugger is running, even if a new debugging session is begun. For details, and for other ways to disable shell commands, see <a href="r05_use_start_f999ba17-ca66-4b05-bce4-9bc4671308e3.xml.htm">Using Shell Commands</a>.</DD>
+<DT><b>-o</b></DT>
+<DD><i>(User mode only)</i>  Debugs all processes launched by the target application (child processes). By default, processes created by the one you are debugging will run as they normally do. For other methods of controlling this, see <a href="r05_use_start_77acc3de-f774-4eba-8804-ae878cd5e99d.xml.htm">Spawning a New Process (User Mode)</a>.</DD>
+<DT><b>-p</b> <i>PID</i></DT>
+<DD>Specifies the decimal process ID to be debugged. This is used to debug a process that is already running. For details, see <a href="r05_use_start_93639902-63fa-4e1b-a145-bd91af8eabb8.xml.htm">Attaching to a Running Process (User Mode)</a>.</DD>
+<DT><b>-pb</b></DT>
+<DD><i>(Windows XP and later, user mode only)</i>  Prevents the debugger from requesting an initial break-in when attaching to a target process. This can be useful if the application is already suspended, or if you wish to avoid creating a break-in thread in the target. See <a href="r05_use_start_93639902-63fa-4e1b-a145-bd91af8eabb8.xml.htm">Attaching to a Running Process (User Mode)</a>.</DD>
+<DT><b>-pd</b></DT>
+<DD><i>(Windows XP and later, user mode only)</i>  Causes the target application not to be terminated at the end of the debugging session. See <a href="r07_use_operation_cec0a699-8a28-48a9-b3f8-62271f688f6c.xml.htm">Ending the Debugging Session</a> for details.</DD>
+<DT><b>-pe</b></DT>
+<DD><i>(Windows XP and later, user mode only)</i>  Indicates that the target application is already being debugged. See <a href="r07_use_operation_1d5faf67-01fe-4837-94ec-14e2fd60dea3.xml.htm">Re-attaching to the Target Application</a> for details.</DD>
+<DT><b>-pn</b> <i>Name</i></DT>
+<DD>Specifies the name of the process to be debugged. (This name must be unique.) This is used to debug a process that is already running. For details, see <a href="r05_use_start_93639902-63fa-4e1b-a145-bd91af8eabb8.xml.htm">Attaching to a Running Process (User Mode)</a>.</DD>
+<DT><b>-pr</b></DT>
+<DD><i>(Windows XP and later, user mode only)</i>   Causes the debugger to start the target process running when it attaches to it. This can be useful if the application is already suspended and you wish it to resume execution. See <a href="r05_use_start_93639902-63fa-4e1b-a145-bd91af8eabb8.xml.htm">Attaching to a Running Process (User Mode)</a>.</DD>
+<DT><b>-psn</b> <i>ServiceName</i></DT>
+<DD>Specifies the name of a service contained in the process to be debugged. This is used to debug a process that is already running. For details, see <a href="r05_use_start_93639902-63fa-4e1b-a145-bd91af8eabb8.xml.htm">Attaching to a Running Process (User Mode)</a>.</DD>
+<DT><b>-pt</b> <i>Seconds</i></DT>
+<DD>Specifies the break timeout, in seconds. The default is 30. See <a href="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml.htm">Controlling the Target</a> for details. </DD>
+<DT><b>-pv</b></DT>
+<DD><i>(User mode only)</i>  Specifies that the debugger should attach to the target process noninvasively. For details, see <a href="r05_use_start_284e0db2-ee99-4c59-a6ef-af2557ee719b.xml.htm">Noninvasive Debugging (User Mode)</a>.</DD>
+<DT><b>-Q</b></DT>
+<DD>Suppresses the "Save Workspace?" dialog box. Workspaces are not automatically saved. See <a href="r06_use_gui_913ac9c6-536d-45c5-91b7-61369b2d2854.xml.htm">Using Workspaces</a> for details.</DD>
+<DT><b>-QS</b></DT>
+<DD>Suppresses the "Reload Source?" dialog box. Source files are not automatically reloaded.</DD>
+<DT><b>-QSY</b></DT>
+<DD>Suppresses the "Reload Source?" dialog box and automatically reloads source files.</DD>
+<DT><b>-QY</b></DT>
+<DD>Suppresses the "Save Workspace?" dialog box and automatically saves workspaces. See <a href="r06_use_gui_913ac9c6-536d-45c5-91b7-61369b2d2854.xml.htm">Using Workspaces</a> for details.</DD>
+<DT><b>-robp</b></DT>
+<DD>This allows CDB to set a breakpoint on a read-only memory page. (The default is for such an operation to fail.)    </DD>
+<DT><b>-sdce</b></DT>
+<DD>Causes the debugger to display <b>File access error</b> messages during symbol load. For details and for other methods of controlling this, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#50845eb8-f7c5-46d4-b4a3-8e50d42224cc">SYMOPT_FAIL_CRITICAL_ERRORS</a>.</DD>
+<DT><b>-secure</b></DT>
+<DD>Activates <a href="r11_security_c67f1beb-2dab-4e98-aa23-02facc89a8f1.xml.htm">Secure Mode</a>.</DD>
+<DT><b>-ses</b></DT>
+<DD>Causes the debugger to perform a strict evaluation of all symbol files and ignore any questionable symbols. For details and for other methods of controlling this, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#4cd85e1a-30d1-41d5-b570-ffdf1c02b441">SYMOPT_EXACT_SYMBOLS</a>.</DD>
+<DT><b>-sflags 0x</b><i>Number</i></DT>
+<DD>Sets all the symbol handler options at once. <i>Number</i> should be a hexadecimal number prefixed with <b>0x</b> &#8212; a decimal without the <b>0x</b> is permitted, but the symbol options are binary flags and therefore hexadecimal is recommended. This option should be used with care, since it will override all the symbol handler defaults. For details, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm">Setting Symbol Options</a>.</DD>
+<DT><b>-sicv</b></DT>
+<DD>Causes the symbol handler to ignore the CV record. For details and for other methods of controlling this, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#3d327ef3-57f6-4476-81ba-99f1536f6bf2">SYMOPT_IGNORE_CVREC</a>.</DD>
+<DT><b>-sins</b></DT>
+<DD>Causes the debugger to ignore the symbol path and executable image path environment variables. For details, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#dccc81ec-f693-4796-bac2-b62a28a55174">SYMOPT_IGNORE_NT_SYMPATH</a>.</DD>
+<DT><b>-snc</b></DT>
+<DD>Causes the debugger to turn off C++ translation. For details and for other methods of controlling this, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#685917f5-f74d-4929-a590-e1da0cd7bbd3">SYMOPT_NO_CPP</a>.</DD>
+<DT><b>-snul</b></DT>
+<DD>Disables automatic symbol loading for unqualified names. For details and for other methods of controlling this, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#8aebbb32-4c91-43af-ad23-2bdbcc7d5520">SYMOPT_NO_UNQUALIFIED_LOADS</a>.</DD>
+<DT><b>-srcpath</b> <i>SourcePath</i></DT>
+<DD>Specifies the source file search path. Separate multiple paths with a semicolon (<b>;</b>). If the path contains spaces, it should be enclosed in quotation marks. For details, and for other ways to change this path, see <a href="r06_use_gui_b85f4b8e-eb5f-4502-9a0e-92d84cd3d8f1.xml.htm">Source Path</a>.</DD>
+<DT><b>-sup</b></DT>
+<DD>Causes the symbol handler to search the public symbol table during every symbol search. For details and for other methods of controlling this, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#fa4f74ce-fe78-49dc-94cc-3070af1c8010">SYMOPT_AUTO_PUBLICS</a>.    </DD>
+<DT><b>-T</b> <i>Title</i></DT>
+<DD>Sets WinDbg window title.</DD>
+<DT><b>-v</b></DT>
+<DD>Enables verbose output from debugger.</DD>
+<DT><b>-W</b> <i>Workspace</i></DT>
+<DD>Loads the given named workspace. If the workspace name contains spaces, enclose it in quotation marks. If no workspace of this name exists, you will be given the option of creating a new workspace with this name or abandoning the load attempt. For details, see <a href="r06_use_gui_913ac9c6-536d-45c5-91b7-61369b2d2854.xml.htm">Using Workspaces</a>.</DD>
+<DT><b>-WF</b> <i>Filename</i></DT>
+<DD>Loads the workspace from the given file. <i>Filename</i> should include the file and the extension (usually <i>.wew</i>). If the workspace name contains spaces, enclose it in quotation marks. If no workspace file with this name exists, you will be given the option of creating a new workspace file with this name or abandoning the load attempt. For details, see <a href="r06_use_gui_913ac9c6-536d-45c5-91b7-61369b2d2854.xml.htm">Using Workspaces</a>.</DD>
+<DT><b>-WX</b></DT>
+<DD>Disables automatic workspace loading. For details, see <a href="r06_use_gui_913ac9c6-536d-45c5-91b7-61369b2d2854.xml.htm">Using Workspaces</a>.</DD>
+<DT><b>-y</b> <i>SymbolPath</i></DT>
+<DD>Specifies the symbol search path. Separate multiple paths with a semicolon (<b>;</b>). If the path contains spaces, it should be enclosed in quotation marks. For details, and for other ways to change this path, see <a href="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml.htm">Symbol Path</a>.</DD>
+<DT><b>-z</b> <i>DumpFile</i></DT>
+<DD>Specifies the name of a crash dump file to debug. If the path and file name contain spaces, this must be surrounded by quotation marks. It is possible to open several dump files at once by including multiple <b>-z</b> options, each followed by a different <i>DumpFile</i> value. For details, see <a href="r10_dump_files_9de6df9c-6d2e-45d1-a562-144f5c70327b.xml.htm">Analyzing a User-Mode Dump File with WinDbg</a> or <a href="r10_dump_files_9e36726a-43e5-4d7a-86e4-651808583c6e.xml.htm">Analyzing a Kernel-Mode Dump File with WinDbg</a>.</DD>
+<DT><b>-zp</b> <i>PageFile</i></DT>
+<DD>Specifies the name of a modified page file. This is useful if you are debugging a dump file and want to use the <a href="r21_metacmds_l_f15dd6af-7557-480e-be99-2a30030f6758.xml.htm"><b>.pagein (Page In Memory)</b></a> command. You cannot use <b>-zp</b> with a standard Windows page file &#8212; only specially-modified page files can be used.    </DD>
+<DT><i>executable</i></DT>
+<DD>Specifies the command line of an executable process. This is used to launch a new process and debug it. This has to be the final item on the command line. All text after the executable name is passed to the executable as its argument string. For details, see <a href="r05_use_start_77acc3de-f774-4eba-8804-ae878cd5e99d.xml.htm">Spawning a New Process (User Mode)</a>.</DD>
+<DT><b>-?</b></DT>
+<DD>Pops up this HTML Help window.<P></P>
+<P>When you are running the debugger from the command line, specify arguments for the target application after application's file name. For instance:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>windbg myexe <i>arg1</i> <i>arg2</i><BR><BR></nobr></P>
+<P></P>
+<P></P>
+</DD>
+</DL>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: WinDbg Command-Line Options RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

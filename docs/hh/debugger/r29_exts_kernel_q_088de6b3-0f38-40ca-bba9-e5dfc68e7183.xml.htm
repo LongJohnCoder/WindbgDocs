@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!sprocess</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !sprocess"><xml><MSHelp:Keyword Index="A" Term="r29_exts_kernel_Q_088de6b3-0f38-40ca-bba9-e5dfc68e7183.xml"/>
+<META NAME="MS-HKWD" CONTENT="!sprocess extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r29_exts_kernel_Q_088de6b3-0f38-40ca-bba9-e5dfc68e7183.xml"></A>!sprocess</H1>
+<P>The <b>!sprocess</b> extension displays information about the specified session process, or about all processes in the specified session.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!sprocess</b> <i>Session</i> [<i>Flags</i> [<i>ImageName</i>]] <BR><b>!sprocess -?</b><BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Session</i></DT>
+<DD>Specifies the session that owns the desired process. <i>Session</i> is always interpreted as a decimal number. <P><i>Session</i> can have the following values:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>-1</b></TD>
+<TD Width="">Use current session. This is the default.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-2</b></TD>
+<TD Width="">Use <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#43042cf2-633d-439a-bd79-904c60de1303">session context</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-4</b></TD>
+<TD Width="">Display all processes by session.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies the level of detail in the display. <i>Flags</i> can be any combination of the following bits. The default is 0. <B></B><table>
+<TR valign="top">
+<TD Width="">0x0</TD>
+<TD Width="">Display minimal information.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 0 (0x1)</TD>
+<TD Width="">Display time and priority statistics.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 1 (0x2)</TD>
+<TD Width="">Adds to the display a list of threads and events associated with the process and the wait states of the threads.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 2 (0x4)</TD>
+<TD Width="">Adds to the display a list of threads associated with the process. If this bit is used without Bit 1 (0x2), each thread is displayed on a single line. If this is included with Bit 1, each thread is displayed with a stack trace.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 3 (0x8)</TD>
+<TD Width="">Adds to the display of each function the return address, the stack pointer and, on Itanium-based systems, the <b>bsp</b> register value. It suppresses the display of function arguments.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Bit 4 (0x10)</TD>
+<TD Width="">Display only the return address of each function. Suppress the arguments and stack pointers.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+</DD>
+<DT><i>ImageName</i></DT>
+<DD>Specifies the name of the process to be displayed. All processes whose executable image names match <i>ImageName</i> are displayed. The image name must match that in the EPROCESS block. In general, this is the executable name that was invoked to start the process, including the file extension (usually <i>.exe</i>), and truncated after the fifteenth character. There is no way to specify an image name that contains a space. </DD>
+<DT><b>-?</b></DT>
+<DD>Displays help for this extension in the Debugger Command window. This help text has some omissions.   <P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The output of this extension is similar to that of <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a>, except that the addresses of _MM_SESSION_SPACE and _MMSESSION are displayed as well.</P>
+<H4>Additional Information</H4>
+<P>For information about sessions and processes in kernel mode, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>. For more information about analyzing processes and threads, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !sprocess RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

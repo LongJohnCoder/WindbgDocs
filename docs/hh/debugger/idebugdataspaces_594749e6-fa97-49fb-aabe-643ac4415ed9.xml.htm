@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetValidRegionVirtual</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetValidRegionVirtual"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetValidRegionVirtual"/>
+<MSHelp:Keyword Index="A" Term="IDebugDataSpaces_594749e6-fa97-49fb-aabe-643ac4415ed9.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugDataSpaces::GetValidRegionVirtual method">
+<META NAME="MS-HKWD" CONTENT="GetValidRegionVirtual (IDebugDataSpaces) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugDataSpaces_594749e6-fa97-49fb-aabe-643ac4415ed9.xml"></A>GetValidRegionVirtual</H1>
+<P><P>The <b>GetValidRegionVirtual</b> method locates the first valid region of memory in a specified memory range.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugDataSpaces4::GetValidRegionVirtual(</b><BR><b>    IN ULONG64  </b><i>Base</i><b>,</b><BR><b>    IN ULONG  </b><i>Size</i><b>,</b><BR><b>    OUT PULONG64  </b><i>ValidBase</i><b>,</b><BR><b>    OUT PULONG  </b><i>ValidSize</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Base</i></DT>
+<DD>Specifies the address of the beginning of the memory range to search for valid memory.</DD>
+<DT><i>Size</i></DT>
+<DD>Specifies the size, in bytes, of the memory range to search.</DD>
+<DT><i>ValidBase</i></DT>
+<DD>Receives the address of the beginning of the found valid memory.</DD>
+<DT><i>ValidSize</i></DT>
+<DD>Receives the size, in bytes, of the valid memory.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetValidRegionVirtual</b> is available in <b>IDebugDataSpaces4</b> and later versions.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugdataspaces_9308b61e-2e9a-4e17-a918-8af4c1b132b8.xml.htm"><b>GetNextDifferentlyValidOffsetVirtual</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetValidRegionVirtual RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

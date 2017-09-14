@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Troubleshooting Hyper-V Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Troubleshooting Hyper-V Debugging"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_217414b4-2715-44b8-8522-56f9a76d1419.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_217414b4-2715-44b8-8522-56f9a76d1419.xml"></A>Troubleshooting Hyper-V Debugging</H1>
+<P>This section discusses some problems that can arise during Hyper-V debugging.</P>
+<H4>Cabling and Configuration Problems</H4>
+<P>If there is no connection string when the root partition starts up, this is usually caused by a cabling or configutation issue.  For example, output such as the following might be displayed:  </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Waiting to reconnect...<BR>Connected to Windows 6001 x64 target, ptr64 TRUE<BR>Kernel Debugger connection established.<BR>Symbol search path is: c:\mysymbols\<BR>Executable search path is:<BR>Loading symbols for fffff800`01602000     ntkrnlmp.exe -&gt;   ntkrnlmp.exe<BR>ModLoad: fffff800`01602000 fffff800`01b17000   ntkrnlmp.exe<BR>Windows Kernel Version 6001 MP (1 procs) Free x64<BR></nobr></P>
+<P>To address this problem, check the configuration of the root partition by typing <b>bcdedit</b> at a command prompt, and verify that the values are correct.</P>
+<P></P>
+<H4>Vmdemux Problems</H4>
+<P>If you restart vmdemux (virtual machine demultiplexer) after you have begun debugging Windows hypervisor, you must add <nobr><b>-channel 0</b></nobr> to its command-line options in order to have the hypervisor channel re-created. This is typically done automatically by Windows hypervisor, but in this case it is not possible, because Windows hypervisor is already being debugged.  </P>
+<P>For a full list of the VMDemux command-line options, type <nobr><b>vmdemux -?</b></nobr> at the command prompt.  </P>
+<P></P>
+<H4>Problems with Unmodified Partitions</H4>
+<P>If you have already set up Hyper-V debugging across a null-modem cable, and have copied the <i>Kdhvcom.dll</i> file to the root partition, and then you later restart the target computer in another partition that does not have this file installed, the debugger may freeze.  In this case, restart vmdemux. This problem arises because unmodified partitions cannot handle multiplexed traffic. Typically, vmdemux closes down all the pipes on a clean shutdown. However, a non-clean shutdown, such as doing a hard restart, is not detectable. </P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Troubleshooting Hyper-V Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

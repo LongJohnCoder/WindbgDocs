@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SetNextEventIndex</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SetNextEventIndex"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="SetNextEventIndex"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_9a902b9c-c621-4d71-bae7-d3fd288b1cd8.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::SetNextEventIndex method">
+<META NAME="MS-HKWD" CONTENT="SetNextEventIndex (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_9a902b9c-c621-4d71-bae7-d3fd288b1cd8.xml"></A>SetNextEventIndex</H1>
+<P><P>The <b>SetNextEventIndex</b> method sets the next <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#2a8fdab1-9104-4107-b188-c3879a3c4a66">current target</a> by selecting the event from the static list of events for the target, if such a list exists.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl3::SetNextEventIndex(</b><BR><b>    IN ULONG  </b><i>Relation</i><b>,</b><BR><b>    IN ULONG  </b><i>Value</i><b>,</b><BR><b>    OUT PULONG  </b><i>NextIndex</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Relation</i></DT>
+<DD>Specifies how to interpret <i>Value</i> when setting the index of the next event.  Possible values are: DEBUG_EINDEX_FROM_START, DEBUG_EINDEX_FROM_END, and DEBUG_EINDEX_FROM_CURRENT.</DD>
+<DT><i>Value</i></DT>
+<DD>Specifies the index of the next event relative to the first, last, or current event.  The interpretation of <i>Value</i> depends on the value of <i>Relation</i>, as follows.<B></B><table>
+<TR valign="top">
+<TH Width="">Value of <i>Relation</i></TH>
+<TH Width="">Next Event Index</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_EINDEX_FROM_START</TD>
+<TD Width=""><i>Value</i>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_EINDEX_FROM_END</TD>
+<TD Width="">Number of events minus <i>Value</i>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_EINDEX_FROM_CURRENT</TD>
+<TD Width="">The current event index plus <i>Value</i>.</TD>
+</TR>
+</table>
+<P></P>
+<P>The resulting index must be greater than zero and one less than the number of events returned by <a href="idebugcontrol_520cbec0-e8b3-49d1-9938-a8f496585758.xml.htm"><b>GetNumberEvents</b></a>.</P>
+</DD>
+<DT><i>NextIndex</i></DT>
+<DD>Receives the index of the next event.  If <i>NextIndex</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>SetNextEventIndex</b> is available in <b>IDebugControl3</b> and later versions.</P>
+<H4>Comments</H4>
+<P>If the specified event is the same as the current event, this method does nothing.  Otherwise,  this method sets the execution status of the target to DEBUG_STATUS_GO (and notifies the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#b82b8e27-44ea-4267-932f-0ed8f937939c">event callbacks</a>).  When <a href="idebugcontrol_19a7d8b3-1f16-400e-bf8f-c782d48b2cf5.xml.htm"><b>WaitForEvent</b></a> is called, the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2dbaa658-dbfe-47de-8266-97ed86c41aea">engine</a> will generate the specified event for the event callbacks and set it as the current event.</P>
+<P>This method is only useful if the target offers a list of events.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_520cbec0-e8b3-49d1-9938-a8f496585758.xml.htm"><b>GetNumberEvents</b></a>, <a href="idebugcontrol_7aec300e-651e-46c6-a4e7-d4ed2b9ca674.xml.htm"><b>GetCurrentEventIndex</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SetNextEventIndex RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

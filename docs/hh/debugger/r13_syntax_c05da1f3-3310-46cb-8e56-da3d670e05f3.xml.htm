@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Pseudo-Register Syntax</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Pseudo-Register Syntax"><xml><MSHelp:Keyword Index="A" Term="r13_syntax_c05da1f3-3310-46cb-8e56-da3d670e05f3.xml"/>
+<META NAME="MS-HKWD" CONTENT="pseudo-registers">
+<META NAME="MS-HKWD" CONTENT="pseudo-registers, automatic">
+<META NAME="MS-HKWD" CONTENT="pseudo-registers, user defined">
+<META NAME="MS-HKWD" CONTENT="registers, pseudo-registers">
+<META NAME="MS-HKWD" CONTENT="loop variables">
+<META NAME="MS-HKWD" CONTENT="return address">
+<META NAME="MS-HKWD" CONTENT="$to to $t19 pseudo-registers">
+<META NAME="MS-HKWD" CONTENT="$bp<ID> pseudo-register">
+<META NAME="MS-HKWD" CONTENT="$ea">
+<META NAME="MS-HKWD" CONTENT="$ea2">
+<META NAME="MS-HKWD" CONTENT="$exp">
+<META NAME="MS-HKWD" CONTENT="$ra">
+<META NAME="MS-HKWD" CONTENT="$ip">
+<META NAME="MS-HKWD" CONTENT="$eventip">
+<META NAME="MS-HKWD" CONTENT="$previp">
+<META NAME="MS-HKWD" CONTENT="$relip">
+<META NAME="MS-HKWD" CONTENT="$scopeip">
+<META NAME="MS-HKWD" CONTENT="$exentry">
+<META NAME="MS-HKWD" CONTENT="$retreg">
+<META NAME="MS-HKWD" CONTENT="$retreg64">
+<META NAME="MS-HKWD" CONTENT="$csp">
+<META NAME="MS-HKWD" CONTENT="$p">
+<META NAME="MS-HKWD" CONTENT="$proc">
+<META NAME="MS-HKWD" CONTENT="$thread">
+<META NAME="MS-HKWD" CONTENT="$peb">
+<META NAME="MS-HKWD" CONTENT="$teb">
+<META NAME="MS-HKWD" CONTENT="$tpid">
+<META NAME="MS-HKWD" CONTENT="$tid">
+<META NAME="MS-HKWD" CONTENT="$frame">
+<META NAME="MS-HKWD" CONTENT="$dbgtime">
+<META NAME="MS-HKWD" CONTENT="$callret">
+<META NAME="MS-HKWD" CONTENT="$lastclrex">
+<META NAME="MS-HKWD" CONTENT="$ptrsize">
+<META NAME="MS-HKWD" CONTENT="$pagesize"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r13_syntax_c05da1f3-3310-46cb-8e56-da3d670e05f3.xml"></A>Pseudo-Register Syntax</H1>
+<P>The debugger supports several <a href="engine_dg_eaa71da7-23ac-4464-9142-23c89a31e14e.xml.htm#3f4e138e-8f32-4497-97ec-ca6ffc25797d"><i>pseudo-registers</i></a> that hold certain values.</P>
+<P>The debugger sets<i> automatic pseudo-registers</i> to certain useful values. <i>User-defined pseudo-registers</i> are integer variables that you can write to or read.</P>
+<P>All pseudo-registers begin with a dollar sign (<b>$</b>). If you are using MASM syntax, you can add an at sign ( <b>@</b> ) before the dollar sign. This at sign tells the debugger that the following token is a register or pseudo-register, not a symbol. If you omit the at sign, the debugger responds more slowly, because it has to search the whole symbol table.</P>
+<P>For example, the following two commands produce the same output, but the second command is faster.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>? $exp</b><BR>Evaluate expression: 143 = 0000008f<BR>0:000&gt; <b>? @$exp</b><BR>Evaluate expression: 143 = 0000008f<BR></nobr></P>
+<P>If a symbol exists with the same name as the pseudo-register, you must add the at sign.</P>
+<P>If you are using C++ expression syntax, the at sign ( <b>@</b> ) is <i>always</i> required.</P>
+<P>The <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command is an exception to this rule. The debugger always interprets its first argument as a register or pseudo-register. (An at sign is not required or permitted.) If there is a second argument for the <b>r </b>command, it is interpreted according to the default expression syntax. If the default expression syntax is C++, you must use the following command to copy the <b>$t2</b> pseudo-register to the <b>$t1</b> pseudo-register.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt;<b> r $t1 = @$t2</b><BR></nobr></P>
+<H4>Automatic Pseudo-Registers</H4>
+<P>The debugger automatically sets the following pseudo-registers.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Pseudo-register</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$ea </b></TD>
+<TD Width="">The effective address of the last instruction that was executed. If this instruction does not have an effective address, the debugger displays "Bad register error". If this instruction has two effective addresses, the debugger displays the first address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$ea2 </b></TD>
+<TD Width="">The second effective address of the last instruction that was executed. If this instruction does not have two effective addresses, the debugger displays "Bad register error".</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$exp </b></TD>
+<TD Width="">The last expression that was evaluated.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$ra </b></TD>
+<TD Width="">The return address that is currently on the stack.<BR><BR>This address is especially useful in execution commands. For example, <b>g @$ra</b> continues until the return address is found (although <a href="r16_cmds_c_320ddebd-6cca-410d-b6bd-d8720b4494e3.xml.htm"><b>gu (Go Up)</b></a> is a more precise effective way of "stepping out" of the current function).<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$ip </b></TD>
+<TD Width="">The instruction pointer register.<BR><BR><i>x86-based processors: </i>The<i> </i>same as <b>eip</b>.<BR><i>Itanium-based processors:  </i>Related to <b>iip</b>. (For more information, see the note following this table.) <BR><i>x64-based processors: </i>The<i> </i>same as <b>rip</b>.<b> </b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$eventip </b></TD>
+<TD Width="">The instruction pointer at the time of the current event. This pointer typically matches <b>$ip</b>, unless you switched threads or manually changed the value of the instruction pointer.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$previp </b></TD>
+<TD Width="">The instruction pointer at the time of the previous event. (Breaking into the debugger counts as an event.)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$relip </b></TD>
+<TD Width="">An instruction pointer that is related to the current event. When you are branch tracing, this pointer is the pointer to the branch source.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$scopeip </b></TD>
+<TD Width="">The instruction pointer for the current <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#348f186b-acf8-4f68-be90-b68b085d7600">local context</a> (also known as the <i>scope</i>).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$exentry </b></TD>
+<TD Width="">The address of the entry point of the first executable of the current process.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$retreg </b></TD>
+<TD Width="">The primary return value register.<BR><BR><i>x86-based processors:  </i>The same as <b>eax</b>.<BR><i>Itanium-based processors: </i>The<i> </i>same as <b>ret0</b>.<BR><i>x64-based processors:  </i>The same as <b>rax</b>.<b> </b> <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$retreg64 </b></TD>
+<TD Width="">The primary return value register, in 64-bit format.<BR><BR><i>x86 processor:  </i>The same as the <b>edx:eax</b> pair.   <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$csp </b></TD>
+<TD Width="">The current call stack pointer. This pointer is the register that is most representative of call stack depth.<BR><BR><i>x86-based processors: </i>The<i> </i>same as <b>esp</b>.<BR><i>Itanium-based processors:  </i>The same as <b>bsp</b>. <BR><i>x64-based processors:  </i>The same as <b>rsp</b>.<b> </b><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$p </b></TD>
+<TD Width="">The value that the last <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>d* (Display Memory)</b></a> command printed.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$proc </b></TD>
+<TD Width="">The address of the current process (that is, the address of the EPROCESS block). </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$thread </b></TD>
+<TD Width="">The address of the current thread. In kernel-mode debugging, this address is the address of the ETHREAD block. In user-mode debugging, this address is the address of the thread environment block (TEB).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$peb </b></TD>
+<TD Width="">The address of the process environment block (PEB) of the current process.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$teb </b></TD>
+<TD Width="">The address of the thread environment block (TEB) of the current thread.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$tpid </b></TD>
+<TD Width="">The process ID (PID) for the process that owns the current thread.    </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$tid </b></TD>
+<TD Width="">The thread ID for the current thread.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$bp</b><i>Number</i></TD>
+<TD Width="">The address of the corresponding breakpoint. For example, <b>$bp3</b> (or <b>$bp03</b>) refers to the breakpoint whose breakpoint ID is 3. <i>Number</i> is always a decimal number. If no breakpoint has an ID of <i>Number</i>, <b>$bp</b><i>Number</i> evaluates to zero. For more information about breakpoints, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$frame</b></TD>
+<TD Width="">The current frame index. This index is the same frame number that the <a href="r20_metacmds_e_562cba4e-2bec-44d2-a751-719a48625811.xml.htm"><b>.frame (Set Local Context)</b></a> command uses.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$dbgtime</b></TD>
+<TD Width="">The current time, according to the computer that the debugger is running on.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$callret</b></TD>
+<TD Width="">The return value of the last function that <a href="r19_metacmds_a_99939ae5-be91-4ff3-a7fe-3162f8cd11da.xml.htm"><b>.call (Call Function)</b></a> called or that is used in an <a href="r20_metacmds_e_189863c6-2702-44b7-b2a6-8e5584244552.xml.htm"><b>.fnret /s</b></a> command. The data type of <b>$callret</b> is the data type of this return value.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$lastclrex </b></TD>
+<TD Width=""><i>Managed debugging only:</i> The address of the last-encountered common language runtime (CLR) exception object. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$ptrsize</b></TD>
+<TD Width="">The size of a pointer. In kernel mode, this size is the pointer size on the target computer.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$pagesize</b></TD>
+<TD Width="">The number of bytes in one page of memory. In kernel mode, this size is the page size on the target computer.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P>Some of these pseudo-registers might not be available in certain debugging scenarios. For example, you cannot use <b>$peb</b>, <b>$tid</b>, and <b>$tpid</b> when you are debugging a user-mode minidump or certain kernel-mode dump files. There will be situations where you can learn thread information from <a href="r15_cmds_a_e8b03a38-abea-4e4f-9429-a89f4638905b.xml.htm"><b>~ (Thread Status)</b></a> but not from <b>$tid</b>. You cannot use the <b>$previp</b> pseudo-register on the first debugger event. You cannot use the <b>$relip</b> pseudo-register unless you are branch tracing. If you use an unavailable pseudo-register, a syntax error occurs.</P>
+<P>A pseudo-register that holds the address of a structure &#8212; such as <b>$thread</b>, <b>$proc</b>, <b>$teb</b>, <b>$peb</b>, and <b>$lastclrex</b> &#8212; will be evaluated according to the proper data type in the C++ expression evaluator, but not in the MASM expression evaluator.  For example, the command <b>? $teb</b> displays the address of the TEB, while the command <b>?? @$teb</b> displays the entire TEB structure. For more information, see <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a>. </P>
+<P>On an Itanium-based processor, the <b>iip</b> register is <i>bundle-aligned</i>, which means that it points to slot 0 in the bundle containing the current instruction, even if a different slot is being executed. So <b>iip</b> is not the full instruction pointer. The <b>$ip</b> pseudo-register is the actual instruction pointer, including the bundle and the slot. The other pseudo-registers that hold address pointers (<b>$ra</b>, <b>$retreg</b>, <b>$eventip</b>, <b>$previp</b>, <b>$relip</b>, and <b>$exentry</b>) have the same structure as <b>$ip</b> on all processors.</P>
+<P>You can use the <b>r</b> command to change the value of <b>$ip</b>. This change also automatically changes the corresponding register. When execution resumes, it resumes at the new instruction pointer address. This register is the only automatic pseudo-register that you can change manually.</P>
+<P class="note"><b>Note</b>  In MASM syntax, you can indicate the <b>$ip</b> pseudo-register with a period ( <b>.</b> ). You do not add an at sign (@) before this period, and do not use the period as the first parameter of the <b>r</b> command. This syntax is not permitted within a C++ expression.</P>
+<P>Automatic pseudo-registers are similar to <a href="r05_use_start_ba4aca87-0103-4e86-9e6c-f3d6a44b3578.xml.htm">automatic aliases</a>. But you can use automatic aliases together with alias-related tokens (such as <b>${ }</b>), and you cannot use pseudo-registers with such tokens.</P>
+<H4>User-Defined Pseudo-Registers</H4>
+<P>There are 20 user-defined pseudo-registers (<b>$t0</b>, <b>$t1</b>, ..., <b>$t19</b>). These pseudo-register are variables that you can read and write through the debugger. You can store any integer value in these pseudo-registers. They can be especially useful as loop variables.</P>
+<P>To write to one of these pseudo-registers, use the <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt;<b> r $t0 = 7</b><BR>0:000&gt;<b> r $t1 = 128*poi(MyVar)</b><BR></nobr></P>
+<P>Like all pseudo-registers, you can use the user-defined pseudo-register in any expression, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt;<b> bp $t3 </b><BR>0:000&gt;<b> bp @$t4 </b><BR>0:000&gt;<b> ?? @$t1 + 4*@$t2 </b><BR></nobr></P>
+<P>A pseudo-register is always typed as an integer, unless you use the <b>?</b> switch together with the <b>r</b> command. If you use this switch, the pseudo-register acquires the type of whatever is assigned to it. For example, the following command assigns the UNICODE_STRING** type and the 0x0012FFBC value to <b>$t15</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt;<b> r? $t15 = * (UNICODE_STRING*) 0x12ffbc</b><BR></nobr></P>
+<P>User-defined pseudo-registers use zero as the default value when the debugger is started.</P>
+<P class="note"><b>Note</b>  The aliases <b>$u0</b>, <b>$u1</b>, ..., <b>$u9</b> are not pseudo-registers, despite their similar appearance. For more information about these aliases, see <a href="r05_use_start_ba4aca87-0103-4e86-9e6c-f3d6a44b3578.xml.htm">Using Aliases</a>.   </P>
+<H4>Example</H4>
+<P>The following example sets a breakpoint that is hit every time that the current thread calls <b>NtOpenFile</b>. But this breakpoint is not hit when other threads call <b>NtOpenFile</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>bp /t @$thread nt!ntopenfile</b><BR></nobr></P>
+<H4>Example</H4>
+<P>The following example executes a command until the register holds a specified value. First, put the following code for conditional stepping in a script file named &#8220;eaxstep&#8221;.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>.if (@eax == 1234) { .echo 1234 } .else { t "$&lt;eaxstep" }</b><BR></nobr></P>
+<P>Next, issue the following command.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>t "$&lt;eaxstep"</b><BR></nobr></P>
+<P>The debugger performs a step and then runs your command. In this case, the debugger runs the script, which either displays <b>1234</b> or repeats the process.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Pseudo-Register Syntax RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

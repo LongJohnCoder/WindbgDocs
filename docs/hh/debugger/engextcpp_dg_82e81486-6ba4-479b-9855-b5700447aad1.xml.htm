@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Typed Data</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Typed Data"><xml><MSHelp:Keyword Index="A" Term="EngExtCpp_DG_82e81486-6ba4-479b-9855-b5700447aad1.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_DG_82e81486-6ba4-479b-9855-b5700447aad1.xml"></A>Typed Data</H1>
+<P>The EngExtCpp extension framework provides a few classes to help manipulate the target's memory.  The <a href="engextcpp_ref_e84c03ce-1156-481b-a429-f0a918797565.xml.htm"><b>ExtRemoteData</b></a> class describes a small piece of the target's memory.  If the type of this memory is known, it is referred to as <i>typed data</i> and is described by <a href="engextcpp_ref_04970dac-e759-4a04-a1e0-8dab752c1418.xml.htm"><b>ExtRemoteTyped</b></a> objects.</P>
+<P>Windows lists can be iterated over by using <a href="engextcpp_ref_83df4aa3-cb9c-4921-a588-ef473a57f0e2.xml.htm"><b>ExtRemoteList</b></a> and, if the type of the objects in the list is known, <a href="engextcpp_ref_5e1242e6-5704-4b87-85e1-b02a41fc4243.xml.htm"><b>ExtRemoteTypedList</b></a>.</P>
+<P class="note"><b>Note</b>  Like the client objects in <a href="engextcpp_ref_3a533353-f008-4887-b937-2098acf1c68e.xml.htm"><b>ExtExtension</b></a>, instances of these classes are only valid while the extension library is used to execute an extension command or format a structure for output.  In particular, they should not be cached.  For more information about when client objects are valid, see <a href="engextcpp_dg_42d89746-845e-4b92-a7b0-362d1a7e57bb.xml.htm">Client Objects and the Engine</a>, .</P>
+<P></P>
+<H4>Remote Data</H4>
+<P>Remote data should be handled using the class <a href="engextcpp_ref_e84c03ce-1156-481b-a429-f0a918797565.xml.htm"><b>ExtRemoteData</b></a>.  This class is a wrapper around a small section of a target's memory.  <b>ExtRemoteData</b> automatically retrieves the memory and wraps other common requests with throwing methods.</P>
+<P></P>
+<H4>Remote Typed Data</H4>
+<P>If the type of the remote data is known, it should be handled using the <a href="engextcpp_ref_04970dac-e759-4a04-a1e0-8dab752c1418.xml.htm"><b>ExtRemoteTyped</b></a> class.  This class is an enhanced remote data object that understands data typed with type information from symbols.  It is initialized to a particular object by symbol or cast, after which it can be used like an object of the given type.  </P>
+<P></P>
+<H4>Remote Lists</H4>
+<P>To handle remote lists, use the <a href="engextcpp_ref_83df4aa3-cb9c-4921-a588-ef473a57f0e2.xml.htm"><b>ExtRemoteList</b></a> class.  This class can be used for either a singly linked or doubly linked list.  If the list is doubly linked, it is assumed that the previous pointer immediately follows the next pointer. The class contains methods that can iterate over the list and retrieve nodes both forward and backward. <b>ExtRemoteList</b> can be used with either null-terminated or circular lists also.</P>
+<P></P>
+<H4>Remote Typed Lists</H4>
+<P>To handle remote lists when the type of the nodes in the list is known, use the <a href="engextcpp_ref_5e1242e6-5704-4b87-85e1-b02a41fc4243.xml.htm"><b>ExtRemoteTypedList</b></a> class.  This is an enhanced version of <a href="engextcpp_ref_83df4aa3-cb9c-4921-a588-ef473a57f0e2.xml.htm"><b>ExtRemoteList</b></a>.  In addition to the basic functionality of <b>ExtRemoteList</b>, <b>ExtRemoteTypedList</b> automatically determines link offsets from type information.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Typed Data RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

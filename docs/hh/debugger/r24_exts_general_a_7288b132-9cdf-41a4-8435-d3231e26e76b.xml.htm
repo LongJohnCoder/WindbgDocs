@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!gs</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !gs"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_7288b132-9cdf-41a4-8435-d3231e26e76b.xml"/>
+<META NAME="MS-HKWD" CONTENT="!gs extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_7288b132-9cdf-41a4-8435-d3231e26e76b.xml"></A>!gs</H1>
+<P><P>The <b>!gs</b> extension analyzes a <b>/GS</b> stack overflow. </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!gs</b><BR></nobr></P>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ext.dll</i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ext.dll</i></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!gs </b>extension helps debug buffer overruns. Run <b>!gs </b>when you encounter a STATUS_STACK_BUFFER_OVERRUN error, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!gs</b><BR>Corruption occurred in mshtml!CDoc::OnPaint or one of its callers<BR>Real canary not found at 0x74866010<BR>Canary at gsfailure frame 0x292ea4e7<BR>Corrupted canary 0x0013e2c8: 0x00000000<BR>Corrupted cookie value too generic, skipping init bit-flip check<BR>a caller of mshtml!CDoc::OnPaint has corrupted the EBP from 0x0013e254 to 0x0013<BR>e234<BR>check callers (without canary) of mshtml!CDoc::OnPaint for 0x1 bytes of overflow<BR><BR>The canary doesn't look corrupted. Not sure how we got here<BR>EBP/ESP check skipped: No saved EBP in exception context<BR>Function mshtml!CDoc::OnPaint:<BR>  00000000 - 00000004 this                      CDoc*<BR>  0013de40 - 0013e180 rd                        CDoc::OnPaint::__l39::REGION_DAT<BR>A<BR>  0013e180 - 0013e18c Lock                      CDoc::CLock<BR>  0013e18c - 0013e224 DI                        CFormDrawInfo<BR>  0013e23c - 0013e240 hwndInplace               HWND__*<BR>  0013e240 - 0013e244 prc                       tagRECT*<BR>  0013e248 - 0013e250 ptBefore                  tagPOINT<BR>  0013e250 - 0013e254 fViewIsReady              int<BR>  0013e250 - 0013e254 fHtPalette                int<BR>  0013e254 - 0013e258 fNoPaint                  int<BR>  0013e258 - 0013e260 ptAfter                   tagPOINT<BR>  0013e260 - 0013e264 c                         int<BR>  0013e264 - 0013e268 hrgn                      HRGN__*<BR>  0013e268 - 0013e2a8 ps                        tagPAINTSTRUCT<BR>Candidate buffer : ps 0013e268 to 0013e2a7<BR>  0013e268 ea 04 01 a7 00 00 00 00-10 01 00 00 f3 00 00 00 ................<BR>  0013e278 ed 03 00 00 44 02 00 00-84 e5 13 00 f4 e2 13 00 ....D...........<BR>  ...<BR>  0013e2ac 38 20 01 03 10 e3 13 00-68 6b e6 01 d0 e6 03 00 8 ......hk......<BR>  0013e2bc 80 fa 03 00 0d 00 00 00-10 08 19 00 00 00 00 00 ................<BR>0:000&gt;<BR></nobr></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !gs RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

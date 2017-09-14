@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetCurrentProcessAddr</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetCurrentProcessAddr"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetCurrentProcessAddr"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_cf956b74-b0e4-43fa-911f-289b01dbf8c8.xml"/>
+<META NAME="MS-HKWD" CONTENT="GetCurrentProcessAddr function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_cf956b74-b0e4-43fa-911f-289b01dbf8c8.xml"></A>GetCurrentProcessAddr</H1>
+<P><P>The <b>GetCurrentProcessAddr</b> function returns the location of the system data that describes the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>VOID</b><BR><b> GetCurrentProcessAddr(</b><BR><b>    DWORD  </b><i>Processor</i><b>,</b><BR><b>    ULONG64  </b><i>CurrentThread</i><b>,</b><BR><b>    PULONG64  </b><i>Address</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Processor</i></DT>
+<DD>Specifies the index of the processor or <a href="dbg_glossary_70b9b003-ee7a-401b-b0e3-bd8d3f9c3250.xml.htm#7fa3d938-d090-42d1-b248-63d8e65760a6">virtual thread</a> that was running the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#e79fad75-e3ff-41d6-9f36-896e7b1ce5bb">current thread</a> when the last <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurred.  <i>Processor</i> is only used in <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>; and, only if <i>CurrentThread</i> is NULL.</DD>
+<DT><i>CurrentThread</i></DT>
+<DD>Specifies the location of the system data for the current thread.  This is the location returned by <a href="wdbgexts_ref_03db8f68-2e64-4530-bf35-df2a6f0d7736.xml.htm"><b>GetCurrentThreadAddr</b></a>.<P>In kernel-mode debugging, <i>CurrentThread</i> can be NULL, in which case <i>Processor</i> is used instead.</P>
+</DD>
+<DT><i>Address</i></DT>
+<DD>Receives the location of the system data that describes the current process.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>None</P>
+<H4>Comments</H4>
+<P>In <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#1a7518e7-05c9-4be8-baf0-63b4024f4e30">user-mode debugging</a>, <b>GetCurrentProcessAddr</b> returns the location of the process's Process Environment Block (PEB).  This is the same location that <a href="wdbgexts_ref_a51cb865-4701-4fbc-a075-7bcadd8ee8be.xml.htm"><b>GetPebAddress</b></a> returns.</P>
+<P>In kernel-mode debugging, <b>GetCurrentProcessAddr</b> returns the location of the KPROCESS structure of the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a>.</P>
+<P>For details on the KPROCESS and PEB structures, see <i>Microsoft Windows Internals</i> by David Solomon and Mark Russinovich.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this function, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_03db8f68-2e64-4530-bf35-df2a6f0d7736.xml.htm"><b>GetCurrentThreadAddr</b></a>, <a href="wdbgexts_ref_a51cb865-4701-4fbc-a075-7bcadd8ee8be.xml.htm"><b>GetPebAddress</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetCurrentProcessAddr RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

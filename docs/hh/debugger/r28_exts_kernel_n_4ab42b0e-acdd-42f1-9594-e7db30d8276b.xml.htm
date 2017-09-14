@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!pcr</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !pcr"><xml><MSHelp:Keyword Index="A" Term="r28_exts_kernel_N_4ab42b0e-acdd-42f1-9594-e7db30d8276b.xml"/>
+<META NAME="MS-HKWD" CONTENT="!pcr extension">
+<META NAME="MS-HKWD" CONTENT="processor control region (PCR)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r28_exts_kernel_N_4ab42b0e-acdd-42f1-9594-e7db30d8276b.xml"></A>!pcr</H1>
+<P>The <b>!pcr</b> extension displays the current status of the Processor Control Region (PCR) on a specific processor.<P></P>
+<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!pcr</b> [<i>Processor</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Processor</i></DT>
+<DD>Specifies the processor to retrieve the PCR information from. If <i>Processor</i> is omitted, the current processor is used.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The processor control block (PRCB) is an extension of the PCR. It can be displayed with the <a href="r28_exts_kernel_n_f9f15b7e-52f0-4819-9e12-2ff93bb9a38a.xml.htm"><b>!prcb</b></a> extension.   </P>
+<P>Here is an example of the <b>!pcr</b> extension on an x86 target computer:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!pcr 0</b><BR>KPCR for Processor 0 at ffdff000:<BR>    Major 1 Minor 1<BR>      NtTib.ExceptionList: 801626e0<BR>          NtTib.StackBase: 801628f0<BR>         NtTib.StackLimit: 8015fb00<BR>       NtTib.SubSystemTib: 00000000<BR>            NtTib.Version: 00000000<BR>        NtTib.UserPointer: 00000000<BR>            NtTib.SelfTib: 00000000<BR><BR>                  SelfPcr: ffdff000<BR>                     Prcb: ffdff120<BR>                     Irql: 00000000<BR>                      IRR: 00000000<BR>                      IDR: ffffffff<BR>            InterruptMode: 00000000<BR>                      IDT: 80043400<BR>                      GDT: 80043000<BR>                      TSS: 803cc000<BR><BR>            CurrentThread: 8015e8a0<BR>               NextThread: 00000000<BR>               IdleThread: 8015e8a0<BR><BR>                DpcQueue:  0x80168ee0 0x80100d04 ntoskrnl!KiTimerExpiration<BR>                          <BR><BR></nobr></P>
+<P>One of the entries in this display shows the interrupt request level (IRQL). The <b>!pcr</b> extension shows the current IRQL, but the current IRQL is usually not of much interest. The IRQL that existed just before the bug check or debugger connection is more interesting. This is displayed by <a href="r27_exts_kernel_e_f85dfa0d-b14e-4057-bd28-f2a86bfeacfe.xml.htm"><b>!irql</b></a>, which is only available on computers running Windows Server 2003 or later versions of Windows.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about the PCR and the PRCB, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !pcr RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

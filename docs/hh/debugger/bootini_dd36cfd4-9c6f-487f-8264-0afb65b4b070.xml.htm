@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>/crashdebug</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, /crashdebug"><xml><MSHelp:Keyword Index="A" Term="bootini_dd36cfd4-9c6f-487f-8264-0afb65b4b070.xml"/>
+<META NAME="MS-HKWD" CONTENT="/crashdebug"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_dd36cfd4-9c6f-487f-8264-0afb65b4b070.xml"></A>/crashdebug</H1>
+<P>The <b>/crashdebug</b> parameter establishes a kernel debugger connection, but does not enable debugging unless a bug check occurs. Until then, the port that is usually reserved for debugging is free for other uses. <P>This option is designed for Windows 2000 and Windows XP. For Windows Server 2003, use the <b>/debug=disable</b> parameter. For details, see <a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug</b></a>.</P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/crashdebug</b> [<b>/debugport=COM</b><i>x</i>] [<b>/baudrate=</b><i>BaudRate</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Subparameters</H4>
+<DT><b>/debugport</b></DT>
+<DD>Specifies the serial port used by the kernel debugger for crash-only debugging.</DD>
+<DT><b>COM</b><i>x</i></DT>
+<DD>Specifies a communications port on the computer. Valid values for <b>COM</b><i>x</i> are any valid COM port, such as COM1 or COM2. The default is the highest enumerated port.</DD>
+<DT><b>/baudrate</b></DT>
+<DD>Specifies the speed of the kernel debugger connection.</DD>
+<DT><i>BaudRate</i></DT>
+<DD>Specifies the speed of the kernel debugger connection in bits per second (BPS). Valid values for <i>BaudRate</i> are 9600, 19200, 38400, 57600, and 115200. The default is 19200.</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>This parameter is useful for debugging random kernel errors.</P>
+<P>If a boot entry includes both <a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug</b></a> and <b>/crashdebug</b>, the <b>/debug</b> parameter is ignored.</P>
+<H4>Examples</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /crashdebug<BR><BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /crashdebug /debugport=COM1 /baudrate=57600<BR><BR></nobr></P>
+<H4>Bootcfg Commands</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /raw "/crashdebug" /A /ID 1<BR>bootcfg /raw "crashdebug /debugport=COM1<i> </i>/baudrate=57600" /A /ID=2<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: /crashdebug RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

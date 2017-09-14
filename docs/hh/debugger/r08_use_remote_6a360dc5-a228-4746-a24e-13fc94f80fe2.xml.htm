@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Controlling a Remote Debugging Session</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Controlling a Remote Debugging Session"><xml><MSHelp:Keyword Index="A" Term="r08_use_remote_6a360dc5-a228-4746-a24e-13fc94f80fe2.xml"/>
+<META NAME="MS-HKWD" CONTENT="remote debugging through the debugger, controlling a session"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r08_use_remote_6a360dc5-a228-4746-a24e-13fc94f80fe2.xml"></A>Controlling a Remote Debugging Session</H1>
+<P>Once the remote session has been started, commands can be entered into either the debugging server or the debugging client. If there are multiple clients, any of them can enter commands. Once ENTER is pressed, the command is transmitted to the debugging server and executed.</P>
+<P>Whenever one user enters a command, all users will see the command itself and its output. If this command was issued from a debugging client, all other users will see an identification, preceding the command, of which user issued the command. Commands issued from the debugging server do not have this prefix.</P>
+<P>After a command is executed by one user, other users who are connected through KD or CDB will not see a new command prompt. On the other hand, users of WinDbg will see the prompt in the bottom panel of the Debugger Command window continuously, even when the debugger engine is running. Neither of these should be a cause for alarm; any user can enter a command at any time, and the engine will execute these commands in the order they were received.</P>
+<P>Actions made through the WinDbg interface will also be executed by the debugging server.</P>
+<P></P>
+<H4>Communication Between Users</H4>
+<P>Whenever a new debugging client connects to the session, all other users will see a message that this client has connected. No message is displayed when a client disconnects.</P>
+<P>The <a href="r19_metacmds_a_e53f575c-5a40-48c6-af85-4aebc680ca91.xml.htm"><b>.clients (List Debugging Clients)</b></a> command will list all clients currently connected to the debugging session.</P>
+<P>The <a href="r20_metacmds_e_6eb44413-2b5e-423a-8a53-73546ee1e3d1.xml.htm"><b>.echo (Echo Comment)</b></a> command is useful for sending messages from one user to another.</P>
+<H4>WinDbg Workspaces</H4>
+<P>When WinDbg is being used as a debugging client, its workspace will only save values set through the graphical interface. Changes made through the Debugger Command window will not be saved. (This guarantees that only changes made by the local client will be reflected, since the Debugger Command window will accept input from all clients as well as the debugging server.)</P>
+<H4>File Paths</H4>
+<P>The symbol path, executable image path, and extension DLL path are all interpreted as file paths relative to the Debugging Tools for Windows installation folder on the debugging server.</P>
+<P>When WinDbg is used as a debugging client, it has its own <i>local source path</i> as well. All source-related commands will access the source files on the local computer. Therefore, the proper paths have to be set on any client or server that will use source commands.</P>
+<P>See <a href="r06_use_gui_2a32f2c3-5091-4c35-8cc5-c393c96fb87e.xml.htm">Setting Paths and Loading Files</a> for details on these paths.</P>
+<P>This multiple-path system allows a debugging client to use source-related commands without actually sharing the source files with other clients or with the server. This is useful if there are private or confidential source files which one of the users has access to.</P>
+<H4>Canceling the Debugging Server</H4>
+<P>The <a href="r20_metacmds_e_f733aa12-edf5-451a-9e98-da99bc21a41c.xml.htm"><b>.endsrv (End Debugging Server)</b></a> command can be used to terminate a debugging server. If the debugger has established multiple debugging servers, you can cancel some of them while leaving others running.</P>
+<P>Terminating a server will prevent any future clients from attaching to it. It will not cut off any clients that are <i>currently</i> attached through the server.  </P>
+<H4>Exiting the Debugger and Terminating the Session</H4>
+<P>To exit from one debugging client without terminating the server, you must issue a command from that specific client. If this client is KD or CDB, use the <a href="r23_keys_847bf5ac-4c45-4a3c-bb2b-bed857dfa042.xml.htm">CTRL+B</a> key to exit. If you are using a script to run KD or CDB, use <a href="r21_metacmds_l_88782c3d-0a61-4fe9-9cb2-049100f627a8.xml.htm"><b>.remote_exit (Exit Debugging Client)</b></a>. If this client is WinDbg, choose <b>Exit</b> from the <b>File</b> menu to exit.</P>
+<P>To terminate the entire session and exit the debugging server, use the <a href="r17_cmds_i_27fbcb2b-e3e7-470e-bab9-29dd7a115129.xml.htm"><b>q (Quit)</b></a> command. This command can be entered from <i>any</i> server or client, and it will terminate the entire session for all users.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Controlling a Remote Debugging Session RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

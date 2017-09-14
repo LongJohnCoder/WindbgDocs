@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!teb</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !teb"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_8f21ff4e-e437-4947-8075-37872377efac.xml"/>
+<META NAME="MS-HKWD" CONTENT="!teb extension">
+<META NAME="MS-HKWD" CONTENT="TEB (thread environment block)">
+<META NAME="MS-HKWD" CONTENT="thread, thread environment block (TEB)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_8f21ff4e-e437-4947-8075-37872377efac.xml"></A>!teb</H1>
+<P>The <b>!teb</b> extension displays a formatted view of the information in the thread environment block (TEB).</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!teb</b> [<i>TEB-Address</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>TEB-Address</i></DT>
+<DD>The hexadecimal address of the thread whose TEB you want to examine. (This is not the address of the TEB as derived from the kernel thread block for the thread.) If <i>TEB-Address</i> is omitted in user mode, the TEB for the current process is used. If it is omitted in kernel mode, the TEB corresponding to the current <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">register context</a> is displayed.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> <BR><i>Ntsdexts.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Exts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The TEB is the user-mode portion of Microsoft Windows thread control structures.</P>
+<P>If the <b>!teb</b> extension with no argument gives you an error in kernel mode, you should use the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a> extension to determine the TEB address for the desired thread. Make sure your <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">register context</a> is set to the desired thread, and then use the TEB address as the argument for <b>!teb</b>.</P>
+<P>Here is an example of this command's output in user mode:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>~</b><BR>   0  id: 324.458   Suspend: 1 Teb 7ffde000 Unfrozen<BR>.  1  id: 324.48c   Suspend: 1 Teb 7ffdd000 Unfrozen<BR><BR>0:001&gt; <b>!teb</b> <BR>TEB at 7FFDD000<BR>    ExceptionList:    76ffdc<BR>    Stack Base:       770000<BR>    Stack Limit:      76f000<BR>    SubSystemTib:     0<BR>    FiberData:        1e00<BR>    ArbitraryUser:    0<BR>    Self:             7ffdd000<BR>    EnvironmentPtr:   0<BR>    ClientId:         324.48c<BR>    Real ClientId:    324.48c<BR>    RpcHandle:        0<BR>    Tls Storage:      0<BR>    PEB Address:      7ffdf000<BR>    LastErrorValue:   0<BR>    LastStatusValue:  0<BR>    Count Owned Locks:0<BR>    HardErrorsMode:   0<BR><BR></nobr></P>
+<P>The similar <a href="r25_exts_general_he_c7e783ec-cfb1-42a0-8da0-fdf0334e5bbd.xml.htm"><b>!peb</b></a> extension displays the process environment block.</P>
+<H4>Additional Information</H4>
+<P>For information about thread environment blocks, see <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !teb RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

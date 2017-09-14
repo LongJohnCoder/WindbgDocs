@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetSystemErrorControl</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetSystemErrorControl"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetSystemErrorControl"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_94595f9e-7e73-4291-a904-49f1a8fbbaa8.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetSystemErrorControl method">
+<META NAME="MS-HKWD" CONTENT="GetSystemErrorControl (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_94595f9e-7e73-4291-a904-49f1a8fbbaa8.xml"></A>GetSystemErrorControl</H1>
+<P><P>The <b>GetSystemErrorControl</b> method returns the control values for handling system errors.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::GetSystemErrorControl(</b><BR><b>    OUT PULONG </b><i>OutputLevel</i><b>,</b><BR><b>    OUT PULONG </b><i>BreakLevel</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>OutputLevel</i></DT>
+<DD>Receives the level at which system errors are printed to the engine's output.  If the level of the system error is less than or equal to <i>OutputLevel</i>, the error is printed to the debugger console.</DD>
+<DT><i>BreakLevel</i></DT>
+<DD>Receives the level at which system errors break into the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#84783e5c-aa71-4d1c-be03-f4cc8ce3d72f">debugger</a>.  If the level of the system error is less than or equal to <i>BreakLevel</i>, the error breaks into the debugger.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetSystemErrorControl</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>The level of a system error can take one of the following three values, listed from lowest to highest: SLE_ERROR, SLE_MINORERROR, and SLE_WARNING.  These values are defined in <i>Winuser.h</i>.</P>
+<P>When a system error occurs, the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> calls the <a href="comcallbacks_a84628b9-4376-4ca0-883f-835d19e13d73.xml.htm"><b>IDebugEventCallbacks::SystemError</b></a> method of the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#b82b8e27-44ea-4267-932f-0ed8f937939c">event callbacks</a>.  If the level is less than or equal to <i>BreakLevel</i>, the error will break into the debugger.  If the level is greater than <i>BreakLevel</i>, the engine will proceed with execution in the target as indicated by the <b>IDebugEventCallbacks::SystemError</b> method calls.  For more information about how the engine proceeds after an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a>, see <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="comcallbacks_a84628b9-4376-4ca0-883f-835d19e13d73.xml.htm"><b>IDebugEventCallbacks::SystemError</b></a>, <a href="idebugcontrol_60e365d4-8645-469c-8973-9f2da168bba3.xml.htm"><b>SetSystemErrorControl</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetSystemErrorControl RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

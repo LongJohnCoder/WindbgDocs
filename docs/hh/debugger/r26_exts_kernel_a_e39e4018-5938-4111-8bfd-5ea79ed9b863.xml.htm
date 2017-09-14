@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!dcr</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !dcr"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_e39e4018-5938-4111-8bfd-5ea79ed9b863.xml"/>
+<META NAME="MS-HKWD" CONTENT="!dcr extension">
+<META NAME="MS-HKWD" CONTENT="DCR (default control register)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_e39e4018-5938-4111-8bfd-5ea79ed9b863.xml"></A>!dcr</H1>
+<P><P>The <b>!dcr </b>extension displays the default control register (DCR) at the specified address.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!dcr</b> <i>Expression</i> [<i>DisplayLevel</i>]<BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Expression</i></DT>
+<DD>Specifies the hexadecimal address of the DCR to display. The expression <b>@dcr</b> can also be used for this parameter. In that case, information about the current processor DCR is displayed.</DD>
+<DT><i>DisplayLevel</i></DT>
+<DD>Can be any one of the following options:<DL><DT><b>0</b></DT>
+<DD>Causes only the values of each DCR field to be displayed. This is the default value.</DD>
+<DT><b>1</b></DT>
+<DD>Causes the display to include more in-depth information about each of the DCR fields that is not reserved or ignored.</DD>
+<DT><b>2</b></DT>
+<DD>Causes the display to include more in-depth information about all of the DCR fields, including those that are ignored or reserved.</DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension command can only be used with an Itanium-based target computer.</P>
+<P></P>
+<H4><b>Comments</b></H4>
+<P>The DCR specifies default parameters for the processor status register values on interruption. The DCR also specifies some additional global controls, as well as whether or not speculative load faults can be deferred.</P>
+<P>Here are a couple of examples:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!dcr @dcr</b><BR>dcr:pp be lc dm dp dk dx dr da dd<BR>1 0 1 1 1 1 1 1 1 1<BR><BR>kd&gt; <b>!dcr @dcr 2</b><BR><BR>  pp : 1 : Privileged Performance Monitor Default<BR>  be : 0 : Big-Endian Default<BR>  lc : 1 : IA-32 Lock check Enable<BR>  rv : 0 : reserved1<BR>  dm : 1 : Defer TLB Miss faults only<BR>  dp : 1 : Defer Page Not Present faults only<BR>  dk : 1 : Defer Key Miss faults only<BR>  dx : 1 : Defer Key Permission faults only<BR>  dr : 1 : Defer Access Rights faults only<BR>  da : 1 : Defer Access Bit faults only<BR>  dd : 0 : Defer Debug faults only<BR>  rv : 0 : reserved2<BR></nobr></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !dcr RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

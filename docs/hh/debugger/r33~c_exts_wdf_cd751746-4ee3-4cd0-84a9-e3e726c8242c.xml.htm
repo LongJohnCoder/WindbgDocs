@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wdfkd.wdfcrashdump</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wdfkd.wdfcrashdump"><xml><MSHelp:Keyword Index="A" Term="r33~c_exts_WDF_cd751746-4ee3-4cd0-84a9-e3e726c8242c.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wdfkd.wdfcrashdump extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~c_exts_WDF_cd751746-4ee3-4cd0-84a9-e3e726c8242c.xml"></A>!wdfkd.wdfcrashdump</H1>
+<P><P>The <b>!wdfkd.wdfcrashdump</b> extension displays the Kernel-Mode Driver Framework (KMDF) error log information and other crash dump information from a <a href="r10_dump_files_1c793f2b-a711-4e06-9c87-99be8f297556.xml.htm">small memory dump</a>, if available.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wdfkd.wdfcrashdump</b> [<i>InfoType</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>InfoType</i></DT>
+<DD>Specifies the kind of information to display. <i>InfoType</i> can be any one of the following values: <DL><DT><b>log</b></DT>
+<DD>Displays error log information, if available in the crash dump file. This is the default value. </DD>
+<DT><b>loader</b></DT>
+<DD>Displays the minidump's dynamic-bound drivers. </DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P><i>Wdfkd.dll</i></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>To display the framework's error log records from a <a href="r10_dump_files_940a7ef7-167f-4f4c-8c73-227538dd30f2.xml.htm">complete memory dump</a>, a <a href="r10_dump_files_cc9e7162-5f3f-486d-9732-328deb2078e9.xml.htm">kernel memory dump</a>, or a <a href="engine_dg_d08297b5-3efa-4b7b-864b-c76133c62431.xml.htm">live kernel-mode target</a>, use the <a href="r33~c_exts_wdf_b04c0ea2-3c82-41c1-abd2-61e5e57d29da.xml.htm"><b>!wdfkd.wdflogdump</b></a> extension. </P>
+<P>For information about setting information that the debugger needs to format WPP tracing messages, see <a href="r33~c_exts_wdf_2fbedc41-a957-49aa-bd1b-53c6662106e0.xml.htm"><b>!wdfkd.wdftmffile</b></a> and <a href="r33~c_exts_wdf_2d768986-34e6-4035-af92-b879180637f5.xml.htm"><b>!wdfkd.wdfsettraceprefix</b></a>. </P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!wdfcrashdump loader</b> <BR>Retrieving crashdump loader information...<BR>Local buffer 0x002B4D00, bufferSize 720<BR>----------------------------------------------<BR>  ImageName      Version    FxGlobals<BR><BR>  Wdf01000       v1.9(6902)<BR>  msisadrv       v1.9(6913) 0x84deb260<BR>  vdrvroot       v1.9(6913) 0x860e8260<BR>  storflt        v1.5(6000) 0x861dfe90<BR>  cdrom          v1.9(6913) 0x84dca008<BR>  intelppm       v1.9(6913) 0x864704a8<BR>  HDAudBus       v1.7(6001) 0x86101c98<BR>  1394ohci       v1.7(6001) 0x8610d2e8<BR>  CompositeBus   v1.9(6913) 0x86505b98<BR>  ObjTestClassExt v1.9(6902) 0x865b7f00<BR>  mqfilter       v1.9(6902) 0x865b8008<BR>  mqueue         v1.9(6902) 0x865b6910<BR>  umbus          v1.9(6913) 0x8618aea0<BR>  monitor        v1.9(6913) 0x86aac1d8<BR>  PEAUTH         v1.5(6000) 0x854e5350<BR>----------------------------------------------<BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~c_wdf_b21958be-e8b5-460c-87b7-a755da1cf37e.xml.htm">Kernel-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wdfkd.wdfcrashdump RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

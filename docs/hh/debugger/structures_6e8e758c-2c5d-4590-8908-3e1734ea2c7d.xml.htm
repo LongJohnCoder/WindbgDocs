@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_TYPED_DATA</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_TYPED_DATA"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="WdbgExts.h, DbgEng.h, DbgHelp.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_TYPED_DATA"/>
+<MSHelp:Keyword Index="A" Term="Structures_6e8e758c-2c5d-4590-8908-3e1734ea2c7d.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_TYPED_DATA structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_6e8e758c-2c5d-4590-8908-3e1734ea2c7d.xml"></A>DEBUG_TYPED_DATA</H1>
+<P><P>The DEBUG_TYPED_DATA structure describes typed data in the memory of the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>. </P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_TYPED_DATA</b><BR><b>{</b><BR><b>    ULONG64  ModBase;</b><BR><b>    ULONG64  Offset;</b><BR><b>    ULONG64  EngineHandle;</b><BR><b>    ULONG64  Data;</b><BR><b>    ULONG  Size;</b><BR><b>    ULONG  Flags;</b><BR><b>    ULONG  TypeId;</b><BR><b>    ULONG  BaseTypeId;</b><BR><b>    ULONG  Tag;</b><BR><b>    ULONG  Register;</b><BR><b>    ULONG64  Internal[9];</b><BR><b>} DEBUG_TYPED_DATA, *PDEBUG_TYPED_DATA;</b><BR></P>
+<DL><H4><b>Members</b></H4>
+<DT><b>ModBase</b></DT>
+<DD>The base address of the <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a>, in the target's virtual address space, that contains the typed data.</DD>
+<DT><b>Offset</b></DT>
+<DD>The location of the typed data in the target's memory. <b>Offset</b> is a virtual memory address unless there are flags present in <b>Flags</b> that specify that <b>Offset</b> is a physical memory address.</DD>
+<DT><b>EngineHandle</b></DT>
+<DD>Set to zero.</DD>
+<DT><b>Data</b></DT>
+<DD>The data cast to a ULONG64. If <b>Flags</b> does not contain the DEBUG_TYPED_DATA_IS_IN_MEMORY flag, the data is not available and <b>Data</b> is set to zero.</DD>
+<DT><b>Size</b></DT>
+<DD>The size, in bytes, of the data.</DD>
+<DT><b>Flags</b></DT>
+<DD>The flags describing the target's memory in which the data resides. The following bit flags can be set.<B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TYPED_DATA_IS_IN_MEMORY</TD>
+<TD Width="">The data is in the target's memory and is available.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TYPED_DATA_PHYSICAL_DEFAULT</TD>
+<TD Width=""><b>Offset</b> is a physical memory address, and the physical memory at <b>Offset</b> uses the default memory caching.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TYPED_DATA_PHYSICAL_CACHED</TD>
+<TD Width=""><b>Offset</b> is a physical memory address, and the physical memory at <b>Offset</b> is cached.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TYPED_DATA_PHYSICAL_UNCACHED</TD>
+<TD Width=""><b>Offset</b> is a physical memory address, and the physical memory at <b>Offset</b> is uncached.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TYPED_DATA_PHYSICAL_WRITE_COMBINED</TD>
+<TD Width=""><b>Offset</b> is a physical memory address, and the physical memory at <b>Offset</b> is write-combined.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>TypeId</b></DT>
+<DD>The type ID for the data's type.</DD>
+<DT><b>BaseTypeId</b></DT>
+<DD>For generated types, the type ID of the type on which the data's type is based. For example, if the typed data represents a pointer (or an array), <b>BaseTypeId</b> is the type of the object pointed to (or held in the array).<P>For other types, <b>BaseTypeId</b> is the same as <b>TypeId</b>.</P>
+</DD>
+<DT><b>Tag</b></DT>
+<DD>The symbol tag of the typed data. This is a value from the <b>SymTagEnum</b> enumeration. For descriptions of the values, see the DbgHelp API documentation.</DD>
+<DT><b>Register</b></DT>
+<DD>The index of the processor's register containing the data, or zero if the data is not contained in a register.  (Note that the zero value can represent either that the data is not in a register or that it is in the register whose index is zero.) </DD>
+<DT><b>Internal</b></DT>
+<DD>Internal <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> data.</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>Instances of this structure should be manipulated using the <a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a> <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation. In particular, instances should be created and released using this method, and members of this structure should not be changed directly.</P>
+<P>There is one exception to the preceding rule: the <b>EXT_TDOP_SET_FROM_TYPE_ID_AND_U64</b> and <b>EXT_TDOP_SET_PTR_FROM_TYPE_ID_AND_U64</b> suboperations take a DEBUG_TYPED_DATA instance that is not manipulated using the <b>Request</b> method.  These suboperations take a manually created instance with some members manually filled in.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>WbgExts.h</i>. Include <i>WdbgExts.h</i> before including <i>DbgEng.h</i>. <b>SymTagEnum</b> is defined in <i>DbgHelp.h</i>. Include <i>DbgHelp.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a>, <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_TYPED_DATA RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

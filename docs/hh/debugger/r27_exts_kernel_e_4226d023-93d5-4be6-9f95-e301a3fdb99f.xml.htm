@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ecb, !ecd, !ecw</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ecb, !ecd, !ecw"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_4226d023-93d5-4be6-9f95-e301a3fdb99f.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ecb extension">
+<META NAME="MS-HKWD" CONTENT="!ecd extension">
+<META NAME="MS-HKWD" CONTENT="!ecw extension">
+<META NAME="MS-HKWD" CONTENT="PCI configuration space"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_4226d023-93d5-4be6-9f95-e301a3fdb99f.xml"></A>!ecb, !ecd, !ecw</H1>
+<P>The <b>!ecb</b>, <b>!ecd</b>, and <b>!ecw</b> extensions write to the the PCI configuration space.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ec</b> <i>Bus</i><b>.</b><i>Device</i><b>.</b><i>Function Offset Data</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Bus</i></DT>
+<DD>Specifies the bus. <i>Bus</i> can range from 0 to 0xFF.</DD>
+<DT><i>Device</i></DT>
+<DD>Specifies the slot device number for the device.</DD>
+<DT><i>Function</i></DT>
+<DD>Specifies the slot function number for the device.</DD>
+<DT><i>Offset</i></DT>
+<DD>Specifies the address at which to write.</DD>
+<DT><i>Data</i></DT>
+<DD>Specifies the value to be written. For the <b>!ecb</b> extension, <i>Data</i> must be 1 byte (two hexadecimal digits). For the <b>!ecw</b> extension, <i>Data</i> must be one WORD (four hexadecimal digits). For the <b>!ecd</b> extension, <i>Data</i> must be one DWORD (eight hexadecimal digits).<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kext.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>These extension commands can only be used with an x86-based target computer.</P>
+<P></P>
+<H4>Comments</H4>
+<P>You cannot use these extension commands to write a sequence of <i>Data</i> values. This can only be done by repeated use of this extension.</P>
+<P>To display the PCI configuration space, use <a href="r28_exts_kernel_n_c5448aa8-f80a-4a16-b121-de72229f834c.xml.htm"><b>!pci</b> <b>100</b> <i>Bus</i> <i>Device</i> <i>Function</i></a>. </P>
+<H4>Additional Information</H4>
+<P>See <a href="t12_drivers_ba75fa45-397b-473d-88dc-c5e0d598456a.xml.htm">Plug and Play Debugging</a> for applications of this extension command, and some additional examples. For information about PCI buses, see the Windows Driver Kit (WDK) documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ecb, !ecd, !ecw RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

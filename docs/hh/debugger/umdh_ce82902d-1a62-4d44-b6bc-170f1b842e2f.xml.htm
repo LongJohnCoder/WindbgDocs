@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Analyze a Running Process</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Analyze a Running Process"><xml><MSHelp:Keyword Index="A" Term="UMDH_ce82902d-1a62-4d44-b6bc-170f1b842e2f.xml"/>
+<META NAME="MS-HKWD" CONTENT="UMDH, analyzing a running process"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="UMDH_ce82902d-1a62-4d44-b6bc-170f1b842e2f.xml"></A>Analyze a Running Process</H1>
+<P>Use the following commands to record and analyze the heap memory allocations in a running process. This analysis focuses on stack traces.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>umdh</b> <b>-p:</b><i>PID </i>[<b>-f:</b><i>Log</i>F<i>ile</i>] [<b>-v</b>[<b>:</b><i>MsgFile</i>]] | [<b>-g</b>] | [<b>-h</b>]<BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>-p:</b><i>PID</i></DT>
+<DD>Specifies the process to analyze. <i>PID</i> is the process ID of the process. This parameter is required. <P>To find the PID of a running process, use Task Manager, Tasklist (Windows XP and later operating systems), or <a href="tlist_d98fd688-471d-4855-aa5c-997719bd11c3.xml.htm">TList</a>.</P>
+</DD>
+<DT><b>-f:</b><i>LogFile</i></DT>
+<DD>Saves the log contents in a text file. By default, UMDH writes the log to stdout (command window).<P><i>LogFile s</i>pecifies the path (optional) and name of the file. If you specify an existing file, UMDH overwrites the file.</P>
+<P class="note"><b>Note</b>  If UMDH was not started in Administrator mode, or attempts to write to &#8220;protected&#8221; paths, it will be denied access.</P>
+</DD>
+<DT><b>-v</b>[<b>:</b><i>MsgFile </i>]</DT>
+<DD>Verbose mode. Generates detailed informational and error messages. By default, UMDH writes these messages to stderr.<P><i>MsgFile s</i>pecifies the path (optional) and name of a text file. When you use this variable, UMDH writes the verbose messages to the specified file, instead of to stderr. If you specify an existing file, UMDH overwrites the file.</P>
+</DD>
+<DT><b>-g</b></DT>
+<DD>Logs the heap blocks that are not referenced by the process ("garbage collection").</DD>
+<DT><b>-h</b></DT>
+<DD>Displays help. </DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>On Windows 2000, if UMDH is reporting errors finding the stack trace database, and you have enabled the <b>Create user mode stack trace database</b> option in <a href="gflags_ea035958-0ade-4e07-856e-cfd1ed0b4df0.xml.htm">GFlags</a>, you might have a symbol file conflict. To resolve it, copy the DBG and PDB symbol files for the application to the same directory, and try again.</P>
+<H4>Sample Usage</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>umdh -?<BR>umdh -p:2230<BR>umdh -p:2230  -f:dump_allocations.txt<BR>umdh -p:2230 -f:c:\Log1.txt -v:c:\Msg1.txt<BR>umdh -p:2230 -g -f:garbage.txt<BR><BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Analyze a Running Process RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

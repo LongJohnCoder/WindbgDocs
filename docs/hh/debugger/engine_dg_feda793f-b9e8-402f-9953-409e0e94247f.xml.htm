@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Event Filters</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Event Filters"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_feda793f-b9e8-402f-9953-409e0e94247f.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, event filters">
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, event filters"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_feda793f-b9e8-402f-9953-409e0e94247f.xml"></A>Event Filters</H1>
+<P><i>Event filters</i> provide simple event filtering; they influence how the debugger engine proceeds after an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurs in a <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>.  When an event occurs, the engine determines whether that event matches an event filter.  If it does, the break status for the event filter influences whether the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger</a> will break into the target.  If the event is an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exception event</a>, the handling status determines whether the exception should be considered handled or not-handled in the target.</P>
+<P class="note"><b>Note</b>  If more sophisticated event filtering is required, <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#b82b8e27-44ea-4267-932f-0ed8f937939c">event callbacks</a> can be used.</P>
+<P></P>
+<P>Event filters are divided into three categories.</P><B></B><OL type="1">
+<LI><i>Specific event filters</i>.  These are the filters for all the non-exception events.  See <a href="structures_a6679c9f-e984-42f4-b033-26ad9256c373.xml.htm">DEBUG_FILTER_<i>XXX</i></a> for a list of these events.</LI>
+<LI><i>Specific exception filters.</i>  The first specific exception filter is the <i>default exception filter</i>.  The rest are filters for those exceptions for which the engine has built-in filters.  See <a href="structures_17f68bad-f76c-48a0-a721-8134d40c904a.xml.htm">Specific Exceptions</a> for a list of the specific exception filters.</LI>
+<LI><i>Arbitrary exception filters</i>.  These are filters for exception events that have been added manually.</LI>
+</OL>
+<P>The filters in categories 1 and 2 are collectively known as <i>specific filters</i>, and the filters in categories 2 and 3 are collectively known as <i>exception filters</i>.  The number of filters in each category is returned by <a href="idebugcontrol_de1a980a-b0cb-486b-a292-1a9463a231c6.xml.htm"><b>GetNumberEventFilters</b></a>.</P>
+<P>An event matches a specific event filter if the type of the event is the same as the type of the filter.  Some event filters have an additional parameter which further restricts the events they match.</P>
+<P>An exception event matches an exception filter if the exception code for the exception event is the same as the exception code for the exception filter.  If there is no exception filter with the same exception code as the exception event, the exception event will be handled by the default exception filter.</P>
+<H4>Commands and Parameters</H4>
+<P>Event filters can have a debugger command associated with them.  This command is executed by the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> when an event matching the filter occurs.  <a href="idebugcontrol_a0acf45f-8741-48a0-9eb0-f8a9aa55c476.xml.htm"><b>GetEventFilterCommand</b></a> and <a href="idebugcontrol_b0661dd4-9ecd-49ac-93e1-86d3c6c2c3f6.xml.htm"><b>SetEventFilterCommand</b></a> can be used to get and set this command.  For exception filters, this command is executed on the <a href="dbg_glossary_115ca2a1-47f8-405f-a4f7-a7446892d897.xml.htm#721095c2-e24a-4306-b08a-12feea466aa2">first-chance</a> of the exception.  A separate <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#a48a7a88-0cc3-46d0-a1c9-2ccfeebb4c01">second-chance</a> command can be executed upon the second-chance exception event.  To get and set the second-chance command, use <a href="idebugcontrol_fba6b716-8dba-4581-87c3-b808d3ab40a1.xml.htm"><b>GetExceptionFilterSecondCommand</b></a> and <a href="idebugcontrol_39380f22-4c68-40fe-b277-f7eace77bcee.xml.htm"><b>SetExceptionSecondChanceCommand</b></a>.</P>
+<P>The parameters for specific event filters and exception filters are returned by <a href="idebugcontrol_ebe245a7-c76c-4b31-aa58-ccad250ed92a.xml.htm"><b>GetSpecificFilterParameters</b></a> and <a href="idebugcontrol_4e60bce4-e40d-46b6-83ad-55559b97fbad.xml.htm"><b>GetExceptionFilterParameters</b></a>.  The break status and handling status for event filters can be set using <a href="idebugcontrol_9bf01d08-9fc1-4ddf-b8dd-c6db0b568f83.xml.htm"><b>SetSpecificFilterParameters</b></a> and <a href="idebugcontrol_4e60bce4-e40d-46b6-83ad-55559b97fbad.xml.htm"><b>SetExceptionFilterParameters</b></a>.</P>
+<P><b>SetExceptionFilterParameters</b> can also be used to add and remove arbitrary exception filters.</P>
+<P>A short description of specific filters is returned by <a href="idebugcontrol_61936aac-8fe2-4f18-86aa-cba1404d845f.xml.htm"><b>GetEventFilterText</b></a>.</P>
+<P>Some specific filters take arguments that restrict which events the filter matches.  <a href="idebugcontrol_ab3a5161-b3e1-47fe-bc97-1f75af363cff.xml.htm"><b>GetSpecificFilterArgument</b></a> and <a href="idebugcontrol_a7f790fa-29f1-46f2-9163-a4b99f4880da.xml.htm"><b>SetSpecificFilterArgument</b></a> will get and set arguments for those specific filters which support arguments.  If a specific filter has no argument, there is no restriction on which events it matches.  The following table lists the event filters that take arguments and how they restrict the events which match them:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Event</TH>
+<TH Width="">Match criteria</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Create Process</TD>
+<TD Width="">The name of the created <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#869bfa55-1556-4c4d-90ed-7b36f8f114b3">process</a> must match the argument.<sup>1</sup></TD>
+</TR>
+<TR valign="top">
+<TD Width="">Exit Process</TD>
+<TD Width="">The name of the exited process must match the argument.<sup>1</sup></TD>
+</TR>
+<TR valign="top">
+<TD Width="">Load Module</TD>
+<TD Width="">The name of the loaded <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> must match the argument.<sup>1</sup></TD>
+</TR>
+<TR valign="top">
+<TD Width="">Unload Module</TD>
+<TD Width="">The base address of the unloaded module must be the same as the argument.<sup>2</sup></TD>
+</TR>
+<TR valign="top">
+<TD Width="">Target Output</TD>
+<TD Width="">The debug output from the target must match the argument.<sup>3</sup></TD>
+</TR>
+</table>
+<P class="note"><b>Notes</b>  <B></B><OL type="1">
+<LI>The argument uses the <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">string wildcard syntax</a> and is compared with the <a href="dbg_glossary_48d73de7-50e9-4e41-8a7f-0207d5301620.xml.htm#4feb6c4a-924f-451f-aa79-a8a7232c2802">image</a> name (ignoring path) when the event occurs.  If the name of the module or process is not available, it is considered a match.</LI>
+<LI>The argument is an expression that is evaluated by the engine when the argument is set.</LI>
+<LI>The argument uses the string wildcard syntax and is compared with the debug output from the target.  If the output is not known, it is considered a match.</LI>
+</OL>
+</P>
+<H4><A NAME="5afc7ddc-0554-4f6c-a6e4-855a535fcb4b"></A>Index and Exception Code</H4>
+<P>Each event filter has an index.  The index is a number between zero and one less than the total number of filters (inclusive).  The index range for each category of filters can be found from the <i>SpecificEvents</i>, <i>SpecificExceptions</i>, and <i>ArbitraryExceptions</i> values returned by <a href="idebugcontrol_de1a980a-b0cb-486b-a292-1a9463a231c6.xml.htm"><b>GetNumberEventFilters</b></a>, as described in the following table:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Event Filters</TH>
+<TH Width="">Index of first filter</TH>
+<TH Width="">Number of filters</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Specific event filters</TD>
+<TD Width="">0</TD>
+<TD Width=""><i>SpecificEvents</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">specific exception filters</TD>
+<TD Width=""><i>SpecificEvents</i></TD>
+<TD Width=""><i>SpecificExceptions</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">arbitrary exception filters</TD>
+<TD Width=""><i>SpecificEvents</i> + <i>SpecificExceptions</i></TD>
+<TD Width=""><i>ArbitraryExceptions</i></TD>
+</TR>
+</table>
+<P></P>
+<P>The indices for the specific event filters are found in the first table located in the topic <a href="structures_a6679c9f-e984-42f4-b033-26ad9256c373.xml.htm">DEBUG_FILTER_<i>XXX</i></a>.  The index of the default exception filter (the first  specific exception filter) is <i>SpecificEvents</i>.  When an arbitrary exception filter is removed, the indices of the other arbitrary exception filters can change.</P>
+<P>The exception filters are usually specified by <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#0b476356-a48f-4e4f-84af-936458a97797">exception code</a>. However, some methods require the index of the exception.  To find the index of an exception filter for a given exception, use <a href="idebugcontrol_012d902c-ff4c-4ac8-9a35-b6cdcd1e2894.xml.htm"><b>GetExceptionFilterParameters</b></a> to iterate over all the exception filters until you find the one with the same exception code as the exception.  The exception codes for the specific exception filters can be found in the topic <a href="structures_17f68bad-f76c-48a0-a721-8134d40c904a.xml.htm">Specific Exceptions</a>.</P>
+<H4>System Errors</H4>
+<P>When a system error occurs, the engine will break into the debugger or print the error to the output stream, if the error occurs at or below specified levels.  These levels are returned by <a href="idebugcontrol_94595f9e-7e73-4291-a904-49f1a8fbbaa8.xml.htm"><b>GetSystemErrorControl</b></a> and can be changed using <a href="idebugcontrol_60e365d4-8645-469c-8973-9f2da168bba3.xml.htm"><b>SetSystemErrorControl</b></a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Event Filters RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

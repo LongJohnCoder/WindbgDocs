@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Overview of Boot Options in EFI</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Overview of Boot Options in EFI"><xml><MSHelp:Keyword Index="A" Term="bootini_6b1b3f48-144b-4b46-98eb-ec48c97bf651.xml"/>
+<META NAME="MS-HKWD" CONTENT="NVRAM boot options [WDK], about EFI NVRAM boot options">
+<META NAME="MS-HKWD" CONTENT="EFI NVRAM boot options [WDK], about EFI NVRAM boot options">
+<META NAME="MS-HKWD" CONTENT="globally-defined variables [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], variables">
+<META NAME="MS-HKWD" CONTENT="boot entry IDs [WDK]">
+<META NAME="MS-HKWD" CONTENT="EFI boot entry IDs [WDK]">
+<META NAME="MS-HKWD" CONTENT="identifiers [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="boot entries [WDK]">
+<META NAME="MS-HKWD" CONTENT="Bootcfg tool"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_6b1b3f48-144b-4b46-98eb-ec48c97bf651.xml"></A>Overview of Boot Options in EFI</H1>
+<P>Like the boot options on a system with BIOS firmware, there are two types of boot options in EFI NVRAM: </P><B></B><UL type="disc">
+<LI><i>Globally-defined variables</i> that apply to all bootable devices and bootable programs on the computer.</LI>
+<LI><i>Boot option variables</i> that apply only to a particular load configuration of a bootable device or program, such as an operating system. The system-specific variables comprise a boot entry for each configuration of a bootable device or bootable program on the computer.</LI>
+</UL>
+<P></P>
+<P>The Bootcfg tool (discussed in <a href="bootini_d949ecf2-fed1-419e-9bcf-a74e97b85813.xml.htm">Editing Boot Options in EFI</a> and documented in Windows Help and Support) allows you to view and edit the boot options in EFI NVRAM.</P>
+<P>The following sample shows a Bootcfg display of a computer with an Itanium processor.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot Options<BR>------------<BR>Timeout:             30<BR>Default:             \Device\HarddiskVolume3\WINDOWS<BR>CurrentBootEntryID:  1<BR><BR>Boot Entries<BR>------------<BR><BR>Boot entry ID:    1<BR>OS Friendly Name: Windows Server 2003, Enterprise<BR>OsLoadOptions: /debug /debugport=COM1 /baudrate=57600<BR>BootFilePath:     \Device\HarddiskVolume1\EFI\Microsoft\WINNT50\ia64ldr.efi<BR>OsFilePath:       \Device\HarddiskVolume3\WINDOWS<BR><BR>Boot entry ID:    2<BR>OS Friendly Name: EFI Shell [Built-in]<BR><BR></nobr></P>
+<P>The following table describes the elements of the Bootcfg display of boot data in EFI NVRAM.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Field</TH>
+<TH Width="">Description</TH>
+<TH Width="">Example</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Boot Options</b></TD>
+<TD Width="">Contains options that apply to all boot entries.</TD>
+<TD Width="">(Section heading)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Timeout</b></TD>
+<TD Width="">Determines how long the boot menu is displayed. When this value expires, the boot loader loads the default operating system.</TD>
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">Timeout:   30<BR></span></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Default</b></TD>
+<TD Width="">Specifies the location of the default operating system.</TD>
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">\Device\HarddiskVolume3\WINDOWS<BR></span></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>CurrentBootEntryID</b></TD>
+<TD Width="">Identifies the boot entry that was used to start the current session of the operating system.</TD>
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">CurrentBootEntryID:  1<BR></span></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Boot Entries</b></TD>
+<TD Width="">Contains system-specific data. It is comprised of one or more <i>boot entries</i> for each operating system or bootable program installed on the computer. <BR><BR>A <i>boot entry</i> is a set of options that defines a load configuration for an operating system or bootable program. <BR><BR></TD>
+<TD Width="">(Section heading)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Boot entry ID</b></TD>
+<TD Width="">Identifies the boot entry to Bootcfg. This value changes when you reorder the boot entries.<BR><BR>This is <i>not</i> the <i>EFI boot entry ID</i>, which is a persistent identifier for the EFI components. <BR><BR></TD>
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">Boot entry ID:    1<BR></span></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>OS Friendly Name</b></TD>
+<TD Width="">Represents the boot entry in the boot menu.</TD>
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">Windows Server 2003,<BR>Enterprise<BR></span></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>OsLoadOptions</b></TD>
+<TD Width="">Specifies the <i>boot parameters</i> for the entry. <i>Boot parameters</i> are commands to enable, disable, and configure features of the operating system. The EFI Boot Manager passes these parameters to the bootable device or system to be interpreted and implemented.<BR><BR>For a list of the boot parameters that are related to driver debugging and testing, see <a href="bootini_09bcc247-05ed-43ac-950c-3477f972baf6.xml.htm">Boot.ini Boot Parameter Reference</a>. <BR><BR></TD>
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">OsLoadOptions: /debug<BR>/debugport=COM1 /baudrate=57600<BR></span></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>BootFilePath</b></TD>
+<TD Width="">Specifies the location of the EFI boot loader for the operating system. On EFI-based systems, each operating system or bootable device has its own copy of the boot loader on the EFI partition.<BR><BR>In EFI NVRAM, the boot loader file path is stored as a binary EFI device path that uses a globally unique identifier (GUID) to identify the EFI partition . <BR><BR>Bootcfg uses the NT device name of the partition in its path display. <BR><BR></TD>
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">BootFilePath: \Device\HarddiskVolume1<BR>\EFI\Microsoft\WINNT50\ia64ldr.efi<BR></span></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>OsFilePath</b></TD>
+<TD Width="">Specifies the location of the operating system. <BR><BR>In NVRAM, this value is stored as an EFI device path that uses the GUID of the boot disk partition and the path to the directory that contains the operating system. <BR><BR>Bootcfg uses the NT device name of the partition in its path display. <BR><BR></TD>
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">OsFilePath: \Device\HarddiskVolume3<BR>\WINDOWS<BR></span></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P>In addition, there is an important element of an EFI boot entry that Bootcfg does not display, the <i>EFI boot entry ID</i>. The EFI boot entry is a unique identifier for an EFI boot entry. This identifier is assigned when the boot entry is created, and it does not change. It represents the boot entry in several lists, including the <i>BootOrder</i> array, and it is the name of the directory on disk in which the system stores data related to the boot entry, including  backup copies of the boot entry. An EFI boot entry ID has the format, Boot<i>xxxx</i>, where <i>xxxx</i> is a hexadecimal number that reflects the order in which the boot entries are created. </P>
+<P></P>
+<P class="note"><b>Note</b>  The <b>Boot entry ID</b> field in Bootcfg and the boot entry number in Nvrboot do <i>not</i> display the EFI boot entry ID. The Bootcfg and Nvrboot IDs are line numbers that represent the order of the boot entry in the <b>Boot Entries</b> section and change when the entries are reordered.</P>
+<P>For a detailed description of boot options on Itanium-based systems, see the Extensible Firmware Interface Specification. You can download a copy of the specification from the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=10596" target="_blank">Intel Extensible Firmware Interface</a> Web site.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Overview of Boot Options in EFI RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

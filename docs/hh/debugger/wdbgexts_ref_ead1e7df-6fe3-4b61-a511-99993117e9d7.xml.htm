@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>InitTypeRead</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, InitTypeRead"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="InitTypeRead"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_ead1e7df-6fe3-4b61-a511-99993117e9d7.xml"/>
+<META NAME="MS-HKWD" CONTENT="InitTypeRead macro">
+<META NAME="MS-HKWD" CONTENT="InitTypeStrRead macro"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_ead1e7df-6fe3-4b61-a511-99993117e9d7.xml"></A>InitTypeRead</H1>
+<P><P>The <b>InitTypeRead</b> and <b>InitTypeStrRead</b> macros initialize a structure so that its members can be read using <a href="wdbgexts_ref_0343858a-65d2-4c15-a1ff-7053d62b0fb9.xml.htm"><b>ReadField</b></a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>#define InitTypeRead(</b><i>Addr</i><b>, </b><i>Type</i><b>) \</b><BR><b>    GetShortField(</b><i>Addr</i><b>, #</b><i>Type</i><b>, 1)</b><BR><BR><b>#define InitTypeStrRead(</b><i>Addr</i><b>, </b><i>TypeStr</i><b>) \</b><BR><b>    GetShortField(</b><i>Addr</i><b>, </b><i>TypeStr</i><b>, 1)</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Addr</i></DT>
+<DD>Specifies the address of the structure in the target's virtual memory.</DD>
+<DT><i>Type</i></DT>
+<DD>Specifies the name of the type of the structure.  The C pre-processor will turn <i>Type</i> into a string.</DD>
+<DT><i>TypeStr</i></DT>
+<DD>Specifies the name of the type of the structure.  <i>TypeStr</i> is expected to be an ASCII string.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>If this macro succeeds, it returns the value zero.  If it fails because the caller passed a zero value as <i>Addr</i>, it returns the value MEMORY_READ_ERROR (defined in <i>Wdbgexts.h</i>).  If it fails for any other reason, it returns an <a href="wdbgexts_ref_a6260d9a-190f-4533-bcc4-8f5e5ae08647.xml.htm">IG_DUMP_SYMBOL_INFO error code</a>.</P>
+<P></P>
+<H4>Comments</H4>
+<P class="note"><b>Note</b>  Because these macros use the <a href="wdbgexts_ref_ef67af78-e72f-440c-9ef3-d84b8cca12dc.xml.htm"><b>GetShortField</b></a> function, <b>ReadField</b> must be used in the same source code file as these macros.  For more details, see <b>GetShortField</b>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that uses this macro, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_b0221684-224c-4fa9-bdaf-ed93b7a89766.xml.htm"><b>InitTypeReadPhysical</b></a>, <a href="wdbgexts_ref_0343858a-65d2-4c15-a1ff-7053d62b0fb9.xml.htm"><b>ReadField</b></a>, <a href="wdbgexts_ref_ef67af78-e72f-440c-9ef3-d84b8cca12dc.xml.htm"><b>GetShortField</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: InitTypeRead RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xCB: DRIVER_LEFT_LOCKED_PAGES_IN_PROCESS</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xCB: DRIVER_LEFT_LOCKED_PAGES_IN_PROCESS"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_5380f2f6-c4c3-45a8-8b19-488c143ba424.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xCB: DRIVER_LEFT_LOCKED_PAGES_IN_PROCESS">
+<META NAME="MS-HKWD" CONTENT="DRIVER_LEFT_LOCKED_PAGES_IN_PROCESS"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_5380f2f6-c4c3-45a8-8b19-488c143ba424.xml"></A>Bug Check 0xCB: DRIVER_LEFT_LOCKED_PAGES_IN_PROCESS</H1>
+<P>The DRIVER_LEFT_LOCKED_PAGES_IN_PROCESS bug check has a value of 0x000000CB. This indicates that a driver or the I/O manager failed to release locked pages after an I/O operation.</P>
+<H4>Parameters</H4>
+<P>The four parameters listed in the message can have two possible meanings.</P>
+<P>If a driver locked these pages, the parameters have the following meaning.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">Calling address in the driver that locked the pages </TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">Caller of the calling address in driver that locked the pages</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">Address of the MDL containing the locked pages</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Number of locked pages</TD>
+</TR>
+</table>
+<P></P>
+<P>If the driver responsible for the error can be identified, its name is printed on the blue screen and stored in memory at the location (PUNICODE_STRING) <b>KiBugCheckDriver</b>.</P>
+<P>If the I/O manager locked these pages, the parameters have the following meaning.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">Address of the dispatch routine of the top driver on the stack to which the IRP was sent </TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">Address of the device object of the top driver on the stack to which the IRP was sent </TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">Address of the MDL containing the locked pages</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Number of locked pages</TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>This bug check is issued only if the registry value <b>\\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\TrackLockedPages</b> is equal to DWORD 1. If this value is not set, the system will issue the less-informative <a href="t05_bugs_60_761ea51e-aa41-47df-90b7-54f8cbfdca17.xml.htm">bug check 0x76</a> (PROCESS_HAS_LOCKED_PAGES).</P>
+<P>Starting with Windows Vista, this bug check can also be issued by Driver Verifier when the Pool Tracking option is enabled.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xCB: DRIVER_LEFT_LOCKED_PAGES_IN_PROCESS RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Finding the Failed Process</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Finding the Failed Process"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_27379023-e6dc-46ee-a2b5-2d8783e2782d.xml"/>
+<META NAME="MS-HKWD" CONTENT="process, finding failed process"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_27379023-e6dc-46ee-a2b5-2d8783e2782d.xml"></A>Finding the Failed Process</H1>
+<P>Before finding the failed process, make sure that you are in the context of the accepting processor. To determine the accepting processor, use the <a href="r28_exts_kernel_n_4ab42b0e-acdd-42f1-9594-e7db30d8276b.xml.htm"><b>!pcr</b></a> extension on each processor and looking for the processor for which an exception handler has been loaded. The exception handler of the accepting processor has an address other than 0xFFFFFFFF. </P>
+<P>For example, because the address of <b>NtTib.ExceptionList</b> on this processor, is 0xFFFFFFFF, this is not the processor with the failed process:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!pcr </b><BR>PCR Processor 0 @ffdff000<BR>        <b>NtTib.ExceptionList: ffffffff</b><BR>            NtTib.StackBase: 80470650<BR>           NtTib.StackLimit: 8046d860<BR>         NtTib.SubSystemTib: 00000000<BR>              NtTib.Version: 00000000<BR>          NtTib.UserPointer: 00000000<BR>              NtTib.SelfTib: 00000000<BR><BR>                    SelfPcr: ffdff000<BR>                       Prcb: ffdff120<BR>                       Irql: 00000000<BR>                        IRR: 00000000<BR>                        IDR: ffffffff<BR>              InterruptMode: 00000000<BR>                        IDT: 80036400<BR>                        GDT: 80036000<BR>                        TSS: 80257000<BR><BR>              CurrentThread: 8046c610<BR>                 NextThread: 00000000<BR>                 IdleThread: 8046c610<BR><BR>                  DpcQueue: <BR></nobr></P>
+<P>However, the results for Processor 1 are quite different. In this case, the value of <b>NtTib.ExceptionList</b> is <b>f0823cc0</b>, not 0xFFFFFFFF, indicating that this is the processor on which the exception occurred.</P>
+<P></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>~1 </b><BR>1: kd&gt; <b>!pcr</b><BR>PCR Processor 1 @81497000<BR>        <b>NtTib.ExceptionList: f0823cc0</b><BR>            NtTib.StackBase: f0823df0<BR>           NtTib.StackLimit: f0821000<BR>         NtTib.SubSystemTib: 00000000<BR>              NtTib.Version: 00000000<BR>          NtTib.UserPointer: 00000000<BR>              NtTib.SelfTib: 00000000<BR><BR>                    SelfPcr: 81497000<BR>                       Prcb: 81497120<BR>                       Irql: 00000000<BR>                        IRR: 00000000<BR>                        IDR: ffffffff<BR>              InterruptMode: 00000000<BR>                        IDT: 8149b0e8<BR>                        GDT: 8149b908<BR>                        TSS: 81498000<BR><BR>              CurrentThread: 81496d28<BR>                 NextThread: 00000000<BR>                 IdleThread: 81496d28<BR><BR>                  DpcQueue: <BR></nobr></P>
+<P>When you are in the correct processor context, the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a> extension displays the currently running process.</P>
+<P>The most interesting parts of the process dump are: </P><B></B><UL type="disc">
+<LI>The times (a high value indicates that process might be the culprit). </LI>
+<LI>The handle count (this is the number in parentheses after <b>ObjectTable</b> in the first entry).</LI>
+<LI>The thread status (many processes have multiple threads). If the current process is <i>Idle</i>, it is likely that either the machine is truly idle or it hung due to some unusual problem.</LI>
+</UL>
+<P></P>
+<P>Although using the <b>!process 0 7</b> extension is the best way to find the problem on a hung system, it is sometimes too much information to filter. Instead, use a <b>!process 0 0</b> and then a <b>!process</b> on the process handle for CSRSS and any other suspicious processes. </P>
+<P>When using a <b>!process 0 7</b>, many of the threads might be marked "kernel stack not resident" because those stacks are paged out. If those pages are still in the cache that is in transition, you can get more information by using a <b>.cache decodeptes</b> before <b>!process 0 7</b>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>.cache decodeptes </b><BR>kd&gt; <b>!process 0 7</b> <BR><BR></nobr></P>
+<P>If you can identify the failing process, use <b>!process &lt;</b><I><B>process</B></I><b>&gt; 7</b> to show the kernel stacks for each thread in the process. This output can identify the problem in kernel mode and reveal what the suspect process is calling.</P>
+<P>In addition to <b>!process</b>, the following extensions can help to determine the cause of an unresponsive computer:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Extension</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r29_exts_kernel_q_28d91ba1-8a4a-4bc9-9615-99432ca06787.xml.htm"><b>!ready</b></a> </TD>
+<TD Width="">Identifies the threads that are ready to run, in order of priority.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r27_exts_kernel_e_0a5e2949-f4ab-488f-bf59-72c3e15d7643.xml.htm"><b>!kdext*.locks</b></a> </TD>
+<TD Width="">Identifies any held resource locks, in case there is a deadlock with retail time outs.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r30_exts_kernel_u_f7bac801-e399-4fab-af3e-ad2c1effce20.xml.htm"><b>!vm</b></a> </TD>
+<TD Width="">Checks the virtual memory usage.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r28_exts_kernel_n_47a5b9f5-03d6-4479-827c-ad88f67d08b2.xml.htm"><b>!poolused</b></a> </TD>
+<TD Width="">Determines whether one type of pool allocation is disproportionately large (pool tagging required).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r27_exts_kernel_e_e5a27ddd-3d24-48ce-9076-7c72c6dd208d.xml.htm"><b>!memusage</b></a> </TD>
+<TD Width="">Checks the physical memory status.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r25_exts_general_he_6f575a41-220b-4f5d-b82b-a4d7ed3a79bf.xml.htm"><b>!heap</b></a> </TD>
+<TD Width="">Checks the validity of the heap.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r27_exts_kernel_e_f937a896-8b86-463a-8bfc-24af6b7181cc.xml.htm"><b>!irpfind</b></a> </TD>
+<TD Width="">Searches nonpaged pool for active IRPs.</TD>
+</TR>
+</table>
+<P></P>
+<P>If the information provided does not indicate an unusual condition, try setting a breakpoint at <b>ntoskrnl!KiSwapThread</b> to determine whether the processor is stuck in one process or if it is still scheduling other processes. If it is not stuck, set breakpoints in common functions, such as <b>NtReadFile</b>, to determine whether the computer is stuck in a specific code path.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Finding the Failed Process RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

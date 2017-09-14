@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Remote Tool</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Remote Tool"><xml><MSHelp:Keyword Index="A" Term="Remote_bf30d515-f221-4419-bea3-294e559f66ed.xml"/>
+<META NAME="MS-HKWD" CONTENT="Remote Tool">
+<META NAME="MS-HKWD" CONTENT="Remote.exe">
+<META NAME="MS-HKWD" CONTENT="Remote.exe, [See Remote Tool]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Remote_bf30d515-f221-4419-bea3-294e559f66ed.xml"></A>Remote Tool</H1>
+<P>The Remote tool, <i>Remote.exe</i>, is a command-line tool that lets you run and control any console program from a remote computer.</P>
+<P>The Remote tool includes the following components:</P><B></B><UL type="disc">
+<LI>A server application that starts a console program and opens a named pipe for client connections.</LI>
+<LI>A client application that establishes a connection to a server. Commands typed on the client computer are sent to the console application on the server, and the remote client displays the output from the server's console window. </LI>
+<LI>A query feature that lists the remote sessions running on a server computer.</LI>
+</UL>
+<P></P>
+<P>With the Remote tool, you can start multiple server sessions on a single computer where multiple clients can connect to each session. The sessions are limited only by the computer's resources.</P>
+<P>This is an older tool that has been eclipsed by more sophisticated tools, primarily Remote Desktop. However, because it is simple and uses very few resources, it is still widely used, typically for remote debugging.</P>
+<P>The Remote tool requires that commands be submitted on both the local and remote computers. As such, to use this tool on a computer without a local user, you must develop an alternate way to submit the commands and to restart the computer, if necessary.</P>
+<P>The Remote tool can compromise security on your computer, because it does not authenticate users or use Microsoft Windows permissions. By default, any remote computer that can connect and provide the session name can use the named pipe that this tool creates, although you can use Remote tool options to include and exclude particular users and groups.</P>
+<P>This section includes:</P><B></B><div class="indent1">
+<P><a href="remote_58739417-0eb2-4500-ba8e-6c8216d6ab86.xml.htm">Remote Tool Concepts</a> </P>
+</div>
+<div class="indent1">
+<P><a href="remote_5dd1d3ec-6340-42ef-944a-cbeaa03fb1c6.xml.htm">Remote Tool Commands</a> </P>
+</div>
+<div class="indent1">
+<P><a href="remote_e07461cc-da34-4f2f-969c-c7f886759303.xml.htm">Remote Tool Examples</a> </P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Remote Tool RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

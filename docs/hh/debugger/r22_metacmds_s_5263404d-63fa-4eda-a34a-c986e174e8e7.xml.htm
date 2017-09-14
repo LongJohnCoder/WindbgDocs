@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.thread (Set Register Context)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .thread (Set Register Context)"><xml><MSHelp:Keyword Index="A" Term="r22_metacmds_S_5263404d-63fa-4eda-a34a-c986e174e8e7.xml"/>
+<META NAME="MS-HKWD" CONTENT=".thread (Set Register Context) command">
+<META NAME="MS-HKWD" CONTENT="Set Register Context (.thread) command">
+<META NAME="MS-HKWD" CONTENT="context, Set Register Context (.thread) command">
+<META NAME="MS-HKWD" CONTENT="registers, Set Register Context (.thread) command">
+<META NAME="MS-HKWD" CONTENT="call stack, Set Register Context (.thread) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r22_metacmds_S_5263404d-63fa-4eda-a34a-c986e174e8e7.xml"></A>.thread (Set Register Context)</H1>
+<P>The <b>.thread</b> command specifies which thread will be used for the register context.<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.thread</b> [<b>/p</b> [<b>/r</b>] ] [<b>/P</b>] [<b>/w</b>] [<i>Thread</i>]<i> </i><BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>/p</b></DT>
+<DD><i>(Live debugging only)</i>  If this option is included and <i>Thread</i> is nonzero, all transition page table entries (PTEs) for the process owning this thread will be automatically translated into physical addresses before access. This may cause slowdowns, because the debugger will have to look up the physical addresses for all the memory used by this process, and a significant amount of data may need to be transferred across the debug cable. (This behavior is the same as that of <a href="r19_metacmds_a_f283d0a1-e577-4429-9ab3-001663afd9f3.xml.htm"><b>.cache forcedecodeuser</b></a>.)<P>If the <b>/p</b> option is included and <i>Thread</i> is zero or omitted, this translation will be disabled. (This behavior is the same as that of <a href="r19_metacmds_a_f283d0a1-e577-4429-9ab3-001663afd9f3.xml.htm"><b>.cache noforcedecodeuser</b></a>.)</P>
+</DD>
+<DT><b>/r</b></DT>
+<DD><i>(Live debugging only)</i>  If the <b>/r</b> option is included along with the <b>/p</b> option, user-mode symbols for the process owning this thread will be reloaded after the process and register contexts have been set. (This behavior is the same as that of <b>.</b><a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>reload /user</b></a>.)</DD>
+<DT><b>/P</b></DT>
+<DD><i>(Live debugging only)</i>  If this option is included and <i>Thread</i> is nonzero, all transition page table entries (PTEs) will be automatically translated into physical addresses before access. Unlike the <b>/p</b> option, this translates the PTEs for all user-mode and kernel-mode processes, not only the process owning this thread. This may cause slowdowns, because the debugger will have to look up the physical addresses for all memory in use, and a huge amount of data may need to be transferred across the debug cable. (This behavior is the same as that of <a href="r19_metacmds_a_f283d0a1-e577-4429-9ab3-001663afd9f3.xml.htm"><b>.cache forcedecodeptes</b></a>.)  </DD>
+<DT><b>/w</b></DT>
+<DD>(<i>64-bit kernel debugging only)  </i>Changes the active context for the thread to the WOW64 32-bit context. The thread specified must be running in a process that has a WOW64 state. </DD>
+<DT><i>Thread</i></DT>
+<DD>The address of the thread. If this is omitted or zero, the thread context is reset to the current thread.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">kernel mode only    </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all     </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Generally, when you are doing kernel debugging, the only visible registers are the ones associated with the current thread.</P>
+<P>The <b>.thread</b> command instructs the kernel debugger to use the specified thread as the register context. After this command is executed, the debugger will have access to the most important registers and the stack trace for this thread. This register context persists until you allow the target to execute or use another register context command (<b>.thread</b>, <b>.cxr</b>, or <b>.trap</b>). See <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">Register Context</a> for full details.</P>
+<P>The <b>/w</b> option can only be used in 64-bit kernel debugging sessions on a thread running in a process that has a WOW64 state. The context retrieved will be the last context remembered by WOW64; this is usually the last user-mode code executed by <i>Thread</i>. This option can only be used if the target is in native machine mode. For example, if the target is running on a 64-bit machine that is emulating an x86-based processor using WOW64, this option cannot be used. Using the <b>/w</b> option will cause the machine mode to switch automatically to an x86-based processor.</P>
+<P>This command does not actually change the <i>current thread</i>. In other words, extensions such as <a href="r29_exts_kernel_q_127b52f2-51ff-49c3-9392-7059a2f5a723.xml.htm"><b>!thread</b></a> and <a href="r25_exts_general_he_8f21ff4e-e437-4947-8075-37872377efac.xml.htm"><b>!teb</b></a> will still default to the current thread if no arguments are used with them.</P>
+<P>Here is an example. Use the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a> extension to find the address of the desired thread. (In this case, <b>!process 0 0</b> is used to list all processes, then <b>!process</b> is used a second time to list all the threads for the desired process.)</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!process 0 0</b><BR>**** NT ACTIVE PROCESS DUMP ****<BR>PROCESS fe5039e0  SessionId: 0  Cid: 0008    Peb: 00000000  ParentCid: 0000<BR>    DirBase: 00030000  ObjectTable: fe529a88  TableSize: 145.<BR>    Image: System<BR><BR><b>.....</b><BR><BR>PROCESS <b>ffaa5280</b>  SessionId: 0  Cid: 0120    Peb: 7ffdf000  ParentCid: 01e0<BR>    DirBase: 03b70000  ObjectTable: ffaa4e48  TableSize:  23.<BR>    Image: winmine.exe<BR><BR>kd&gt; <b>!process ffaa5280</b><BR>PROCESS ffaa5280  SessionId: 0  Cid: 0120    Peb: 7ffdf000  ParentCid: 01e0<BR>    DirBase: 03b70000  ObjectTable: ffaa4e48  TableSize:  23.<BR>    Image: winmine.exe<BR>    VadRoot ffaf6e48 Clone 0 Private 50. Modified 0. Locked 0.<BR>    DeviceMap fe502e88<BR>    Token                             e1b55d70<BR><BR><b>.....</b><BR><BR>        THREAD <b>ffaa43a0</b>  Cid 120.3a4  Teb: 7ffde000  Win32Thread: e1b4fea8 WAIT: (WrUserRequest) UserMode Non-Alertable<BR>            ffadc6a0  SynchronizationEvent<BR>        Not impersonating<BR>        Owning Process ffaa5280<BR>        WaitTime (seconds)      24323<BR>        Context Switch Count    494                   LargeStack<BR><BR><b>.....</b><BR><BR></nobr></P>
+<P>Now use the <b>.thread</b> command with the address of the desired thread. This sets the register context and enables you to examine the important registers and the call stack for this thread.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>.thread ffaa43a0</b><BR>Using context of thread ffaa43a0<BR><BR>kd&gt; <b>r</b><BR>Last set context:<BR>eax=00000000 ebx=00000000 ecx=00000000 edx=00000000 esi=00000000 edi=00000000<BR>eip=80403a0d esp=fd581c2c ebp=fd581c60 iopl=0         nv up di pl nz na pe nc<BR>cs=0000  ss=0000  ds=0000  es=0000  fs=0000  gs=0000             efl=00000000<BR>0000:3a0d ??              ???<BR><BR>kd&gt; <b>k</b><BR>  *** Stack trace for last set context - .thread resets it<BR>ChildEBP RetAddr  <BR>fd581c38 8042d61c ntoskrnl!KiSwapThread+0xc5<BR>00001c60 00000000 ntoskrnl!KeWaitForSingleObject+0x1a1<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information about the register context and other context settings, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .thread (Set Register Context) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

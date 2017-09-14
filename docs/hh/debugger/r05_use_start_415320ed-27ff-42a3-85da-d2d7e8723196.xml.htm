@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Switching Modes</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Switching Modes"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_415320ed-27ff-42a3-85da-d2d7e8723196.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_415320ed-27ff-42a3-85da-d2d7e8723196.xml"></A>Switching Modes</H1>
+<P>When you <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">control user-mode debugging from the kernel debugger</a>, you encounter four different modes, and can switch between them in a variety of ways.</P>
+<P class="note"><b>Note</b>  In describing this scenario, <i>target application</i> refers to the user-mode application that is being debugged, <i>target computer</i> refers to the computer that contains the target application and the CDB or NTSD process, and <i>host computer</i> refers to the computer that contains the kernel debugger.</P>
+<P>The following four modes will be encountered:</P>
+<DL><DT><i>User-mode debugging</i></DT>
+<DD>The target computer and target application are frozen. The user-mode debugging prompt appears in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a> of the kernel debugger. In WinDbg, the prompt in the lower panel of the WinDbg window displays <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>Input&gt;</b></span>. You can enter commands at this prompt, as if they are entered during user-mode debugging, to analyze the target application's state or cause it to run or step through its execution. Symbol files, extension DLLs, and other files that the debugger accesses will be those files on the target computer, not the host computer.</DD>
+<DT><i>Target application execution</i></DT>
+<DD>The target computer is running, the target application is running, and the debugger is waiting. This mode is the same as letting the target run in ordinary debugging.</DD>
+<DT><i>Sleep mode</i></DT>
+<DD>The target computer is running, but the target application is frozen, and both debuggers are frozen. This mode is useful if you have to do something on the target computer but you do not want to change the state of the debugging session.</DD>
+<DT><i>Kernel-mode debugging</i></DT>
+<DD>The target computer and the target application are frozen. The kernel-mode debugging prompt <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>kd&gt;</b></span> appears in the Debugger Command window of the kernel debugger. This mode is the typical kernel-mode debugging state.</DD>
+</DL>
+<P></P>
+<P>The session begins in user-mode debugging mode. The following actions and events cause the mode to change:</P><B></B><UL type="disc">
+<LI>To switch from user-mode debugging to target application execution, use the <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command at the <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>Input&gt;</b></span> prompt.</LI>
+<LI>To temporarily switch from user-mode debugging to target application execution and then return to user-mode debugging, use a step, trace, or other temporary execution command. For a list of such commands, see <a href="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml.htm">Controlling the Target</a>.</LI>
+<LI>To switch from user-mode debugging to sleep mode, use the <a href="r22_metacmds_s_b21b6f36-ff6d-41af-a76a-899763c5ce9f.xml.htm"><b>.sleep (Pause Debugger)</b></a> command. This command is timed. When the time expires, the system returns to user-mode debugging.</LI>
+<LI>To switch from user-mode debugging to kernel-mode debugging, use the <a href="r19_metacmds_a_d3f65c1e-657b-4ead-8fe0-7f20503cb30f.xml.htm"><b>.breakin (Break to the Kernel Debugger)</b></a> command. Note that <b>.breakin</b> might fail with an access denied error if the calling process does not have administrator rights. In this case, switch to KD by issuing a short <b>.sleep</b> command and pressing CTRL+C. </LI>
+<LI>You can switch from target application execution to user-mode debugging only in certain environments. If the target computer is running Microsoft Windows XP or a later version of the Windows operating system, you can use the <a href="r26_exts_kernel_a_fb05d268-b407-4c26-84b7-b3ac841f588b.xml.htm"><b>!bpid</b></a> extension command. If you are using CDB (not NTSD), you can activate the CDB window on the target computer and press CTRL+C.   </LI>
+<LI>If the target application hits a breakpoint, encounters an exception, encounters some other controlled event, or ends, the system switches from target application execution to user-mode debugging. You should plan such events in advance, especially when you are using NTSD. For more information about these events, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a> and <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a>.</LI>
+<LI>To switch from target application execution to kernel-mode debugging, press CTRL+C in the KD window, press CTRL+BREAK or click<b> Break</b> on the <b>Debug</b> menu in the WinDbg window, or press SYSRQ or ALT+SYSRQ on the target computer keyboard. (If your kernel debugger is KD and if you press CTRL+C at the same time that the kernel debugger is communicating with the user-mode debugger, the user-mode debugger might capture you pressing CTRL+C.) </LI>
+<LI>If the debugger encounters a kernel error or if you use the <i>Breakin.exe</i> tool, the system switches from target application execution to kernel-mode debugging.</LI>
+<LI>To switch from sleep mode to user-mode debugging, wait for the sleep time to expire, start a new CDB process on the target computer by using the <nobr><b>-wake</b></nobr> <a href="r12_cmdline_3ec269e8-a2d8-43e4-8758-2201481cd323.xml.htm">command-line option</a>, or use the <a href="r22_metacmds_s_935bb156-3ff7-49b1-84ff-18de81356c08.xml.htm"><b>.wake (Wake Debugger)</b></a> command in a different copy of CDB or NTSD on the target computer.</LI>
+<LI>To switch out of kernel-mode debugging, use the <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command at the <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>kd&gt;</b></span> prompt. This command returns to user-mode debugging or target application execution (whichever of the two was the most recently-used state).</LI>
+</UL>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Switching Modes RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

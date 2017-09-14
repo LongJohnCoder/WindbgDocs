@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>EXT_TYPED_DATA</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, EXT_TYPED_DATA"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="WdbgExts.h, DbgEng.h"/>
+<MSHelp:Attr Name="APIName" Value="EXT_TYPED_DATA"/>
+<MSHelp:Keyword Index="A" Term="Structures_e4240445-73f9-4f38-8f1b-17035ced15f7.xml"/>
+<META NAME="MS-HKWD" CONTENT="EXT_TYPED_DATA structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_e4240445-73f9-4f38-8f1b-17035ced15f7.xml"></A>EXT_TYPED_DATA</H1>
+<P><P>The EXT_TYPED_DATA structure is passed to and returned from the <a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a> <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation. It contains the input and output parameters for the operation as well as specifying which particular suboperation to perform.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _EXT_TYPED_DATA {</b><BR><b>    IN EXT_TDOP  Operation;</b><BR><b>    IN ULONG  Flags;</b><BR><b>    IN DEBUG_TYPED_DATA  InData;</b><BR><b>    OUT DEBUG_TYPED_DATA  OutData;</b><BR><b>    IN ULONG  InStrIndex;</b><BR><b>    IN ULONG  In32;</b><BR><b>    OUT ULONG  Out32;</b><BR><b>    IN ULONG64  In64;</b><BR><b>    OUT ULONG64  Out64;</b><BR><b>    OUT ULONG  StrBufferIndex;</b><BR><b>    IN ULONG  StrBufferChars;</b><BR><b>    OUT ULONG  StrCharsNeeded;</b><BR><b>    IN OUT ULONG  DataBufferIndex;</b><BR><b>    IN ULONG  DataBufferBytes;</b><BR><b>    OUT ULONG  DataBytesNeeded;</b><BR><b>    OUT HRESULT  Status;</b><BR><b>    ULONG64  Reserved[8];</b><BR><b>} EXT_TYPED_DATA, *PEXT_TYPED_DATA;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>Operation</b></DT>
+<DD>Specifies which suboperation the <a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a> <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation should perform. The interpretation of some of the other members depends on <b>Operation</b>. For a list of possible suboperations, see <a href="structures_77246150-309c-4646-82b2-ba9c75d9a2d4.xml.htm">EXT_TDOP</a>.</DD>
+<DT><b>Flags</b></DT>
+<DD>Specifies the bit flags describing the target's memory in which the data resides. If no flags are present, the data is considered to be in virtual memory. One of the following flags may be present:<B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">EXT_TDF_PHYSICAL_DEFAULT</TD>
+<TD Width="">The typed data is in physical memory, and this physical memory uses the default memory caching.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">EXT_TDF_PHYSICAL_CACHED</TD>
+<TD Width="">The typed data is in physical memory, and this physical memory is cached.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">EXT_TDF_PHYSICAL_UNCACHED</TD>
+<TD Width="">The typed data is in physical memory, and this physical memory is uncached.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">EXT_TDF_PHYSICAL_WRITE_COMBINED</TD>
+<TD Width="">The typed data is in physical memory, and this physical memory is write-combined.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>InData</b></DT>
+<DD>Specifies typed data to be used as input to the operation. For details about this structure, see <a href="structures_6e8e758c-2c5d-4590-8908-3e1734ea2c7d.xml.htm">DEBUG_TYPED_DATA</a>.<P>The interpretation of <b>InData</b> depends on the value of <b>Operation</b>.</P>
+</DD>
+<DT><b>OutData</b></DT>
+<DD>Receives typed data as output from the operation. Any suboperation that returns typed data to <b>OutData</b> initially copies the contents of <b>InData</b> to <b>OutData</b>, then modifies <b>OutData</b> in place, so that the input parameters in <b>InData</b> are also present in <b>OutData</b>. For details about this structure, see <a href="structures_6e8e758c-2c5d-4590-8908-3e1734ea2c7d.xml.htm">DEBUG_TYPED_DATA</a>.<P>The interpretation of <b>OutData</b> depends on the value of <b>Operation</b>.</P>
+</DD>
+<DT><b>InStrIndex</b></DT>
+<DD>Specifies the position of an ANSI string to be used as input to the operation. <b>InStrIndex</b> can be zero to indicate that the input parameters do not include an ANSI string.<P>The position of the string is relative to the base address of this EXT_TYPED_DATA structure. The string must follow this structure, so <b>InStrIndex</b> must be greater than the size of this structure. The string is part of the input to the operation and <b>InStrIndex</b> must be smaller than <i>InBufferSize</i>, the size of the input buffer passed to <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a>.</P>
+<P>The interpretation of the string depends on the value of <b>Operation</b>.</P>
+</DD>
+<DT><b>In32</b></DT>
+<DD>Specifies a 32-bit parameter to be used as input to the operation.<P>The interpretation of <b>In32</b> depends on the value of <b>Operation</b>.</P>
+</DD>
+<DT><b>Out32</b></DT>
+<DD>Receives a 32-bit value as output from the operation.<P>The interpretation of <b>Out32</b> depends on the value of <b>Operation</b>.</P>
+</DD>
+<DT><b>In64</b></DT>
+<DD>Specifies a 64-bit parameter to be used as input to the operation.<P>The interpretation of <b>In64</b> depends on the value of <b>Operation</b>.</P>
+</DD>
+<DT><b>Out64</b></DT>
+<DD>Receives a 64-bit value as output from the operation.<P>The interpretation of <b>Out64</b> depends on the value of <b>Operation</b>.</P>
+</DD>
+<DT><b>StrBufferIndex</b></DT>
+<DD>Specifies the position to return an ANSI string as output from the operation. <b>StrBufferIndex</b> can be zero if no ANSI string is to be received from the operation.<P>The position of the string is relative to the base address of the returned EXT_TYPED_DATA structure. The string must follow the structure, so <b>StrBufferIndex</b> must be greater than the size of this structure. The string is part of the output from the suboperation, and <b>StrBufferIndex</b> plus <b>StrBufferChars</b> must be smaller than <i>OutBufferSize</i>, the size of the output buffer passed to <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a>.</P>
+<P>The interpretation of the string depends on the value of <b>Operation</b>.</P>
+</DD>
+<DT><b>StrBufferChars</b></DT>
+<DD>Specifies the size in characters of the ANSI string buffer specified by <b>StrBufferIndex</b>.</DD>
+<DT><b>StrCharsNeeded</b></DT>
+<DD>Receives the number of characters needed by the string buffer specified by <b>StrBufferIndex</b>.</DD>
+<DT><b>DataBufferIndex</b></DT>
+<DD>Set to zero.</DD>
+<DT><b>DataBufferBytes</b></DT>
+<DD>Set to zero.</DD>
+<DT><b>DataBytesNeeded</b></DT>
+<DD>Set to zero,</DD>
+<DT><b>Status</b></DT>
+<DD>Receives the status code returned by the operation. This is the same value returned by <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a>.</DD>
+<DT><b>Reserved</b></DT>
+<DD>Set to zero.</DD>
+</DL>
+<H4>Comments</H4>
+<P>The members of this structure are used as the input and output parameters to the <a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a> <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation. The interpretation of most of the parameters depends on the particular suboperation being performed, as specified by the <b>Operation</b> member.</P>
+<P>This structure can optionally specify additional data&#8212;using the members <b>InStrIndex</b> and <b>StrBufferIndex</b>&#8212;that is included with the structure. This additional data is specified relative to the address of the instance of this structure. When used with the DEBUG_REQUEST_EXT_TYPED_DATA_ANSI <b>Request</b> operation, the additional data is included in the <i>InBuffer</i> and <i>OutBuffer</i> (as appropriate) and should be included in the size of these two buffers.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>WbgExts.h</i>.  Include <i>WdbgExts.h</i> before including <i>DbgEng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a>, <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a>, <a href="structures_6e8e758c-2c5d-4590-8908-3e1734ea2c7d.xml.htm">DEBUG_TYPED_DATA</a>, <a href="structures_77246150-309c-4646-82b2-ba9c75d9a2d4.xml.htm">EXT_TDOP</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: EXT_TYPED_DATA RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

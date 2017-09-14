@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Live Local Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Live Local Debugging"><xml><MSHelp:Keyword Index="A" Term="t11~b_ks_7075b69d-1f58-48d7-9ca1-eb8a61e59c16.xml"/>
+<META NAME="MS-HKWD" CONTENT="kernel streaming debugging, live local debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~b_ks_7075b69d-1f58-48d7-9ca1-eb8a61e59c16.xml"></A>Live Local Debugging</H1>
+<P>In Microsoft Windows XP and later operating systems, it is possible to do local kernel debugging by starting the kernel debugger (KD) or WinDbg with the <b>&#8211;kl </b> command line option:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>kd [-y SymbolPath] -kl </b><BR></nobr></P>
+<P>or</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg [-y SymbolPath] -kl </b><BR></nobr></P>
+<P>Local debugging does not require the machine to be booted with the <b>/debug</b> option.</P>
+<P>Live local debugging is extremely useful for debugging issues that are difficult to reproduce when the debugger is attached; however, anything that requires knowledge of time sensitive information, including packet, IRP, and SRB data, is unlikely to work unless the problem is a hang or a stall.</P>
+<P>When performing local debugging, consider the following variables:</P><B></B><UL type="disc">
+<LI>  <b>Overall states.</b>  For example, is the stream running? Is the stream paused? </LI>
+<LI>  <b>Packet counts.</b>  For example, are there IRPs queued to the stream?</LI>
+<LI>  <b>Changes in packet counts.</b>  Is the stream moving?</LI>
+<LI>  <b>Changes in packet lists.</b> </LI>
+<LI>  <b>Hung kernel threads.</b></LI>
+<P></P>
+</UL>
+<P></P>
+<P>Consider the last of these.</P>
+<H4>Examining a Hung Thread in LKD</H4>
+<P>First, use the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm">!process 0 0</a> extension to identify the process containing the hung thread. Then, issue <b>!process</b> again for more information about that thread:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>lkd&gt; <b>!process 816a550 7</b><BR>        THREAD 81705da8  Cid 0b5c.0b60  Teb: 7ffde000 Win32Thread: e1b2d890 WAIT: (Suspended)<BR>        IRP List:<BR>            816c9ad8: (0006,0190) Flags: 00000030  Mdl: 00000000<BR>        Start Address kernel32!BaseProcessStartThunk (0x77e5c650)<BR>        Win32 Start Address 0x0101c9be<BR>        Stack Init f50bf000 Current <b>f50bea74</b> Base <b>f50bf000</b> Limit f50b9000 Call 0<BR>        Priority 10 BasePriority 8 PriorityDecrement 0<BR><BR></nobr></P>
+<P>The threads are not displayed, but the stack addresses are.  Using the <a href="r16_cmds_c_4865ae85-0c91-47f6-ad21-fa4c1db674be.xml.htm">dds</a><b><u> </u></b>(or <b>ddq</b>) command on the current address on the stack yields a starting point for further investigation, because it specifies which process is calling.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>lkd&gt; <b>dds f50bea74</b><BR>f50bea74  f50bebc4<BR>f50bea78  00000000<BR>f50bea7c  80805795 nt!KiSwapContext+0x25<BR>f50beab4  8080ece0 nt!KeWaitForSingleObject<BR>f50beabc  f942afda ks!CKsQueue::CancelAllIrps+0x14<BR>f50bead8  f94406c4 ks!CKsQueue::SetDeviceState+0x170<BR>f50beb00  f943f6f1 ks!CKsPipeSection::DistributeDeviceStateChange+0x1d<BR>f50beb24  f943fb1e ks!CKsPipeSection::SetDeviceState+0xb2<BR><BR></nobr></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Live Local Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>AbandonCurrentProcess</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, AbandonCurrentProcess"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="AbandonCurrentProcess"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_2a3f34d6-591b-4cae-bc28-2da5f05a9548.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::AbandonCurrentProcess method">
+<META NAME="MS-HKWD" CONTENT="AbandonCurrentProcess (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_2a3f34d6-591b-4cae-bc28-2da5f05a9548.xml"></A>AbandonCurrentProcess</H1>
+<P><P>The <b>AbandonCurrentProcess</b> methods removes the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a> from the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine's</a> <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#869bfa55-1556-4c4d-90ed-7b36f8f114b3">process</a> list without detaching or terminating the process.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient2::AbandonCurrentProcess(</b><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT>None</DT>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>AbandonCurrentProcess</b> is available in <b>IDebugClient2</b> and later versions.</P>
+<H4>Comments</H4>
+<P>This method is only available for <a href="dbg_glossary_bf550fa0-6430-4ba8-8ea4-50277d85224d.xml.htm#05126786-2493-4948-a5b3-1f3a23f7f320">live user-mode debugging</a>.  The target must be running on Windows XP or a later version of Windows.</P>
+<P>Windows will continue to consider this process as being debugged, and so the process will remain <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#0a6b6a99-2d54-46ab-99eb-d47231b221e6">suspended</a>.  This method allows the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#84783e5c-aa71-4d1c-be03-f4cc8ce3d72f">debugger</a> to be shut down and a new debugger to attach to the process.  See <a href="engine_dg_5e74ebf4-af57-41c3-ad2a-bd87417cd8d9.xml.htm">Live User-Mode Targets</a> and <a href="r07_use_operation_1d5faf67-01fe-4837-94ec-14e2fd60dea3.xml.htm">Re-attaching to the Target Application</a> for more information.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugclient_032236c1-3072-4226-919b-3f6f95635a20.xml.htm"><b>AttachProcess</b></a>, <a href="idebugclient_898e4cd4-45bf-43b8-80be-f761743e7f5c.xml.htm"><b>CreateProcessAndAttach2</b></a>, <a href="idebugclient_cee2b21f-2cbf-449d-a2c8-2006e21074db.xml.htm"><b>DetachCurrentProcess</b></a>, <a href="idebugclient_7129a1e4-f1a5-4dff-a45c-bf759ae410cf.xml.htm"><b>TerminateCurrentProcess</b></a>, <a href="r19_metacmds_a_ea8b7b66-835b-4c3c-a9f9-773e073bc583.xml.htm"><b>.abandon (Abandon Process)</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: AbandonCurrentProcess RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!db, !dc, !dd, !dp, !dq, !du, !dw</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !db, !dc, !dd, !dp, !dq, !du, !dw"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_cfc39aa4-b8b1-4ff0-b867-3f0a6b9a1c82.xml"/>
+<META NAME="MS-HKWD" CONTENT="!db extension">
+<META NAME="MS-HKWD" CONTENT="!dc extension">
+<META NAME="MS-HKWD" CONTENT="!dd extension">
+<META NAME="MS-HKWD" CONTENT="!dp extension">
+<META NAME="MS-HKWD" CONTENT="!dq extension">
+<META NAME="MS-HKWD" CONTENT="!du extension">
+<META NAME="MS-HKWD" CONTENT="!dw extension">
+<META NAME="MS-HKWD" CONTENT="memory, Display Physical (!d*) extensions"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_cfc39aa4-b8b1-4ff0-b867-3f0a6b9a1c82.xml"></A>!db, !dc, !dd, !dp, !dq, !du, !dw</H1>
+<P>The <b>!db</b>, <b>!dc</b>, <b>!dd</b>, <b>!dp, !dq</b>, <b>!du</b>, and <b>!dw</b> extensions display data at the specified physical address on the target computer.<P>These extension commands should not be confused with the <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>d* (Display Memory)</b></a> command, or with the <a href="r31_exts_user_684518e3-bf26-4e75-b665-a0f30e104bfc.xml.htm"><b>!ntsdexts.dp</b></a> extension command.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!db</b> [<i>Caching</i>] [<b>-m</b>] [<i>PhysicalAddress</i>] [<b>L</b> <i>Size</i>] <BR><b>!dc</b> [<i>Caching</i>] [<b>-m</b>] [<i>PhysicalAddress</i>] [<b>L</b> <i>Size</i>] <BR><b>!dd</b> [<i>Caching</i>] [<b>-m</b>] [<i>PhysicalAddress</i>] [<b>L</b> <i>Size</i>] <BR><b>!dp</b> [<i>Caching</i>] [<b>-m</b>] [<i>PhysicalAddress</i>] [<b>L</b> <i>Size</i>] <BR><b>!dq</b> [<i>Caching</i>] [<b>-m</b>] [<i>PhysicalAddress</i>] [<b>L</b> <i>Size</i>] <BR><b>!du</b> [<i>Caching</i>] [<b>-m</b>] [<i>PhysicalAddress</i>] [<b>L</b> <i>Size</i>] <BR><b>!dw</b> [<i>Caching</i>] [<b>-m</b>] [<i>PhysicalAddress</i>] [<b>L</b> <i>Size</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Caching</i></DT>
+<DD>Can be any one of the following values. The <i>Caching</i> value must be surrounded by square brackets:    <DL><DT><b>[c]</b></DT>
+<DD>Causes this extension to read from cached memory.</DD>
+<DT><b>[uc]</b></DT>
+<DD>Causes this extension to read from uncached memory.</DD>
+<DT><b>[wc]</b></DT>
+<DD>Causes this extension to read from write-combined memory.</DD>
+</DL>
+</DD>
+<DT><b>-m</b></DT>
+<DD>Causes memory to be read one unit at a time. For example, <b>!db -m</b> reads memory in 8-bit chunks and <b>!dw -m</b> reads memory in 16-bit chunks. If your hardware does not support 32-bit physical memory reads, it may be necessary to use the <b>-m</b> option. This option does not affect the length or appearance of the display &#8212; it only affects how the memory is accessed.</DD>
+<DT><i>PhysicalAddress</i></DT>
+<DD>Specifies the first physical address to be displayed, in hexadecimal format. If this is omitted the first time this command is used, the address defaults to zero. If this is omitted on a subsequent use, the display will begin where the last display ended.</DD>
+<DT><b>L</b> <i>Size</i></DT>
+<DD>Specifies the number of chunks of memory to display. The size of a chunk is determined by the precise extension used.</DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kext.dll</i> <BR><i>Kdextx86.dll</i>   </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>These extensions each display physical memory, but their display formats and default length differ:</P><B></B><UL type="disc">
+<LI>The <b>!db</b> extension displays hexadecimal bytes and their ASCII character equivalents. The default length is 128 bytes.</LI>
+<LI>The <b>!dc</b> extension displays DWORD values and their ASCII character equivalents. The default length is 32 DWORDs (128 total bytes).</LI>
+<LI>The <b>!dd</b> extension displays DWORD values. The default length is 32 DWORDs (128 total bytes).</LI>
+<LI>The <b>!dp</b> extension displays ULONG_PTR values. These are either 32-bit or 64-bit words, depending on the instruction size. The default length is 128 total bytes.</LI>
+<LI>The <b>!dq</b> extension displays ULONG64_PTR values. These are 32-bit words. The default length is 128 total bytes.</LI>
+<LI>The <b>!du</b> extension displays UNICODE characters. The default length is 16 characters (32 total bytes), or until a NULL character is encountered. </LI>
+<LI>The <b>!dw</b> extension displays WORD values. The default length is 64 DWORDs (128 total bytes).</LI>
+</UL>
+<P>Consequently, using two of these extensions that are distinct with the same value of <i>Size</i> will most likely result in a difference in the total amount of memory displayed. For example, using the command <b>!db L 32</b> results in 32 bytes being displayed (as hexadecimal bytes), whereas the command <b>!dd L 32</b> results in 128 bytes being displayed (as DWORD values).</P>
+<P></P>
+<P>Here is an example in which the caching attribute flag is needed:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!dc e9000</b><BR>physical memory read at e9000 failed<BR>If you know the caching attributes used for the memory,<BR>try specifying [c], [uc] or [wc], as in !dd [c] &lt;params&gt;.<BR>WARNING: Incorrect use of these flags will cause unpredictable<BR>processor corruption. This may immediately (or at any time in<BR>the future until reboot) result in a system hang, incorrect data<BR>being displayed or other strange crashes and corruption.<BR><BR>kd&gt; <b>!dc [c] e9000</b><BR>#   e9000 000ea002 000ea002 000ea002 000ea002 ................<BR>#   e9010 000ea002 000ea002 000ea002 000ea002 ................<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>To write to physical memory, use the <a href="r27_exts_kernel_e_f013ab0d-2301-4fa9-8567-d94677aae8df.xml.htm"><b>!e*</b></a> extensions. For an overview of memory manipulation and a description of other memory-related commands, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !db, !dc, !dd, !dp, !dq, !du, !dw RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

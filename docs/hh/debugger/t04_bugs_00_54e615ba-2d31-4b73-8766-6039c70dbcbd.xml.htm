@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x18: REFERENCE_BY_POINTER</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x18: REFERENCE_BY_POINTER"><xml><MSHelp:Keyword Index="A" Term="t04_bugs_00_54e615ba-2d31-4b73-8766-6039c70dbcbd.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x18: REFERENCE_BY_POINTER">
+<META NAME="MS-HKWD" CONTENT="REFERENCE_BY_POINTER"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t04_bugs_00_54e615ba-2d31-4b73-8766-6039c70dbcbd.xml"></A>Bug Check 0x18: REFERENCE_BY_POINTER</H1>
+<P>The REFERENCE_BY_POINTER bug check has a value of 0x00000018. This indicates that the reference count of an object is illegal for the current state of the object.<P></P>
+</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">Object type of the object whose reference count is being lowered.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">Object whose reference count is being lowered.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">Reserved</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Reserved</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>The reference count of an object is illegal for the current state of the object. Each time a driver uses a pointer to an object, the driver calls a kernel routine to increase the reference count of the object by one. When the driver is done with the pointer, the driver calls another kernel routine to decrease the reference count by one.</P>
+<P>Drivers must match calls to the routines that increase (<i>reference</i>) and decrease (<i>dereference</i>) the reference count. This bug check is caused by an inconsistency in the object&#8217;s reference count. Typically, the inconsistency is caused by a driver that decreases the reference count of an object too many times, making extra calls that dereference the object. This bug check can occur because an object's reference count goes to zero while there are still open handles to the object. It might also occur when the object&#8217;s reference count drops below zero, whether or not there are open handles to the object.</P>
+<P></P>
+<H4>Resolving the Problem</H4>
+<P>Make sure that the driver matches calls to the routines that increase and decrease the reference count of the object. Make sure that your driver does not make extra calls to routines that dereference the object (see Parameter 2). </P>
+<P>You can use a debugger to help analyze this problem. To find the handle and pointer count on the object, use the <b>!object</b> debugger command.</P>
+<P>kd&gt; !object <i>address</i></P>
+<P></P>
+<P>Where <i>address</i> is the address of the object given in Parameter 2.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x18: REFERENCE_BY_POINTER RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

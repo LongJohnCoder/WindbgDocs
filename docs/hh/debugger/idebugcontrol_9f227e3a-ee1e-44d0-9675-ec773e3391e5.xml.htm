@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetExtensionFunction</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetExtensionFunction"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetExtensionFunction"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_9f227e3a-ee1e-44d0-9675-ec773e3391e5.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetExtensionFunction method">
+<META NAME="MS-HKWD" CONTENT="GetExtensionFunction (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_9f227e3a-ee1e-44d0-9675-ec773e3391e5.xml"></A>GetExtensionFunction</H1>
+<P>The <b>GetExtensionFunction</b> and <b>GetExtensionFunctionWide</b> methods return a pointer to an extension function from an extension library.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::GetExtensionFunction(</b><BR><b>    IN ULONG64  </b><i>Handle</i><b>,</b><BR><b>    IN PCSTR  </b><i>FuncName</i><b>,</b><BR><b>    OUT FARPROC *  </b><i>Function</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::GetExtensionFunctionWide(</b><BR><b>    IN ULONG64  </b><i>Handle</i><b>,</b><BR><b>    IN PCWSTR  </b><i>FuncName</i><b>,</b><BR><b>    OUT FARPROC *  </b><i>Function</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetExtensionFunctionT GetExtensionFunctionWide</b><BR><b>#else</b><BR><b>#define GetExtensionFunctionT GetExtensionFunction</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Handle</i></DT>
+<DD>Specifies the handle of the extension library that contains the extension function.  If <i>Handle</i> is zero, the engine will walk the extension library chain searching for the extension function.</DD>
+<DT><i>FuncName</i></DT>
+<DD>Specifies the name of the extension function to return.  When searching the extension libraries for the function, the debugger engine will prepend "_EFN_" to the name.  For example, if <i>FuncName</i> is "SampleFunction", the engine will search the extension libraries for "_EFN_SampleFunction".</DD>
+<DT><i>Function</i></DT>
+<DD>Receives the extension function.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetExtensionFunction</b> is available in all versions of <b>IDebugControl</b>.  <b>GetExtensionFunctionWide</b> is available in <b>IDebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>Extension libraries are loaded into the host engine and extension functions cannot be called remotely.  The current client must not be a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cab89f06-8d34-430d-b047-ea48e96aac1b">debugging client</a>, it must belong to the host engine.</P>
+<P>The extension function can have any function prototype.  In order for any program to call this extension function, the extension function should be cast to the correct prototype.</P>
+<P>For more information on using extension functions, see <a href="engine_dg_d73e4097-bf61-439b-9a14-6b0f445de761.xml.htm">Calling Extensions and Extension Functions</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_9d85fcbb-1c02-4b5a-b9ab-c50b9b266d1d.xml.htm"><b>AddExtension</b></a>, <a href="idebugcontrol_c37b420a-b94b-4d54-8a5a-2e1a74b49f26.xml.htm"><b>CallExtension</b></a>, <a href="idebugcontrol_821ee348-ddb2-4464-93cd-b6a58e267795.xml.htm"><b>GetExtensionByPath</b></a></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetExtensionFunction RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

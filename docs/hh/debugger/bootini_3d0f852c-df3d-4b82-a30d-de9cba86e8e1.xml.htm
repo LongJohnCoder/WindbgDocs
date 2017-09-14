@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>/execute</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, /execute"><xml><MSHelp:Keyword Index="A" Term="bootini_3d0f852c-df3d-4b82-a30d-de9cba86e8e1.xml"/>
+<META NAME="MS-HKWD" CONTENT="/execute"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_3d0f852c-df3d-4b82-a30d-de9cba86e8e1.xml"></A>/execute</H1>
+<P>The <b>/execute</b> parameter disables Data Execution Prevention (DEP) and Physical Address Extension (PAE).<P class="note"><b>Note</b>  DEP is a highly effective security feature. Do not disable DEP unless you have no other alternative.<P class="note"><b>Note  </b>The<b> /execute</b> parameter is supported in in Windows Server 2003 with SP1 to disable both DEP and PAE . To disable DEP and PAE in Windows XP with Service Pack 2 (SP2), use <b>/noexecute=alwaysoff</b>. For more information, see <a href="bootini_aff45176-bd02-43cf-9895-c212fa392de2.xml.htm"><b>/noexecute</b></a>.</P>
+</P>
+<P>For more information about using the /<b>execute</b> parameter and the other parameters that affect DEP configuration, see <a href="bootini_29e11bdf-06dc-489d-af10-27a8c03d3a62.xml.htm">Boot Parameters to Configure DEP and PAE</a>. </P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/execute</b><BR></nobr></P>
+<H4>Comments</H4>
+<H4>What is DEP?</H4>
+<P>DEP consists of hardware and software methods. <i>Software-enforced DEP</i>, which protects only user-mode processes, must be supported by the operating system. <i>Hardware-enforced DEP</i> sets a bit in the page table entry that prevents code from being executed from a virtual memory page that should contain only data. Hardware-enforced DEP must be supported by the operating system and the processor on the computer. If the operating system supports DEP, but the processor does not, only software-enforced DEP is enabled on the system.</P>
+<H4>Operating System Support</H4>
+<P>DEP is supported in Windows Server 2003 with SP1, Windows XP with SP2, Windows Vista, and later versions of Windows. The <b>/execute</b> option is supported only on Windows Server 2003 with SP1 and Windows XP with SP2. On Windows Vista and later versions of Windows, use the <b>NX</b> element in BCDEdit.</P>
+<H4>32-bit and 64-bit Support</H4>
+<P>The <b>/execute</b> parameter is effective only on 32-bit processes. On 64-bit processes, DEP is enabled by default and cannot be disabled. For these processes, the <b>/execute</b> parameter is ignored. On a 64-bit operating system, the <b>/execute</b> parameter affects only on 32-bit processes running on the system.</P>
+<H4>Enabling and Configuring DEP</H4>
+<P>To enable, disable, and configure DEP on Windows Server 2003 with SP1 and Windows XP with SP2, use the<a href="bootini_aff45176-bd02-43cf-9895-c212fa392de2.xml.htm"><b>/noexecute</b></a> boot parameter.</P>
+<H4>DEP and PAE</H4>
+<P>On 32-bit operating systems, hardware-enforced DEP requires PAE. Therefore, when DEP is enabled on a computer that supports hardware-enforced DEP, 32-bit versions of the Windows operating system automatically enable PAE (see <a href="bootini_17b4305e-23ac-40ea-99db-4858b29a5d66.xml.htm"><b>/pae</b></a>).</P>
+<P>The <b>/execute</b> parameter disables both DEP and PAE.</P>
+<P>On Windows XP, Windows Vista and later versions of Windows when you disable DEP, Windows also disables PAE. On Windows XP, the <b>/execute</b> parameter has the same effect as the <b>/noexecute=alwaysoff</b> and <b>noexecute=alwaysoff /nopae</b> parameters; they all disable both DEP and PAE. </P>
+<P>However, on Windows Server 2003 with SP1, the <b>/noexecute=alwaysoff</b> parameter disables DEP, but it does not disable PAE, and the system ignores <a href="bootini_37644df1-f3ea-4e1b-9ea6-c5ea00a1164b.xml.htm"><b>/nopae</b></a>. To disable both DEP and PAE on Windows Server 2003 with SP1, you must use <b>/execute</b>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: /execute RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

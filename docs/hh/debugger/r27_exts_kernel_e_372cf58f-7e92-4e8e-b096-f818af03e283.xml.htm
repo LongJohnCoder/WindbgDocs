@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!iovirp</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !iovirp"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_372cf58f-7e92-4e8e-b096-f818af03e283.xml"/>
+<META NAME="MS-HKWD" CONTENT="!iovirp extension">
+<META NAME="MS-HKWD" CONTENT="I/O Request Packet (IRP), !iovirp extension">
+<META NAME="MS-HKWD" CONTENT="I/O Verifier"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_372cf58f-7e92-4e8e-b096-f818af03e283.xml"></A>!iovirp</H1>
+<P><P>The <b>!iovirp </b>extension displays detailed information for a specified I/O Verifier IRP.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!iovirp</b> [<i>IRP</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>IRP</i></DT>
+<DD>Specifies the address of an IRP tracked by the Driver Verifier. If <i>IRP</i> is 0 or is omitted, the summary information for each outstanding IRP is displayed.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example of the output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!iovirp 947cef68</b><BR>IovPacket       84509af0<BR>TrackedIrp      947cef68<BR>HeaderLock      84509d61<BR>LockIrql        0<BR>ReferenceCount  1<BR>PointerCount    1<BR>HeaderFlags     00000000<BR>ChainHead       84509af0<BR>Flags           00200009<BR>DepartureIrql   0<BR>ArrivalIrql     0<BR>StackCount      1<BR>QuotaCharge     00000000<BR>QuotaProcess    0<BR>RealIrpCompletionRoutine        0<BR>RealIrpControl                  0<BR>RealIrpContext                  0<BR>TopStackLocation        2<BR>PriorityBoost           0<BR>LastLocation            0<BR>RefTrackingCount        0<BR>SystemDestVA            0<BR>VerifierSettings        84509d08<BR>pIovSessionData         84509380<BR>Allocation Stack:<BR>  nt!IovAllocateIrp+1a  (817df356)<BR>  nt!IopXxxControlFile+40c  (8162de20)<BR>  nt!NtDeviceIoControlFile+2a  (81633090)<BR>  nt!KiFastCallEntry+164  (81513c64)<BR>  nt!EtwpFlushBuffer+10f  (817606d7)<BR>  nt!EtwpFlushBuffersWithMarker+bd  (817608cb)<BR>  nt!EtwpFlushActiveBuffers+2b4  (81760bc2)<BR>  nt!EtwpLogger+213  (8176036f)<BR><BR></nobr></P>
+<P>You can stop execution at any point by pressing CTRL+BREAK (in WinDbg) or CTRL+C (in KD).</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !iovirp RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

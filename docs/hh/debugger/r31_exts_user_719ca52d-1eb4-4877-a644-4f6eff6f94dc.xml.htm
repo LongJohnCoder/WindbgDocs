@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!locks (!ntsdexts.locks)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !locks (!ntsdexts.locks)"><xml><MSHelp:Keyword Index="A" Term="r31_exts_user_719ca52d-1eb4-4877-a644-4f6eff6f94dc.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ntsdexts.locks extension">
+<META NAME="MS-HKWD" CONTENT="!locks (!ntsdexts.locks) extension">
+<META NAME="MS-HKWD" CONTENT="critical section, !ntsdexts.locks extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r31_exts_user_719ca52d-1eb4-4877-a644-4f6eff6f94dc.xml"></A>!locks (!ntsdexts.locks)</H1>
+<P>The <b>!locks</b> extension in <i>Ntsdexts.dll</i> displays a list of critical sections associated with the current process.<P>This extension command should not be confused with the <a href="r27_exts_kernel_e_0a5e2949-f4ab-488f-bf59-72c3e15d7643.xml.htm"><b>!kdext*.locks</b></a> extension command.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!locks</b> [<i>Options</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Specifies the amount of information to be displayed. Any combination of the following options can be used:<DL><DT><b>-v</b></DT>
+<DD>Causes the display to include all critical sections, even those that are not currently owned.</DD>
+<DT><b>-o</b></DT>
+<DD><i>(Windows XP and later)</i>  Causes the display to only include orphaned information (pointers that do not actually point to valid critical sections).</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ntsdexts.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ntsdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension command shows all critical sections that have been initialized by calling <b>RtlInitializeCriticalSection</b>.  If there are no critical sections, then no output will result.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!locks</b><BR><BR>CritSec w3svc!g_pWamDictator+a0 at 68C2C298<BR>LockCount          0<BR>RecursionCount     1<BR>OwningThread       d1<BR>EntryCount         1<BR>ContentionCount    0<BR>*** Locked<BR><BR>CritSec SMTPSVC+66a30 at 67906A30<BR>LockCount          0<BR>RecursionCount     1<BR>OwningThread       d0<BR>EntryCount         1<BR>ContentionCount    0<BR>*** Locked<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For other commands and extensions that can display critical section information, see <a href="t01_basic_0696c252-05c6-4f6f-b4c9-ad087b22de2b.xml.htm">Displaying a Critical Section</a>. For information about critical sections, see the Microsoft Windows SDK documentation, the Windows Driver Kit (WDK) documentation, and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !locks (!ntsdexts.locks) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

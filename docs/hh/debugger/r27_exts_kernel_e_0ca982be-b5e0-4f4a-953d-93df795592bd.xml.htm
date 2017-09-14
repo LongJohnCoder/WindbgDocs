@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!errrec</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !errrec"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_0ca982be-b5e0-4f4a-953d-93df795592bd.xml"/>
+<META NAME="MS-HKWD" CONTENT="!errrec extension">
+<META NAME="MS-HKWD" CONTENT="Windows Hardware Error Architecture, !errrec extension">
+<META NAME="MS-HKWD" CONTENT="WHEA, !errrec extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_0ca982be-b5e0-4f4a-953d-93df795592bd.xml"></A>!errrec</H1>
+<P><P>The <b>!errrec</b> extension displays the contents of a Windows Hardware Error Architecture (WHEA) error record.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!errrec</b> <i>Address</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the error record. </DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows Server 2003</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows Vista and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension can be used only in Windows Vista and later versions of Windows.</P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The following example shows how the <a href="r30_exts_kernel_u_95131e12-e601-4d1d-b676-21847ce6c545.xml.htm"><b>!whea</b></a> extension can be used to obtain the address of an error record, and then the contents of this record can be displayed by the <b>!errrec</b> extension: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>3: kd&gt; <b>!whea</b> <BR>Error Source Table @ fffff800019ca250<BR>13 Error Sources<BR>Error Source 0 @ fffffa80064132c0<BR>   Notify Type      : Machine Check Exception<BR>   Type             : 0x0 (MCE)<BR>   Error Count      : 8<BR>   Record Count     : 10<BR>   Record Length    : c3e<BR>   Error Records    : wrapper @ fffffa8007cf4000  record @ fffffa8007cf4030<BR><BR>. . . . <BR><BR>3: kd&gt; <b>!errrec fffffa8007cf4030</b> <BR>===============================================================================<BR>Common Platform Error Record @ fffffa8007cf4030<BR>-------------------------------------------------------------------------------<BR>Revision      : 2.1<BR>Record Id     : 01c9c7ff04e0ff7d<BR>Severity      : Fatal (1)<BR>Length        : 1730<BR>Creator       : Microsoft<BR>Notify Type   : Machine Check Exception<BR>Timestamp     : 4/28/2009 12:54:47<BR>Flags         : 0x00000000<BR><BR>===============================================================================<BR>Section 0     : Processor Generic<BR>-------------------------------------------------------------------------------<BR>Descriptor    @ fffffa8007cf40b0<BR>Section       @ fffffa8007cf4188<BR>Offset        : 344<BR>Length        : 192<BR>Flags         : 0x00000001 Primary<BR>Severity      : Fatal<BR><BR>No valid data fields are present.<BR><BR>===============================================================================<BR>Section 1     : {390f56d5-ca86-4649-95c4-73a408ae5834}<BR>-------------------------------------------------------------------------------<BR>Descriptor    @ fffffa8007cf40f8<BR>Section       @ fffffa8007cf4248<BR>Offset        : 536<BR>Length        : 658<BR>Flags         : 0x00000000<BR>Severity      : Fatal<BR><BR>*** Unknown section format ***<BR><BR>===============================================================================<BR>Section 2     : Error Packet<BR>-------------------------------------------------------------------------------<BR>Descriptor    @ fffffa8007cf4140<BR>Section       @ fffffa8007cf44da<BR>Offset        : 1194<BR>Length        : 536<BR>Flags         : 0x00000000<BR>Severity      : Fatal<BR><BR>   WHEA Error Packet Info Section (@ fffffa8007cf44da)<BR>   Flags            : 0x00000000<BR>   Size             : 0x218<BR>   RawDataLength    : 0x392<BR>   Context          : 0x0000000000000000<BR>   ErrorType        : 0x0 - Processor<BR>   ErrorSeverity    : 0x1 - Fatal<BR>   ErrorSourceId    : 0x0<BR>   ErrorSourceType  : 0x0 - MCE<BR>   Version          : 00000002<BR>   Cpu              : 0000000000000002<BR>   RawDataFormat    : 0x2 - Intel64 MCA<BR><BR>   Raw Data         : Located @ FFFFFA8007CF45F2<BR><BR>Processor Error: (Internal processor error)<BR>This error means either the processor is damaged or perhaps<BR>voltage and/or temperature thresholds have been exceeded.<BR>If the problem continues to occur, replace the processor.<BR>Processor Number : 2<BR>Bank Number      : 0<BR>   Status  :                0<BR>   Address : 0000000000000000 (I)<BR>   Misc    : 0000000000000000 (I)<BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>The <a href="r30_exts_kernel_u_95131e12-e601-4d1d-b676-21847ce6c545.xml.htm"><b>!whea</b></a> and <a href="r27_exts_kernel_e_c6f2cb29-c517-4905-bbb9-f79ab6794579.xml.htm"><b>!errpkt</b></a> extensions can be used to display additional WHEA information.  For general information about WHEA, see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=153571" target="_blank"><u>Windows Hardware Error Architecture (WHEA)</u></a> in the Windows Driver Kit (WDK) documentation. </P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !errrec RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xCD: PAGE_FAULT_BEYOND_END_OF_ALLOCATION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xCD: PAGE_FAULT_BEYOND_END_OF_ALLOCATION"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_e4fecbd0-a9d6-4741-abc7-9996def7ddcf.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xCD: PAGE_FAULT_BEYOND_END_OF_ALLOCATION">
+<META NAME="MS-HKWD" CONTENT="PAGE_FAULT_BEYOND_END_OF_ALLOCATION"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_e4fecbd0-a9d6-4741-abc7-9996def7ddcf.xml"></A>Bug Check 0xCD: PAGE_FAULT_BEYOND_END_OF_ALLOCATION</H1>
+<P>The PAGE_FAULT_BEYOND_END_OF_ALLOCATION bug check has a value of 0x000000CD. This indicates that the system accessed memory beyond the end of some driver's pool allocation.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">Memory address referenced</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width=""><b>0:</b> Read<BR><BR><b>1:</b> Write<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">Address that referenced memory (if known)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Reserved    </TD>
+</TR>
+</table>
+<P></P>
+<P>If the driver responsible for the error can be identified, its name is printed on the blue screen and stored in memory at the location (PUNICODE_STRING) <b>KiBugCheckDriver</b>.</P>
+<H4>Cause</H4>
+<P>The driver allocated <i>n</i> bytes of memory from the special pool. Subsequently, the system referenced more than <i>n </i>bytes from this pool. This usually indicates a system-driver synchronization problem.</P>
+<P>For information about the special pool, consult the Driver Verifier section of the Windows Driver Kit.  </P>
+<H4>Comments</H4>
+<P>This cannot be protected by a <b>try - except</b> handler &#8212; it can only be protected by a probe.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xCD: PAGE_FAULT_BEYOND_END_OF_ALLOCATION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging Hyper-V via a 1394 Cable Connection</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging Hyper-V via a 1394 Cable Connection"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_0aa4bb58-3160-41af-b789-70ba0cd0463c.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_0aa4bb58-3160-41af-b789-70ba0cd0463c.xml"></A>Debugging Hyper-V via a 1394 Cable Connection</H1>
+<P>To debug the root partition or Windows hypervisor across a 1394 cable connection, use the following procedure.   </P><B></B><OL type="1">
+<LI>Verify that you have the proper version of Debugging Tools for Windows installed on the host computer. If you are unsure of which version to use, see <a href="r02_setup_1_bec62139-3e78-4a5a-9ff0-b525fe703d98.xml.htm">Choosing a 32-Bit or 64-Bit Debugger Package</a>. </LI>
+<LI>On the target computer, use the BCDEdit tool to set the boot configuration settings to allow the debugging that you want. If you intend to debug the root partition, use the following commands: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set dbgtransport kd1394.dll </b><BR><b>bcdedit /dbgsettings 1394 CHANNEL:</b><i>ChannelNumber</i><b> </b><BR><b>bcdedit /debug on </b><BR></nobr></P>
+<P>If you intend to debug Windows hypervisor, use the following commands:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /hypervisorsettings 1394 CHANNEL:</b><i>ChannelNumber</i><b> </b><BR><b>bcdedit /set hypervisordebug on </b><BR><b>bcdedit /set hypervisorlaunchtype auto </b><BR></nobr></P>
+<P>In these commands, <i>ChannelNumber</i> represents the number of the 1394 channel that you are using.  For details on the use of BCDEdit,  see <a href="bootini_7a4cbe01-a9e7-4b00-9c85-7bac20c73286.xml.htm">Editing Boot Options</a>.  </P>
+<P>If you want to enable debugging of both the root partition and Window hypervisor, use both sets of BCDEdit commands described in this step, with two different 1394 channel numbers.</P>
+<P>After issuing these BCDEdit commands, restart the target computer. </P>
+</LI>
+<LI>Connect the host computer and the target computer by connecting a null-modem cable between their COM ports. This is done exactly as in standard kernel debugging; for details, see <a href="r02_setup_1_f15cdae4-9a5d-4eef-8507-cd68d6e729f9.xml.htm">Setting Up a 1394 Cable Connection</a>.</LI>
+<LI>The actual debugging session is started by using the Remote tool (<i>Remote.exe</i>) to launch KD. To begin debugging, use the following command:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>remote.exe /s</b> "<i>DbgPath</i><b>\kd &#8211;k 1394:</b><i>ChannelNumber</i> <b>-y</b> <i>SymPath</i>" <i>RemoteID</i> <BR></nobr></P>
+<P>In this command, <i>ChannelNumber</i> represents the 1394 channel number you used in the BCDEdit command. To debug the root partition, use the channel number you specified for it; to debug Windows hypervisor, use the channel number you specified for it. <i>RemoteID</i> represents an identifying string that is used by the Remote tool (for example, <b>HyperV_ROOT</b> or <b>HyperV_HV</b>). <i>DbgPath</i> represents the root directory of the Debugging Tools for Windows installation, and <i>SymPath</i> represents the symbol path. You may include other KD options as well. If you want to connect remotely to KD from another computer, (using WinDbg or a second instance of KD), include the <b>-server</b> parameter followed by any permissible transport options. If you include the <b>-server</b> parameter, it must be the first parameter used.  </P>
+<P>For example, the command to debug the root partition is similar to this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>remote.exe /s "\debuggers\kd &#8211;k 1394:50 -y srv*c:\localstore*http://msdl.microsoft.com/download/symbols" HyperV_ROOT</b> <BR></nobr></P>
+</LI>
+</OL>
+<P></P>
+<P>At this point, you can debug the target normally. For available commands, see <a href="r05_use_start_2a697bbe-caeb-49e4-ad14-ce07699d630b.xml.htm">Debugger Operation</a> and <a href="r07_use_operation_3c307117-9a8a-4597-8a52-6bedbefa7864.xml.htm">Debugger Operation (Kernel Mode)</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging Hyper-V via a 1394 Cable Connection RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

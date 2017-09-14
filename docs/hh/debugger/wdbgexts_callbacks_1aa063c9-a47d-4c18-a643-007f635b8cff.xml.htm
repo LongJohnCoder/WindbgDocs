@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ExtensionApiVersion</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ExtensionApiVersion"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgext.h"/>
+<MSHelp:Attr Name="APIName" Value="ExtensionApiVersion"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Callbacks_1aa063c9-a47d-4c18-a643-007f635b8cff.xml"/>
+<META NAME="MS-HKWD" CONTENT="ExtensionApiVersion callback function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Callbacks_1aa063c9-a47d-4c18-a643-007f635b8cff.xml"></A>ExtensionApiVersion</H1>
+<P>The <b>ExtensionApiVersion</b> callback function returns version information about the extension DLL.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>LPEXT_API_VERSION</b><BR><b>  ExtensionApiVersion(</b><BR><b>    VOID</b><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT>None</DT>
+</DL>
+<H4>Return Value</H4>
+<P>This function must return a pointer to an API_VERSION structure.</P>
+<H4>Headers</H4>
+<P>You must define this function in your code using the prototype above.  Include <i>wdbgext.h</i>.</P>
+<H4>Comments</H4>
+<P><b>ExtensionApiVersion</b> is called by the debugger when the extension DLL is loaded.</P>
+<P>The debugger uses the <b>MajorVersion</b> and <b>MinorVersion</b> fields of the returned API_VERSION structure when executing commands like <b>.chain</b> and <b>version</b> that display the extension version number. The debugger does not perform any "version checking" &#8212; the extension DLL will be loaded regardless of what version numbers are present in these fields.</P>
+<P>The <b>Revision</b> field of the returned API_VERSION structure should be EXT_API_VERSION_NUMBER64 if you are using 64-bit pointers in your code, or EXT_API_VERSION_NUMBER32 if you are using 32-bit pointers. It is recommended that you always use 64-bit pointers in your code, since the debugger will automatically resize these pointers when necessary. See <a href="wdbgexts_dg_850413ea-f120-4037-9556-72dbd34764ba.xml.htm">32-Bit Pointers and 64-Bit Pointers</a> for details.</P>
+<H4>Additional Information</H4>
+<P>For more details, see <a href="wdbgexts_dg_7a7d6cab-1b13-46dc-ad0e-ba9a597d2227.xml.htm">Using WdbgExts Extension Callbacks</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ExtensionApiVersion RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

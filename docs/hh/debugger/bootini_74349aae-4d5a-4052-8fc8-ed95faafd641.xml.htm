@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Changing the Boot Menu Time-out</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Changing the Boot Menu Time-out"><xml><MSHelp:Keyword Index="A" Term="bootini_74349aae-4d5a-4052-8fc8-ed95faafd641.xml"/>
+<META NAME="MS-HKWD" CONTENT="Boot.ini files [WDK], menu time-outs">
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], menu time-outs">
+<META NAME="MS-HKWD" CONTENT="menu time-outs [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="time-outs [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="boot menu time-outs [WDK]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_74349aae-4d5a-4052-8fc8-ed95faafd641.xml"></A>Changing the Boot Menu Time-out</H1>
+<P>The boot menu time-out determines how long the boot menu is displayed before the default boot entry is loaded. It is calibrated in seconds.</P>
+<P>If you want extra time to choose the operating system that loads on your computer, you can extend the time-out value. Or, you can shorten the time-out value so that the default operating system starts faster.</P>
+<P>For Windows Server 2003 and earlier versions of NT-based Windows, to change the boot menu time-out value in a <i>Boot.ini</i> file, you can use Bootcfg or edit the <i>Boot.ini</i> file in Notepad. To change the time-out value in EFI NVRAM, you must use Bootcfg. (Nvrboot only edits boot entries.)</P>
+<P>For Windows Vista and later versions of Windows, you can use BCDEdit to change the default boot menu time-out value.</P>
+<P></P>
+<H4>Using Bootcfg</H4>
+<P>To change the boot menu time-out, use the Bootcfg <b>/timeout</b> switch. Valid values are from 0 through 999. You cannot use Bootcfg to set an indefinite time-out.</P>
+<P>The following Bootcfg command sets the boot menu time-out to 2 seconds:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bootcfg /timeout 2</b><BR><BR></nobr></P>
+<P>The following Bootcfg display of boot options in EFI NVRAM shows the new time-out value. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot Options<BR>------------<BR><b>Timeout:             2</b><BR>Default:             \Device\HarddiskVolume3\WINDOWS<BR>CurrentBootEntryID:  1<BR><BR></nobr></P>
+<P>For complete instructions for using Bootcfg, see Help and Support Services. For examples, see <a href="bootini_eca9701d-6f34-4e1c-a9ad-f2e14ba189d5.xml.htm">Using Boot Parameters</a>.</P>
+<H4>Editing the <i>Boot.ini</i> file</H4>
+<P>The <b>timeout</b> parameter in the [boot loader] section of the <i>Boot.ini</i> file determines the boot menu time-out. Valid values are from 0 through 9999 and &#8722;1. When the value of <b>timeout</b> is &#8722;1, the time-out is indefinite, that is, the operating system does not boot until you select an item from the boot menu.</P>
+<P>To change the boot menu time-out in the <i>Boot.ini</i> file, type a new value for the <b>timeout</b> parameter in the [boot loader] section. For example, the boot menu time-out in the following Bootcfg sample is 30 seconds, which is the preset value on all versions of Windows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR><b>timeout=30</b><BR>default=multi(0)disk(0)rdisk(0)partition(3)\WINDOWS<BR>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(1)\WINNT="Microsoft Windows 2000 Professional" /fastdetect <BR>multi(0)disk(0)rdisk(0)partition(3)\WINDOWS="Microsoft Windows XP Professional" /fastdetect <BR><BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Using BCDEdit</H4>
+<P>To specify the boot menu time-out value, use the <b>/timeout</b> option: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /timeout <i>&lt;timeout&gt;</i><BR></nobr></P>
+<P></P>
+<P>Use the <b>/timeout </b>option and specify the timeout value in seconds. For example, to specify a 15-second timeout value:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /timeout 15<BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Changing the Boot Menu Time-out RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

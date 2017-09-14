@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!devext</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !devext"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_346bd09f-2f67-4afe-81ad-dc77887036d6.xml"/>
+<META NAME="MS-HKWD" CONTENT="!devext extension">
+<META NAME="MS-HKWD" CONTENT="!usbhub extension (obsolete)">
+<META NAME="MS-HKWD" CONTENT="!hidfdo extension (obsolete)">
+<META NAME="MS-HKWD" CONTENT="!hidpdo extension (obsolete)">
+<META NAME="MS-HKWD" CONTENT="device extension">
+<META NAME="MS-HKWD" CONTENT="bus"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_346bd09f-2f67-4afe-81ad-dc77887036d6.xml"></A>!devext</H1>
+<P><P>The <b>!devext</b> extension displays bus-specific device extension information for devices on a variety of buses.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!devext</b> <i>Address</i> <i>TypeCode</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the hexadecimal address of the device extension to be displayed.</DD>
+<DT><i>TypeCode</i></DT>
+<DD>Specifies the type of object that owns the device extension to be displayed. Type codes are not case-sensitive. Valid type codes are:<B></B><table>
+<TR valign="top">
+<TH Width="">TypeCode</TH>
+<TH Width="">Object</TH>
+</TR>
+<TR valign="top">
+<TD Width="">PCI</TD>
+<TD Width=""><i>(Windows 2000 only)</i>  PCI device extension  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">ISAPNP</TD>
+<TD Width="">ISA PnP device extension</TD>
+</TR>
+<TR valign="top">
+<TD Width="">PCMCIA</TD>
+<TD Width="">PCMCIA device extension</TD>
+</TR>
+<TR valign="top">
+<TD Width="">HID</TD>
+<TD Width="">HID device extension</TD>
+</TR>
+<TR valign="top">
+<TD Width="">USBD</TD>
+<TD Width=""><i>(Windows 2000 only)</i>  USB bus driver extension</TD>
+</TR>
+<TR valign="top">
+<TD Width="">UHCD</TD>
+<TD Width=""><i>(Windows 2000 only)</i>  UHCD host controller extension</TD>
+</TR>
+<TR valign="top">
+<TD Width="">OpenHCI</TD>
+<TD Width=""><i>(Windows 2000 only)</i>  Open HCI host controller extension</TD>
+</TR>
+<TR valign="top">
+<TD Width="">USBHUB</TD>
+<TD Width=""><i>(Windows 2000 only)</i>  USB hub extension</TD>
+</TR>
+<TR valign="top">
+<TD Width="">MF</TD>
+<TD Width=""><i>(Windows 2000 only)</i>  MF device extension</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!usbhub</b>, <b>!hidfdo</b>, and <b>!hidpdo</b> extensions are obsolete; their functionality has been integrated into <b>!devext</b>.</P>
+<P>For those object types that are no longer supported by <b>!devext</b>, use the <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt </b>(Display Type)</a> debugger command.</P>
+<P>Here is an example for an ISA PnP device extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devext e0000165fff32190 ISAPNP</b><BR>ISA PnP FDO @ 0x00000000, DevExt @ 0xe0000165fff32190, Bus # 196639<BR>Flags (0x854e2530)  DF_ACTIVATED, DF_QUERY_STOPPED, <BR>                    DF_STOPPED, DF_RESTARTED_NOMOVE, <BR>                    DF_BUS<BR>                    Unknown flags 0x054e2000<BR><BR>NumberCSNs           - -536870912<BR>ReadDataPort         - 0x0000000d (mapped)<BR>AddressPort          - 0x00000000 (not mapped)<BR>CommandPort          - 0x00000000 (not mapped)<BR>DeviceList           - 0xe000000085007b50<BR>CardList             - 0x00000000<BR>PhysicalBusDevice    - 0x00000000<BR>AttachedDevice       - 0x00000000<BR>SystemPowerState     - Unspecified<BR>DevicePowerState     - Unspecified<BR><BR></nobr></P>
+<P>Here is an example for a PCI device:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devext e0000000858c31b0 PCI</b><BR>PDO Extension, Bus 0x0, Device 0, Function 0.<BR>  DevObj 0xe0000000858c3060 PCI Parent Bus FDO DevExt 0xe0000000858c4960<BR>  Device State = PciNotStarted<BR>  Vendor ID 8086 (INTEL)  Device ID 123D<BR>  Class Base/Sub 08/00  (Base System Device/Interrupt Controller)<BR>  Programming Interface: 20, Revision: 01, IntPin: 00, Line Raw/Adj 00/00<BR>  Enables ((cmd &amp; 7) = 106): BM   Capabilities Pointer = &lt;none&gt;<BR>  CurrentState:          System Working,  Device D0<BR>  WakeLevel:             System Unspecified,  Device Unspecified<BR>  Requirements: &lt;none&gt;<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>See <a href="t12_drivers_ba75fa45-397b-473d-88dc-c5e0d598456a.xml.htm">Plug and Play Debugging</a> for applications of this extension command. For more information about device extensions, see the Windows Driver Kit (WDK) documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !devext RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

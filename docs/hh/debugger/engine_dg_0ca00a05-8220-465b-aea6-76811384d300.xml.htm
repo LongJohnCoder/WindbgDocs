@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Symbols</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Symbols"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_0ca00a05-8220-465b-aea6-76811384d300.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, symbols">
+<META NAME="MS-HKWD" CONTENT="Synthetic Symbols"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_0ca00a05-8220-465b-aea6-76811384d300.xml"></A>Using Symbols</H1>
+<P>For an overview of symbols, including using symbol files and symbol servers, see <a href="engine_overview_fcf0ebc7-625b-461f-ae21-83c8937ff68f.xml.htm">Symbols</a>.</P>
+<H4>Symbol Names and Locations</H4>
+<P>To find the location of a symbol given its name, use <a href="idebugsymbols_ef72e546-d27f-4cdf-9eeb-53151680c2d1.xml.htm"><b>GetOffsetByName</b></a>.  For details on the syntax used to specify symbol names, see <a href="r09_symbols_6e5fcfbf-08a6-481b-9df4-23e19ee7559d.xml.htm">Symbol Syntax and Symbol Matching</a>.</P>
+<P>If the exact name of a symbol is not known, or multiple symbols have the same name, <a href="idebugsymbols_4b000f13-0dc1-4a2c-8de3-3bf5384172c3.xml.htm"><b>StartSymbolMatch</b></a> will begin a search for symbols whose names match a given pattern.  For details on the syntax, see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a>.</P>
+<P>To find the name of a symbol given its location, use <a href="idebugsymbols_5045ed52-43b3-4f5c-90fe-d9725aeb5782.xml.htm"><b>GetNameByOffset</b></a>.  To find the names of symbols in a <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> near a given location, use <a href="idebugsymbols_cdd9bec8-6fe8-4523-ac98-df3ce90fd073.xml.htm"><b>GetNearNamebyOffset</b></a>.</P>
+<P class="note"><b>Note</b>  Whenever possible, qualify the symbol with the module name &#8212; for example <b>mymodule!main</b>.  Otherwise, if the symbol does not exist (for example, because of a typographical error) the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> will have to load and search the symbols for every module; this can be a slow process, especially for <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>.  If the symbol name was qualified with a module name, the engine will only need to search the symbols for that module.</P>
+<P>A symbol is uniquely identified using the structure <a href="structures_d53c2a34-f855-45a0-918b-0a8dfb936828.xml.htm">DEBUG_MODULE_AND_ID</a>.  This structure is returned by the methods <a href="idebugsymbols_4c157d74-d5e8-43d5-87f9-5ad089adb4a0.xml.htm"><b>GetSymbolEntriesByName</b></a> and <a href="idebugsymbols_dba4bc10-a8a8-476d-b668-652c24743ea5.xml.htm"><b>GetSymbolEntriesByOffset</b></a>, which search for symbols based on their name and location, respectively.</P>
+<P>The method <a href="idebugsymbols_a1ac4d9f-172c-4697-937d-a59c88bb8778.xml.htm"><b>GetSymbolEntryInformation</b></a> returns a description of a symbol using the <a href="structures_5673550e-274a-429f-9a31-88e401bca68e.xml.htm">DEBUG_SYMBOL_ENTRY</a> structure.</P>
+<P>To find the offset of a field within a structure, use <a href="idebugsymbols_3e5be57a-3af9-4fe3-a7cc-4f31fb9b54f0.xml.htm"><b>GetFieldOffset</b></a>.  To find the name of a field given its index within a structure, use <a href="idebugsymbols_9956ec9a-7914-46e4-9cec-49a22a0d184f.xml.htm"><b>GetFieldName</b></a>.  To find the name of an enumeration constant given its value, use <a href="idebugsymbols_438111b4-a0f4-40cc-aadc-8b1d2c67b219.xml.htm"><b>GetConstantName</b></a>.</P>
+<P>The method <a href="idebugadvanced_353e07f5-e506-4d5f-8c64-d3f500ff283f.xml.htm"><b>GetSymbolInformation</b></a> can perform several requests for information about symbols.</P>
+<H4>Symbol Options</H4>
+<P>A number of options control how the symbols are loaded and unloaded.  For a description of these options, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm">Setting Symbol Options</a>.  </P>
+<P>Symbol options may be turned on by using <a href="idebugsymbols_a7ffc5ae-fc9e-4298-a351-95871b8fd12e.xml.htm"><b>AddSymbolOptions</b></a>, and turned off by using <a href="idebugsymbols_a6b53bc6-23e5-4dae-b3b8-09330e91caba.xml.htm"><b>RemoveSymbolOptions</b></a>.</P>
+<P><a href="idebugsymbols_70c05823-d1a1-4769-8584-e191255c4deb.xml.htm"><b>GetSymbolOptions</b></a> returns the current symbol options.  To set all the symbol options at once, use <a href="idebugsymbols_56cfcd8d-304b-4433-beab-2fc3e58a54a4.xml.htm"><b>SetSymbolOptions</b></a>.</P>
+<H4>Reloading Symbols</H4>
+<P>After loading symbol files, the engine stores the symbol information in an internal cache.  To flush this cache, use <a href="idebugsymbols_ec5df701-b081-45c4-b2e4-10c101ce69a4.xml.htm"><b>Reload</b></a>. These symbols will have to be loaded again now or at a later time.</P>
+<H4><A NAME="947027df-ea41-4f12-8009-2e12339bf08c"></A>Synthetic Symbols</H4>
+<P><i>Synthetic symbols</i> are a way to label an arbitrary address for easy reference.  Synthetic symbols can be created in any existing module.  The method <a href="idebugsymbols_8dcf97a7-eb9c-44aa-a2a7-1ad74cb396c1.xml.htm"><b>AddSyntheticSymbol</b></a> creates a new synthetic symbol.  Synthetic symbols can be removed using <a href="idebugsymbols_dc1ccbc7-17e4-4424-8a3d-fbb7f16d3c3b.xml.htm"><b>RemoveSyntheticSymbol</b></a>. Reloading the symbols for the module deletes all synthetic symbols associated with that module.</P>
+<H4>Symbol Path</H4>
+<P>To add a directory or symbol server to the symbol path, use the method <a href="idebugsymbols_cc73a8f6-3cf1-40a1-8cb5-712eeca0b883.xml.htm"><b>AppendSymbolPath</b></a>.  The whole symbol path is returned by <a href="idebugsymbols_b13afb68-0f30-477d-be1b-a2b49ae40081.xml.htm"><b>GetSymbolPath</b></a> and can be changed using <a href="idebugsymbols_b699ac62-be52-4f79-9762-8ed1274dfb41.xml.htm"><b>SetSymbolPath</b></a>.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Symbols RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

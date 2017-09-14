@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>rm (Register Mask)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, rm (Register Mask)"><xml><MSHelp:Keyword Index="A" Term="r17_cmds_I_7920456a-7091-467f-a3d0-552c68eee937.xml"/>
+<META NAME="MS-HKWD" CONTENT="rm (Register Mask) command">
+<META NAME="MS-HKWD" CONTENT="Register Mask (rm) command">
+<META NAME="MS-HKWD" CONTENT="registers, Register Mask (rm) command">
+<META NAME="MS-HKWD" CONTENT="flags, Register Mask (rm) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r17_cmds_I_7920456a-7091-467f-a3d0-552c68eee937.xml"></A>rm (Register Mask)</H1>
+<P>The <b>rm</b> command modifies or displays the register display mask. This mask controls how registers are displayed by the <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>rm</b> <BR><b>rm</b> <b>?</b> <BR><b>rm</b> <i>Mask</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>?</b></DT>
+<DD>Displays a list of possible <i>Mask</i> bits.</DD>
+<DT><i>Mask</i></DT>
+<DD>Specifies the mask to use when the debugger displays the registers. <i>Mask</i> is a sum of bits that indicate something about the register display. The meaning of the bits depends on the processor and the mode. For more information; see the tables in the following Comments section.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The "m" in the command name must be a lowercase letter.</P>
+<P>If you use <b>rm</b> with no parameters, the current value is displayed, along with an explanation about its bits.</P>
+<P>To display the basic integer registers, you must set bit 0 (0x1) or bit 1 (0x2). By default, 0x1 is set for 32-bit targets and 0x2 is set for 64-bit targets. You cannot set these two bits at the same time&#8212;if you try to set both bits, 0x2 overrides 0x1.</P>
+<P>You can override the default mask by using the <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command together with the <b>M</b> option.</P>
+<P>The following <i>Mask</i> bits are supported for an x86-based processor or an x64-based processor.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Bit</TH>
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0<BR>1</TD>
+<TD Width="">0x1<BR>0x2</TD>
+<TD Width="">Displays the basic integer registers. (Setting one or both of these bits has the same effect.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">0x4</TD>
+<TD Width="">Displays the floating-point registers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">0x8</TD>
+<TD Width="">Displays the segment registers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">0x10</TD>
+<TD Width="">Displays the MMX registers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">5</TD>
+<TD Width="">0x20</TD>
+<TD Width="">Displays the debug registers. In kernel mode, setting this bit also displays the CR4 register.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">6</TD>
+<TD Width="">0x40</TD>
+<TD Width="">Displays the SSE XMM registers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">7</TD>
+<TD Width="">0x80</TD>
+<TD Width=""><i>(Kernel mode only)</i>  Displays the CR0, CR1, and CR3 registers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">8</TD>
+<TD Width="">0x100</TD>
+<TD Width=""><i>(Kernel mode only)</i>  Displays the descriptor and task state registers.</TD>
+</TR>
+</table>
+<P></P>
+<P>The following <i>Mask</i> bits are supported for an Itanium-based processor.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Bit</TH>
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0<BR>1</TD>
+<TD Width="">0x1<BR>0x2</TD>
+<TD Width="">Displays the basic integer registers. (Setting one or both of these bits has the same effect.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">0x4</TD>
+<TD Width="">Displays the floating-point registers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">0x8</TD>
+<TD Width="">Displays the high, floating-point registers (<b>f32</b> to <b>f127</b>).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">0x10</TD>
+<TD Width="">Displays the user debug registers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">5</TD>
+<TD Width="">0x20</TD>
+<TD Width=""><i>(Kernel mode only)</i>  Displays the KSPECIAL_REGISTERS.</TD>
+</TR>
+</table>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about registers and their manipulation, see <a href="r07_use_operation_5cbc4ff1-b5f4-4308-b937-4343876eaaa8.xml.htm">Reading and Writing Registers and Flags</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: rm (Register Mask) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

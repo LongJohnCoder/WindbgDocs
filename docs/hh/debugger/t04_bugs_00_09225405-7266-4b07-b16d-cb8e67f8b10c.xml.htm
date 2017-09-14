@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x4E: PFN_LIST_CORRUPT</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x4E: PFN_LIST_CORRUPT"><xml><MSHelp:Keyword Index="A" Term="t04_bugs_00_09225405-7266-4b07-b16d-cb8e67f8b10c.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x4E: PFN_LIST_CORRUPT">
+<META NAME="MS-HKWD" CONTENT="PFN_LIST_CORRUPT"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t04_bugs_00_09225405-7266-4b07-b16d-cb8e67f8b10c.xml"></A>Bug Check 0x4E: PFN_LIST_CORRUPT</H1>
+<P>The PFN_LIST_CORRUPT bug check has a value of 0x0000004E. This indicates that the page frame number (PFN) list is corrupted.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen. <b>Parameter 1</b> indicates the type of violation. The meaning of the other parameters depends on the value of <b>Parameter 1</b>.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x01</TD>
+<TD Width="">The <b>ListHead</b> value that was corrupted</TD>
+<TD Width="">The number of pages available </TD>
+<TD Width="">0</TD>
+<TD Width="">The list head was corrupt.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x02</TD>
+<TD Width="">The entry in the list that is being removed</TD>
+<TD Width="">The highest physical page number </TD>
+<TD Width="">The reference count of the entry being removed</TD>
+<TD Width="">A list entry was corrupt.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x07</TD>
+<TD Width="">The page frame number</TD>
+<TD Width="">The current share count</TD>
+<TD Width="">0</TD>
+<TD Width="">A driver has unlocked a certain page more times than it locked it.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8F</TD>
+<TD Width="">New page number</TD>
+<TD Width="">Old page number</TD>
+<TD Width="">0</TD>
+<TD Width="">The free or zeroed page listhead is corrupt.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x99</TD>
+<TD Width="">Page frame number</TD>
+<TD Width="">Current page state</TD>
+<TD Width="">0</TD>
+<TD Width="">A page table entry (PTE) or PFN is corrupt.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x9A</TD>
+<TD Width="">Page frame number </TD>
+<TD Width="">Current page state </TD>
+<TD Width="">The reference count of the entry that is being removed </TD>
+<TD Width="">A driver attempted to free a page that is still locked for IO. </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>This error is typically caused by a driver passing a bad memory descriptor list. For example, the driver might have called <b>MmUnlockPages</b> twice with the same list.</P>
+<P>If a kernel debugger is available, examine the stack trace. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x4E: PFN_LIST_CORRUPT RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>be (Breakpoint Enable)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, be (Breakpoint Enable)"><xml><MSHelp:Keyword Index="A" Term="r15_cmds_A_1bc918e0-3f85-4e12-b692-a9e84b2681cf.xml"/>
+<META NAME="MS-HKWD" CONTENT="be (Breakpoint Enable) command">
+<META NAME="MS-HKWD" CONTENT="Breakpoint Enable (be) command">
+<META NAME="MS-HKWD" CONTENT="breakpoints, Breakpoint Enable (be) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r15_cmds_A_1bc918e0-3f85-4e12-b692-a9e84b2681cf.xml"></A>be (Breakpoint Enable)</H1>
+<P>The <b>be</b> command restores one or more breakpoints that were previously disabled.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>be</b> <i>Breakpoints</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Breakpoints</i></DT>
+<DD>Specifies the ID numbers of the breakpoints to enable. You can specify any number of breakpoints. You must separate multiple IDs by spaces or commas. You can specify a range of breakpoint IDs by using a hyphen (-). You can use an asterisk (<b>*</b>) to indicate all breakpoints. If you want to use a <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">numeric expression</a> for an ID, enclose it in brackets (<b>[]</b>). If you want to use a <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">string with wildcard characters</a> to match a breakpoint's symbolic name, enclose it in quotation marks ( <b>" "</b> ). </DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Use the <a href="r15_cmds_a_4239e89a-bfe7-423f-ab96-4f0725cef52a.xml.htm"><b>bl (Breakpoint List)</b></a> command to list all existing breakpoints, their ID numbers, and their status.</P>
+<P>Use the <a href="r19_metacmds_a_fbc53fa8-9480-485b-9b49-64cf24fecd26.xml.htm"><b>.bpcmds (Display Breakpoint Commands)</b></a> command to list all existing breakpoints, their ID numbers, and the commands that were used to create them.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about and examples of how to use breakpoints, other breakpoint commands and methods of controlling breakpoints, and how to set breakpoints in user space from a kernel debugger, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a>. For more information about conditional breakpoints, see <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm">Setting a Conditional Breakpoint</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: be (Breakpoint Enable) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

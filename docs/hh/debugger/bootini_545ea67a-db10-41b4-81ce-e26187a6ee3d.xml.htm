@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>/hal</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, /hal"><xml><MSHelp:Keyword Index="A" Term="bootini_545ea67a-db10-41b4-81ce-e26187a6ee3d.xml"/>
+<META NAME="MS-HKWD" CONTENT="/hal"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_545ea67a-db10-41b4-81ce-e26187a6ee3d.xml"></A>/hal</H1>
+<P>The <b>/hal</b> parameter directs the boot loader to load an alternate hardware abstraction layer (HAL) file for the operating system. The default HAL file is hal.dll.</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/hal=</b><i>HALFile</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Subparameter</H4>
+<DT><i>HALFile</i></DT>
+<DD>Specifies a HAL file. The specified file must be located in the %SystemRoot%\system32 directory, and its file name must conform to 8.3&#8722;character format.</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>/hal</b> option is supported only on Windows Server 2003 with SP1 and Windows XP with SP2. On Windows Vista and later versions of Windows, use the <b>HAL</b> element in BCDEdit.</P>
+<P>You can use this parameter to test a HAL patch or use it with the <a href="bootini_69718cb1-bbba-47af-9922-68397bfbd53e.xml.htm">/kernel</a> parameter to load a  <a href="bootini_7053a71f-06b9-4a03-9154-a73095fca410.xml.htm">partial checked build</a> installation.  </P>
+<P>Do not use this parameter unless you have deliberately installed a different HAL. </P>
+<H4>Example</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /hal=HALtest.dll<BR></nobr></P>
+<P></P>
+<H4>Bootcfg Command</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /raw "/hal=HALtest.dll" /A /ID 1<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: /hal RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

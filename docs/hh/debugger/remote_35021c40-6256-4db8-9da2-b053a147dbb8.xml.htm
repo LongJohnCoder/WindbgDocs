@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Remote Server Syntax</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Remote Server Syntax"><xml><MSHelp:Keyword Index="A" Term="Remote_35021c40-6256-4db8-9da2-b053a147dbb8.xml"/>
+<META NAME="MS-HKWD" CONTENT="Remote Tool, Remote Server Syntax"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Remote_35021c40-6256-4db8-9da2-b053a147dbb8.xml"></A>Remote Server Syntax</H1>
+<P>To start the server side of the Remote tool, use the following syntax at the command line. </P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>remote /s</b> <i>Command</i><b> </b><i>SessionName </i>[<b>/f </b><i>Color</i>] [<b>/b</b>] [<b>/u </b><i>User</i> [<b>/u</b> <i>User</i>...]] [<b>/ud </b><i>User</i> [<b>/ud </b><i>User</i>...]] [<b>/v</b> | <b>/-v</b>]<BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>/s</b></DT>
+<DD>Starts a server session.</DD>
+<DT><i>Command</i></DT>
+<DD>Specifies the command that starts the console-based program. The command can include parameters. If the command includes spaces, enclose it in quotation marks.</DD>
+<DT><i>SessionName</i></DT>
+<DD>Assigns a name to the remote session. If the name includes spaces, enclose it in quotation marks. This parameter is not case-sensitive.</DD>
+<DT><b>/f</b></DT>
+<DD>Specifies the color of the text in the server command window.</DD>
+<DT><b>/b</b></DT>
+<DD>Specifies the background color of the server command window.</DD>
+<DT><i>Color</i></DT>
+<DD>Specifies a color. Valid values are black, blue, green, cyan, red, purple, yellow, white, lblack, lblue, lgreen, lred, lpurple, lyellow, and lwhite.</DD>
+<DT><b>/u</b></DT>
+<DD>Specifies users or groups that are permitted to connect to the remote session; by default, everyone is permitted. When you use this parameter, everyone is denied permission, except for the users and groups specified by the <i>User</i> subparameter.</DD>
+<DT><b>/ud</b></DT>
+<DD>Specifies users or groups that are denied permission to connect to the remote session; by default, no one is denied permission.</DD>
+<DT><i>User</i></DT>
+<DD>Specifies the name of a user or group in [<i>domain</i> | <i>computer</i>]\{<i>user</i> | <i>group</i>} format. When specifying users or groups on the local computer, omit the computer name.</DD>
+<DT><b>/v</b></DT>
+<DD>Makes a session visible. For more information, see <a href="remote_58739417-0eb2-4500-ba8e-6c8216d6ab86.xml.htm#ea849ebb-8c45-425a-9031-b708fddbc51f">Visible Session</a>.<P>By default, only debugger sessions are visible, that is, sessions in which the value of the <i>Command</i> parameter include the words <b>kd</b>, <b>dbg</b>, <b>remoteds</b>, <b>ntsd</b>, or <b>cdb</b>; otherwise, the session is not visible.</P>
+</DD>
+<DT><b>-v</b></DT>
+<DD>Makes a remote debugger session invisible. For more information, see <a href="remote_58739417-0eb2-4500-ba8e-6c8216d6ab86.xml.htm#ea849ebb-8c45-425a-9031-b708fddbc51f">Visible Session</a>. <P></P>
+</DD>
+</DL>
+<H4>Comments</H4>
+<P>The <i>Command</i> and <i>SessionName</i> parameters must appear in the order shown on the syntax line.</P>
+<P>To end a remote session, type <b>@k</b>. For more information, see <a href="remote_ab7a03b5-1dc6-4e82-87ef-d78487ac9401.xml.htm">Remote Session Commands</a>.</P>
+<P>The Remote tool will not create a session that the current user does not have permission to join.</P>
+<P>When starting more than one remote session on a single computer, open a new command window for each session. Also, use a different session name for each session. Because the session names are used to label the named pipes, they must be unique on the computer.</P>
+<H4>Sample Usage</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>remote /s "i386kd -v" TestSession<BR>remote /s "cmd" "My Remote Session" /f white /b black /u Server01\Administrators<BR>remote /s "ntsd -d -g -x" DebugIt /-v<BR>remote /q Server01<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Remote Server Syntax RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

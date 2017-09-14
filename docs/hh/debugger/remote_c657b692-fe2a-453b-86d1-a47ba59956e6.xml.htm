@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Remote Client Syntax</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Remote Client Syntax"><xml><MSHelp:Keyword Index="A" Term="Remote_c657b692-fe2a-453b-86d1-a47ba59956e6.xml"/>
+<META NAME="MS-HKWD" CONTENT="Remote Tool, Remote Client Syntax"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Remote_c657b692-fe2a-453b-86d1-a47ba59956e6.xml"></A>Remote Client Syntax</H1>
+<P>To start the client side of the Remote tool, use the following syntax at the command line.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>remote /c</b> <i>Server</i> <i>SessionName</i> [<b>/L </b><i>Lines</i>] [<b>/f</b>] [<b>/b</b>] [<b>/k </b><i>ColorFile</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>/c</b></DT>
+<DD>Connects the client to a remote session.</DD>
+<DT><i>Server</i></DT>
+<DD>Specifies the computer name of the server that established the session.</DD>
+<DT><i>SessionName</i></DT>
+<DD>Specifies the name of the remote session. This parameter is not case-sensitive.</DD>
+<DT><b>/L</b> <i>Lines</i></DT>
+<DD>Specifies the number of lines from the console display that are sent to the client computer. The default is 200 lines. <i>Lines</i> is a decimal number.</DD>
+<DT><b>/f</b></DT>
+<DD>Specifies the color of the text in the server command window.</DD>
+<DT><b>/b</b></DT>
+<DD>Specifies the background color of the server command window.</DD>
+<DT><i>Color</i></DT>
+<DD>Specifies a color. Valid values are black, blue, green, cyan, red, purple, yellow, white, lblack, lblue, lgreen, lred, lpurple, lyellow, and lwhite.</DD>
+<DT><b>/k</b> <i>ColorFile</i></DT>
+<DD>Indicates the path (optional) and name of a formatted text file that specifies the colors for displaying the output on the client computer.<P>The color file associates keywords in the output with text colors. When the keywords appear in a line of output, the Remote tool applies the associated text color to that line. For the format of the file, see <b>Comments</b>.</P>
+</DD>
+<DT><b>/q</b> <i>Computer</i></DT>
+<DD>Displays the remote sessions available on the specified computer. Only visible sessions appear in the list. (See <b>/v</b> in <a href="remote_35021c40-6256-4db8-9da2-b053a147dbb8.xml.htm">Remote Server Syntax</a>.)<P></P>
+</DD>
+</DL>
+<H4>Comments</H4>
+<P>The <i>Server</i> and <i>SessionName</i> parameters must appear in the order shown on the syntax line.</P>
+<P>To disconnect from a remote session, type <b>@q</b>. For more information, see <a href="remote_ab7a03b5-1dc6-4e82-87ef-d78487ac9401.xml.htm">Remote Session Commands</a>.</P>
+<P><b>Keyword Color File</b>. The format of the keyword color file is as follows. The keyword interpreter is not case sensitive. </P>
+<P>The keyword or phrase appears on a line by itself. The colors associated with that keyword appear by themselves on the following line, as shown in the syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><i>Keyword</i><BR><i>TextColor</i>[, <i>BackgroundColor</i>]<BR><BR></nobr></P>
+<P>For example, the following file directs Remote to display lines that include the word "error" in black text on a light red background; to display lines that include the word "warning" in light blue (on the default background), and lines that include the phrase "Windows Vista" in light green on the default background.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>ERROR<BR>black, lred<BR>WARNING<BR>lblue<BR>Windows Vista<BR>lgreen<BR><BR></nobr></P>
+<H4>Sample Usage</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>remote /c Server01 TestSession<BR>remote /c Domain1\ComputerA0 "cmd" "My Remote Session"<BR>remote /c Server01 TestSession /L 50 /f black /b white /k c:\remote_file.txt<BR>remote /q Server01<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Remote Client Syntax RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

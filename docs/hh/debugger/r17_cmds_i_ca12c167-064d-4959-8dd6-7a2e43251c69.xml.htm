@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>pc (Step to Next Call)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, pc (Step to Next Call)"><xml><MSHelp:Keyword Index="A" Term="r17_cmds_I_ca12c167-064d-4959-8dd6-7a2e43251c69.xml"/>
+<META NAME="MS-HKWD" CONTENT="pc (Step to Next Call) command">
+<META NAME="MS-HKWD" CONTENT="Step to Next Call (pc) command">
+<META NAME="MS-HKWD" CONTENT="controlling the target, Step to Next Call (pc) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r17_cmds_I_ca12c167-064d-4959-8dd6-7a2e43251c69.xml"></A>pc (Step to Next Call)</H1>
+<P>The <b>pc</b> command executes the program until a call instruction is reached.    </P>
+<H4>Syntax</H4>
+<P>User-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr>[<b>~</b><i>Thread</i>] <b>pc</b> [<b>r</b>] [= <i>StartAddress</i>] [<i>Count</i>] <BR></nobr></P>
+<P></P>
+<P>Kernel-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>pc</b> [<b>r</b>] [= <i>StartAddress</i>] [<i>Count</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Thread</i></DT>
+<DD>Specifies threads to continue executing. All other threads are frozen. For more information about the syntax, see <a href="r13_syntax_5bebd798-3782-4d86-8a4f-33b8f2488b7a.xml.htm">Thread Syntax</a>. You can specify threads only in user mode.</DD>
+<DT><b>r</b></DT>
+<DD>Turns on and off the display of registers and flags. By default, the registers and flags are displayed. You can disable register display by using the <b>pcr</b>, <a href="r17_cmds_i_169c2b2f-7f47-4e0a-85a9-506f151f0a8f.xml.htm"><b>pr</b></a>, <a href="r18_cmds_s_fe6d30ae-7c39-40db-a971-2aae584c13d3.xml.htm"><b>tr</b></a>, or <nobr><a href="r21_metacmds_l_55475ec8-bd36-4a0c-b380-0ff50ea3488d.xml.htm"><b>.prompt_allow -reg</b></a></nobr> commands. All of these commands control the same setting and you can use any of them to override any previous use of these commands.  <P>You can also disable register display by using the <nobr><a href="r17_cmds_i_11dcb4d0-b005-46df-b006-79397ff26e7e.xml.htm"><b>l-os</b></a></nobr> command. This setting is separate from the other three commands. To control <i>which</i> registers and flags are displayed, use the <a href="r17_cmds_i_7920456a-7091-467f-a3d0-552c68eee937.xml.htm"><b>rm (Register Mask)</b></a> command.</P>
+</DD>
+<DT><i>StartAddress</i></DT>
+<DD>Specifies the address where the debugger begins execution. Otherwise, the debugger begins at the instruction that the instruction pointer points to. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+<DT><i>Count</i></DT>
+<DD>Specifies the number of <b>call</b> instructions that the debugger must encounter for this command to stop. The default value is one.   <P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All</TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>pc</b> command causes the target to begin executing. This execution continues until a <b>call</b> instruction is reached or a breakpoint is encountered.</P>
+<P>If the program counter is already on a <b>call</b> instruction, the entire call is executed. After this call is returned, execution continues until another <b>call</b> is reached. This execution, rather than tracing, of the call is the only difference between <b>pc</b> and <a href="r18_cmds_s_d3de7394-427e-4f70-b61d-94fa2ad32596.xml.htm"><b>tc (Trace to Next Call)</b></a>.</P>
+<P>In source mode, you can associate one source line with multiple assembly instructions. The <b>pc</b> command does not stop at a <b>call</b> instruction that is associated with the current source line.</P>
+<H4>Additional Information</H4>
+<P>For more information about related commands, see <a href="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml.htm">Controlling the Target</a>. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: pc (Step to Next Call) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

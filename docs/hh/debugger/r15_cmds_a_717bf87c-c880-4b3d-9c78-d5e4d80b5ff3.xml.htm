@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>~e (Thread-Specific Command)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ~e (Thread-Specific Command)"><xml><MSHelp:Keyword Index="A" Term="r15_cmds_A_717bf87c-c880-4b3d-9c78-d5e4d80b5ff3.xml"/>
+<META NAME="MS-HKWD" CONTENT="~e (Thread-Specific Command) command">
+<META NAME="MS-HKWD" CONTENT="Thread-Specific Command (~e) command">
+<META NAME="MS-HKWD" CONTENT="thread, Thread-Specific Command (~e) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r15_cmds_A_717bf87c-c880-4b3d-9c78-d5e4d80b5ff3.xml"></A>~e (Thread-Specific Command)</H1>
+<P>The <b>~e</b> command executes one or more commands for a specific thread or for all threads in the target process.<P>Do not confuse this command with the <a href="r16_cmds_c_01f3ea78-e52a-4c87-a1cb-071feb0e422c.xml.htm"><b>e (Enter Values)</b></a> command.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>~</b><i>Thread</i> <b>e</b> <i>CommandString</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Thread</i></DT>
+<DD>Specifies the thread or threads that the debugger will execute <i>CommandString</i> for. For more information about the syntax, see <a href="r13_syntax_5bebd798-3782-4d86-8a4f-33b8f2488b7a.xml.htm">Thread Syntax</a>.</DD>
+<DT><i>CommandString</i></DT>
+<DD>Specifies one or more commands to execute. You should separate multiple commands by using semicolons. <i>CommandString</i> includes the rest of the input line. All of the text that follows the letter "e" is interpreted as part of this string. Do not enclose <i>CommandString</i> in quotation marks.</DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>You can specify threads only in user mode. In kernel mode, the tilde (<b>~</b>) refers to a processor.</P>
+<P>When you use the <b>~e</b> command together with one thread, the <b>~e</b> command only saves some typing. For example, the following two commands are equivalent.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>~2e r; k; kd</b> <BR><BR>0:000&gt; <b>~2r; ~2k; ~2kd</b> <BR></nobr></P>
+<P>However, you can use the <b>~e</b> qualifier to repeat a command or extension command several times. When you use the qualifier in this manner, it can eliminate extra typing. For example, the following command repeats the <a href="r24_exts_general_a_48d24819-6e92-4223-9129-ea627c616515.xml.htm"><b>!gle</b></a> extension command for every thread that you are debugging.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>~*e !gle</b> <BR></nobr></P>
+<P></P>
+<P>If an error occurs in the execution of one command, execution continues with the next command.</P>
+<P>You cannot use the <b>~e</b> qualifier together with execution commands (<b>g</b>, <b>gh</b>, <b>gn</b>, <b>gN</b>, <b>gu</b>, <b>p</b>, <b>pa</b>, <b>pc</b>, <b>t</b>, <b>ta</b>, <b>tb</b>, <b>tc</b>, <b>wt</b>).</P>
+<P>You cannot use the <b>~e</b> qualifier together with the <a href="r17_cmds_i_d3caf916-24fd-419f-90eb-05a88b72032e.xml.htm"><b>j (Execute If-Else)</b></a> or <a href="r18_cmds_s_db1fba63-62d1-4e3c-a76c-a8cd4e158ed8.xml.htm"><b>z (Execute While)</b></a> conditional commands.</P>
+<P>If you are debugging more than one process, you cannot use the <b>~e</b> command to access the virtual memory space for a inactive process.</P>
+<H4>Additional Information</H4>
+<P>For more information about other commands that control threads, see <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">Controlling Processes and Threads</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ~e (Thread-Specific Command) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xA0: INTERNAL_POWER_ERROR</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xA0: INTERNAL_POWER_ERROR"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_00b973c0-99da-4a14-a605-a7cb9ee1eabd.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xA0: INTERNAL_POWER_ERROR">
+<META NAME="MS-HKWD" CONTENT="INTERNAL_POWER_ERROR"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_00b973c0-99da-4a14-a605-a7cb9ee1eabd.xml"></A>Bug Check 0xA0: INTERNAL_POWER_ERROR</H1>
+<P>The INTERNAL_POWER_ERROR bug check has a value of 0x000000A0. This bug check indicates that the power policy manager experienced a fatal error.</P>
+<H4>Parameters</H4>
+<P>The following parameters appear on the blue screen. Parameter 1 indicates the type of violation. The meaning of the other parameters depends on the value of Parameter 1.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width=""><b>1:</b> A device has overrun its maximum number of reference counts.<BR><BR><b>2, 3, or 4: </b> (<i>Windows Server 2003, Windows XP, and Windows 2000 only ) </i>Too many inrush power IRPs have been queued.<BR><BR><b>5:</b> (<i>Windows Server 2003, Windows XP, and Windows 2000 only) </i>The power IRP has been sent to a passive level device object.<BR><BR></TD>
+<TD Width="">Except when Parameter 2 is equal to 5, this parameter indicates the maximum number of pending IRPs that are allowed.<BR><BR>If Parameter 2 is equal to 5, this parameter is reserved.<BR><BR></TD>
+<TD Width="">Reserved </TD>
+<TD Width="">An error occurred during the handling of the power I/O request packet (IRP). </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">An internal failure has occurred while attempting to process a power event.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">The expected checksum </TD>
+<TD Width="">The actual checksum </TD>
+<TD Width="">The line number of the failure </TD>
+<TD Width="">The checksum for a hibernation context page does not match its expected checksum. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">The expected checksum </TD>
+<TD Width="">The actual checksum </TD>
+<TD Width="">The line number of the failure</TD>
+<TD Width="">The checksum for a page about to be written to the hibernation file does not match its expected checksum. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">An unknown shutdown code has been sent to the system shutdown handler. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">An unhandled exception has occurred. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">A fatal error occurred while processing a system power event.<BR><BR>(<i>See the following table for more details.</i>)<BR><BR></TD>
+</TR>
+</table>
+<P></P>
+<P>When Parameter 1 is0x8, a fatal error occurred while processing a system power event.  In this situation, Parameter 2 indicates the cause of the error.  The meaning of the other parameters depends on the value of Parameter 2.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x100</TD>
+<TD Width="">The device object </TD>
+<TD Width="">The address of the POWER_CHANNEL_SUMMARY structure (a record of device object states) </TD>
+<TD Width="">An unknown device type is being processed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x101 </TD>
+<TD Width="">Exception pointer </TD>
+<TD Width="">Reserved</TD>
+<TD Width="">An unhandled exception occurred. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x102 </TD>
+<TD Width="">The address of the DUMP_INITIALIZATION_CONTEXT structure, which contains the information that is passed from the system to the disk dump driver during the driver's initialization</TD>
+<TD Width="">The address of the POP_HIBER_CONTEXT structure, which contains information about the state of the computer before hibernation</TD>
+<TD Width="">The hibernation working buffer size is not page-aligned. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x103 </TD>
+<TD Width="">The address of the POP_HIBER_CONTEXT structure</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Some working pages were not accounted for during the hibernation process. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x104 </TD>
+<TD Width="">The address of the POP_HIBER_CONTEXT structure</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">An attempt was made to map internal hibernation memory while the internal memory structures were locked. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x105 </TD>
+<TD Width="">The address of the POP_HIBER_CONTEXT structure</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">An attempt was made to map internal hibernation memory with an unsupported memory type flag. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x106 </TD>
+<TD Width="">The MDL </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">A memory descriptor list (MDL) was created during the hibernation process that describes memory that is not paged-aligned. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x107 </TD>
+<TD Width="">The address of the POP_HIBER_CONTEXT structure</TD>
+<TD Width="">The address of the PO_MEMORY_RANGE_ARRAY structure </TD>
+<TD Width="">A data mismatch occurred in the internal hibernation data structures. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x108 </TD>
+<TD Width="">The address of the POP_HIBER_CONTEXT structure</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">The disk subsystem failed to properly write part of the hibernation file. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x109  </TD>
+<TD Width="">The expected checksum </TD>
+<TD Width="">The actual checksum </TD>
+<TD Width="">The checksum for the processor state data does not match its expected checksum. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10A </TD>
+<TD Width="">The address of the POP_HIBER_CONTEXT structure</TD>
+<TD Width="">The NTSTATUS failure code </TD>
+<TD Width="">The disk subsystem failed to properly write part of the hibernation file. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x200  </TD>
+<TD Width="">The device object</TD>
+<TD Width="">The address of the DEVICE_OBJECT_POWER_EXTENSION notification structure </TD>
+<TD Width="">An unknown device type is being checked for an idle state. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x300  </TD>
+<TD Width="">The device object </TD>
+<TD Width="">The IRP </TD>
+<TD Width="">An unknown status was returned from a battery power IRP. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x301 </TD>
+<TD Width="">The device object </TD>
+<TD Width="">The IRP</TD>
+<TD Width="">The battery has entered an unknown state. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x400 </TD>
+<TD Width="">The IRP stack location</TD>
+<TD Width="">The device object  </TD>
+<TD Width="">A device has overrun its maximum number of reference counts. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x401, <BR>0x402, <BR>or <BR>0x403 </TD>
+<TD Width="">The pending IRP list </TD>
+<TD Width="">The device object </TD>
+<TD Width="">(<i>Windows Server 2003, Windows XP, and Windows 2000 only)  </i>Too many inrush power IRPs have been queued. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x404 </TD>
+<TD Width="">The IRP stack location</TD>
+<TD Width="">The device object </TD>
+<TD Width="">(<i>Windows Server 2003, Windows XP, and Windows 2000 only)  </i>A power IRP has been sent to a passive level device object. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x500 </TD>
+<TD Width="">The IRP </TD>
+<TD Width="">The device object </TD>
+<TD Width="">An unknown status was returned from a thermal power IRP. </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>For more information about the exact cause for the INTERNAL_POWER_ERROR bug check, see the tables in the Parameters section above.</P>
+<H4>Resolving the Problem</H4>
+<P>The following procedures will help you debug certain instances of this bug check. </P><B>Debugging bug check 0xA0 when Parameter 1 equals 0x2</B><OL type="1">
+<LI>Examine the stack. Look for the <b>ntoskrnl!PopExceptionFilter </b>function. This function contains the following code as its first argument.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr> (error_code &lt;&lt; 16) | _LINE_<BR></nobr></P>
+<P>If the caller is <b>PopExceptionFilter</b>, the first argument to this function is of type PEXCEPTION_POINTERS. Note the value of this argument.</P>
+</LI>
+<LI>Use the  <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a>  command and specify the value that you found in the previous step as <i>argument</i>.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>dt nt!_EXCEPTION_POINTERS</b> <i>argument</i> <BR></nobr></P>
+<P>. This command displays the structure.  Note the address of the context record.</P>
+</LI>
+<LI>Use the  <a href="r19_metacmds_a_a174b7ab-942b-4703-85e7-a391e4b5dfdf.xml.htm"><b>.cxr (Display Context Record)</b></a>  command and specify the context record that you found in the previous step as <i>record</i>.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>.cxr </b><i>record</i> <BR></nobr></P>
+<P>. This command sets the  <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">register context</a>  to the proper value.</P>
+</LI>
+<LI>Use a variety of commands to analyze the source of the error. Start with  <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kb (Display Stack Backtrace)</b></a> . </LI>
+</OL>
+<P></P><B>Debugging bug check 0xA0 when Parameter 1 equals 0x7</B><OL type="1">
+<LI>Examine the stack. Look for the <b>ntoskrnl!PopExceptionFilter </b>function. The first argument to this function is of type PEXCEPTION_POINTERS. Note the value of this argument.</LI>
+<LI>Use the  <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a>  command and specify the value that you found in the previous step as <i>argument</i>.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>dt nt!_EXCEPTION_POINTERS</b> <i>argument</i> <BR></nobr></P>
+<P>This command displays the structure. Note the address of the context record.</P>
+</LI>
+<LI>Use the  <a href="r19_metacmds_a_a174b7ab-942b-4703-85e7-a391e4b5dfdf.xml.htm"><b>.cxr (Display Context Record)</b></a>  command and specify the context record that you found in the previous step as <i>record</i>.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>.cxr </b><i>record</i> <BR></nobr></P>
+<P>This command sets the  <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">register context</a> to the proper value.</P>
+</LI>
+<LI>Use a variety of commands to analyze the source of the error. Start with  <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kb (Display Stack Backtrace)</b></a> . </LI>
+</OL>
+<P></P><B>Debugging bug check 0xA0 when Parameter 1 equals 0x8 and Parameter 2 equals 0x101</B><OL type="1">
+<LI>Use the  <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a>  command and specify the value of Parameter 3 as <i>argument</i>.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>dt nt!_EXCEPTION_POINTERS</b> <i>argument</i> <BR></nobr></P>
+<P>This command displays the structure. Note the address of the context record.</P>
+</LI>
+<LI>Use the  <a href="r19_metacmds_a_a174b7ab-942b-4703-85e7-a391e4b5dfdf.xml.htm"><b>.cxr (Display Context Record)</b></a>  command and specify the context record that you found the previous step as <i>record</i>.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>.cxr </b><i>record</i> <BR></nobr></P>
+<P>This command sets the  <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">register context</a> to the proper value.</P>
+</LI>
+<LI>Use a variety of commands to analyze the source of the error. Start with  <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kb (Display Stack Backtrace)</b></a> . </LI>
+</OL>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xA0: INTERNAL_POWER_ERROR RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SetValues</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SetValues"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="SetValues"/>
+<MSHelp:Keyword Index="A" Term="IDebugRegisters_0c188698-35b8-4c8f-ad8c-1218695845a8.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugRegisters::SetValues method">
+<META NAME="MS-HKWD" CONTENT="SetValues (IDebugRegisters) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugRegisters_0c188698-35b8-4c8f-ad8c-1218695845a8.xml"></A>SetValues</H1>
+<P><P>The <b>SetValues</b> method sets the value of several of the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>'s <a href="dbg_glossary_67e8768c-0585-41a5-ab7c-f8d2b5978663.xml.htm#14df9d28-2548-44c6-b68f-410607212d6c">registers</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugRegisters::SetValues(</b><BR><b>    IN ULONG  </b><i>Count</i><b>,</b><BR><b>    IN OPTIONAL PULONG  </b><i>Indices</i><b>,</b><BR><b>    IN ULONG  </b><i>Start</i><b>,</b><BR><b>    IN PDEBUG_VALUE  </b><i>Values</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Count</i></DT>
+<DD>Specifies the number of registers for which to set the values.</DD>
+<DT><i>Indices</i></DT>
+<DD>Specifies an array that contains the indices of the registers for which to set the values.  The number of elements in this array is <i>Count</i>.  If <i>Indices</i> is NULL, <i>Start</i> is used instead.</DD>
+<DT><i>Start</i></DT>
+<DD>If <i>Indices</i> is NULL, the registers will be set consecutively starting at this index.  Otherwise it is ignored.</DD>
+<DT><i>Values</i></DT>
+<DD>Specifies the array that contains values to which to set the registers.  The number of elements this array holds is <i>Count</i>.  See <a href="structures_2486f31c-2a25-41eb-ac3f-9cc1d62dd2e0.xml.htm">DEBUG_VALUE</a> for a description of this parameter type.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_UNEXPECTED</DT>
+<DD>The target is not accessible, or one or more of the registers could not be accessed.</DD>
+<DT>E_INVALIDARG</DT>
+<DD>The value of the index of one or more of the registers is greater than the number of registers on the target machine.</DD>
+</DL>
+<P>This list does not contain all the errors that might occur.  For a list of possible errors, see <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">HRESULT Values</a>.</P>
+<P></P>
+<H4>Interface Version</H4>
+<P><b>SetValues</b> is available in all versions of <b>IDebugRegisters</b>.</P>
+<H4>Comments</H4>
+<P>The engine does its best to coerce the values in <i>Values</i> into the type of the registers; this coercion is the same as that performed by <a href="idebugcontrol_034a690e-25bb-40a1-b788-7b148ba0d9cd.xml.htm"><b>CoerceValue</b></a>.  If the value is larger than what the register can hold, the least significant bits are dropped.  Floating-point and integer conversions will also be performed if necessary.  </P>
+<P>If the return value is not S_OK, some of the registers still might have been set.  </P>
+<P>When a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#bc60aae0-7ae8-4a07-84ce-cd7cd778d15e">subregister</a> is altered, the register containing it is also altered.</P>
+<P>To set the value of only a single register, use the <a href="idebugregisters_f704c31f-5062-47d7-9f44-35bc85e0d0aa.xml.htm"><b>SetValue</b></a> method instead.</P>
+<P>The method <a href="idebugregisters_4e5c8f37-a5ad-4083-adb9-e75ec18542b2.xml.htm"><b>SetValues2</b></a> performs the same task as this method but also allows the register source to be specified.</P>
+<P>For an overview of the <a href="idebugregisters_ca710692-a977-4276-b779-2b66311938dc.xml.htm"><b>IDebugRegisters</b></a> interface and other register-related methods, see <a href="engine_dg_eaa71da7-23ac-4464-9142-23c89a31e14e.xml.htm">Registers</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="idebugregisters_f704c31f-5062-47d7-9f44-35bc85e0d0aa.xml.htm"><b>SetValue</b></a>, <a href="idebugregisters_4e5c8f37-a5ad-4083-adb9-e75ec18542b2.xml.htm"><b>SetValues2</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SetValues RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

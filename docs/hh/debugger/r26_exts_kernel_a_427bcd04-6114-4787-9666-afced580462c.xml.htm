@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ca</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ca"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_427bcd04-6114-4787-9666-afced580462c.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ca extension">
+<META NAME="MS-HKWD" CONTENT="control area"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_427bcd04-6114-4787-9666-afced580462c.xml"></A>!ca</H1>
+<P>The <b>!ca</b> extension displays the control area for the specified section.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ca</b> <i>Address</i> <BR></nobr></P>
+<P></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the hexadecimal address of the section.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>To get a list of the control areas of all mapped files, use the <a href="r27_exts_kernel_e_e5a27ddd-3d24-48ce-9076-7c72c6dd208d.xml.htm"><b>!memusage</b></a> extension.</P>
+<P></P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!memusage</b><BR> loading PFN database<BR>loading (99% complete)<BR>             Zeroed:     16 (    64 kb)<BR>               Free:      0 (     0 kb)<BR>            Standby:   2642 ( 10568 kb)<BR>           Modified:    720 (  2880 kb)<BR>    ModifiedNoWrite:      0 (     0 kb)<BR>       Active/Valid:  13005 ( 52020 kb)<BR>         Transition:      0 (     0 kb)<BR>            Unknown:      0 (     0 kb)<BR>              TOTAL:  16383 ( 65532 kb)<BR>  Building kernel map<BR>  Finished building kernel map<BR><BR>  Usage Summary (in Kb):<BR>Control Valid Standby Dirty Shared Locked PageTables  name<BR>ff8636e8    56    376     0     0     0     0  mapped_file( browseui.dll )<BR>ff8cf388    24      0     0     0     0     0  mapped_file( AVH32DLL.DLL )<BR>ff8d62c8    12      0     0     0     0     0  mapped_file( PSAPI.DLL )<BR>ff8dd468   156     28     0     0     0     0  mapped_file( INOJOBSV.EXE )<BR>fe424808   136     88     0    52     0     0  mapped_file( oleaut32.dll )<BR>fe4228a8   152     44     0   116     0     0  mapped_file( MSVCRT.DLL )<BR>ff8ec848     4      0     0     0     0     0    No Name for File<BR>ff859de8     0     32     0     0     0     0  mapped_file( timedate.cpl )<BR><b>. . . . .</b><BR><BR>kd&gt; <b>!ca ff8636e8</b><BR><BR>ControlArea @ff8636e8<BR>  Segment:    e1b74548    Flink              0   Blink:               0<BR>  Section Ref        0    Pfn Ref           6c   Mapped Views:        1<BR>  User Ref           1    Subsections        5   Flush Count:         0<BR>  File Object ff86df88    ModWriteCount      0   System Views:        0<BR>  WaitForDel         0    Paged Usage      380   NonPaged Usage       e0<BR>  Flags (10000a0) Image File HadUserReference <BR><BR>   File: \WINNT\System32\browseui.dll<BR><BR>Segment @ e1b74548:<BR>   Base address        0  Total Ptes        c8  NonExtendPtes:       c8<BR>   Image commit        1  ControlArea ff8636e8  SizeOfSegment: c8000<BR>   Image Base          0  Committed          0  PTE Template:   31b8438<BR>   Based Addr   76e10000  ProtoPtes   e1b74580  Image Info:    e1b748a4<BR><BR>Subsection 1. @ ff863720<BR>   ControlArea: ff8636e8  Starting Sector 0 Number Of Sectors 2<BR>   Base Pte     e1b74580  Ptes In subsect        1 Unused Ptes          0<BR>   Flags              15  Sector Offset          0 Protection           1<BR>    ReadOnly CopyOnWrite <BR><BR>Subsection 2. @ ff863740<BR>   ControlArea: ff8636e8  Starting Sector 2 Number Of Sectors 3d0<BR>   Base Pte     e1b74584  Ptes In subsect       7a Unused Ptes          0<BR>   Flags              35  Sector Offset          0 Protection           3<BR>    ReadOnly CopyOnWrite <BR><BR>Subsection 3. @ ff863760<BR>   ControlArea: ff8636e8  Starting Sector 3D2 Number Of Sectors 7<BR>   Base Pte     e1b7476c  Ptes In subsect        1 Unused Ptes          0<BR>   Flags              55  Sector Offset          0 Protection           5<BR>    ReadOnly CopyOnWrite <BR><BR>Subsection 4. @ ff863780<BR>   ControlArea: ff8636e8  Starting Sector 3D9 Number Of Sectors 21f<BR>   Base Pte     e1b74770  Ptes In subsect       44 Unused Ptes          0<BR>   Flags              15  Sector Offset          0 Protection           1<BR>    ReadOnly CopyOnWrite <BR><BR>Subsection 5. @ ff8637a0<BR>   ControlArea: ff8636e8  Starting Sector 5F8 Number Of Sectors 3a<BR>   Base Pte     e1b74880  Ptes In subsect        8 Unused Ptes          0<BR>   Flags              15  Sector Offset          0 Protection           1<BR>    ReadOnly CopyOnWrite <BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about control areas, see <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ca RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

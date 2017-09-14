@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Viewing the Call Stack</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Viewing the Call Stack"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_531a7dd9-5201-43eb-9054-a793c3e60a60.xml"/>
+<META NAME="MS-HKWD" CONTENT="call stack">
+<META NAME="MS-HKWD" CONTENT="call stack, viewing">
+<META NAME="MS-HKWD" CONTENT="call stack, overview">
+<META NAME="MS-HKWD" CONTENT="stack">
+<META NAME="MS-HKWD" CONTENT="stack, [See &quot;call stack&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_531a7dd9-5201-43eb-9054-a793c3e60a60.xml"></A>Viewing the Call Stack</H1>
+<P>The <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#81c37228-c201-48ad-9f7a-85d8b1ade52c"><i>call stack</i></a> is the chain of function calls that have led to the current location of the program counter. The top function on the call stack is the current function, the next function is the function that called the current function, and so on.</P>
+<P>The call stack also preserves some facts whenever a function calls a new function. These facts vary from processor to processor, but typically they include the following:</P><B></B><UL type="disc">
+<LI>The name or location of the function called.</LI>
+<LI>The return address. (This address is typically the assembly instruction immediately after the address that the function was called from.)</LI>
+<LI>The parameters that were passed to the function.</LI>
+<LI>The base pointer for the stack frame.</LI>
+</UL>
+<P>To display the call stack, you can use the following methods:</P><B></B><UL type="disc">
+<LI>The <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>k (Display Stack Backtrace)</b></a> command is the basic stack trace command. This command displays the base pointer for the stack frame, the return address, and the name of the function. If source line information is available, <b>k</b> also displays source modules and line numbers.</LI>
+<LI>The <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kb (Display Stack Backtrace)</b></a> command displays the same stack as the <b>k</b> command and displays the first three parameters that were passed to the function.</LI>
+<LI>The <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kp (Display Stack Backtrace)</b></a> command displays the same stack as the <b>kb</b> command and displays a full listing of the parameters that were passed to each function.</LI>
+<LI>The <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kv (Display Stack Backtrace)</b></a> command displays the same stack as the <b>kb</b> command and displays additional frame pointer omission (FPO) information. On an x86-based processor, this command also displays calling convention information. On an Itanium-based processor, this command also displays nonvolatile registers.</LI>
+<LI>The <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kd (Display Stack Backtrace)</b></a> command displays the raw stack data, without any formatting.</LI>
+<LI><i>(WinDbg only)</i> The <a href="r36_gui_1_b6fb163f-531c-4403-aa9d-100772f42189.xml.htm">Calls window</a> displays call stack information. You can customize this window to display different stack data. You can also use this window to quickly jump to the corresponding function in a <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a> or <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a>.</LI>
+</UL>
+<P></P>
+<P>If you try to display the call stack at the very beginning of a function (before the function prolog has been executed), you probably see incorrect results. The debugger uses the frame register to compute the current backtrace, and this register is not set correctly for a function until its prolog has been executed.</P>
+<P>The call stack that is displayed is based on the current program counter, unless you change the register context. For more information about how to change the register context, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>.</P>
+<P>A variety of problems can make it difficult to obtain an accurate stack trace. For more information about this matter, see <a href="t13_advanced_20ecf71a-1120-4574-b393-502f9a830c8a.xml.htm">Getting a Stack Trace</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Viewing the Call Stack RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

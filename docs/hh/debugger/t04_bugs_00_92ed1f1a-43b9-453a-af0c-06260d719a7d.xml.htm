@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xA: IRQL_NOT_LESS_OR_EQUAL</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xA: IRQL_NOT_LESS_OR_EQUAL"><xml><MSHelp:Keyword Index="A" Term="t04_bugs_00_92ed1f1a-43b9-453a-af0c-06260d719a7d.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xA: IRQL_NOT_LESS_OR_EQUAL">
+<META NAME="MS-HKWD" CONTENT="IRQL_NOT_LESS_OR_EQUAL"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t04_bugs_00_92ed1f1a-43b9-453a-af0c-06260d719a7d.xml"></A>Bug Check 0xA: IRQL_NOT_LESS_OR_EQUAL</H1>
+<P>The IRQL_NOT_LESS_OR_EQUAL bug check has a value of 0x0000000A. This indicates that Microsoft Windows or a kernel-mode driver accessed paged memory at DISPATCH_LEVEL or above.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">Memory referenced</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">IRQL at time of reference</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width=""><b>0:</b> Read<BR><BR><b>1:</b> Write<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Address which referenced memory </TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>This bug check is issued if paged memory (or invalid memory) is accessed when the IRQL is too high.</P>
+<P>The error that generates this bug check usually occurs after the installation of a faulty device driver, system service, or BIOS.</P>
+<P>If you encounter bug check 0xA while upgrading to a later version of Windows, this error might be caused by a device driver, a system service, a virus scanner, or a backup tool that is incompatible with the new version.</P>
+<H4>Resolving the Problem</H4>
+<P>If a kernel debugger is available, obtain a stack trace.</P><B>To resolve an error caused by a faulty device driver, system service, or BIOS</B><OL type="1">
+<LI>Restart your computer.</LI>
+<LI>Press F8 at the character-based menu that displays the operating system choices. </LI>
+<LI>Select the <b>Last Known Good Configuration</b> option from the Windows <b>Advanced Options</b> menu. This option is most effective when only one driver or service is added at a time.</LI>
+</OL>
+<P></P><B>To resolve an error caused by an incompatible device driver, system service, virus scanner, or backup tool</B><OL type="1">
+<LI>Check the System Log in <b>Event Viewer</b> for error messages that might identify the device or driver that caused the error.</LI>
+<LI>Try disabling memory caching of the BIOS.</LI>
+<LI>Run the hardware diagnostics supplied by the system manufacturer, especially the memory scanner. For details on these procedures, see the owner's manual for your computer.</LI>
+<LI>Make sure the latest Service Pack is installed.</LI>
+<LI>If your system has small computer system interface (SCSI) adapters, contact the adapter manufacturer to obtain updated Windows drivers. Try disabling sync negotiation in the SCSI BIOS, checking the cabling and the SCSI IDs of each device, and confirming proper termination.</LI>
+<LI>For integrated device electronics (IDE) devices, define the onboard IDE port as Primary only. Also, check each IDE device for the proper master/subordinate/stand-alone setting. Try removing all IDE devices except for hard disks.</LI>
+</OL>
+<P></P>
+<P>If the message appears during an installation of Windows, make sure that the computer and all installed peripherals are listed in the Microsoft Windows Marketplace Tested Products List.</P>
+<P>Here is a debugging example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt;<b> .bugcheck       </b><i>[Lists bug check data.]</i><BR>Bugcheck code 0000000a<BR>Arguments 00000000 0000001c 00000000 00000000<BR><BR>kd&gt; <b>kb       </b><i>[Lists the stack trace.]</i><BR>ChildEBP RetAddr  Args to Child<BR>8013ed5c 801263ba 00000000 00000000 e12ab000 NT!_DbgBreakPoint<BR>8013eecc 801389ee 0000000a 00000000 0000001c NT!_KeBugCheckEx+0x194<BR>8013eecc 00000000 0000000a 00000000 0000001c NT!_KiTrap0E+0x256<BR>8013ed5c 801263ba 00000000 00000000 e12ab000<BR>8013ef64 00000246 fe551aa1 ff690268 00000002 NT!_KeBugCheckEx+0x194<BR><BR>kd&gt; <b>kv       </b><i>[Lists the trap frames.]</i><BR>ChildEBP RetAddr  Args to Child<BR>8013ed5c 801263ba 00000000 00000000 e12ab000 NT!_DbgBreakPoint (FPO: [0,0,0])<BR>8013eecc 801389ee 0000000a 00000000 0000001c NT!_KeBugCheckEx+0x194<BR>8013eecc 00000000 0000000a 00000000 0000001c NT!_KiTrap0E+0x256 (FPO: [0,0] TrapFrame @ 8013eee8)<BR>8013ed5c 801263ba 00000000 00000000 e12ab000<BR>8013ef64 00000246 fe551aa1 ff690268 00000002 NT!_KeBugCheckEx+0x194<BR><BR>kd&gt; <b>.trap 8013eee8       </b><i>[Gets the registers for the trap frame at the time of the fault.]</i><BR>eax=dec80201 ebx=ffdff420 ecx=8013c71c edx=000003f8 esi=00000000 edi=87038e10<BR>eip=00000000 esp=8013ef5c ebp=8013ef64 iopl=0         nv up ei pl nz na pe nc<BR>cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00010202<BR>ErrCode = 00000000<BR>00000000 ???????????????<b>       </b><i>[The current instruction pointer is NULL.]</i><BR><BR>kd&gt; <b>kb       </b><i>[Gives the stack trace before the fault.]</i><BR>ChildEBP RetAddr  Args to Child<BR>8013ef68 fe551aa1 ff690268 00000002 fe5620d2 NT!_DbgBreakPoint<BR>8013ef74 fe5620d2 fe5620da ff690268 80404690<BR>NDIS!_EthFilterIndicateReceiveComplete+0x31<BR>8013ef64 00000246 fe551aa1 ff690268 00000002 elnkii!_ElnkiiRcvInterruptDpc+0x1d0<BR><BR></nobr></P>
+<H4>Comments</H4>
+<P>Before upgrading to a new version of Windows, remove all third-party device drivers and system services, and disable any virus scanners. Contact the software manufacturers to obtain updates of these third-party tools.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xA: IRQL_NOT_LESS_OR_EQUAL RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

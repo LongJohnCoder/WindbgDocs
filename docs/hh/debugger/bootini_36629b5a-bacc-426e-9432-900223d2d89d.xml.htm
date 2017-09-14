@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>BCDEdit /set</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, BCDEdit /set"><xml><MSHelp:Keyword Index="A" Term="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml"/>
+<META NAME="MS-HKWD" CONTENT="BCDEdit /set"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml"></A>BCDEdit /set</H1>
+<P></P>
+<P>The <b>/set</b> command sets a boot entry option value in the boot configuration data store. Use this command to configure specific boot entry elements, such as kernel debugger settings, data execution protection (DEP) and processor address extension (PAE) options, and to load alternate hardware abstraction layer (HAL) and kernel files.<P></P>
+</P>
+<P></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>bcdedit</b>  <b>/set</b> [<b>{</b><i>ID</i><b>}</b>] <i>datatype</i> <i>value</i> <BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Parameters</H4>
+<DL><DT>[<b>{</b><i>ID</i><b>}]</b></DT>
+<DD>The <b>{</b><i>ID</i><b>}</b> is the GUID that is associated with the boot entry. If you do not specify an <b>{</b><i>ID</i><b>}</b>, the command modifies the current operating system boot entry. If a boot entry is specified, the GUID associated with the boot entry must be enclosed in braces <nobr><b>{ }</b>.</nobr> To view the GUID identifiers for all of the active boot entries, use the <b>bcdedit /enum</b> command. </DD>
+</DL>
+<P></P>
+<DL><H4>Possible values of <i>datatype value</i></H4>
+<DT><b>bootlog</b>  [ <b>yes</b> | <b>no</b>]</DT>
+<DD>Enables the system initialization log.  This log is stored in the <i>Ntbtlog.txt</i> file in the <i>%WINDIR%</i> directory.  It includes a list of loaded and unloaded drivers in text format. </DD>
+<DT><b>groupsize </b><i>maxsize</i></DT>
+<DD>Sets the maximum number of logical processors in a single processor group, where <i>maxsize</i> is any power of 2 between 1 and 64 inclusive. By default, processor groups have a maximum size of 64 logical processors. You can use this boot configuration setting to override the size and makeup of a computer&#8217;s processor groups for testing purposes. <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=155063" target="_blank"><u>Processor groups</u></a><u> </u>provide support for computers with greater than 64 logical processors. This boot option is available on 64-bit versions of Windows 7 and Windows Server 2008 R2 and later versions. This boot option has no effect on the 32-bit versions of Windows 7.<P>Use the <b>groupsize</b> option if you want to force multiple groups and the computer has 64 or fewer active logical processors. For more information about using this option, see <a href="bootini_ee1074ad-8962-4c18-ad51-4bb071fb858f.xml.htm">Boot Parameters to Test Drivers for Multiple Processor Group Support</a>. </P>
+</DD>
+<DT><b>groupaware </b>[ <b>on</b> | <b>off </b>]</DT>
+<DD>Forces drivers to be aware of multiple groups in a multiple processor group environment. Use this option to help expose cross-group incompatibilities in drivers and components. <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=155063" target="_blank"><u>Processor groups</u></a> provide support for computers with greater than 64 logical processors. This boot option is available on 64-bit versions of Windows 7 and Windows Server 2008 R2 and later versions. This boot option has no effect on the 32-bit versions of Windows 7. You can use the <b>groupaware</b> option and the <b>groupsize</b> option to test driver compatibility to function with multiple groups when computer has 64 or fewer active logical processors.  <P>The <b>groupaware on</b> setting ensures that processes are started in a group other than group 0. This increases the chances of cross-group interaction between drivers and components. The option also modifies the behavior of the legacy functions, <b>KeSetTargetProcessorDpc</b>, <b>KeSetSystemAffinityThreadEx</b>, and <b>KeRevertToUserAffinityThreadEx</b>, so that they always operate on the highest numbered group that contains active logical processors. Drivers that call any of these legacy functions should be changed to call their group-aware counterparts (<b>KeSetTargetProcessorDpcEx</b>, <b>KeSetSystemGroupAffinityThread</b>, and <b>KeRevertToUserGroupAffinityThread</b>).</P>
+<P>For more information about using this option, see <a href="bootini_ee1074ad-8962-4c18-ad51-4bb071fb858f.xml.htm">Boot Parameters to Test Drivers for Multiple Processor Group Support</a>. </P>
+</DD>
+<DT><b>hal </b><i>file</i></DT>
+<DD>Directs the operating system loader to load an alternate HAL file. The specified file must be located in the <i>%SystemRoot%\system32</i> directory, and its file name must conform to 8.3&#8722;character format. </DD>
+<DT><b>increaseuserva </b><i>Megabytes</i></DT>
+<DD> Specifies the amount of memory, in megabytes, for user-mode virtual address space. This variable can have any value between 2048 (2 GB) and 3072 (3 GB) megabytes in decimal notation. Windows uses the remaining address space (4 GB minus the specified amount) as its kernel-mode address space. </DD>
+<DT><b>kernel </b><i>file </i></DT>
+<DD>Directs the operating system loader to load an alternate kernel. The specified file must be located in the %SystemRoot%\system32 directory, and its file name must conform to 8.3&#8722;character format. </DD>
+<DT><b>loadoptions busparams=</b><i>Bus.Device.Function </i></DT>
+<DD>Specifies the target controller when multiple controllers exist. This syntax is appropriate when using either a 1394 cable or a USB 2.0 debug cable for debugging.  <i>Bus</i> specifies the bus number, <i>Device</i> specifies the device number, and <i>Function</i> specifies the function number. <P class="note"><b>Note</b>  For 1394 debugging, the bus parameters must be specified in decimal, regardless of which version of Windows is being configured.  The format of the bus parameters used for USB 2.0 debugging depends on the Windows version. In Windows Vista and Windows Server 2008, the USB 2.0 bus parameters must be specified in hexadecimal. In Windows 7 and later versions of Windows, the USB 2.0 bus parameters must be specified in decimal.  </P>
+</DD>
+<DT><b>maxgroup </b>[ <b>on</b> | <b>off </b>]</DT>
+<DD>Maximizes the number of groups created in a processor group configuration.<P>The <b>maxgroup</b> <b>on</b> setting assigns NUMA nodes to groups in a manner that maximizes the number of groups for a particular computer. The number of groups created is either the number of NUMA nodes the computer has, or the maximum number of groups supported by this version of Windows, whichever is smaller. The default behavior (<b>maxgroup</b> <b>off) </b>is to pack the NUMA nodes tightly into as few groups as possible.</P>
+<P>Use this option if you want to use multiple groups, the computer has 64 or fewer active logical processors, and the computer already has multiple NUMA nodes. This option can also be used to alter the default group configuration of a computer that has more than 64 logical processors.</P>
+<P><img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=155063" target="_blank"><u>Processor groups</u></a> provide support for computers with greater than 64 logical processors. This option is available on 64-bit versions of Windows 7 and Windows Server 2008 R2 and later versions. This boot option has no effect on the 32-bit versions of Windows 7.</P>
+<P>For more information about using this option, see <a href="bootini_ee1074ad-8962-4c18-ad51-4bb071fb858f.xml.htm">Boot Parameters to Test Drivers for Multiple Processor Group Support</a>. </P>
+</DD>
+<DT><b>nolowmem</b> [ <b>on</b> | <b>off </b>]<b> </b></DT>
+<DD>Controls the use of low memory. When <b>nolowmem on</b> is specified, this option loads the operating system, device drivers, and all applications into addresses above the 4 GB boundary, and directs Windows to allocate all memory pools at addresses above the 4 GB boundary. </DD>
+<DT><b>nx </b>[<b>Optin |OptOut | AlwaysOn |AlwaysOff</b>]</DT>
+<DD>Enables, disables, and configures Data Execution Prevention (DEP), a set of hardware and software technologies designed to prevent harmful code from running in protected memory locations. For information about how to use the Control Panel to change the DEP settings, see the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=101144" target="_blank">Change Data Execution Prevention settings</a> page on the Windows Help and How-to Web site.<DL><DT><b>Optin</b></DT>
+<DD>Enables DEP only for operating system components, including the Windows kernel and drivers. Administrators can enable DEP on selected executable files by using the Application Compatibility Toolkit (ACT). </DD>
+<DT><b>Optout</b></DT>
+<DD>Enables DEP for the operating system and all processes, including the Windows kernel and drivers. However, administrators can disable DEP on selected executable files by using <b>System</b> in <b>Control Panel</b>. </DD>
+<DT><b>AlwaysOn</b></DT>
+<DD>Enables DEP for the operating system and all processes, including the Windows kernel and drivers. All attempts to disable DEP are ignored. </DD>
+<DT><b>AlwaysOff</b></DT>
+<DD>Disables DEP. Attempts to enable DEP selectively are ignored. <P>On Windows Vista, this parameter also disables Physical Address Extension (PAE). This parameter does not disable PAE on Windows Server 2008. </P>
+</DD>
+</DL>
+</DD>
+<DT><b>onecpu </b>[ <b>on</b> | <b>off </b>]</DT>
+<DD>Forces only the boot CPU to be used in a computer that has more than one logical processor.<P>For example, the following command configures the current operating system loader to use one processor.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /set onecpu on <BR></nobr></P>
+</DD>
+<DT><b>pae </b>[ <b>Default</b> | <b>ForceEnable</b> | <b>ForceDisable </b>]</DT>
+<DD>Enables or disables Physical Address Extension (PAE). When PAE is enabled, the system loads the PAE version of the Windows kernel.<P>The <b>pae</b> parameter is valid only on boot entries for 32-bit versions of Windows that run on computers with x86-based and x64-based processors. On 32-bit versions of Windows, PAE is disabled by default. However, Windows automatically enables PAE when the computer is configured for hot-add memory devices in memory ranges beyond the 4 GB region, as defined by the Static Resource Affinity Table (SRAT). <i>Hot-add memory</i> supports memory devices that you can add without rebooting or turning off the computer. In this case, because PAE must be enabled when the system starts, it is enabled automatically so that the system can immediately address extended memory that is added between restarts. Hot-add memory is supported only on Windows Server 2003, Datacenter Edition; Windows Server 2003, Enterprise Edition; Windows Server 2008, Datacenter Edition; Windows Server 2008, Enterprise IA64 Edition; and on the datacenter and enterprise editions of all later versions of Windows Server.  Moreover, for versions of Windows prior to Windows Server 2008, hot-add memory is supported only on computers with an ACPI BIOS, an x86 processor, and specialized hardware.  For Windows Server 2008 and later versions of Windows Server, it is supported for all processor architectures. </P>
+<P>On a computer that supports hardware-enabled Data Execution Prevention (DEP) and is running a 32-bit version of the Windows operating system that supports DEP, PAE is automatically enabled when DEP is enabled and, on all 32-bit versions of the Windows operating system, except Windows Server 2003 with SP1, PAE is disabled when you disable DEP. To enable PAE when DEP is disabled, you must enable PAE explicitly, by using <b>/set nx AlwaysOff </b> and <b>/set pae ForceEnable</b>. For more information about DEP, see <a href="bootini_29e11bdf-06dc-489d-af10-27a8c03d3a62.xml.htm">Boot Parameters to Configure DEP and PAE</a>.</P>
+<P>PAE is required to support Cache Coherent Non-Uniform Memory Architecture (known as ccNUMA or NUMA) on computers with x86 processors, although Windows can run in non-NUMA mode on NUMA-capable computers without PAE. Even when it is required, PAE is not enabled automatically. NUMA is supported in all editions of Windows XP and Windows Vista, and in the Enterprise and Datacenter editions of Windows Server 2003.</P>
+<P>For more information about using the <b>pae</b> parameter and the other parameters that affect PAE configuration, see <a href="bootini_29e11bdf-06dc-489d-af10-27a8c03d3a62.xml.htm">Boot Parameters to Configure DEP and PAE</a>.</P>
+<P>If you are running a 32-bit version of Windows Vista on a computer that has 4 GB of memory installed, the amount of RAM available for use could be less than what you would expect. For more information about memory usage, see article Q929605, <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=3100&amp;id=929605" target="_blank">"The system memory that is reported in the System Information dialog box in Windows Vista is less than you expect if 4 GB of RAM is installed"</a> in the Microsoft Knowledge Base. </P>
+</DD>
+<DT><b>quietboot </b>[ <b>on</b> | <b>off </b>]</DT>
+<DD>Controls the display of a high-resolution bitmap in place of the Windows boot screen display and animation. In operating systems prior to Windows Vista, the <b>/noguiboot</b> serves a similar function. </DD>
+<DT><b>removememory </b><i>Megabytes</i></DT>
+<DD>Removes memory from the total available memory that the operating system can use.<P>For example, the following command removes 256 MB of memory from the total available to the operating system associated with the specified boot entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /set {49916baf-0e08-11db-9af4-000bdbd316a0} removememory 256 <BR></nobr></P>
+</DD>
+<DT><b>sos </b>[ <b>on</b> | <b>off </b>]</DT>
+<DD>Controls the display of the names of the drivers as they load during the boot process. Use <b>sos</b> <b>on</b> to display the names. Use <b>sos off</b> to suppress the display. </DD>
+<DT><b>testsigning </b>[ <b>on</b> | <b>off </b>]</DT>
+<DD>Controls whether Windows 7, Windows Server 2008, or Windows Vista will load any type of test-signed kernel-mode code. This option is not set by default, which means test-signed kernel-mode drivers on 64-bit versions of Windows 7, Windows Server 2008, and Windows Vista will not load by default. After you run the BCDedit command, restart the computer so that the change takes effect.    For more information, see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=153574" target="_blank"><u>Introduction to Test-Signing</u></a> in the Windows Driver Kit (WDK) documentation.   </DD>
+<DT><b>truncatememory </b><i>address</i></DT>
+<DD>Limits the amount of physical memory available to Windows. When you use this option, Windows ignores all memory at or above the specified physical address. Specify the <i>address</i> in bytes. <P>For example, the following command sets the physical address limit at 1 GB. You can specify the address in decimal (1073741824) or hexadecimal (0x40000000).</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /set {49916baf-0e08-11db-9af4-000bdbd316a0} truncatememory 0x40000000 <BR></nobr></P>
+</DD>
+<DT><b>usefirmwarepcisettings</b> [ <b>yes</b> | <b>no </b>]</DT>
+<DD>Enables or disables the use of BIOS-configured peripheral component interconnect (PCI) resources. </DD>
+<DT><b>vga </b>[ <b>on</b> | <b>off </b>]</DT>
+<DD>Forces the use of the VGA display driver. </DD>
+</DL>
+<P></P>
+<H4>Comment</H4>
+<P>For more information about specific BCD elements and boot options, you can use the commands <b>BCDEdit /? OSLOADER</b>  and <b>BCDEdit /? TYPES OSLOADER</b>. </P>
+<P>To view the current boot entries and their settings, use the <b>bcdedit /enum</b> command. This command displays the active boot entries and their associated globally unique identifiers (GUID). Use the identifiers with the <b>/set</b> command to configure options for a specific boot entry. </P>
+<P>To delete a boot option value that you have set, use the <b>/deletevalue</b> option. The syntax for the command is as follows:</P>
+<P><b>bcdedit </b>[<b>{</b><i>ID</i><b>}</b>] /<b>deletevalue</b> <i>datatatype</i></P>
+<P>For example, if you change the processor group option, <b>groupsize</b>, to a new value for testing purposes, you can revert to the default value of 64 by typing the following command and then restarting the computer.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /deletevalue groupsize</b><BR></nobr></P>
+<P>Any change to a boot option requires a restart to take effect. For information about commonly used BCDEdit commands, see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=155086" target="_blank"><u>Boot Configuration Data Editor Frequently Asked Questions</u></a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: BCDEdit /set RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

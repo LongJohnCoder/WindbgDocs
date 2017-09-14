@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>BCDEdit /emssettings</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, BCDEdit /emssettings"><xml><MSHelp:Keyword Index="A" Term="bootini_05ddabd3-37a0-4622-b1f3-c9fcd1f51c5d.xml"/>
+<META NAME="MS-HKWD" CONTENT="BCDEdit /emssettings"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_05ddabd3-37a0-4622-b1f3-c9fcd1f51c5d.xml"></A>BCDEdit /emssettings</H1>
+<P></P>
+<P>The <b>/emssettings</b> option sets the global Emergency Management Services (EMS) settings for the computer. To enable or disable EMS, use the<b> /ems</b> option. The <b>/emssettings</b> option does not enable or disable EMS for any boot entry.<P></P>
+</P>
+<P></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>bcdedit /emssettings</b> [ <b>BIOS</b> ] | [ <b>EMSPORT:</b> <i>port</i> | [<b>EMSBAUDRATE:</b> <i>baudrate</i>] ] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>BIOS</b></DT>
+<DD>Specifies that the system will use BIOS settings for the EMS configuration. This works only on systems that have EMS support provided by the BIOS.</DD>
+<DT><b>EMSPORT:</b> <i>port</i> </DT>
+<DD>Specifies the serial port to use as the EMS port. This parameter should not be specified with the <b>BIOS</b> option.</DD>
+<DT><b>EMSBAUDRATE: </b><i>baudrate</i></DT>
+<DD>Specifies the serial baud rate to use for EMS. This command should not be specified with the BIOS. The <i>baudrate</i> is optional, and the default is 9,600 bps. </DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>To properly enable EMS console redirection after Windows is installed, Windows needs to know the port and transmission rate that the computer uses for out-of-band communication. Windows uses these same settings for EMS console redirection. </P>
+<P>On computers with BIOS firmware and an ACPI Serial Port Console Redirection (SPCR) table, Windows can find the out-of-band settings established in the BIOS by reading entries in the SPCR table. On these systems, you can use the <b>BIOS </b>parameter to direct Windows to look in the SPCR table for the port settings, or you can use the <b>emsport:</b><i>port</i> and <b>emsbaudrate:</b><i>baudrate</i> parameters to override the settings in the SPCR table.</P>
+<P>On computers that have BIOS firmware, but do not have an SPCR table, use BCDEdit<b> </b>and the <b>/emssettings</b> command with the <b>emsport:</b><i>port</i> parameter to specify the port and with the <b>emsbaudrate:</b><i>baudrate</i> parameter to specify the transmission rate.</P>
+<P>On all systems, use the <a href="bootini_3b1c9007-f570-4547-bf12-90a0738285bd.xml.htm"><b>BCDEdit /ems</b></a><b> </b>command and specify the boot entry to enable EMS console redirection on the operating system that the boot entry loads.</P>
+<P>The boot parameters described in this section enable EMS console redirection after Windows is installed. For information about enabling EMS during a new installation or upgrade of Windows, search for "Enabling Emergency Management Services" on the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=10111" target="_blank">Microsoft TechNet</a> Web site.</P>
+<P>For a detailed example, see <a href="bootini_32960519-7cac-4b64-a2cc-358e0eba11ba.xml.htm">Boot Parameters to Enable EMS Redirection</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: BCDEdit /emssettings RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

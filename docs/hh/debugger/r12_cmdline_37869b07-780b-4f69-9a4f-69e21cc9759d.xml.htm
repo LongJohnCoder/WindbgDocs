@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DbgRpc Command-Line Options</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DbgRpc Command-Line Options"><xml><MSHelp:Keyword Index="A" Term="r12_cmdline_37869b07-780b-4f69-9a4f-69e21cc9759d.xml"/>
+<META NAME="MS-HKWD" CONTENT="command-line options, DbgRpc">
+<META NAME="MS-HKWD" CONTENT="DbgRpc, command-line options"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r12_cmdline_37869b07-780b-4f69-9a4f-69e21cc9759d.xml"></A>DbgRpc Command-Line Options</H1>
+<P>The DbgRpc command line must always contain exactly one of the <nobr><b>-l</b></nobr>, <nobr><b>-e</b></nobr>, <nobr><b>-t</b></nobr>, <nobr><b>-c</b></nobr>, or <nobr><b>-a</b></nobr> switches. The options following these switches depend on the switch used. The <nobr><b>-s</b></nobr>, <nobr><b>-p</b></nobr>, and <nobr><b>-r</b></nobr> options can be used with any other options.<P></P>
+<P></P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>dbgrpc</b> [<b>-s</b> <i>Server</i> <b>-p</b> <i>ProtSeq</i>] [<b>-r</b> <i>Radix</i>] <b>-l -P</b> <i>ProcessID</i> <b>-L</b> <i>CellID1</i><b>.</b><i>CellID2</i> <BR><BR><b>dbgrpc</b> [<b>-s</b> <i>Server</i> <b>-p</b> <i>ProtSeq</i>] [<b>-r</b> <i>Radix</i>] <b>-e</b> [<b>-E</b> <i>EndpointName</i>] <BR><BR><b>dbgrpc</b> [<b>-s</b> <i>Server</i> <b>-p</b> <i>ProtSeq</i>] [<b>-r</b> <i>Radix</i>] <b>-t -P</b> <i>ProcessID</i> [<b>-T</b> <i>ThreadID</i>] <BR><BR><b>dbgrpc</b> [<b>-s</b> <i>Server</i> <b>-p</b> <i>ProtSeq</i>] [<b>-r</b> <i>Radix</i>] [<b>-c</b>|<b>-a</b>] [<b>-C</b> <i>CallID</i>] [<b>-I</b> <i>IfStart</i>] [<b>-N</b> <i>ProcNum</i>] [<b>-P</b> <i>ProcessID</i>] <BR><BR><b>dbgrpc -?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-s</b> <i>Server</i></DT>
+<DD>Allows DbgRpc to view information from a remote machine. The server name should not be preceded by slash marks. For more information about using DbgRpc remotely, see <a href="t11_rpc_acpi_ffe18735-edab-4192-8bb2-17cbfc9a0ad7.xml.htm">Using the DbgRpc Tool</a>.</DD>
+<DT><b>-p</b> <i>ProtSeq</i></DT>
+<DD>Specifies the remote transport to be used. The possible values of <i>ProtSeq</i> are <b>ncacn_ip_tcp</b> (TCP protocol) and <b>ncacn_np</b> (named pipe protocol). TCP protocol is recommended. For more information about using DbgRpc remotely, see <a href="t11_rpc_acpi_ffe18735-edab-4192-8bb2-17cbfc9a0ad7.xml.htm">Using the DbgRpc Tool</a>.   </DD>
+<DT><b>-r</b> <i>Radix</i></DT>
+<DD>Specifies the radix to be used for the command parameters. The default is base 16. If the <b>-r</b> parameter is used, it should be placed first on the line, since it only affects parameters listed after itself. It does not affect the output of the DbgRpc tool.    </DD>
+<DT><b>-l</b></DT>
+<DD>Displays RPC state information for the specified cell. For an example, see <a href="t11_rpc_acpi_b0722c15-08b6-4d36-980c-20b8e208492c.xml.htm">Get RPC Cell Information</a>.</DD>
+<DT><i>ProcessID</i></DT>
+<DD>Specifies the process ID (PID) of a process. When the <b>-l</b> option is being used, this should be the process whose server contains the desired cell. When the <b>-t</b> option is being used, this should be the process containing the desired thread. When the <b>-c</b> or <b>-a</b> options are being used, this parameter is optional; it should be the server process that owns the calls you wish to display.</DD>
+<DT><i>CellID1</i><b>.</b><i>CellID2</i></DT>
+<DD>Specifies the number of the cell to be displayed.</DD>
+<DT><b>-e</b></DT>
+<DD>Searches the system's RPC state information for endpoint information. For an example, see <a href="t11_rpc_acpi_ecadb256-27c9-45e4-8fb2-4e7752ff6ca4.xml.htm">Get RPC Endpoint Information</a>.</DD>
+<DT><i>EndpointName</i></DT>
+<DD>Specifies the number of the endpoint to be displayed. If omitted, the endpoints for all processes on the system are displayed.   </DD>
+<DT><b>-t</b></DT>
+<DD>Searches the system's RPC state information for thread information. For an example, see <a href="t11_rpc_acpi_0a6e6c3c-e352-4581-a39f-58e88e5ce4b9.xml.htm">Get RPC Thread Information</a>.</DD>
+<DT><i>ThreadID</i></DT>
+<DD>Specifies the thread ID of the thread to be displayed. If omitted, all threads in the specified process will be displayed.</DD>
+<DT><b>-c</b></DT>
+<DD>Searches the system's RPC state information for server-side call (SCALL) information. For an example, see <a href="t11_rpc_acpi_6325b497-2169-4af8-b7c4-a3b07a2b6be3.xml.htm">Get RPC Call Information</a>.</DD>
+<DT><b>-a</b></DT>
+<DD>Searches the system's RPC state information for client call (CCALL) information. For an example, see <a href="t11_rpc_acpi_043c8f1b-d4f6-4058-8cf3-cd0956ba302f.xml.htm">Get RPC Client Call Information</a>. <i>This option requires full RPC state information</i>.</DD>
+<DT><i>CallID</i></DT>
+<DD>Specifies the call ID. This parameter is optional; include it only if you want to display calls matching a specific <i>CallID</i> value.</DD>
+<DT><i>IfStart</i></DT>
+<DD>Specifies the first DWORD of the interface's universally unique identifier (UUID) on which the call was made. This parameter is optional; include it only if you want to display calls matching a specific <i>IfStart</i> value.</DD>
+<DT><i>ProcNum</i></DT>
+<DD>Specifies the procedure number of this call. (The RPC Run-Time identifies individual routines from an interface by numbering them by position in the IDL file &#8212; the first routine in the interface is 0, the second 1, and so on.)  This parameter is optional; include it only if you want to display calls matching a specific <i>ProcNum</i> value.<P></P>
+</DD>
+</DL>
+<H4>Additional Information</H4>
+<P>For more information about debugging Microsoft Remote Procedure Call (RPC), see <a href="t11_rpc_acpi_df2011c1-80e2-4ff6-83f6-340a17586c7f.xml.htm">RPC Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DbgRpc Command-Line Options RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

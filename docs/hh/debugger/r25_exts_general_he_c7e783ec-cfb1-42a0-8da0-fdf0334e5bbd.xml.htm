@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!peb</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !peb"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_c7e783ec-cfb1-42a0-8da0-fdf0334e5bbd.xml"/>
+<META NAME="MS-HKWD" CONTENT="!peb extension">
+<META NAME="MS-HKWD" CONTENT="PEB (process environment block)">
+<META NAME="MS-HKWD" CONTENT="process, process environment block (PEB)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_c7e783ec-cfb1-42a0-8da0-fdf0334e5bbd.xml"></A>!peb</H1>
+<P>The <b>!peb</b> extension displays a formatted view of the information in the process environment block (PEB).</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!peb</b> [<i>PEB-Address</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>PEB-Address</i></DT>
+<DD>The hexadecimal address of the process whose PEB you want to examine. (This is not the address of the PEB as derived from the kernel process block for the process.) If <i>PEB-Address</i> is omitted in user mode, the PEB for the current process is used. If it is omitted in kernel mode, the PEB corresponding to the current <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#e761ea09-6dde-4444-9472-9e71933f4e71">process context</a> is displayed.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> <BR><i>Ntsdexts.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Exts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The PEB is the user-mode portion of Microsoft Windows process control structures.</P>
+<P>If the <b>!peb</b> extension with no argument gives you an error in kernel mode, you should use the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a> extension to determine the PEB address for the desired process. Make sure your <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#e761ea09-6dde-4444-9472-9e71933f4e71">process context</a> is set to the desired process, and then use the PEB address as the argument for <b>!peb</b>.</P>
+<P>The exact output displayed depends on the Windows version and on whether you are debugging in kernel mode or user mode. The following example is taken from a kernel debugger attached to a Windows Server 2003 target:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!peb</b><BR>PEB at 7ffdf000<BR>    InheritedAddressSpace:    No<BR>    ReadImageFileExecOptions: No<BR>    BeingDebugged:            No<BR>    ImageBaseAddress:         4ad00000<BR>    Ldr                       77fbe900<BR>    Ldr.Initialized:          Yes<BR>    Ldr.InInitializationOrderModuleList: 00241ef8 . 00242360<BR>    Ldr.InLoadOrderModuleList:           00241e90 . 00242350<BR>    Ldr.InMemoryOrderModuleList:         00241e98 . 00242358<BR>            Base TimeStamp                     Module<BR>        4ad00000 3d34633c Jul 16 11:17:32 2002 D:\WINDOWS\system32\cmd.exe<BR>        77f40000 3d346214 Jul 16 11:12:36 2002 D:\WINDOWS\system32\ntdll.dll<BR>        77e50000 3d3484ef Jul 16 13:41:19 2002 D:\WINDOWS\system32\kernel32.dll<BR>....<BR>    SubSystemData:     00000000<BR>    ProcessHeap:       00140000<BR>    ProcessParameters: 00020000<BR>    WindowTitle:  'D:\Documents and Settings\Administrator\Desktop\Debuggers.lnk'<BR>    ImageFile:    'D:\WINDOWS\system32\cmd.exe'<BR>    CommandLine:  '"D:\WINDOWS\system32\cmd.exe" '<BR>    DllPath:      'D:\WINDOWS\system32;D:\WINDOWS\system32;....<BR>    Environment:  00010000<BR>        ALLUSERSPROFILE=D:\Documents and Settings\All Users<BR>        APPDATA=D:\Documents and Settings\UserTwo\Application Data<BR>        CLIENTNAME=Console<BR>....<BR>        windir=D:\WINDOWS<BR><BR></nobr></P>
+<P></P>
+<P>The similar <a href="r25_exts_general_he_8f21ff4e-e437-4947-8075-37872377efac.xml.htm"><b>!teb</b></a> extension displays the thread environment block.</P>
+<H4>Additional Information</H4>
+<P>For information about process environment blocks, see <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !peb RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

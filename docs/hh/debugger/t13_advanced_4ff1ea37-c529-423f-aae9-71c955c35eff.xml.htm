@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using UMDH to Find a User-Mode Memory Leak</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using UMDH to Find a User-Mode Memory Leak"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_4ff1ea37-c529-423f-aae9-71c955c35eff.xml"/>
+<META NAME="MS-HKWD" CONTENT="memory leak, user-mode, UMDH">
+<META NAME="MS-HKWD" CONTENT="UMDH, memory leak detection"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_4ff1ea37-c529-423f-aae9-71c955c35eff.xml"></A>Using UMDH to Find a User-Mode Memory Leak</H1>
+<P>The user-mode dump heap (UMDH) utility works with the operating system to analyze Windows heap allocations for a specific process. UMDH locates which routine in a specific process is leaking memory.</P>
+<P>UMDH is included in Debugging Tools for Windows. For full details, see <a href="umdh_dad64a92-11c2-4bda-842a-ebfddd61ca41.xml.htm">UMDH</a>.</P>
+<H4>Preparing to Use UMDH</H4>
+<P>If you have not already determined which process is leaking memory, do that first. For details, see <a href="t13_advanced_a0de630e-922f-48e3-aed9-b807539163b9.xml.htm">Using Performance Monitor to Find User-Mode Memory Leaks</a>.</P>
+<P>The most important data in the UMDH logs are the stack traces of the heap allocations.  To determine whether a process is leaking heap memory, analyze these stack traces. </P>
+<P>Before using UMDH to display the stack trace data, you must use <a href="gflags_ea035958-0ade-4e07-856e-cfd1ed0b4df0.xml.htm">GFlags</a> to configure your system properly. GFlags is included in Debugging Tools for Windows.</P>
+<P>The following GFlags settings enable UMDH stack traces:</P><B></B><UL type="disc">
+<LI>In the GFlags graphical interface, choose the Image File tab, type the process name (including the file name extension), press the TAB key, select <b>Create user mode stack trace database</b>, and then click <b>Apply</b>.<P>Or, equivalently, use the following GFlags command line, where <i>ImageName</i> is the process name (including the file name extension):</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /i</b> <i>ImageName</i> <b>+ust </b><BR></nobr></P>
+</LI>
+<LI>By default, the amount of stack trace data that Windows gathers is limited to 32 MB on an x86 processor, and 64 MB on an x64 or Itanium-based processor.    If you must increase the size of this database, choose the <b>Image File</b> tab in the GFlags graphical interface, type the process name, press the TAB key, check the <b>Stack Backtrace (Megs)</b> check box, type a value (in MB) in the associated text box, and then click <b>Apply</b>.  Increase this database only when necessary, because it may deplete limited Windows resources. When you no longer need the larger size, return this setting to its original value. </LI>
+<LI>If you changed any flags on the <b>System Registry</b> tab, you must restart Windows to make these changes effective. If you changed any flags on the <b>Image File</b> tab, you must restart the process to make the changes effective. Changes to the <b>Kernel Flags</b> tab are effective immediately, but they are lost the next time Windows restarts. </LI>
+</UL>
+<P></P>
+<P>Before using UMDH, you must have access to the proper symbols for your application. UMDH uses the symbol path specified by the environment variable _NT_SYMBOL_PATH. Set this variable equal to a path containing the symbols for your application. If you also include a path to Windows symbols, the analysis may be more complete. The syntax for this symbol path is the same as that used by the debugger; for details, see <a href="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml.htm">Symbol Path</a>.</P>
+<P>For example, if the symbols for your application are located at <i>C:\MySymbols</i>, and you want to use the public Microsoft symbol store for your Windows symbols, using <i>C:\MyCache</i> as your downstream store, you would use the following command to set your symbol path: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>set _NT_SYMBOL_PATH=c:\mysymbols;srv*c:\mycache*http://msdl.microsoft.com/download/symbols </b><BR></nobr></P>
+<P>In addition, to assure accurate results, you must disable BSTR caching. To do this, set the OANOCACHE environment variable equal to one (1). Make this setting before you launch the application whose allocations are to be traced.</P>
+<P>If you need to trace the allocations made by a service, you must set OANOCACHE as a system environment variable and then restart Windows for this setting to take effect. </P>
+<P>On Windows 2000, in addition to setting OANOCACHE equal to 1, you must also install the hotfix available with <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=3100&amp;id=139701" target="_blank">KB 139071</a>. This hotfix is not needed on Windows XP and later versions of Windows. </P>
+<P></P>
+<H4>Detecting Increases in Heap Allocations with UMDH</H4>
+<P>After making these preparations, you can use UMDH to capture information about the heap allocations of a process. To do so, follow this procedure:</P><B></B><OL type="1">
+<LI>Determine the <a href="r04_setup_3_a40111cb-c7c2-451d-b09a-8a2e579f8514.xml.htm">process ID (PID)</a> for the process you want to investigate. </LI>
+<LI>Use UMDH to analyze the heap memory allocations for this process, and save it to a log file. Use the <nobr><b>-p</b></nobr> switch with the PID, and the <nobr><b>-f</b></nobr> switch with the name of the log file. For example, if the PID is 124, and you want to name the log file <i>Log1.txt</i>, use the following command:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>umdh &#8211;p:124 &#8211;f:log1.txt </b><BR></nobr></P>
+</LI>
+<LI>Use Notepad or another program to open the log file. This file contains the call stack for each heap allocation, the number of allocations made through that call stack, and the number of bytes consumed through that call stack. </LI>
+<LI>Because you are looking for a memory leak, the contents of a single log file are not sufficient. You must compare log files recorded at different times to determine which allocations are growing. <P>UMDH can compare two different log files and display the change in their respective allocation sizes. You can use the greater-than symbol (<b>&gt;</b>) to redirect the results into a third text file. You may also want to include the <nobr><b>-d</b></nobr> option, which converts the byte and allocation counts from hexadecimal to decimal. For example, to compare <i>Log1.txt</i> and <i>Log2.txt</i>, saving the results of the comparison to the file <i>LogCompare.txt</i>, use the following command: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>umdh log1.txt log2.txt &gt; logcompare.txt </b><BR></nobr></P>
+</LI>
+<LI>Open the <i>LogCompare.txt</i> file. Its contents resemble the following: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>+ 5320 ( f110 - 9df0) 3a allocs BackTrace00B53 <BR>Total increase == 5320 <BR></nobr></P>
+<P>For each call stack (labeled "BackTrace") in the UMDH log files, there is a comparison made between the two log files. In this example, the first log file (<i>Log1.txt</i>) recorded 0x9DF0 bytes allocated for BackTrace00B53, while the second log file recorded 0xF110 bytes, which means that there were 0x5320 additional bytes allocated between the time the two logs were captured. The bytes came from the call stack identified by BackTrace00B53. </P>
+</LI>
+<LI>To determine what is in that backtrace, open one of the original log files (for example, <i>Log2.txt</i>) and search for "BackTrace00B53." The results are similar to this data: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>00005320 bytes in 0x14 allocations (@ 0x00000428) by: BackTrace00B53<BR>ntdll!RtlDebugAllocateHeap+0x000000FD<BR>ntdll!RtlAllocateHeapSlowly+0x0000005A<BR>ntdll!RtlAllocateHeap+0x00000808<BR>MyApp!_heap_alloc_base+0x00000069<BR>MyApp!_heap_alloc_dbg+0x000001A2<BR>MyApp!_nh_malloc_dbg+0x00000023<BR>MyApp!_nh_malloc+0x00000016<BR>MyApp!operator new+0x0000000E<BR>MyApp!DisplayMyGraphics+0x0000001E<BR>MyApp!main+0x0000002C<BR>MyApp!mainCRTStartup+0x000000FC<BR>KERNEL32!BaseProcessStart+0x0000003D <BR></nobr></P>
+<P>This UMDH output shows that there were 0x5320 (decimal 21280) total bytes allocated from the call stack. These bytes were allocated from 0x14 (decimal 20) separate allocations of 0x428 (decimal 1064) bytes each. </P>
+<P>The call stack is given an identifier of "BackTrace00B53," and the calls in this stack are displayed. In reviewing the call stack, you see that the <b>DisplayMyGraphics</b> routine is allocating memory through the <b>new</b> operator, which calls the routine <b>malloc</b>, which uses the Visual C++ run-time library to obtain memory from the heap.</P>
+<P>Determine which of these calls is the last one to explicitly appear in your source code. In this case, it is probably the <b>new</b> operator because the call to <b>malloc</b> occurred as part of the implementation of <b>new</b> rather than as a separate allocation. So this instance of the <b>new</b> operator in the <b>DisplayMyGraphics</b> routine is repeatedly allocating memory that is not being freed. </P>
+</LI>
+</OL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using UMDH to Find a User-Mode Memory Leak RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

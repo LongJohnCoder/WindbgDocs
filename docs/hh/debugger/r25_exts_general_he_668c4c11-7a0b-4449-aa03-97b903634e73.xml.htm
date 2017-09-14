@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!htrace</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !htrace"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_668c4c11-7a0b-4449-aa03-97b903634e73.xml"/>
+<META NAME="MS-HKWD" CONTENT="!htrace extension">
+<META NAME="MS-HKWD" CONTENT="handle, !htrace extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_668c4c11-7a0b-4449-aa03-97b903634e73.xml"></A>!htrace</H1>
+<P><P></P>
+<P>The <b>!htrace</b> extension displays stack trace information for one or more handles.</P>
+</P>
+<H4>Syntax</H4>
+<P>User-Mode Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!htrace</b> [<i>Handle </i>[<i>Max_Traces</i>]] <BR><b>!htrace -enable </b>[<i>Max_Traces</i>]<BR><b>!htrace -snapshot</b><BR><b>!htrace -diff</b><BR><b>!htrace -disable</b><BR><b>!htrace -?</b> <BR></nobr></P>
+<P></P>
+<P>Kernel-Mode Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!htrace</b> [<i>Handle</i> [<i>Process </i>[<i>Max_Traces</i>]]] <BR><b>!htrace -?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Handle</i></DT>
+<DD>Specifies the handle whose stack trace will be displayed. If <i>Handle</i> is 0 or omitted, stack traces for all handles in the process will be displayed.</DD>
+<DT><i>Process</i></DT>
+<DD><i>(Kernel mode only)</i>  Specifies the process whose handles will be displayed.  If <i>Process </i>is 0 or omitted, then the current process is used.  In user mode, the current process is always used.  </DD>
+<DT><i>Max_Traces</i></DT>
+<DD>Specifies the maximum number of stack traces to display.  In user mode, if this parameter is omitted, then all the stack traces for the target process will be displayed.  </DD>
+<DT><b>-enable</b></DT>
+<DD>(<i>User mode only</i>)  Enables handle tracing and takes the first snapshot of the handle information to use as the initial state by the <b>-diff</b> option.<P></P>
+</DD>
+<DT><b>-snapshot</b></DT>
+<DD>(<i>User mode only</i>)  Takes a snapshot of the current handle information to use as the initial state by the <b>-diff</b> option.<P></P>
+</DD>
+<DT><b>-diff</b></DT>
+<DD>(<i>User mode only</i>)  Compares current handle information with the last snapshot of handle information that was taken.  Displays all handles that are still open.<P></P>
+</DD>
+<DT><b>-disable</b></DT>
+<DD>(<i>User mode only; Windows Server 2003 and later only</i>)  Disables handle tracing.  In Windows XP, handle tracing can be disabled only by terminating the target process.<P></P>
+</DD>
+<DT><b>-?</b></DT>
+<DD>Displays some brief Help text for this extension in the Debugger Command window.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> <BR><i>Ntsdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Before <b>!htrace</b> can be used, handle tracing must be enabled. One way to enable handle tracing is to enter the <b>!htrace &#8211;enable</b> command. When handle tracing is enabled, stack trace information is saved each time the process opens a handle, closes a handle, or references an invalid handle.  It is this stack trace information that <b>!htrace </b>displays.</P>
+<P class="note"><b>Note</b>  You can also enable handle tracing by activating Application Verifier for the target process and selecting the <b>Handles</b> option.</P>
+<P>Some of the traces reported by <b>!htrace</b> may be from a different process context.  In this case, the return addresses may not resolve properly in the current process context, or may resolve to the wrong symbols.</P>
+<P>The following example displays information about all handles in process 0x81400300:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!htrace 0 81400300</b><BR>Process 0x81400300<BR>ObjectTable 0xE10CCF60<BR><BR>--------------------------------------<BR>Handle 0x7CC - CLOSE:<BR>0x8018FCB9: ntoskrnl!ExDestroyHandle+0x103<BR>0x801E1D12: ntoskrnl!ObpCloseHandleTableEntry+0xE4<BR>0x801E1DD9: ntoskrnl!ObpCloseHandle+0x85<BR>0x801E1EDD: ntoskrnl!NtClose+0x19<BR>0x010012C1: badhandle!mainCRTStartup+0xE3<BR>0x77DE0B2F: KERNEL32!BaseProcessStart+0x3D<BR>--------------------------------------<BR>Handle 0x7CC - OPEN:<BR>0x8018F44A: ntoskrnl!ExCreateHandle+0x94<BR>0x801E3390: ntoskrnl!ObpCreateUnnamedHandle+0x10C<BR>0x801E7317: ntoskrnl!ObInsertObject+0xC3<BR>0x77DE23B2: KERNEL32!CreateSemaphoreA+0x66<BR>0x010011C5: badhandle!main+0x45<BR>0x010012C1: badhandle!mainCRTStartup+0xE3<BR>0x77DE0B2F: KERNEL32!BaseProcessStart+0x3D<BR>--------------------------------------<BR>Handle 0x7DC - BAD REFERENCE:<BR>0x8018F709: ntoskrnl!ExMapHandleToPointerEx+0xEA<BR>0x801E10F2: ntoskrnl!ObReferenceObjectByHandle+0x12C<BR>0x801902BE: ntoskrnl!NtSetEvent+0x6C<BR>0x80154965: ntoskrnl!_KiSystemService+0xC4<BR>0x010012C1: badhandle!mainCRTStartup+0xE3<BR>0x77DE0B2F: KERNEL32!BaseProcessStart+0x3D<BR>--------------------------------------<BR>Handle 0x7DC - CLOSE:<BR>0x8018FCB9: ntoskrnl!ExDestroyHandle+0x103<BR>0x801E1D12: ntoskrnl!ObpCloseHandleTableEntry+0xE4<BR>0x801E1DD9: ntoskrnl!ObpCloseHandle+0x85<BR>0x801E1EDD: ntoskrnl!NtClose+0x19<BR>0x010012C1: badhandle!mainCRTStartup+0xE3<BR>0x77DE0B2F: KERNEL32!BaseProcessStart+0x3D<BR>--------------------------------------<BR>Handle 0x7DC - OPEN:<BR>0x8018F44A: ntoskrnl!ExCreateHandle+0x94<BR>0x801E3390: ntoskrnl!ObpCreateUnnamedHandle+0x10C<BR>0x801E7317: ntoskrnl!ObInsertObject+0xC3<BR>0x77DE265C: KERNEL32!CreateEventA+0x66<BR>0x010011A0: badhandle!main+0x20<BR>0x010012C1: badhandle!mainCRTStartup+0xE3<BR>0x77DE0B2F: KERNEL32!BaseProcessStart+0x3D<BR><BR>--------------------------------------<BR>Parsed 0x6 stack traces.<BR>Dumped 0x5 stack traces.<BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about handles, see the Microsoft Windows SDK documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. To display further information about a specific handle, use the <a href="r24_exts_general_a_48ae5bbf-e2df-4d21-835f-9721a17c40dd.xml.htm"><b>!handle</b></a> extension.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !htrace RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SymProxy</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SymProxy"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_cec36ec3-cb6f-4e9b-bc90-341a12f18995.xml"/>
+<META NAME="MS-HKWD" CONTENT="symbols, SymProxy (symproxy.dll)">
+<META NAME="MS-HKWD" CONTENT="symbol stores, HTTP">
+<META NAME="MS-HKWD" CONTENT="symbol stores, SymProxy (symproxy.dll)">
+<META NAME="MS-HKWD" CONTENT="SymProxy"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_cec36ec3-cb6f-4e9b-bc90-341a12f18995.xml"></A>SymProxy</H1>
+<P>You can configure your HTTP-based symbol store to act as a proxy between client computers and other symbol stores.  The implementation is through an Internet Server Application Programming Interface (ISAPI) filter called SymProxy (<i>Symproxy.dll</i>).  The SymProxy server can be used as a gateway computer to the Internet or other sources within your company network.  </P>
+<P></P>
+<p><img src="symproxy_configuration.png"><p><b>Example of SymProxy Configuration</b></p>
+</p>
+<P></P>
+<P>SymProxy is useful in many situations. For example: </P><B></B><UL type="disc">
+<LI>You are debugging many systems within a lab environment in which the computers are not attached to the company network, but the symbols are stored in the network and must be accessed using Integrated Windows Authentication (IWA).</LI>
+<LI>Your corporate computing environment includes a firewall that prevents access to the Internet from computers that are debugging and you must obtain symbols from an internet Web site.</LI>
+<LI>You want to present a single symbol path for all users in your company so that they  need not  know or care about where symbols are located, and  you can add new symbol stores without user intervention.</LI>
+<LI>You have a remote site that is physically far from the rest of your company resources, and network access is slow.  This system can be used to acquire symbols and cache them to the remote site.</LI>
+</UL>
+<P></P>
+<P>To install SymProxy, you must manually copy the files to the correct location, configure the registry, choose network security credentials, and configure Internet Information Services (IIS).  To ensure that your HTTP symbol store is properly configured, see <a href="r09_symbols_a0af9a12-53b2-477f-a7aa-57a27f442437.xml.htm">HTTP Symbol Stores</a>. </P>
+<P>This section includes:</P><B></B><div class="indent1">
+<P><a href="r09_symbols_90664113-4670-4ba2-9eab-af876ae29882.xml.htm">Installing SymProxy</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r09_symbols_c3f5ea57-d8ac-4f74-9e46-d033009e46a3.xml.htm">Configuring the Registry</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r09_symbols_6523e42e-b81c-4372-afb4-889ea40ed799.xml.htm">Choosing Network Security Credentials</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r09_symbols_5af10c3e-680c-4d62-b23a-601b5ebc3b74.xml.htm">Configuring IIS for SymProxy</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r09_symbols_62f15c4f-497e-4fe7-a9f4-9d11b542f456.xml.htm">Setting Up Exclusion Lists</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r09_symbols_3acbad07-7206-42c7-ab82-adb6b7318341.xml.htm">Dealing with Unavailable Symbol Stores</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r09_symbols_8dca475d-b5d3-4353-8696-e0eec13848cf.xml.htm">Checking and Updating Status</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r09_symbols_6b0b1e32-da2d-4f64-9e1d-937fd00ee0f0.xml.htm">Handling File Pointers</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r09_symbols_27c283e7-5fb1-4a06-9540-ea7ba4374312.xml.htm">Caching Acquired Symbol Files</a> </P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SymProxy RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

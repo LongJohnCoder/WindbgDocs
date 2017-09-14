@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ReadControlSpace</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ReadControlSpace"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="ReadControlSpace"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_8337344a-4a97-4f74-9be4-8fdd771d8bbf.xml"/>
+<META NAME="MS-HKWD" CONTENT="ReadControlSpace function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_8337344a-4a97-4f74-9be4-8fdd771d8bbf.xml"></A>ReadControlSpace</H1>
+<P><P>The <b>ReadControlSpace</b> function reads the processor-specific control space into the array pointed to by <i>buf</i>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>VOID </b><BR><b>  ReadControlSpace (</b><BR><b>    USHORT</b> <i>processor</i><b>,</b><BR>    <b>ULONG</b> <i>address</i><b>,</b><BR>    <b>PVOID</b> <i>buf</i><b>,</b><BR>    <b>ULONG</b> <i>size</i><BR><i>    </i><b>);</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>processor</i></DT>
+<DD>Specifies the number of the processor whose control space is to be read.</DD>
+<DT><i>address</i></DT>
+<DD>Specifies the address of the control space.</DD>
+<DT><i>buf</i></DT>
+<DD>Specifies the address of an array of bytes to hold the control space data.</DD>
+<DT><i>size</i></DT>
+<DD>Specifies the number of bytes in the array pointed to by <i>buf</i>.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>None</P>
+<H4>Comments</H4>
+<P>If you are writing 64-bit code, you should use <a href="wdbgexts_ref_3327dad4-903c-4285-b3cc-fe408d15f129.xml.htm"><b>ReadControlSpace64</b></a> instead. See <a href="wdbgexts_dg_850413ea-f120-4037-9556-72dbd34764ba.xml.htm">32-Bit Pointers and 64-Bit Pointers</a> for details.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this function, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ReadControlSpace RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

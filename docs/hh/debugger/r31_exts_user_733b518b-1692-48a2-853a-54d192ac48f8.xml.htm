@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!findstack</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !findstack"><xml><MSHelp:Keyword Index="A" Term="r31_exts_user_733b518b-1692-48a2-853a-54d192ac48f8.xml"/>
+<META NAME="MS-HKWD" CONTENT="!findstack extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r31_exts_user_733b518b-1692-48a2-853a-54d192ac48f8.xml"></A>!findstack</H1>
+<P><P>The <b>!findstack </b>extension locates all of the stacks that contain a specified symbol or module.  </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!findstack</b> <i>Symbol </i>[<i>DisplayLevel</i>]<BR><b>!findstack</b> -<b>?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Symbol</i></DT>
+<DD>Specifies a symbol or module.</DD>
+<DT><i>DisplayLevel</i></DT>
+<DD>Specifies what the display should contain. This can be any one of the following values.  The default value is 1.<DL><DT>0</DT>
+<DD>Displays only the thread ID for each thread that contains <i>Symbol</i>.</DD>
+<DT>1</DT>
+<DD>Displays both the thread ID and the frame for each thread that contains <i>Symbol</i>.</DD>
+<DT>2</DT>
+<DD>Displays the entire thread stack for each thread that contains <i>Symbol</i>.</DD>
+<P></P>
+</DL>
+</DD>
+<DT><b>-?</b></DT>
+<DD>Displays some brief Help text for this extension in the Debugger Command window.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Uext.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Uext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <a href="r29_exts_kernel_q_e8bc89db-0e90-49e2-9899-99461f099edf.xml.htm"><b>!stacks</b></a> kernel-mode extension also display information about stacks, including a brief summary of the state of every thread.</P>
+<P>The following are some examples of the output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:023&gt; <b>!uext.findstack wininet</b><BR>Thread 009, 2 frame(s) match<BR>        * 06 03eaffac 771d9263 wininet!ICAsyncThread::SelectThread+0x22a<BR>        * 07 03eaffb4 7c80b50b wininet!ICAsyncThread::SelectThreadWrapper+0xd<BR> <BR>Thread 011, 2 frame(s) match<BR>        * 04 03f6ffb0 771cda1d wininet!AUTO_PROXY_DLLS::DoThreadProcessing+0xa1<BR>        * 05 03f6ffb4 7c80b50b wininet!AutoProxyThreadFunc+0xb<BR> <BR>Thread 020, 6 frame(s) match<BR>        * 18 090dfde8 771db73a wininet!CheckForNoNetOverride+0x9c<BR>        * 19 090dfe18 771c5e4d wininet!InternetAutodialIfNotLocalHost+0x220<BR>        * 20 090dfe8c 771c5d6a wininet!ParseUrlForHttp_Fsm+0x135<BR>        * 21 090dfe98 771bcb2c wininet!CFsm_ParseUrlForHttp::RunSM+0x2b<BR>        * 22 090dfeb0 771d734a wininet!CFsm::Run+0x39<BR>        * 23 090dfee0 77f6ad84 wininet!CFsm::RunWorkItem+0x79<BR> <BR>Thread 023, 9 frame(s) match<BR>        * 16 0bd4fe00 771bd256 wininet!ICSocket::Connect_Start+0x17e<BR>        * 17 0bd4fe0c 771bcb2c wininet!CFsm_SocketConnect::RunSM+0x42<BR>        * 18 0bd4fe24 771bcada wininet!CFsm::Run+0x39<BR>        * 19 0bd4fe3c 771bd22b wininet!DoFsm+0x25<BR>        * 20 0bd4fe4c 771bd706 wininet!ICSocket::Connect+0x32<BR>        * 21 0bd4fe8c 771bd4cb wininet!HTTP_REQUEST_HANDLE_OBJECT::OpenConnection_Fsm+0x391<BR>        * 22 0bd4fe98 771bcb2c wininet!CFsm_OpenConnection::RunSM+0x33<BR>        * 23 0bd4feb0 771d734a wininet!CFsm::Run+0x39<BR>        * 24 0bd4fee0 77f6ad84 wininet!CFsm::RunWorkItem+0x79<BR> <BR>0:023&gt; <b>!uext.findstack wininet!CFsm::Run 0</b><BR>Thread 020, 2 frame(s) match<BR>Thread 023, 3 frame(s) match<BR><BR>0:023&gt; <b>!uext.findstack wininet!CFsm 0</b><BR>Thread 020, 3 frame(s) match<BR>Thread 023, 5 frame(s) match<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information about stack traces and other ways to display stack traces, see <a href="r07_use_operation_531a7dd9-5201-43eb-9054-a793c3e60a60.xml.htm">Viewing the Call Stack</a> and <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>k, kb, kc, kd, kp, kP, kv </b>(Display Stack Backtrace)</a> commands.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !findstack RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

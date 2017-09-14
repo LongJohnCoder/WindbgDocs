@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Reading Symbols from Paged-Out Headers</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Reading Symbols from Paged-Out Headers"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_b54ec2fe-1c5b-4b2f-a2a5-4ec1d4a4db61.xml"/>
+<META NAME="MS-HKWD" CONTENT="symbols, paged-out header problems"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_b54ec2fe-1c5b-4b2f-a2a5-4ec1d4a4db61.xml"></A>Reading Symbols from Paged-Out Headers</H1>
+<P>The kernel debugger must read the header for each loaded module's image in order to know which symbols correspond to that module.</P>
+<P>If a module's header is paged out to disk, the debugger will not load symbols for this module. If this happens with a module that is essential to the debugging process, it can be a critical problem.</P>
+<P>The following procedure can be used to solve this problem.</P><B>To acquire symbols for paged-out headers</B><OL type="1">
+<LI>Make a second copy of the kernel itself. It is probably easiest to put this on a network share.</LI>
+<LI>Append the root directory of this share to the symbol path. See <a href="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml.htm">Symbol Path</a> for the ways to change the symbol path.</LI>
+<LI>Use the <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload (Reload Module)</b></a> command.</LI>
+<LI>Use the <a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym noisy</b></a> extension command to see more verbose output. If this is used, you will be able to see which symbols are loaded from the module images on the target computer, and which are loaded from the copy of the kernel modules.</LI>
+</OL>
+<P></P>
+<P>This technique must be used with care, since the debugger has no way of verifying whether the file copies actually match the originals. So it is crucial that the version of Windows used on the network share matches the version used on the target computer.</P>
+<P>This technique is only used for kernel-mode debugging. The operating system is capable of paging in any headers required during user-mode debugging (unless the disk holding the paging file is dismounted or otherwise inaccessible).</P>
+<P></P>
+<P></P>
+<P>Here is an example of this technique being used:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>.reload</b><BR>Connected to Windows XP 2268 x86 compatible target, ptr64 FALSE<BR>Loading Kernel Symbols<BR>..........Unable to read image header for dmload.sys at fe0be000 - NTSTATUS 0xC0000001<BR>..........Unable to read image header for dmboot.sys at fda93000 - NTSTATUS 0xC0000001<BR>.....................................Unable to read image header for fdc.sys at fdfc2000 - NTSTATUS 0xC0000001<BR>...Unable to read image header for flpydisk.sys at fde4a000 - NTSTATUS 0xC0000001<BR>.Unable to read image header for Fs_Rec.SYS at fe0c8000 - NTSTATUS 0xC0000001<BR>.Unable to read image header for Null.SYS at fe2c4000 - NTSTATUS 0xC0000001<BR>...................Unable to read image header for win32k.sys at a0000000 - NTSTATUS 0xC0000001<BR>..Unable to read image header for dxg.sys at a0194000 - NTSTATUS 0xC0000001<BR>.......Unable to read image header for ati2draa.dll at a01a4000 - NTSTATUS 0xC0000001<BR>..Unable to read image header for ParVdm.SYS at fe116000 - NTSTATUS 0xC0000001<BR>.......<BR>Loading unloaded module list<BR>..............<BR>Loading User Symbols<BR>Unable to retrieve the PEB address. This is usually caused<BR>by being in the wrong process context or by paging<BR><BR></nobr></P>
+<P>Notice that many images have inaccessible headers. Check the symbols from one of these files (in this example, <i>fs_rec.sys</i>):</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>x fs_rec!*</b><BR>*** ERROR: Module load completed but symbols could not be loaded for fs_rec.sys<BR><BR></nobr></P>
+<P>These headers are apparently paged out. So you need to add the proper images to the symbol path:  </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>.sympath+ \\myserver\myshare\symbols\x86fre\symbols</b><BR>Symbol search path is: symsrv*symsrv.dll*c:\localcache*http://msdl.microsoft.com/download/symbols;\\myserver\myshare\symbols\x86fre\symbols<BR><BR>kd&gt; <b>.reload</b><BR>Connected to Windows XP 2268 x86 compatible target, ptr64 FALSE<BR>Loading Kernel Symbols<BR>..........Unable to read image header for dmload.sys at fe0be000 - NTSTATUS 0xC0000001<BR>..........Unable to read image header for dmboot.sys at fda93000 - NTSTATUS 0xC0000001<BR>.....................................Unable to read image header for fdc.sys at fdfc2000 - NTSTATUS 0xC0000001<BR>...Unable to read image header for flpydisk.sys at fde4a000 - NTSTATUS 0xC0000001<BR>.Unable to read image header for Fs_Rec.SYS at fe0c8000 - NTSTATUS 0xC0000001<BR>.Unable to read image header for Null.SYS at fe2c4000 - NTSTATUS 0xC0000001<BR>...................Unable to read image header for win32k.sys at a0000000 - NTSTATUS 0xC0000001<BR>..Unable to read image header for dxg.sys at a0194000 - NTSTATUS 0xC0000001<BR>.......Unable to read image header for ati2draa.dll at a01a4000 - NTSTATUS 0xC0000001<BR>..Unable to read image header for ParVdm.SYS at fe116000 - NTSTATUS 0xC0000001<BR>.......<BR>Loading unloaded module list<BR>..............<BR>Loading User Symbols<BR>Unable to retrieve the PEB address. This is usually caused<BR>by being in the wrong process context or by paging<BR><BR></nobr></P>
+<P>The same warnings have appeared, but the symbols themselves are now accessible:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>x fs_Rec!*</b><BR>fe0c8358  Fs_Rec!_imp___allmul<BR>fe0c8310  Fs_Rec!_imp__IoCreateDevice<BR>fe0c835c  Fs_Rec!_imp___allshr<BR>........<BR>fe0c8360  Fs_Rec!ntoskrnl_NULL_THUNK_DATA<BR>fe0c832c  Fs_Rec!_imp__KeSetEvent<BR>fe0c9570  Fs_Rec!_NULL_IMPORT_DESCRIPTOR<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Reading Symbols from Paged-Out Headers RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

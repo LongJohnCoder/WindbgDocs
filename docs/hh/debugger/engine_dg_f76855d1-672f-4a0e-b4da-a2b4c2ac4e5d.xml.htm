@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Callback Objects</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Callback Objects"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_f76855d1-672f-4a0e-b4da-a2b4c2ac4e5d.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, callback objects">
+<META NAME="MS-HKWD" CONTENT="callback objects">
+<META NAME="MS-HKWD" CONTENT="callback objects, event callbacks">
+<META NAME="MS-HKWD" CONTENT="event callbacks">
+<META NAME="MS-HKWD" CONTENT="callback objects, input callbacks">
+<META NAME="MS-HKWD" CONTENT="input callbacks">
+<META NAME="MS-HKWD" CONTENT="callback objects, output callbacks">
+<META NAME="MS-HKWD" CONTENT="output callbacks">
+<META NAME="MS-HKWD" CONTENT="callback objects, event callbacks">
+<META NAME="MS-HKWD" CONTENT="event callbacks">
+<META NAME="MS-HKWD" CONTENT="callback objects, input callbacks">
+<META NAME="MS-HKWD" CONTENT="input callbacks">
+<META NAME="MS-HKWD" CONTENT="callback objects, output callbacks">
+<META NAME="MS-HKWD" CONTENT="output callbacks"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_f76855d1-672f-4a0e-b4da-a2b4c2ac4e5d.xml"></A>Using Callback Objects</H1>
+<P>There are three callback COM interfaces that are used by the engine: <a href="comcallbacks_72745555-ec34-41fa-9305-cf23357bcd17.xml.htm"><b>IDebugEventCallbacks</b></a> for notifying <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#a1e40118-1d4c-4ebf-8adc-4fe9a9d1a90f">debugger extensions</a> and <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#75adb4be-6841-48ba-8227-9b322bfa7dd4">applications</a> of changes to the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> or <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>, <a href="comcallbacks_9dd6d3d2-e92d-41bc-8276-fa8b7818a372.xml.htm"><b>IDebugInputCallbacks</b></a> for requesting input, and <a href="comcallbacks_ed6ca0bd-5599-426d-b089-18a12311eba0.xml.htm"><b>IDebugOutputCallbacks</b></a> for sending output.</P>
+<P>Callback objects are registered with <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">clients</a>.  At most, one instance of each of the three callback interfaces can be registered with each client (the Unicode and ASCII versions of a interface count as the same interface).</P>
+<P>When a client is created, the engine remembers the thread in which it was created. The engine uses this same thread whenever it makes a call to a callback instance registered with the client.  If the thread is in use, the engine will queue the calls it needs to make.  To allow the engine to make these calls, the method <a href="idebugclient_faf284c2-ca0f-4e00-bd74-08817338a808.xml.htm"><b>DispatchCallbacks</b></a> should be called whenever a client's thread is idle.  The method <a href="idebugclient_5c4cc320-694e-481a-814d-a77653548f7d.xml.htm"><b>ExitDispatch</b></a> will cause <b>DispatchCallbacks</b> to return.  If the thread is the same thread that was used to start the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugger session</a>, then the engine can make the callback calls during the <a href="idebugcontrol_19a7d8b3-1f16-400e-bf8f-c782d48b2cf5.xml.htm"><b>WaitForEvent</b></a> method, and <b>DispatchCallbacks</b> does not need to be called.</P>
+<P>The method <a href="idebugclient_e808ca3a-5762-419b-96de-4c49984c1ccd.xml.htm"><b>FlushCallbacks</b></a> tells the engine to send all buffered output to the output callbacks.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="2916ff82-f256-421c-ad08-e67335774140"></A>Event Callback Objects</H3>
+<P>The <a href="comcallbacks_72745555-ec34-41fa-9305-cf23357bcd17.xml.htm"><b>IDebugEventCallbacks</b></a> interface is used by the engine to notify the debugger extensions and applications of <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">events</a> and changes to the engine and target.  An implementation of <b>IDebugEventCallbacks</b> can be registered with a client using <a href="idebugclient_a234bf28-5dd1-4e92-ab72-aa8d9a3a282b.xml.htm"><b>SetEventCallbacks</b></a>.  The current implementation registered with a client can be found using <a href="idebugclient_81e23179-deb3-4c14-ae9e-b0c0a1d48f00.xml.htm"><b>GetEventCallbacks</b></a>.  The number of event callbacks registered across all clients can be found using <a href="idebugclient_976101a5-6218-475a-b8e9-e7091e2524d6.xml.htm"><b>GetNumberEventCallbacks</b></a>.</P>
+<P>For details on how the engine manages events, see <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>.</P>
+<H3><A NAME="061f9a7a-c177-4dcf-9ece-76bdde1b520a"></A>Input Callback Objects</H3>
+<P>The <a href="comcallbacks_9dd6d3d2-e92d-41bc-8276-fa8b7818a372.xml.htm"><b>IDebugInputCallbacks</b></a> interface is used by the engine to request input from debugger extensions and applications.  An implementation of <b>IDebugInputCallbacks</b> can be registered with a client using <a href="idebugclient_fea0d021-69b2-462f-965f-455305fd5971.xml.htm"><b>SetInputCallbacks</b></a>.  The current implementation registered with a client can be found using <a href="idebugclient_ab365943-baaa-4a51-9c1b-d82086098b2f.xml.htm"><b>GetInputCallbacks</b></a>.  The number of input callbacks registered across all clients can be found using <a href="idebugclient_ccf5fe3e-20d9-4415-bcfd-4823960acd05.xml.htm"><b>GetNumberInputCallbacks</b></a>.</P>
+<P>For details on how the engine manages input, see <a href="engine_dg_ce5dd9cd-7068-4ca7-95d9-f4985a9812c2.xml.htm">Input and Output</a>.</P>
+<H3><A NAME="584852f1-7157-4b2a-99a4-aa760877a5ae"></A>Output Callback Objects</H3>
+<P>The <b>IDebugOutputCallbacks</b> interface is used by the engine to send output to the debugger extensions and applications.  An implementation of <b>IDebugOutputCallbacks</b> can be registered with a client using <a href="idebugclient_b1da4bc1-b368-475e-bd13-021358f9d234.xml.htm"><b>SetOutputCallbacks</b></a>.  The current implementation registered with a client can be found using <a href="idebugclient_693aaf2a-8408-48c4-b7c0-66e7064a6f35.xml.htm"><b>GetOutputCallbacks</b></a>.  The number of output callbacks registered across all clients can be found using <a href="idebugclient_ce6e107b-a356-434a-81d7-eccb8495289d.xml.htm"><b>GetNumberOutputCallbacks</b></a>.</P>
+<P>For details on how the engine manages output, see <a href="engine_dg_ce5dd9cd-7068-4ca7-95d9-f4985a9812c2.xml.htm">Input and Output</a>.</P>
+<P class="note"><b>Note</b>  As is typical for COM objects, the engine will call <b>IUnknown::AddRef</b> on a callback COM object when it is registered with a client, and <b>IUnknown::Release</b> when the object is replaced or the client is deleted.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Callback Objects RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

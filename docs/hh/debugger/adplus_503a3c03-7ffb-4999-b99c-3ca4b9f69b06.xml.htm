@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Hang Mode</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Hang Mode"><xml><MSHelp:Keyword Index="A" Term="ADPlus_503a3c03-7ffb-4999-b99c-3ca4b9f69b06.xml"/>
+<META NAME="MS-HKWD" CONTENT="ADPlus, hang mode"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_503a3c03-7ffb-4999-b99c-3ca4b9f69b06.xml"></A>Hang Mode</H1>
+<P>In hang mode, ADPlus immediately produces full memory dumps for all of the processes that are specified at the command prompt after the script has finished running. ADPlus puts each <i>.dmp</i> file that it creates into a folder that contains the date and time stamp from when ADPlus was run. And each file name contains the process name, the process ID, and the date and time stamp from when ADPlus was run. While the process memory is being dumped to a file, the process is frozen, with the debugger non-invasively attached to it. After the memory dump is finished, the debugger detaches and the process resumes.</P>
+<P>You can use ADPlus in hang mode instead of <a href="r10_dump_files_bbade5fe-7a72-4267-84e3-6c7c5389cd5c.xml.htm">UserDump</a> to dump the memory for one or more processes. In addition, hang mode works inside a Terminal Server session. </P>
+<H4>-MiniOnSecond Switch</H4>
+<P>When you specify the <b>-MiniOnSecond</b> command-line parameter for ADPlus, ADPlus produces log files from a scripted debug session and minidump files (which are typically less than 100 KB ). This parameter is typically faster than creating full memory dumps for each process that is specified on the command line. (In earlier versions of ADPlus, this feature was called <i>quick mode</i>.)</P>
+<P>A minidump file is especially useful if you do not plan to analyze the file yourself. You can create a .zip file that contains the dump file and send it in an e-mail message to a professional support technician. This process is easier than having to put the files on an FTP site or use some other method of transfer. </P>
+<H4>-NoDumpOnSecond Switch</H4>
+<P>When you use the <b>-NoDumpOnSecond</b> command-line parameter, ADPlus does not create any dump files.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Hang Mode RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

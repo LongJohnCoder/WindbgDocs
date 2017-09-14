@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.sympath (Set Symbol Path)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .sympath (Set Symbol Path)"><xml><MSHelp:Keyword Index="A" Term="r22_metacmds_S_9b66f1cb-f87e-45be-9382-dc21f116fa2c.xml"/>
+<META NAME="MS-HKWD" CONTENT=".sympath (Set Symbol Path) command">
+<META NAME="MS-HKWD" CONTENT="Set Symbol Path (.sympath) command">
+<META NAME="MS-HKWD" CONTENT="symbol files and paths, Set Symbol Path (.sympath) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r22_metacmds_S_9b66f1cb-f87e-45be-9382-dc21f116fa2c.xml"></A>.sympath (Set Symbol Path)</H1>
+<P>The <b>.sympath</b> command changes the default path of the host debugger for symbol search.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.sympath</b>[<b>+</b>] [<i>Path</i> [<b>;</b> <i>...</i>]] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>+</b></DT>
+<DD>Specifies that the new directories will be appended to (rather than replace) the previous symbol search path.</DD>
+<DT><i>Path</i></DT>
+<DD>The fully qualified path, on the host computer, of a new symbol search.  Multiple symbol paths should be separated with semicolons. If <i>Path</i> is omitted, the current symbol path is displayed.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>New symbol information will not be loaded when the symbol path is changed. You can use the <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload (Reload Module)</b></a> command to reload symbols if deferred symbol loading is off. See <a href="r09_symbols_538315dc-6582-4a76-9725-d9d53b52e4a0.xml.htm">Deferred Symbol Loading</a> for details.</P>
+<H4>Additional Information</H4>
+<P>For details and other ways to change this path, see <a href="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml.htm">Symbol Path</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .sympath (Set Symbol Path) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>StartServer</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, StartServer"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="StartServer"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_5ca142fb-bb02-4484-adf0-9337f53d0bdc.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::StartServer method">
+<META NAME="MS-HKWD" CONTENT="StartServer (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_5ca142fb-bb02-4484-adf0-9337f53d0bdc.xml"></A>StartServer</H1>
+<P><P>The <b>StartServer</b> and <b>StartServerWide</b> methods start a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#098e09f5-d7db-435e-9403-16661d6693b5">debugging server</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient::StartServer(</b><BR><b>    IN PCSTR  </b><i>Options</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugClient5::StartServerWide(</b><BR><b>    IN PCWSTR  </b><i>Options</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define StartServerT StartServerWide</b><BR><b>#else</b><BR><b>#define StartServerT StartServer</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Specifies the connections options for this server.  These are the same options given to the <b>.server</b> debugger command or the WinDbg and CDB <b>-server</b> command-line option.  For details on the syntax of this string, see <a href="r08_use_remote_2cf49506-2562-4684-b843-be4726f59691.xml.htm">Activating a Debugging Server</a>.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>StartServer</b> is available in all versions of <b>IDebugClient</b>.  <b>StartServerWide</b> is available in <b>IDebugClient5</b> and later versions.</P>
+<H4>Comments</H4>
+<P>The server that is started will be accessible by other <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#84783e5c-aa71-4d1c-be03-f4cc8ce3d72f">debuggers</a> through the transport specified in the <i>Options</i> parameter.</P>
+<P>For more information about debugging servers, see <a href="engine_dg_403e6a06-76ae-4dfc-a475-4e8a77318c95.xml.htm#ef57e4cd-0279-4746-8c0e-1b5416eac328">Debugging Server and Debugging Client</a>.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="clientfns_7beeb350-b8bd-44ea-b5c9-ca0da15146ae.xml.htm"><b>DebugConnect</b></a>, <a href="idebugclient_de137b80-ffd7-4399-85a3-50b3c870c28c.xml.htm"><b>StartProcessServer</b></a>, <a href="idebugclient_8fecfb37-5e4d-4a2b-af1e-df081e636337.xml.htm"><b>OutputServers</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: StartServer RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

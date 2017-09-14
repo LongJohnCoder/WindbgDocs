@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Sample Configuration File for Custom Exceptions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Sample Configuration File for Custom Exceptions"><xml><MSHelp:Keyword Index="A" Term="ADPlus_590d0146-6ea4-4539-beb9-14831b18356e.xml"/>
+<META NAME="MS-HKWD" CONTENT="ADPlus, configuration files, custom exceptions"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_590d0146-6ea4-4539-beb9-14831b18356e.xml"></A>Sample Configuration File for Custom Exceptions</H1>
+<P>The following sample shows you how to configure ADPlus for custom exceptions.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>&lt;ADPlus&gt;<BR>    &lt;!-- Configuring ADPlus for custom actions on a given CLR exception --&gt;<BR>    &lt;!-- First we load sos extension --&gt;<BR>   &lt;!-- Next we use the !cce command to check if the exception is the one we are looking for --&gt;<BR>   &lt;!-- Next we use a j command on $t1 to do what we want --&gt;<BR>   &lt;!-- Replace UnhandledException_Console.MyCustomException below with the name of the exception you are looking for --&gt;<BR>    &lt;!-- You need to put the GN in the two branches of the j command and use VOID in the ReturnACtion1 tag --&gt;<BR>&lt;Exceptions&gt;<BR>     &lt;Config&gt;<BR>        &lt;!-- This is for the CLR exception --&gt;<BR>       &lt;Code&gt; clr &lt;/Code&gt;<BR>       &lt;Actions1&gt; Log &lt;/Actions1&gt;<BR>       &lt;CustomActions1&gt; !cce  UnhandledException_Console.MyCustomException 1; j ($t1 = 1) '.dump /ma /u c:\Dumps\MyCustom.dmp;gn' ; 'gn'  &lt;/CustomActions1&gt;<BR>       &lt;ReturnAction1&gt; VOID  &lt;/ReturnAction1&gt;<BR>     &lt;/Config&gt;<BR>  &lt;/Exceptions&gt;<BR>&lt;/ADPlus&gt;<BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Sample Configuration File for Custom Exceptions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>U</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, glossary, U"><xml><MSHelp:Keyword Index="A" Term="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml"/>
+<META NAME="MS-HKWD" CONTENT="user mode">
+<META NAME="MS-HKWD" CONTENT="user-mode debugging">
+<META NAME="MS-HKWD" CONTENT="user-mode target"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>    <H1><A NAME="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml"></A>U</H1>
+<P></P>
+<DL><DT><B><A NAME="b9622678-468c-4b90-a002-a3d4280796f0"></A>user mode</B></DT>
+<DD>Applications and subsystems run within Windows in <i>user mode</i>. Processes that run in user mode do so within their own virtual address spaces. They are restricted from gaining direct access to many parts of the system, including system hardware, memory that was not allocated for their use, and other portions of the system that might compromise system integrity. Because processes that run in user mode are effectively isolated from the system and other user-mode processes, they cannot interfere with these resources.<P>User-mode processes can be grouped in the following categories: </P><B></B><UL type="disc">
+<LI><i>System Processes</i>. <P>These perform important functions and are integral part of the operating system. System processes include such items as the logon process and the session manager process. </P>
+</LI>
+<LI><i>Server Processes</i>.<P>These are operating system services such as the Event Log and the Scheduler. They can be configured to start automatically at boot time.</P>
+</LI>
+<LI><i>Environment Subsystems</i>.<P>These are used to create a complete operating system environment for the applications. Windows provides the following three environments: Win32, POSIX, and OS/2.</P>
+</LI>
+<LI><i>User Applications</i>.<P>There are five types: Win32, Windows 3.1, Microsoft MS-DOS, POSIX, and OS/2.</P>
+</LI>
+</UL>
+<P></P>
+<P></P>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="1a7518e7-05c9-4be8-baf0-63b4024f4e30"></A>user-mode debugging</B></DT>
+<DD>A <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugger session</a> in which the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a> is running in <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#b9622678-468c-4b90-a002-a3d4280796f0">user mode</a>. </DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="ee9a29df-b52f-4883-8452-51e8c4d608a7"></A>user-mode target</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#997fd309-38d4-4217-9777-65e9f2af4377">target application</a>.</DD>
+</DL>
+<P></P>  <DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: U RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

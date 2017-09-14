@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Writing EngExtCpp Extensions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Writing EngExtCpp Extensions"><xml><MSHelp:Keyword Index="A" Term="EngExtCpp_DG_76c4f780-fe4d-4906-a0da-2d74b8ec9886.xml"/>
+<META NAME="MS-HKWD" CONTENT="EngExtCpp extensions, writing"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_DG_76c4f780-fe4d-4906-a0da-2d74b8ec9886.xml"></A>Writing EngExtCpp Extensions</H1>
+<P>The EngExtCpp extension library can include any standard C++ code. It can also include the C++ interfaces that appear in the <i>engextcpp.h</i> and <i>dbgeng.h</i> header files, in addition to the C functions that appear in the <i>wdbgexts.h</i> header file.  Both <i>dbgeng.h</i> and <i>wdbgexts.h</i> are included from <i>engextcpp.h</i>.</P>
+<P>For a full list of interfaces in <i>dbgeng.h</i> that can be used in an extension command, see <a href="clientfns_524def0c-b620-4bb4-a496-0b0080f4df58.xml.htm">Debugger Engine Reference</a>.</P>
+<P>For a full list of functions in <i>wdbgexts.h</i> that can be used in an extension command, see <a href="wdbgexts_ref_a074bbf3-80f8-415e-988d-1b45b2e73cc1.xml.htm">WdbgExts Functions</a>. A number of these functions appear in 32-bit versions and 64-bit versions. Typically, the 64-bit versions end in "64" and the 32-bit versions have no numerical ending &#8212; for example, <b>ReadIoSpace64</b> and <b>ReadIoSpace</b>. When calling a <i>wdbgexts.h</i> function from a DbgEng extension, you should always use the function name ending in "64". This is because the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> always uses 64-bit pointers internally, regardless of the target platform.  When including <i>wdbgexts.h</i>, <i>engextcpp.h</i> selects the 64-bit version of the API.  The <b>ExtensionApis</b> global variable used by the WDbgExts API is automatically initialized on entry to a EngExtCpp method and cleared on exit.</P>
+<P>When an EngExtCpp extension is used with remote DbgEng interfaces, the WDbgExts interfaces will not be available and the <b>ExtensionApis</b> structure can be zeroed.  If an EngExtCpp extension is expected to function in such an environment, it should avoid using the WDbgExts API.</P>
+<P class="note"><b>Note</b>  You must not attempt to call any DbgHelp or ImageHlp routines from any debugger extension. Calling these routines is not supported and may cause a variety of problems.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Writing EngExtCpp Extensions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

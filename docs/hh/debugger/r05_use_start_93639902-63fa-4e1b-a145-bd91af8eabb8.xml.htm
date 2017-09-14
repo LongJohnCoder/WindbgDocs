@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Attaching to a Running Process (User Mode)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Attaching to a Running Process (User Mode)"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_93639902-63fa-4e1b-a145-bd91af8eabb8.xml"/>
+<META NAME="MS-HKWD" CONTENT="attaching to a running process">
+<META NAME="MS-HKWD" CONTENT="process, attaching debugger to">
+<META NAME="MS-HKWD" CONTENT="process, debugging invasively">
+<META NAME="MS-HKWD" CONTENT="invasive debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_93639902-63fa-4e1b-a145-bd91af8eabb8.xml"></A>Attaching to a Running Process (User Mode)</H1>
+<P>If a user-mode application is already running, the debugger can attach to the process for the application and then debug the process. You typically specify the application by a decimal number, called the <i>process ID</i> (PID), assigned to it by the operating system.</P>
+<P>You can also specify the application by its name. This name is the complete name of the process, including the file name extension. However, if two processes have the same name, you must use the process ID instead. (For more information about how to determine the process ID and the process name, see <a href="r04_setup_3_a40111cb-c7c2-451d-b09a-8a2e579f8514.xml.htm">Finding the Process ID</a>.)</P>
+<P>The following sections in this topic describe several ways to attach to a running process. </P>
+<P></P>
+<H4>CDB Command Line</H4>
+<P>To attach to a running process from the CDB command line, specify the <b>-p</b> option and the process ID, in the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>cdb -p</b> <i>ProcessID</i> <BR></nobr></P>
+<P>Or, to attach to a running process by specifying the process name, use the following syntax instead.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>cdb -pn</b> <i>ProcessName</i> <BR></nobr></P>
+<P>There are several other useful command-line options. For example, you can use the <b>-psn</b> option to debug a process by specifying the name of a service that the process contains. For more information about the command-line syntax, see <a href="r12_cmdline_3ec269e8-a2d8-43e4-8758-2201481cd323.xml.htm">CDB Command-Line Options</a>.</P>
+<H4>WinDbg Command Line</H4>
+<P>To attach to a running process from the WinDbg command line, specify the <b>-p</b> option and the process ID, in the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg -p</b> <i>ProcessID</i> <BR></nobr></P>
+<P>Or, to attach to a running process by specifying the process name, use the following syntax instead.    </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg -pn</b> <i>ProcessName</i> <BR></nobr></P>
+<P>There are several other useful command-line options. For example, you can use the <b>-psn</b> option to debug a process by specifying the name of a service that the process contains. For more information about the command-line syntax, see <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">WinDbg Command-Line Options</a>.</P>
+<H4>WinDbg Menu</H4>
+<P>When WinDbg is in dormant mode, you can attach to a running process by clicking <a href="r36_gui_1_9f476268-a365-4ae3-a658-5e6ee79ae2db.xml.htm"><b>Attach to a Process</b></a> on the <b>File </b>menu or by pressing F6.</P>
+<P>When the <b>Attach to Process</b> dialog box appears, select the line that contains the process ID and name that you want. (You can also enter the process ID in the <b>Process ID</b> box.) Then click <b>OK</b>.</P>
+<H4>Debugger Command Window</H4>
+<P>If the debugger is already open, you can attach to a running process by using the <a href="r19_metacmds_a_8c6d47be-d1e0-4d39-b0cd-14ac56c87de5.xml.htm"><b>.attach (Attach to Process)</b></a> command in the <a href="r05_use_start_7a79993b-70e5-49ef-bca5-095e88ebca78.xml.htm">Debugger Command window</a>.</P>
+<P>You can use the <b>.attach</b> command if CDB is dormant or is already debugging one or more processes. You cannot use this command if WinDbg is dormant.</P>
+<P>The debugger will always start multiple target processes simultaneously, unless some of their threads are frozen or suspended. </P>
+<P>If the <b>.attach</b> command is successful, the debugger attaches to the specified process the next time that the debugger issues an execution command. If you use this command several times in a row, execution has to be requested by the debugger as many times as you use this command.</P>
+<H4>Noninvasive Debugging</H4>
+<P>If you want to debug a running process and interfere only minimally in its execution, you should debug the process <a href="r05_use_start_284e0db2-ee99-4c59-a6ef-af2557ee719b.xml.htm"><i>noninvasively</i></a>.</P>
+<H4>Beginning the Debugging Session</H4>
+<P>For more information about how to begin a debugging session, see <a href="r06_use_gui_4b24004a-3b77-4692-b369-dbb122feba7a.xml.htm">Debugger Configuration</a>, <a href="r09_symbols_750b8c7c-1e41-4116-b7d3-ecd4c7fe42ce.xml.htm">Symbols</a>, <a href="r07_use_operation_265193af-6b7a-4832-8785-b58a645547e5.xml.htm">Debugger Operation (General)</a> and <a href="r07_use_operation_167942d3-b143-49df-b4f6-2ca81063bcce.xml.htm">Debugger Operation (User Mode)</a>.</P>
+<P>Processes that the debugger creates behave differently than they would if started as they usually are. For more information about these kinds of processes, see <a href="r07_use_operation_984a2aed-0e63-432c-81fd-b03bd183da5d.xml.htm">Behavior of Spawned Processes</a>.</P>
+<P>In Microsoft Windows XP and later versions of the Windows operating system, if the debugger stops responding or freezes, you can attach a new debugger to the target process. For more information about how to attach a debugger in this situation, see <a href="r07_use_operation_1d5faf67-01fe-4837-94ec-14e2fd60dea3.xml.htm">Re-attaching to the Target Application</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Attaching to a Running Process (User Mode) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using UNC Shares</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using UNC Shares"><xml><MSHelp:Keyword Index="A" Term="SymChk_e512f2da-5c62-4a8a-a5da-dd14b7c22e1e.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_e512f2da-5c62-4a8a-a5da-dd14b7c22e1e.xml"></A>Using UNC Shares</H1>
+<P>The <i>Cv2http.cmd</i>, <i>Cv2http.pl</i>, and Walk (<i>Walk.cmd</i>) scripts are used to provide source files from a simple UNC share.  The files <i>Cv2http.cmd</i> and <i>Cv2http.pl</i> extract the SrcSrv stream, modify it using a Perl script, and put the altered stream back in the <i>.pdb</i> file.  The syntax is as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>cv2http.cmd</b> <i>PDB</i> <i>Alias</i> <i>SourceRoot</i><BR></nobr></P>
+<P>where <i>PDB </i>specifies the name of the <i>.pdb</i>file to modify, <i>Alias</i> specifies the logical name to apply to your Web site, and <i>SourceRoot</i> specifies the root of the UNC share to which you extracted the source files.  Note that the <i>Alias</i> parameter is stored in the PDB as a varaible name that can be overridden on the debugger client in <i>Scrsrv.ini</i>, should you ever move the location of the Web site.</P>
+<P>This script requires that all the standard SrcSrv tools be available in the path because it calls both SrcTool and PDBStr. Remember that <i>Cv2http.pl</i> is a Perl script and can be modified to meet your needs.</P>
+<P>The third file, the Walk (<i>walk.cmd</i>) script,  modifies an entire set of <i>.pdb</i> files.  For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>walk.cmd *.pdb cv2http.cmd <i>SourceRoot</i> \\server\share<BR></nobr></P>
+<P>The preceding command calls <i>Cv2http.cmd </i>on every <i>.pdb</i> file in a tree, using <i>SourceRoot</i> for the alias and <i>\\server\share</i> for the UNC share.  For more details on Walk, see <a href="symchk_1a4ba602-a79e-4b90-bf2e-ed2ad1d926d9.xml.htm">Extracting Source Files</a>. </P>
+<P>After this command is executed on a tree of <i>.pdb</i> files, they are ready for installation into the Web site or whatever location in which you want to put them.  Remember that you can use SrcTool and PDBStr<i> </i>to examine the changes to the <i>.pdb</i> files.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using UNC Shares RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

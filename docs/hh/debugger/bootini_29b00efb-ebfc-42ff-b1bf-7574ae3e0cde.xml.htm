@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Boot Parameters to Manipulate Memory</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Boot Parameters to Manipulate Memory"><xml><MSHelp:Keyword Index="A" Term="bootini_29b00efb-ebfc-42ff-b1bf-7574ae3e0cde.xml"/>
+<META NAME="MS-HKWD" CONTENT="memory-related boot options [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot entry parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="manipulating memory [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="low-memory environments [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="simulating low-memory environments [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="memory [WDK boot parameters]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_29b00efb-ebfc-42ff-b1bf-7574ae3e0cde.xml"></A>Boot Parameters to Manipulate Memory</H1>
+<P>You can simulate a low-memory environment for testing without changing the amount of physical memory on the computer. Instead, you can limit the memory available to the operating system by using the <a href="bootini_042b78d7-43eb-458c-bd62-1e5b70253b13.xml.htm"><b>/burnmemory</b></a> and <a href="bootini_1827b040-9a2c-4ec3-ad58-1194c63cefcc.xml.htm"><b>/maxmem</b></a> boot parameters in Windows Server 2003 and Windows XP, and by using <b>truncatememory</b> or <b>removememory</b> options with the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDedit /set</b></a> command on Windows Vista and later.</P>
+<P>The <b>/burnmemory</b> parameter, which is available on Windows Server 2003 and Windows XP, reduces the memory available to Windows by the specified amount. It is calibrated in megabytes (MB). Set the value to any amount less than the actual physical memory on the computer.</P>
+<P>The <b>/maxmem</b> parameter specifies the maximum amount of memory available to Windows. It is calibrated in megabytes (MB). Set the value to any amount less than the actual physical memory on the computer. </P>
+<P>The <b>/maxmem</b> parameter actually determines the largest memory address available to Windows. Due to gaps in the mapping of physical memory, Windows might receive somewhat less memory than the value of <b>/maxmem</b>. For more precision, use <b>/burnmemory</b>.</P>
+<P>The <b>truncatememory</b> or <b>removememory</b> options are available on Windows Vista and later. The <b>truncatememory </b>option disregards all memory at or above the specified physical address. The <b>removememory</b> option reduces memory available to Windows by the specified amount (measured in MB). Both options reduce memory, but the <b>removememory</b> option is better at restricting the operating system to use the specified memory while accounting for memory gaps.</P>
+<H4>Boot Parameters to Test in a Low-memory Environment in Operating Systems prior to Windows Vista</H4>
+<P>To simulate a low-memory environment on Windows Server 2003 and Windows XP, add the <b>/burnmemory</b> parameter to a boot entry. Set its value to the amount of physical memory on the system minus the desired memory size for this test. </P>
+<P>For example, to limit the memory of a computer with 1 GB of physical memory to a maximum of 128 MB of available memory, set the value of the <b>/burnmemory</b> parameter to 896 (1 GB (1024 MB) - 128 MB = 896 MB).</P>
+<P>The first boot entry in the following sample <i>Boot.ini</i> file has the <b>/burnmemory</b> parameter.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Low Memory" /fastdetect <b>/burnmemory=896</b><BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect<BR></nobr></P>
+<P></P>
+<P>To add the <b>/burnmemory</b> parameter to a boot entry, use Bootcfg. Because Bootcfg does not have a parameter-specific switch for <b>/burnmemory</b>, use the Bootcfg <b>/raw</b> switch, which allows you to specify any boot parameter for a boot entry.</P>
+<P>In the following Bootcfg command, the <b>/raw</b> switch adds the content of the string, <b>"/burnmemory=896"</b> to a boot entry. The <b>/A</b> switch directs Bootcfg to append the string to the entry, rather than replacing all boot parameters for the entry. The <b>/ID</b> switch identifies the boot entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /raw "/burnmemory=896" /A /ID 1<BR><BR></nobr></P>
+<P>The following Bootcfg display shows the result of the command on a system with a <i>Boot.ini</i> file.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot Entries<BR>------------<BR>Boot entry ID:   1<BR>Friendly Name:   "Microsoft Windows XP Professional"<BR>Path:            multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>OS Load Options: /fastdetect <b>/burnmemory=896</b><BR><BR></nobr></P>
+<P></P>
+<H4>Boot Parameters to Test in a Low-memory Environment in Windows Vista and Later</H4>
+<P>To simulate a low-memory environment on Windows Vista and later, use the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDedit /set</b></a><b> </b> command and the <b>removememory</b> option<i> </i>to modify a boot entry. Set the value of <b>removememory</b> to the amount of physical memory on the system minus the desired memory size for this test. </P>
+<P>For example, to limit the memory of a computer with 2 GB of physical memory to a maximum of 512 MB of available memory, set the value of the <b>removememory</b> parameter to 1536 (1 GB (2048 MB) - 512 MB = 1536 MB).</P>
+<P>The following example shows a BCDEdit command used to remove 1536 MB of memory from the total available to the system for the specified boot entry. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} removememory 1536<BR></nobr></P>
+<P></P>
+<P></P>
+<P>You can also use the <b>truncatememory</b> option with the <b>bcdedit /set</b> command to achieve the same result. When you use this option, Windows ignores all memory at or above the specified physical address. Specify the <i>address</i> in bytes. For example, the following command sets the physical address limit at 1 GB for the specified boot entry. You can specify the address in decimal (1073741824) or hexadecimal (0x40000000).</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} truncatememory Ox40000000<BR></nobr></P>
+<P></P>
+<P></P>
+<P>Because the <b>removememory</b> option makes more efficient use of system memory, its use is recommended instead of <b>truncatememory</b>.</P>
+<H4>Boot parameters to debug in a low-memory environment in operating systems prior to Windows Vista</H4>
+<P>To simulate a low-memory environment on Windows 2000, add the <b>/maxmem</b> parameter to a boot entry. Set its value to the desired memory size for the test. </P>
+<P>The first boot entry in the following sample <i>Boot.ini</i> file includes the <b>/maxmem</b> parameter.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Low Memory" /fastdetect <b>/maxmem=128</b><BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect<BR></nobr></P>
+<P></P>
+<P>In this example, the <b>/maxmem</b> parameter is used to limit Windows to 128 MB of memory and the computer is configured for debugging with a debug (null modem) cable. This configuration requires two Bootcfg commands.</P>
+<P>The first Bootcfg command uses the Bootcfg <b>/addsw</b> (add switch) switch with the <b>/MM</b> argument and a value of 128 to add the <b>/maxmem</b> parameter and to set it to a value of 128 (MB). The <b>/ID</b> switch identifies the boot entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /addsw /MM 128 /ID 1<BR><BR></nobr></P>
+<P>The second Bootcfg command uses the Bootcfg <b>/debug</b> switch with a value of ON to add the <b>/debug</b> parameter to the boot entry. It uses the <b>/port</b> switch with a value of COM1 to add the <b>/debugport</b> parameter and to set it to COM1, and it uses the <b>/baud</b> switch with a value of 19200 to add the <b>/baudrate</b> parameter and set it to 19,200 BPS. The <b>/ID</b> parameter identifies the boot entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /debug ON /port COM1 /baud 19200 /ID 1<BR><BR></nobr></P>
+<P>The following Bootcfg sample shows the resulting boot entry. The newly added parameters are displayed in bold type. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot Entries<BR>------------<BR>Boot entry ID:   1<BR>Friendly Name:   "Windows XP 128MB Debug"<BR>Path:            multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>OS Load Options: /fastdetect <b>/maxmem=128 /debug /debugport=COM1 /baudrate=19200</b><BR><BR><BR><BR></nobr></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Boot Parameters to Manipulate Memory RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

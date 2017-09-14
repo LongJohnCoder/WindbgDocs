@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xC0000221: STATUS_IMAGE_CHECKSUM_MISMATCH</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xC0000221: STATUS_IMAGE_CHECKSUM_MISMATCH"><xml><MSHelp:Keyword Index="A" Term="t08_bugs_END_460365fb-8168-4803-bef5-d730837d54c6.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xC0000221: STATUS_IMAGE_CHECKSUM_MISMATCH">
+<META NAME="MS-HKWD" CONTENT="STATUS_IMAGE_CHECKSUM_MISMATCH"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t08_bugs_END_460365fb-8168-4803-bef5-d730837d54c6.xml"></A>Bug Check 0xC0000221: STATUS_IMAGE_CHECKSUM_MISMATCH</H1>
+<P>The STATUS_IMAGE_CHECKSUM_MISMATCH bug check has a value of 0xC0000221. This indicates that a driver or a system DLL has been corrupted.<P></P>
+</P>
+<H4>Parameters</H4>
+<P>This bug check will display a descriptive text message. The name of the damaged file is displayed as part of the message.</P>
+<H4>Cause</H4>
+<P>This bug check results from a serious error in a driver or other system file. The file header checksum does not match the expected checksum.</P>
+<P>This can also be caused by faulty hardware in the I/O path to the file (a disk error, faulty RAM, or a corrupted page file).</P>
+<H4>Resolving the Problem</H4>
+<P>To remedy this error, run the Emergency Recovery Disk (ERD) and allow the system to repair or replace the missing or damaged driver file on the system partition.  </P>
+<P>You can also run an in-place upgrade over the existing copy of Windows. This preserves all registry settings and configuration information, but replaces all system files. If any Service Packs and/or hotfixes had previously been applied, you need to reinstall them afterward in the appropriate order (latest Service Pack, then any post-Service Pack hotfixes in the order in which they were originally installed, if applicable). </P>
+<P>If a specific file was identified in the bug check message as being corrupted, you can try replacing that individual file manually. If the system partition is formatted with FAT, you can start from an MS-DOS startup disk and copy the file from the original source onto the hard disk. If you have a dual-boot machine, you can boot to your other operating system and replace the file.</P>
+<P>If you want to replace the file on a single-boot system with an NTFS partition, you need to restart the system, press F8 at the operating system <b>Loader</b> menu, and choose <b>Safe Mode with Command Prompt</b>. From there, copy a fresh version of the file from the original source onto the hard disk. If the file is used as part of the system startup process in Safe Mode, you need to start the computer using the Recovery Console in order to access the file. If these methods fail, try reinstalling Windows and then restoring the system from a backup. </P>
+<P class="note"><b>Note</b>  If the original file from the product CD has a filename extension ending in an <b>_</b> (underscore), the file needs to be uncompressed before it can be used. The Recovery Console's <b>Copy</b> command automatically detects compressed files and expands them as they are copied to the target location. If you are using Safe Mode to access a drive, use the <b>Expand</b> command to uncompress and copy the file to the target folder. You can use the <b>Expand</b> command in the command line environment of Safe Mode.</P>
+<P><i>Resolving a disk error problem:</i> Disk errors can be a source of file corruption. Run <b>Chkdsk /f /r</b> to detect and resolve any file system structural corruption. You must restart the system before the disk scan begins on a system partition.</P>
+<P><i>Resolving a RAM problem:</i> If the error occurred immediately after RAM was added to the system, the paging file might be corrupted or the new RAM itself might be either faulty or incompatible. </P><B>To determine if newly added RAM is causing a bug check</B><OL type="1">
+<LI>Return the system to the original RAM configuration. </LI>
+<LI>Use the Recovery Console to access the partition containing the paging file and delete the file <i>pagefile.sys</i>.  </LI>
+<LI>While still in the Recovery Console, run <b>Chkdsk /r</b> on the partition that contained the paging file. </LI>
+<LI>Restart the system. </LI>
+<LI>Set the paging file to an optimal level for the amount of RAM added.</LI>
+<LI>Shutdown the system and add your RAM. <P>The new RAM must meet the system manufacturer's specifications for speed, parity, and type (that is, fast page-mode (FPM) versus extended data out (EDO) versus synchronous dynamic random access memory (SDRAM)). Try to match the new RAM to the existing installed RAM as closely as possible. RAM can come in many different capacities, and more importantly, in different formats (single inline memory modules &#8212; SIMM &#8212; or dual inline memory modules &#8212; DIMM). The electrical contacts can be either gold or tin and it is not wise to mix these contact types.</P>
+</LI>
+</OL>
+<P></P>
+<P>If you experience the same error message after reinstalling the new RAM, run hardware diagnostics supplied by the system manufacturer, especially the memory scanner. For details on these procedures, see the owner's manual for your computer. </P>
+<P>When you can log on to the system again, check the System Log in Event Viewer for additional error messages that might help pinpoint the device or driver that is causing the error.</P>
+<P>Disabling memory caching of the BIOS might also resolve this error.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xC0000221: STATUS_IMAGE_CHECKSUM_MISMATCH RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

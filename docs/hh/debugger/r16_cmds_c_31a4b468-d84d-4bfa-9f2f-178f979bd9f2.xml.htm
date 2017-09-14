@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>gc (Go from Conditional Breakpoint)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, gc (Go from Conditional Breakpoint)"><xml><MSHelp:Keyword Index="A" Term="r16_cmds_C_31a4b468-d84d-4bfa-9f2f-178f979bd9f2.xml"/>
+<META NAME="MS-HKWD" CONTENT="gc (Go from Conditional Breakpoint) command">
+<META NAME="MS-HKWD" CONTENT="Go from Conditional Breakpoint (gc) command">
+<META NAME="MS-HKWD" CONTENT="controlling the target, Go from Conditional Breakpoint (gc) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r16_cmds_C_31a4b468-d84d-4bfa-9f2f-178f979bd9f2.xml"></A>gc (Go from Conditional Breakpoint)</H1>
+<P>The <b>gc</b> command resumes execution from a conditional breakpoint in the same fashion that was used to hit the breakpoint (stepping, tracing, or freely executing).</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>gc</b> <BR></nobr></P>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>When a <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm"><u>conditional breakpoint</u></a> includes an execution command at the end, this should be the <b>gc</b> command.</P>
+<P>For example, the following is a proper conditional breakpoint formulation:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bp </b><i>Address</i><b> "j (</b><i>Condition</i><b>) '</b><i>OptionalCommands</i><b>'; 'gc' "</b> <BR><BR></nobr></P>
+<P>When this breakpoint is encountered and the expression is false, execution will resume using the same execution type that was previously used. For example, if you used a <b>g (Go)</b> command to reach this breakpoint, execution would resume freely.  But if you reached this breakpoint while stepping or tracing, execution would resume with a step or a trace.</P>
+<P>On the other hand, the following is an improper breakpoint formulation, since execution will always resume freely even if you had been stepping before reaching the breakpoint:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bp </b><i>Address</i><b> "j (</b><i>Condition</i><b>) '</b><i>OptionalCommands</i><b>'; 'g' "</b> <BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For an overview of related commands, see <a href="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml.htm">Controlling the Target</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: gc (Go from Conditional Breakpoint) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

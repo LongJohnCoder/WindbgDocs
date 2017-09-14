@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x9C: MACHINE_CHECK_EXCEPTION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x9C: MACHINE_CHECK_EXCEPTION"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_d9e325c9-274f-4795-af27-2d2d374e628d.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x9C: MACHINE_CHECK_EXCEPTION">
+<META NAME="MS-HKWD" CONTENT="MACHINE_CHECK_EXCEPTION"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_d9e325c9-274f-4795-af27-2d2d374e628d.xml"></A>Bug Check 0x9C: MACHINE_CHECK_EXCEPTION</H1>
+<P>The MACHINE_CHECK_EXCEPTION bug check has a value of 0x0000009C. This bug check indicates that a fatal machine check exception has occurred.</P>
+<H4>Parameters</H4>
+<P>The four parameters that are listed in the message have different meanings, depending on the processor type.</P>
+<P>If the processor is based on an older x86-based architecture and has the Machine Check Exception (MCE) feature but not the Machine Check Architecture (MCA) feature (for example, the Intel Pentium processor), the parameters have the following meaning. </P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">The low 32 bits of P5_MC_TYPE Machine Service Report (MSR) </TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">The address of the MCA_EXCEPTION structure  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">The high 32 bits of P5_MC_ADDR MSR </TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">The low 32 bits of P5_MC_ADDR MSR </TD>
+</TR>
+</table>
+<P></P>
+<P>If the processor is based on a newer x86-based architecture and has the MCA feature and the MCE feature (for example, any Intel Processor of family 6 or higher, such as Pentium Pro, Pentium IV, or Xeon), or if the processor is an x64-based processor, the parameters have the following meaning.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">The bank number </TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">The address of the MCA_EXCEPTION structure </TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">The high 32 bits of MCi_STATUS MSR for the MCA bank that had the error </TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">The low 32 bits of MCi_STATUS MSR for the MCA bank that had the error </TD>
+</TR>
+</table>
+<P></P>
+<P>On an Itanium-based processor, the parameters have the following meaning. </P>
+<P class="note"><b>Note  </b>Parameter 1 indicates the type of violation.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">The address of the log</TD>
+<TD Width="">The size of the log</TD>
+<TD Width="">0</TD>
+<TD Width=""> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">The address of the log</TD>
+<TD Width="">The size of the log</TD>
+<TD Width="">The error code</TD>
+<TD Width="">The system abstraction layer (SAL) returned an error for SAL_GET_STATEINFO while processing MCA. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">The address of the log</TD>
+<TD Width="">The size of the log</TD>
+<TD Width="">The error code</TD>
+<TD Width="">SAL returned an error for SAL_CLEAR_STATEINFO while it processed MCA. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">The address of the log</TD>
+<TD Width="">The size of the log</TD>
+<TD Width="">0</TD>
+<TD Width="">Firmware (FW) reported a fatal MCA.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">The address of the log</TD>
+<TD Width="">The size of the log</TD>
+<TD Width="">0</TD>
+<TD Width="">There are two possible causes:<B></B><UL type="disc">
+<LI>SAL reported a recoverable MCA, but this recovery is not currently supported.</LI>
+<LI>SAL generated an MCA but could not produce an error record.</LI>
+</UL>
+</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB</TD>
+<TD Width="">The address of the log</TD>
+<TD Width="">The size of the log</TD>
+<TD Width="">0</TD>
+<TD Width=""><I><B>  </B></I> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xC</TD>
+<TD Width="">The address of the log</TD>
+<TD Width="">The size of the log</TD>
+<TD Width="">The error code</TD>
+<TD Width="">SAL returned an error for SAL_GET_STATEINFO while processing an INIT event. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xD</TD>
+<TD Width="">The address of the log</TD>
+<TD Width="">The size of the log</TD>
+<TD Width="">The error code</TD>
+<TD Width="">SAL returned an error for SAL_CLEAR_STATEINFO while it processed an INIT event. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xE</TD>
+<TD Width="">The address of the log</TD>
+<TD Width="">The size of the log</TD>
+<TD Width="">0</TD>
+<TD Width=""><I><B> </B></I> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>For more information about Machine Check Architecture (MCA), see the Intel or AMD Web sites.</P>
+<P class="note"><b>Note  </b>Starting with Windows Vista, this bug check is no longer supported, and has been replaced with <a href="t07_bugs_e0_e7494f00-a0e4-49f4-9c41-23d7bdf91ce1.xml.htm">bug Check 0x124: WHEA_UNCORRECTABLE_ERROR</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x9C: MACHINE_CHECK_EXCEPTION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

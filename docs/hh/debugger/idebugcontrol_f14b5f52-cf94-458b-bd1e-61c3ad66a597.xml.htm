@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetProcessorTypeNames</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetProcessorTypeNames"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetProcessorTypeNames"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_f14b5f52-cf94-458b-bd1e-61c3ad66a597.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetProcessorTypeNames method">
+<META NAME="MS-HKWD" CONTENT="GetProcessorTypeNames (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_f14b5f52-cf94-458b-bd1e-61c3ad66a597.xml"></A>GetProcessorTypeNames</H1>
+<P><P>The <b>GetProcessorTypeNames</b> and <b>GetProcessorTypeNamesWide</b> methods return the full name and abbreviated name of the specified processor type.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::GetProcessorTypeNames(</b><BR><b>    IN ULONG  </b><i>Type</i><b>,</b><BR><b>    OUT OPTIONAL PSTR  </b><i>FullNameBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>FullNameBufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FullNameSize</i><b>,</b><BR><b>    OUT OPTIONAL PSTR  </b><i>AbbrevNameBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>AbbrevNameBufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>AbbrevNameSize</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::GetProcessorTypeNamesWide(</b><BR><b>    IN ULONG  </b><i>Type</i><b>,</b><BR><b>    OUT OPTIONAL PWSTR  </b><i>FullNameBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>FullNameBufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FullNameSize</i><b>,</b><BR><b>    OUT OPTIONAL PWSTR  </b><i>AbbrevNameBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>AbbrevNameBufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>AbbrevNameSize</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetProcessorTypeNamesT GetProcessorTypeNamesWide</b><BR><b>#else</b><BR><b>#define GetProcessorTypeNamesT GetProcessorTypeNames</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Type</i></DT>
+<DD>Specifies the type of the processor whose name is requested.  See <a href="idebugcontrol_5511971f-2155-4ba3-b0f3-9bcd91b29555.xml.htm"><b>GetActualProcessorType</b></a> for a list of possible values.</DD>
+<DT><i>FullNameBuffer</i></DT>
+<DD>Receives the full name of the processor type.  If <i>FullNameBuffer</i> is NULL, this information is not returned.</DD>
+<DT><i>FullNameBufferSize</i></DT>
+<DD>Specifies the size, in characters, of the buffer that <i>FullNameBuffer</i> specifies.</DD>
+<DT><i>FullNameSize</i></DT>
+<DD>Receives the size in characters of the full name of the processor type.  If <i>FullNameSize</i> is NULL, this information is not returned.</DD>
+<DT><i>AbbrevNameBuffer</i></DT>
+<DD>Receives the abbreviated name of the processor type.  If <i>AbbrevNameBuffer</i> is NULL, this information is not returned.</DD>
+<DT><i>AbbrevNameBufferSize</i></DT>
+<DD>Specifies the size, in characters, of the buffer that <i>AbbrevNameBuffer</i> specifies.</DD>
+<DT><i>AbbrevNameSize</i></DT>
+<DD>Receives the size in characters of the abbreviated name of the processor type.  If <i>AbbrevNameSize</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful.  However, at least one of <i>FullNameBuffer</i> or <i>AbbrevNameBuffer</i> was too small for the corresponding name, so the name was truncated.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetProcessorTypeNames</b> is available in all versions of <b>IDebugControl</b>.  <b>GetProcessorTypeNamesWide</b> is available in <b>IDebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>For more information, see <a href="engine_dg_e6d71f34-178f-47ae-ab7c-7e7dc07927d9.xml.htm">Target Information</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_555eef6a-df68-4f94-9cfa-dc31aee27014.xml.htm"><b>GetSupportedProcessorTypes</b></a><b> </b></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetProcessorTypeNames RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

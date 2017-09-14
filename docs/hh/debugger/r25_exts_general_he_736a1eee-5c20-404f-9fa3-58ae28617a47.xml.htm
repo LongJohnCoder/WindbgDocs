@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!lmi</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !lmi"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_736a1eee-5c20-404f-9fa3-58ae28617a47.xml"/>
+<META NAME="MS-HKWD" CONTENT="!lmi extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_736a1eee-5c20-404f-9fa3-58ae28617a47.xml"></A>!lmi</H1>
+<P><P>The <b>!lmi</b> extension displays detailed information about a module.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!lmi</b> <i>Module</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Module</i></DT>
+<DD>Specifies a loaded module, either by name or by base address.    <P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Dbghelp.dll </i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Dbghelp.dll </i></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P></P>
+<P>Module addresses can be determined by using the <a href="r17_cmds_i_2360e197-1deb-4e41-98ff-d2c7e6c7d8f3.xml.htm"><b>lm (List Loaded Modules)</b></a> command.</P>
+<P>The <b>!lmi</b> extension analyzes the module headers and displays a formatted summary of the information therein. If the module headers are paged out, an error message is displayed. To see a more extensive display of header information, use the <a href="r24_exts_general_a_0cfffcec-6e70-4dc3-99fc-5c15db5dd2b4.xml.htm"><b>!dh</b></a> extension command.</P>
+<P>This command shows a number of fields, each with a different title. Some of these titles have specific meanings:</P><B></B><UL type="disc">
+<LI>The <b>Image Name</b> field shows the name of the executable file, including the extension. Typically, the full path is included in user mode but not in kernel mode.</LI>
+<LI>The <b>Module</b> field shows the <i>module name</i>. This is usually just the file name without the extension. In a few cases, the module name differs significantly from the file name. For details, see <a href="r06_use_gui_8f9c224f-0972-4b0f-941d-cfaac48c608c.xml.htm">Executable Image Path</a>.</LI>
+<LI>The <b>Symbol Type</b> field shows information about the debugger's attempts to load this module's symbols. For an explanation of the various status values, see <a href="r09_symbols_5b8b553c-d200-44b2-a817-b0497d5e5b08.xml.htm">Symbol Status Abbreviations</a>. If symbols have been loaded, the symbol file name follows this.</LI>
+<LI>The first address in the module is shown as <b>Base Address</b>. The size of the module is shown as <b>Size</b>. Thus, if <b>Base Address</b> is "faab4000" and <b>Size</b> is "2000", the module extends from 0xFAAB4000 to 0xFAAB5FFF, inclusive.</LI>
+</UL>
+<P></P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>lm</b> <BR>start    end        module name<BR>00400000 0042d000   Prymes     C (pdb symbols)              Prymes.pdb<BR>77e80000 77f35000   KERNEL32     (export symbols)           C:\WINNT\system32\KERNEL32.dll<BR>77f80000 77ffb000   ntdll        (export symbols)           ntdll.dll<BR><BR>0:000&gt; <b>!lmi 00400000</b><BR>Loaded Module Info: [00400000] <BR>         Module: Prymes<BR>   Base Address: 00400000<BR>     Image Name: Prymes.exe<BR>   Machine Type: 332 (I386)<BR>     Time Stamp: 3c76c346 Fri Feb 22 14:16:38 2002<BR>           Size: 2d000<BR>       CheckSum: 0<BR>Characteristics: 230e stripped <BR>Debug Data Dirs: Type Size     VA  Pointer<BR>                 MISC  110,     0,   77a00 [Data not mapped]<BR>    Symbol Type: EXPORT   - PDB not found<BR>    Load Report: export symbols<BR><BR></nobr></P>
+<P>For an explanation of the abbreviations shown on the <b>Characteristics</b> line of this example, see <a href="r09_symbols_5b8b553c-d200-44b2-a817-b0497d5e5b08.xml.htm">Symbol Status Abbreviations</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !lmi RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

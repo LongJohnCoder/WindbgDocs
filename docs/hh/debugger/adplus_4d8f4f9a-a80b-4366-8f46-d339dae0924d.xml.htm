@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>PreCommands</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, PreCommands"><xml><MSHelp:Keyword Index="A" Term="ADPlus_4d8f4f9a-a80b-4366-8f46-d339dae0924d.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_4d8f4f9a-a80b-4366-8f46-d339dae0924d.xml"></A>PreCommands</H1>
+<P>The <b>PreCommands</b> section has the following format.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>    &lt;PreCommands&gt;</b><BR><b>       &lt;Cmd&gt; </b><i>some command</i> <b> &lt;/Cmd&gt;</b><BR><b>       &lt;ShellSync&gt; </b><i>some command line</i><b> &lt;/ShellSync&gt;</b><BR><b>       &lt;ShellAsync&gt; </b><i>some command line</i><b> &lt;/ShellAsync&gt;</b><BR><b>    &lt;/PreCommands&gt;</b><BR><BR></nobr></P>
+<P>With the <b>&lt;Cmd&gt;</b> tag, you can define additional debugger commands that you want to include in the final script, before the commands that are related to each exception are defined. You can include multiple <b>&lt;Cmd&gt;</b> tags. The related text has to be a command that the CDB debugger understands. For example, you could use the following text to load a custom extension.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>&lt;Cmd&gt; .load SomeExtension.dll &lt;/Cmd&gt;<BR></nobr></P>
+<P>With the <b>&lt;ShellSync&gt;</b> and <b>&lt;ShellAsync&gt;</b> tags, you can define an application that you want to be run before ADPlus starts to attach to the selected processes.</P>
+<P>You can run these applications synchronously or asynchronously.</P>
+<P>These applications are run only one time, regardless of how many processes you are attaching to.</P>
+<P>The following example shows the <b>ShellSync</b> element.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>&lt;ShellSync&gt; notepad.exe c:\myfolder\somefile.txt &lt;/ShellSync&gt; <BR></nobr></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: PreCommands RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

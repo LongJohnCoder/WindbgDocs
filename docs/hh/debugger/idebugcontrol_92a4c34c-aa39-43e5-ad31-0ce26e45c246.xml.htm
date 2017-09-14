@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetSystemVersion</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetSystemVersion"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="ntddk.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetSystemVersion"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_92a4c34c-aa39-43e5-ad31-0ce26e45c246.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetSystemVersion method">
+<META NAME="MS-HKWD" CONTENT="GetSystemVersion (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_92a4c34c-aa39-43e5-ad31-0ce26e45c246.xml"></A>GetSystemVersion</H1>
+<P><P>The <b>GetSystemVersion</b> method returns information that identifies the operating system on the computer that is running the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#2a8fdab1-9104-4107-b188-c3879a3c4a66">current target</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::GetSystemVersion(</b><BR><b>    OUT PULONG  </b><i>PlatformId</i><b>,</b><BR><b>    OUT PULONG  </b><i>Major</i><b>,</b><BR><b>    OUT PULONG  </b><i>Minor</i><b>,</b><BR><b>    OUT OPTIONAL PSTR  </b><i>ServicePackString</i><b>,</b><BR><b>    IN ULONG  </b><i>ServicePackStringSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>ServicePackStringUsed</i><b>,</b><BR><b>    OUT PULONG  </b><i>ServicePackNumber</i><b>,</b><BR><b>    OUT OPTIONAL PSTR  </b><i>BuildString</i><b>,</b><BR><b>    IN ULONG  </b><i>BuildStringSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>BuildStringUsed</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>PlatformId</i></DT>
+<DD>Receives the platform ID. <i>PlatformId</i> is always VER_PLATFORM_WIN32_NT for NT-based Windows.   </DD>
+<DT><i>Major</i></DT>
+<DD>Receives 0xF if the target's operating system is a <a href="dbg_glossary_115ca2a1-47f8-405f-a4f7-a7446892d897.xml.htm#fa518e01-fcc1-428f-9548-a6443ecba5d0">free build</a>, or 0xC if the operating system is a <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#4abb5bf0-b8bd-4c56-bbfa-598f77215cbe">checked build</a>.</DD>
+<DT><i>Minor</i></DT>
+<DD>Receives the build number for the target's operating system.</DD>
+<DT><i>ServicePackString</i></DT>
+<DD>Receives the string for the service pack level of the target computer.  If <i>ServicePackString</i> is NULL, this information is not returned.  If no service pack is installed, <i>ServicePackString</i> can be empty.</DD>
+<DT><i>ServicePackStringSize</i></DT>
+<DD>Specifies the size, in characters, of the buffer that <i>ServicePackString</i> specifies.</DD>
+<DT><i>ServicePackStringUsed</i></DT>
+<DD>Receives the size, in characters, of the string of the service pack level.  If <i>ServicePackStringUsed</i> is NULL, this information is not returned.</DD>
+<DT><i>ServicePackNumber</i></DT>
+<DD>Receives the service pack level of the target's operating system.</DD>
+<DT><i>BuildString</i></DT>
+<DD>Receives the string that identifies the build of the system.  If <i>BuildString</i> is NULL, this information is not returned.</DD>
+<DT><i>BuildStringSize</i></DT>
+<DD>Specifies the size, in characters, of the buffer that <i>BuildString</i> specifies.</DD>
+<DT><i>BuildStringUsed</i></DT>
+<DD>Receives the size, in characters, of the string that identifies the build.  If <i>BuildStringUsed</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful. However, the <i>ServicePackString</i> buffer or the <i>BuildString</i> buffer were too small and the corresponding string was truncated.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetSystemVersion</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>For more information, see <a href="engine_dg_e6d71f34-178f-47ae-ab7c-7e7dc07927d9.xml.htm">Target Information</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.  The VER_PLATFORM_<i>XXX</i> values are defined in <i>Ntddk.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_4adaed37-7034-4c64-9064-466706a2951e.xml.htm"><b>GetSystemVersionString</b></a>, <a href="idebugcontrol_32de1433-8721-41c0-9b14-43ef8f7bcf70.xml.htm"><b>GetSystemVersionValues</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetSystemVersion RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

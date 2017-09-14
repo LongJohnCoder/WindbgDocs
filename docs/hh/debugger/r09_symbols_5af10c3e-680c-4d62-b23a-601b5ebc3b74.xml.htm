@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Configuring IIS for SymProxy</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Configuring IIS for SymProxy"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_5af10c3e-680c-4d62-b23a-601b5ebc3b74.xml"/>
+<META NAME="MS-HKWD" CONTENT="SymProxy, IIS"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_5af10c3e-680c-4d62-b23a-601b5ebc3b74.xml"></A>Configuring IIS for SymProxy</H1>
+<P>Internet Information Services (IIS) must be configured to use SymProxy<i> </i>as an Internet Server Application Programming Interface (ISAPI) filter.  Furthermore, permissions must be set so that IIS can obtain symbols.</P><B>To configure the application pool</B><OL type="1">
+<LI>From <b>Administrative Tools</b> open <b>Internet Information Services (IIS) Manager</b>.</LI>
+<LI>Right-click <b>Application Pools</b> and choose <b>New -&gt; Application Pool</b>.</LI>
+<LI>For the <b>Application ID</b> type <b>SymSrv Pool</b>.</LI>
+<LI>To exit <b>Add New Application Pool</b>, click <b>OK</b>.</LI>
+<LI>Right-click the <b>SymSrv Pool</b> application pool and select <b>Properties</b>.</LI>
+<LI>Click the <b>Identity</b> tab.</LI><B></B><OL type="a">
+<LI>If you are authenticating as a network service, select <b>Predefined</b> for the <b>Application Pool Identity</b> and then select <b>Network Service</b>.</LI>
+<LI>If you are authenticating as a domain user, select <b>Configurable</b> for the <b>Application Pool Identity</b>, type the credentials of the account that has permissions to access the remote symbol server store (for example, <i>corp\SymProxyUser</i>), and click <b>OK</b>.</LI>
+</OL>
+<LI>To exit <b>SymSrv Pool Properties</b>, click <b>OK</b>.</LI>
+</OL>
+<P></P>
+<P></P><B>To set up the Virtual Directory</B><OL type="1">
+<LI>Expand <b>Web Sites</b>.</LI>
+<LI>Expand <b>Default Web Site</b>.</LI>
+<LI>Right-click the <b>Symbols</b> virtual directory and choose <b>Properties</b>.</LI>
+<LI>In the <b>Virtual Directory</b> tab, click <b>Create</b>.</LI>
+<LI>From the <b>Application Pool</b> drop-down menu, choose <b>SymSrv Pool</b>.</LI>
+<LI>To exit <b>Symbols Properties</b>, click <b>OK</b>.</LI>
+</OL>
+<P></P>
+<P></P><B>To configure the ISAPI filter</B><OL type="1">
+<LI>Right-click the <b>Default Web Site</b> and select <b>Properties</b>.</LI>
+<LI>Click the <b>ISAPI Filters</b> tab.</LI>
+<LI>Click <b>Add</b>.</LI>
+<LI>For <b>Filter Name</b> type <b>SymProxy</b> or some other meaningful name.</LI>
+<LI>For <b>Executable</b> type <i>c:\\windows\system32\inetsrv\symproxy.dll</i>.</LI>
+<LI>To exit the <b>Filter Properties</b> dialog, click <b>OK</b>.</LI>
+<LI>To exit <b>Default Web Site Properties,</b> click <b>OK</b>. </LI>
+</OL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Configuring IIS for SymProxy RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

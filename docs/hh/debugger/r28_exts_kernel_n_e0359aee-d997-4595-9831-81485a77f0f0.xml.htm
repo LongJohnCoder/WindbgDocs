@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!processfields</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !processfields"><xml><MSHelp:Keyword Index="A" Term="r28_exts_kernel_N_e0359aee-d997-4595-9831-81485a77f0f0.xml"/>
+<META NAME="MS-HKWD" CONTENT="!processfields extension">
+<META NAME="MS-HKWD" CONTENT="process, Process Fields (!processfields) extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r28_exts_kernel_N_e0359aee-d997-4595-9831-81485a77f0f0.xml"></A>!processfields</H1>
+<P>The <b>!processfields</b> extension displays the names and offsets of the fields within the executive process (EPROCESS) block.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!processfields</b> <BR></nobr></P>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width="">Unavailable (see the <b>Comments</b> section) </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension command is not available in Windows XP or later versions of Windows. Instead, use the <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a> command to show the EPROCESS structure directly:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>dt nt!_EPROCESS</b> <BR><BR></nobr></P>
+<P>Here is an example of <b>!processfields</b> from a Windows 2000 system:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!processfields</b><BR> EPROCESS structure offsets:<BR><BR>    Pcb:                               0x0<BR>    ExitStatus:                        0x6c<BR>    LockEvent:                         0x70<BR>    LockCount:                         0x80<BR>    CreateTime:                        0x88<BR>    ExitTime:                          0x90<BR>    LockOwner:                         0x98<BR>    UniqueProcessId:                   0x9c<BR>    ActiveProcessLinks:                0xa0<BR>    QuotaPeakPoolUsage[0]:             0xa8<BR>    QuotaPoolUsage[0]:                 0xb0<BR>    PagefileUsage:                     0xb8<BR>    CommitCharge:                      0xbc<BR>    PeakPagefileUsage:                 0xc0<BR>    PeakVirtualSize:                   0xc4<BR>    VirtualSize:                       0xc8<BR>    Vm:                                0xd0<BR>    DebugPort:                         0x120<BR>    ExceptionPort:                     0x124<BR>    ObjectTable:                       0x128<BR>    Token:                             0x12c<BR>    WorkingSetLock:                    0x130<BR>    WorkingSetPage:                    0x150<BR>    ProcessOutswapEnabled:             0x154<BR>    ProcessOutswapped:                 0x155<BR>    AddressSpaceInitialized:           0x156<BR>    AddressSpaceDeleted:               0x157<BR>    AddressCreationLock:               0x158<BR>    ForkInProgress:                    0x17c<BR>    VmOperation:                       0x180<BR>    VmOperationEvent:                  0x184<BR>    PageDirectoryPte:                  0x1f0<BR>    LastFaultCount:                    0x18c<BR>    VadRoot:                           0x194<BR>    VadHint:                           0x198<BR>    CloneRoot:                         0x19c<BR>    NumberOfPrivatePages:              0x1a0<BR>    NumberOfLockedPages:               0x1a4<BR>    ForkWasSuccessful:                 0x182<BR>    ExitProcessCalled:                 0x1aa<BR>    CreateProcessReported:             0x1ab<BR>    SectionHandle:                     0x1ac<BR>    Peb:                               0x1b0<BR>    SectionBaseAddress:                0x1b4<BR>    QuotaBlock:                        0x1b8<BR>    LastThreadExitStatus:              0x1bc<BR>    WorkingSetWatch:                   0x1c0<BR>    InheritedFromUniqueProcessId:      0x1c8<BR>    GrantedAccess:                     0x1cc<BR>    DefaultHardErrorProcessing         0x1d0<BR>    LdtInformation:                    0x1d4<BR>    VadFreeHint:                       0x1d8<BR>    VdmObjects:                        0x1dc<BR>    DeviceMap:                         0x1e0<BR>    ImageFileName[0]:                  0x1fc<BR>    VmTrimFaultValue:                  0x20c<BR>    Win32Process:                      0x214<BR>    Win32WindowStation:                0x1c4<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about the EPROCESS block, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !processfields RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

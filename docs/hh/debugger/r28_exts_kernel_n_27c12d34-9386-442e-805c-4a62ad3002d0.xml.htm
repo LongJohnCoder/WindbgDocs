@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ptov</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ptov"><xml><MSHelp:Keyword Index="A" Term="r28_exts_kernel_N_27c12d34-9386-442e-805c-4a62ad3002d0.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ptov extension">
+<META NAME="MS-HKWD" CONTENT="virtual address, !ptov extension">
+<META NAME="MS-HKWD" CONTENT="physical address, !ptov extension">
+<META NAME="MS-HKWD" CONTENT="addresses, !ptov extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r28_exts_kernel_N_27c12d34-9386-442e-805c-4a62ad3002d0.xml"></A>!ptov</H1>
+<P>The <b>!ptov</b> extension displays the entire physical-to-virtual map for a given process.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ptov</b> <i>PFN</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>PFN</i></DT>
+<DD>Specifies the page frame number (PFN) of the directory base for the process. This is the same as the directory base without the final three hexadecimal digits (in other words, right-shifted 12 bits).<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example. First, use the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a> extension to determine the directory base of the desired process:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!process 0 0</b><BR>**** NT ACTIVE PROCESS DUMP ****<BR>....<BR>PROCESS ff779190  SessionId: 0  Cid: 04fc    Peb: 7ffdf000  ParentCid: 0394<BR>    <b>DirBase: 098fd000</b>  ObjectTable: e1646b30  TableSize:   8.<BR>    Image: MyApp.exe<BR><BR></nobr></P>
+<P>In this case, the directory base is 0x098FD000. Discard the three trailing zeros. The result is 0x098FD. This is the page frame number (PFN) of the directory base.</P>
+<P>Pass this number to <b>!ptov</b>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!ptov 98fd</b><BR>7119000 10000<BR>a21a000 20000<BR>6133000 12e000<BR>9de9000 12f000<BR>2b0c000 130000<BR>87cd000 131000<BR>aaf6000 140000<BR>...    ...<BR><BR></nobr></P>
+<P>The numbers in the left column are the physical addresses of each memory page that has a mapping for this process. The numbers in the right column are the virtual addresses to which they are mapped.</P>
+<P>The total display is very long.</P>
+<H4>Additional Information</H4>
+<P>For related topics, see <a href="r30_exts_kernel_u_15c2c0bd-29e2-4939-8958-02a30ebe4af2.xml.htm"><b>!vtop</b></a> and <a href="t01_basic_d3a32249-4872-4355-acf2-45e4743c4d66.xml.htm">Converting Virtual Addresses to Physical Addresses</a>. For information about page tables and page directories, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ptov RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GFlags Commands</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GFlags Commands"><xml><MSHelp:Keyword Index="A" Term="GFlags_63e1eba1-7ac0-4577-b130-ed091210a4c6.xml"/>
+<META NAME="MS-HKWD" CONTENT="GFlags, commands"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_63e1eba1-7ac0-4577-b130-ed091210a4c6.xml"></A>GFlags Commands</H1>
+<P>To use GFlags, type the following commands at the command line. <P>You can use the GFlags commands and the <a href="gflags_386ff394-9e91-4dd3-b0bf-5cea6e18a02d.xml.htm"><b>Global Flags</b> Dialog Box</a> interchangeably.</P>
+</P>
+<H4>Syntax</H4>
+<P>To open the GFlags dialog box:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>gflags</b><BR></nobr></P>
+<P></P>
+<P>To set or clear global flags in the registry:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>gflags</b> <b>/r</b> [{<b>+</b> | <b>-</b>}<i>Flag</i> [{<b>+</b> | <b>-</b>}<i>Flag</i>...]]<BR></nobr></P>
+<P></P>
+<P>To set or clear global flags for the current session:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>gflags</b> <b>/k</b> [{<b>+</b> | <b>-</b>}<i>Flag</i> [{<b>+</b> | <b>-</b>}<i>Flag</i>...]]<BR></nobr></P>
+<P></P>
+<P>To set or clear global flags for an image file:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>gflags</b>  <b>/i</b> <i>ImageFile</i> [{<b>+</b> | <b>-</b>}<i>Flag</i> [{<b>+</b> | <b>-</b>}<i>Flag</i>...]]<BR><b>gflags</b>  <b>/i</b> <i>ImageFile</i> <b>/tracedb</b> <i>SizeInMB</i><BR></nobr></P>
+<P>To set or clear the Special Pool feature (<i>Windows Vista and later</i>)</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>gflags</b> {<b>/r</b> | <b>/k</b>} {<b>+</b> | <b>-</b>}<b>spp</b> {<i>PoolTag</i> | <b>0x</b><i>Size</i>}<BR></nobr></P>
+<P></P>
+<P>To enable or disable the Object Reference Tracing feature  (<i>Windows Vista and later</i>)</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>gflags</b> {<b>/ro</b> | <b>/ko</b>} [<b>/p</b>] [<b>/i</b> <i>ImageFile </i>|<i> </i><b>/t </b><i>PoolTag</i>;[<i>PoolTag</i>...]]<BR></nobr></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>gflags</b> {<b>/ro</b> | <b>/ko</b>} <b>/d</b><BR></nobr></P>
+<P></P>
+<P>To enable and configure page heap verification:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>gflags /p</b> <b>/enable</b> <i>ImageFile</i>  [ <b>/full</b> [<b>/backwards</b>] | <b>/random</b> <i>Probability</i> | <b>/size</b> <i>SizeStart</i> <i>SizeEnd</i> | <b>/address</b> <i>AddressStart</i> <i>AddressEnd</i> | <b>/dlls</b> <i>DLL</i> [<i>DLL</i>...] ] <BR>[<b>/debug</b> [<b>"</b><i>DebuggerCommand</i><b>"</b>] | <b>/kdebug</b>] [<b>/unaligned</b>] [<b>/notraces</b>] [<b>/fault</b> <i>Rate</i> [<i>TimeOut</i>]] [<b>/leaks</b>] [<b>/protect</b>] [<b>/no_sync</b>] [<b>/no_lock_checks</b>] <BR></nobr></P>
+<P></P>
+<P>To disable page heap verification:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>gflags /p </b>[<b>/disable</b> <i>ImageFile</i>] [<b>/?</b>]<BR></nobr></P>
+<P></P>
+<P>To display help:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>glags /?</b><BR></nobr></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<P></P>
+<DT><i>Flag</i> </DT>
+<DD>Specifies a three-letter abbreviation (<i>FlagAbbr</i>) or hexadecimal value (<i>FlagHex</i>) that represents a debugging feature. The abbreviations and hexadecimal values are listed in the <a href="gflags_bf174207-b0ea-40b3-b4d7-fc7e921e119e.xml.htm">GFlags Flag Table</a>.<P>Use one of the following flag formats:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Format</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">{<b>+</b> | <b>-</b>}<i>FlagAbbr</i></TD>
+<TD Width="">Sets (+) or clears (-) the flag represented by the flag abbreviation. Without a plus (+) or minus (-) symbol, the command has no effect.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">[<b>+</b> | <b>-</b>]<i>FlagHex</i></TD>
+<TD Width="">Adds (+) or subtracts (-) the hexadecimal value of a flag. A flag is set when its value is included in the sum. Add (+) is the default. Enter a hexadecimal value (without 0x) that represents a single flag or enter the sum of hexadecimal values for multiple flags.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>ImageFile</i> </DT>
+<DD>Specifies the name of an executable file, including the file name extension (for example, <i>notepad.exe</i> or <i>mydll.dll</i>). </DD>
+<DT><b>/r</b></DT>
+<DD>Registry. Displays or changes system-wide debugging flags stored in the registry. These settings take effect when you restart Windows and remain effective until you change them. <P>With no additional parameters, <b>gflags /r</b> displays the system-wide flags set in the registry.</P>
+</DD>
+<DT><b>/k</b></DT>
+<DD>Kernel flag settings. Displays or changes system-wide debugging flags for this session. These settings are effective immediately, but are lost when Windows shuts down. The settings affect processes started after this command completes. <P>With no additional parameters, <b>gflags /k</b> displays system-wide flags set for the current session.</P>
+</DD>
+<DT><b>/i</b></DT>
+<DD>Image file settings. Displays or changes debugging flags for a particular process. These settings are stored in the registry. They are effective for all new instances of this process and they remain effective until you change them. <P>With no additional parameters, <b>gflags /i </b><I><B>ImageFile</B></I> displays the flags set for the specified process.</P>
+</DD>
+<DT><b>/tracedb</b> <i>SizeInMB</i></DT>
+<DD>Sets the maximum size of the user-mode stack trace database for the process. To use this parameter, the <a href="gflags_afe6f8c7-152a-45fb-ba04-ef3ea84b2199.xml.htm"><i>Create user mode stack trace database</i></a> (ust) flag must be set for the process. <P><i>SizeInMB</i> is a whole number representing the number of megabytes in decimal units. The default value is the minimum size, 8 MB; there is no maximum size. To revert to the default size, set <i>SizeInMB</i> to 0.</P>
+</DD>
+<DT><b>spp</b></DT>
+<DD>(<i>Windows Vista and later</i>.) Sets or clears the <a href="gflags_49d59420-7de8-4925-8f99-7ee0e8acd8ec.xml.htm">Special Pool</a> feature. For an example, see <a href="gflags_cd99cdbb-6092-45db-b733-a6f41f633762.xml.htm">Example 14:  Configuring Special Pool</a>.</DD>
+<DT><i>PoolTag</i></DT>
+<DD>(<i>Windows Vista and later</i>.) Specifies a pool tag for the <a href="gflags_49d59420-7de8-4925-8f99-7ee0e8acd8ec.xml.htm">Special Pool</a> feature. Use only with the <b>spp</b> flag.<P>Enter a four-character pattern for <i>PoolTag</i>, such as Tag1. It can include the <b>?</b> (substitute for any single character) and <b>*</b> (substitute for multiple characters) wildcard characters. For example, Fat* or Av?4. Pool tags are always case-sensitive.</P>
+</DD>
+<DT><b>0x</b><i>Size</i></DT>
+<DD>(<i>Windows Vista and later</i>.) Specifies a size range for the Special Pool feature. Use only with the <b>spp</b> flag. For guidance on selecting a size value, see "Selecting an Allocation Size" in <a href="gflags_49d59420-7de8-4925-8f99-7ee0e8acd8ec.xml.htm">Special Pool</a>.</DD>
+<DT><b>/ro</b></DT>
+<DD>Enables, disables, and displays <a href="gflags_29eddbe3-a557-4bd0-8907-2a58e7b7d9f3.xml.htm">Object Reference Tracing</a> settings in the registry. To make a change to this setting effective, you must restart Windows.<P>Without additional parameters, <b>/ro</b> displays the Object Reference Tracing settings in the registry.</P>
+<P>To enable Object Reference Tracing, you must include at least one pool tag (<b>/t</b> <i>PoolTag</i>) or one image file (<b>/i</b> ImageFile) in the command. For details, see <a href="gflags_5c012392-d8d0-4ee7-b66b-bbe971e1b871.xml.htm">Example 15: Using Object Reference Tracing</a>.</P>
+<P>The following table lists the subparameters that are valid with <b>/ro</b>.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>/t</b> <i>PoolTags</i></TD>
+<TD Width="">Limits the trace to objects with the specified pool tags. Use a semicolon (<b>;</b>) to separate tag names. Enter up to 16 pool tags.<BR><BR>Enter a four-character pattern for <i>PoolTags</i>, such as Tag1.<BR><BR>If you specify more than one pool tag, Windows traces objects with any of the specified pool tags .<BR><BR>If you do not specify any pool tags, Windows traces all objects that are created by the image.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/i</b> <i>ImageFile</i></TD>
+<TD Width="">Limits the trace to objects that are created by processes with the specified image file. You can specify only one image file with the <b>/i</b> parameter. <BR><BR>Enter an image file name, such as <i>notepad.exe</i>, with up to 64 characters. "System" and "Idle" are not valid image names.<BR><BR>If you do not specify an image file, Windows traces all objects with the specified pool tags. If you specify both an image file (<b>/i</b>) and one or more pool tags (<b>/t</b>), Windows traces objects with any of the specified pool tags that are created by the specified image.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/d</b></TD>
+<TD Width="">Clears the Object Reference Tracing feature settings. When used with <b>/ro</b>, it clears the settings in the registry. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/p</b></TD>
+<TD Width="">Permanent. The trace data is retained until Object Reference Tracing is disabled, or the computer is shut down or restarted. By default, the trace data for an object is discarded when the object is destroyed.</TD>
+</TR>
+</table>
+</DD>
+<P></P>
+<DT><b>/ko</b></DT>
+<DD>Enables, disables, and displays kernel flag (run time) <a href="gflags_29eddbe3-a557-4bd0-8907-2a58e7b7d9f3.xml.htm">Object Reference Tracing</a> settings. Changes to this setting are effective immediately, but are lost when the system is shut down or restarted. For details, see <a href="gflags_5c012392-d8d0-4ee7-b66b-bbe971e1b871.xml.htm">Example 15: Using Object Reference Tracing</a>.<P>Without additional parameters, <b>/ko</b> displays the kernel flag (run time) Object Reference Tracing settings.</P>
+<P>To enable Object Reference Tracing, you must include at least one pool tag (<b>/t</b> <i>PoolTag</i>) or one image file (<b>/i</b> <i>ImageFile</i>) in the command. </P>
+<P>The following table lists the subparameters that are valid with <b>/ko</b>.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>/t</b> <i>PoolTags</i></TD>
+<TD Width="">Limits the trace to objects with the specified pool tags. Use a semicolon (<b>;</b>) to separate tag names. Enter up to 16 pool tags.<BR><BR>Enter a four-character pattern for <i>PoolTags</i>, such as Tag1.<BR><BR>If you specify more than one pool tag, Windows traces objects with any of the specified pool tags.<BR><BR>If you do not specify any pool tags, Windows traces all objects that are created by the image.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/i</b> <i>ImageFile</i></TD>
+<TD Width="">Limits the trace to objects that are created by processes with the specified image file. You can specify only one image file with the <b>/i</b> parameter. <BR><BR>If you do not specify an image file, Windows traces all objects with the specified pool tags. <BR><BR>If you specify both an image file (<b>/i</b>) and one or more pool tags (<b>/t</b>), Windows traces objects with any of the specified pool tags that are created by the specified image.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/d</b></TD>
+<TD Width="">Clears the Object Reference Tracing feature settings. When used with <b>/ro</b>, it clears the settings in the registry. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/p</b></TD>
+<TD Width="">Permanent. The trace data is retained until Object Reference Tracing is disabled, or the computer is shut down or restarted. By default, the trace data for an object is discarded when the object is destroyed.</TD>
+</TR>
+</table>
+</DD>
+<DT><b>/p</b> </DT>
+<DD>Sets page heap verification options for a process. <P>With no additional parameters, <b>gflags /p</b> displays a list of image files for which page heap verification is enabled. </P>
+<P>Page heap verification monitors dynamic heap memory operations, including allocate operations and free operations, and causes a debugger break when it detects a heap error.</P>
+</DD>
+<DT><b>/disable</b> <i>ImageFile</i> </DT>
+<DD>Turns off page heap verification (standard or full) for the specified image file. <P>This command is equivalent to turning off the <a href="gflags_68e44540-168b-4c75-bacd-9cb9d34b1fcc.xml.htm">Enable page heap</a> (hpa) flag for a process (<b>gflags /i </b><i>ImageFile</i><b> -hpa</b>). You can use the commands interchangeably.</P>
+</DD>
+<DT><b>/enable</b> <i>ImageFile</i> </DT>
+<DD>Turns on page heap verification for the specified image file. <P>By default, the <b>/enable</b> parameter turns on <i>standard</i> page heap verification for the image file. To enable <i>full</i> page heap verification for the image file, add the <b>/full</b> parameter to the command or use the <b>/i</b> parameter with the <b>+hpa</b> flag.</P>
+</DD>
+<DT><b>/full</b> </DT>
+<DD>Turns on full page heap verification for the process. Full page heap verification places a zone of reserved virtual memory at the end of each allocation.<P>Using this parameter is equivalent to turning on the <a href="gflags_68e44540-168b-4c75-bacd-9cb9d34b1fcc.xml.htm">Enable page heap</a> (hpa) flag for a process (<b>gflags /i </b><i>ImageFile</i> <b>+hpa</b>). You can use the commands interchangeably.</P>
+</DD>
+<DT><b>/backwards</b> </DT>
+<DD>Places the zone of reserved virtual memory at the beginning of an allocation, rather than at the end. As a result, the debugger traps overruns at the beginning of the buffer, instead of those at the end of the buffer. Valid only with the <b>/full</b> parameter. </DD>
+<DT><b>/random</b> <i>Probability</i> </DT>
+<DD>Chooses full or standard page heap verification for each allocation, based on the specified probability.<P><i>Probability</i> is a decimal integer from 0 through 100 representing the probability of full page heap verification. A probability of 100 is the same as using the <b>/full</b> parameter. A probability of 0 is the same as using standard page heap verification.</P>
+</DD>
+<DT><b>/size</b> <i>SizeStart</i> <i>SizeEnd</i> </DT>
+<DD>Enables full page heap verification for allocations within the specified size range and enables standard page heap verification for all other allocations by the process. <P><i>SizeStart</i> and <i>SizeEnd</i> are decimal integers. The default is standard page heap verification for all allocations. </P>
+</DD>
+<DT><b>/address</b> <i>AddressStart</i> <i>AddressEnd</i></DT>
+<DD>Enables full page heap verification for memory allocated while a return address in the specified address range is on the run-time call stack. It enables standard page heap verification for all other allocations by the process. <P>To use this feature, specify a range that includes the addresses of all functions that call the function with the suspect allocation. The address of the calling function will be on the call stack when the suspect allocation occurs. </P>
+<P><i>AddressStart</i> and <i>AddressEnd</i> specify the address range searched in allocation stack traces. The addresses are specified in hexadecimal format, such as, 0xAABBCCDD.</P>
+<P>On Windows Server 2003 and earlier systems, the <b>/address</b> parameter is valid only on <i>x</i>86-based computers. On Windows Vista,: it is valid on all supported architectures.</P>
+</DD>
+<DT><b>/dlls</b> <i>DLL</i>[<b>,</b> <i>DLL</i>...] </DT>
+<DD>Enables full page heap verification for allocations requested by the specified DLLs and standard page heap verification for all other allocations by the process. <P><i>DLL</i> is the name of a binary file, including its file name extension. The specified file must be a function library that the process loads during execution.</P>
+</DD>
+<DT><b>/debug</b> </DT>
+<DD>Automatically launches the process specified by the <b>/enable</b> parameter under a debugger. <P>By default, this parameter uses the NTSD debugger with the command line <b>ntsd -g -G -x</b> and with page heap enabled, but you can use the <i>DebuggerCommand</i> variable to specify a different debugger and command line.</P>
+<P>For information about NTSD, see <a href="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml.htm">CDB and NTSD</a>.</P>
+<P>This option is useful for programs that are difficult to start from a command prompt and those that are started by other processes.</P>
+</DD>
+<DT><b>"</b><i>DebuggerCommand</i><b>"</b></DT>
+<DD>Specifies a debugger and the command sent to the debugger. This quoted string can include a fully qualified path to the debugger, the debugger name, and command parameters that the debugger interprets. The quotation marks are required.<P>If the command includes a path to the debugger, the path cannot contain any other quotation marks. If other quotation marks appear, the command shell (<i>cmd.exe</i>) will misinterpret the command.</P>
+</DD>
+<DT><b>/kdebug</b> </DT>
+<DD>Automatically launches the process specified by the <b>/enable</b> parameter under the NTSD debugger with the command line <b>ntsd -g -G -x</b>, with page heap enabled, and with control of NTSD redirected to the kernel debugger. <P>For information about NTSD, see <a href="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml.htm">CDB and NTSD</a>.</P>
+</DD>
+<DT><b>/unaligned</b> </DT>
+<DD>Aligns the end of each allocation at an end-of-page boundary, even if doing so means that the starting address is not aligned on an 8-byte block. By default, the heap manager guarantees that the starting address of an allocation is aligned on an 8-byte block.<P>This option is used to detect off-by-one-byte errors. When this parameter is used with the <b>/full</b> parameter, the zone of reserved virtual memory begins just after the last byte of the allocation and an immediate fault occurs when a process tries to read or write even one byte beyond the allocation.</P>
+</DD>
+<DT><b>/decommit</b> </DT>
+<DD>This option is no longer valid. It is accepted, but ignored.<P>The PageHeap program (<i>pageheap.exe</i>) included in Windows 2000 implemented full page heap verification by placing an inaccessible page after an allocation. In that tool, the <b>/decommit</b> parameter substituted a zone of reserved virtual memory for the inaccessible page. In this version of GFlags, a zone of reserved virtual memory is always used to implement full page heap verification.</P>
+</DD>
+<DT><b>/notraces</b> </DT>
+<DD>Specifies that run-time stack traces are not saved. <P>This option improves performance slightly, but it makes debugging much more difficult. This parameter is valid, but its use is not recommended.</P>
+</DD>
+<DT><b>/fault</b> </DT>
+<DD>Forces the program's memory allocations to fail at the specified rate and after the specified time-out.<P>This parameter inserts heap allocation errors into the image file being tested (a practice known as "fault injection") so that some memory allocations fail, as might occur when the program runs in low memory conditions. This test helps to detect errors in handling allocation failure, such as failing to release resources.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TD Width=""><i>Rate</i></TD>
+<TD Width="">Specifies a decimal integer from 1 (.01%) through 10000 (100%) representing the probability that an allocation will fail. The default is 100 (1%).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>TimeOut</i></TD>
+<TD Width="">Determines the time interval between the start of the program and the start of the fault injection routines.<BR><BR><i>TimeOut</i> is measured in seconds. The default is 5 (seconds).<BR><BR></TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>/leaks</b> </DT>
+<DD>Checks for heap leaks when a process ends. <P>The <b>/leaks</b> parameter disables full page heap. When <b>/leaks</b> is used, the <b>/full</b> parameter and parameters that modify the <b>/full</b> parameter, such as <b>/backwards</b>, are ignored, and GFlags performs standard page heap verification with a leak check. </P>
+</DD>
+<DT><b>/protect</b> </DT>
+<DD>Protects heap internal structures. This test is used to detect random heap corruptions. It can make execution significantly slower. </DD>
+<DT><b>/no_sync</b> </DT>
+<DD>Checks for unsynchronized access. This parameter causes a break if it detects that a heap created with the HEAP_NO_SERIALIZE flag is accessed by different threads. <P>Do not use this flag to debug a program that includes a customized heap manager. Functions that synchronize heap access cause the page heap verifier to report synchronization faults that do not exist.</P>
+</DD>
+<DT><b>/no_lock_checks</b> </DT>
+<DD>Disables the critical section verifier. </DD>
+<DT><b>/?</b> </DT>
+<DD>Displays help for GFlags. With <b>/p</b>, <b>/?</b> displays help for the page heap verification options in GFlags. <P></P>
+</DD>
+</DL>
+<H4>Comments</H4>
+<P>Typing <b>gflags</b> without parameters opens the <b>Global Flags</b> dialog box. </P>
+<P>Typing <b>gflags /p</b> without additional parameters displays a list of programs that have page heap verification enabled. </P>
+<P>To clear all flags, set <i>Flag</i> to <b>-FFFFFFFF</b>. (Setting <i>Flag</i> to 0 adds zero to the current flag value. It does not clear all flags.) </P>
+<P>When you set <i>Flag</i> for an image file to <b>FFFFFFFF</b>, Windows clears all flags and deletes the GlobalFlag entry in the registry subkey for the image file. The subkey remains. </P>
+<P>The <b>/full</b>, <b>/random</b>, <b>/size</b>, <b>/address</b>, and <b>/dlls</b> parameters for the page heap <b>/enable</b> operation determine which allocations are subject to page heap verification and the verification method used. You can use only one of these parameters in each command. The default is standard page heap verification of all allocations of the process. The remaining parameters set options for page heap verification. </P>
+<P>The page heap features in GFlags only monitor heap memory allocations that use the standard Windows heap manager functions (<b>HeapAlloc</b>, <b>GlobalAlloc</b>, <b>LocalAlloc</b>, <b>malloc</b>, <b>new</b>, <b>new[]</b>, or their corresponding deallocation functions), or those that use custom operations that call the standard heap manager functions. </P>
+<P>To determine whether full or standard page heap verification is enabled for a program, at the command line, type <b>gflags /p</b>. In the resulting display, <b>traces</b> indicates that standard page heap verification is enabled for the program and <b>full traces</b> indicates that full page heap verification is enabled for the program.</P>
+<P>The <b>/enable</b> parameter sets the <a href="gflags_68e44540-168b-4c75-bacd-9cb9d34b1fcc.xml.htm">Enable page heap</a> (hpa) flag for the image file in the registry. However, the <b>/enable</b> parameter turns on <i>standard</i> heap verification for the image file by default, unlike the <b>/i</b> parameter with the <b>+hpa</b> flag, which turns on <i>full</i> heap verification for an image file.</P>
+<P><i>Standard</i> page heap verification places random patterns at the end of an allocation and examines the patterns when a heap block is freed. <i>Full</i> page heap verification places a zone of reserved virtual memory at the end of each allocation.</P>
+<P>Full page heap verification can consume system memory quickly. To enable full page heap verification for memory-intensive processes, use the <b>/size</b> or <b>/dlls</b> parameter. </P>
+<P>After using global flags for debugging, submit a <b>gflags /p /disable</b> command to turn off the page heap verification and delete associated registry entries. Otherwise, entries that the debugger reads remain in the registry. You cannot use the <b>gflags /i hpa</b> command for this task, because it turns off page heap verification, but does not delete the registry entries.</P>
+<P>By default, on Windows Vista and later versions of Windows, program-specific settings (image file flags and page heap verification settings) are stored in the current user account.</P>
+<P>This version of GFlags includes the <b>-v</b> options, which enable features being developed for GFlags. However, these features are not yet complete and, therefore, are not documented.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GFlags Commands RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

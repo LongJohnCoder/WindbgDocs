@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>IG_DUMP_SYMBOL_INFO</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, IG_DUMP_SYMBOL_INFO"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="IG_DUMP_SYMBOL_INFO"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml"/>
+<META NAME="MS-HKWD" CONTENT="IG_DUMP_SYMBOL_INFO Ioctl operation"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_22e264c9-ed41-4257-a192-7b3f6d4ffdea.xml"></A>IG_DUMP_SYMBOL_INFO</H1>
+<P><P>The IG_DUMP_SYMBOL_INFO <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation provides information about the type of a symbol.  When calling <b>Ioctl</b> with <i>IoctlType</i> set to IG_DUMP_SYMBOL_INFO, <i>IpvData</i> should contain an instance of the SYM_DUMP_PARAM structure.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _SYM_DUMP_PARAM {</b><BR><b>    ULONG  size;</b><BR><b>    PUCHAR  sName;</b><BR><b>    ULONG  Options;</b><BR><b>    ULONG64  addr;</b><BR><b>    PFIELD_INFO  listLink;</b><BR><b>    union {</b><BR><b>        PVOID  Context;</b><BR><b>        PVOID  pBuffer;</b><BR><b>    };</b><BR><b>    PSYM_DUMP_FIELD_CALLBACK CallbackRoutine;</b><BR><b>    ULONG  nFields;</b><BR><b>    PFIELD_INFO  Fields;</b><BR><b>    ULONG64  ModBase;</b><BR><b>    ULONG  TypeId;</b><BR><b>    ULONG  TypeSize;</b><BR><b>    ULONG  BufferSize;</b><BR><b>    ULONG  fPointer:2;</b><BR><b>    ULONG  fArray:1;</b><BR><b>    ULONG   fStruct:1;</b><BR><b>    ULONG  fConstant:1;</b><BR><b>    ULONG  Reserved:27;</b><BR><b>} SYM_DUMP_PARAM, *PSYM_DUMP_PARAM;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>size</b></DT>
+<DD>Specifies the size, in bytes, of this structure.  It should be set to <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>sizeof(</b>SYM_DUMP_PARAM<b>)</b></span>.</DD>
+<DT><b>sName</b></DT>
+<DD>Specifies the name of the symbol to lookup.</DD>
+<DT><b>Options</b></DT>
+<DD>Specifies the flags that determine the behavior of this <b>Ioctl</b> operation.  For a description of these flags, see <a href="wdbgexts_ref_ab6ebd65-40be-46bd-9ecb-4c66f0e42746.xml.htm">DBG_DUMP_<i>XXX</i></a>.</DD>
+<DT><b>addr</b></DT>
+<DD>Specifies the address of the symbol.</DD>
+<DT><b>listLink</b></DT>
+<DD>Specifies the field that contains the next item in a linked list.  If the symbol is an entry in a linked list, this <b>Ioctl</b> operation can iterate over the items in the list using the field specified here as the pointer to the next item in the list.  The type of this structure is <a href="wdbgexts_ref_4c79e59a-cd12-4ad9-affb-b7f0bd7689fb.xml.htm">FIELD_INFO</a>.<P>The callback function specified in the <b>fieldCallBack</b> member of this structure is called, during this <b>Ioctl</b> operation, for each item in the list.  When it is called, it is passed this <b>linkList</b> structure with the members filled in for the list entry along with the contents of the <b>Context</b> member.</P>
+<P>DBG_DUMP_LIST should be set in <b>Options</b> to tell this <b>Ioctl</b> to iterate over the list.</P>
+</DD>
+<DT><b>Context</b></DT>
+<DD>Specifies a pointer that is passed to the callback function in the <b>CallbackRoutine</b> member and to the callback functions in the <b>fieldCallBack</b> member of the <b>linkList</b> and <b>Fields</b> members.</DD>
+<DT><b>pBuffer</b></DT>
+<DD>Specifies a buffer that receives information about the symbol.  This buffer is only used if the DBG_DUMP_COPY_TYPE_DATA flag is set in <b>Options</b>.  The size of this buffer is specified in <b>BufferSize</b>.</DD>
+<DT><b>CallbackRoutine</b></DT>
+<DD>Specifies a callback function that is called by the engine.  The engine provides the callback function with information about the symbol and its members.</DD>
+<DT><b>nFields</b></DT>
+<DD>Specifies the number of entries in the <b>Fields</b> array.</DD>
+<DT><b>Fields</b></DT>
+<DD>Specifies an array of <a href="wdbgexts_ref_4c79e59a-cd12-4ad9-affb-b7f0bd7689fb.xml.htm">FIELD_INFO</a> structures that control the behavior of this operation for individual members of the specified symbol. See FIELD_INFO for details.</DD>
+<DT><b>ModBase</b></DT>
+<DD>Receives the location in the target's memory of the start of the <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> that contains the symbol.</DD>
+<DT><b>TypeId</b></DT>
+<DD>Receives the type ID of the symbol.</DD>
+<DT><b>TypeSize</b></DT>
+<DD>Receives the size, in bytes, of the symbol in the target's memory.</DD>
+<DT><b>BufferSize</b></DT>
+<DD>Specifies the size, in bytes, of the <b>pBuffer</b> buffer.</DD>
+<DT><b>fPointer</b></DT>
+<DD>Receives a Boolean value that indicates whether the symbol is a pointer.  <b>fPointer</b> is FALSE if the symbol is not a pointer.  It is 1 if the symbol is a 32-bit pointer and 3 if the symbol is a 64-bit pointer.</DD>
+<DT><b>fArray</b></DT>
+<DD>Receives a Boolean value that indicates whether the symbol is an array.  <b>fArray</b> is FALSE if the symbol is not an array and TRUE if it is.</DD>
+<DT><b>fStruct</b></DT>
+<DD>Receives a Boolean value that indicates whether the symbol is a structure.  <b>fStruct</b> is FALSE if the symbol is not a structure and TRUE if it is.</DD>
+<DT><b>fConstant</b></DT>
+<DD>Receives a Boolean value that indicates whether the symbol is a constant.  <b>fConstant</b> is FALSE if the symbol is not a constant and TRUE if it is.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>If this <b>Ioctl</b> operation succeeds, the return value from <b>Ioctl</b> is zero; otherwise, it is an <a href="wdbgexts_ref_a6260d9a-190f-4533-bcc4-8f5e5ae08647.xml.htm">IG_DUMP_SYMBOL_INFO error code</a>.</P>
+<P></P>
+<H4>Comments</H4>
+<P>The parameters for the IG_DUMP_SYMBOL_INFO <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation are the members of the SYM_DUMP_PARAM structure.</P>
+<P>This <b>Ioctl</b> operation looks up the module information for the symbol, loading module symbols if possible.</P>
+<P>If <b>nFields</b> is zero and DBG_DUMP_CALL_FOR_EACH is set in <b>Options</b>, the callback function specified in <b>CallbackRoutine</b> is called for every field in the symbol.</P>
+<P>If <b>nFields</b> is non-zero and DBG_DUMP_CALL_FOR_EACH is set in <b>Options</b>, callbacks are only made for those fields matching the <b>fName</b> member of one of the <b>Fields</b> elements.  If a field matches a <b>fName</b> member and the <b>fieldCallBack</b> member is not NULL, the callback function in  <b>fieldCallBack</b> is called; if it is NULL, the callback function in <b>CallbackRoutine</b> is called instead.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Declared in <i>wdbgexts.h</i>. If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that uses this <b>Ioctl</b> operation, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a>, <a href="wdbgexts_ref_a6260d9a-190f-4533-bcc4-8f5e5ae08647.xml.htm">IG_DUMP_SYMBOL_INFO Error Codes</a>, <a href="wdbgexts_ref_ab6ebd65-40be-46bd-9ecb-4c66f0e42746.xml.htm">DBG_DUMP_<i>XXX</i></a>, <a href="wdbgexts_ref_4c79e59a-cd12-4ad9-affb-b7f0bd7689fb.xml.htm">FIELD_INFO</a> </P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: IG_DUMP_SYMBOL_INFO RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

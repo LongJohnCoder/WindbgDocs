@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Sending Output to the Debugger</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Sending Output to the Debugger"><xml><MSHelp:Keyword Index="A" Term="t02_debugfns_b8f888cc-bbbb-4f27-aeed-ac63da0ddcd9.xml"/>
+<META NAME="MS-HKWD" CONTENT="sending output to the debugger">
+<META NAME="MS-HKWD" CONTENT="OutputDebugString function">
+<META NAME="MS-HKWD" CONTENT="DbgPrint function">
+<META NAME="MS-HKWD" CONTENT="DbgPrintEx function">
+<META NAME="MS-HKWD" CONTENT="KdPrint function">
+<META NAME="MS-HKWD" CONTENT="KdPrintEx function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t02_debugfns_b8f888cc-bbbb-4f27-aeed-ac63da0ddcd9.xml"></A>Sending Output to the Debugger</H1>
+<P>User-mode and kernel-mode code use different routines to send output to the debugger.</P>
+<H4>User-Mode Output Routines</H4>
+<P><b>OutputDebugString</b> sends a null-terminated string to the debugger of the calling process. In a user-mode driver, <b>OutputDebugString</b> displays the string in the Debugger Command window. If a debugger is not running, this routine has no effect. <b>OutputDebugString</b> does not support the variable arguments of a <b>printf</b> formatted string.</P>
+<P>For complete documentation of this routine, see the Microsoft Windows SDK.</P>
+<H4>Kernel-Mode Output Routines</H4>
+<P><b>DbgPrint</b> displays output in the debugger window. This routine supports the basic <b>printf</b> format parameters. Only kernel-mode code can call <b>DbgPrint</b>.</P>
+<P><b>DbgPrintEx</b> is similar to <b>DbgPrint</b>, but it allows you to "tag" your messages. When running the debugger, you can permit only those messages with certain tags to be sent. This allows you to view only those messages that you are interested in. For details, see <a href="t02_debugfns_7757121f-3370-467e-9ec3-e3fdde749f81.xml.htm">Reading and Filtering Debugging Messages</a>.</P>
+<P class="note"><b>Note</b>  In Windows Vista and later versions of Windows, <b>DbgPrint</b> produces tagged messages as well. This is a change from previous versions of Windows.</P>
+<P><b>KdPrint</b> and <b>KdPrintEx</b> are identical to <b>DbgPrint</b> and <b>DbgPrintEx</b>, respectively, when compiled in the checked build environment. When compiled in the free build environment, they have no effect.</P>
+<P>For complete documentation of these routines, as well as the build environment, see the Windows Driver Kit.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Sending Output to the Debugger RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>/noexecute</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, /noexecute"><xml><MSHelp:Keyword Index="A" Term="bootini_aff45176-bd02-43cf-9895-c212fa392de2.xml"/>
+<META NAME="MS-HKWD" CONTENT="/noexecute"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_aff45176-bd02-43cf-9895-c212fa392de2.xml"></A>/noexecute</H1>
+<P>The <b>/noexecute</b> parameter enables, disables, and configures Data Execution Prevention (DEP), a set of hardware and software technologies designed to prevent harmful code from running in protected memory locations.<P>For more information about using the /<b>noexecute</b> parameter and the other parameters that affect DEP configuration, see <a href="bootini_29e11bdf-06dc-489d-af10-27a8c03d3a62.xml.htm">Boot Parameters to Configure DEP and PAE</a>. </P>
+<P class="note"><b>Note</b>  DEP is a highly effective security feature. Do not disable DEP unless you have no alternative.</P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/noexecute=</b>{<b>alwayson</b> | <b>optout</b> | <b>optin</b> | <b>alwaysoff</b>}<BR></nobr></P>
+<P></P>
+<H4>Subparameter</H4>
+<DL><DT><b>alwayson</b></DT>
+<DD>Enables DEP for the operating system and all processes, including the Windows kernel and drivers. All attempts to disable DEP are ignored.</DD>
+<DT><b>optout</b></DT>
+<DD>Enables DEP for the operating system and all processes, including the Windows kernel and drivers. However, administrators can disable DEP on selected executable files by using<b> System </b>in Control Panel.</DD>
+<DT><b>optin</b></DT>
+<DD>Enables DEP only for operating system components, including the Windows kernel and drivers. Administrators can enable DEP on selected executable files by using the Application Compatibility Toolkit (ACT).</DD>
+<DT><b>alwaysoff</b></DT>
+<DD>Disables DEP. Attempts to enable DEP selectively are ignored. <P>On Windows XP with SP2, this subparameter also disables Physical Address Extension (PAE). This subparameter does not disable PAE on Windows Server 2003 with SP1.</P>
+</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<H4>What is DEP?</H4>
+<P><i>Data Execution Prevention</i> (DEP) consists of hardware and software methods. <i>Software-enforced DEP</i>, which protects only user-mode processes, must be supported by the operating system. <i>Hardware-enforced DEP</i> sets a bit in the page table entry that prevents code from being executed from a virtual memory page that should contain only data. Hardware-enforced DEP must be supported by the operating system and the processor on the computer. If the operating system supports DEP, but the processor does not, only software-enforced DEP is enabled on the system.</P>
+<H4>Operating System Support</H4>
+<P>DEP is supported in Windows Server 2003 with SP1, Windows XP with SP2, Windows Vista, and later versions of Windows. </P>
+<P>The <b>/noexecute</b> parameter is supported only on Windows Server 2003 with SP1 and Windows XP with SP2. On Windows Vista and later versions of Windows, use the <b>NX</b> element in BCDEdit.</P>
+<H4>32-bit and 64-bit Support</H4>
+<P>The <b>/noexecute</b> parameter is effective only on 32-bit processes. It enables software-enforced DEP and, if the processor supports DEP, it also enables hardware-enforced DEP. </P>
+<P>On 64-bit processes, DEP is enabled by default and cannot be disabled (equivalent to <b>/noexecute=alwayson</b>). For these processes, the <b>/noexecute</b> parameter is ignored. On a 64-bit operating system, the <b>/noexecute</b> parameter affects only 32-bit processes running on the system.</P>
+<H4>Default Values</H4>
+<P>On Windows XP with SP2, the installation program adds <b>/noexecute=optin</b> to the boot entry.</P>
+<P>On Windows Server 2003 with SP1, the installation program adds <b>/noexecute=optout</b> to the boot entry.</P>
+<P>However, on all operating systems that support DEP, if the <b>/noexecute</b> parameter is not present in the boot options, the system behaves as though the setting is <b>/noexecute=optin</b>.</P>
+<H4>DEP and PAE</H4>
+<P>On 32-bit operating systems, hardware-enforced DEP requires Physical Address Extension (PAE). Therefore, when DEP is enabled on a computer that supports hardware-enforced DEP, 32-bit versions of the Windows operating system automatically enable PAE and ignores <a href="bootini_37644df1-f3ea-4e1b-9ea6-c5ea00a1164b.xml.htm"><b>/nopae</b></a>. </P>
+<P>On Windows XP with SP2, , when you disable DEP by using <b>/noexecute=alwaysoff</b>, Windows disables both DEP and PAE. This is the equivalent of using <b>/noexecute=alwaysoff /nopae</b>. To enable PAE without DEP on a system with hardware-enforced DEP, use /<b>noexecute=alwaysoff /pae</b>. This explicitly enables PAE while disabling DEP.</P>
+<P>However, on Windows Server 2003 with SP1, when you disable DEP by using <b>/noexecute=alwaysoff</b>, Windows disables only DEP. PAE is still enabled and the system ignores explicit attempts to disable PAE, such as the <b>/nopae</b> parameter. To disable both DEP and PAE on Windows Server 2003 with SP1, use <a href="bootini_3d0f852c-df3d-4b82-a30d-de9cba86e8e1.xml.htm"><b>/execute</b></a>. </P>
+<P>For a table that describes these parameters and their effects, see <a href="bootini_29e11bdf-06dc-489d-af10-27a8c03d3a62.xml.htm">Boot Parameters to Configure DEP and PAE</a>.</P>
+<H4>Setting DEP in Control Panel</H4>
+<P>To set the <b>/noexecute=optin</b> or <b>/noexecute=optout</b> policies, or to disable DEP on a particular executable file, open Control Panel, and then double-click <b>System</b>. Click the <b>Advanced</b> tab and under <b>Performance</b>, click <b>Settings</b>, and then click the <b>Data Execution Prevention</b> tab. To make the new settings effective, you must restart the computer.</P>
+<P>For more information about DEP, see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=35141" target="_blank">Changes to Functionality in Microsoft Windows XP Service Pack 2, Part 3: Memory Protection Technologies</a>.</P>
+<H4>Example</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /noexecute=alwayson<BR><BR></nobr></P>
+<H4>Bootcfg command</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /raw "/noexecute=alwayson" /A /ID 1<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: /noexecute RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

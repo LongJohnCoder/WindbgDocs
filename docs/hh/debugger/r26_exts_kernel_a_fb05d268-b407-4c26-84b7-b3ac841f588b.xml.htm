@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!bpid</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !bpid"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_fb05d268-b407-4c26-84b7-b3ac841f588b.xml"/>
+<META NAME="MS-HKWD" CONTENT="!bpid extension">
+<META NAME="MS-HKWD" CONTENT="controlling the user-mode debugger from the kernel debugger, !bpid extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_fb05d268-b407-4c26-84b7-b3ac841f588b.xml"></A>!bpid</H1>
+<P><P>The <b>!bpid</b> extension requests that a process on the target computer break into the debugger or requests that a user-mode debugger be attached to a process on the target computer.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!bpid</b> [<i>Options</i>] <i>PID</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Option</i></DT>
+<DD>Controls the additional activities of this command. <P>The valid values for <i>Option</i> appear in the following table.  </P>
+<P></P><B></B><table>
+<TR valign="top">
+<TD Width=""><nobr><b>-a</b></nobr></TD>
+<TD Width="">Attaches a new user-mode debugger to the process specified by <i>PID</i>. The user-mode debugger runs on the target machine.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><nobr><b>-s</b></nobr></TD>
+<TD Width="">Adds a breakpoint that occurs in the WinLogon process immediately before the break in the user-mode process specified by <i>PID</i>. This allows the user to verify the request before attempting the action.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><nobr><b>-w</b></nobr></TD>
+<TD Width="">Stores the request in the memory in the target computer. The target system can then repeat the request, but this is not usually necessary.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>PID</i></DT>
+<DD>Specifies the process ID of the desired process on the target computer. If you are using this to control a user-mode debugger on the target computer, <i>PID</i> should be the process ID of the target application, not of the user-mode debugger. (Because process IDs are usually listed in decimal format, you might need to prefix this with <b>0n</b> or convert it to hexadecimal format.)<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension command is supported on x86-based, x64-based, and Itanium-based target computers.</P>
+<P></P>
+<H4>Comments</H4>
+<P>This command is especially useful when redirecting input and output from a user-mode debugger to the kernel debugger. It causes the user-mode target application to break into the user-mode debugger, which in turn requests input from the kernel debugger. See <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a> for details.</P>
+<P>If this command is used in another situation, the user-mode process calls <b>DbgBreakPoint</b>. This will usually break directly into the kernel debugger.</P>
+<P>The <b>-s</b> option causes a break in WinLogon just before the break in the specified process occurs. This is useful if you want to perform debugging actions within WinLogon's process context. The <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command can then be used to move on to the second break.</P>
+<P>Note that there are ways in which this extension can fail to execute:</P><B></B><UL type="disc">
+<LI> Lack of resources. The <b>!bpid</b> extension injects a thread into the target process, so the system must have enough resources to create a thread. Using the <b>-a</b> option requires even more system resources since <b>!bpid -a</b> must run a full instance of a debugger on the target computer. </LI>
+<LI> The loader lock is already held. Both <b>!bpid </b>and <b>!bpid -a</b> require a thread to run in the target process in order to make it break into the debugger. If another thread is holding the loader lock, then the <b>!bpid</b> thread will not be able to run and a break into the debugger may not occur. Thus, if <b>!bpid</b> fails when there is enough user-mode memory available for the target process, it is possible that the loader lock is held.</LI>
+<LI>Lack of permission. The operation of the !bpid extension requires permission sufficient for WinLogon to create a remote thread and attach a debugger to a given process.</LI>
+<LI>No access to ntsd.exe. If ntsd.exe is not found in a commonly known path, !bpid will fail to set an appropriate PID. Note that ntsd.exe is not included by default with Windows Vista.</LI>
+<P></P>
+</UL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !bpid RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

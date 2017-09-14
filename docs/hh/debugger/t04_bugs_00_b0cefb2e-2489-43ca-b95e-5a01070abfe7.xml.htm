@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x4D: NO_PAGES_AVAILABLE</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x4D: NO_PAGES_AVAILABLE"><xml><MSHelp:Keyword Index="A" Term="t04_bugs_00_b0cefb2e-2489-43ca-b95e-5a01070abfe7.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x4D: NO_PAGES_AVAILABLE">
+<META NAME="MS-HKWD" CONTENT="NO_PAGES_AVAILABLE"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t04_bugs_00_b0cefb2e-2489-43ca-b95e-5a01070abfe7.xml"></A>Bug Check 0x4D: NO_PAGES_AVAILABLE</H1>
+<P>The NO_PAGES_AVAILABLE bug check has a value of 0x0000004D. This indicates that no free pages are available to continue operations. <P></P>
+</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">The total number of dirty pages </TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">The number of dirty pages destined for the page file </TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width=""><i>Windows XP and Windows 2000:</i>  The size of the nonpaged pool available at the time the bug check occurred <BR><BR><i>Windows Server 2003 and later:</i>  Reserved <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width=""><i>Windows 2000:</i>  The number of transition pages that are currently stranded <BR><BR><i>Windows XP and later:</i>  The most recent modified write error status.<BR><BR></TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>To see general memory statistics, use the <a href="r30_exts_kernel_u_f7bac801-e399-4fab-af3e-ad2c1effce20.xml.htm"><b>!vm 3</b></a> extension.</P>
+<P>This bug check can occur for any of the following reasons: </P><B></B><UL type="disc">
+<LI>A driver has blocked, deadlocking the modified or mapped page writers. Examples of this include mutex deadlocks or accesses to paged out memory in file system drivers or filter drivers. This indicates a driver bug. <P>If Parameter 1 or Parameter 2 is large, then this is a possibility. Use <a href="r30_exts_kernel_u_f7bac801-e399-4fab-af3e-ad2c1effce20.xml.htm"><b>!vm 3</b></a>.</P>
+</LI>
+<LI>A storage driver is not processing requests. Examples of this are stranded queues and non-responding drives. This indicates a driver bug. <P>If Parameter 1 or Parameter 2 is large, then this is a possibility. Use  <a href="r30_exts_kernel_u_f7bac801-e399-4fab-af3e-ad2c1effce20.xml.htm"><b><u>!vm 8</u></b></a>, followed by  <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process 0 7</b></a>.</P>
+</LI>
+<LI>A high-priority realtime thread has starved the balance set manager from trimming pages from the working set, or starved the modified page writer from writing them out. This indicates a bug in the component that created this thread. <P>This situation is difficult to analyze. Try using <a href="r29_exts_kernel_q_28d91ba1-8a4a-4bc9-9615-99432ca06787.xml.htm"><b>!ready</b></a>.  Try also  <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process 0 7</b></a> to list all threads and see if any have accumulated excessive kernel time as well as what their current priorities are.  Such processes may have blocked out the memory management threads from making pages available.</P>
+</LI>
+<LI><i>Windows XP and Windows 2000:</i>  Not enough pool is available for the storage stack to write out modified pages. This indicates a driver bug. <P>If Parameter 3 is small, then this is a possibility. Use <a href="r30_exts_kernel_u_f7bac801-e399-4fab-af3e-ad2c1effce20.xml.htm"><b>!vm</b></a> and <a href="r28_exts_kernel_n_47a5b9f5-03d6-4479-827c-ad88f67d08b2.xml.htm"><b>!poolused 2</b></a>.</P>
+</LI>
+<LI><i>Windows 2000:</i>  All the processes have been trimmed to their minimums and all modified pages written, but still no memory is available. The freed memory must be stuck in transition pages with non-zero reference counts &#8212; thus they cannot be put on the freelist. <P>A driver is neglecting to unlock the pages preventing the reference counts from going to zero which would free the pages. This may be due to transfers that never finish, causing the driver routines to run endlessly, or to other driver bugs. </P>
+<P>If Parameter 4 is large, then this is a possibility. But it is very hard to find the driver. Try the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process 0 1</b></a> extension and look for any drivers that have a lot of locked pages. </P>
+</LI>
+</UL>
+<P></P>
+<P>If the problem cannot be found, then try booting with a kernel debugger attached from the beginning, and monitor the situation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x4D: NO_PAGES_AVAILABLE RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

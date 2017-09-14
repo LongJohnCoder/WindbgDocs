@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SetSymbolPath</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SetSymbolPath"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="SetSymbolPath"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_b699ac62-be52-4f79-9762-8ed1274dfb41.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::SetSymbolPath method">
+<META NAME="MS-HKWD" CONTENT="SetSymbolPath (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_b699ac62-be52-4f79-9762-8ed1274dfb41.xml"></A>SetSymbolPath</H1>
+<P><P>The <b>SetSymbolPath</b> and <b>SetSymbolPathWide</b> methods set the symbol path.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>IDebugSymbols::SetSymbolPath(</b><BR><b>    IN PCSTR  </b><i>Path</i><BR><b>    );</b><BR><BR><b>IDebugSymbols3::SetSymbolPathWide(</b><BR><b>    IN PWSTR  </b><i>Path</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define SetSymbolPathT SetSymbolPathWide</b><BR><b>#else</b><BR><b>#define SetSymbolPathT SetSymbolPath</b><BR><b>#endif</b><BR><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Path</i></DT>
+<DD>Specifies the new symbol path.  This is a string that contains symbol path elements separated by semicolons (<b>;</b>).  Each symbol path element can specify either a directory or a symbol server.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>These methods can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>SetSymbolPath</b> is available in all versions of <b>IDebugSymbols</b>.  <b>SetSymbolPathWide</b> is available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4>Comments</H4>
+<P>For more information about manipulating the symbol path, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Using Symbols</a>.  For an overview of the symbol path and its syntax, see <a href="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml.htm">Symbol Path</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugsymbols_cc73a8f6-3cf1-40a1-8cb5-712eeca0b883.xml.htm"><b>AppendSymbolPath</b></a>, <a href="idebugsymbols_b13afb68-0f30-477d-be1b-a2b49ae40081.xml.htm"><b>GetSymbolPath</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SetSymbolPath RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

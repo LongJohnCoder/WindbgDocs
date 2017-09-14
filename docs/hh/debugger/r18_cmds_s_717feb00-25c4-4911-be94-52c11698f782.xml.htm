@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>x (Examine Symbols)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, x (Examine Symbols)"><xml><MSHelp:Keyword Index="A" Term="r18_cmds_S_717feb00-25c4-4911-be94-52c11698f782.xml"/>
+<META NAME="MS-HKWD" CONTENT="x (Examine Symbols) command">
+<META NAME="MS-HKWD" CONTENT="Examine Symbols (x) command">
+<META NAME="MS-HKWD" CONTENT="symbols, Examine Symbols (x) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r18_cmds_S_717feb00-25c4-4911-be94-52c11698f782.xml"></A>x (Examine Symbols)</H1>
+<P>The <b>x</b> command displays the symbols in all contexts that match the specified pattern.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>x</b> [<i>Options</i>] <i>Module</i><b>!</b><i>Symbol</i> <BR><b>x</b> [<i>Options</i>] <b>*</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Specifies symbol searching options. You can use one or more of the following options:<DL><DT><b>/t</b></DT>
+<DD>Displays the data type of each symbol, if the data type is known.</DD>
+<DT><b>/v</b></DT>
+<DD>Displays the symbol type (local, global, parameter, function, or unknown) of each symbol. This option also displays the size of each symbol. The size of a function symbol is the size of the function in memory. The size of other symbols is the size of the data type that the symbol represents. Size is always measured in bytes and displayed in hexadecimal format.</DD>
+<DT><b>/s</b> <i>Size</i></DT>
+<DD>Display only those symbols whose size, in bytes, equals the value of <i>Size</i>. The <i>Size</i> of a function symbol is the size of the function in memory. The <i>Size</i> of other symbols is the size of the data type that the symbol represents. Symbols whose size cannot be determined are always displayed. <i>Size</i> must be a nonzero integer.</DD>
+<DT><b>/q</b></DT>
+<DD>Displays symbol names in quoted format.</DD>
+<DT><b>/p</b></DT>
+<DD>Omits the space before the opening parenthesis when the debugger displays a function name and its arguments. This kind of display can make it easier if you are copying function names and arguments from the <b>x</b> display to another location.</DD>
+<DT><b>/f</b></DT>
+<DD>Displays the data size of a function.</DD>
+<DT><b>/d</b></DT>
+<DD>Displays the data size of data.</DD>
+<DT><b>/a</b></DT>
+<DD>Sorts the display by address, in ascending order.</DD>
+<DT><b>/A</b></DT>
+<DD>Sorts the display by address, in descending order.</DD>
+<DT><b>/n</b></DT>
+<DD>Sorts the display by name, in ascending order.</DD>
+<DT><b>/N</b></DT>
+<DD>Sorts the display by name, in descending order.</DD>
+<DT><b>/z</b></DT>
+<DD>Sorts the display by size, in ascending order.</DD>
+<DT><b>/Z</b></DT>
+<DD>Sorts the display by size, in descending order.</DD>
+</DL>
+</DD>
+<DT><i>Module</i></DT>
+<DD>Specifies the module to search. This module can be an <i>.exe</i>, <i>.dll</i>, or <i>.sys</i> file. <i>Module</i> can contain a variety of wildcard characters and specifiers. For more information about the syntax, see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a>.</DD>
+<DT><i>Symbol</i></DT>
+<DD>Specifies a pattern that the symbol must contain. <i>Symbol</i> can contain a variety of wildcard characters and specifiers. For more information about the syntax, see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a>. <P>Because this pattern is matched to a symbol, the match is not case sensitive, and a single leading underscore (_) represents any quantity of leading underscores. You can add spaces within <i>Symbol</i>, so that you can specify symbol names that contain spaces (such as "operator new" or "Template&lt;A, B&gt;") without using wildcard characters.</P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>x</b> command displays all of the public symbols for the specified module (<i>Module</i>) that match the specified pattern (<i>Symbol</i>). For example, the following command finds all of the symbols in <b>MyModule</b> that contain the string "spin".</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>x mymodule!*spin*</b> <BR></nobr></P>
+<P>The following command quickly locates the "DownloadMinor" and "DownloadMajor" symbols in <b>MyModule</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>x mymodule!downloadm??or</b> <BR></nobr></P>
+<P>You can also show all symbols in the <b>MyModule</b> by using the following command.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>x mymodule!*</b> <BR></nobr></P>
+<P>The preceding commands also force the debugger to reload symbol information from <b>MyModule</b>. If you want to reload the symbols in the module with a minimal display, use the following command.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>x mymodule!*start*</b> <BR></nobr></P>
+<P>A few symbols always contain the string "start". Therefore, the preceding command always displays some output to verify that the command works. But the preceding command avoids the excessive display length of <b>x mymodule!*</b>.</P>
+<P>The display shows the starting address of each symbol and the full symbol name. If the symbol is a function name, the display also includes a list of its argument types. If the symbol is a global variable, its current value is displayed.</P>
+<P>There is one other special case of the <b>x</b> command. To display the addresses and names of all local variables for the current context, use the following command.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>x *</b> <BR></nobr></P>
+<P class="note"><b>Note</b>  In most cases, you cannot access local variables unless private symbols have been loaded. For more information about this situation, see <a href="r35_errors_f164b35d-1ac3-45c6-951e-a86bde647d22.xml.htm"><b>dbgerr005:</b> Private Symbols Required</a>. To display the values of local variables, use the <a href="r16_cmds_c_98e3cbda-d34b-4869-94a1-d21e5fac0030.xml.htm"><b>dv (Display Local Variables)</b></a> command.</P>
+<P>The following code examples show the additional <b>x</b> options. When you use the <b>/v</b> option, the first column of the display shows the symbol type (local, global, parameter, function, or unknown). The second column is the address of the symbol. The third column is the size of the symbol, in bytes. The fourth column shows the module name and symbol name. In some cases, this display is followed by an equal sign (=) and then the data type of the symbol. The source of the symbol (public or full symbol information) is also displayed.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>x /v nt!CmType*</b><BR>global 806c9e68    0 nt!CmTypeName = struct _UNICODE_STRING []<BR>global 806c9e68  150 nt!CmTypeName = struct _UNICODE_STRING [42]<BR>global 806c9e68    0 nt!CmTypeName = struct _UNICODE_STRING []<BR>global 805bd7b0    0 nt!CmTypeString = unsigned short *[]<BR>global 805bd7b0   a8 nt!CmTypeString = unsigned short *[42]<BR></nobr></P>
+<P>In the preceding example, the size is given in hexadecimal format, while the data type is given in decimal format. Therefore, in the last line of the preceding example, the data type is an array of 42 unsigned short integers. The size of this array is 42*4 = 168, and 168 is displayed in hexadecimal format as 0xA8.</P>
+<P>You can use the <b>/s</b> <i>Size</i> option to display only those symbols whose size, in bytes, is a certain value. For example, you can restrict the command in the preceding example to symbols that represent objects whose size is 0xA8.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>x /v /s a8 nt!CmType*</b><BR>global 805bd7b0   a8 nt!CmTypeString = unsigned short *[42]<BR></nobr></P>
+<P>The <b>/t</b> option causes the debugger to display information about each symbol's data type. Note that for many symbols, this information is displayed even without the <b>/t</b> option. When you use <b>/t</b>, such symbols have their data type information displayed twice.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>x prymes!__n*</b><BR>00427d84 myModule!__nullstring = 0x00425de8 "(null)"<BR>0042a3c0 myModule!_nstream = 512<BR>Type information missing error for _nh_malloc<BR>004021c1 myModule!MyStructInstance = struct MyStruct<BR>00427d14 myModule!_NLG_Destination = &lt;no type information&gt;<BR><BR>0:001&gt; <b>x /t prymes!__n*</b><BR>00427d84 char * myModule!__nullstring = 0x00425de8 "(null)"<BR>0042a3c0 int myModule!_nstream = 512<BR>Type information missing error for _nh_malloc<BR>004021c1 struct MyStruct myModule!MyStructInstance = struct MyStruct<BR>00427d14 &lt;NoType&gt; myModule!_NLG_Destination = &lt;no type information&gt;<BR></nobr></P>
+<P>The following example demonstrates the switch <b>/f</b> when used to filter functions on the module <i>notepad.exe</i>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; x /f /v notepad!*main*<BR>prv func   00000001`00003340  249 notepad!WinMain (struct HINSTANCE__ *, struct HINSTANCE__ *, char *, int)<BR>prv func   00000001`0000a7b0   1c notepad!WinMainCRTStartup$filt$0 (void)<BR>prv func   00000001`0000a540  268 notepad!WinMainCRTStartup (void)<BR><BR></nobr></P>
+<H4>See Also</H4>
+<P><a href="r09_symbols_45e4c51f-7e31-48b1-b641-0321f9e2710a.xml.htm">Verifying Symbols</a>, <a href="r16_cmds_c_98e3cbda-d34b-4869-94a1-d21e5fac0030.xml.htm"><b>dv (Display Local Variables)</b></a> </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: x (Examine Symbols) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

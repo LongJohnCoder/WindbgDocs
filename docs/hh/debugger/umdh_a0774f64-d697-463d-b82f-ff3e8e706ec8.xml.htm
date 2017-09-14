@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Interpreting a Log Comparison</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Interpreting a Log Comparison"><xml><MSHelp:Keyword Index="A" Term="UMDH_a0774f64-d697-463d-b82f-ff3e8e706ec8.xml"/>
+<META NAME="MS-HKWD" CONTENT="UMDH, interpreting a log comparison"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="UMDH_a0774f64-d697-463d-b82f-ff3e8e706ec8.xml"></A>Interpreting a Log Comparison</H1>
+<P>You can generate multiple UMDH logs of the same process over time. Then, you can use UMDH to compare the logs and determine which call stack allocations have grown the most between trials.</P>
+<P>For example, the following command directs UMDH to compare two UMDH logs, <i>Log1.txt</i> and <i>Log2.txt</i>, and redirects the output to a third file, <i>Compare.txt</i>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>umdh &#8211;v Log1.txt Log2.txt &gt; Compare.txt<BR><BR></nobr></P>
+<P>The resulting <i>Compare.txt</i> file lists the call stacks recorded in each log and, for each stack, displays the change in heap allocations between the log files.</P>
+<P>For example, the following line from the file shows the change in allocation size for the functions in the call stack labeled "Backtrace00053."</P>
+<P>In <i>Log1.txt</i>, the calls in the stack accounts for 40,432 (0x9DF0) bytes, but in <i>Log2.txt</i>, the same call stack accounts for 61,712 (0xF110) bytes, a difference of 21,280 (0x5320) bytes.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>+ 5320 (f110 - 9df0) 3a allocs BackTrace00053 <BR>Total increase == 5320<BR></nobr></P>
+<P>Following is the stack for the allocation:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>ntdll!RtlDebugAllocateHeap+0x000000FD<BR>ntdll!RtlAllocateHeapSlowly+0x0000005A<BR>ntdll!RtlAllocateHeap+0x00000808<BR>MyApp!_heap_alloc_base+0x00000069<BR>MyApp!_heap_alloc_dbg+0x000001A2<BR>MyApp!_nh_malloc_dbg+0x00000023<BR>MyApp!_nh_malloc+0x00000016<BR>MyApp!operator new+0x0000000E<BR>MyApp!LeakyFunc+0x0000001E<BR>MyApp!main+0x0000002C<BR>MyApp!mainCRTStartup+0x000000FC<BR>KERNEL32!BaseProcessStart+0x0000003D<BR><BR></nobr></P>
+<P>An examination of the call stack shows that the <b>LeakyFunc</b> function is allocating memory by using the Visual C++ run-time library. If examination of the other log files shows that the allocation grows over time, you might be able to conclude that memory allocated from the heap is not being freed.</P>
+<P></P>
+<H4>See Also</H4>
+<P><a href="t13_advanced_4ff1ea37-c529-423f-aae9-71c955c35eff.xml.htm">Using UMDH to Find a User-Mode Memory Leak</a> </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Interpreting a Log Comparison RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

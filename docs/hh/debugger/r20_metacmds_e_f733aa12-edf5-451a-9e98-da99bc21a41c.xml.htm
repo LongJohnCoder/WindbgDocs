@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.endsrv (End Debugging Server)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .endsrv (End Debugging Server)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_f733aa12-edf5-451a-9e98-da99bc21a41c.xml"/>
+<META NAME="MS-HKWD" CONTENT=".endsrv (End Debugging Server) command">
+<META NAME="MS-HKWD" CONTENT="End Debugging Server (.endsrv) command">
+<META NAME="MS-HKWD" CONTENT="remote debugging through the debugger, End Debugging Server (.endsrv) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_f733aa12-edf5-451a-9e98-da99bc21a41c.xml"></A>.endsrv (End Debugging Server)</H1>
+<P>The <b>.endsrv</b> command causes the debugger to cancel an active debugging server.  </P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.endsrv</b> <i>ServerID</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>ServerID</i></DT>
+<DD>Specifies the ID of the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#098e09f5-d7db-435e-9403-16661d6693b5">debugging server</a>.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4>
+<P>You can use this command only when you are performing remote debugging through the debugger.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>You must issue the <b>.endsrv</b> command from the debugging server or from one of the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cab89f06-8d34-430d-b047-ea48e96aac1b">debugging clients</a> that are connected to the debugging server.</P>
+<P>To determine the ID of a debugging server, use the <a href="r22_metacmds_s_2864ec63-b13b-488d-9989-16193e94ce9f.xml.htm"><b>.servers (List Debugging Servers)</b></a> command.</P>
+<P>The <b>.endsrv</b> command can terminate a debugging server, but it cannot terminate a process server or KD connection server. For information on how to end these servers, see <a href="r08_use_remote_38b8a8af-6279-489c-8b76-e52c9eb9bb1c.xml.htm">Controlling a Process Server Session</a> and <a href="r08_use_remote_1abca1e1-5abd-4f36-a396-edc030a9af9c.xml.htm">Controlling a KD Connection Server Session</a>. (There is, however, one exceptional case when <b>.endsrv</b> can end a process server that has been launched programmatically; for details, see <a href="idebugclient_de137b80-ffd7-4399-85a3-50b3c870c28c.xml.htm"><b>IDebugClient::StartProcessServer</b></a>.) </P>
+<P>If you cancel a debugging server, you prevent any future debugging clients from attaching to the server. However, if you cancel a debugging server, you do not detach any clients that are <i>currently</i> attached through the server.  </P>
+<P>Consider the following situation. Suppose that you start some debugging servers, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.server npipe:pipe=rabbit</b><BR>Server started with 'npipe:pipe=rabbit'<BR>0:000&gt; <b>.server tcp:port=7</b><BR>Server started with 'tcp:port=7'<BR></nobr></P>
+<P>Then, you decide to use a password, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.server npipe:pipe=tiger,password=hardtoguess</b><BR>Server started with 'npipe:pipe=tiger,password=hardtoguess'<BR></nobr></P>
+<P>But the earlier servers are still running, so you should cancel them, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.servers</b><BR>0 - Debugger Server - npipe:Pipe=rabbit<BR>1 - Debugger Server - tcp:Port=7<BR>2 - Debugger Server - npipe:Pipe=tiger,Password=*<BR>0:000&gt; <b>.endsrv 0</b><BR>Server told to exit.  Actual exit may be delayed until<BR>the next connection attempt.<BR>0:000&gt; <b>.endsrv 1</b><BR>Server told to exit.  Actual exit may be delayed until<BR>the next connection attempt.<BR>0:000&gt; <b>.servers</b><BR>0 - &lt;Disabled, exit pending&gt;<BR>1 - &lt;Disabled, exit pending&gt;<BR>2 - Debugger Server - npipe:Pipe=tiger,Password=*<BR></nobr></P>
+<P>Finally, to make sure that nothing attached to your computer while the earlier servers were active, use the <a href="r19_metacmds_a_e53f575c-5a40-48c6-af85-4aebc680ca91.xml.htm"><b>.clients (List Debugging Clients)</b></a> command.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.clients</b><BR>HotMachine\HostUser, last active Mon Mar 04 16:05:21 2002<BR></nobr></P>
+<P class="note"><b>Caution</b>  Using a password with TCP, NPIPE, or COM protocol offers only a <i>small</i> amount of protection, because the password is not encrypted.  When you use a password together with a SSL or SPIPE protocol, the password is encrypted. If you want to establish a secure remote session, you <i>must</i> use the SSL or SPIPE protocol.</P>
+<H4>Additional Information</H4>
+<P>For more information about remote debugging, see <a href="r08_use_remote_e8049dea-474e-411d-8286-ec4a646480f7.xml.htm">Remote Debugging Through the Debugger</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .endsrv (End Debugging Server) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

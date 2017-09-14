@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging a Service Application</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging a Service Application"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_5c8fb529-d9f1-4f24-ae82-1d52a1d3d794.xml"/>
+<META NAME="MS-HKWD" CONTENT="service application debugging">
+<META NAME="MS-HKWD" CONTENT="postmortem debugging, debugging service applications">
+<META NAME="MS-HKWD" CONTENT="services"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_5c8fb529-d9f1-4f24-ae82-1d52a1d3d794.xml"></A>Debugging a Service Application</H1>
+<P>A <i>service</i>, also known as a <i>Windows service</i>, is a user-mode process designed to be started by Windows without human interaction. It is started automatically at system boot, or by an application that uses the service functions included in the Win32 API. A service can also be started by a human user through the Services control panel utility. Every service must conform to the interface rules of the service control manager (SCM).</P>
+<P>Each service is composed of three elements: a <i>service application</i>, a <i>service control program</i>, and the service control manager itself. Although a service application is sometimes (incorrectly) referred to as a "service," it is actually one of the three components that make up a service. The service application can contain almost any kind of user-mode code. The service control program controls when the service application starts and stops. The service control manager is part of Windows.</P>
+<P>The following sections describe how to debug a service application:</P><B></B><div class="indent1">
+<P><a href="t13_advanced_421325cc-6e83-41aa-81d5-57a3ba622c23.xml.htm">Choosing the Best Method</a> </P>
+</div>
+<div class="indent1">
+<P><a href="t13_advanced_1d91f582-44b7-4603-804b-8ed48a14a2cf.xml.htm">Preparing to Debug the Service Application</a> </P>
+</div>
+<div class="indent1">
+<P><a href="t13_advanced_878afdbd-18d3-4564-88c3-45ffb9ba1a0b.xml.htm">Debugging the Service Application Automatically</a> </P>
+</div>
+<div class="indent1">
+<P><a href="t13_advanced_8dded06a-1586-4f86-9ff9-bca1fca5380f.xml.htm">Debugging the Service Application Manually</a> </P>
+</div>
+<P></P>
+<P>For an overview of services, service applications, and the service control manager, see <i>Microsoft Windows Internals: Microsoft Windows Server 2003, Windows XP, and Windows 2000</i> by David A. Solomon and Mark E. Russinovich (4th edition, Microsoft Press, 2005).</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging a Service Application RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

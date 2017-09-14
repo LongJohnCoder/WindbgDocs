@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x9A: SYSTEM_LICENSE_VIOLATION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x9A: SYSTEM_LICENSE_VIOLATION"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_b1a64407-82d2-4fd4-9421-36fb10638fe5.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x9A: SYSTEM_LICENSE_VIOLATION">
+<META NAME="MS-HKWD" CONTENT="SYSTEM_LICENSE_VIOLATION"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_b1a64407-82d2-4fd4-9421-36fb10638fe5.xml"></A>Bug Check 0x9A: SYSTEM_LICENSE_VIOLATION</H1>
+<P>The SYSTEM_LICENSE_VIOLATION bug check has a value of 0x0000009A. This bug check indicates that the software license agreement has been violated.</P>
+<H4>Parameters</H4>
+<P>The following parameters appear on the blue screen. Parameter 1 indicates the type of violation. The meaning of the other parameters depends on the value of Parameter 1.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x00</TD>
+<TD Width=""><b>0:</b> The product should be WinNT<BR><BR><b>1:</b> The product should be LanmanNT or ServerNT <BR><BR></TD>
+<TD Width="">A partial serial number</TD>
+<TD Width="">The first two characters of the product type from the product options</TD>
+<TD Width="">Offline product type changes have been attempted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x01</TD>
+<TD Width="">The registered evaluation time from source 1</TD>
+<TD Width="">A partial serial number </TD>
+<TD Width="">The registered evaluation time from an alternate source </TD>
+<TD Width="">Offline changes to the Microsoft Windows evaluation unit time period have been attempted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x02</TD>
+<TD Width="">The status code that is associated with the open failure</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The setup key could not be opened.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x03</TD>
+<TD Width="">The status code that is associated with the key lookup failure</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The SetupType or SetupInProgress value from the setup key is missing, so setup mode could not be detected.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x04</TD>
+<TD Width="">The status code that is associated with the key lookup failure</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The <b>SystemPrefix</b> value from the setup key is missing.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x05</TD>
+<TD Width="">(See the setup code) </TD>
+<TD Width="">An invalid value was found in licensed processors </TD>
+<TD Width="">The officially licensed number of processors</TD>
+<TD Width="">Offline changes to the number of licensed processors have been attempted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x06</TD>
+<TD Width="">The status code that is associated with the open failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The <b>ProductOptions</b> key could not be opened.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x07</TD>
+<TD Width="">The status code that is associated with the read failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The <b>ProductType</b> value could not be read.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x08</TD>
+<TD Width="">The status code that is associated with the Change Notify failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">Change Notify on <b>ProductOptions</b> failed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x09</TD>
+<TD Width="">The status code that is associated with the Change Notify failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">Change Notify on <b>SystemPrefix</b> failed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0A</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">An NTW system was converted to an NTS system.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0B</TD>
+<TD Width="">The status code that is associated with the change failure</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The reference of the setup key failed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0C</TD>
+<TD Width="">The status code that is associated with the change failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The reference of the product options key failed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0D</TD>
+<TD Width="">The status code that is associated with the failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The attempt to open <b>ProductOptions</b> in the worker thread failed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0F</TD>
+<TD Width="">The status code that is associated with the failure</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The attempt to open the setup key failed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10</TD>
+<TD Width="">The status code that is associated with the failure</TD>
+<TD Width=""><b>0:</b> set value failed<BR><BR><b>1:</b> Change Notify failed <BR><BR></TD>
+<TD Width="">0 </TD>
+<TD Width="">A failure occurred in the setup key worker thread.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x11</TD>
+<TD Width="">The status code that is associated with the failure </TD>
+<TD Width=""><b>0:</b> set value failed<BR><BR><b>1:</b> Change Notify failed <BR><BR></TD>
+<TD Width="">0 </TD>
+<TD Width="">A failure occurred in the product options key worker thread.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x12</TD>
+<TD Width="">The status code that is associated with the failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">Unable to open the <b>LicenseInfoSuites</b> key for the suite.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x13</TD>
+<TD Width="">The status code that is associated with the failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">Unable to query the <b>LicenseInfoSuites</b> key for the suite.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x14</TD>
+<TD Width="">The size of the memory allocation </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">Unable to allocate memory.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x15</TD>
+<TD Width="">The status code that is associated with the failure </TD>
+<TD Width="">Reserved</TD>
+<TD Width="">0 </TD>
+<TD Width="">Unable to reset the <b>ConcurrentLimit</b> value for the suite key.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x16</TD>
+<TD Width="">The status code that is associated with the failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">Unable to open the license key for a suite product.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x17</TD>
+<TD Width="">The status code that is associated with the failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">Unable to reset the <b>ConcurrentLimit</b> value for a suite product.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x18</TD>
+<TD Width="">The status code that is associated with the open failure </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">0 </TD>
+<TD Width="">Unable to start the Change Notify for the <b>LicenseInfoSuites</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x19</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">A suite is running on a system that must be PDC.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1A</TD>
+<TD Width="">The status code that is associated with the failure </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">A failure occurred when enumerating the suites.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1B</TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width="">Changes to the policy cache were attempted.</TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>The Microsoft Windows operating system detects a violation of the software license agreement. </P>
+<P>A user might have tried to change the product type of an offline system or change the trial period of an evaluation unit of Windows. For more information about the specific violation, see the parameter list.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x9A: SYSTEM_LICENSE_VIOLATION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

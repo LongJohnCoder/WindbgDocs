@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Determining the ACL of an Object</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Determining the ACL of an Object"><xml><MSHelp:Keyword Index="A" Term="t01_basic_9890adda-ffa5-4270-b66d-3b055947a030.xml"/>
+<META NAME="MS-HKWD" CONTENT="access control list (ACL)">
+<META NAME="MS-HKWD" CONTENT="ACL (access control list)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t01_basic_9890adda-ffa5-4270-b66d-3b055947a030.xml"></A>Determining the ACL of an Object</H1>
+<P>You can use the debugger to examine the access control list (ACL) of an object.</P>
+<P></P>
+<P>The following method can be used if you are performing kernel debugging. To use it while you are performing user-mode debugging, you need to redirect control to a kernel debugger. See <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a> for details.</P>
+<P>First, use the <a href="r28_exts_kernel_n_ce7c0939-9122-41e1-bffb-27f4e5855af6.xml.htm"><b>!object</b></a> debugger extension with the name of the object in question:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!object \BaseNamedObjects\AgentToWkssvcEvent</b><BR>Object: ffbb8a98  Type: (80e30e70) Event<BR>    ObjectHeader: <b>ffbb8a80</b><BR>    HandleCount: 2  PointerCount: 3<BR>    Directory Object: e14824a0  Name: AgentToWkssvcEvent<BR><BR></nobr></P>
+<P>This shows that the object header has address 0xFFBB8A80. Use the <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a> command with this address and the <b>nt!_OBJECT_HEADER</b> structure name:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>dt nt!_OBJECT_HEADER ffbb8a80</b><BR>   +0x000 PointerCount     : 3<BR>   +0x004 HandleCount      : 2<BR>   +0x004 NextToFree       : 0x00000002<BR>   +0x008 Type             : 0x80e30e70<BR>   +0x00c NameInfoOffset   : 0x10 ''<BR>   +0x00d HandleInfoOffset : 0 ''<BR>   +0x00e QuotaInfoOffset  : 0 ''<BR>   +0x00f Flags            : 0x20 ' '<BR>   +0x010 ObjectCreateInfo : 0x8016b460<BR>   +0x010 QuotaBlockCharged : 0x8016b460<BR>   +0x014 SecurityDescriptor : <b>0xe11f08b6</b><BR>   +0x018 Body             : _QUAD<BR><BR></nobr></P>
+<P>The security descriptor pointer value is shown as 0xE11F08B6. The lowest 3 bits of this value represent an offset past the beginning of this structure, so you should ignore them. In other words, the SECURITY_DESCRIPTOR structure actually begins at 0xE11F08B6 &amp; ~0x7. Use the <a href="r25_exts_general_he_d3b91f8f-dafa-49c5-b759-5af138790d91.xml.htm"><b>!sd</b></a> extension on this address:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!sd e11f08b0</b><BR>-&gt;Revision: 0x1<BR>-&gt;Sbz1    : 0x0<BR>-&gt;Control : 0x8004<BR>            SE_DACL_PRESENT<BR>            SE_SELF_RELATIVE<BR>-&gt;Owner   : S-1-5-32-544<BR>-&gt;Group   : S-1-5-18<BR>-&gt;Dacl    : <BR>-&gt;Dacl    : -&gt;AclRevision: 0x2<BR>-&gt;Dacl    : -&gt;Sbz1       : 0x0<BR>-&gt;Dacl    : -&gt;AclSize    : 0x44<BR>-&gt;Dacl    : -&gt;AceCount   : 0x2<BR>-&gt;Dacl    : -&gt;Sbz2       : 0x0<BR>-&gt;Dacl    : -&gt;Ace[0]: -&gt;AceType: ACCESS_ALLOWED_ACE_TYPE<BR>-&gt;Dacl    : -&gt;Ace[0]: -&gt;AceFlags: 0x0<BR>-&gt;Dacl    : -&gt;Ace[0]: -&gt;AceSize: 0x14<BR>-&gt;Dacl    : -&gt;Ace[0]: -&gt;Mask : 0x001f0003<BR>-&gt;Dacl    : -&gt;Ace[0]: -&gt;SID: S-1-5-18<BR><BR>-&gt;Dacl    : -&gt;Ace[1]: -&gt;AceType: ACCESS_ALLOWED_ACE_TYPE<BR>-&gt;Dacl    : -&gt;Ace[1]: -&gt;AceFlags: 0x0<BR>-&gt;Dacl    : -&gt;Ace[1]: -&gt;AceSize: 0x18<BR>-&gt;Dacl    : -&gt;Ace[1]: -&gt;Mask : 0x00120001<BR>-&gt;Dacl    : -&gt;Ace[1]: -&gt;SID: S-1-5-32-544<BR><BR>-&gt;Sacl    :  is NULL<BR><BR></nobr></P>
+<P>This displays the security information for this object.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Determining the ACL of an Object RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

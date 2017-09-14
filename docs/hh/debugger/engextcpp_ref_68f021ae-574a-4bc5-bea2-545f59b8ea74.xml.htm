@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetUnnamedArgStr</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetUnnamedArgStr"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="GetUnnamedArgStr"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_68f021ae-574a-4bc5-bea2-545f59b8ea74.xml"/>
+<META NAME="MS-HKWD" CONTENT="ExtExtension::GetUnnamedArgStr method">
+<META NAME="MS-HKWD" CONTENT="GetUnnamedArgStr (ExtExtension) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_68f021ae-574a-4bc5-bea2-545f59b8ea74.xml"></A>GetUnnamedArgStr</H1>
+<P><P>The <b>GetUnnamedArgStr</b> method returns an unnamed string argument from the command line used to invoke the current extension command.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>PCSTR</b><BR><b>  ExtExtension::GetUnnamedArgStr(</b><BR><b>    IN ULONG  </b><i>Index</i><BR><b>    ) throw(...)</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Index</i></DT>
+<DD>Specifies the index of the argument.  The command-line description used in <a href="engextcpp_ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml.htm">EXT_COMMAND</a> must specify that the type of this argument is string.  The value of <i>Index</i> should be between zero and the number of unnamed arguments returned by <a href="engextcpp_ref_8ca2186f-dcda-422a-948f-ead63f451ff2.xml.htm"><b>GetNumUnnamedArgs</b></a> minus one (unnamed arguments - 1).</DD>
+</DL>
+<H4>Return Value</H4>
+<P><b>GetUnnamedArgStr</b> returns the unnamed string argument.</P>
+<H4>Comments</H4>
+<P>For an overview of argument parsing in the EngExtCpp extensions framework, see <a href="engextcpp_dg_ee0ab1ba-1ede-4981-9200-ac2b0dbc6c03.xml.htm">Parsing Extension Arguments</a>.</P>
+<P>The string returned by <b>GetUnnamedArgStr</b> is only meaningful during the execution of the current extension command.</P>
+<P>This method should only be called during the execution of an extension command provided by this class.</P>
+<H4>Requirements</H4>
+<p><b>Headers:</b> Defined in <i>Engextcpp.hpp</i>.  Include <i>Engextcpp.hpp</i>.</p>
+<H4>See Also</H4>
+<P><a href="engextcpp_ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml.htm">EXT_COMMAND</a>, <a href="engextcpp_ref_8ca2186f-dcda-422a-948f-ead63f451ff2.xml.htm"><b>GetNumUnnamedArgs</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetUnnamedArgStr RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

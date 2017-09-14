@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetExpressionEx</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetExpressionEx"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetExpressionEx"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_74af8a17-694a-46ec-827c-fdd2aecbf15c.xml"/>
+<META NAME="MS-HKWD" CONTENT="GetExpressionEx function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_74af8a17-694a-46ec-827c-fdd2aecbf15c.xml"></A>GetExpressionEx</H1>
+<P><P>The <b>GetExpressionEx</b> function evaluates an expression. The expression is evaluated using the MASM evaluator, and can contain aliases.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>BOOL</b><BR><b>GetExpressionEx(</b><BR><b>    PCSTR  </b><i>Expression</i><b>,</b><BR><b>    ULONG64 *  </b><i>Value</i><b>,</b><BR><b>    PCSTR *  </b><i>Remainder</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Expression</i></DT>
+<DD>Specifies the expression to evaluate.  The expression uses the MASM syntax.  For details of this syntax, see <a href="r13_syntax_eac65e6b-f13f-4fcb-8973-e64ba0ac8865.xml.htm">MASM Numbers and Operators</a>.</DD>
+<DT><i>Value</i></DT>
+<DD>Receives the value of the expression.</DD>
+<DT><i>Remainder</i></DT>
+<DD>Receives a pointer to the first character in the expression <i>Expression</i> that was not used in the evaluation of the expression.</DD>
+</DL>
+<H4>Return Value</H4>
+<P><b>GetExpressionEx </b>returns one of the following values:</P>
+<DL><DT>TRUE</DT>
+<DD>The expression was evaluated successfully.</DD>
+<DT>FALSE</DT>
+<DD>An error occurred while attempting to evaluate the expression.</DD>
+</DL>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this function, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_666ae7de-7842-4ba8-9352-e79aefe24ba7.xml.htm"><b>GetExpression</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetExpressionEx RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Accessing Local Variables</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Accessing Local Variables"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_80f32b72-6ace-4cf7-a9d5-9a24afd387d9.xml"/>
+<META NAME="MS-HKWD" CONTENT="local variables, accessing"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_80f32b72-6ace-4cf7-a9d5-9a24afd387d9.xml"></A>Accessing Local Variables</H1>
+<P>Local variables, like global variables, are stored in the symbol files. Like global variables, the debugger interprets their names as addresses. They can be read and written in the same manner as global variables.  However, if it is necessary to indicate to a command that a symbol is local, precede the symbol with a dollar sign ( $ ) and an exclamation point ( ! ), as in <b>$!var</b>.</P>
+<P>You can also use the following methods to display, change, and use local variables:</P><B></B><UL type="disc">
+<LI>The <a href="r16_cmds_c_98e3cbda-d34b-4869-94a1-d21e5fac0030.xml.htm"><b>dv (Display Local Variables)</b></a> command displays the names and values of all local variables.</LI>
+<LI><i>(WinDbg only)</i>  The <a href="r36_gui_1_e05d85f5-f61e-41e4-b80a-f72b4fc0bdd7.xml.htm">Locals window</a> displays the names and values of all local variables. You can also use this window to change the values of these variables. </LI>
+<LI>The <a href="r24_exts_general_a_d01e96cf-88a5-4cbd-94a4-14a9f308eff2.xml.htm"><b>!for_each_local</b></a> extension enables you to execute a single command repeatedly, once for each local variable.</LI>
+</UL>
+<P></P>
+<P>However, there is one primary difference between local and global variables. When an application is executing, the meaning of local variables depends on the location of the program counter, because the scope of such variables extends only to the function in which they are defined.</P>
+<P>The debugger interprets local variables according to the <a href="dbg_glossary_bf550fa0-6430-4ba8-8ea4-50277d85224d.xml.htm#171904bd-2abc-4ac2-9e8c-d809b95a23b3"><i>local context</i></a>. By default, this context matches the location of the program counter. But the debugger can change the context. For more information about the local context, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#348f186b-acf8-4f68-be90-b68b085d7600">Local Context</a>.</P>
+<P>When the local context is changed, the Locals window is immediately updated to reflect the new collection of local variables. The <b>DV</b> command also shows the new variables. All of these variable names are then interpreted correctly by the memory commands that are described earlier. You can then read or write to these variables.</P>
+<P>When you are debugging optimized code, some local variables might be collapsed, replaced with a register, or perhaps even temporarily stored on the stack. If you want to use source files or local variables while you are debugging, you should not optimize your code.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Accessing Local Variables RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

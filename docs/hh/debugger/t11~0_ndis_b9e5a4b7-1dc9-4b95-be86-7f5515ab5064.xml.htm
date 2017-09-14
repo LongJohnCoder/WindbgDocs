@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Enabling NDIS Debug Tracing</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Enabling NDIS Debug Tracing"><xml><MSHelp:Keyword Index="A" Term="t11~0_ndis_b9e5a4b7-1dc9-4b95-be86-7f5515ab5064.xml"/>
+<META NAME="MS-HKWD" CONTENT="NDIS debugging, debug tracing"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~0_ndis_b9e5a4b7-1dc9-4b95-be86-7f5515ab5064.xml"></A>Enabling NDIS Debug Tracing</H1>
+<P>NDIS debug tracing is the primary method for debugging NDIS drivers.  When you set up NDIS debug tracing, you are actually enabling one or more levels of <b>DbgPrint</b> statements with NDIS.  The resulting information is sufficient for debugging most network driver problems.</P>
+<P>Debug tracing can be enabled in two ways:  from a debugger, or by editing the registry.  To enable debug tracing from the debugger, use the two NDIS extensions <a href="r32_exts_lg_nd_rpc_b747e4aa-ff66-40d0-a697-0dd81646eba4.xml.htm"><b>!ndiskd.dbglevel</b></a> and <a href="r32_exts_lg_nd_rpc_178e44e0-7397-41ee-b8d5-63e0bcd80d1c.xml.htm"><b>!ndiskd.dbgsystems</b></a>. For each extension you must provide appropriate arguments. To enable debug tracing by editing the registry, you must set the appropriate registry values; for details, see <a href="t11~0_ndis_ece22487-e22b-47c0-96a1-dc12e556397e.xml.htm">Enabling NDIS Debug Tracing By Setting Registry Values</a>.</P>
+<P>The registry method works even if the host computer does not have the checked version of the <i>Ndis.sys </i>symbols installed.   </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Enabling NDIS Debug Tracing RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

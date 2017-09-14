@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Global Flags Dialog Box</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Global Flags Dialog Box"><xml><MSHelp:Keyword Index="A" Term="GFlags_386ff394-9e91-4dd3-b0bf-5cea6e18a02d.xml"/>
+<META NAME="MS-HKWD" CONTENT="GFlags, dialog box"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_386ff394-9e91-4dd3-b0bf-5cea6e18a02d.xml"></A>Global Flags Dialog Box</H1>
+<P>You can use the <b>Global Flags</b> dialog box to set and clear global flags from a user interface that lists all flags by name. There is no need to look up flag abbreviations or hexadecimal values. </P>
+<P>Also, the dialog box provides access to the following features that are not available from the command line:</P><B></B><UL type="disc">
+<LI><b>Debugger</b> &#8722; Specifies that a particular program always runs in a debugger. </LI>
+<LI><b>Launch</b> &#8722; Runs a program with the specified debugging settings. </LI>
+<LI><b>Kernel Special Pool Tag</b> &#8722; Configures the Special Pool feature.</LI>
+</UL>
+<P></P>
+<P>This topic includes instructions for the following procedures:</P><B></B><div class="indent1">
+<P><a href="gflags_16d95539-45c1-4336-9a9c-289f0c51fcfe.xml.htm">Opening the Dialog Box</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_eb998dd7-df8e-458e-9d39-fc5af6d001c9.xml.htm">Setting and Clearing System-wide Flags</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_c099fb3a-c68b-4a3e-a299-b5eb2efb1da7.xml.htm">Setting and Clearing Kernel Flags</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_45110ddb-42f1-42b2-9a0d-a54b3a32c825.xml.htm">Setting and Clearing Image File Flags</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_5a368cce-72c6-4a23-9dc5-5cebda029430.xml.htm">Launching a Program with Flags</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_25523a5e-cb59-4f0b-86cd-3d25326f1e2d.xml.htm">Running a Program in a Debugger</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_df50b292-a788-44a3-9461-8dc8461a0557.xml.htm">Configuring Special Pool</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_4cb53592-1ff3-4f52-b231-e73a72a190ab.xml.htm">Configuring Object Reference Tracing</a> </P>
+</div>
+<P></P>
+<P>Pool tagging is permanently enabled on Windows Server 2003 and later versions of Windows. On these systems, the <b>Enable pool tagging</b> check box on the <b>Global Flags</b> dialog box is dimmed, and commands to enable or disable pool tagging fail. </P>
+<P>Use care in interpreting the <b>Enable page heap</b> check box for an image file in the <b>Global Flags</b> dialog box. This check box indicates that page heap verification is enabled for an image file, but it does not indicate whether it is full or standard page heap verification. If the check results from selecting the check box, then full page heap verification is enabled for the image file. However, if the check results from use of the command-line interface, then the check can represent the enabling of either full or standard page heap verification for the image file.</P>
+<P>To determine whether a full or standard page heap verification is enabled for a program, at the command line, type <b>gflags /p</b>. In the resulting display, <b>traces</b> indicates that standard page heap verification is enabled for the program and <b>full traces</b> indicates that full page heap verification is enabled for the program.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Global Flags Dialog Box RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

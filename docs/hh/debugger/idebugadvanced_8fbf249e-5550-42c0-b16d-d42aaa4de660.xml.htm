@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Request</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Request"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="Request"/>
+<MSHelp:Keyword Index="A" Term="IDebugAdvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugAdvanced*::Request method">
+<META NAME="MS-HKWD" CONTENT="Request (IDebugAdvanced*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugAdvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml"></A>Request</H1>
+<P><P>The <b>Request</b> method performs a variety of different operations.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugAdvanced2::Request(</b><BR><b>    IN ULONG  </b><i>Request</i><b>,</b><BR><b>    IN OPTIONAL PVOID  </b><i>InBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>InBufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PVOID  </b><i>OutBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>OutBufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>OutSize</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Request</i></DT>
+<DD>Specifies which operation to perform.  <i>Request</i> can be one of the values in the following table.  Details of each operation can be found by following the link in the <b>Request</b> column.<B></B><table>
+<TR valign="top">
+<TH Width="">Request</TH>
+<TH Width="">Action</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_3bc933ec-b2b4-417c-80b9-22be597b6acf.xml.htm">DEBUG_REQUEST_SOURCE_PATH_HAS_SOURCE_SERVER</a></TD>
+<TD Width="">Check the source path for a source server.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_cadf4646-f771-4367-b8bd-7c8cdb6e17d6.xml.htm">DEBUG_REQUEST_TARGET_EXCEPTION_CONTEXT</a></TD>
+<TD Width="">Return the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#55d53254-4010-4b02-b11f-938de8c2622b">thread context</a> for the stored event in a user-mode minidump file.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_2ac92008-4ff7-456c-a765-180938c0a2d4.xml.htm">DEBUG_REQUEST_TARGET_EXCEPTION_THREAD</a></TD>
+<TD Width="">Return the operating system thread ID for the stored event in a user-mode minidump file.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_7b4ab40a-ff45-4355-8a9c-f2295f77380d.xml.htm">DEBUG_REQUEST_TARGET_EXCEPTION_RECORD</a></TD>
+<TD Width="">Return the exception record for the stored event in a user-mode minidump file.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_873556cb-5f04-41c9-84a1-3790eb9dca5f.xml.htm">DEBUG_REQUEST_GET_ADDITIONAL_CREATE_OPTIONS</a></TD>
+<TD Width="">Return the default process creation options.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_935a7450-0123-4289-b615-e7037e767d28.xml.htm">DEBUG_REQUEST_SET_ADDITIONAL_CREATE_OPTIONS</a></TD>
+<TD Width="">Set the default process creation options.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_96dc7a97-2f3a-451f-905a-de4b1fb1e5d7.xml.htm">DEBUG_REQUEST_GET_WIN32_MAJOR_MINOR_VERSIONS</a></TD>
+<TD Width="">Return the version of Windows that is currently running on the target.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_60564876-4bdf-4236-875e-f094d8b0e84a.xml.htm">DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM</a></TD>
+<TD Width="">Read a stream from a user-mode minidump target.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_b43cf757-ea07-40c0-9bdf-da88248bafdc.xml.htm">DEBUG_REQUEST_TARGET_CAN_DETACH</a></TD>
+<TD Width="">Check to see if it is possible for the debugger engine to detach from the current process (leaving the process running but no longer being debugged).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_bf5124cd-b4b0-4e56-865d-93e6a418f8ee.xml.htm">DEBUG_REQUEST_SET_LOCAL_IMPLICIT_COMMAND_LINE</a></TD>
+<TD Width="">Set the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a>'s implicit command line.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_e8f2931c-b213-4245-9648-53fe7384ef3d.xml.htm">DEBUG_REQUEST_GET_CAPTURED_EVENT_CODE_OFFSET</a></TD>
+<TD Width="">Return the current event's instruction pointer.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_11e6e4c8-5045-4e46-8fae-3a1198eb6c29.xml.htm">DEBUG_REQUEST_READ_CAPTURED_EVENT_CODE_STREAM</a></TD>
+<TD Width="">Return up to 64 bytes of memory at the current event's instruction pointer.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a></TD>
+<TD Width="">Perform a variety of different operations that aid in the interpretation of typed data.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>InBuffer</i></DT>
+<DD>Specifies the input to this method.  The type and interpretation of the input depends on the <i>Request</i> parameter.</DD>
+<DT><i>InBufferSize</i></DT>
+<DD>Specifies the size of the input buffer <i>InBuffer</i>.  If the request requires no input, <i>InBufferSize</i> should be set to zero.</DD>
+<DT><i>OutBuffer</i></DT>
+<DD>Receives the output from this method.  The type and interpretation of the output depends on the <i>Request</i> parameter.  If <i>OutBuffer</i> is NULL, the output is not returned.</DD>
+<DT><i>OutBufferSize</i></DT>
+<DD>Specifies the size of the output buffer <i>OutBufferSize</i>.  If the type of the output returned to <i>OutBuffer</i> has a known size, <i>OutBufferSize</i> is usually expected to be exactly that size, even if <i>OutBuffer</i> is set to NULL.</DD>
+<DT><i>OutSize</i></DT>
+<DD>Receives the size of the output returned in the output buffer <i>OutBuffer</i>.  If <i>OutSize</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>The interpretation of the return value depends on the value of the <i>Request</i> parameter.  Unless otherwise stated, the following values may be returned.</P>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful.  However, the output would not fit in the output buffer <i>OutBuffer</i>, so truncated output was returned.</DD>
+<DT>E_INVALIDARG</DT>
+<DD>The size of the input buffer <i>InBufferSize</i> or the size of the output buffer <i>OutBufferSize</i> was not the expected value.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>Request</b> is available in <b>IDebugAdvanced2</b> and later versions.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugadvanced_3bc933ec-b2b4-417c-80b9-22be597b6acf.xml.htm">DEBUG_REQUEST_SOURCE_PATH_HAS_SOURCE_SERVER</a>, <a href="idebugadvanced_cadf4646-f771-4367-b8bd-7c8cdb6e17d6.xml.htm">DEBUG_REQUEST_TARGET_EXCEPTION_CONTEXT</a>, <a href="idebugadvanced_2ac92008-4ff7-456c-a765-180938c0a2d4.xml.htm">DEBUG_REQUEST_TARGET_EXCEPTION_THREAD</a>, <a href="idebugadvanced_7b4ab40a-ff45-4355-8a9c-f2295f77380d.xml.htm">DEBUG_REQUEST_TARGET_EXCEPTION_RECORD</a>, <a href="idebugadvanced_873556cb-5f04-41c9-84a1-3790eb9dca5f.xml.htm">DEBUG_REQUEST_GET_ADDITIONAL_CREATE_OPTIONS</a>, <a href="idebugadvanced_935a7450-0123-4289-b615-e7037e767d28.xml.htm">DEBUG_REQUEST_SET_ADDITIONAL_CREATE_OPTIONS</a>, <a href="idebugadvanced_96dc7a97-2f3a-451f-905a-de4b1fb1e5d7.xml.htm">DEBUG_REQUEST_GET_WIN32_MAJOR_MINOR_VERSIONS</a>, <a href="idebugadvanced_60564876-4bdf-4236-875e-f094d8b0e84a.xml.htm">DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM</a>, <a href="idebugadvanced_b43cf757-ea07-40c0-9bdf-da88248bafdc.xml.htm">DEBUG_REQUEST_TARGET_CAN_DETACH</a>, <a href="idebugadvanced_bf5124cd-b4b0-4e56-865d-93e6a418f8ee.xml.htm">DEBUG_REQUEST_SET_LOCAL_IMPLICIT_COMMAND_LINE</a>, <a href="idebugadvanced_e8f2931c-b213-4245-9648-53fe7384ef3d.xml.htm">DEBUG_REQUEST_GET_CAPTURED_EVENT_CODE_OFFSET</a>, <a href="idebugadvanced_11e6e4c8-5045-4e46-8fae-3a1198eb6c29.xml.htm">DEBUG_REQUEST_READ_CAPTURED_EVENT_CODE_STREAM</a></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Request RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

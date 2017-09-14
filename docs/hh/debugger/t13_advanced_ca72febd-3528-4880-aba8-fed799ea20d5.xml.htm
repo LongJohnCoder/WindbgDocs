@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging CSRSS</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging CSRSS"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_ca72febd-3528-4880-aba8-fed799ea20d5.xml"/>
+<META NAME="MS-HKWD" CONTENT="CSRSS debugging">
+<META NAME="MS-HKWD" CONTENT="NTSD, debugging CSRSS">
+<META NAME="MS-HKWD" CONTENT="controlling the user-mode debugger from the kernel debugger, debugging CSRSS"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_ca72febd-3528-4880-aba8-fed799ea20d5.xml"></A>Debugging CSRSS</H1>
+<P>The Client Server Run-Time Subsystem (CSRSS) is the user-mode process that controls the underlying layer for the Windows environment. There are a number of problems that make it necessary to debug CSRSS itself.</P>
+<P>Debugging CSRSS is also useful when the Windows subsystem terminates unexpectedly  with a <a href="t08_bugs_end_7b197f47-8362-496c-83f8-7ae501401457.xml.htm">Bug Check 0xC000021A</a> (STATUS_SYSTEM_PROCESS_TERMINATED).   In this case, debugging CSRSS will catch the failure before it gets to an "unexpected" point.</P>
+<H4>Controlling NTSD from the Kernel Debugger</H4>
+<P>The easiest way to debug CSRSS is to use <a href="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml.htm#f7997e21-d84a-4224-af71-bc393265af91">NTSD</a> and <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">control it from the kernel debugger</a>.    </P>
+<H4>Enabling CSRSS Debugging</H4>
+<P>CSRSS debugging must be enabled before you can proceed. If the target computer is running a <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#4abb5bf0-b8bd-4c56-bbfa-598f77215cbe">checked build</a> of Windows, CSRSS debugging is always enabled. If the target computer is running a <a href="dbg_glossary_115ca2a1-47f8-405f-a4f7-a7446892d897.xml.htm#fa518e01-fcc1-428f-9548-a6443ecba5d0">free build</a> of Windows, you will have to enable CSRSS debugging through the Global Flags Utility (GFlags).</P>
+<P>To do this, start the GFlags utility, select the <b>System Registry</b> radio button, and select <b>Enable debugging of Win32 subsystem</b>.</P>
+<P>Alternatively, you can use the following GFlags command-line:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>gflags /r +20000 <BR></nobr></P>
+<P>Or, if you prefer, you can edit the registry key manually instead of using GFlags. Open the following registry key:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager <BR></nobr></P>
+<P>Edit the <b>GlobalFlag</b> value entry (of type REG_DWORD) and set the bit 0x00020000. </P>
+<P>After using GFlags or manually editing the registry, you must reboot for the changes to take effect.</P>
+<H4>Starting NTSD</H4>
+<P>Because you will be controlling the user-mode debugger from the kernel debugger, you will need to set up a kernel debugging connection. See <a href="r02_setup_1_c5f2090d-a089-47ef-860b-7c03fe583de7.xml.htm">Kernel-Mode Setup</a> for details.</P>
+<P>After the registry has been properly configured, it is a simple matter of starting NTSD as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ntsd --</b> <BR></nobr></P>
+<P>See <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a> for an explanation of how to proceed.</P>
+<P>You will have to set your symbol path to a location on your host computer or to some other location on your network. When CSRSS is being debugged, network authentication on the target computer will not work properly.</P>
+<P>Note that you may see an "in page io error" message. This is another manifestation of a hardware failure.</P>
+<P>In Windows XP and later versions of Windows, when the debugging session ends, the debugger will detach from CSRSS while the CSRSS process is still running. This avoids termination of the CSRSS process itself. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging CSRSS RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

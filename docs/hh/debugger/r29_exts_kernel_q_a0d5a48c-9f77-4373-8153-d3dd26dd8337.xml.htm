@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!reg</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !reg"><xml><MSHelp:Keyword Index="A" Term="r29_exts_kernel_Q_a0d5a48c-9f77-4373-8153-d3dd26dd8337.xml"/>
+<META NAME="MS-HKWD" CONTENT="!reg extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r29_exts_kernel_Q_a0d5a48c-9f77-4373-8153-d3dd26dd8337.xml"></A>!reg</H1>
+<P><P>The <b>!reg</b> extension displays and searches through registry data.</P>
+<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!reg kcb</b> <i>Address</i> <BR><b>!reg knode</b> <i>Address</i> <BR><b>!reg kbody</b> <i>Address</i> <BR><b>!reg kvalue</b> <i>Address</i> <BR><b>!reg valuelist</b> <i>HiveAddress</i> <i>KeyNodeAddress</i> <BR><b>!reg subkeylist</b> <i>HiveAddress</i> <i>KeyNodeAddress</i> <BR><b>!reg cellindex</b> <i>HiveAddress</i> <i>Index</i> <BR><b>!reg baseblock</b> <i>HiveAddress</i> <BR><b>!reg seccache</b> <i>HiveAddress</i> <BR><b>!reg hashindex</b> <i>HashKey</i><BR><b>!reg openkeys</b> {<i>HiveAddress</i>|<b>0</b>} <BR><b>!reg findkcb</b> <i>Path</i> <BR><b>!reg hivelist</b> <BR><b>!reg viewlist</b> <i>HiveAddress</i> <BR><b>!reg freebins</b> <i>HiveAddress</i> <BR><b>!reg freecells</b> <i>BinAddress</i> <BR><b>!reg dirtyvector</b> <i>HiveAddress</i> <BR><b>!reg freehints</b> <i>HiveAddress</i> <BR><b>!reg dumppool</b> [<b>s</b>|<b>r</b>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>kcb</b> <i>Address</i></DT>
+<DD>Displays a registry key control block. <i>Address</i> specifies the address of the key control block.     </DD>
+<DT><b>knode</b> <i>Address</i></DT>
+<DD>Displays a registry key node structure. <i>Address</i> specifies the address of the key node.   </DD>
+<DT><b>kbody</b> <i>Address</i></DT>
+<DD>Displays a registry key body (KBODY) structure. <i>Address</i> specifies the address of the key body. (Registry key bodies are the actual objects associated with handles.)</DD>
+<DT><b>kvalue</b> <i>Address</i></DT>
+<DD>Displays a registry key value structure. <i>Address</i> specifies the address of the value.</DD>
+<DT><b>valuelist</b> <i>HiveAddress KeyNodeAddress</i></DT>
+<DD>Displays a list of the values in the specified key node. <i>HiveAddress</i> specifies the address of the hive. <i>KeyNodeAddress</i> specifies the address of the key node.</DD>
+<DT><b>subkeylist</b> <i>HiveAddress KeyNodeAddress</i></DT>
+<DD>Displays a list of the subkeys of the specified key node. <i>HiveAddress</i> specifies the address of the hive. <i>KeyNodeAddress</i> specifies the address of the key node.</DD>
+<DT><b>cellindex</b> <i>HiveAddress</i> <i>Index</i></DT>
+<DD>Displays the virtual address for a cell in a hive. <i>HiveAddress</i> specifies the address of the hive. <i>Index</i> specifies the cell index.</DD>
+<DT><b>baseblock</b> <i>HiveAddress</i></DT>
+<DD>Displays the base block for a hive (also known as the <i>hive header</i>). <i>HiveAddress</i> specifies the address of the hive.</DD>
+<DT><b>seccache</b> <i>HiveAddress</i></DT>
+<DD>Displays the security cache for a hive. <i>HiveAddress</i> specifies the address of the hive.</DD>
+<DT><b>hashindex</b> <i>HashKey</i></DT>
+<DD>Computes the hash index entry for a hash key. <i>HashKey</i> specifies the key.     </DD>
+<DT><b>openkeys</b> { <i>HiveAddress</i> | <b>0</b> } </DT>
+<DD>Displays all open keys in a hive. <i>HiveAddress</i> specifies the address of the hive. If zero is used instead, the entire registry hash table is displayed; this table contains all open keys in the registry.   </DD>
+<DT><b>findkcb</b> <i>Path</i></DT>
+<DD>Displays the registry key control block corresponding to a registry path. <i>Path</i> specifies the full key path; this path must be present in the hash table.</DD>
+<DT><b>hivelist</b></DT>
+<DD>Displays a list of all hives in the system, along with detailed information about each hive.</DD>
+<DT><b>viewlist</b> <i>HiveAddress</i></DT>
+<DD>Displays all pinned and mapped views for a hive, with detailed information for each view. <i>HiveAddress</i> specifies the address of the hive.</DD>
+<DT><b>freebins</b> <i>HiveAddress</i></DT>
+<DD>Displays all free bins for a hive, with detailed information for each bin. <i>HiveAddress</i> specifies the address of the hive.</DD>
+<DT><b>freecells</b> <i>BinAddress</i></DT>
+<DD>Iterates through a bin and displays all free cells inside it. <i>BinAddress</i> specifies the address of the bin.</DD>
+<DT><b>dirtyvector</b> <i>HiveAddress</i></DT>
+<DD>Displays the dirty vector for a hive. <i>HiveAddress</i> specifies the address of the hive.</DD>
+<DT><b>freehints</b> <i>HiveAddress</i></DT>
+<DD>Displays free hints. <i>HiveAddress</i> specifies the address of the hive.   </DD>
+<DT><b>dumppool</b> [ <b>s</b> | <b>r</b> ] </DT>
+<DD>Displays registry-allocated paged pool. If <b>s</b> is specified, the list of registry pages is saved to a temporary file. If <b>r</b> is specified, the registry page list is restored from the previously saved temporary file.   <P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>To display formatted registry key information, use the <a href="r31_exts_user_d482904d-4ea0-436c-b377-c69863fd8d7b.xml.htm"><b>!dreg</b></a> extension instead.</P>
+<P>Here are are some examples:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!reg hivelist</b><BR><BR>-------------------------------------------------------------------------------------------------------------<BR>| HiveAddr |Stable Length|Stable Map|Volatile Length|Volatile Map|MappedViews|PinnedViews|U(Cnt)| BaseBlock | FileName <BR>-------------------------------------------------------------------------------------------------------------<BR>| e16e7428 |       2000  | e16e7484 |          0    |  00000000  |        1  |        0  |     0| e101f000  | \Microsoft\Windows\UsrClass.dat<BR>| e1705a78 |      77000  | e1705ad4 |       1000    |  e1705bb0  |       30  |        0  |     0| e101c000  | ttings\Administrator\ntuser.dat<BR>| e13d4b88 |     814000  | e146a000 |       1000    |  e13d4cc0  |      255  |        0  |     0| e1460000  | emRoot\System32\Config\SOFTWARE<BR>| e13ad008 |      23000  | e13ad064 |       1000    |  e13ad140  |        9  |        0  |     0| e145e000  | temRoot\System32\Config\DEFAULT<BR>| e13b3b88 |       a000  | e13b3be4 |       1000    |  e13b3cc0  |        3  |        0  |     0| e145d000  | emRoot\System32\Config\SECURITY<BR>| e142d008 |       5000  | e142d064 |          0    |  00000000  |        2  |        0  |     0| e145f000  | &lt;UNKNOWN&gt;<BR>| e11e3628 |       4000  | e11e3684 |       3000    |  e11e3760  |        0  |        0  |     0| e11e4000  | &lt;NONAME&gt;<BR>| e10168a8 |     1c1000  | e1016904 |      15000    |  e10169e0  |       66  |        0  |     0| e1017000  | SYSTEM<BR>| e10072c8 |       1000  | e1007324 |          0    |  00000000  |        0  |        0  |     0| e1010000  | &lt;NONAME&gt;<BR>-------------------------------------------------------------------------------------------------------------<BR><BR>kd&gt; <b>!reg hashindex e16e7428</b><BR><BR>CmpCacheTable = e100a000<BR><BR>Hash Index[e16e7428] : 5ac<BR>Hash Entry[e16e7428] : e100b6b0<BR><BR>kd&gt; <b>!reg openkeys e16e7428</b><BR><BR>Index 68:  7bab7683 kcb=e13314f8 cell=00000740 f=00200004 \REGISTRY\USER\S-1-5-21-1715567821-413027322-527237240-500_Classes\CLSID<BR>Index 7a1:  48a30288 kcb=e13a3738 cell=00000020 f=002c0004 \REGISTRY\USER\S-1-5-21-1715567821-413027322-527237240-500_Classes<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about the registry and its components, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !reg RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

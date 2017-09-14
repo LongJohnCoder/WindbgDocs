@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ListType</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ListType"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="ListType"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_aa50fe48-2a66-4d5e-aec7-d225966cfab2.xml"/>
+<META NAME="MS-HKWD" CONTENT="ListType function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_aa50fe48-2a66-4d5e-aec7-d225966cfab2.xml"></A>ListType</H1>
+<P><P>The <b>ListType</b> function calls a specified callback function for every element in a linked list.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>ULONG</b><BR><b>ListType (</b><BR><b>    IN LPCSTR  </b><i>Type</i><b>,</b><BR><b>    IN ULONG64  </b><i>Address</i><b>,</b><BR><b>    IN USHORT  </b><i>ListByFieldAddress</i><b>,</b><BR><b>    IN LPCSTR  </b><i>NextPointer</i><b>,</b><BR><b>    IN PVOID  </b><i>Context</i><b>,</b><BR><b>    IN PSYM_DUMP_FIELD_CALLBACK  </b><i>CallbackRoutine</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Type</i></DT>
+<DD>Specifies the name of the type of each entry in the linked list.</DD>
+<DT><i>Address</i></DT>
+<DD><DL><DT>If <i>ListByFieldAddress</i> is zero:</DT>
+<DD>Specifies the address in the target's memory of the first entry in the linked list.</DD>
+<DT>If <i>ListByFieldAddress</i> is 1:</DT>
+<DD>Specifies the address in the target's memory of the member of the first entry that points to the next entry.</DD>
+</DL>
+</DD>
+<DT><i>ListByFieldAddress</i></DT>
+<DD>Specifies whether <i>Address</i> contains the base address of the first entry, or if it contains the address of the member of the first entry that points to the next entry.</DD>
+<DT><i>NextPointer</i></DT>
+<DD>Specifies the name of the member in the structure of type <i>Type</i> that contains a pointer to the next entry in the linked list.  <i>NextPointer</i> can be a period-separated path, for example, if <i>Type</i> is "nt!_ETHREAD", <i>NextPointer</i> could be "Tcb.ThreadListEntry.Flink".</DD>
+<DT><i>Context</i></DT>
+<DD>Specifies a pointer that is passed to the callback function specified by <i>CallbackRoutine</i> each time the callback function is called.</DD>
+<DT><i>CallbackRoutine</i></DT>
+<DD>Specifies a function that is called for each entry in the linked list.  The parameters passed to the function are the <i>Context</i> pointer and a <a href="wdbgexts_ref_4c79e59a-cd12-4ad9-affb-b7f0bd7689fb.xml.htm">FIELD_INFO</a> structure; the address of the entry is found in the <b>address</b> member of this structure.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>This function returns TRUE on success and FALSE on failure.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this function, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ListType RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

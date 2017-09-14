@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>KD</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, KD"><xml><MSHelp:Keyword Index="A" Term="r01_intro_ad867058-949b-4093-abf6-c4363257a83d.xml"/>
+<META NAME="MS-HKWD" CONTENT="KD">
+<META NAME="MS-HKWD" CONTENT="KD, overview">
+<META NAME="MS-HKWD" CONTENT="I386KD">
+<META NAME="MS-HKWD" CONTENT="IA64KD">
+<META NAME="MS-HKWD" CONTENT="Kernel Debugger (KD)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r01_intro_ad867058-949b-4093-abf6-c4363257a83d.xml"></A>KD</H1>
+<P>Microsoft Kernel Debugger (KD) is a character-based console program that enables in-depth analysis of <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#c2dfd7a9-249b-4018-9789-2b3d6268346b">kernel-mode</a> activity on all NT-based operating systems.</P>
+<P>KD can be used to debug kernel-mode programs and drivers, or to monitor the behavior of the operating system itself. KD also supports multiprocessor debugging.</P>
+<P>Typically, the KD tool will not be run on the computer being debugged. Two machines (the <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#77205ddc-d81d-483c-ab52-47eb6d613eac"><u>host computer</u></a> and the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#592a23b6-7f7d-434c-b4f6-5e1470b41393"><u>target computer</u></a>) are needed for kernel-mode debugging.</P>
+<P>Most KD commands cannot be targeted to specific processes or threads, as they can in <a href="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml.htm">CDB</a>, <a href="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml.htm#f7997e21-d84a-4224-af71-bc393265af91">NTSD</a>, and <a href="r01_intro_eae4d594-1986-49f9-b8b1-87f7eeb0d513.xml.htm">WinDbg</a>.</P>
+<H4>Debugging different target platforms</H4>
+<P>KD is capable of debugging a target computer which is running on an x86, Itanium, or x64 platform.</P>
+<P>The debugger will automatically detect the platform on which the target is running. You do not need to specify the target on the KD command line. The older syntax (using the name <i>I386KD</i> or <i>IA64KD</i>) is obsolete.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: KD RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

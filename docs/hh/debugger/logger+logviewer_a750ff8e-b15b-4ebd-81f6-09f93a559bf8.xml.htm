@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Reading the LogViewer Display</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Reading the LogViewer Display"><xml><MSHelp:Keyword Index="A" Term="Logger+LogViewer_a750ff8e-b15b-4ebd-81f6-09f93a559bf8.xml"/>
+<META NAME="MS-HKWD" CONTENT="LogViewer, display"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Logger+LogViewer_a750ff8e-b15b-4ebd-81f6-09f93a559bf8.xml"></A>Reading the LogViewer Display</H1>
+<P>LogViewer displays a list of all functions in the order they were logged.</P>
+<P>Each row of the display contains several columns. The significance of each column is as follows.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Column</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>+/-</b></TD>
+<TD Width="">If this column contains a "+" (plus sign), it indicates that the function takes one or more parameters. To see the parameters and their values, either double click on the row or hit the right arrow key when the row is outlined in red. To hide it again, double click it again or hit the left arrow key when the row is outlined in red.<BR><BR>There is also a "d#" value in this column. This indicates the "depth" of the function call (in other words, how deep the call is nested in other logged function calls).<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>#</b></TD>
+<TD Width="">The sequential row number of the function call. This is useful when you have filters applied and are interested to know how far apart two function calls are.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Thrd</b></TD>
+<TD Width="">The thread number on which the function call was made. This number is not a thread ID, but is rather an assigned number based on the order that threads were created in the process.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Caller</b></TD>
+<TD Width="">The instruction address that made the function call. This is derived from the return address for the call. It is actually the return address minus 5 bytes (the typical size of a <b>call dword ptr</b> instruction).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Module</b></TD>
+<TD Width="">The module that contains the calling instruction.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>API Function</b></TD>
+<TD Width="">The name of the function. The name of the module that contains the function is omitted for brevity.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Return Value</b></TD>
+<TD Width="">The value returned by the function, if it is not a void function.</TD>
+</TR>
+</table>
+<P></P>
+<P>Double-clicking on a row in the viewer will expand the row to reveal the parameters to the function and their values "going in" to the function. If they are designated as OUT parameters, their value "coming out" is shown on the right.</P>
+<P>You can also use the ENTER key or the right and left arrow keys to expand and collapse rows.</P>
+<P>Function calls that returned failure status codes are shaded in pink.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Reading the LogViewer Display RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

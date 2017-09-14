@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Edit | Breakpoints</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Edit | Breakpoints"><xml><MSHelp:Keyword Index="A" Term="r37_gui_2_5abe2105-cf44-4d1e-a4ae-f4d44409ed58.xml"/>
+<META NAME="MS-HKWD" CONTENT="Edit | Breakpoints">
+<META NAME="MS-HKWD" CONTENT="breakpoints, Edit | Breakpoints"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_POPUP_BREAKPOINTS"></a><H1><A NAME="r37_gui_2_5abe2105-cf44-4d1e-a4ae-f4d44409ed58.xml"></A>Edit | Breakpoints</H1>
+<P></P>
+<P></P>
+<P>Click <b>Breakpoints</b> on the <b>Edit</b> menu to display or control breakpoints.</P>
+<P>This command is equivalent to pressing ALT+F9. If a <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a> or the <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a> is not active, you can also press F9 or click the <b>Insert or remove breakpoint (F9) </b>button (<img src="tbbp.bmp">) on the toolbar.</P>
+<P>However, if a Source window or the Disassembly window is open, the <b>Insert or remove breakpoint (F9)</b> button and the F9 key set a breakpoint on the current line. (If there is already a breakpoint set at the current line, this button or key will remove the breakpoint.)</P>
+<P>If a statement or call spans multiple lines, WinDbg sets the breakpoint on the last line of the statement or call. You should insert the caret (<b>^</b>) on or before the statement to set a breakpoint for the whole statement. If the debugger cannot set a breakpoint at the current caret position, it will search in a downward direction for the next allowed position and insert the breakpoint there.</P>
+<H4>Dialog Box</H4>
+<P>When you click <b>Breakpoints</b>, the <b>Breakpoints</b> dialog box appears. This dialog box displays all current breakpoint information and is presented in the following columns:</P><B></B><UL type="disc">
+<LI>The breakpoint number. This number is a decimal number that you can use to refer to the breakpoint in future commands.</LI>
+<LI>The breakpoint status. This status can be <b>e</b> (enabled) or <b>d</b> (disabled).</LI>
+<LI><i>(Unresolved breakpoints only)</i>  The letter <b>u</b>. This letter appears if the breakpoint is unresolved (that is, it does not match any currently-loaded module address). For details, see <a href="r07_use_operation_3a87f521-a016-43a6-bc5f-820bfd4fa0c4.xml.htm">Unresolved Breakpoints (<b>bu</b> Breakpoints)</a>. </LI>
+<LI>The virtual address of the breakpoint. If you have enabled the loading of source line numbers, the display includes file and line number information instead of address offsets. If the breakpoint is unresolved, the address appears at the end of the listing instead of here.</LI>
+<LI><i>(Processor breakpoints only)</i>  Type and size information. This information can be <b>e</b> (execute), <b>r</b> (read/write), <b>w</b> (write), or <b>i</b> (input/output). These types are followed with the size of the block, in bytes. For details, see <a href="r07_use_operation_d80bd6e2-8037-421c-ae24-557262f4dad4.xml.htm">Processor Breakpoints (<b>ba</b> Breakpoints)</a>. </LI>
+<LI>The number of passes that are remaining until the breakpoint becomes active, followed by the initial number of passes in parentheses. The number of times that the program counter passes through the breakpoint <i>without</i> breaking is one less than the value of this number. Therefore, this number is never lower than 1. Note also that this number counts only the times the application executes <i>through</i> this point. In other words, stepping over this point does not count. After the full count has been reached, you can reset the count only by clearing and resetting the breakpoint.</LI>
+<LI>The associated process and thread. If thread is given with three asterisks (<b>***</b>), this breakpoint is not a thread-specific breakpoint.</LI>
+<LI>The module and function, with offset, that correspond to the breakpoint address. If the breakpoint is unresolved, the breakpoint address appears here, in parentheses. If the breakpoint is set on a valid address but symbol information is missing, this column will be blank.</LI>
+<LI>The command string that is automatically executed when this breakpoint is hit. This command string is displayed in quotation marks. If the breakpoint is hit, the commands in this command string are executed until application execution resumes. Any command that resumes program execution (such as <b>g</b> or <b>t</b>) will stop the execution of the command list.</LI>
+</UL>
+<P></P>
+<P>If you select any breakpoint, you can then click the <b>Remove</b>, <b>Disable</b>, or <b>Enable</b> button. The <b>Remove</b> button permanently removes the breakpoint. The <b>Disable</b> button temporarily deactivates the breakpoint. The <b>Enable</b> button re-enables a disabled breakpoint.</P>
+<P>The <b>Remove All</b> button permanently removes all breakpoints.</P>
+<P>You can also enter commands in the <b>Command</b> box in the following ways:</P><B></B><UL type="disc">
+<LI>If you enter a <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bp (Set Breakpoint)</b></a>, <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bu (Set Unresolved Breakpoint)</b></a>, <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bm (Set Symbol Breakpoint)</b></a>, <a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba (Break on Access)</b></a>, <a href="r15_cmds_a_ccc07fee-278e-46c1-83a8-a80313d93ba2.xml.htm"><b>bc (Breakpoint Clear)</b></a>, <a href="r15_cmds_a_086f3898-7c6d-4c41-b262-ca44e1966aa6.xml.htm"><b>bd (Breakpoint Disable)</b></a>, or <a href="r15_cmds_a_1bc918e0-3f85-4e12-b692-a9e84b2681cf.xml.htm"><b>be (Breakpoint Enable)</b></a> command, the <b>Command </b>box works as if you were entering the command in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>. However, the command itself must be in lowercase letters. The command cannot begin with a thread specifier. If you want to use a thread specifier, enter it in the <b>Thread</b> box without the initial tilde (<b>~</b>).</LI>
+<LI>If you enter any other text, the text will be treated as the argument string for a <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bu (Set Unresolved Breakpoint)</b></a> command. That is, the debugger prefixes your entry with <b>bu</b> and a space and then executes it as a command.</LI>
+</UL>
+<P></P>
+<P>When you are entering a new breakpoint, you can also do the following:</P><B></B><UL type="disc">
+<LI>Create a thread-specific breakpoint by entering a thread specifier in the <b>Thread</b> box. Do not include the tilde (<b>~</b>) character that is typically prefixed to a thread specifier.</LI>
+<LI>Create a conditional breakpoint by entering a condition in the <b>Condition</b> box. The condition can be any evaluable expression, and it will be evaluated according to the current expression syntax (see <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a>). For more information about these types of breakpoints, see <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm">Setting a Conditional Breakpoint</a>.</LI>
+</UL>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about how to use breakpoints, other breakpoint commands and methods of controlling breakpoints, and setting breakpoints in user space from a kernel debugger, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a>. For more information about conditional breakpoints, see <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm">Setting a Conditional Breakpoint</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Edit | Breakpoints RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

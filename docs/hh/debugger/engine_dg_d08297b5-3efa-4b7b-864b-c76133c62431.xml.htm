@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Live Kernel-Mode Targets</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Live Kernel-Mode Targets"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_d08297b5-3efa-4b7b-864b-c76133c62431.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, targets, kernel-mode"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_d08297b5-3efa-4b7b-864b-c76133c62431.xml"></A>Live Kernel-Mode Targets</H1>
+<P>To attach the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> to a <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#592a23b6-7f7d-434c-b4f6-5e1470b41393">target computer</a> for <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>, use the method <a href="idebugclient_9008538b-3492-4952-a18f-b1dd346e887e.xml.htm"><b>AttachKernel</b></a>.</P>
+<P class="note"><b>Note</b>  The engine doesn't completely attach to the <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#ddf5e2eb-aa21-42cb-b18c-9621029f2e6e">kernel</a> until the <a href="idebugcontrol_19a7d8b3-1f16-400e-bf8f-c782d48b2cf5.xml.htm"><b>WaitForEvent</b></a> method has been called.  Only after the kernel has generated an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> &#8212; for example, the <a href="dbg_glossary_48d73de7-50e9-4e41-8a7f-0207d5301620.xml.htm#7d1e41b4-37e6-417b-9446-698dc700ed32">initial breakpoint</a> &#8212; does it become available in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugger session</a>.  See <a href="engine_overview_87d6e561-6d31-4a9e-8be3-1b5b93ebb5a3.xml.htm">Debugging Session and Execution Model</a> for more details.</P>
+<P>If the debugger engine is attached to a kernel which is not the local kernel and the connection is not an eXDI connection, the connection options used to find the target computer can be queried using <a href="idebugclient_5a7fe06a-42e4-4bdd-935c-8130cdfef568.xml.htm"><b>GetKernelConnectionOptions</b></a>.  The connection can also be re-synchronized or the connection speed changed using <a href="idebugclient_b7b26913-d776-41b9-b94a-d5fa685e5fa9.xml.htm"><b>SetKernelConnectionOptions</b></a>.</P>
+<P>The debugger can attach to the local kernel, but only in a limited way and only if the computer was booted with the <b>/debug</b> boot switch. (In some Windows installations, local kernel debugging is supported when other switches are used, such as <b>/debugport</b>, but this is not a guaranteed feature of Windows and should not be relied on.)  <a href="idebugclient_05c5446d-28b4-4d9b-bb20-7dc1746545d6.xml.htm"><b>IsKernelDebuggerEnabled</b></a> is used to determine if the local computer is available for debugging.  For more information about kernel debugging on a single machine, see <a href="r07_use_operation_fabb9469-404e-4883-950a-5f35a09c27a2.xml.htm">Performing Local Kernel Debugging</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Live Kernel-Mode Targets RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

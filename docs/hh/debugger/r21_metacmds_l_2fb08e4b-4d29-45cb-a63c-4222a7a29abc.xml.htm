@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.reload (Reload Module)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .reload (Reload Module)"><xml><MSHelp:Keyword Index="A" Term="r21_metacmds_L_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml"/>
+<META NAME="MS-HKWD" CONTENT=".reload (Reload Module) command">
+<META NAME="MS-HKWD" CONTENT="Reload Module (.reload) command">
+<META NAME="MS-HKWD" CONTENT="symbols, Reload Module (.reload) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r21_metacmds_L_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml"></A>.reload (Reload Module)</H1>
+<P>The <b>.reload</b> command deletes all symbol information for the specified module and reloads these symbols as needed. In some cases, this command also reloads or unloads the module itself.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.reload</b> [<i>Options</i>] [<i>Module</i> [<b>=</b> <i>Address</i> [<b>, </b><i>Size</i> [<b>, </b><i>Timestamp</i>] ] ] ] <BR><b>.reload -?</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Any of the following options: <DL><DT><b>/d</b></DT>
+<DD>Reload all modules in the debugger's module list. (When you omit all parameters, this situation is the default during user-mode debugging.)</DD>
+<DT><b>/f</b></DT>
+<DD>Forces the debugger to immediately load the symbols. This parameter overrides <i>lazy symbol loading</i>. For more information, see the following Comments section.</DD>
+<DT><b>/i</b></DT>
+<DD>Ignores a mismatch in the <i>.pdb</i> file versions. (If you do not include this parameter, the debugger does not load mismatched symbol files.) When you use <b>/i</b>, <b>/f</b> is used also, even if you do not explicitly specify it.</DD>
+<DT><b>/l</b></DT>
+<DD>Lists the modules but does not reload their symbols. (In kernel mode, this parameter gives the same output as the <a href="r26_exts_kernel_a_c8029c52-4738-4fa1-88a8-bf6f6819dc09.xml.htm"><b>!drivers</b></a> extension.)    </DD>
+<DT><b>/n</b></DT>
+<DD>Reloads kernel symbols only. This parameter does not reload any user symbols. (You can use this option only during kernel-mode debugging.)</DD>
+<DT><b>/o</b></DT>
+<DD>Forces the cached files in a symbol server's downstream store to be overwritten. When you use this flag, you should also include <b>/f</b>. By default, the downstream store files are never overwritten.<P>Because the symbol server uses distinct file names for the symbols of every different build of a binary, you do not have to use this option unless you believe your downstream store has become corrupted.</P>
+</DD>
+<DT><b>/s</b></DT>
+<DD>Reloads all modules in the system's module image list. (When you omit all parameters, this situation is the default during kernel-mode debugging.)  If you are loading an individual system module by name while you perform user-mode debugging, you must include <b>/s</b>.</DD>
+<DT><b>/u</b></DT>
+<DD>Unloads the specified module and all its symbols. The debugger unloads any loaded module whose name matches <i>Module</i>, regardless of the full path. Image names are also searched. For more information, see the note in the following Comments section.</DD>
+<DT><b>/unl</b></DT>
+<DD>Reloads symbols based on the image information in the unloaded module list.</DD>
+<DT><b>/user</b></DT>
+<DD>Reloads user symbols only. (You can use this option only during kernel-mode debugging.)</DD>
+<DT><b>/v</b></DT>
+<DD>Turns on verbose mode.</DD>
+<DT><b>/w</b></DT>
+<DD>Treats <i>Module</i> as a literal string. This treatment prevents the debugger from expanding wildcard characters.</DD>
+</DL>
+</DD>
+<DT><i>Module</i></DT>
+<DD>Specifies the name of an image on the target system for which to reload symbols on the host computer. <i>Module</i> should include the name and file name extension of the file. Unless you use the <b>/w</b> option, <i>Module</i> might contain a variety of wildcard characters and specifiers. For more information about the syntax, see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a>. If you omit <i>Module</i>, the behavior of the <b>.reload</b> command depends on which <i>Options</i> you use.</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the base address of the module. Typically, you have to have this address only if the image header has been corrupted or is paged out.</DD>
+<DT><i>Size</i></DT>
+<DD>Specifies the size of the module image. In many situations, the debugger knows the correct size of the module. When the debugger does not know the correct size, you should specify <i>Size</i>. This size can be the actual module size or a larger number, but the size should not be a smaller number. Typically, you have to have this size only if the image header has been corrupted or is paged out.</DD>
+<DT><i>Timestamp</i></DT>
+<DD>Specifies the timestamp of the module image. In many situations, the debugger knows the correct timestamp of the module. When the debugger does not know the timestamps, you should specify <i>Timestamp</i>. Typically, you have to have this timestamp only if the image header has been corrupted or is paged out.    </DD>
+<DT><b>-?</b></DT>
+<DD>Displays a short help text for this command.   </DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>.reload</b> command does not cause symbol information to be read. Instead, this command lets the debugger know that the symbol files might have changed or that a new module should be added to the module list. This command causes the debugger to revise its module list and delete its symbol information for the specified modules. The actual symbol information is not read from the individual <i>.pdb</i> files until the information is needed. (This kind of loading is known as <i>lazy symbol loading</i> or <i>deferred symbol loading</i>.)</P>
+<P>You can force symbol loading to occur by using the <b>/f</b> option or by issuing an <a href="r17_cmds_i_4c0144c7-30e4-40ee-a7aa-6ee2c44b143d.xml.htm"><b>ld (Load Symbols)</b></a> command.</P>
+<P>The <b>.reload</b> command is useful if the system stops responding (that is, <i>crashes</i>), which might cause you to lose symbols for the target computer that is being debugged. The command can also be useful if you have updated the symbol tree.</P>
+<P>If the image header is incorrect for some reason, such as the module being unloaded, or is paged out, you can load symbols correctly by using the <b>/unl</b> argument, or specifying both <i>Address</i> and <i>Size</i>.</P>
+<P>The <b>.reload /u</b> command performs a broad search. The debugger first tries to match <i>Module</i> with an exact module name, regardless of path. If the debugger cannot find this match, <i>Module</i> is treated as the name of the loaded image. For example, if the HAL that resides in memory has the module name of <i>halacpi.dll</i>, both of the following commands unload its symbols.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>.reload /u halacpi.dll</b><BR><BR>kd&gt; <b>.reload /u hal</b><BR></nobr></P>
+<P>If you are performing user-mode debugging and want to load a module that is not part of the target application's module list, you must include the <b>/s</b> option, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.reload /u ntdll.dll</b><BR>Unloaded ntdll.dll<BR><BR>0:000&gt; <b>.reload /s /f ntdll.dll</b><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information about deferred (lazy) symbol loading, see <a href="r09_symbols_538315dc-6582-4a76-9725-d9d53b52e4a0.xml.htm">Deferred Symbol Loading</a>. For more information about other symbol options, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm">Setting Symbol Options</a>. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .reload (Reload Module) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

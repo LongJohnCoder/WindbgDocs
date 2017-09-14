@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetNumberEventCallbacks</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetNumberEventCallbacks"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetNumberEventCallbacks"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_976101a5-6218-475a-b8e9-e7091e2524d6.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::GetNumberEventCallbacks method">
+<META NAME="MS-HKWD" CONTENT="GetNumberEventCallbacks (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_976101a5-6218-475a-b8e9-e7091e2524d6.xml"></A>GetNumberEventCallbacks</H1>
+<P><P>The <b>GetNumberEventCallbacks</b> method returns the number of <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#b82b8e27-44ea-4267-932f-0ed8f937939c">event callbacks</a> that are interested in the given <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">events</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient5::GetNumberEventCallbacks(</b><BR><b>    IN ULONG  </b><i>EventFlags</i><b>,</b><BR><b>    OUT PULONG  </b><i>Count</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>EventFlags</i></DT>
+<DD>Specifies a set of events used to filter out some of the event callbacks; only event callbacks that have indicated an interest in one of the events in <i>EventFlags</i> will be counted.  See <a href="structures_40533232-e02e-4893-931a-14f2b0bc29e1.xml.htm">DEBUG_EVENT_<i>XXX</i></a> for a list of the events.</DD>
+<DT><i>Count</i></DT>
+<DD>Receives the number of event callbacks that are interested in at least one of the events in <i>EventFlags</i>.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetNumberEventCallbacks</b> is available in <b>IDebugClient5</b> and later versions.</P>
+<H4>Comments</H4>
+<P>Each <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client</a> can have at most one event callback registered with it.  When a callback is registered with a client, its <a href="comcallbacks_564e7fce-ee9a-404e-9ae4-06805cb0b677.xml.htm"><b>IDebugEventCallbacks::GetInterestMask</b></a> method is called to allow the client to specify which events it is interested in.</P>
+<P>For more information about callbacks, see <a href="engine_dg_f76855d1-672f-4a0e-b4da-a2b4c2ac4e5d.xml.htm">Callbacks</a>.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="comcallbacks_72745555-ec34-41fa-9305-cf23357bcd17.xml.htm"><b>IDebugEventCallbacks</b></a>, <a href="idebugclient_81e23179-deb3-4c14-ae9e-b0c0a1d48f00.xml.htm"><b>GetEventCallbacks</b></a>, <a href="idebugclient_a234bf28-5dd1-4e92-ab72-aa8d9a3a282b.xml.htm"><b>SetEventCallbacks</b></a>, <a href="idebugclient_ce6e107b-a356-434a-81d7-eccb8495289d.xml.htm"><b>GetNumberOutputCallbacks</b></a>, <a href="idebugclient_ccf5fe3e-20d9-4415-bcfd-4823960acd05.xml.htm"><b>GetNumberInputCallbacks</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetNumberEventCallbacks RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Breaking Into the Debugger</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Breaking Into the Debugger"><xml><MSHelp:Keyword Index="A" Term="t02_debugfns_5c3e007d-5d9d-4531-8392-495c1d9750af.xml"/>
+<META NAME="MS-HKWD" CONTENT="breaking into the debugger">
+<META NAME="MS-HKWD" CONTENT="DebugBreak function">
+<META NAME="MS-HKWD" CONTENT="DbgBreakPoint function">
+<META NAME="MS-HKWD" CONTENT="KdBreakPoint function">
+<META NAME="MS-HKWD" CONTENT="DbgBreakPointWithStatus function">
+<META NAME="MS-HKWD" CONTENT="KdBreakPointWithStatus function">
+<META NAME="MS-HKWD" CONTENT="ASSERT macro">
+<META NAME="MS-HKWD" CONTENT="ASSERTMSG macro"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t02_debugfns_5c3e007d-5d9d-4531-8392-495c1d9750af.xml"></A>Breaking Into the Debugger</H1>
+<P>User-mode and kernel-mode code use different routines to break into the debugger.</P>
+<H4>User-Mode Break Routines</H4>
+<P>A break routine causes an exception to occur in the current process, so that the calling thread can signal the debugger associated with the calling process.</P>
+<P>To break into a debugger from a user-mode program, use the <b>DebugBreak</b> routine. For complete documentation of this routine, see the Microsoft Windows SDK.</P>
+<P>When a user-mode program calls <b>DebugBreak</b>, the following possible actions will occur:</P><B></B><OL type="1">
+<LI>If a user-mode debugger is attached, the program will break into the debugger. This means that the program will pause and the debugger will become active.</LI>
+<LI>If no user-mode debugger is attached, but kernel-mode debugging was enabled at boot time, the entire computer will break into the kernel debugger. If no kernel debugger is attached, the computer will freeze and await a kernel debugger.</LI>
+<LI>If no user-mode debugger is attached, and kernel-mode debugging is not enabled, the program will terminate with an unhandled exception, and the post-mortem (just-in-time) debugger will be activated. By default, the postmortem debugger is Dr. Watson, which will create a crash dump file and then ask you if you want to send this crash dump file to Microsoft.</LI>
+</OL>
+<P></P>
+<H4>Kernel-Mode Break Routines</H4>
+<P>When a kernel-mode program breaks into the debugger, the entire operating system freezes until the kernel debugger allows execution to resume. If no kernel debugger is present, this is treated as a bug check.</P>
+<P>The <b>DbgBreakPoint</b> routine works in kernel-mode code, but is otherwise similar to the <b>DebugBreak</b> user-mode routine.</P>
+<P><b>DbgBreakPointWithStatus</b> also causes a break, but it additionally sends a 32-bit status code to the debugger.</P>
+<P><b>KdBreakPoint</b> and <b>KdBreakPointWithStatus</b> are identical to <b>DbgBreakPoint</b> and <b>DbgBreakPointWithStatus</b>, respectively, when compiled in the checked build environment. When compiled in the free build environment, they have no effect.</P>
+<P>For complete documentation of these routines, as well as the build environment, see the Windows Driver Kit.</P>
+<H4>Kernel-Mode Conditional Break Routines</H4>
+<P>Two conditional break routines are available for kernel-mode code. These routines test a logical expression. If the expression is false, execution halts and the debugger becomes active.</P>
+<P>The <b>ASSERT</b> macro causes the debugger to display the failed expression and its location in the program. The <b>ASSERTMSG</b> macro is similar, but allows an additional message to be sent to the debugger.</P>
+<P><b>ASSERT</b> and <b>ASSERTMSG</b> are only active when compiled in the checked build environment. When compiled in the free build environment, they have no effect.</P>
+<P>For complete documentation of these routines, as well as the build environment, see the Windows Driver Kit.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Breaking Into the Debugger RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

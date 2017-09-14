@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!verifier</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !verifier"><xml><MSHelp:Keyword Index="A" Term="r30_exts_kernel_U_8ff8c17d-a570-426d-800e-ad90c9adf899.xml"/>
+<META NAME="MS-HKWD" CONTENT="!verifier extension">
+<META NAME="MS-HKWD" CONTENT="!verifier extension, !kdextx86.verifier extension">
+<META NAME="MS-HKWD" CONTENT="!verifier extension, !kdexts.verifier extension">
+<META NAME="MS-HKWD" CONTENT="Driver Verifier">
+<META NAME="MS-HKWD" CONTENT="Driver Verifier, !verifier (!kdext*.verifier) extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r30_exts_kernel_U_8ff8c17d-a570-426d-800e-ad90c9adf899.xml"></A>!verifier</H1>
+<P><P>The <b>!verifier</b> extension displays the status of Driver Verifier and its actions.</P>
+<P>Driver Verifier is included in Windows. It works on both checked and free builds. For information about Driver Verifier, see the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=120480" target="_blank"><i><u>Driver Verifier </u></i></a><u> </u>topic in the Windows Driver Kit (WDK) documentation.</P>
+</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!verifier</b> [<i>Flags</i> [<i>Image</i>]] <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!verifier</b> [<i>Flags</i> [<i>Image</i>]] <BR><b>!verifier</b> <b>4</b> [<i>Quantity</i>] <BR><b>!verifier</b> <b>8</b> [<i>Quantity</i>] <BR><b>!verifier</b> <b>0x20</b> [<i>CompletionTime</i> <i>CancelTime</i> <i>ForceCancellation</i>] <BR><b>!verifier</b> <b>0x40</b> [<i>Quantity</i>] <BR><b>!verifier 0x80 </b>[<i>Quantity</i>]<BR><b>!verifier 0x80 </b><i>Address</i><BR><b>!verifier 0x100 </b>[<i>Quantity</i>]<BR><b>!verifier 0x100 </b><i>Address</i><BR><b>!verifier ?</b> <BR></nobr></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Specifies what information is displayed in the output from this command. If <i>Flags</i> is equal to the value 4, 8, 0x20, 0x40, 0x80, or 0x100, then the remaining arguments to <b>!verifier</b> are interpreted based on the the specific arguments associated with those values. If <i>Flags</i> is equal to any other value, even if one or more of these bits are set, only the <i>Flags</i> and <i>Image</i> arguments are permitted. <i>Flags</i> can be any sum of the following bits; the default is 0: <DL><DT>Bit 0 (0x1)</DT>
+<DD>Displays the names of all drivers being verified. The number of bytes currently allocated to each driver from the nonpaged pool and the paged pool is also displayed.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Displays information about pools (pool size, headers, and pool tags) and outstanding memory allocations left by unloaded drivers. <i>This flag has no effect unless bit 0 (0x1) is also set.</i></DD>
+<DT>Bit 2 (0x4)</DT>
+<DD><i>(Windows XP and later)</i>  Displays fault injection information. The return address, symbol name, and displacement of the code requesting each allocation are displayed. If <i>Flags</i> is exactly 0x4 and the <i>Quantity</i> parameter is included, the number of these records displayed can be chosen. Otherwise, four records are displayed.</DD>
+<DT>Bit 3 (0x8)</DT>
+<DD><i>(Windows XP and later)</i>  Displays the most recent IRQL changes made by the drivers being verified. The old IRQL, new IRQL, processor, and time stamp are displayed. If <i>Flags</i> is exactly 0x8 and the <i>Quantity</i> parameter is included, the number of these records displayed can be chosen. Otherwise, four records are displayed.</DD>
+<DT>Bit 5 (0x20)</DT>
+<DD><i>(Windows Vista and later)</i>  Displays information related to the <b>Driver Hang Verification</b> option of Driver Verifier. If the <i>CompletionTime</i>, <i>CancelTime</i>, and <i>ForceCancellation</i> arguments are specified, these replace the previous the Driver Hang Verification settings.</DD>
+<DT>Bit 6 (0x40)</DT>
+<DD><i>(Windows Vista and later)</i>  Displays information from the <b>Force Pending I/O Requests</b> option of Driver Verifier, including traces from the log of forced pending IRPs.  <P>The <i>Quantity</i> parameter specifies the number of traces to be displayed. By default, the entire log is displayed. </P>
+</DD>
+<DT>Bit 7 (0x80)</DT>
+<DD><i>(Windows Vista and later)</i>  Displays information from the kernel pool Allocate/Free log.<P>The <i>Quantity</i> parameter specifies the number of traces to be displayed.  By default, the entire log is displayed.</P>
+<P>If <i>Address </i>is specified, only traces associated with the specified address within the kernel pool Allocate/Free log are displayed.</P>
+</DD>
+<DT>Bit 8 (0x100)</DT>
+<DD><i>(Windows Vista and later)</i>  Displays information from the log of IoAllocateIrp, IoCompleteRequest and IoCancelIrp calls. <P>The Quantity parameter specifies the number of traces to be displayed. By default, the entire log is displayed.</P>
+<P>If <i>Address </i>is specified, only traces associated with the specified IRP address are displayed.</P>
+</DD>
+</DL>
+</DD>
+<DT><i>Image</i></DT>
+<DD>If <i>Flags</i> is used and is not equal to 4, 8, or 0x10, <i>Image</i> specifies the name of a driver. <i>Image</i> is used to filter the information displayed by <i>Flags</i> values of <nobr>0x1</nobr> and <nobr>0x2</nobr>: only the specified driver is considered. This driver must be currently verified.</DD>
+<DT><i>Quantity</i></DT>
+<DD><i>(Windows XP and later)</i>  If <i>Flags</i> is exactly equal to 0x4, <i>Quantity</i> specifies the number of fault injection records to display. If <i>Flags</i> is exactly equal to 0x8, <i>Quantity</i> specifies the number of IRQL log entries to display. If <i>Flags</i> is exactly equal to 0x40, <i>Quantity</i> specifies the number of traces displayed from the log of forced pending IRPs. If Flags is exactly equal to 0x80, Quantity specifies the number of traces displayed from the kernel pool Allocate/Free log. If Flags is exactly equal to 0x100, Quantity specifies the number of traces displayed from the log of IoAllocateIrp, IoCompleteRequest and IoCancelIrp calls. </DD>
+<DT><i>CompletionTime</i></DT>
+<DD><i>(Windows Vista and later)  </i>Specifies the time limit for completing an IRP, in milliseconds. The default value is 0x2710 (10 seconds). If the driver exceeds this limit, the completion routine is reported in the Driver Hang Verification log. When <i>CompletionTime</i> is 0, Driver Verifier does not monitor IRP completion. This Driver Hang Verification parameter is supported only when <i>Flags</i> is exactly equal to 0x20. </DD>
+<DT><i>CancelTime</i></DT>
+<DD>(Windows Vista and later)  Specifies the time limit for canceling an IRP, in milliseconds. The default value is 0x1388 (5 seconds). If the driver exceeds this limit, the cancellation routine is reported in the Driver Hang Verification log. When <i>CancelTime</i> is <b>0</b>, Driver Verifier does not monitor IRP cancellation. This Driver Hang Verification parameter is available only when <i>Flags</i> is exactly equal to 0x20. </DD>
+<DT><i>ForceCancellation</i></DT>
+<DD><i>(Windows Vista and later)</i>  Enables or disables the cancellation of IRPs that do not complete within the time specified by <i>CompletionTime</i>. To enable forced cancellation, set <i>ForceCancellation</i> to <b>1</b>. To disable forced cancellation, set <i>ForceCancellation</i> to <b>0</b>. The default is <b>0</b>. This Driver Hang Verification parameter is available only when <i>Flags</i> is exactly equal to 0x20. </DD>
+<DT><b>?</b></DT>
+<DD><i>(Windows XP and later)</i>  Displays some brief Help text for this extension in the Debugger Command window.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>When using Driver Verifier to test graphics drivers, use the <a href="r33_exts_acpi_482b405a-48e6-46b0-960e-2afdfe4cbba0.xml.htm"><b>!gdikdx.verifier</b></a> extension instead of <b>!verifier</b>.</P>
+<P>The values of 4, 8, and 0x20, 0x40, 0x80, and 0x100 are special values for <i>Flags</i>. If these values are used, the special arguments listed in the <b>Parameters</b> section can be used, and the display will include only the information associated with that flag value.</P>
+<P>If any other value for <i>Flags</i> is used, even if one or more of these bits are set, only the <i>Flags</i> and <i>Image</i> arguments are permitted. In this situation, in addition to all the other information displayed, <b>!verifier</b> will display the Driver Verifier options that are active, along with statistics on pool allocations, IRQL raises, spin locks, and trims.</P>
+<P>If <i>Flags</i> equals 0x20, the values specified for <i>CompletionTime</i>, <i>CancelTime</i>, and <i>ForceCancellation</i> are used by the Driver Hang Verification option of Driver Verifier. These new values take effect immediately and last until the next boot. When you reboot, they revert to their default values.</P>
+<P>Also, if <i>Flags</i> equals 0x20 (with or without additional parameters), the Driver Hang Verification log is printed. For information on interpreting the log, see the <i>Driver Hang Verification</i> section of the Driver Verifier documentation in the Windows Driver Kit (WDK) documentation.</P>
+<P>Here is an example of the <b>!verifier</b> extension on a Windows XP computer. Notice that the display is sorted by driver name:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!verifier 0xf</b><BR><BR>Verify Level 1f ... enabled options are:<BR>      special pool<BR>      special irql<BR>      inject random pool failures<BR>      all pool allocations checked on unload<BR>      Io subsystem checking enabled<BR><BR><b>Summary of All Verifier Statistics</b><BR><BR>RaiseIrqls                             0x0<BR>AcquireSpinLocks                       0x22a<BR>Synch Executions                       0xbcd7<BR>Trims                                  0x20e<BR><BR>Pool Allocations Attempted             0x48<BR>Pool Allocations Succeeded             0x48<BR>Pool Allocations Succeeded SpecialPool 0x48<BR>Pool Allocations With NO TAG           0x0<BR>Pool Allocations Failed                0x0<BR>Pool Allocations Failed Deliberately   0x0<BR><BR>Current paged pool allocations         0x8 for 000002D8 bytes<BR>Peak paged pool allocations            0xa for 00000494 bytes<BR>Current nonpaged pool allocations      0xb for 00003038 bytes<BR>Peak nonpaged pool allocations         0xb for 00003038 bytes<BR><BR><b>Driver Verification List</b><BR><BR><b>Entry     State           NonPagedPool   PagedPool   Module</b><BR><BR><b>fe527df8 Loaded           00002094       000002b8    ftdisk.sys</b><BR><BR>Current Pool Allocations  00000007    00000005<BR>Current Pool Bytes        000002b8    00002094<BR>Peak Pool Allocations     00000009    00000005<BR>Peak Pool Bytes           00000338    00002094<BR><BR>PoolAddress  SizeInBytes    Tag       CallersAddress<BR>f7b1bff0     0x00000010     ScFt      fdbac7af<BR>f7b1df88     0x00000078     ScFt      fdbb6e9f<BR>f7bfbfd0     0x00000030     ScFt      fdbac7af<BR>fe4e4000     0x00002000     ScFt      fdba01e6<BR>f7c19ff8     0x00000004     ScFt      fdba2677<BR>f7c2bfb0     0x00000050     ScFt      fdbac2c1<BR>f7c2df60     0x000000a0     ScFt      fdba672e<BR>f7c47fe0     0x00000020     ScFt      fdba6968<BR>f7c73f60     0x000000a0     ScFt      fdba672e<BR>f7c8dfe0     0x00000020     ScFt      fdba6968<BR>f7cb9f60     0x000000a0     ScFt      fdba672e<BR>f7cd3fe0     0x00000020     ScFt      fdba6968<BR><BR><b>fe527d68 Loaded           00000f84       00000000    i8042prt.sys</b><BR><BR>Current Pool Allocations  00000000    00000005<BR>Current Pool Bytes        00000000    00000f84<BR>Peak Pool Allocations     00000002    00000005<BR>Peak Pool Bytes           000001bc    00000f84<BR><BR>PoolAddress  SizeInBytes    Tag       CallersAddress<BR>f8a6ff40     0x000000c0     8042      fdde2eec<BR>f8a71f88     0x00000074     8042      fdde2f3e<BR>f8cf1b50     0x000004b0     8042      fdddf64c<BR>f93bb6a0     0x00000960     8042      fdde0990<BR>f93b9fc0     0x00000040     8042      fdddfd0e<BR><BR><b>fe527cd8 Loaded           00000020       00000020    flpydisk.sys</b><BR><BR>Current Pool Allocations  00000001    00000001<BR>Current Pool Bytes        00000020    00000020<BR>Peak Pool Allocations     00000001    00000001<BR>Peak Pool Bytes           00000020    00000020<BR><BR>PoolAddress  SizeInBytes    Tag       CallersAddress<BR>f93abfe0     0x00000020     Flop      fdf5dcb5<BR>f93affe0     0x00000020     Flop      fdf5b75d<BR><BR>----------------------------------------------- <BR><b>Fault injection trace log                       </b><BR>----------------------------------------------- <BR>No fault injection traces found. <BR>----------------------------------------------- <BR><b>Track irql trace log                            </b><BR>----------------------------------------------- <BR><BR>Size of track irql queue is 0x80 <BR><BR>Thread:             FFFFFFFFFE4FA880<BR>Old irql:           0<BR>New irql:           2<BR>Processor:          0<BR>Time stamp:         5B97C<BR><BR>    FFFFFFFF80535D9E ntoskrnl!VerifierKfAcquireSpinLock+0x28<BR>    FFFFFFFFFDB9ED56 +0xfffffffffdb9ed56<BR>    FFFFFFFFFDB9F2CA +0xfffffffffdb9f2ca<BR>    FFFFFFFF804175BD ntoskrnl!IopfCallDriver+0x31<BR>    FFFFFFFFFDBEA69B +0xfffffffffdbea69b<BR><BR>Thread:             FFFFFFFFFE4FA880<BR>Old irql:           2<BR>New irql:           0<BR>Processor:          0<BR>Time stamp:         5B979<BR><BR>    FFFFFFFF80535E57 ntoskrnl!VerifierKfReleaseSpinLock+0x67<BR>    FFFFFFFFFDB9EEED +0xfffffffffdb9eeed<BR>    FFFFFFFFFDB9F2CA +0xfffffffffdb9f2ca<BR>    FFFFFFFF804175BD ntoskrnl!IopfCallDriver+0x31<BR>    FFFFFFFFFDBEA69B +0xfffffffffdbea69b<BR><BR>Thread:             FFFFFFFFFE4FA880<BR>Old irql:           0<BR>New irql:           2<BR>Processor:          0<BR>Time stamp:         5B979<BR><BR>    FFFFFFFF80535D9E ntoskrnl!VerifierKfAcquireSpinLock+0x28<BR>    FFFFFFFFFDB9ED56 +0xfffffffffdb9ed56<BR>    FFFFFFFFFDB9F2CA +0xfffffffffdb9f2ca<BR>    FFFFFFFF804175BD ntoskrnl!IopfCallDriver+0x31<BR>    FFFFFFFFFDBEA69B +0xfffffffffdbea69b<BR><BR>Thread:             FFFFFFFFFE4FA880<BR>Old irql:           2<BR>New irql:           0<BR>Processor:          0<BR>Time stamp:         5B974<BR><BR>    FFFFFFFF80535E57 ntoskrnl!VerifierKfReleaseSpinLock+0x67<BR>    FFFFFFFFFDB9EEED +0xfffffffffdb9eeed<BR>    FFFFFFFFFDB9F2CA +0xfffffffffdb9f2ca<BR>    FFFFFFFF804175BD ntoskrnl!IopfCallDriver+0x31<BR>    FFFFFFFFFDBEA69B +0xfffffffffdbea69b<BR><BR></nobr></P>
+<P>Here is an example of the <b>!verifier</b> extension on a Windows Vista computer with bit 7 turned on and <i>Address</i> specified.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!verifier</b> <b>80</b> a2b1cf20<BR>Parsing 00004000 array entries, searching for address a2b1cf20.<BR>=======================================<BR>Pool block a2b1ce98, Size 00000168, Thread a2b1ce98<BR>808f1be6 ndis!ndisFreeToNPagedPool+0x39<BR>808f11c1 ndis!ndisPplFree+0x47<BR>808f100f ndis!NdisFreeNetBufferList+0x3b<BR>8088db41 NETIO!NetioFreeNetBufferAndNetBufferList+0xe<BR>8c588d68 tcpip!UdpEndSendMessages+0xdf<BR>8c588cb5 tcpip!UdpSendMessagesDatagramsComplete+0x22<BR>8088d622 NETIO!NetioDereferenceNetBufferListChain+0xcf<BR>8c5954ea tcpip!FlSendNetBufferListChainComplete+0x1c<BR>809b2370 ndis!ndisMSendCompleteNetBufferListsInternal+0x67<BR>808f1781 ndis!NdisFSendNetBufferListsComplete+0x1a<BR>8c04c68e pacer!PcFilterSendNetBufferListsComplete+0xb2<BR>809b230c ndis!NdisMSendNetBufferListsComplete+0x70<BR>8ac4a8ba test1!HandleCompletedTxPacket+0xea<BR>=======================================<BR>Pool block a2b1ce98, Size 00000164, Thread a2b1ce98<BR>822af87f nt!VerifierExAllocatePoolWithTagPriority+0x5d<BR>808f1c88 ndis!ndisAllocateFromNPagedPool+0x1d<BR>808f11f3 ndis!ndisPplAllocate+0x60<BR>808f1257 ndis!NdisAllocateNetBufferList+0x26<BR>80890933 NETIO!NetioAllocateAndReferenceNetBufferListNetBufferMdlAndData+0x14<BR>8c5889c2 tcpip!UdpSendMessages+0x503<BR>8c05c565 afd!AfdTLSendMessages+0x27<BR>8c07a087 afd!AfdTLFastDgramSend+0x7d<BR>8c079f82 afd!AfdFastDatagramSend+0x5ae<BR>8c06f3ea afd!AfdFastIoDeviceControl+0x3c1<BR>8217474f nt!IopXxxControlFile+0x268<BR>821797a1 nt!NtDeviceIoControlFile+0x2a<BR>8204d16a nt!KiFastCallEntry+0x127<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about  <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=120480" target="_blank"><i><u>Driver Verifier </u></i></a>, see the Windows Driver Kit (WDK) documentation.</P>
+<P>For more information and downloads, see the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=8753" target="_blank"><u>Driver Verifier</u></a><u> </u>page on the Windows Hardware Developer Central (WHDC) Web site.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !verifier RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

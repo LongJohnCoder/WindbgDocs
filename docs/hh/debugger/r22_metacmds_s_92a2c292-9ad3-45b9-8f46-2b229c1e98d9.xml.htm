@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.step_filter (Set Step Filter)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .step_filter (Set Step Filter)"><xml><MSHelp:Keyword Index="A" Term="r22_metacmds_S_92a2c292-9ad3-45b9-8f46-2b229c1e98d9.xml"/>
+<META NAME="MS-HKWD" CONTENT=".step_filter (Set Step Filter) command">
+<META NAME="MS-HKWD" CONTENT="Set Step Filter (.step_filter) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r22_metacmds_S_92a2c292-9ad3-45b9-8f46-2b229c1e98d9.xml"></A>.step_filter (Set Step Filter)</H1>
+<P>The <b>.step_filter</b> command creates a list of functions that are skipped (stepped over) when tracing. This allows you to trace through code and skip only certain functions. It can also be used in source mode to control stepping when there are multiple function calls on one line.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.step_filter</b> <b>"</b><i>FilterList</i><b>"</b> <BR><b>.step_filter /c</b> <BR><b>.step_filter</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>"</b><i>FilterList</i><b>"</b></DT>
+<DD>Specifies the symbols associated with functions to be stepped over. <i>FilterList</i> can contain any number of text patterns separated by semicolons. Each of these patterns may contain a variety of wildcards and specifiers; see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a> for details. A function whose symbol matches at least one of these patterns will be stepped over during tracing. Each time <b>.step_filter "</b><i>FilterList</i><b>"</b> is used, any previous filter list is discarded and completely replaced with the new list. </DD>
+<DT><b>/c</b></DT>
+<DD>Clears the filter list. </DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Without any parameters, <b>.step_filter</b> displays the current filter list.</P>
+<P>Typically, a trace command (for example, <a href="r18_cmds_s_fe6d30ae-7c39-40db-a971-2aae584c13d3.xml.htm"><b>t</b></a> or the WinDbg <a href="r37_gui_2_5c02f91a-b263-4ac8-9fe0-1f8f16265c51.xml.htm"><b>Debug | Step Into</b></a> button <img src="tbinto.bmp">) traces into a function call. However, if the symbol associated with the function being called matches a pattern specified by <i>FilterList</i>, the function will be stepped over &#8212; as if a step command (for example, <a href="r17_cmds_i_169c2b2f-7f47-4e0a-85a9-506f151f0a8f.xml.htm"><b>p</b></a>) had been used.</P>
+<P>If the instruction pointer is located within code that is listed in the filter list, any trace or step commands will step out of this function, like the <a href="r16_cmds_c_320ddebd-6cca-410d-b6bd-d8720b4494e3.xml.htm"><b>gu</b></a> command or the WinDbg <b>Step Out</b> button. Of course, this filter would prevent such code from having been traced into in the first place, so this will only happen if you have changed the filter or hit a breakpoint.</P>
+<P>For example, the following command will cause trace commands to skip over all CRT calls:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>.step_filter "msvcrt!*"</b> <BR><BR></nobr></P>
+<P>The <b>.step_filter</b> command is most useful when you are debugging in source mode, because there can be multiple function calls on a single source line. The <b>p</b> and <b>t</b> commands cannot be used to separate these function calls.</P>
+<P>For example, in the following line, the <b>t</b> command will step into both <b>GetTickCount</b> and <b>printf</b>, while the <b>p</b> command will step over both function calls:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>printf( "%x\n", GetTickCount() );</b><BR><BR></nobr></P>
+<P>The <b>.step_filter</b> command allows you to filter out one of these calls while still tracing into the other.</P>
+<P>Because the functions are identified by symbol, a single filter can include an entire module. This lets you filter out framework functions &#8212; for example, Microsoft Foundation Classes (MFC) or Active Template Library (ATL) calls.</P>
+<P>When debugging in assembly mode, each call is on a different line, so you can choose whether to step or trace line-by-line. So <b>.step_filter</b> is not very useful in assembly mode.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .step_filter (Set Step Filter) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

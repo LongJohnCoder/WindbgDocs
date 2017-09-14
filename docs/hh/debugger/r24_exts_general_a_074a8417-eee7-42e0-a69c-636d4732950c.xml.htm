@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!cs</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !cs"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_074a8417-eee7-42e0-a69c-636d4732950c.xml"/>
+<META NAME="MS-HKWD" CONTENT="!cs extension">
+<META NAME="MS-HKWD" CONTENT="critical section, !cs extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_074a8417-eee7-42e0-a69c-636d4732950c.xml"></A>!cs</H1>
+<P><P>The <b>!cs</b> extension displays one or more critical sections or the whole critical section tree.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!cs</b> [<b>-s</b>] [<b>-l</b>] [<b>-o</b>] <BR><b>!cs</b> [<b>-s</b>] [<b>-o</b>] [<i>Address</i>] <BR><b>!cs</b> [<b>-s</b>] [<b>-l</b>] [<b>-o</b>] <i>StartAddress EndAddress</i> <BR><b>!cs</b> [<b>-s</b>] [<b>-o</b>] <b>-d</b> <i>InfoAddress</i> <BR><b>!cs</b> [<b>-s</b>] <b>-t</b> [<i>TreeAddress</i>] <BR><b>!cs -?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-s</b></DT>
+<DD>Displays each critical section's initialization stack trace, if this information is available.</DD>
+<DT><b>-l</b></DT>
+<DD>Display only the locked critical sections. </DD>
+<DT><b>-o</b></DT>
+<DD>Displays the owner's stack for any locked critical section that is being displayed. </DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the critical section to display. If you omit this parameter, the debugger displays all critical sections in the current process.</DD>
+<DT><i>StartAddress</i></DT>
+<DD>Specifies the beginning of the address range to search for critical sections.</DD>
+<DT><i>EndAddress</i></DT>
+<DD>Specifies the end of the address range to search for critical sections.</DD>
+<DT><b>-d</b></DT>
+<DD>Displays critical sections that are associated with DebugInfo.   </DD>
+<DT><i>InfoAddress</i></DT>
+<DD>Specifies the address of the DebugInfo.</DD>
+<DT><b>-t</b></DT>
+<DD>Displays a critical section tree. Before you can use the <b>-t</b> option, you must activate <a href="appverif2_437533d6-daa8-4fe9-90da-a7717ebc9683.xml.htm">Application Verifier</a> for the target process and select the <b>Check lock usage</b> option. </DD>
+<DT><i>TreeAddress</i></DT>
+<DD>Specifies the address of the root of the critical section tree. If you omit this parameter or specify zero, the debugger displays the critical section tree for the current process.</DD>
+<DT><b>-?</b></DT>
+<DD>Displays some Help text for this extension in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Exts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The !<b>cs</b> extension requires full symbols (including type information) for the process that is being debugged and for <i>Ntdll.dll</i>. If you do not have symbols for <i>Ntdll.dll</i>, see <a href="r09_symbols_02a93db3-239a-4416-8bd5-2630a8eaa4f1.xml.htm">Installing Windows Symbol Files</a>.</P>
+<P>The following examples shows you how to use <b>!cs</b>. The following command displays information about the critical section at address 0x7803B0F8 and shows its initialization stack trace.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>!cs -s 0x7803B0F8</b><BR>Critical section   = 0x7803B0F8 (MSVCRT!__app_type+0x4)<BR>DebugInfo          = 0x6A262080<BR>NOT LOCKED<BR>LockSemaphore      = 0x0<BR>SpinCount          = 0x0<BR><BR>Stack trace for DebugInfo = 0x6A262080:<BR><BR>0x6A2137BD: ntdll!RtlInitializeCriticalSectionAndSpinCount+0x9B<BR>0x6A207A4C: ntdll!LdrpCallInitRoutine+0x14<BR>0x6A205569: ntdll!LdrpRunInitializeRoutines+0x1D9<BR>0x6A20DCE1: ntdll!LdrpInitializeProcess+0xAE5<BR></nobr></P>
+<P>The following command displays information about the critical section whose DebugInfo is at address 0x7803B0F8.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>!cs -d 0x6A262080</b><BR>DebugInfo          = 0x6A262080<BR>Critical section   = 0x7803B0F8 (MSVCRT!__app_type+0x4)<BR>NOT LOCKED<BR>LockSemaphore      = 0x0<BR>SpinCount          = 0x0<BR></nobr></P>
+<P>The following command displays information about all of the active critical sections in the current process.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>!cs</b><BR>-----------------------------------------<BR>DebugInfo          = 0x6A261D60<BR>Critical section   = 0x6A262820 (ntdll!RtlCriticalSectionLock+0x0)<BR>LOCKED<BR>LockCount          = 0x0<BR>OwningThread       = 0x460<BR>RecursionCount     = 0x1<BR>LockSemaphore      = 0x0<BR>SpinCount          = 0x0<BR>-----------------------------------------<BR>DebugInfo          = 0x6A261D80<BR>Critical section   = 0x6A262580 (ntdll!DeferedCriticalSection+0x0)<BR>NOT LOCKED<BR>LockSemaphore      = 0x7FC<BR>SpinCount          = 0x0<BR>-----------------------------------------<BR>DebugInfo          = 0x6A262600<BR>Critical section   = 0x6A26074C (ntdll!LoaderLock+0x0)<BR>NOT LOCKED<BR>LockSemaphore      = 0x0<BR>SpinCount          = 0x0<BR>-----------------------------------------<BR>DebugInfo          = 0x77fbde20<BR>Critical section   = 0x77c8ba60 (GDI32!semColorSpaceCache+0x0)<BR>LOCKED<BR>LockCount          = 0x0<BR>OwningThread       = 0x00000dd8<BR>RecursionCount     = 0x1<BR>LockSemaphore      = 0x0<BR>SpinCount          = 0x00000000<BR>-----------------------------------------<BR>...<BR></nobr></P>
+<P>The following command displays the critical section tree.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>!cs -t</b><BR><BR>Tree root 00bb08c0<BR><BR>Level     Node       CS    Debug  InitThr EnterThr  WaitThr TryEnThr LeaveThr EnterCnt  WaitCnt<BR><BR>-----------------------------------------------------------------------------------------------<BR><BR>    0 00bb08c0 77c7e020 77fbcae0      4c8      4c8        0        0      4c8        c        0<BR>    1 00dd6fd0 0148cfe8 01683fe0      4c8      4c8        0        0      4c8        2        0<BR>    2 00bb0aa0 008e8b84 77fbcc20      4c8        0        0        0        0        0        0<BR>    3 00bb09e0 008e8704 77fbcba0      4c8        0        0        0        0        0        0<BR>    4 00bb0a40 008e8944 77fbcbe0      4c8        0        0        0        0        0        0<BR>    5 00bb0a10 008e8824 77fbcbc0      4c8        0        0        0        0        0        0<BR>    5 00bb0a70 008e8a64 77fbcc00      4c8        0        0        0        0        0        0<BR>    3 00bb0b00 008e8dc4 77fbcc60      4c8        0        0        0        0        0        0<BR>    4 00bb0ad0 008e8ca4 77fbcc40      4c8        0        0        0        0        0        0<BR>    4 00bb0b30 008e8ee4 77fbcc80      4c8        0        0        0        0        0        0<BR>    5 00dd4fd0 0148afe4 0167ffe0      4c8        0        0        0        0        0        0<BR>    2 00bb0e90 77c2da98 00908fe0      4c8      4c8        0        0      4c8       3a        0<BR>    3 00bb0d70 77c2da08 008fcfe0      4c8        0        0        0        0        0        0<BR></nobr></P>
+<P>The following items appear in this <b>!cs -t</b> display: </P><B></B><UL type="disc">
+<LI><b>InitThr</b> is the thread ID for the thread that initialized the CS.</LI>
+<LI><b>EnterThr</b> is the ID of the thread that called <b>EnterCriticalSection</b> last time.</LI>
+<LI><b>WaitThr</b> is the ID of the thread that found the critical section that another thread owned and waited for it last time.</LI>
+<LI><b>TryEnThr</b> is the ID of the thread that called <b>TryEnterCriticalSection</b> last time.</LI>
+<LI><b>LeaveThr</b> is the ID of the thread that called <b>LeaveCriticalSection</b> last time</LI>
+<LI><b>EnterCnt</b> is the count of <b>EnterCriticalSection.</b></LI>
+<LI><b>WaitCnt</b> is the contention count. </LI>
+</UL>
+<H4>Additional Information</H4>
+<P>For other commands and extensions that can display critical section information, see <a href="t01_basic_0696c252-05c6-4f6f-b4c9-ad087b22de2b.xml.htm">Displaying a Critical Section</a>. For more information about critical sections, see the Microsoft Windows SDK documentation, the Windows Driver Kit (WDK) documentation, and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !cs RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetArgStr</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetArgStr"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="GetArgStr"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_0a1f3246-41a5-4a2f-8656-45f8c17b6418.xml"/>
+<META NAME="MS-HKWD" CONTENT="ExtExtension::GetArgStr method">
+<META NAME="MS-HKWD" CONTENT="GetArgStr (ExtExtension) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_0a1f3246-41a5-4a2f-8656-45f8c17b6418.xml"></A>GetArgStr</H1>
+<P><P>The <b>GetArgStr</b> method returns a named string argument from the command line used to invoke the current extension command.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>PCSTR</b><BR><b>  ExtExtension::GetArgStr(</b><BR><b>    IN PCSTR  </b><i>Name</i><b>,</b><BR><b>    IN bool  </b><i>Required</i><b> = true</b><BR><b>    ) throw(...)</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Name</i></DT>
+<DD>Specifies the name of the argument.  The command-line description used in <a href="engextcpp_ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml.htm">EXT_COMMAND</a> must specify that the type of this argument is string.</DD>
+<DT><i>Required</i></DT>
+<DD>Specifies if the argument is required.  If <i>Required</i> is <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">true</span> and the argument was not present on the command line, <b>ExtInvalidArgumentException</b> is thrown.  You do not need to set this parameter; if it is not set <i>Required</i> defaults to <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">true</span>.</DD>
+</DL>
+<H4>Return Value</H4>
+<P><b>GetArgStr</b> returns the named string argument.</P>
+<H4>Comments</H4>
+<P>For an overview of argument parsing in the EngExtCpp extensions framework, see <a href="engextcpp_dg_ee0ab1ba-1ede-4981-9200-ac2b0dbc6c03.xml.htm">Parsing Extension Arguments</a>.</P>
+<P>The string returned by <b>GetArgStr</b> is only meaningful during the execution of the current extension command.</P>
+<P>This method should only be called during the execution of an extension command provided by this class.</P>
+<P></P>
+<H4>Requirements</H4>
+<p><b>Headers:</b> Defined in <i>Engextcpp.hpp</i>.  Include <i>Engextcpp.hpp</i>.</p>
+<H4>See Also</H4>
+<P><a href="engextcpp_ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml.htm">EXT_COMMAND</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetArgStr RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

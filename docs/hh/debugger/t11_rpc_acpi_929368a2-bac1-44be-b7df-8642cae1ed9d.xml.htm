@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Analyzing a Stuck Call Problem</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Analyzing a Stuck Call Problem"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_929368a2-bac1-44be-b7df-8642cae1ed9d.xml"/>
+<META NAME="MS-HKWD" CONTENT="RPC debugging, stuck call"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_929368a2-bac1-44be-b7df-8642cae1ed9d.xml"></A>Analyzing a Stuck Call Problem</H1>
+<P>A common problem occurs when a process makes an RPC call, directly or indirectly, while holding a critical section or a resource. In this case, the RPC call goes to another process or machine and dispatches to the manager routine (server routine), which then hangs or takes too long. This causes the original caller to encounter a critical section time-out.</P>
+<P>When examined through the debugger, RPC is on top of the stack of the thread owning the critical section, but it is not clear what it is waiting for.</P>
+<P>Here is one example of such a stack. Many variations are possible.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:002&gt; <b>~1k</b><BR>ChildEBP RetAddr<BR>0068fba0 77e9e8eb ntdll!ZwWaitForSingleObject+0xb<BR>0068fbc8 4efeff73 KERNEL32!WaitForSingleObjectEx+0x5a<BR>0068fbe8 4eff0012 RPCRT4!UTIL_WaitForSyncIO+0x21<BR>0068fc0c 4efe6e2b RPCRT4!UTIL_GetOverlappedResultEx+0x44<BR>0068fc44 4ef973bf RPCRT4!WS_SyncRecv+0x12a<BR>0068fc68 4ef98d5a RPCRT4!OSF_CCONNECTION__TransSendReceive+0xcb<BR>0068fce4 4ef9b682 RPCRT4!OSF_CCONNECTION__SendFragment+0x297<BR>0068fd38 4ef9a5a8 RPCRT4!OSF_CCALL__SendNextFragment+0x272<BR>0068fd88 4ef9a9cb RPCRT4!OSF_CCALL__FastSendReceive+0x165<BR>0068fda8 4ef9a7f8 RPCRT4!OSF_CCALL__SendReceiveHelper+0xed<BR>0068fdd4 4ef946a7 RPCRT4!OSF_CCALL__SendReceive+0x37<BR>0068fdf0 4efd56b3 RPCRT4!I_RpcSendReceive+0xc4<BR>0068fe08 01002850 RPCRT4!NdrSendReceive+0x4f<BR>0068ff40 01001f32 rtclnt+0x2850<BR>0068ffb4 77e92ca8 rtclnt+0x1f32<BR>0068ffec 00000000 KERNEL32!CreateFileA+0x11b<BR><BR></nobr></P>
+<P>Here's how to troubleshoot this problem.</P>
+<P></P><B>Troubleshooting a stuck call problem</B><OL type="1">
+<LI>Make sure the debugger is debugging the process that owns the stuck cell. (This is the process containing the client thread that is suspected of hanging in RPC.)</LI>
+<LI>Get the stack pointer of this thread. The stack will look like the one shown in the preceding example. In this example, the stack pointer is 0x0068FBA0.  </LI>
+<LI>Get the call information for this thread. In order to do that, use the <a href="r32_exts_lg_nd_rpc_d4207fbe-571c-4663-bf65-308f236f0090.xml.htm"><b>!rpcexts.rpcreadstack</b></a> extension with the thread stack pointer as its parameter, as follows:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>!rpcexts.rpcreadstack 68fba0</b><BR>CallID: 1<BR>IfStart: 19bb5061<BR>ProcNum: 0<BR>        Protocol Sequence:      "ncacn_ip_tcp"  (Address: 00692ED8)<BR>        NetworkAddress: ""      (Address: 00692F38)<BR>        Endpoint:       "1120"  (Address: 00693988)<BR><BR></nobr></P>
+<P>The information displayed here will allow you to trace the call.</P>
+</LI>
+<LI>The network address is empty, which indicates the local machine. The endpoint is 1120. You need to determine which process hosts this endpoint. This can be done by passing this endpoint number to the <a href="r32_exts_lg_nd_rpc_2630a6b1-73b4-4700-8f0f-bf9c1058a85e.xml.htm"><b>!rpcexts.getendpointinfo</b></a> extension, as follows:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>!rpcexts.getendpointinfo 1120</b><BR>Searching for endpoint info ...<BR>PID  CELL ID   ST PROTSEQ        ENDPOINT<BR>--------------------------------------------<BR>0278 0000.0001 01            TCP 1120<BR><BR></nobr></P>
+</LI>
+<LI>From the preceding information, you can see that process 0x278 contains this endpoint. You can determine if this process knows anything about this call by using the <a href="r32_exts_lg_nd_rpc_9744e87c-777a-4ff6-8d81-9e7fcf64e69c.xml.htm"><b>!rpcexts.getcallinfo</b></a> extension. This extension needs four parameters: <i>CallID</i>, <i>IfStart</i>, and <i>ProcNum</i> (which were found in step 3), and the <i>ProcessID</i> of 0x278:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>!rpcexts.getcallinfo 1 19bb5061 0 278</b><BR>Searching for call info ...<BR>PID  CELL ID   ST PNO IFSTART  TIDNUMBER CALLFLAG CALLID   LASTTIME CONN/CLN<BR>----------------------------------------------------------------------------<BR>0278 0000.0004 02 000 19bb5061 0000.0002 00000001 00000001 00072c09 0000.0003<BR><BR></nobr></P>
+</LI>
+<LI>The information in step 5 is useful, but somewhat abbreviated. The cell ID is given in the second column as 0000.0004. If you pass the process ID and this cell number to the <a href="r32_exts_lg_nd_rpc_2e6c7d8d-6002-4083-a3e2-92ba9931c94b.xml.htm"><b>!rpcexts.getdbgcell</b></a> extension, you will see a more readable display of this cell:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>!rpcexts.getdbgcell 278 0.4</b><BR>Getting cell info ...<BR>Call<BR>Status: Dispatched<BR>Procedure Number: 0<BR>Interface UUID start (first DWORD only): 19BB5061<BR>Call ID: 0x1 (1)<BR>Servicing thread identifier: 0x0.2<BR>Call Flags: cached<BR>Last update time (in seconds since boot):470.25 (0x1D6.19)<BR>Owning connection identifier: 0x0.3<BR><BR></nobr></P>
+<P>This shows that the call is in state "dispatched", which means is has left the RPC Run-Time. The last update time is 470.25. You can learn the current time by using the <a href="r32_exts_lg_nd_rpc_c87bd7cf-0b6e-4ba7-98f2-a0cae77f76fc.xml.htm"><b>!rpcexts.rpctime</b></a> extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>!rpcexts.rpctime</b><BR>Current time is: 6003, 422<BR><BR></nobr></P>
+<P>This shows that the last contact with this call was approximately 5533 seconds ago, which is about 92 minutes. Thus, this must be a stuck call. </P>
+</LI>
+<LI>As a last step before you attach a debugger to the server process, you can isolate the thread that should currently service the call by using the Servicing thread identifier. This is another cell number; it appeared in step 6 as "0x0.2". You can use it as follows:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>!rpcexts.getdbgcell 278 0.2</b><BR>Getting cell info ...<BR>Thread<BR>Status: Dispatched<BR>Thread ID: 0x1A4 (420)<BR>Last update time (in seconds since boot):470.25 (0x1D6.19)<BR><BR></nobr></P>
+<P>Now you know that you are looking for thread 0x1A4 in process 0x278.</P>
+</LI>
+</OL>
+<P></P>
+<P>It is possible that the thread was making <i>another</i> RPC call. If necessary, you can trace this call by repeating this procedure.</P>
+<P class="note"><b>Note</b>  This procedure shows how to find the server thread if you know the client thread. For an example of the <i>reverse</i> technique, see <a href="t11_rpc_acpi_045ac5d9-af8d-48d9-bcfa-0fd3fe2d1a60.xml.htm">Identifying the Caller From the Server Thread</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Analyzing a Stuck Call Problem RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.echotimestamps (Show Time Stamps)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .echotimestamps (Show Time Stamps)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_48ba5774-77b0-4ac1-8eaf-f2d48c95e264.xml"/>
+<META NAME="MS-HKWD" CONTENT=".echotimestamps (Show Time Stamps) command">
+<META NAME="MS-HKWD" CONTENT="Show Time Stamps (.echotimestamps) command">
+<META NAME="MS-HKWD" CONTENT="time stamps">
+<META NAME="MS-HKWD" CONTENT="DbgPrint time stamps"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_48ba5774-77b0-4ac1-8eaf-f2d48c95e264.xml"></A>.echotimestamps (Show Time Stamps)</H1>
+<P>The <b>.echotimestamps</b> command turns on or turns off the display of time stamp information.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.echotimestamps</b> <b>0</b> <BR><b>.echotimestamps</b> <b>1</b> <BR><b>.echotimestamps</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>0</b></DT>
+<DD>Turns off the display of time stamp information. This is the default behavior of the Debugger.</DD>
+<DT><b>1</b></DT>
+<DD>Turns on the display of time stamp information.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>When you use the <b>.echotimestamps</b> command without parameters, the display of time stamps is turned on or off, and the new state is displayed.</P>
+<P>If you turn on this display, the debugger shows time stamps for module loads, thread creations, exceptions, and other events.</P>
+<P>The <b>DbgPrint</b>, <b>KdPrint</b>, <b>DbgPrintEx</b>, and <b>KdPrintEx</b> kernel-mode routines send a formatted string to a buffer on the host computer. The string is displayed in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a> (unless you have disabled such printing). You can also display the formatted string by using the <a href="r26_exts_kernel_a_da744a34-04ee-4dd7-8bdc-a0419cdb60c1.xml.htm"><b>!dbgprint</b></a> extension command.</P>
+<P>When you use <b>.echotimestamps</b> to turn on the display of time stamps, the time and date of each comment in the <b>DbgPrint</b> buffer is displayed.</P>
+<H4>Additional Information</H4>
+<P>For more information about <b>DbgPrint</b>, <b>KdPrint</b>, <b>DbgPrintEx</b>, and <b>KdPrintEx</b>, see <a href="t02_debugfns_7757121f-3370-467e-9ec3-e3fdde749f81.xml.htm#83ba7bbd-e84e-4148-afb3-8e7f539bcde1">The DbgPrint Buffer</a> or see the Microsoft Windows Driver Kit (WDK) documentation.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .echotimestamps (Show Time Stamps) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xCA: PNP_DETECTED_FATAL_ERROR</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xCA: PNP_DETECTED_FATAL_ERROR"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_5b9d6ab5-63ec-4476-ab32-7d745d119b78.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xCA: PNP_DETECTED_FATAL_ERROR">
+<META NAME="MS-HKWD" CONTENT="PNP_DETECTED_FATAL_ERROR"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_5b9d6ab5-63ec-4476-ab32-7d745d119b78.xml"></A>Bug Check 0xCA: PNP_DETECTED_FATAL_ERROR</H1>
+<P>The PNP_DETECTED_FATAL_ERROR bug check has a value of 0x000000CA. This indicates that the Plug and Play Manager encountered a severe error, probably as a result of a problematic Plug and Play driver.<P></P>
+</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen. Parameter 1 identifies the type of violation.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">Address of newly-reported PDO</TD>
+<TD Width="">Address of older PDO which has been duplicated</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Duplicate PDO: </b>A specific instance of a driver has enumerated multiple PDOs with identical device ID and unique IDs.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">Address of purported PDO</TD>
+<TD Width="">Address of driver object</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Invalid PDO:</b> An API which requires a PDO has been called with random memory, or with an FDO, or with a PDO which hasn't been initialized.<BR><BR>(An uninitialized PDO is one that has not been returned to Plug and Play by <b>QueryDeviceRelation</b> or <b>QueryBusRelations</b>.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">Address of PDO whose IDs were queried</TD>
+<TD Width="">Address of ID buffer</TD>
+<TD Width=""><b>1:</b> DeviceID<BR><BR><b>2:</b> UniqueID<BR><BR><b>3:</b> HardwareIDs<BR><BR><b>4:</b> CompatibleIDs<BR><BR></TD>
+<TD Width=""><b>Invalid ID:</b> An enumerator has returned an ID which contains illegal characters or isn't properly terminated. (IDs must contain only characters in the ranges 0x20 - 0x2B and 0x2D - 0x7F.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">Address of PDO with DOE_DELETE_PENDING set</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Invalid enumeration of deleted PDO:</b> An enumerator has returned a PDO which it had previously deleted using <b>IoDeleteDevice</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">Address of PDO</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>PDO freed while linked in devnode tree:</b> The object manager reference count on a PDO dropped to zero while the devnode was still linked in the tree. (This usually indicates that the driver is not adding a reference when returning the PDO in a query IRP.)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8</TD>
+<TD Width="">Address of PDO whose stack returned the invalid bus relation</TD>
+<TD Width="">Total number of PDOs returned as bus relations</TD>
+<TD Width="">The index (zero-based) at which the first NULL PDO was found </TD>
+<TD Width=""><b>Null pointer returned as a bus relation:  </b>One or more of the devices present on the bus is a NULL PDO. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x9</TD>
+<TD Width="">Connection type that was passed</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width=""><b>Invalid connection type passed to IoDisconnectInterruptEx:  </b>  A driver has passed an invalid connection type to <b>IoDisconnectInterruptEx</b>.  The connection type passed to this routine must match the one returned by a corresponding successful call to <b>IoConnectInterruptEx</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xA</TD>
+<TD Width="">Driver object </TD>
+<TD Width="">IRQL after returning from driver callback </TD>
+<TD Width="">Combined APC disable count after returning from driver callback </TD>
+<TD Width=""><b>Incorrect notify callback behavior:  </b>A driver failed to preserve IRQL or combined APC disable count across a Plug 'n' Play notification.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB</TD>
+<TD Width="">Related PDO</TD>
+<TD Width="">Removal relations</TD>
+<TD Width="">Reserved</TD>
+<TD Width=""><b>Deleted PDO reported as relation:  </b> One of the removal relations for the device being removed has already been deleted.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xCA: PNP_DETECTED_FATAL_ERROR RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

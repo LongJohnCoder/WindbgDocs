@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xC2: BAD_POOL_CALLER</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xC2: BAD_POOL_CALLER"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_7a93f797-6ab2-41ff-bbae-20e9e66897d5.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xC2: BAD_POOL_CALLER">
+<META NAME="MS-HKWD" CONTENT="BAD_POOL_CALLER"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_7a93f797-6ab2-41ff-bbae-20e9e66897d5.xml"></A>Bug Check 0xC2: BAD_POOL_CALLER</H1>
+<P>The BAD_POOL_CALLER bug check has a value of 0x000000C2. This indicates that the current thread is making a bad pool request.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen. <b>Parameter 1</b> indicates the type of violation.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x00</TD>
+<TD Width="">0 </TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Pool tag</TD>
+<TD Width="">The current thread requested a zero-byte pool allocation.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x01,<BR>0x02,<BR>or<BR>0x04</TD>
+<TD Width="">Pointer to pool header</TD>
+<TD Width="">First part of pool header contents</TD>
+<TD Width="">0 </TD>
+<TD Width="">The pool header has been corrupted.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x06</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">Pointer to pool header</TD>
+<TD Width="">Pool header contents</TD>
+<TD Width="">The current thread attempted to free the pool, which was already freed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x07</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">Pool header contents </TD>
+<TD Width="">Address of the block of pool being freed </TD>
+<TD Width="">The current thread attempted to free the pool, which was already freed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x08</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Size of allocation, in bytes</TD>
+<TD Width="">The current thread attempted to allocate the pool at an invalid IRQL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x09</TD>
+<TD Width="">Current IRQL</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Address of pool</TD>
+<TD Width="">The current thread attempted to free the pool at an invalid IRQL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0A</TD>
+<TD Width="">Address of pool</TD>
+<TD Width="">Allocator's tag</TD>
+<TD Width="">Tag being used in the attempted free</TD>
+<TD Width="">The current thread attempted to free pool memory by using the wrong tag.<BR><BR>(The memory might belong to another component.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0B,<BR>0x0C,<BR>or<BR>0x0D</TD>
+<TD Width="">Address of pool</TD>
+<TD Width="">Pool allocation's tag</TD>
+<TD Width="">Bad quota process pointer</TD>
+<TD Width="">The current thread attempted to release a quota on a corrupted pool allocation.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x40</TD>
+<TD Width="">Starting address</TD>
+<TD Width="">Start of system address space</TD>
+<TD Width="">0 </TD>
+<TD Width="">The current thread attempted to free the kernel pool at a user-mode address.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x41</TD>
+<TD Width="">Starting address</TD>
+<TD Width="">Physical page frame</TD>
+<TD Width="">Highest physical page frame</TD>
+<TD Width="">The current thread attempted to free a non-allocated nonpaged pool address.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x42<BR>or<BR>0x43</TD>
+<TD Width="">Address being freed</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The current thread attempted to free a virtual address that was never in any pool.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x44</TD>
+<TD Width="">Starting address</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">0</TD>
+<TD Width="">The current thread attempted to free a non-allocated nonpaged pool address.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x46</TD>
+<TD Width="">Starting address</TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width="">The current thread attempted to free an invalid pool address. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x47</TD>
+<TD Width="">Starting address</TD>
+<TD Width="">Physical page frame </TD>
+<TD Width="">Highest physical page frame </TD>
+<TD Width="">The current thread attempted to free a non-allocated nonpaged pool address. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x48</TD>
+<TD Width="">Starting address </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">The current thread attempted to free a non-allocated paged pool address. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x50</TD>
+<TD Width="">Starting address</TD>
+<TD Width="">Start offset, in pages, from beginning of paged pool</TD>
+<TD Width="">Size of paged pool, in bytes</TD>
+<TD Width="">The current thread attempted to free a non-allocated paged pool address.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x60</TD>
+<TD Width="">Starting address </TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The current thread attempted to free an invalid contiguous memory address.<BR><BR>(The caller of <b>MmFreeContiguousMemory</b> is passing a bad pointer.) <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x99</TD>
+<TD Width="">Address that is being freed</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The current thread attempted to free pool with an invalid address.<BR><BR>(This code can also indicate corruption in the pool header.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x9A</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Number of bytes requested</TD>
+<TD Width="">Pool tag</TD>
+<TD Width="">The current thread marked an allocation request MUST_SUCCEED.<BR><BR>(This pool type is no longer supported.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x9B</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Number of bytes requested</TD>
+<TD Width="">Caller's address</TD>
+<TD Width="">The current thread attempted to allocate a pool with a tag of 0<BR><BR>(This would be untrackable, and possibly corrupt the existing tag tables.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x9C</TD>
+<TD Width="">Pool type</TD>
+<TD Width="">Number of bytes requested</TD>
+<TD Width="">Caller's address</TD>
+<TD Width="">The current thread attempted to allocate a pool with a tag of "BIG".<BR><BR>(This would be untrackable and could possibly corrupt the existing tag tables.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x9D</TD>
+<TD Width="">Incorrect pool tag used</TD>
+<TD Width="">Pool type </TD>
+<TD Width="">Caller's address</TD>
+<TD Width="">The current thread attempted to allocate a pool with a tag that does not contain any letters or digits.  Using such tags makes tracking pool issues difficult. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x41286</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Start offset from the beginning of the paged pool, in pages </TD>
+<TD Width="">The current thread attempted to free a paged pool address in the middle of an allocation. </TD>
+</TR>
+</table>
+<P></P>
+<P>The _POOL_TYPE codes are enumerated in <i>Ntddk.h</i>. In particular, 0 indicates nonpaged pool and 1 indicates paged pool.</P>
+<H4>Cause</H4>
+<P>An invalid pool request has been made by the current thread.</P>
+<H4>Resolving the Problem</H4>
+<P>Activate Driver Verifier to obtain more information about these errors. For details, see the Driver Verifier section of the Windows Driver Kit (WDK).  </P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xC2: BAD_POOL_CALLER RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

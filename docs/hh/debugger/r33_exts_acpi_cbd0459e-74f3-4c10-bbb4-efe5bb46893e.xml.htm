@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!amli r</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !amli r"><xml><MSHelp:Keyword Index="A" Term="r33_exts_ACPI_cbd0459e-74f3-4c10-bbb4-efe5bb46893e.xml"/>
+<META NAME="MS-HKWD" CONTENT="!amli r extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33_exts_ACPI_cbd0459e-74f3-4c10-bbb4-efe5bb46893e.xml"></A>!amli r</H1>
+<P>The <b>!amli r</b> extension displays information about the current context or the specified context.</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!acpikd.amli r</b> [<i>ContextAddress</i>] <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!amli r</b> [<i>ContextAddress</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the context block to be displayed. The address of a context block can be determined from the <b>Ctxt</b> field in the <a href="r33_exts_acpi_916a102a-d94c-4152-adfc-e6bfdf9071c0.xml.htm"><b>!amli lc</b></a> display. If <i>ContextAddress</i> is prefixed with two percent signs (<b>%%</b>), it is interpreted as a physical address. Otherwise, it is interpreted as a virtual address. If this parameter is omitted, the current context is displayed.  <P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Acpikd.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If the AMLI Debugger prompt appears suddenly, this is a useful command to use.</P>
+<P>For example, the following command will display the current context of the interpreter:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>AMLI(? for help)-&gt; <b>r</b><BR><BR>Context=c18b4000*, Queue=00000000, ResList=00000000<BR>ThreadID=c15a6618, Flags=00000010<BR>StackTop=c18b5eec, UsedStackSize=276 bytes, FreeStackSize=7636 bytes<BR>LocalHeap=c18b40c0, CurrentHeap=c18b40c0, UsedHeapSize=88 bytes<BR>Object=\_WAK, Scope=\_WAK, ObjectOwner=c18b4108, SyncLevel=0<BR>AsyncCallBack=ff06b5d0, CallBackData=0, CallBackContext=c99efddc<BR><BR>MethodObject=\_WAK<BR>80e0ff5c: Local0=Unknown()<BR>80e0ff70: Local1=Unknown()<BR>80e0ff84: Local2=Unknown()<BR>80e0ff98: Local3=Unknown()<BR>80e0ffac: Local4=Unknown()<BR>80e0ffc0: Local5=Unknown()<BR>80e0ffd4: Local6=Unknown()<BR>80e0ffe8: Local7=Unknown()<BR>80e0e040: RetObj=Unknown()<BR><BR>Next AML Pointer: ffffffff80e630df:[\_WAK+16]<BR><BR>ffffffff80e630df : If(S4BW<BR>ffffffff80e630e5 : {<BR>ffffffff80e630e5 : | Store(Zero, S4BW)<BR>ffffffff80e630eb : }<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about related commands and their uses, see <a href="t11_rpc_acpi_26cfe8b9-d3ee-4915-b8b5-f2335c18d782.xml.htm">The AMLI Debugger</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !amli r RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

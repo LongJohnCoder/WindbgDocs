@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using SymChk</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using SymChk"><xml><MSHelp:Keyword Index="A" Term="SymChk_1bdef4f2-1b94-46b4-b5e4-a0cbb8670338.xml"/>
+<META NAME="MS-HKWD" CONTENT="SymChk, using"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_1bdef4f2-1b94-46b4-b5e4-a0cbb8670338.xml"></A>Using SymChk</H1>
+<P>The basic syntax for SymChk is as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>symchk</b> [<b>/r</b>] <i>FileNames</i> <b>/s</b> <i>SymbolPath</i> <BR><BR></nobr></P>
+<P><i>FileNames</i> specifies one or more program files whose symbols are needed. If <i>FileNames</i> is a directory and the <b>/r</b> flag is used, this directory is explored recursively, and SymChk will try to find symbols for all program files in this directory tree. <i>SymbolPath</i> specifies where SymChk is to search for symbols.</P>
+<P>There are many more command-line optinos. For a full listing, see <a href="symchk_b85bc2c3-7b60-48dd-8095-0e3b28ce4af1.xml.htm">SymChk Command-Line Options</a>.</P>
+<P>The symbol path specified can include any number of local directories, UNC directories, or symbol servers. Local directories and UNC directories are <i>not</i> searched recursively. Only the specified directory and a subdirectory based on the executable's extension are searched. For example, the query</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>symchk thisdriver.sys /s g:\symbols</b> <BR><BR></nobr></P>
+<P>will search <i>g:\mysymbols</i> and <i>g:\mysymbols\sys</i>.</P>
+<P>You can specify a symbol server by using either of the following syntaxes as part of your symbol path:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>srv*</b><i>DownstreamStore</i><b>*\\</b><i>Server</i><b>\</b><i>Share</i><BR><b>srv*\\</b><i>Server</i><b>\</b><i>Share</i><BR><BR></nobr></P>
+<P>This is very similar to using a symbol server in the debugger's symbol path. For details on this, see <a href="r09_symbols_cf2471ca-ad4b-4a54-b8cf-534539691b4c.xml.htm">Using Symbol Servers and Symbol Stores</a>.</P>
+<P>If a downstream store is specified, SymChk will make copies of all valid symbol files found by the symbol server and place them in the downstream store. Only symbol files that are complete matches are copied downstream.</P>
+<P>SymChk always searches the downstream store <i>before</i> querying the symbol server. Therefore you should be careful about using a downstream store when someone else is maintaining the symbol store. If you run SymChk once and it finds symbol files, it will copy those to the downstream store. If you then run SymChk again after these files have been altered or deleted on the symbol store, SymChk will not notice this fact, since it will find what it is looking for on the downstream store and look no further.</P>
+<P class="note"><b>Note</b>  SymChk always uses SymSrv (<i>Symsrv.dll</i>) as its symbol server DLL. On the other hand, the debuggers can choose a symbol server DLL other than SymSrv if one is available. (SymSrv is the symbol server included in the Debugging Tools for Windows package.)</P>
+<H4>Examples</H4>
+<P>Here are some examples. The following command searches for symbols for the program <i>Myapp.exe</i>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>e:\debuggers&gt;<b> symchk f:\myapp.exe /s f:\symbols\applications</b> <BR><BR>SYMCHK: Myapp.exe           FAILED  - Myapp.pdb is missing<BR><BR>SYMCHK: FAILED files = 1<BR>SYMCHK: PASSED + IGNORED files = 0<BR><BR></nobr></P>
+<P>You can try again with a different symbol path:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>e:\debuggers&gt;<b> symchk f:\myapp.exe /s f:\symbols\newdirectory</b> <BR><BR>SYMCHK: FAILED files = 0<BR>SYMCHK: PASSED + IGNORED files = 1<BR><BR></nobr></P>
+<P>The search was successful this time. If the verbose option is not used, SymChk will only list files for which it failed to find symbols. So in this example no files were listed. You can tell that the search succeeded because there is now one file listed in the "passed" category and none in the "failed" category.</P>
+<P>A program file is ignored if it contains no executable code. Many resource files are of this type.</P>
+<P>If you prefer to see the file names of <i>all</i> program files, you can use the <b>/v</b> option to generate verbose output:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>e:\debuggers&gt;<b> symchk /v f:\myapp.exe /s f:\symbols\newdirectory</b> <BR><BR>SYMCHK: MyApp.exe           PASSED<BR><BR>SYMCHK: FAILED files = 0<BR>SYMCHK: PASSED + IGNORED files = 1<BR><BR></nobr></P>
+<P>The following command searches for a huge number of Windows symbols in a symbol server. There are a great variety of possible error messages:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>e:\debuggers&gt;<b> symchk /r c:\windows\system32 /s srv*\\manysymbols\windows</b> <BR><BR>SYMCHK: msisam11.dll         FAILED  - MSISAM11.pdb is missing<BR>SYMCHK: msuni11.dll          FAILED  - msuni11link.pdb is missing<BR>SYMCHK: msdxm.ocx            FAILED  - Image is split correctly, but msdxm.dbg i<BR>s missing<BR>SYMCHK: expsrv.dll           FAILED  - Checksum doesn't match with expsrv.DBG<BR>SYMCHK: imeshare.dll         FAILED  - imeshare.opt.pdb is missing<BR>SYMCHK: ir32_32.dll          FAILED  - Built with no debugging information<BR>SYMCHK: author.dll           FAILED  - rpctest.pdb is missing<BR>SYMCHK: msvcrt40.dll         FAILED  - Built with no debugging information<BR>......<BR>SYMCHK: FAILED files = 211<BR>SYMCHK: PASSED + IGNORED files = 4809<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using SymChk RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xDA: SYSTEM_PTE_MISUSE</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xDA: SYSTEM_PTE_MISUSE"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_9007a26e-56e0-4afb-ba6c-78889ed0b5ff.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xDA: SYSTEM_PTE_MISUSE">
+<META NAME="MS-HKWD" CONTENT="SYSTEM_PTE_MISUSE"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_9007a26e-56e0-4afb-ba6c-78889ed0b5ff.xml"></A>Bug Check 0xDA: SYSTEM_PTE_MISUSE</H1>
+<P>The SYSTEM_PTE_MISUSE bug check has a value of 0x000000DA. This indicates that a page table entry (PTE) routine has been used in an improper way.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen. Parameter 1 indicates the type of violation. The meaning of the other parameters depends on the value of Parameter 1.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x01</TD>
+<TD Width="">The address of the internal lock tracking structure </TD>
+<TD Width="">The address of the memory descriptor list </TD>
+<TD Width="">The address of the duplicate internal lock tracking structure </TD>
+<TD Width="">The mapping being freed is a duplicate. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x02</TD>
+<TD Width="">The address of the internal lock tracking structure </TD>
+<TD Width="">The number of mappings that the system expects to free </TD>
+<TD Width="">The number of mappings that the driver is requesting to free </TD>
+<TD Width="">The number of mappings being freed is incorrect. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x03</TD>
+<TD Width="">The address of the first internal tracking structure found </TD>
+<TD Width="">The mapping address that the system expects to free </TD>
+<TD Width="">The mapping address that the driver is requesting to free </TD>
+<TD Width="">The mapping address being freed is incorrect. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x04</TD>
+<TD Width="">The address of the internal lock tracking structure </TD>
+<TD Width="">The page frame number that the system expects should be first in the MDL </TD>
+<TD Width="">The page frame number that is currently first in the MDL </TD>
+<TD Width="">The first page of the mapped MDL has changed since the MDL was mapped. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x05</TD>
+<TD Width="">The address of the first internal tracking structure found </TD>
+<TD Width="">The virtual address that the system expects to free </TD>
+<TD Width="">The virtual address that the driver is requesting to free </TD>
+<TD Width="">The start virtual address in the MDL being freed has changed since the MDL was mapped. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x06</TD>
+<TD Width="">The MDL specified by the driver </TD>
+<TD Width="">The virtual address specified by the driver </TD>
+<TD Width="">The number of mappings to free (specified by the driver)</TD>
+<TD Width="">The MDL being freed was never (or is currently not) mapped. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x07</TD>
+<TD Width="">The initial mapping </TD>
+<TD Width="">The number of mappings </TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">(<i>Windows 2000 only) </i>The mapping range is being double-allocated. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x08</TD>
+<TD Width="">The initial mapping </TD>
+<TD Width="">The number of mappings the caller is freeing </TD>
+<TD Width="">The number of mappings the system thinks should be freed</TD>
+<TD Width="">(<i>Windows 2000 only) </i>The caller is asking to free an incorrect number of mappings. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x09</TD>
+<TD Width="">The initial mapping </TD>
+<TD Width="">The number of mappings that the caller is freeing</TD>
+<TD Width="">The mapping index that the system thinks is already free</TD>
+<TD Width="">(<i>Windows 2000 only) </i>The caller is asking to free several mappings, but at least one of them is not allocated. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0A</TD>
+<TD Width=""><b>1:</b> The driver requested "bug check on failure" in the MDL.<BR><BR><b>0:</b> The driver did not request "bug check on failure" in the MDL.<BR><BR></TD>
+<TD Width="">The number of mappings that the caller is allocating</TD>
+<TD Width="">The type of mapping pool requested</TD>
+<TD Width="">(<i>Windows 2000 only) </i>The caller is asking to allocate zero mappings. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0B</TD>
+<TD Width="">The corrupt mapping</TD>
+<TD Width="">The number of mappings that the caller is allocating</TD>
+<TD Width="">The type of mapping pool requested</TD>
+<TD Width="">(<i>Windows 2000 only) </i>The mapping list was already corrupt at the time of this allocation. The corrupt mapping is located below the lowest possible mapping address. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0C</TD>
+<TD Width="">The corrupt mapping</TD>
+<TD Width="">The number of mappings that the caller is allocating</TD>
+<TD Width="">The type of mapping pool requested</TD>
+<TD Width="">(<i>Windows 2000 only) </i>The mapping list was already corrupt at the time of this allocation. The corrupt mapping is located above the lowest possible mapping address. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0D</TD>
+<TD Width="">The initial mapping </TD>
+<TD Width="">The number of mappings that the caller is freeing</TD>
+<TD Width="">The type of mapping pool</TD>
+<TD Width="">(<i>Windows 2000 only) </i>The caller is trying to free zero mappings. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0E</TD>
+<TD Width="">The initial mapping </TD>
+<TD Width="">The number of mappings that the caller is freeing</TD>
+<TD Width="">The type of mapping pool</TD>
+<TD Width="">(<i>Windows 2000 only) </i>The caller is trying to free mappings, but the guard mapping has been overwritten. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0F</TD>
+<TD Width="">The non-existent mapping</TD>
+<TD Width="">The number of mappings that the caller is trying to free</TD>
+<TD Width="">The type of mapping pool being freed</TD>
+<TD Width="">(<i>Windows 2000 only) </i>The caller is trying to free a non-existent mapping. The non-existent mapping is located below the lowest possible mapping address. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10</TD>
+<TD Width="">The non-existent mapping</TD>
+<TD Width="">The number of mappings the caller is trying to free</TD>
+<TD Width="">The type of mapping pool being freed</TD>
+<TD Width="">(<i>Windows 2000 only) </i>The caller is trying to free a non-existent mapping. The non-existent mapping is located above the highest possible mapping address. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x11</TD>
+<TD Width="">The non-existent mapping </TD>
+<TD Width="">The number of mappings that the caller is trying to free</TD>
+<TD Width="">The type of mapping pool being freed</TD>
+<TD Width="">(<i>Windows 2000 only) </i>The caller is trying to free a non-existent mapping. The non-existent mapping is at the base of the mapping address space. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x100</TD>
+<TD Width="">The number of mappings being requested </TD>
+<TD Width="">The caller's identifying tag </TD>
+<TD Width="">The address of the routine that called the caller of this routine </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller requested 0 mappings. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x101</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">The caller's identifying tag </TD>
+<TD Width="">The owner's identifying tag </TD>
+<TD Width="">(<i>Windows XP and later only) </i>A caller is trying to free a mapping address range that it does not own.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x102</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">The caller's identifying tag </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The mapping address space that the caller is trying to free is apparently empty. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x103</TD>
+<TD Width="">The address of the invalid mapping </TD>
+<TD Width="">The caller's identifying tag </TD>
+<TD Width="">The number of mappings in the mapping address space </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The mapping address space that the caller is trying to free is still reserved.  <b>MmUnmapReservedMapping</b><BR><BR> must be called before <b>MmFreeMappingAddress</b>.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x104</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">The caller's identifying tag </TD>
+<TD Width="">The owner's identifying tag </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to map an MDL to a mapping address space that it does not own. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x105</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">The caller's identifying tag </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to map an MDL to an invalid mapping address space.  The caller has mostly likely specified an invalid address.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x107</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">The address of the non-empty mapping  </TD>
+<TD Width="">The last mapping address </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to map an MDL to a mapping address space that has not been properly reserved.  The caller should have called <b>MmUnmapReservedMapping</b> prior to calling <b>MmMapLockedPagesWithReservedMapping</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x108</TD>
+<TD Width="">The first mapping address  </TD>
+<TD Width="">The caller's identifying tag </TD>
+<TD Width="">The owner's identifying tag </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to unmap a locked mapping address space that it does not own.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x109</TD>
+<TD Width="">The first mapping address</TD>
+<TD Width="">The caller's identifying tag </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to unmap a locked virtual address space that is apparently empty.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10A</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">The number of mappings in the locked mapping address space </TD>
+<TD Width="">The number of mappings to unmap </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to unmap more mappings than actually exist in the locked mapping address space.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10B</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">The caller's identifying tag</TD>
+<TD Width="">The number of mappings to unmap </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to unmap a portion of a locked virtual address space that is not currently mapped.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10C</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">The caller's identifying tag </TD>
+<TD Width="">The number of mappings to unmap </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is not unmapping the entirety of the locked mapping address space.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x200</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to reserve a mapping address space that contains no mappings. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x201<BR>0x202</TD>
+<TD Width="">The first mapping address to reserve </TD>
+<TD Width="">The address of the mapping that has already been reserved </TD>
+<TD Width="">The number of mappings to reserve </TD>
+<TD Width="">(<i>Windows XP and later only) </i>One of the mappings that the caller is attempting to reserve has already been reserved.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x300</TD>
+<TD Width="">The first mapping address to release </TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to release a mapping address space that contains no mappings.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x301</TD>
+<TD Width="">The address of the mapping</TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to release a mapping that it is not permitted to release.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x303</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">The number of mappings to release </TD>
+<TD Width="">0</TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to release a mapping address range that was not reserved.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x304</TD>
+<TD Width="">The first mapping address  </TD>
+<TD Width="">The number of mappings to release </TD>
+<TD Width="">0</TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to release a mapping address range that begins in the middle of a different allocation.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x305</TD>
+<TD Width="">The first mapping address  </TD>
+<TD Width="">The number of mappings that the caller is trying to release </TD>
+<TD Width="">The number of mappings that should be released </TD>
+<TD Width="">(<i>Windows XP and later only) </i>The caller is attempting to release the wrong number of mappings. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x306</TD>
+<TD Width="">The first mapping address </TD>
+<TD Width="">The free mapping address </TD>
+<TD Width="">The number of mappings to release </TD>
+<TD Width="">(<i>Windows XP and later only) </i>One of the mappings that the caller is attempting to release is already free.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x400</TD>
+<TD Width="">The base address of the I/O space mapping </TD>
+<TD Width="">The number of pages to be freed </TD>
+<TD Width="">0</TD>
+<TD Width="">(<i>Windows XP and later only</i>) The caller is trying to free an I/O space mapping that the system is unaware of. </TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>The error is indicated by the value of Parameter 1.</P>
+<P>A stack trace will identify the driver that caused the error. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xDA: SYSTEM_PTE_MISUSE RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

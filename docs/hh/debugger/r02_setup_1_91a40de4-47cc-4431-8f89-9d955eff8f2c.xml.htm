@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Setting Up a Null-Modem Cable Connection</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Setting Up a Null-Modem Cable Connection"><xml><MSHelp:Keyword Index="A" Term="r02_setup_1_91a40de4-47cc-4431-8f89-9d955eff8f2c.xml"/>
+<META NAME="MS-HKWD" CONTENT="setup, making a debug cable connection">
+<META NAME="MS-HKWD" CONTENT="null-modem cable">
+<META NAME="MS-HKWD" CONTENT="debug cable">
+<META NAME="MS-HKWD" CONTENT="cable connection">
+<META NAME="MS-HKWD" CONTENT="cable connection, debug (null-modem) cable)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r02_setup_1_91a40de4-47cc-4431-8f89-9d955eff8f2c.xml"></A>Setting Up a Null-Modem Cable Connection</H1>
+<P>When the host computer is in the same location as the target computer, or when you must put a local host computer that has remote access server (RAS) capabilities between the target and a remote host, you must connect the two computers by using a debug (null-modem) cable, an <a href="r02_setup_1_f15cdae4-9a5d-4eef-8507-cd68d6e729f9.xml.htm">IEEE 1394 ("FireWire") cable</a>, or a <a href="r02_setup_1_8237073f-467e-4a10-b191-b7cd218175ce.xml.htm">USB 2.0 debug cable</a>.</P>
+<P><i>Null-modem cables</i> are serial cables that have been configured to send data between two serial ports. They are available at most computer stores. Do not confuse null-modem cables with standard serial cables. Standard serial cables do not connect serial ports to each other.</P>
+<P>If you are accessing the target system's modem over a phone line, debugging a failed user-mode process on the same computer, or analyzing a dump file, you do not have to use a null-modem cable.</P>
+<H4>COM Ports</H4>
+<P>The default serial port for debug output from the target computer is the highest enumerated port (typically COM2).   You can change this default port by setting the <b>debugport</b> boot option. For more information about how to change the port, see <a href="bootini_pageone_dbg_06095f76-d8a9-4397-880e-d9d461b84904.xml.htm">Configuring Software on the Target Computer</a>.</P>
+<P>The default serial port for debug input to the host computer is COM1. You can change this default port by setting the _NT_DEBUG_PORT environment variable. For more information about how to set this environment variable, see <a href="r03_setup_2_00df7801-ba57-480e-94f7-9b17dda9b40b.xml.htm">Configuring Software on the Host Computer</a>.</P>
+<H4>Software Setup</H4>
+<P>For information about how to configure the boot entries on the target computer,  see <a href="bootini_7a4cbe01-a9e7-4b00-9c85-7bac20c73286.xml.htm">Boot Parameters to Enable Debugging</a>.   For more information about how to start a kernel debugging session, see <a href="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml.htm">Attaching to a Target Computer (Kernel Mode)</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Setting Up a Null-Modem Cable Connection RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

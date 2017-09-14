@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Expression Examples</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Expression Examples"><xml><MSHelp:Keyword Index="A" Term="r13_syntax_7538f485-e4d2-4edc-8290-314527cbb37d.xml"/>
+<META NAME="MS-HKWD" CONTENT="expressions, examples">
+<META NAME="MS-HKWD" CONTENT="MASM expressions, examples">
+<META NAME="MS-HKWD" CONTENT="C++ expressions, examples"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r13_syntax_7538f485-e4d2-4edc-8290-314527cbb37d.xml"></A>Expression Examples</H1>
+<P>This topics contains examples of MASM and C++ expressions that are used in various commands.</P>
+<P>All other sections of this Help documentation use MASM expression syntax in the examples (unless otherwise noted). C++ expression syntax is very useful for manipulating structures and variables, but it does not parse the parameters of debugger commands very well. </P>
+<P>If you are using debugger commands for general purposes or using debugger extensions, you should set MASM expression syntax as the default syntax. If you must have a specific parameter to use C++ expression syntax, use the <b>@@( )</b> syntax.</P>
+<H4>Conditional Breakpoints</H4>
+<P>You can use comparison operators to create <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm">conditional breakpoints</a>.  The following code example uses MASM expression syntax. Because the current default radix is 16, the example uses the <b>0n</b> prefix so that the number 20 is understood as a decimal number.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bp MyFunction+0x43 "j ( poi(MyVar)&gt;0n20 ) ''; 'gc' "</b> <BR></nobr></P>
+<P>In the previous example, <b>MyVar</b> is an integer in the C source. Because the MASM parser treats all symbols as addresses, the example must have the <b>poi</b> operator to dereference <b>MyVar</b>.</P>
+<H4>Conditional Expressions</H4>
+<P>The following example prints the value of <b>ecx</b> if <b>eax</b> is greater than <b>ebx</b>, 7 if <b>eax</b> is less than <b>ebx</b>, and 3 if <b>eax</b> equals <b>ebx</b>. This example uses the MASM expression evaluator, so the equal sign (=) is a comparison operator, not an assignment operator.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>? ecx*(eax&gt;ebx) + 7*(eax&lt;ebx) + 3*(eax=ebx)</b> <BR></nobr></P>
+<P>In C++ syntax, the <b>@</b> sign indicates a register, a double equal sign (==) is the comparison operator, and code must explicitly cast from BOOL to <b>int</b>. Therefore, in C++ syntax, the previous command becomes the following.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>?? @ecx*(int)(@eax&gt;@ebx) + 7*(int)(@eax&lt;@ebx) + 3*(int)(@eax==@ebx)</b> <BR></nobr></P>
+<P></P>
+<H4>C++ Expression Examples</H4>
+<P>If <b>myInt</b> is a ULONG32 value and if you are using the MASM expression evaluator, the following two examples show the value of <b>MyInt</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>?? myInt</b> <BR>0:000&gt; <b>dd myInt L1</b> <BR></nobr></P>
+<P>However, the following example shows the <i>address</i> of <b>myInt</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>? myInt</b> <BR></nobr></P>
+<H4>Mixed Expression Examples</H4>
+<P>You cannot use source-line expressions in a C++ expression. The following example uses the <b>@@( )</b> syntax to nest an MASM expression within a C++ expression. This example sets <b>MyPtr</b> equal to the address of line 43 of the <i>Myfile.c</i> file.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>?? MyPtr = @@( `myfile.c:43` )</b><BR></nobr></P>
+<P>The following examples set the default expression evaluator to MASM and then evaluate <i>Expression2</i> as a C++ expression, and evaluate <i>Expression1</i> and <i>Expression3</i> as MASM expressions.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.expr /s masm</b> <BR>0:000&gt; <b>bp</b> <i>Expression1</i> <b>+</b> <b>@@(</b> <i>Expression2</i> <b>)</b> <b>+</b> <i>Expression3</i> <BR></nobr></P>
+<P>If <b>myInt</b> is a ULONG64 value and if you know that this value is followed in memory by another ULONG64, you can set an access breakpoint at that location by using one of the following examples. (Note the use of pointer arithmetic.)</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>ba r8 @@( &amp;myInt + 1 )</b> <BR>0:000&gt; <b>ba r8 myInt + 8</b> <BR></nobr></P>
+<H4>Structures</H4>
+<P>The C++ expression evaluator casts pseudo-registers to their appropriate types. For example, <b>$teb</b> is cast as a TEB*. The following example displays the process ID.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>??  @$teb-&gt;ClientId.UniqueProcess</b> <BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Expression Examples RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Reattaching to the Target Application</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Reattaching to the Target Application"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_1d5faf67-01fe-4837-94ec-14e2fd60dea3.xml"/>
+<META NAME="MS-HKWD" CONTENT="re-attaching to the target application">
+<META NAME="MS-HKWD" CONTENT="process, re-attaching debugger to"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_1d5faf67-01fe-4837-94ec-14e2fd60dea3.xml"></A>Reattaching to the Target Application</H1>
+<P>If the debugger freezes or otherwise stops responding (that is, <i>crashes</i>) while you perform user-mode debugging, you can attach a new debugger to the existing process.</P>
+<P class="note"><b>Note  </b>This method is supported only on Microsoft Windows XP and later versions of Windows. This method does not depend on whether the debugger originally created the process or attached to an existing process. This method does not depend on whether you used the <b>-pd</b> option.</P>
+<P>To reattach a debugger to an existing target application, do the following:</P><B></B><OL type="1">
+<LI><a href="r04_setup_3_a40111cb-c7c2-451d-b09a-8a2e579f8514.xml.htm">Determine the process ID</a> of the target application.</LI>
+<LI>Start a new instance of CDB or WinDbg. Use the <b>-pe </b>command-line option.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><i>Debugger</i> <b>-pe -p</b> <i>PID</i> <BR></nobr></P>
+<P>You can also use other <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line options</a>.</P>
+<P>You can also connect from a dormant debugger by using the <a href="r19_metacmds_a_8c6d47be-d1e0-4d39-b0cd-14ac56c87de5.xml.htm"><b>.attach (Attach to Process)</b></a> command together with the <b>-e</b> option.</P>
+</LI>
+<LI>After the attach is complete, end the original debugger process.</LI>
+<LI>If the process does not respond properly, it might have a suspend count that is too high. You can use the <a href="r15_cmds_a_ead644bb-5361-45bb-9d42-0b17adf19347.xml.htm"><b>~m (Resume Thread)</b></a> command to reduce the suspend count. For more information about suspend counts, see <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">Controlling Processes and Threads</a>.</LI>
+</OL>
+<P></P>
+<P>If the original debugger is still operating properly, this method might not work. The two debuggers are competing for debugging events, and the Windows operating system does not necessarily assign all of the debugging events to the new debugger.</P>
+<P>If the original debugger is ended <i>before</i> you attach the new debugger, the target application is also closed. (However, if the debugger attached with the <b>-pd</b> option and then exits normally, the target application continues running. In this situation, a second debugger can attach to the target application <i>without</i> using the <b>-pe</b> option.)</P>
+<P>If you are already debugging a process and want to detach from  the process but leave it frozen in a debugging state, you can use the <a href="r19_metacmds_a_ea8b7b66-835b-4c3c-a9f9-773e073bc583.xml.htm"><b>.abandon (Abandon Process)</b></a> command. After this command, any Windows debugger can reattach to the process by using the procedure that is described in this topic.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Reattaching to the Target Application RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

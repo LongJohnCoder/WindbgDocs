@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>CTRL+F (Break to KD)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, CTRL+F (Break to KD)"><xml><MSHelp:Keyword Index="A" Term="r23_keys_d09e4030-33b4-41a5-b721-be694e8780fc.xml"/>
+<META NAME="MS-HKWD" CONTENT="CTRL+F (Break to KD) control key">
+<META NAME="MS-HKWD" CONTENT="Break to KD (CTRL+F) control key">
+<META NAME="MS-HKWD" CONTENT="KD, Break to KD (CTRL+K) control key"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r23_keys_d09e4030-33b4-41a5-b721-be694e8780fc.xml"></A>CTRL+F (Break to KD)</H1>
+<P>The <b>CTRL+F</b> key cancels commands or breaks into the debugger. (This control key is particularly useful when you are using CDB to debug KD itself.)</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr>CTRL+F  ENTER <BR></nobr></P>
+<P></P>
+<H4>Environment</H4>
+<P></P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Debuggers</b></TD>
+<TD Width="">CDB, KD</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Under typical conditions, CTRL+F is identical to the standard break commands (<a href="r23_keys_5e05b1f2-1c9d-4f1a-a681-4994b0fe679c.xml.htm">CTRL+C</a> in KD and CDB, and <a href="r37_gui_2_94482ad8-41d6-46e7-9a18-40dce2459d10.xml.htm"><b>Debug | Break</b></a> or <a href="r37_gui_2_94482ad8-41d6-46e7-9a18-40dce2459d10.xml.htm">CTRL+BREAK</a> in WinDbg.)</P>
+<P>However, if you are debugging KD with CDB, these two keys will work differently. CTRL+C will be intercepted by the host debugger (CDB), while CTRL+F will be intercepted by the target debugger (KD).</P>
+<H4>See Also</H4>
+<P><a href="r19_metacmds_a_d3f65c1e-657b-4ead-8fe0-7f20503cb30f.xml.htm"><b>.breakin (Break to the Kernel Debugger)</b></a> </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: CTRL+F (Break to KD) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

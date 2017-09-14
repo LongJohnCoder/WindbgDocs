@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!dlls</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !dlls"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_0787939f-c2f2-42c9-9d52-3675c826a534.xml"/>
+<META NAME="MS-HKWD" CONTENT="!dlls extension">
+<META NAME="MS-HKWD" CONTENT="DLL table entry"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_0787939f-c2f2-42c9-9d52-3675c826a534.xml"></A>!dlls</H1>
+<P><P>The <b>!dlls </b>extension displays the table entries of all loaded modules or all modules that a specified thread or process are using.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!dlls</b> [<i>Options</i>] [<i>LoaderEntryAddress</i>] <BR><b>!dlls -h</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Specifies the level of output. This parameter can be any combination of the following values:<DL><DT><b>-f</b></DT>
+<DD>Displays file headers.</DD>
+<DT><b>-s</b></DT>
+<DD>Displays section headers.</DD>
+<DT><b>-a</b></DT>
+<DD>Displays complete module information. (This option is equivalent to <b>-f -s</b>.)</DD>
+<DT><b>-c</b> <i>ModuleAddress</i></DT>
+<DD>Displays the module that contains <i>ModuleAddress</i>.</DD>
+<DT><b>-i</b></DT>
+<DD>Sorts the display by initialization order.</DD>
+<DT><b>-l</b></DT>
+<DD>Sorts the display by load order. This situation is the default.</DD>
+<DT><b>-m</b></DT>
+<DD>Sorts the display by memory order.</DD>
+<DT><b>-v</b></DT>
+<DD><i>(Windows XP and later)</i>  Displays version information. This information is taken from the resource section of each module.</DD>
+</DL>
+</DD>
+<DT><i>LoaderEntryAddress</i></DT>
+<DD>Specifies the address of the loader entry for a module. If you include this parameter, the debugger displays only this specific module.   </DD>
+<DT><b>-h</b></DT>
+<DD>Displays some Help text for this extension in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> <BR><i>Ntsdexts.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Exts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The module listing includes all entry points into each module.</P>
+<P>The<b> .dlls</b> extension works only in live debugging (not with crash dump analysis).</P>
+<P>In kernel mode, this extension displays the modules for the current <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#e761ea09-6dde-4444-9472-9e71933f4e71">process context</a>. You cannot use <b>!dlls</b> together with a system process or the idle process.</P>
+<P>The following examples shows you how to use the <b>!dlls</b> extension.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!dlls -c 77f60000</b><BR>Dump dll containing 0x77f60000:<BR><BR>0x00091f38: E:\WINDOWS\System32\ntdll.dll<BR>      Base   0x77f60000  EntryPoint  0x00000000  Size        0x00097000<BR>      Flags  0x00004004  LoadCount   0x0000ffff  TlsIndex    0x00000000<BR>             LDRP_IMAGE_DLL<BR>             LDRP_ENTRY_PROCESSED<BR><BR>kd&gt; <b>!dlls -a 91ec0</b><BR><BR>0x00091ec0: E:\WINDOWS\system32\winmine.exe<BR>      Base   0x01000000  EntryPoint  0x01003e2e  Size        0x00020000<BR>      Flags  0x00005000  LoadCount   0x0000ffff  TlsIndex    0x00000000<BR>             LDRP_LOAD_IN_PROGRESS<BR>             LDRP_ENTRY_PROCESSED<BR><BR>File Type: EXECUTABLE IMAGE<BR>FILE HEADER VALUES<BR>     14C machine (i386)<BR>       3 number of sections<BR>3A98E856 time date stamp Sun Feb 25 03:11:18 2001<BR><BR>       0 file pointer to symbol table<BR>       0 number of symbols<BR>      E0 size of optional header<BR>     10F characteristics<BR>            Relocations stripped<BR>            Executable<BR>            Line numbers stripped<BR>            Symbols stripped<BR>            32 bit word machine<BR><BR>OPTIONAL HEADER VALUES<BR>     10B magic #<BR>    7.00 linker version<BR>    3A00 size of code<BR>   19E00 size of initialized data<BR>       0 size of uninitialized data<BR>    3E2E address of entry point<BR>    1000 base of code<BR>         ----- new -----<BR>01000000 image base<BR>    1000 section alignment<BR>     200 file alignment<BR>       2 subsystem (Windows GUI)<BR>    5.01 operating system version<BR>    5.01 image version<BR>    4.00 subsystem version<BR>   20000 size of image<BR>     400 size of headers<BR>   21970 checksum<BR>00040000 size of stack reserve<BR>00001000 size of stack commit<BR>00100000 size of heap reserve<BR>00001000 size of heap commit<BR>01000100 Opt Hdr<BR>       0 [       0] address [size] of Export Directory<BR>    40B4 [      B4] address [size] of Import Directory<BR>    6000 [   19170] address [size] of Resource Directory<BR>       0 [       0] address [size] of Exception Directory<BR>       0 [       0] address [size] of Security Directory<BR>       0 [       0] address [size] of Base Relocation Directory<BR>    11B0 [      1C] address [size] of Debug Directory<BR>       0 [       0] address [size] of Description Directory<BR>       0 [       0] address [size] of Special Directory<BR>       0 [       0] address [size] of Thread Storage Directory<BR>       0 [       0] address [size] of Load Configuration Directory<BR>     258 [      A8] address [size] of Bound Import Directory<BR>    1000 [     1B0] address [size] of Import Address Table Directory<BR>       0 [       0] address [size] of Reserved Directory<BR>       0 [       0] address [size] of Reserved Directory<BR>       0 [       0] address [size] of Reserved Directory<BR><BR><BR>SECTION HEADER #1<BR>   .text name<BR>    3992 virtual size<BR>    1000 virtual address<BR>    3A00 size of raw data<BR>     400 file pointer to raw data<BR>       0 file pointer to relocation table<BR>       0 file pointer to line numbers<BR>       0 number of relocations<BR>       0 number of line numbers<BR>60000020 flags<BR>         Code<BR>         (no align specified)<BR>         Execute Read<BR><BR><BR>Debug Directories(1)<BR>        Type       Size     Address  Pointer<BR><BR>        cv           1c        13d0      7d0    Format: NB10, 3a98e856, 1, winmi<BR>ne.pdb<BR><BR>SECTION HEADER #2<BR>   .data name<BR>     BB8 virtual size<BR>    5000 virtual address<BR>     200 size of raw data<BR>    3E00 file pointer to raw data<BR>       0 file pointer to relocation table<BR>       0 file pointer to line numbers<BR>       0 number of relocations<BR>       0 number of line numbers<BR>C0000040 flags<BR>         Initialized Data<BR>         (no align specified)<BR>         Read Write<BR><BR>SECTION HEADER #3<BR>   .rsrc name<BR>   19170 virtual size<BR>    6000 virtual address<BR>   19200 size of raw data<BR>    4000 file pointer to raw data<BR>       0 file pointer to relocation table<BR>       0 file pointer to line numbers<BR>       0 number of relocations<BR>       0 number of line numbers<BR>40000040 flags<BR>         Initialized Data<BR>         (no align specified)<BR>         Read Only<BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !dlls RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

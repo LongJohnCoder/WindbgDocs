@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Creating Your Own Source Control System</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Creating Your Own Source Control System"><xml><MSHelp:Keyword Index="A" Term="SymChk_182f1661-06ff-43b5-bb48-9d44ec514674.xml"/>
+<META NAME="MS-HKWD" CONTENT="source servers, HTTP sites">
+<META NAME="MS-HKWD" CONTENT="source servers, UNC shares">
+<META NAME="MS-HKWD" CONTENT="SrcSrv, HTTP sites">
+<META NAME="MS-HKWD" CONTENT="SrcSrv, UNC shares"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_182f1661-06ff-43b5-bb48-9d44ec514674.xml"></A>Creating Your Own Source Control System</H1>
+<P>This section enables you to understand how to prepare instrumentation scripts so that SrcSrv can be integrated into your build or version control system.  The implementation is dependent on the language specification version that ships with SrcSrv<i>.</i></P>
+<P>Many of the specifics of how <i>Srcsrv.dll </i>is called by symbol handler code are discussed.  However, this information is not static and will not become so in the future.  No one should attempt to write code that calls <i>Srcsrv.dll </i>directly.  This is reserved for DbgHelp or the Visual Studio products.  Third-party vendors wanting to integrate such functionality into their products should use the <b>SymGetSourceFile</b> function.  This function, along with others in the DbgHelp API, is described in the DbgHelp<i> </i>documentation, which can be found in the <i>sdk/help</i> subdirectory of the Debugging Tools for Windows installation directory.</P>
+<P>If you do not see this documentation in your current debugger installation, it is because you did not perform a full installation.  See <a href="r02_setup_1_e4ee9269-bcd5-4f42-b68f-02e815d16be7.xml.htm">Customizing the Installation</a> for details.</P>
+<P>This section includes:</P><B></B><div class="indent1">
+<P><a href="symchk_b97a7f51-f138-46a0-9ac0-e4a1b17b93da.xml.htm">Language Specification 1</a> </P>
+</div>
+<div class="indent1">
+<P><a href="symchk_6605358d-7227-4a27-9a39-c9d3912321ee.xml.htm">Language Specification 2</a> </P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Creating Your Own Source Control System RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

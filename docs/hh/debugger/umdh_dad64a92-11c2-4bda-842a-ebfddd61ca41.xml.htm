@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>UMDH</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, UMDH"><xml><MSHelp:Keyword Index="A" Term="UMDH_dad64a92-11c2-4bda-842a-ebfddd61ca41.xml"/>
+<META NAME="MS-HKWD" CONTENT="UMDH">
+<META NAME="MS-HKWD" CONTENT="User-Mode Dump Heap">
+<META NAME="MS-HKWD" CONTENT="User-Mode Dump Heap, [See &quot;UMDH&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="UMDH_dad64a92-11c2-4bda-842a-ebfddd61ca41.xml"></A>UMDH</H1>
+<P>The User-Mode Dump Heap (UMDH) tool, <i>Umdh.exe</i>, analyzes the Microsoft Windows heap memory allocations for a given process. UMDH has the following modes.</P><B></B><UL type="disc">
+<LI><b>Analyze a running process</b> ("Mode 1"). UMDH captures and analyzes the heap memory allocations for a process. For each allocation, UMDH displays the size of the allocation, the size of the overhead, the pointer to the allocation and the allocation stack. If a process has more than one active memory heap, UMDH captures all heaps. This analysis can be displayed in realtime or saved in a log file. </LI>
+<LI><b>Analyze UMDH log files</b> ("Mode 2"). UMDH analyzes the log files it has previously created. UMDH can compare two logs created for the same process at different times, and display the calls in which the allocation size increased the most. This technique can be used to find memory leaks. </LI>
+</UL>
+<P></P>
+<P>This section includes:</P><B></B><div class="indent1">
+<P><a href="umdh_f3f255c9-69ea-42d3-babd-5cc58c03e32a.xml.htm">Preparing to Use UMDH</a> </P>
+</div>
+<div class="indent1">
+<P><a href="umdh_e2b8ec46-e960-44fd-b3df-16327f74e10a.xml.htm">UMDH Commands</a> </P>
+</div>
+<div class="indent1">
+<P><a href="umdh_ec44fde0-3091-4322-89fb-a1fdbc9318b4.xml.htm">Interpreting a UMDH Log</a> </P>
+</div>
+<div class="indent1">
+<P><a href="umdh_a0774f64-d697-463d-b82f-ff3e8e706ec8.xml.htm">Interpreting a Log Comparison</a> </P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: UMDH RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

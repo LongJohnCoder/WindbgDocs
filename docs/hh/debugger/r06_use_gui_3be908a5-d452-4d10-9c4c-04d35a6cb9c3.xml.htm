@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Moving Through a Window</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Moving Through a Window"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_3be908a5-d452-4d10-9c4c-04d35a6cb9c3.xml"/>
+<META NAME="MS-HKWD" CONTENT="debugging information windows, navigating"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_3be908a5-d452-4d10-9c4c-04d35a6cb9c3.xml"></A>Moving Through a Window</H1>
+<P>There are several ways of moving through a debugging information window. </P>
+<P>If a scrollbar appears in the window, you can use it to display more of the window.</P>
+<P>In addition, some windows support the <b>Find</b>, <b>Go to Address</b>, or <b>Go to Line</b> commands. These commands only change the WinDbg display. They do not affect the execution of the target or any other debugger operations.</P>
+<H4>Find Command</H4>
+<P>You can use the <b>Find</b> command in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a> or in a <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a>.</P>
+<P>When one of these windows is active, click<b> Find</b> on the <b>Edit</b> menu or press CTRL+F. The <b>Find</b> dialog box opens.</P>
+<P>Enter the text that you want to find in the dialog box, and select <b>Up</b> or <b>Down</b> to determine the direction of your search. The search begins wherever the cursor is in the window. You can put the cursor at any point by using the mouse.</P>
+<P>Select the <b>Match whole word only</b> check box if you want to search for a single whole word. (If you select this check box and you enter multiple words, this check box is ignored.) Select the <b>Match case</b> check box to perform a case-sensitive search.</P>
+<P>If you close the <b>Find</b> dialog box, you can repeat the previous search in a forward direction by clicking <b>Find Next</b> on the <b>Edit</b> menu or pressing F3. You can repeat the search in a backward direction by pressing SHIFT+F3.</P>
+<H4>Go to Address Command</H4>
+<P>The <b>Go to Address</b> command searches for an address in the application that you are debugging. To use this option, click <b>Go to Address</b> on the <b>Edit</b> menu or press CTRL+G.</P>
+<P>When the <b>View Code Offset</b> dialog box appears, enter the address that you want to search for. You can enter this address as an expression, such as a function, symbol, or integer memory address. If the address is ambiguous, a list appears with all of the ambiguous items.</P>
+<P>After you click <b>OK</b>, the debugger moves the cursor to the beginning of the function or address in the <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a> or a <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a>.</P>
+<P>You can use the <b>Go to Address</b> command regardless of which debugging information window is open. If the debugger is in disassembly mode, the debugger finds the address that you are searching for in the Disassembly window. If the debugger is in source mode, the debugger tries to find the address in a Source window. If the debugger cannot find the address in a Source window, the debugger finds the address in the Disassembly window. If the needed window is not open, the debugger  opens it.</P>
+<H4>Moving to a Specific Line</H4>
+<P>The <b>Go to Line</b> command searches for a line number in the active Source window. If the active window is not a Source window, you cannot use the <b>Go to Line</b> command.</P>
+<P>To activate this option, click <b>Go to Line</b> on the <b>Edit</b> menu or press CTRL+L.</P>
+<P>When the <b>Go to Line</b> dialog box appears, enter the line number that you want to find and then click <b>OK</b>. The debugger moves the cursor to that line. If the line number is larger than the last line in the file, the cursor moves to the end of the file.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Moving Through a Window RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

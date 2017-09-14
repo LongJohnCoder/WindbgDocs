@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Logging to Track Important Events</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Logging to Track Important Events"><xml><MSHelp:Keyword Index="A" Term="t11~b_ks_02b19a3c-3b51-46e5-88c7-2e8e87239450.xml"/>
+<META NAME="MS-HKWD" CONTENT="kernel streaming debugging, video stream stall, logging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~b_ks_02b19a3c-3b51-46e5-88c7-2e8e87239450.xml"></A>Using Logging to Track Important Events</H1>
+<P>In general, data is moved downstream only by triggering events, the minidriver's processing, and buffer completions. To isolate the cause of a hang or stall:</P><B></B><UL type="disc">
+<LI>  Check for mismatched <b>KsGate</b><I><B>Xxx</B></I> calls.</LI>
+<LI>  Check for omitted <b>Ks</b><I><B>Xxx</B></I><b>AttemptProcessing </b>calls.</LI>
+<LI>  Look for problems in code related to triggering events, including code that either references the pin flags for the problem stream or that calls <b>KsPinAttemptProcessing</b>.</LI>
+<LI>  Look for problems in the code related to the processing dispatch, in particular where it queues to hardware and where clone pointers are created.</LI>
+<LI>  Look for problems in the code related to the driver's deferred procedure call (DPC), especially where buffers are completed or any calls are made to <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=56550" target="_blank"><b><u>KsStreamPointerDelete</u></b></a>.</LI>
+<LI>  Look for problems in the startup code for the stream.</LI>
+</UL>
+<P></P>
+<P>The most effective way to collect this information is by logging everything in the affected region, including processing, buffer acquisition (such as cloning and programming hardware), buffer release (such as deleting clones), and any gate manipulations. Most of this information is highly timing dependent and requires memory-based logging or ETW.</P>
+<P>To maintain a rolling memory-based log, use the following code:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>typedef struct _LOGENTRY {<BR>    ULONG Tag;<BR>    ULONG Arg[3];<BR>} LOGENTRY, *PLOGENTRY;<BR>#define LOGSIZE 2048<BR>LONG g_LogCount;<BR>LOGENTRY g_Log [LOGSIZE];<BR>#define LOG(tag,arg1,arg2,arg3) do { \<BR>    LONG i = InterlockedIncrement (&amp;g_LogCount) % LOGSIZE; \<BR>    g_Log [i].Tag = tag; \<BR>    g_Log [i].Arg [0] = (ULONG)(arg1); \<BR>    g_Log [i].Arg [1] = (ULONG)(arg2); \<BR>    g_Log [i].Arg [2] = (ULONG)(arg3); \<BR>} while (0)<BR></nobr></P>
+<P></P>
+<P>Then, use a simple "dc g_Log" to view the contents of the <b>g_Log</b> array in the debugger.</P>
+<P>The following example uses the above memory-based scheme to determine the cause of a processing stall. Output is from an AVStream streaming scenario in graphedt. The following minidriver events were logged:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Abbreviation</b></TD>
+<TD Width=""><b>Description</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>Strt</i></TD>
+<TD Width="">This event occurs when the minidriver first queues buffers for the device from within the minidriver's <b>Start</b> dispatch.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>Prc&lt;</i></TD>
+<TD Width="">This event occurs at the start of the minidriver's <i>Process</i> dispatch.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>AddB</i></TD>
+<TD Width="">This event occurs when the minidriver queues buffers to the device from within its <i>Process</i> dispatch.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>DPC&lt;</i></TD>
+<TD Width="">This event occurs at the start of the minidriver's <i>CallOnDPC</i>. It indicates buffer completion.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>Atmp</i></TD>
+<TD Width="">This event occurs when the minidriver calls from within the DPC to <b>KsPinAttemptProcessing</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>Dele</i></TD>
+<TD Width="">This event occurs when the minidriver calls from within the DPC to delete a clone stream pointer.</TD>
+</TR>
+</table>
+<P></P>
+<P>Log excerpts are as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>f9494b80  3c435044 816e2c90 00000000 00000000  DPC&lt;.,n.........<BR>f9494b90  656c6544 816e2c90 81750260 00000000  Dele.,n.`.u.....<BR>f9494ba0  706d7441 816e2c90 ffa4d418 00000000  Atmp.,n.........<BR>f9494bb0  3c637250 819c1f00 00000000 00000000  Prc&lt;............<BR>f9494bc0  42646441 819c1f00 ffa2eb08 00000000  AddB............<BR>f9494bd0  3c435044 816e2c90 00000000 00000000  DPC&lt;.,n.........<BR>f9494be0  656c6544 816e2c90 ffa80348 00000000  Dele.,n.H.......<BR>f9494bf0  706d7441 816e2c90 ffa4d418 00000000  Atmp.,n.........<BR>f9494c00  3c637250 819c1f00 00000000 00000000  Prc&lt;............<BR>f9494c10  42646441 819c1f00 ffa3d9b8 00000000  AddB............<BR><BR></nobr></P>
+<P>This first log excerpt is representative of the normal streaming state. In the first line, the minidriver's <i>CallOnDPC</i> is called to complete a buffer (<i>DPC&lt;</i>). The buffer is deleted (<i>Dele</i>), and <b>KsPinAttemptProcessing </b>is called to move the leading edge forward, if there are any unprocessed buffers in the queue (<i>Atmp</i>). In this case, there were, as can be seen by the call to the process dispatch (<b>Prc&lt;</b>). More buffers are added to the queue (<i>AddB</i>), and the whole scenario repeats.  </P>
+<P>This next excerpt includes the last entries in the log right before the stall occurred.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>f949b430  3c435044 816e2c90 00000000 00000000  DPC&lt;.,n.........<BR>f949b440  656c6544 816e2c90 ffac4de8 00000000  Dele.,n..M......<BR>f949b450  706d7441 816e2c90 ffa4d418 00000000  Atmp.,n.........<BR>f949b460  3c435044 816e2c90 00000000 00000000  DPC&lt;.,n.........<BR>f949b470  656c6544 816e2c90 816ffc80 00000000  Dele.,n...o.....<BR>f949b480  706d7441 816e2c90 ffa4d418 00000000  Atmp.,n.........<BR>f949b490  3c435044 816e2c90 00000000 00000000  DPC&lt;.,n.........<BR>f949b4a0  656c6544 816e2c90 ffa80348 00000000  Dele.,n.H.......<BR>f949b4b0  706d7441 816e2c90 ffa4d418 00000000  Atmp.,n.........<BR>f949b4c0  3c435044 816e2c90 00000000 00000000  DPC&lt;.,n.........<BR>f949b4d0  656c6544 816e2c90 8174e1c0 00000000  Dele.,n...t.....<BR>f949b4e0  706d7441 816e2c90 ffa4d418 00000000  Atmp.,n.........<BR><BR></nobr></P>
+<P>In this example, several buffers are being completed (indicated by the repeated instances of <i>DPC&lt;</i>), but there are no unprocessed buffers in the queue, so the process dispatch is not being called (indicated by the absence of <i>Prc&lt;</i>). In fact, all of the processed buffers in the queue have been completed, apparently before any new unprocessed buffers could be added. Because the application is already running (so that <i>Start</i> will not be called) and no calls are being made to <i>CallOnDPC</i> (because there are no processed buffers ready to be completed), any new buffers are apparently accumulating ahead of the leading edge, waiting to be processed, with nothing initiating processing.  </P>
+<P>The problem is that the KSPIN_FLAG_DO_NOT_INITIATE_PROCESSING flag has been set. When this flag is set, processing occurs only through a call to <i>Start</i> or <i>CallOnDPC</i>. If this flag is not set, processing will be initiated whenever new buffers are added to the queue.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Logging to Track Important Events RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

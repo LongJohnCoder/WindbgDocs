@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Setting Up a USB 2.0 Debug Cable Connection</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Setting Up a USB 2.0 Debug Cable Connection"><xml><MSHelp:Keyword Index="A" Term="r02_setup_1_8237073f-467e-4a10-b191-b7cd218175ce.xml"/>
+<META NAME="MS-HKWD" CONTENT="setup, making a USB 2.0 cable connection">
+<META NAME="MS-HKWD" CONTENT="cable connection, USB 2.0 debug cable">
+<META NAME="MS-HKWD" CONTENT="USB 2.0 debugging connection">
+<META NAME="MS-HKWD" CONTENT="USB 2.0 debugging connection, setting up the hardware">
+<META NAME="MS-HKWD" CONTENT="USB 2.0 debugging connection, software requirements"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r02_setup_1_8237073f-467e-4a10-b191-b7cd218175ce.xml"></A>Setting Up a USB 2.0 Debug Cable Connection</H1>
+<P>When the host computer is in the same location as the target computer, or when you have to put a local host computer that has remote access server (RAS) capabilities between the target and a remote host, you must connect the two computers by using a USB 2.0 debug cable, a <a href="r02_setup_1_91a40de4-47cc-4431-8f89-9d955eff8f2c.xml.htm">debug (null-modem) cable</a>, or an <a href="r02_setup_1_f15cdae4-9a5d-4eef-8507-cd68d6e729f9.xml.htm">IEEE 1394 ("FireWire") cable</a>. </P>
+<P>Kernel debugging through a USB 2.0 debug cable is not supported on all systems. The target computer must be running Windows Vista or a later version of Windows, and the host computer must be running Windows 2000 or a later version of Windows.</P>
+<P>You must use the following hardware for this kind of debugging:</P><B></B><UL type="disc">
+<LI>A USB 2.0 debug cable.  This cable is not a standard USB 2.0 cable, because it has an extra hardware component that makes it compatible with the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=85606" target="_blank">USB2 Debug Device Functional Specification</a>.  You can find these cables with an Internet search for "USB 2.0 debug cable".      </LI>
+<LI>The host computer must have a USB 2.0 controller that is compatible with the Enhanced Host Controller Interface (EHCI) specification. </LI>
+<LI>The target computer must have a USB 2.0 controller that is compatible with the EHCI specification, and which supports kernel debugging.  Not all EHCI-compatible controllers have this support, and there is no programmatic method to determine whether a given computer does have this support.    </LI>
+<LI>If the EHCI-compatible controller provides kernel debugging support, you must use Port 1 of the controller on the target computer for the debug connection. The USB debugging port must be exposed to the outside of the target computer.  (A few computers have a USB 2.0 controller that supports debugging through a certain physical port that is not accessible from the outside of the computer.)  You can use the <a href="usbview_d9553e41-309d-4622-9b23-472f29f4b8e3.xml.htm">USBView</a> utility that helps to identify which port number is assigned to each USB connector. </LI>
+</UL>
+<P></P>
+<P>USB debugging does not work over a hub or docking station. </P>
+<H4>Software Setup</H4>
+<P>For information about how to configure the boot entries on the target computer,  see <a href="bootini_7a4cbe01-a9e7-4b00-9c85-7bac20c73286.xml.htm">Boot Parameters to Enable Debugging</a>.  For more information about how to start a kernel debugging session, see <a href="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml.htm">Attaching to a Target Computer (Kernel Mode)</a>.</P>
+<P class="note"><b>Note</b>  Additional support can be requested by sending mail to <img src="internet_link_sm.gif"><text> </text><a href="mailto:usbdbg@microsoft.com" target="_blank">usbdbg@microsoft.com</a>.  </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Setting Up a USB 2.0 Debug Cable Connection RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

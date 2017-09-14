@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!poolfind</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !poolfind"><xml><MSHelp:Keyword Index="A" Term="r28_exts_kernel_N_5620723a-23da-4333-8902-b04e66f7dda0.xml"/>
+<META NAME="MS-HKWD" CONTENT="!poolfind extension">
+<META NAME="MS-HKWD" CONTENT="memory, Pool Tag Search (!poolfind) extension">
+<META NAME="MS-HKWD" CONTENT="memory, pool tag"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r28_exts_kernel_N_5620723a-23da-4333-8902-b04e66f7dda0.xml"></A>!poolfind</H1>
+<P>The <b>!poolfind</b> extension finds all instances of a specific pool tag in either nonpaged or paged memory pools.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!poolfind</b> <i>TagString</i> [<i>PoolType</i>] <BR><b>!poolfind</b> <i>TagValue</i> [<i>PoolType</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>TagString</i></DT>
+<DD>Specifies the pool tag. <i>TagString</i> is a case-sensitive ASCII string. The asterisk (<b>*</b>) can be used to represent any number of characters; the question mark (<b>?</b>) can be used to represent exactly one character. Unless an asterisk is used, <i>TagString</i> must be exactly four characters in length.</DD>
+<DT><i>TagValue</i></DT>
+<DD>Specifies the pool tag. <i>TagValue</i> must begin with "0x", even if the default radix is 16. If this parameter begins with any other value (including "0X") it will be interpreted as an ASCII tag string.</DD>
+<DT><i>PoolType</i></DT>
+<DD>Specifies the type of pool to be searched. The following values are permitted:<DL><DT>0</DT>
+<DD>Specifies nonpaged memory pool. This is the default.</DD>
+<DT>1</DT>
+<DD>Specifies paged memory pool.</DD>
+<DT>2</DT>
+<DD>Specifies the special pool.  </DD>
+<DT>4</DT>
+<DD><i>(Windows XP and later)</i>  Specifies the session pool.</DD>
+<P></P>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This command can take a significant amount of time to execute, depending on the size of pool memory that must be searched. To speed up this execution, increase the COM port speed with the <a href="r23_keys_5e94e92d-e89a-40df-8030-190b68a181e5.xml.htm">CTRL+A (Toggle Baud Rate)</a> key, or use the <a href="r19_metacmds_a_f283d0a1-e577-4429-9ab3-001663afd9f3.xml.htm"><b>.cache (Set Cache Size)</b></a> command to increase the cache size (to approximately 10 MB).</P>
+<P>The pool tag is the same tag passed to the <b>ExAllocate</b><I><B>Xxx</B></I> family of routines.</P>
+<P>Here is an example. The entire nonpaged pool is searched and then the paged pool is searched, but the command is terminated before completion (after an hour of operation):</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!poolfind SeSd 0</b><BR><BR>Scanning large pool allocation table for Tag: SeSd (827d1000 : 827e9000)<BR><BR>Searching NonPaged pool (823b1000 : 82800000) for Tag: SeSd<BR><BR>826fa130 size:   c0 previous size:   40  (Allocated) SeSd<BR>82712000 size:   c0 previous size:    0  (Allocated) SeSd<BR>82715940 size:   a0 previous size:   60  (Allocated) SeSd<BR>8271da30 size:   c0 previous size:   10  (Allocated) SeSd<BR>82721c00 size:   10 previous size:   30  (Free)      SeSd<BR>8272b3f0 size:   60 previous size:   30  (Allocated) SeSd<BR>8272d770 size:   60 previous size:   40  (Allocated) SeSd<BR>8272d7d0 size:   a0 previous size:   60  (Allocated) SeSd<BR>8272d960 size:   a0 previous size:   70  (Allocated) SeSd<BR>82736f30 size:   a0 previous size:   10  (Allocated) SeSd<BR>82763840 size:   a0 previous size:   10  (Allocated) SeSd<BR>8278b730 size:  100 previous size:  290  (Allocated) SeSd<BR>8278b830 size:   10 previous size:  100  (Free)      SeSd<BR>82790130 size:   a0 previous size:   20  (Allocated) SeSd<BR>82799180 size:   a0 previous size:   10  (Allocated) SeSd<BR>827c00e0 size:   a0 previous size:   30  (Allocated) SeSd<BR>827c8320 size:   a0 previous size:   60  (Allocated) SeSd<BR>827ca180 size:   a0 previous size:   50  (Allocated) SeSd<BR>827ec140 size:   a0 previous size:   10  (Allocated) SeSd<BR><BR>Searching NonPaged pool (fe7c3000 : ffbe0000) for Tag: SeSd<BR><BR>kd&gt; <b>!poolfind SeSd 1</b><BR><BR>Scanning large pool allocation table for Tag: SeSd (827d1000 : 827e9000)<BR><BR>Searching Paged pool (e1000000 : e4400000) for Tag: SeSd<BR><BR>e10000b0 size:   d0 previous size:   20  (Allocated) SeSd<BR>e1000260 size:   d0 previous size:   60  (Allocated) SeSd<BR>......<BR>e1221dc0 size:   a0 previous size:   60  (Allocated) SeSd<BR>e1224250 size:   a0 previous size:   30  (Allocated) SeSd<BR><BR>...terminating - searched pool to e1224000<BR>kd&gt; <BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about memory pools and pool tags, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !poolfind RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

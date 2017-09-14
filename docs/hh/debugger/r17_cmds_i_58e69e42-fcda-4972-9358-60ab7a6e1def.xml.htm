@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>k, kb, kc, kd, kp, kP, kv (Display Stack Backtrace)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, k, kb, kc, kd, kp, kP, kv (Display Stack Backtrace)"><xml><MSHelp:Keyword Index="A" Term="r17_cmds_I_58e69e42-fcda-4972-9358-60ab7a6e1def.xml"/>
+<META NAME="MS-HKWD" CONTENT="k (Display Stack Backtrace) command">
+<META NAME="MS-HKWD" CONTENT="kb (Display Stack Backtrace) command">
+<META NAME="MS-HKWD" CONTENT="kc (Display Stack Backtrace) command">
+<META NAME="MS-HKWD" CONTENT="kd (Display Stack Backtrace) command">
+<META NAME="MS-HKWD" CONTENT="kp (Display Stack Backtrace) command">
+<META NAME="MS-HKWD" CONTENT="kP (Display Stack Backtrace) command">
+<META NAME="MS-HKWD" CONTENT="kv (Display Stack Backtrace) command">
+<META NAME="MS-HKWD" CONTENT="Display Stack Ba"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r17_cmds_I_58e69e42-fcda-4972-9358-60ab7a6e1def.xml"></A>k, kb, kc, kd, kp, kP, kv (Display Stack Backtrace)</H1>
+<P>The <b>k</b><i>*</i> commands display the stack frame of the given thread, together with related information..</P>
+<H4>Syntax</H4>
+<P>User-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr>[<b>~</b><i>Thread</i>] <b>k</b>[<b>b</b>|<b>p</b>|<b>P</b>|<b>v</b>] [<b>c</b>] [<b>n</b>] [<b>f</b>] [<b>L</b>] [<i>FrameCount</i>] <BR>[<b>~</b><i>Thread</i>] <b>k</b>[<b>b</b>|<b>p</b>|<b>P</b>|<b>v</b>] [<b>c</b>] [<b>n</b>] [<b>f</b>] [<b>L</b>] <b>=</b> <i>BasePtr</i> [<i>FrameCount</i>] <BR>[<b>~</b><i>Thread</i>] <b>k</b>[<b>b</b>|<b>p</b>|<b>P</b>|<b>v</b>] [<b>c</b>] [<b>n</b>] [<b>f</b>] [<b>L</b>] <b>=</b> <i>BasePtr</i> <i>StackPtr</i> <i>InstructionPtr</i> <BR>[<b>~</b><i>Thread</i>] <b>kd</b> [<i>WordCount</i>] <BR></nobr></P>
+<P></P>
+<P>Kernel-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr>[<i>Processor</i>] <b>k</b>[<b>b</b>|<b>p</b>|<b>P</b>|<b>v</b>] [<b>c</b>] [<b>n</b>] [<b>f</b>] [<b>L</b>] [<i>FrameCount</i>] <BR>[<i>Processor</i>] <b>k</b>[<b>b</b>|<b>p</b>|<b>P</b>|<b>v</b>] [<b>c</b>] [<b>n</b>] [<b>f</b>] [<b>L</b>] <b>=</b> <i>BasePtr</i> [<i>FrameCount</i>] <BR>[<i>Processor</i>] <b>k</b>[<b>b</b>|<b>p</b>|<b>P</b>|<b>v</b>] [<b>c</b>] [<b>n</b>] [<b>f</b>] [<b>L</b>] <b>=</b> <i>BasePtr</i> <i>StackPtr</i> <i>InstructionPtr</i> <BR>[<i>Processor</i>] <b>kd</b> [<i>WordCount</i>] <BR></nobr></P>
+<P></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Thread</i></DT>
+<DD>Specifies the thread whose stack is to be displayed. If you omit this parameter, the stack of the current thread is displayed. For more information about thread syntax, see <a href="r13_syntax_5bebd798-3782-4d86-8a4f-33b8f2488b7a.xml.htm">Thread Syntax</a>. You can specify threads only in user mode.</DD>
+<DT><i>Processor</i></DT>
+<DD>Specifies the processor whose stack is to be displayed.   For more information about processor syntax, see <a href="r13_syntax_b7eb5ea3-8cf4-420d-9461-94d4e20f38d5.xml.htm">Multiprocessor Syntax</a>. You can specify processors only in kernel mode.</DD>
+<DT><b>b</b></DT>
+<DD>Displays the first three parameters that are passed to each function in the stack trace.</DD>
+<DT><b>c</b></DT>
+<DD>Displays a clean stack trace. Each display line includes only the module name and the function name.</DD>
+<DT><b>p</b></DT>
+<DD>Displays all of the parameters for each function that is called in the stack trace. The parameter list includes each parameter's data type, name, and value. The <b>p</b> option is case sensitive. <i>This parameter requires full symbol information.</i></DD>
+<DT><b>P</b></DT>
+<DD>Displays all of the parameters for each function that is called in the stack trace, like the <b>p </b>parameter. However, for <b>P</b>, the function parameters are printed on a second line of the display, instead of on the same line as the rest of the data.</DD>
+<DT><b>v</b></DT>
+<DD>Displays frame pointer omission (FPO) information. On x86-based processors, the display also includes calling convention information.</DD>
+<DT><b>n</b></DT>
+<DD>Displays frame numbers.</DD>
+<DT><b>f</b></DT>
+<DD>Displays the distance between adjacent frames. This distance is the number of bytes that separate the frames on the actual stack.</DD>
+<DT><b>L</b></DT>
+<DD>Hides source lines in the display. <b>L</b> is case sensitive.</DD>
+<DT><i>FrameCount</i></DT>
+<DD>Specifies the number of stack frames to display. You should specify this number in hexadecimal format, unless you have changed the radix by using the <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command. The default value is 20 (0x14), unless you have changed the default value by using the <a href="r20_metacmds_e_be65d192-ad15-4638-8862-0c270107c457.xml.htm"><b>.kframes (Set Stack Length)</b></a> command.</DD>
+<DT><i>BasePtr</i></DT>
+<DD>Specifies the base pointer for the stack trace. The <i>BasePtr</i> parameter is available only if there is an equal sign (<b>=</b>) after the command. On an x86-based processor, you can add one more parameter after <i>BasePtr</i> (which is interpreted as the <i>FrameCount</i> parameter) or two more parameters after <i>BasePtr</i> (which are interpreted as the <i>StackPtr</i> and <i>InstructionPtr</i> parameters).     </DD>
+<DT><i>StackPtr</i></DT>
+<DD><i>(x86-based processor only)</i>  Specifies the stack pointer for the stack trace. If you omit <i>StackPtr</i> and <i>InstructionPtr</i>, the command uses the stack pointer that the <b>esp</b> register specifies and the instruction pointer that the <b>eip</b> register specifies.</DD>
+<DT><i>InstructionPtr</i></DT>
+<DD><i>(x86-based processor only)</i>  Specifies the instruction pointer for the stack trace. If you omit <i>StackPtr</i> and <i>InstructionPtr</i>, the command uses the stack pointer that the <b>esp</b> register specifies and the instruction pointer that the <b>eip</b> register specifies.</DD>
+<DT><i>WordCount</i></DT>
+<DD>Specifies the number of DWORD_PTR values in the stack to dump.  The default value is 20 (0x14), unless you changed the default value by using the <a href="r20_metacmds_e_be65d192-ad15-4638-8862-0c270107c457.xml.htm"><b>.kframes (Set Stack Length)</b></a> command.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>When you issue the <b>k</b>, <b>kb</b>, <b>kp</b>, <b>kP</b>, or <b>kv</b> command, a stack trace is displayed in a tabular format. If line loading is enabled, source modules and line numbers are also displayed.</P>
+<P>The stack trace includes the base pointer for the stack frame, the return address, and function names.</P>
+<P>If you use the <b>kp</b> or <b>kP</b> command, the full parameters for each function that is called in the stack trace are displayed. The parameter list includes each parameter's data type, name, and value. </P>
+<P>This command might be slow. For example, when <b>MyFunction1</b> calls <b>MyFunction2</b>, the debugger must have full symbol information for <b>MyFunction1</b> to display the parameters that are passed in this call. This command does not fully display internal Microsoft Windows routines that are not exposed in public symbols.    </P>
+<P>If you use the <b>kb</b> or <b>kv</b> command, the first three parameters that are passed to each function are displayed. If you use the <b>kv</b> command, FPO data is also displayed.</P>
+<P>On an x86-based processor, the <b>kv</b> command also displays calling convention information.</P>
+<P>On an Itanium-based processor, the <b>kv</b> command also causes nonvolatile registers to be displayed. This information enables you to trace the register stack.</P>
+<P></P>
+<P>When you use the <b>kv </b>command, the FPO information is added at the end of the line in the following format.</P><B></B><table>
+<TR valign="top">
+<TH Width="">FPO text</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">FPO: [non-Fpo]<BR></span></TD>
+<TD Width="">No FPO data for the frame.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">FPO: [<i>N1</i>,<i>N2</i>,<i>N3</i>]<BR></span></TD>
+<TD Width=""><i>N1</i> is the total number of parameters.  <BR><BR><i>N2</i> is the number of DWORD values for the local variables.   <BR><BR><i>N3</i> is the number of registers that are saved.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">FPO: [<i>N1</i>,<i>N2</i>] TrapFrame @ <i>Address</i><BR></span></TD>
+<TD Width=""><i>N1</i> is the total number of parameters.  <BR><BR><i>N2</i> is the number of DWORD values for the locals.   <BR><BR><i>Address</i> is the address of the trap frame.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">FPO: TaskGate <i>Segment</i>:0<BR></span></TD>
+<TD Width=""><i>Segment</i> is the segment selector for the task gate.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">FPO: [EBP 0x<i>Base</i>]<BR></span></TD>
+<TD Width=""><i>Base</i> is the base pointer for the frame.</TD>
+</TR>
+</table>
+<P></P>
+<P>The <b>kd</b> command displays the raw stack data. Each DWORD value is displayed on a separate line. Symbol information is displayed for those lines together with associated symbols. This format creates a more detailed list than the other <b>k</b><i>*</i> commands. The <b>kd</b> command is equivalent to a <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>dds (Display Memory)</b></a> command that uses the stack address as its parameter.</P>
+<P>If you want a stack trace that begins somewhere other than the current stack location, you can use the <i>BasePtr</i> parameter to specify the base pointer value. If you are specifying the base pointer value on an x86-based processor, you should specify <i>BasePtr</i>, <i>StackPtr</i>, and <i>InstructionPtr</i>. These parameters should be the values of <b>ebp</b>, <b>esp</b>, and <b>eip</b> that correspond to the stack trace that you want. If you specify <i>BasePtr</i> and omit <i>StackPtr</i> and <i>InstructionPtr</i>, you might receive incorrect results if there are FPO frames present.</P>
+<P>If you use the <b>k</b> command at the beginning of a function (before the function prolog has been executed), you receive incorrect results. The debugger uses the frame register to compute the current backtrace, and this register is not set correctly for a function until its prolog has been executed.</P>
+<P>In user mode, the stack trace is based on the stack of the current thread. For more information about threads, see <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">Controlling Processes and Threads</a>.</P>
+<P>In kernel mode, the stack trace is based on the current <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb"><i>register context</i></a>. You can set the register context  to match a specific thread, context record, or trap frame. </P>
+<H4>Additional Information</H4>
+<P>For more information about stack traces and other ways to display stack traces, see <a href="r07_use_operation_531a7dd9-5201-43eb-9054-a793c3e60a60.xml.htm">Viewing the Call Stack</a>. For more information about the register context and other context settings, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: k, kb, kc, kd, kp, kP, kv (Display Stack Backtrace) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

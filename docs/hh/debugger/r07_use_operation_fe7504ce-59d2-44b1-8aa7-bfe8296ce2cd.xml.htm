@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Accessing Global Variables</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Accessing Global Variables"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_fe7504ce-59d2-44b1-8aa7-bfe8296ce2cd.xml"/>
+<META NAME="MS-HKWD" CONTENT="global variables">
+<META NAME="MS-HKWD" CONTENT="global variables, accessing"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_fe7504ce-59d2-44b1-8aa7-bfe8296ce2cd.xml"></A>Accessing Global Variables</H1>
+<P>The names of global variables are stored in the symbol files that are created when an application is compiled. The debugger interprets the name of a global variable as a virtual address. Therefore, any command that accepts an address as a parameter also accepts the name of a variable as that parameter.</P>
+<P>Therefore, you can use all of the commands that are described earlier in this topic to read or write global variables.</P>
+<P>In addition, you can use the <a href="r15_cmds_a_c6ea44eb-73b8-451d-8054-ded9b17ac2bd.xml.htm"><b>? (Evaluate Expression)</b></a> command to display the address that is associated with any symbol.</P>
+<P>Consider the following example. Suppose that you want to examine the <b>MyCounter </b>global variable, which is a 32-bit integer. Suppose also that the default radix is 10. </P>
+<P>You can obtain this variable's address and then display it as follows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>? MyCounter</b> <BR>Evaluate expression: 1244892 = 0012fedc<BR>0:000&gt; <b>dd 0x0012fedc L1</b> <BR>0012fedc  00000052<BR></nobr></P>
+<P></P>
+<P>The first command output tells you that the address of <b>MyCounter</b> is 0x0012FEDC. You can then use the <b>D*</b> command to display one double-word at this address. (You could also use 1244892, which is the decimal version of this address. However, most C programmers prefer to use 0x0012FEDC.) The second command tells you that the value of <b>MyCounter</b> is 0x52 (decimal 82).</P>
+<P>You could also perform these steps in the following command.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dd MyCounter L1</b> <BR>0012fedc  00000052<BR></nobr></P>
+<P></P>
+<P>To change the value of <b>MyCounter</b> to decimal 83, use the following command.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>ed MyCounter 83</b> <BR></nobr></P>
+<P></P>
+<P>This example uses decimal input, because that format seems more natural for an integer. However, the <i>output</i> of the <b>D*</b> command is still in hexadecimal format.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dd MyCounter L1</b> 0012fedc  00000053<BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Accessing Global Variables RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using the Kernel Debugger to Find a Kernel-Mode Memory Leak</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using the Kernel Debugger to Find a Kernel-Mode Memory Leak"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_a4783df5-4efe-4630-b6e6-35def0d3f563.xml"/>
+<META NAME="MS-HKWD" CONTENT="memory leak, kernel-mode, kernel debugger"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_a4783df5-4efe-4630-b6e6-35def0d3f563.xml"></A>Using the Kernel Debugger to Find a Kernel-Mode Memory Leak</H1>
+<P>The kernel debugger determines the precise location of a kernel-mode memory leak.</P>
+<H4>Enable Pool Tagging (Windows 2000 and Windows XP)</H4>
+<P>On Windows 2000 and Windows XP, you must first use <a href="gflags_ea035958-0ade-4e07-856e-cfd1ed0b4df0.xml.htm">GFlags</a> to enable pool tagging. GFlags is included in Debugging Tools for Windows. Start GFlags, choose the <b>System Registry</b> tab, check the <b>Enable Pool Tagging</b> box, and then click <b>Apply</b>. You must restart Windows for this setting to take effect.</P>
+<P>On Windows Server 2003 and later versions of Windows, pool tagging is always enabled. </P>
+<H4>Determining the Pool Tag of the Leak</H4>
+<P>To determine which pool tag is associated with the leak, it is usually easiest to use the PoolMon tool for this step. For details, see <a href="t13_advanced_2e1b1c13-0c48-4b86-a09e-c37a9939107b.xml.htm">Using PoolMon to Find Kernel-Mode Memory Leaks</a>.</P>
+<P>Alternatively, you can use the kernel debugger to look for tags associated with large pool allocations. To do so, follow this procedure:</P><B></B><OL type="1">
+<LI>Reload all modules by using the <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload (Reload Module)</b></a> command. </LI>
+<LI>Use the <a href="r28_exts_kernel_n_47a5b9f5-03d6-4479-827c-ad88f67d08b2.xml.htm"><b>!poolused</b></a> extension. Include the flag "4" to sort the output by paged memory use:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!poolused 4</b> <BR>Sorting by Paged Pool Consumed<BR><BR>Pool Used:<BR>            NonPaged            Paged     <BR>Tag    Allocs     Used    Allocs     Used <BR>Abc         0        0     36405 33930272 <BR>Tron        0        0       552  7863232 <BR>IoN7        0        0     10939   998432 <BR>Gla5        1      128      2222   924352 <BR>Ggb         0        0        22   828384 <BR></nobr></P>
+</LI>
+<LI>Determine which pool tag is associated with the greatest usage of memory. In this example, the driver using the tag "Abc" is using the most memory&#8212;almost 34 MB. Therefore, the memory leak is most likely to be in this driver. </LI>
+</OL>
+<P></P>
+<H4>Finding the Leak</H4>
+<P>After you have determined the pool tag associated with the leak, follow this procedure to locate the leak itself:</P><B></B><OL type="1">
+<LI>Use the <a href="r16_cmds_c_01f3ea78-e52a-4c87-a1cb-071feb0e422c.xml.htm"><b>ed (Enter Values)</b></a> command to modify the value of the global system variable <b>PoolHitTag</b>. This global variable causes the debugger to break whenever a pool tag matching its value is used.</LI>
+<LI>Set <b>PoolHitTag</b> equal to the tag that you suspect to be the source of the memory leak. The module name "nt" should be specified for faster symbol resolution. The tag value must be entered in little-endian format (that is, backward). Because pool tags are always four characters, this tag is actually <nobr>A-b-c-space,</nobr> not merely <nobr>A-b-c.</nobr> So use the following command:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>ed nt!poolhittag ' cbA'</b> <BR></nobr></P>
+</LI>
+<LI>To verify the current value of <b>PoolHitTag</b>, use the <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>db (Display Memory)</b></a> command: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>db nt!poolhittag L4</b> <BR>820f2ba4  41 62 63 20           Abc  <BR></nobr></P>
+</LI>
+<LI>The debugger will break every time that pool is allocated or freed with the tag <b>Abc</b>. Each time the debugger breaks on one of these allocations or free operations, use the <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kb (Display Stack Backtrace)</b></a> debugger command to view the stack trace. </LI>
+</OL>
+<P></P>
+<P>Using this procedure, you can determine which code resident in memory is overallocating pool with the tag <b>Abc</b>.</P>
+<P>To clear the breakpoint, set <b>PoolHitTag</b> to zero:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>ed nt!poolhittag 0</b> <BR></nobr></P>
+<P>If there are several different places where memory with this tag is being allocated and these are in an application or driver that you have written, you can alter your source code to use unique tags for each of these allocations.</P>
+<P>If you cannot recompile the program but you want to determine which one of several possible locations in the code is causing the leak, you can unassemble the code at each location and use the debugger to edit this code resident in memory so that each instance uses a distinct (and previously unused) pool tag. Then allow the system to run for several minutes or more. After some time has passed, break in again with the debugger and use the <a href="r28_exts_kernel_n_5620723a-23da-4333-8902-b04e66f7dda0.xml.htm"><b>!poolfind</b></a> extension to find all pool allocations associated with each of the new tags.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using the Kernel Debugger to Find a Kernel-Mode Memory Leak RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.prompt_allow (Control Prompt Display)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .prompt_allow (Control Prompt Display)"><xml><MSHelp:Keyword Index="A" Term="r21_metacmds_L_55475ec8-bd36-4a0c-b380-0ff50ea3488d.xml"/>
+<META NAME="MS-HKWD" CONTENT=".prompt_allow (Control Prompt Display) command">
+<META NAME="MS-HKWD" CONTENT="Control Prompt Display (.prompt_allow) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r21_metacmds_L_55475ec8-bd36-4a0c-b380-0ff50ea3488d.xml"></A>.prompt_allow (Control Prompt Display)</H1>
+<P>The <b>.prompt_allow</b> command controls what information is displayed during stepping and tracing and whenever the target's execution stops.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.prompt_allow</b> {<b>+</b>|<b>-</b>}<i>Item </i>[...] <BR><b>.prompt_allow</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>+</b></DT>
+<DD>Displays the specified item at the stepping, tracing, and execution prompt. You must add a space before the plus sign (+), but you cannot add a space after it.</DD>
+<DT><b>-</b></DT>
+<DD>Prevents the specified item from being displayed at the stepping, tracing, and execution prompt. You must add a space before the minus sign (&#8211;), but you cannot add a space after it.</DD>
+<DT><i>Item</i></DT>
+<DD>Specifies an item to display or not display. You can specify any number of items. Separate multiple items by spaces. You must add a plus sign (+) or minus sign (&#8211;) before each item.  You can use the following items:<DL><DT><b>dis</b></DT>
+<DD>The disassembled instructions at the current location.</DD>
+<DT><b>ea</b></DT>
+<DD>The effective address for the current instruction.</DD>
+<DT><b>reg</b></DT>
+<DD>The current state of the most important registers.  You can disable register display by using the <a href="r17_cmds_i_169c2b2f-7f47-4e0a-85a9-506f151f0a8f.xml.htm"><b>pr</b></a>, <a href="r18_cmds_s_fe6d30ae-7c39-40db-a971-2aae584c13d3.xml.htm"><b>tr</b></a>, or <nobr><a href="r21_metacmds_l_55475ec8-bd36-4a0c-b380-0ff50ea3488d.xml.htm"><b>.prompt_allow -reg</b></a></nobr> command. All three of these commands control the same setting, and you can use any of them to override any previous use of these commands.  <P>You can also disable register display by using the <nobr><a href="r17_cmds_i_11dcb4d0-b005-46df-b006-79397ff26e7e.xml.htm"><b>l-os</b></a></nobr> command. This setting is separate from the other three commands, as described in the following Comments section.  To control <i>which</i> registers and flags are displayed, use the <a href="r17_cmds_i_7920456a-7091-467f-a3d0-552c68eee937.xml.htm"><b>rm (Register Mask)</b></a> command.</P>
+</DD>
+<DT><b>src</b></DT>
+<DD>The source line that corresponds to the current instruction.  You can disable source line display by using the <nobr><a href="r17_cmds_i_11dcb4d0-b005-46df-b006-79397ff26e7e.xml.htm"><b>l-ls</b></a></nobr> or <nobr><b>.prompt_allow -src</b>;</nobr> commands. You must enable source line display through both mechanisms to be visible.</DD>
+<DT><b>sym</b></DT>
+<DD>The symbol for the current instruction. This symbol includes the current module, function name, and offset.</DD>
+</DL>
+</DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>You can use the <b>.prompt_allow</b> command without parameters to show which items are displayed and are not displayed. Every time that you run <b>.prompt_allow</b>, the debugger changes the status of only the specified items.</P>
+<P>By default, all items are displayed.</P>
+<P>If you have used the <nobr><a href="r17_cmds_i_11dcb4d0-b005-46df-b006-79397ff26e7e.xml.htm"><b>l+os</b></a></nobr> option, this option overrides any of the <b>.prompt_allow</b> options other than <b>src</b>.</P>
+<P>You can also use a complex command such as the following example.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.prompt_allow -reg -dis +ea </b><BR>Allow the following information to be displayed at the prompt:<BR>(Other settings can affect whether the information is actually displayed)<BR>   sym - Symbol for current instruction<BR>    ea - Effective address for current instruction<BR>   src - Source info for current instruction<BR>Do not allow the following information to be displayed at the prompt:<BR>   dis - Disassembly of current instruction<BR>   reg - Register state<BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information about commands that affect execution, see <a href="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml.htm">Controlling the Target</a>. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .prompt_allow (Control Prompt Display) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

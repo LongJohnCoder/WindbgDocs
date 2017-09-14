@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.abandon (Abandon Process)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .abandon (Abandon Process)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_ea8b7b66-835b-4c3c-a9f9-773e073bc583.xml"/>
+<META NAME="MS-HKWD" CONTENT=".abandon (Abandon Process) command">
+<META NAME="MS-HKWD" CONTENT="Abandon Process (.abandon) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_ea8b7b66-835b-4c3c-a9f9-773e073bc583.xml"></A>.abandon (Abandon Process)</H1>
+<P>The <b>.abandon</b> command ends the debugging session, but leaves the target application in a debugging state. This returns the debugger to dormant mode.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.abandon</b> [ <b>/h</b> | <b>/n</b> ] <BR><BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>/h</b></DT>
+<DD>Any outstanding debug event will be continued and marked as handled.  This is the default.</DD>
+<DT><b>/n</b></DT>
+<DD>Any outstanding debug event will be continued unhandled.</DD>
+<P></P>
+</DL>
+<H4>Environment</H4>
+<P>This command is only supported in Windows XP and later versions of Windows.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Additional Information</H4>
+<P>If the target is left in a debugging state, a new debugger can be attached to it. See <a href="r07_use_operation_1d5faf67-01fe-4837-94ec-14e2fd60dea3.xml.htm">Re-attaching to the Target Application</a> for details. However, after a process has been abandoned once, it can never be restored to a running state without a debugger attached.</P>
+<P>For other methods of exiting the debugger or detaching from the target, see  <a href="r07_use_operation_cec0a699-8a28-48a9-b3f8-62271f688f6c.xml.htm">Ending the Debugging Session</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .abandon (Abandon Process) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

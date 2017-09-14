@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>dt (Display Type)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, dt (Display Type)"><xml><MSHelp:Keyword Index="A" Term="r16_cmds_C_94727332-6184-4ced-897b-d358ca7c173d.xml"/>
+<META NAME="MS-HKWD" CONTENT="dt (Display Type) command">
+<META NAME="MS-HKWD" CONTENT="Display Type (dt) command">
+<META NAME="MS-HKWD" CONTENT="types">
+<META NAME="MS-HKWD" CONTENT="data types">
+<META NAME="MS-HKWD" CONTENT="structures">
+<META NAME="MS-HKWD" CONTENT="data structures">
+<META NAME="MS-HKWD" CONTENT="unions">
+<META NAME="MS-HKWD" CONTENT="memory, Display Type (dt) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r16_cmds_C_94727332-6184-4ced-897b-d358ca7c173d.xml"></A>dt (Display Type)</H1>
+<P>The <b>dt</b> command displays information about a local variable, global variable or data type. This can display information about simple data types, as well as structures and unions.<P></P>
+</P>
+<H4>Syntax</H4>
+<P>User-Mode Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>dt</b> [<b>-</b><i>DisplayOpts</i>] [<b>-</b><i>SearchOpts</i>] [<i>module</i><b>!</b>]<i>Name</i> [[<b>-</b><i>SearchOpts</i>] <i>Field</i>] [<i>Address</i>] [<b>-l</b> <i>List</i>] <BR><b>dt</b> [<b>-</b><i>DisplayOpts</i>] <i>Address</i> [<b>-l</b> <i>List</i>] <BR><b>dt</b> <b>-h</b> <BR></nobr></P>
+<P></P>
+<P>Kernel-Mode Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr>[<i>Processor</i>] <b>dt</b> [<b>-</b><i>DisplayOpts</i>] [<b>-</b><i>SearchOpts</i>] [<i>module</i><b>!</b>]<i>Name</i> [[<b>-</b><i>SearchOpts</i>] <i>Field</i>] [<i>Address</i>] [<b>-l</b> <i>List</i>] <BR><b>dt</b> [<b>-</b><i>DisplayOpts</i>] <i>Address</i> [<b>-l</b> <i>List</i>] <BR><b>dt</b> <b>-h</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Processor</i></DT>
+<DD>Specifies the processor that is running the process containing the information needed. For more information, see <a href="r13_syntax_b7eb5ea3-8cf4-420d-9461-94d4e20f38d5.xml.htm">Multiprocessor Syntax</a>. Processors can only be specified in kernel mode.</DD>
+<DT><i>DisplayOpts</i></DT>
+<DD>Specifies one or more of the options given in the following table. These options are preceded by a hyphen.<B></B><table>
+<TR valign="top">
+<TH Width="">Option</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-a</b>[<i>quantity</i>]</TD>
+<TD Width="">Show each array element on a new line, with its index. A total of <i>quantity</i> elements will be displayed. There must be no space between the <b>a</b> and the <i>quantity</i>. If <b>-a</b> is not followed by a digit, all items in the array are shown. The <b>-a</b>[<i>quantity</i>] switch should appear immediately before each type name or field name that you want displayed in this manner. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-b</b></TD>
+<TD Width="">Display blocks recursively. If a displayed structure contains substructures, it is expanded recursively to arbitrary depths and displayed in full. Pointers are expanded only if they are in the <i>original</i> structure, not in substructures.    </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-c</b></TD>
+<TD Width="">Compact output. All fields are displayed on one line, if possible. (When used with the <b>-a</b> switch, each array element takes one line rather than being formatted as a several-line block.)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-d</b></TD>
+<TD Width="">When used with a <i>Name </i>that is ended with an asterisk, display verbose output for all types that begin with <i>Name</i>.  If <i>Name</i> does not end with an asterisk, display verbose output.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-e</b></TD>
+<TD Width="">Forces <b>dt</b> to enumerate types. This option is only needed if <b>dt</b> is mistakenly interpreting the <i>Name</i> value as an instance rather than as a type.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-i</b></TD>
+<TD Width="">Do not indent the subtypes.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-o</b></TD>
+<TD Width="">Omit offset values of the structure fields.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-p</b></TD>
+<TD Width=""><i>Address</i> is a physical address, rather than a virtual address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-r</b>[<i>depth</i>]</TD>
+<TD Width="">Recursively dumps the subtype fields. If <i>depth</i> is given, this recursion will stop after <i>depth</i> levels. The <i>depth</i> must be a digit between 1 and 9, and there must be no space between the <b>r</b> and the <i>depth</i>. The <b>-r</b>[<i>depth</i>] switch should appear immediately before the address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-s </b><i>size</i></TD>
+<TD Width="">Enumerate only those types whose size in bytes equals the value of <i>size</i>. The <b>-s</b> option is only useful when types are being enumerated. When <b>-s</b> is specified, <b>-e</b> is always implied as well.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-t</b></TD>
+<TD Width="">Enumerate types only.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-v</b></TD>
+<TD Width="">Verbose output. This gives additional information such as the total size of a structure and the number of its elements. When this is used along with the <b>-y</b> search option, all symbols are displayed, even those with no associated type information.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>SearchOpts</i></DT>
+<DD>Specifies one or more of the options given in the following table. These options are preceded by a hyphen.<B></B><table>
+<TR valign="top">
+<TH Width="">Option</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-n</b></TD>
+<TD Width="">This indicates that the next parameter is a name. This should be used if the next item consists entirely of hexadecimal characters, because it will otherwise be taken as an address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>-y</b></TD>
+<TD Width="">This indicates that the next parameter is the beginning of the name, not necessarily the entire name. When <b>-y</b> is included, all matches are listed, followed by detailed information on the first match in the list. If <b>-y</b> is not included, only exact matches will be displayed.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>module</i></DT>
+<DD>An optional parameter specifying the module that defines this structure. If there is a local variable or type with the same name as a global variable or type, you should include <i>module</i> to specify that you mean the global variable. Otherwise, the <b>dt</b> command will display the local variable, even if the local variable is a case-insensitive match and the global variable is a case-sensitive match. </DD>
+<DT><i>Name</i></DT>
+<DD>Specifies the name of a type or global variable. If <i>Name</i> ends with an asterisk (<b>*</b>), a list of all matches is displayed. Thus, <b>dt A*</b> will list all data types, globals, and statics beginning with "A", but will not display the actual instances of these types. (If the <b>-v</b> display option is used at the same time, all symbols will be displayed &#8212; not just those with associated type information.) You can also replace <i>Name</i> with a period (<b>.</b>) to signify that you want to repeat the most recently used value of <i>Name</i>. If <i>Name</i> contains a space, it should be enclosed in parentheses. </DD>
+<DT><i>Field</i></DT>
+<DD>Specifies the field(s) to be displayed. If <i>Field </i>is omitted, all fields are displayed. If <i>Field</i> is followed by a period (<b>.</b>), the first-level subfields of this field will be displayed as well. If <i>Field</i> is followed with a series of periods, the subfields will be displayed to a depth equal to the number of periods. Any field name followed by a period will be treated as a prefix match, as if the <b>-y</b> search option was used. If <i>Field</i> is followed by an asterisk (*), it is treated as only the beginning of the field, not necessarily the entire field, and all matching fields are displayed. </DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the structure to be displayed. If <i>Name</i> is omitted, <i>Address</i> must be included and must specify the address of a global variable. <i>Address</i> is taken to be a virtual address unless otherwise specified. Use the <b>-p</b> option to specify a physical address. Use an "at" sign ( <b>@</b> ) to specify a register (for example, <b>@eax</b>).</DD>
+<DT><i>List</i></DT>
+<DD>Specifies the field name that links a linked list.  The <i>Address</i> parameter must be included.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>dt</b> command output will always display signed numbers in base 10, and unsigned numbers in hexadecimal.</P>
+<P>All parameters of <b>dt</b> that allow symbol values also allow string wildcards.   See <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a> for details.</P>
+<P>The <b>-y</b> and <b>-n</b> options can precede any <i>Name</i> or <i>Field</i>. The <b>-y</b> option allows you to specify the beginning of the type or structure name. For example, <b>dt -y ALLEN</b> will display data about the type <b>ALLENTOWN</b>. However, you could not display the type <b>ALLENTOWN</b> with <b>dt -y A</b>. Instead, you would have to use <b>dt -ny A</b>, because <b>A</b> is a valid hexadecimal value and would be interpreted as an address without the <b>-n</b> option.</P>
+<P>If <i>Name</i> indicates a structure, all fields will be displayed (for example, <b>dt myStruct</b>). If you only want one specific field, you can do <b>dt myStruct myField</b>. This displays the member that C would call <b>myStruct.myField</b>. However, note that the command <b>dt myStruct myField1 myField2</b> displays <b>myStruct.myField1</b> and <b>myStruct.myField2</b>. It does <i>not</i> display <b>myStruct.myField1.myField2</b>.</P>
+<P>If a structure name or field is followed by a subscript, this specifies a single instance of an array. For example, <b>dt myStruct myFieldArray[3]</b> will display the fourth element of the array in question. But if a type name is followed by a subscript, this specifies an entire array. For example, <b>dt CHAR[8] myPtr</b> will display an eight-character string. The subscript is always taken as decimal regardless of the current radix; an <b>0x</b> prefix will cause an error.</P>
+<P>Because the command uses type information from the .<i>pdb</i> file, it can freely be used to debug any CPU platform.</P>
+<P>The type information used by <b>dt</b> includes all type names created with <b>typedef</b>, including all the Windows-defined types. For example, <b>unsigned long</b> and <b>char</b> are not valid type names, but <b>ULONG</b> and <b>CHAR</b> are. See the Microsoft Windows SDK for a full list of all Windows type names.</P>
+<P>All types created by <b>typedef</b>s within your own code will be present, as long as they have actually been used in your program. However, types that are defined in your headers but never actually used will not be stored in the <i>.pdb</i> symbol files and will not be accessible to the debugger. To make such a type available to the debugger, use it as the <i>input</i> of a <b>typedef</b> statement. For example, if the following appears in your code, the structure MY_DATA will be stored in the <i>.pdb</i> symbol file and can be displayed by the <b>dt</b> command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>typedef struct _MY_DATA {<BR>    . . .<BR>    } MY_DATA;<BR>typedef  MY_DATA *PMY_DATA; <BR></nobr></P>
+<P>On the other hand, the following code would not suffice because both MY_DATA and PMY_DATA are defined by the initial <b>typedef</b> and, therefore, MY_DATA has not itself been used as the input of any <b>typedef</b> statement:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>typedef struct _MY_DATA {<BR>    . . .<BR>    } MY_DATA, *PMY_DATA; <BR></nobr></P>
+<P>In any event, type information is included only in a full symbol file, not a symbol file that has been stripped of all private symbol information. For more information, see <a href="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml.htm">Public and Private Symbols</a>.</P>
+<P>If you want to display unicode strings, you need to use the <a href="r20_metacmds_e_9485abdb-48eb-4cbd-a410-76ac2f4ad2bd.xml.htm"><b>.enable_unicode (Enable Unicode Display)</b></a> command first. You can control the display of long integers with the <a href="r20_metacmds_e_c15fcdd0-2668-465e-b455-98469d929bd6.xml.htm"><b>.enable_long_status (Enable Long Integer Display)</b></a> command.</P>
+<P>In the following example, <b>dt</b> displays a global variable:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt mt1</b> <BR>   +0x000 a                : 10<BR>   +0x004 b                : 98 'b'<BR>   +0x006 c                : 0xdd<BR>   +0x008 d                : 0xabcd<BR>   +0x00c gn               : [6] 0x1<BR>   +0x024 ex               : 0x0     <BR></nobr></P>
+<P>In the following example, <b>dt</b> displays the array field <b>gn</b>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt mt1 -a gn</b> <BR>   +0x00c gn : <BR>    [00] 0x1<BR>    [01] 0x2<BR>    [02] 0x3<BR>    [03] 0x4<BR>    [04] 0x5<BR>    [05] 0x6  <BR></nobr></P>
+<P>The following command displays some subfields of a variable:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt mcl1 m_t1 dpo</b> <BR>   +0x010 dpo  : DEEP_ONE<BR>   +0x070 m_t1 : MYTYPE1 <BR></nobr></P>
+<P>The following command displays the subfields of the field <b>m_t1</b>. Because the period automatically causes prefix matching, this will also display subfields of any field that begins with "m_t1":</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt mcl1 m_t1.</b> <BR>   +0x070 m_t1  : <BR>      +0x000 a     : 0<BR>      +0x004 b     : 0 ''<BR>      +0x006 c     : 0x0<BR>      +0x008 d     : 0x0<BR>      +0x00c gn    : [6] 0x0<BR>      +0x024 ex    : 0x0 <BR></nobr></P>
+<P>You could repeat this to any depth. For example, the command <b>dt mcl1 a..c.</b> would display all fields to depth four, such that the first field name began with <b>a</b> and the third field name began with <b>c</b>.</P>
+<P>Here is a more detailed example of how subfields can be displayed. First, display the <b>Ldr</b> field:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt nt!_PEB Ldr 7ffdf000</b> <BR>   +0x00c Ldr : 0x00191ea0 <BR></nobr></P>
+<P>Now expand the pointer type field:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt nt!_PEB Ldr Ldr. 7ffdf000</b> <BR>   +0x00c Ldr  : 0x00191ea0<BR>      +0x000 Length : 0x28<BR>      +0x004 Initialized : 0x1 ''<BR>      +0x008 SsHandle : (null)<BR>      +0x00c InLoadOrderModuleList : _LIST_ENTRY [ 0x191ee0 - 0x192848 ]<BR>      +0x014 InMemoryOrderModuleList : _LIST_ENTRY [ 0x191ee8 - 0x192850 ]<BR>      +0x01c InInitializationOrderModuleList : _LIST_ENTRY [ 0x191f58 - 0x192858 ]<BR>      +0x024 EntryInProgress : (null) <BR></nobr></P>
+<P>Now display the <b>CriticalSectionTimeout</b> field:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt nt!_PEB CriticalSectionTimeout 7ffdf000</b> <BR>   +0x070 CriticalSectionTimeout : _LARGE_INTEGER 0xffffe86d`079b8000 <BR></nobr></P>
+<P>Now expand the <b>CriticalSectionTimeout</b> structure subfields one level deep:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt nt!_PEB CriticalSectionTimeout. 7ffdf000</b> <BR>   +0x070 CriticalSectionTimeout  :  0xffffe86d`079b8000<BR>      +0x000 LowPart                 : 0x79b8000<BR>      +0x004 HighPart                : -6035<BR>      +0x000 u                       : __unnamed<BR>      +0x000 QuadPart                : -25920000000000 <BR></nobr></P>
+<P>Now expand the <b>CriticalSectionTimeout</b> structure subfields two levels deep:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt nt!_PEB CriticalSectionTimeout.. 7ffdf000</b> <BR>   +0x070 CriticalSectionTimeout   :  0xffffe86d`079b8000<BR>      +0x000 LowPart                  : 0x79b8000<BR>      +0x004 HighPart                 : -6035<BR>      +0x000 u                        :<BR>         +0x000 LowPart                  : 0x79b8000<BR>         +0x004 HighPart                 : -6035<BR>      +0x000 QuadPart                 : -25920000000000 <BR></nobr></P>
+<P>The following command displays an instance of the data type MYTYPE1 that is located at the address 0x0100297C:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt 0x0100297c MYTYPE1</b> <BR>   +0x000 a                : 22<BR>   +0x004 b                : 43 '+'<BR>   +0x006 c                : 0x0<BR>   +0x008 d                : 0x0<BR>   +0x00c gn               : [6] 0x0<BR>   +0x024 ex               : 0x0      <BR></nobr></P>
+<P>The following command displays an array of 10 ULONGs at the address 0x01002BE0:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt -ca10 ULONG 01002be0</b> <BR>[0] 0x1001098<BR>[1] 0x1<BR>[2] 0xdead<BR>[3] 0x7d0<BR>[4] 0x1<BR>[5] 0xcd<BR>[6] 0x0<BR>[7] 0x0<BR>[8] 0x0<BR>[9] 0x0  <BR></nobr></P>
+<P>The following command continues the previous display at a different address. Note that "ULONG" does not need to be re-entered:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt -ca4 . 01002d00</b> <BR>Using sym ULONG<BR>[0] 0x12<BR>[1] 0x4ac<BR>[2] 0xbadfeed<BR>[3] 0x2  <BR></nobr></P>
+<P>Here are some examples of type display. The following command displays all types and globals beginning with the string "MY" in the module <i>thismodule</i>. Those prefixed with an address are actual instances; those without addresses are type definitions:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>dt thismodule!MY*</b> <BR>010029b8  thismodule!myglobal1<BR>01002990  thismodule!myglobal2<BR>          thismodule!MYCLASS1<BR>          thismodule!MYCLASS2<BR>          thismodule!MYCLASS3<BR>          thismodule!MYTYPE3::u<BR>          thismodule!MYTYPE1<BR>          thismodule!MYTYPE3<BR>          thismodule!MYTYPE3<BR>          thismodule!MYFLAGS  <BR></nobr></P>
+<P>When performing type display, the <b>-v</b> option can be used to display the size of each item. The <b>-s</b> <i>size</i> option can be used to only enumerate items of a specific size. Again, those prefixed with an address are actual instances; those without addresses are type definitions:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:001&gt; <b>dt -s 2 -v thismodule!*</b> <BR>Enumerating symbols matching thismodule!*, Size = 0x2<BR>Address   Size Symbol<BR>           002 thismodule!wchar_t<BR>           002 thismodule!WORD<BR>           002 thismodule!USHORT<BR>           002 thismodule!SHORT<BR>           002 thismodule!u_short<BR>           002 thismodule!WCHAR<BR>00427a34   002 thismodule!numberOfShips<BR>00427a32   002 thismodule!numberOfPlanes<BR>00427a30   002 thismodule!totalNumberOfItems  <BR></nobr></P>
+<P>Here is an example of the <b>-b</b> option. The structure is expanded and the <b>OwnerThreads</b> array within the structure is expanded, but the <b>Flink</b> and <b>Blink</b> list pointers are not followed:   </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>dt nt!_ERESOURCE -b 0x8154f040</b> <BR>   +0x000 SystemResourcesList :  [ 0x815bb388 - 0x816cd478 ]<BR>      +0x000 Flink            : 0x815bb388<BR>      +0x004 Blink            : 0x816cd478<BR>   +0x008 OwnerTable       : (null)<BR>   +0x00c ActiveCount      : 1<BR>   +0x00e Flag             : 8<BR>   +0x010 SharedWaiters    : (null)<BR>   +0x014 ExclusiveWaiters : (null)<BR>   +0x018 OwnerThreads     :<BR>    [00]<BR>      +0x000 OwnerThread      : 0<BR>      +0x004 OwnerCount       : 0<BR>      +0x004 TableSize        : 0<BR>    [01]<BR>      +0x000 OwnerThread      : 0x8167f563<BR>      +0x004 OwnerCount       : 1<BR>      +0x004 TableSize        : 1<BR>   +0x028 ContentionCount  : 0<BR>   +0x02c NumberOfSharedWaiters : 0<BR>   +0x02e NumberOfExclusiveWaiters : 0<BR>   +0x030 Address          : (null)<BR>   +0x030 CreatorBackTraceIndex : 0<BR>   +0x034 SpinLock         : 0<BR></nobr></P>
+<P></P>
+<P>Here is an example of <b>dt</b> in kernel mode. The following command produces results similar to <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process 0 0</b></a>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>dt nt!_EPROCESS -l ActiveProcessLinks.Flink -y Ima -yoi Uni 814856f0</b> <BR>ActiveProcessLinks.Flink at 0x814856f0<BR>---------------------------------------------<BR>UniqueProcessId : 0x00000008<BR>ImageFileName : [16] "System"<BR><BR>ActiveProcessLinks.Flink at 0x8138a030<BR>---------------------------------------------<BR>UniqueProcessId : 0x00000084<BR>ImageFileName : [16] "smss.exe"<BR><BR>ActiveProcessLinks.Flink at 0x81372368<BR>---------------------------------------------<BR>UniqueProcessId : 0x000000a0<BR>ImageFileName : [16] "csrss.exe"<BR><BR>ActiveProcessLinks.Flink at 0x81369930<BR>---------------------------------------------<BR>UniqueProcessId : 0x000000b4<BR>ImageFileName : [16] "winlogon.exe"<BR><BR>....  <BR></nobr></P>
+<P>If you want to execute a command for each element of the list, use the <a href="r25_exts_general_he_8deee1dc-d85a-4a95-a2da-9846d0507fbb.xml.htm"><b>!list</b></a> extension.</P>
+<P>Finally, the <b>dt -h</b> command will display a short help text summarizing the <b>dt</b> syntax.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For an overview of memory manipulation and a description of other memory-related commands, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: dt (Display Type) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

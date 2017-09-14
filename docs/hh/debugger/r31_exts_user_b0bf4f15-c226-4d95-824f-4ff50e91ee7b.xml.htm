@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!avrf</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !avrf"><xml><MSHelp:Keyword Index="A" Term="r31_exts_user_b0bf4f15-c226-4d95-824f-4ff50e91ee7b.xml"/>
+<META NAME="MS-HKWD" CONTENT="!avrf extension">
+<META NAME="MS-HKWD" CONTENT="Application Verifier, !avrf extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r31_exts_user_b0bf4f15-c226-4d95-824f-4ff50e91ee7b.xml"></A>!avrf</H1>
+<P>  <P>The <b>!avrf</b> extension controls the settings of <a href="appverif2_437533d6-daa8-4fe9-90da-a7717ebc9683.xml.htm">Application Verifier</a> and displays a variety of output produced by Application Verifier.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!avrf</b> <BR><b>!avrf -a</b> <i>Address</i> <BR><b>!avrf -cs</b> { <i>Length</i> | <b>-a</b> <i>Address</i> } <BR><b>!avrf -hp</b> { <i>Length</i> | <b>-a</b> <i>Address</i> } <BR><b>!avrf -vs</b> { <i>Length</i> | <b>-a</b> <i>Address</i> } <BR><b>!avrf -dlls</b> [ <i>Length</i> ] <BR><b>!avrf -ex</b> [ <i>Length</i> ] <BR><b>!avrf -cnt</b> <BR><b>!avrf -trm</b> <BR><b>!avrf -threads</b> [<i>ThreadID</i>] <BR><b>!avrf -trace</b> <i>TraceIndex</i> <BR><b>!avrf -brk</b> [<i>BreakEventType</i>] <BR><b>!avrf -flt</b> <BR><b>!avrf -flt</b> <i>EventType</i> <i>Probability</i> <BR><b>!avrf -flt break</b> <i>EventType</i> <BR><b>!avrf -flt stacks</b> <i>Length</i> <BR><b>!avrf -trg</b> [ <i>Start End</i> | <b>dll</b> <i>Module</i> | <b>all</b> ] <BR><b>!avrf -skp</b> [ <i>Start End</i> | <b>dll</b> <i>Module</i> | <b>all</b> | <i>Time</i> ] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-a</b> <i>Address</i></DT>
+<DD>Specifies an address. Records of allocations that contain this address will be displayed. Records of free operations that begin with this address will be displayed.  If this option is not preceded by <b>-cs</b>, <b>-hp</b>, or <b>-vs</b>, then the light heap is searched.</DD>
+<DT><b>-cs</b></DT>
+<DD>Displays the critical section delete log.  For details, see "Critical Section Delete Logs" in the Application Verifier documentation.</DD>
+<DT><b>-hp</b></DT>
+<DD>Displays the heap operation log.  For details, see "Heap Operation Logs" in the Application Verifier documentation.</DD>
+<DT><b>-vs</b></DT>
+<DD>Displays the virtual space operation log.  For details, see "Virtual Space Operation Logs" in the Application Verifier documentation.</DD>
+<DT><b>-dlls</b></DT>
+<DD>Displays the DLL load/unload log.   For details, see "DLL Load/Unload Logs" in the Application Verifier documentation.</DD>
+<DT><b>-ex</b></DT>
+<DD>Displays the exception log.  For details, see "Exception Logs" in the Application Verifier documentation.</DD>
+<DT><i>Length</i></DT>
+<DD>Specifies the number of records to display. If the <b>-dlls</b> option or the <b>-ex</b> option is used, <i>Length</i> can be omitted; which causes all of the DLL load/unload operations, or all exceptions, to be displayed.</DD>
+<DT><b>-cnt</b></DT>
+<DD>Displays a list of global counters.</DD>
+<DT><b>-trm</b></DT>
+<DD>Displays a log of all terminated and suspended threads.   </DD>
+<DT><b>-threads</b></DT>
+<DD>Displays information about threads in the target process. For child threads, the stack size and the <b>CreateThread</b> flags specified by the parent are displayed as well.</DD>
+<DT><i>ThreadID</i></DT>
+<DD>Specifies the ID of the thread to display. If this is omitted, all threads are displayed.</DD>
+<DT><b>-trace </b><i>TraceIndex</i></DT>
+<DD>Displays a stack trace for the specified <i>TraceIndex</i>. Some structures use this 16-bit index number to identify a stack trace. This index points to a location within the stack trace database. If you are analyzing such a structure, you will find this syntax useful.</DD>
+<DT><b>-brk</b></DT>
+<DD>Specifies that this is a break-event command. When <b>!avrf -brk</b> is used with no additional parameters, the break event settings are displayed.  For an example, see "Requesting Breaks on Certain Events" in the Application Verifier documentation.</DD>
+<DT><i>BreakEventType</i></DT>
+<DD>Specifies the type number of the break event. For a list of possible types, see "Requesting Breaks on Certain Events" in the Application Verifier documentation.</DD>
+<DT><b>-flt</b></DT>
+<DD>Specifies that this is a fault-injection command. When <b>!avrf -flt</b> is used with no additional parameters, the current fault injection settings are displayed.  For an example, see "Choosing Which Events to Fault" in the Application Verifier documentation.</DD>
+<DT><i>EventType</i></DT>
+<DD>Specifies the type number of the event.  For a list of possible types, see "Choosing Which Events to Fault" in the Application Verifier documentation.</DD>
+<DT><i>Probability</i></DT>
+<DD>Specifies the frequency with which the event will fail. This can be any integer between 0 and 100 (0x64).</DD>
+<DT><b>break</b></DT>
+<DD>Causes Application Verifier to break into the debugger each time this fault is injected.  For an example of such a break, see "Choosing Which Events to Fault" in the Application Verifier documentation.</DD>
+<DT><b>stacks</b></DT>
+<DD>Displays stack traces for the most recent fault-injected operations.  For an example, see "Choosing Which Events to Fault" in the Application Verifier documentation.</DD>
+<DT><b>-trg</b></DT>
+<DD>Specifies that this is a target range command. When <b>-trg</b> is used with no additional parameters, the current target ranges are displayed.  For details, see "Choosing Where to Fault" in the Application Verifier documentation.</DD>
+<DT><b>-skp</b></DT>
+<DD>Specifies that this is a exclusion range command. When <b>-trg</b> is used with no additional parameters, the current target ranges are displayed.  For details, see "Choosing Where to Fault" in the Application Verifier documentation.</DD>
+<DT><i>Start</i></DT>
+<DD>Specifies the beginning address of the target range or exclusion range.</DD>
+<DT><i>End</i></DT>
+<DD>Specifies the ending address of the target range or exclusion range.</DD>
+<DT><i>Module</i></DT>
+<DD>Specifies the name of a module to be targeted or excluded. <i>Module</i> should include the full module name, including the <i>.exe</i> or <i>.dll</i> extension. Path information should not be included.</DD>
+<DT><b>all</b></DT>
+<DD>Causes all target ranges or exclusion ranges to be reset.</DD>
+<DT><i>Time</i></DT>
+<DD>Causes all faults to be suppressed for <i>Time</i> milliseconds after execution resumes.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Exts.dll</i>     </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>When the <b>!avrf</b> extension is used with no parameters, it displays the current Application Verifier options.  If the <b>Full page heap</b> or <b>Fast fill heap</b> option has been enabled, information about active page heaps will be displayed as well.  For some examples, see "Heap Operation Logs" in the Application Verifier documentation.</P>
+<P>If an Application Verifier Stop has occurred, the <b>!avrf</b> extension with no parameters will reveal the nature of the stop and what caused it.  For some examples, see "Debugging Application Verifier Stops" in the Application Verifier documentation.</P>
+<P>If symbols for <i>ntdll.dll</i> and <i>verifier.dll</i> are missing, the <b>!avrf</b> extension will generate an error message.  For information on how to address this problem, see "Setting Up a Debugger for Application Verifier" in the Application Verifier documentation.</P>
+<H4>Additional Information</H4>
+<P>For information on how to download and install Application Verifier and its documentation, see <a href="appverif2_437533d6-daa8-4fe9-90da-a7717ebc9683.xml.htm">Application Verifier</a>. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !avrf RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

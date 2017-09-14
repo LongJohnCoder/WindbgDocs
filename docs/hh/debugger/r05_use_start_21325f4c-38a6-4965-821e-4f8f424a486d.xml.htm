@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Evaluating Expressions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Evaluating Expressions"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml"/>
+<META NAME="MS-HKWD" CONTENT="expressions, overview">
+<META NAME="MS-HKWD" CONTENT="expressions, different types">
+<META NAME="MS-HKWD" CONTENT="MASM expressions, when to use">
+<META NAME="MS-HKWD" CONTENT="C++ expressions, when to use">
+<META NAME="MS-HKWD" CONTENT="MASM expressions, overview">
+<META NAME="MS-HKWD" CONTENT="C++ expressions, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml"></A>Evaluating Expressions</H1>
+<P>The debugger understands two different forms of expressions: <i>MASM expressions</i> and <i>C++ expressions</i>.</P>
+<P>Microsoft Macro Assembler (MASM) expressions are used in the examples in this Help documentation, except when otherwise noted. In MASM expressions, all symbols are treated as addresses.</P>
+<P>C++ expressions are the same as those used in actual C++ code. In these expressions, symbols are understood as the appropriate data types.</P>
+<H4>When Each Syntax is Used</H4>
+<P>You can select the default expression evaluator in one of the following ways:</P><B></B><UL type="disc">
+<LI>Use the _NT_EXPR_EVAL <a href="r12_cmdline_067c8775-4c54-4443-b4f5-3233dfa9d00f.xml.htm">environment variable</a> before the debugger is started.</LI>
+<LI>Use the <b>-ee</b> {<b>masm</b>|<b>c++</b>} <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> when the debugger is started.</LI>
+<LI>Use the <a href="r20_metacmds_e_9a36ade0-e6ed-44d8-b399-9e64f4651383.xml.htm"><b>.expr (Choose Expression Evaluator)</b></a> command to display or change the expression evaluator after the debugger is running.</LI>
+</UL>
+<P></P>
+<P>If you do not use one of the preceding methods, the debugger uses the MASM expression evaluator.</P>
+<P>If you want to evaluate an expression without changing the debugger state, you can use the <a href="r15_cmds_a_c6ea44eb-73b8-451d-8054-ded9b17ac2bd.xml.htm"><b>? (Evaluate Expression)</b></a> command.</P>
+<P>All commands and debugging information windows interpret their arguments through the default expression evaluator, with the following exceptions:</P><B></B><UL type="disc">
+<LI>The <a href="r15_cmds_a_5452eb2e-975c-4151-9bc0-890b163f004d.xml.htm"><b>?? (Evaluate C++ Expression)</b></a> command always uses the C++ expression evaluator.</LI>
+<LI>The <a href="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml.htm">Watch window</a> always uses the C++ expression evaluator.</LI>
+<LI>The <a href="r36_gui_1_e05d85f5-f61e-41e4-b80a-f72b4fc0bdd7.xml.htm">Locals window</a> always uses the C++ expression evaluator.</LI>
+<LI>Some extension commands always use the MASM expression evaluator (and other extension commands accept only numeric arguments instead of full expressions).</LI>
+<LI>If any part of an expression is enclosed in parentheses and you insert two at signs (<b>@@</b>) before the expression, the expression is evaluated by the expression evaluator that would <i>not</i> typically be used in this case.</LI>
+</UL>
+<P></P>
+<P></P>
+<P>The two at signs (<b>@@</b>) enable you to use two different evaluators for different parameters of a single command. It also enables you to evaluate different pieces of a long expression by different methods. You can nest the two at signs. Each appearance of the two at signs switches to the other expression evaluator.</P>
+<P class="note"><b>Warning</b>  C++ expression syntax is useful for manipulating structures and variables, but it is not well-suited as a parser for the parameters of debugger commands. When you are using debugger commands for general purposes or you are using debugger extensions, you should set MASM expression syntax as the default expression evaluator. If you must have a specific parameter use C++ expression syntax, use the two at sign (<b>@@</b>) syntax.</P>
+<P>For more information about the two different expression types, see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a>.</P>
+<H4>Numbers in Expressions</H4>
+<P>Numbers in MASM expressions are interpreted according to the current radix. The <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command can be used to set the default radix to 16, 10, or 8. All un-prefixed numbers will be interpreted in this base. The default radix can be overridden by specifying the <b>0x</b> prefix (hexadecimal), the <b>0n</b> prefix (decimal), the <b>0t</b> prefix (octal), or the <b>0y</b> prefix (binary).</P>
+<P></P>
+<P>Numbers in C++ expressions are interpreted as decimal numbers unless you specify differently. To specify a hexadecimal integer, add <b>0x</b> before the number. To specify an octal integer, add <b>0</b> (zero) before the number. (However, in the debugger's <i>output</i>, the <b>0n</b> decimal prefix is sometimes used.)</P>
+<P>If you want to display a number in several bases at the same time, use the <a href="r20_metacmds_e_231f22c0-4744-4c01-ac46-372b490bab6e.xml.htm"><b>.formats (Show Number Formats)</b></a> command.</P>
+<H4>Symbols in Expressions</H4>
+<P>The two types of expressions interpret symbols differently:</P><B></B><UL type="disc">
+<LI>In MASM expressions, each symbol is interpreted as an address. Depending on what the symbol refers to, this address is the address of a global variable, local variable, function, segment, module, or any other recognized label.</LI>
+<LI>In C++ expressions, each symbol is interpreted according to its type. Depending on what the symbol refers to, it might be interpreted as an integer, a data structure, a function pointer, or any other data type. A symbol that does not correspond to a C++ data type (such as an unmodified module name) creates a syntax error.</LI>
+</UL>
+<P></P>
+<P></P>
+<P>If a symbol might be ambiguous, precede it with the module name and an exclamation point ( <b>!</b> ). If the symbol name could be interpreted as a hexadecimal number, precede it with the module name and an exclamation point ( <b>!</b> ) or only an exclamation point. In order to specify that a symbol is meant to be local, omit the module name, and include a dollar sign and an exclamation point ( <b>$!</b> ) before the symbol name. For more information about interpreting symbols, see <a href="r09_symbols_6e5fcfbf-08a6-481b-9df4-23e19ee7559d.xml.htm">Symbol Syntax and Symbol Matching</a>.</P>
+<H4>Operators in Expressions</H4>
+<P>Each expression type uses a different collection of operators.</P>
+<P>For more information about the operators that you can use in MASM expressions and their precedence rules, see <a href="r13_syntax_eac65e6b-f13f-4fcb-8973-e64ba0ac8865.xml.htm">MASM Numbers and Operators</a>.</P>
+<P>For more information about the operators that you can use in C++ expressions and their precedence rules, see <a href="r13_syntax_372599d3-a780-4c57-9219-05575c604059.xml.htm">C++ Numbers and Operators</a>.</P>
+<P>Remember that MASM operations are always byte-based, and C++ operations follow C++ type rules (including the scaling of pointer arithmetic).</P>
+<P>For some examples of the different syntaxes, see <a href="r13_syntax_7538f485-e4d2-4edc-8290-314527cbb37d.xml.htm">Expression Examples</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Evaluating Expressions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

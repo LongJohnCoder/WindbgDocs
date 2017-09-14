@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Firewalls and Proxy Servers</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Firewalls and Proxy Servers"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_ee8ab129-5530-41ad-af38-8a777fde7b79.xml"/>
+<META NAME="MS-HKWD" CONTENT="SymSrv, firewalls and proxy servers">
+<META NAME="MS-HKWD" CONTENT="firewalls and SymSrv">
+<META NAME="MS-HKWD" CONTENT="internet firewalls and SymSrv">
+<META NAME="MS-HKWD" CONTENT="proxy servers and SymSrv"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_ee8ab129-5530-41ad-af38-8a777fde7b79.xml"></A>Firewalls and Proxy Servers</H1>
+<P>If you are using SymSrv to access symbols, and your computer is on a network that uses a proxy server or the symbol store is outside your firewall, authentication may be required for data transmission to take place.</P>
+<P>When SymSrv receives authentication requests, the debugger can either display the authentication request or automatically refuse the request, depending on how it has been configured.</P>
+<P>SymSrv has integrated support for a proxy server. It can either use the default proxy server, <a href="r09_symbols_cec36ec3-cb6f-4e9b-bc90-341a12f18995.xml.htm">SymProxy</a>, or it can use another proxy server of your choice.</P>
+<H4>Authentication Requests</H4>
+<P>The debugger can be configured to allow authentication requests. When a firewall or proxy server requests authorization, a dialog box will appear. You will have to enter some sort of information (usually a user name and password) before the debugger can download symbols. If you enter incorrect information, the dialog box will be redisplayed. If you select the <b>Cancel</b> button, the dialog box will vanish and no symbol information will be transferred.</P>
+<P>If the debugger is configured to refuse all authentication requests, no dialog box will appear, and no symbols will be transferred if authentication is required.</P>
+<P>If you refuse an authentication request, or if the debugger automatically refuses an authentication request, SymSrv will make no further attempts to contact the symbol store. If you wish to renew contact, you must either restart the debugging session or use <a href="r25_exts_general_he_f413b6a1-ea74-426e-a517-24172d4b4335.xml.htm"><b>!symsrv close</b></a>.</P>
+<P class="note"><b>Note</b>  If you are using KD or CDB, the authentication dialog box may appear <i>behind</i> an open window. If this occurs, you may have to move or minimize some windows in order to find this dialog box.</P>
+<P>In WinDbg, authentication requests are allowed by default. In KD and CDB, authentication requests are automatically refused by default.</P>
+<P>To allow authentication requests, use either <a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym prompts</b></a> or <a href="r22_metacmds_s_1fcea95c-6db6-4fa7-9087-37fdce3d4f0f.xml.htm"><b>.symopt-0x80000</b></a>. To refuse all requests, use either <a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym prompts off</b></a> or <a href="r22_metacmds_s_1fcea95c-6db6-4fa7-9087-37fdce3d4f0f.xml.htm"><b>.symopt+0x80000</b></a>. To display the current setting, use <a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym</b></a>.</P>
+<P>You must use <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload (Reload Module)</b></a> after making any changes to the authentication permission status.</P>
+<H4>Choosing a Proxy Server</H4>
+<P>To select a default proxy server for Windows, open <b>Internet Options</b> in Control Panel, select the <b>Connections</b> tab, and then select the <b>LAN Settings</b> button. You can then enter the proxy server name and port number, or select <b>Advanced</b> to configure multiple proxy servers. For more details, see Internet Explorer's help file.</P>
+<P>To select a specific proxy server for symsrv to use, set the _NT_SYMBOL_PROXY environment variable equal to the name or IP of the proxy server, followed by a colon and then the port number. For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>set _NT_SYMBOL_PROXY=myproxyserver:80</b><BR><BR></nobr></P>
+<P>When a proxy server is chosen in this way, it will be used by any Windows debugger that is using SymSrv to access a symbol server. It will also be used by any other debugging tool that uses DbgHelp as its symbol handler. No other programs will be affected by this setting.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Firewalls and Proxy Servers RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

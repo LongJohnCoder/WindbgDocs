@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using !ks.graph</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using !ks.graph"><xml><MSHelp:Keyword Index="A" Term="t11~b_ks_120ccc14-6398-412c-9282-07f1b037316a.xml"/>
+<META NAME="MS-HKWD" CONTENT="kernel streaming debugging, displaying a graph"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~b_ks_120ccc14-6398-412c-9282-07f1b037316a.xml"></A>Using !ks.graph</H1>
+<P>The <a href="r33~b_exts_ks_df6c3259-4369-4b58-8d2c-ebbbcd3b7c2a.xml.htm">!ks.graph</a> command is one of most powerful extension commands in the kernel streaming extension module. This command displays a picture of an entire graph in kernel mode from any given starting point.</P>
+<P>Before running <b>!ks.graph</b>, you may want to enable all library extensions that are capable of being active. To do this, issue a  <a href="r33~b_exts_ks_d320bb35-9ebb-42cb-ae39-9446791b45de.xml.htm">!ks.libexts enableall</a> command. The output of <b>!ks.graph</b> will be a textual description of the kernel mode graph in topologically sorted order. Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!graph ffa0c6d4 7</b><BR>Attempting a graph build on ffa0c6d4...  Please be patient...<BR>Graph With Starting Point ffa0c6d4:<BR>"usbaudio" Filter ffaaa768, Child Factories 2<BR>    Output Factory 0:<BR>        Pin ffb1caf0 (File 811deeb8, -&gt; "splitter" ffa8b008) Irps(q/p) = 7, 1<BR></nobr></P>
+<P></P>
+<P>This example displays a capture graph in which two <i>Sndrec32.exe</i>'s are capturing from a Telex USB Microphone. Each individual record begins with a name (usbaudio, in the above section) and shows the filter address (0xFFAAA768) and quantity of child pin factories (2) on the filter.</P>
+<P>Below each entry, each factory is enumerated and lists the address of each pin instance (0xFFB1CAF0), the file object (0x811DEEB8) corresponding to each instance, the direction of the connection, the destination of that connection, and the address of the destination pin (0xFFA8B008). The number of queued (7) and pending IRPs (1) for each pin is also displayed.</P>
+<P>Connections which have forward direction symbols (-&gt;) indicate that the pin is an output pin and is connected to an input pin.  Connections which have reverse direction symbols (&lt;-), on the other hand, are input pins and show the origination of the connection. The output continues as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>"splitter" Filter ffa0c660, Child Factories 2<BR>    Output Factory 0:<BR>        Pin 81250008 (File ffb10028, -&gt; "kmixer" 8123c000) Irps(q/p) = 3, 0<BR>        Pin 811df9c0 (File ffaaf2f0, -&gt; "kmixer" 81236000) Irps(q/p) = 3, 0<BR>    Input Factory 1:<BR>        Pin ffa8b008 (File ffb26d68, &lt;- "usbaudio" ffb1caf0) Irps(q/p) = 1, 7<BR>"kmixer" Filter ffa65b70, Child Factories 4<BR>    Input Factory 2:<BR>        Pin 81236000 (File ffaaf7d0, &lt;- "splitter" 811df9c0) Irps(q/p) = 0, 0<BR>    Output Factory 3:<BR>        Pin 81252d00 (File 811df1d8) Irps(q/p) = 10, 0<BR>"kmixer" Filter ffb03808, Child Factories 4<BR>    Input Factory 2:<BR>        Pin 8123c000 (File ffb10130, &lt;- "splitter" 81250008) Irps(q/p) = 0, 0<BR>    Output Factory 3:<BR>        Pin ffa1e9c0 (File 81253468) Irps(q/p) = 10, 0<BR></nobr></P>
+<P></P>
+<P>In order to follow the graph, use the following procedure:</P><B>To follow this graph:</B><OL type="1">
+<LI>Find the pin of interest. Consider 0xFFB1CAF0, usbaudio's output pin (factory 0).</LI>
+<LI>Find the connected pin. In this example, this is splitter pin 0xFFA8B008.</LI>
+<LI>Look at the connection direction and visually move that way looking for the filter name.  (Remember, the list is topologically sorted.) In this example, the right-pointing arrow indicates that we need to look below this entry in the list to find the corresponding pin. The splitter filter 0xFFA0C660 is immediately below.</LI>
+<LI>Find the destination pin address in the filter pin instance list. In this case, this address is 0xFFA8B008.</LI>
+</OL>
+<P></P>
+<P>The <b>!ks.graph</b> command can also be used to analyze stalled graphs from any given starting point. To do this, specify 4 in the <i>Flags</i> parameter:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!graph 812567c0 7 4</b><BR><BR>Attempting a graph build on 812567c0...  Please be patient...<BR><BR>Graph With Starting Point 812567c0:<BR><BR>"emu10k" Filter ff9ebb98, Child Factories 5<BR>    Output Factory 0:<BR>        Pin 812567c0 (File 811c6630, -&gt; "splitter" 811df960) Irps(q/p) = 8, 0<BR>"splitter" Filter ffb18890, Child Factories 2<BR>    Output Factory 0:<BR>        Pin 811df430 (File ffa55f90) Irps(q/p) = 10, 0<BR>    Input Factory 1:<BR>        Pin 811df960 (File 81187820, &lt;- "emu10k" 812567c0) Irps(q/p) = 0, 8<BR><BR>Analyzing a Hung Graph From 812567c0:<BR><BR>Suspect Filters (For a Hung Graph):<BR>    "emu10k" Filter ff9ebb98 or class "PortCls Wave Cyclic" is suspect.<BR>        Reasons For This Analysis:<BR>            - No critical pin has less than 8 queued Irps<BR>            - Downstream "splitter" pin 811df960 is starved<BR>        Irps to check:<BR>            81255418 811df008 81252008 81255280 81250b30 ffa1fe70 81252e70 ffa01d98<BR><BR>NOTE: The above is based on heuristic analysis.  It is not designed to be a<BR>      replacement for an actual developer looking at this particular hang!  The<BR>      filters listed as suspects may or may not be the actual cause of the<BR>      stall!<BR><BR></nobr></P>
+<P></P>
+<P>For such output, look at the "suspects" list. These suspect filters are those that are in the critical path of progress being made in the graph. Begin debugging from that point based on the reasons that the analyzer has produced for the stall.</P>
+<P class="note"><b>Note</b>  This functionality should only be used on stalled graphs! The analyzer has no way of knowing how long the graph has been in this state. Breaking into the debugger and analyzing a running graph as a stalled graph still displays a suspect filter.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using !ks.graph RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

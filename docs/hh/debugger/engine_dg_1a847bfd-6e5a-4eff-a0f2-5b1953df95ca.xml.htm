@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Other Data Spaces</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Other Data Spaces"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_1a847bfd-6e5a-4eff-a0f2-5b1953df95ca.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, memory, data spaces">
+<META NAME="MS-HKWD" CONTENT="Handles"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_1a847bfd-6e5a-4eff-a0f2-5b1953df95ca.xml"></A>Other Data Spaces</H1>
+<P>In <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>, it is possible to read and write data to a variety of data spaces in addition to the main memory and registers.  The following data spaces can be accessed:</P>
+<DL><DT>System Bus</DT>
+<DD>The methods <a href="idebugdataspaces_59d5bf3f-7eb5-452c-ace2-4aed701d34a6.xml.htm"><b>ReadBusData</b></a> and <a href="idebugdataspaces_a1fb8543-dee8-475d-b42c-17077d72b06e.xml.htm"><b>WriteBusData</b></a> read and write system bus data.</DD>
+<DT>Control-Space Memory</DT>
+<DD>The methods <a href="idebugdataspaces_bca10b0c-a1bb-49bf-aa76-4e790a907a9f.xml.htm"><b>ReadControl</b></a> and <a href="idebugdataspaces_7da7d848-6188-4325-8da5-3fa3df3c68b9.xml.htm"><b>WriteControl</b></a> read and write control-space memory.</DD>
+<DT>I/O Memory.</DT>
+<DD>The methods <a href="idebugdataspaces_a6189a47-dc48-44cf-aadd-61769085ebc5.xml.htm"><b>ReadIo</b></a> and <a href="idebugdataspaces_d36b33ec-db19-4df1-8813-b77f22705279.xml.htm"><b>WriteIo</b></a> read and write system and bus I/O memory.</DD>
+<DT>Model Specific Register (MSR)</DT>
+<DD>The methods <a href="idebugdataspaces_ad5999a9-949f-4771-b0b9-16fa1b79ac10.xml.htm"><b>ReadMsr</b></a> and <a href="idebugdataspaces_b0b0220e-66d2-4d96-b4bf-3016b0ed677c.xml.htm"><b>WriteMsr</b></a> read and write MSRs, which are control registers that enable and disable features, and support debugging, for a particular model of CPU.</DD>
+</DL>
+<H4><A NAME="e8fb6197-b37e-4bd5-b0de-c2f960126711"></A>Handles</H4>
+<P></P>
+<P>In user-mode debugging, information about system objects can be obtained using system handles owned by a target process.  The method <a href="idebugdataspaces_cbad043a-7b6e-4c5c-8a14-9a7b20a0b125.xml.htm"><b>ReadHandleData</b></a> can be used to read this information.</P>
+<P>System handles for thread and process system objects can be obtained by using the <a href="idebugsystemobjects_6c615962-bf20-4cdb-8bab-8afc142e8c65.xml.htm"><b>GetCurrentThreadHandle</b></a> and <a href="idebugsystemobjects_480199cd-20d9-467c-a5c3-42d221f44509.xml.htm"><b>GetCurrentProcessHandle</b></a> methods.  These handles are also provided to the <a href="comcallbacks_db1fe5dc-8392-4c79-a1ed-9752170eed3c.xml.htm"><b>IDebugEventCallbacks::CreateThread</b></a> and <a href="comcallbacks_cd6a97b7-a041-419c-8e64-0aeb6fe7b0c8.xml.htm"><b>IDebugEventCallbacks::CreateProcess</b></a> callback methods when create-thread and create-process debugging event occur.  </P>
+<P class="note"><b>Note</b>  In kernel mode, the process and thread handles are artificial handles.  They are not system handles.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Other Data Spaces RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

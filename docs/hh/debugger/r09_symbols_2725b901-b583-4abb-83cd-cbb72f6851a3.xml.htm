@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Symbols and Symbol Files</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Symbols and Symbol Files"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_2725b901-b583-4abb-83cd-cbb72f6851a3.xml"/>
+<META NAME="MS-HKWD" CONTENT="symbols, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_2725b901-b583-4abb-83cd-cbb72f6851a3.xml"></A>Symbols and Symbol Files</H1>
+<P>When applications, libraries, drivers, or operating systems are linked, the linker that creates the <i>.exe</i> and <i>.dll</i> files also creates a number of additional files known as <i>symbol files</i>.</P>
+<P>Symbol files hold a variety of data which are not actually needed when running the binaries, but which could be very useful in the debugging process.</P>
+<P>Typically, symbol files might contain:</P><B></B><UL type="disc">
+<LI>Global variables</LI>
+<LI>Local variables</LI>
+<LI>Function names and the addresses of their entry points</LI>
+<LI>Frame pointer omission (FPO) records</LI>
+<LI>Source-line numbers</LI>
+</UL>
+<P></P>
+<P>Each of these items is called, individually, a <i>symbol</i>.  For example, a single symbol file <i>Myprogram.pdb</i> might contain several hundred symbols, including  global variables and function names and hundreds of local variables.  Often, software companies release two versions of each symbol file:  a full symbol file containing both <i>public symbols</i> and <i>private symbols</i>, and a reduced (stripped) file containing only public symbols.  For details, see <a href="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml.htm">Public and Private Symbols</a>.</P>
+<P>When debugging, you must make sure that the debugger can access the symbol files that are associated with the target you are debugging.  Both live debugging and debugging crash dump files require symbols. You must obtain the proper symbols for the code that you wish to debug, and load these symbols into the debugger.</P>
+<H4>Windows Symbols</H4>
+<P>Microsoft Windows 2000 keeps its symbols in files with the extensions <i>.pdb</i> and <i>.dbg</i>. Windows XP and later versions of Windows use <i>.pdb</i> files exclusively. Windows drivers can follow either model.</P>
+<P>The compiler and the linker control the symbol format. The Visual C++ 5.0 Linker creates both <i>.pdb</i> and <i>.dbg</i> symbol files &#8212; the <i>.dbg</i> files it creates are essentially pointers to the <i>.pdb</i> files. The Visual C++ 6.0 Linker, as well as the linkers of later versions of Visual Studio, places all symbols into <i>.pdb</i> files.</P>
+<P>The Windows operating system is built in two versions. The <a href="dbg_glossary_115ca2a1-47f8-405f-a4f7-a7446892d897.xml.htm#fa518e01-fcc1-428f-9548-a6443ecba5d0"><i>free build</i></a> (or <i>retail build</i>) has relatively small binaries, and the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#4abb5bf0-b8bd-4c56-bbfa-598f77215cbe"><i>checked build</i></a> (or<i> debug build</i>) has larger binaries, with more debugging symbols in the code itself. Each of these builds has its own symbol files. When debugging a target on Windows, you must use the symbol files that match the build of Windows on the target.</P>
+<P>The following table lists several of the directories which exist in a standard Windows symbol tree:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Directory</TH>
+<TH Width="">Contains Symbol Files for</TH>
+</TR>
+<TR valign="top">
+<TD Width="">ACM</TD>
+<TD Width="">Microsoft Audio Compression Manager files</TD>
+</TR>
+<TR valign="top">
+<TD Width="">COM</TD>
+<TD Width="">Executable files (.com)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">CPL</TD>
+<TD Width="">Control Panel programs </TD>
+</TR>
+<TR valign="top">
+<TD Width="">DLL</TD>
+<TD Width="">Dynamic-link library files (.dll)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DRV</TD>
+<TD Width="">Driver files (.drv) </TD>
+</TR>
+<TR valign="top">
+<TD Width="">EXE</TD>
+<TD Width="">Executable files (.exe) </TD>
+</TR>
+<TR valign="top">
+<TD Width="">SCR</TD>
+<TD Width="">Screen-saver files</TD>
+</TR>
+<TR valign="top">
+<TD Width="">SYS</TD>
+<TD Width="">Driver files (.sys) </TD>
+</TR>
+</table>
+<P></P>
+<H4>Data Types</H4>
+<P>All types created by <b>typedef</b>s within your own code will be present, as long as they have actually been used in your program. However, types that are defined in your headers but never actually used will not be stored in the <i>.pdb</i> symbol files and will not be accessible to the debugger. If you wish to make such a type available to the debugger, you should use it as the <i>input</i> of a <b>typedef</b> statement. For example, if the following appears in your code, the structure MY_DATA will be stored in the <i>.pdb</i> symbol file and can be displayed by the debugger:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>typedef struct _MY_DATA {<BR>    . . .<BR>    } MY_DATA;<BR>typedef  MY_DATA *PMY_DATA; <BR></nobr></P>
+<P>On the other hand, the following code would not suffice, because both MY_DATA and PMY_DATA are defined by the initial <b>typedef</b>, and therefore MY_DATA has not itself been used as the input of any <b>typedef</b> statement:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>typedef struct _MY_DATA {<BR>    . . .<BR>    } MY_DATA, *PMY_DATA; <BR></nobr></P>
+<P>In any event, type information is included only in a full symbol file, not a symbol file that has been stripped of all private symbol information. For more information, see <a href="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml.htm">Public and Private Symbols</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Symbols and Symbol Files RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

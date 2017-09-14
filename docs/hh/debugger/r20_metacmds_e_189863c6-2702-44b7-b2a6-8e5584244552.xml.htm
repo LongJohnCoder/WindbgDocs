@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.fnret (Display Function Return Value)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .fnret (Display Function Return Value)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_189863c6-2702-44b7-b2a6-8e5584244552.xml"/>
+<META NAME="MS-HKWD" CONTENT=".fnret (Display Function Return Value) command">
+<META NAME="MS-HKWD" CONTENT="Display Function Return Value (.fnret) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_189863c6-2702-44b7-b2a6-8e5584244552.xml"></A>.fnret (Display Function Return Value)</H1>
+<P>The <b>.fnret</b> command displays information about a function's return value.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.fnret</b> [<b>/s</b>] <i>Address</i> [<i>Value</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>/s</b></DT>
+<DD>Sets the <b>$callret</b> pseudo-register equal to the return value that is being displayed, including type information.</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the function.</DD>
+<DT><i>Value</i></DT>
+<DD>Specifies the return value to display.  If you include <i>Value</i>, <b>.fnret</b> casts <i>Value</i> to the return type of the specified function and displays it in the format of the return type.  If you omit <i>Value</i>, the debugger obtains the return value of the function from the return value registers.</DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If you include the <i>Value</i> parameter, the <b>.fnret</b> command only casts this value to the proper type and displays the results.</P>
+<P>If you omit <i>Value</i>, the debugger uses the return value registers to determine this value. If a function has returned more recently than the function that the <i>Address</i> parameter specifies, the value that is displayed will probably not be a value that this function returned.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .fnret (Display Function Return Value) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

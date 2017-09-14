@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x39: SYSTEM_EXIT_OWNED_MUTEX</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x39: SYSTEM_EXIT_OWNED_MUTEX"><xml><MSHelp:Keyword Index="A" Term="t04_bugs_00_a74e9c65-14d3-463a-aec6-52330e484f9b.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x39: SYSTEM_EXIT_OWNED_MUTEX">
+<META NAME="MS-HKWD" CONTENT="SYSTEM_EXIT_OWNED_MUTEX"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t04_bugs_00_a74e9c65-14d3-463a-aec6-52330e484f9b.xml"></A>Bug Check 0x39: SYSTEM_EXIT_OWNED_MUTEX</H1>
+<P>The SYSTEM_EXIT_OWNED_MUTEX bug check has a value of 0x00000039. This indicates that the worker routine returned without releasing the mutex object that it owned.<P></P>
+</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">The address of the worker routine that caused the error. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">The parameter passed to the worker routine.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">The address of the work item.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Reserved.</TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>The worker routine returned while it still owned a mutex object. The current worker thread will proceed to run other unrelated work items, and the mutex will never be released.</P>
+<P></P>
+<H4>Resolving the Problem</H4>
+<P>A debugger is required to analyze this problem. To find the driver that caused the error, use the <b>ln</b> (List Nearest Symbols) debugger command:</P>
+<P>kd&gt; ln address</P>
+<P></P>
+<P>Where address is the worker routine given in Parameter 1.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x39: SYSTEM_EXIT_OWNED_MUTEX RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

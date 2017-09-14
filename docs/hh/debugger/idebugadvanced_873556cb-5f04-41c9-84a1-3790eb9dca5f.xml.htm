@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_REQUEST_GET_ADDITIONAL_CREATE_OPTIONS</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_REQUEST_GET_ADDITIONAL_CREATE_OPTIONS"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_REQUEST_GET_ADDITIONAL_CREATE_OPTIONS"/>
+<MSHelp:Keyword Index="A" Term="IDebugAdvanced_873556cb-5f04-41c9-84a1-3790eb9dca5f.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_REQUEST_GET_ADDITIONAL_CREATE_OPTIONS request operation"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugAdvanced_873556cb-5f04-41c9-84a1-3790eb9dca5f.xml"></A>DEBUG_REQUEST_GET_ADDITIONAL_CREATE_OPTIONS</H1>
+<P>The DEBUG_REQUEST_GET_ADDITIONAL_CREATE_OPTIONS <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation returns the default process creation options.</P>
+<DL><H4>Parameters</H4>
+<DT><i>InBuffer</i></DT>
+<DD>Not used.</DD>
+<DT><i>OutBuffer</i></DT>
+<DD>The default process creation options.  The type of the process creation options is <a href="structures_2dc7014a-a1c3-4d31-b754-834f5d06c482.xml.htm">DEBUG_CREATE_PROCESS_OPTIONS</a>.</DD>
+</DL>
+<H4>Comments</H4>
+<P>The default process creation options are used by methods <a href="idebugclient_6411b416-f861-4c99-94bc-ceffd54acce0.xml.htm"><b>CreateProcess</b></a> and <a href="idebugclient_5ff3afdf-164e-4f2f-a625-389f3da41d24.xml.htm"><b>CreateProcessAndAttach</b></a> which, unlike <a href="idebugclient_1cf74a01-b7bd-4899-8a17-4fc443ee0fbc.xml.htm"><b>CreateProcess2</b></a> and <a href="idebugclient_898e4cd4-45bf-43b8-80be-f761743e7f5c.xml.htm"><b>CreateProcessAndAttach2</b></a>, do not specify the full range of process creation options.</P>
+<P>The <b>CreateFlags</b> field of the <a href="structures_2dc7014a-a1c3-4d31-b754-834f5d06c482.xml.htm">DEBUG_CREATE_PROCESS_OPTIONS</a> structure is not used as a default because all process creation operations provide this information.</P>
+<H4>See Also</H4>
+<P><a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a>, <a href="idebugadvanced_935a7450-0123-4289-b615-e7037e767d28.xml.htm">DEBUG_REQUEST_SET_ADDITIONAL_CREATE_OPTIONS</a>, <a href="structures_2dc7014a-a1c3-4d31-b754-834f5d06c482.xml.htm">DEBUG_CREATE_PROCESS_OPTIONS</a>,</P>
+<P><a href="idebugclient_6411b416-f861-4c99-94bc-ceffd54acce0.xml.htm"><b>CreateProcess</b></a>, <a href="idebugclient_5ff3afdf-164e-4f2f-a625-389f3da41d24.xml.htm"><b>CreateProcessAndAttach</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_REQUEST_GET_ADDITIONAL_CREATE_OPTIONS RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

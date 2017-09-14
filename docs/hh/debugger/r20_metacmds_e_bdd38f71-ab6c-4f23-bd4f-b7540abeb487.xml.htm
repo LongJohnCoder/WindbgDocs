@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.eventlog (Display Recent Events)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .eventlog (Display Recent Events)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_bdd38f71-ab6c-4f23-bd4f-b7540abeb487.xml"/>
+<META NAME="MS-HKWD" CONTENT=".eventlog (Display Recent Events) command">
+<META NAME="MS-HKWD" CONTENT="Display Recent Events (.eventlog) command">
+<META NAME="MS-HKWD" CONTENT="event log">
+<META NAME="MS-HKWD" CONTENT="events, Display Recent Events (.eventlog) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_bdd38f71-ab6c-4f23-bd4f-b7540abeb487.xml"></A>.eventlog (Display Recent Events)</H1>
+<P>The <b>.eventlog</b> command displays the recent Microsoft Win32 debug events, such as module loading, process creation and termination, and thread creation and termination. </P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.eventlog</b> <BR></nobr></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>.eventlog</b> command shows only 1024 characters.</P>
+<P>The following example shows the .<b>eventlog</b> command.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt;<b> .eventlog</b><BR><b>0904.1014: Load module C:\Windows\system32\ADVAPI32.dll at 000007fe`fed80000</b><BR><b>0904.1014: Load module C:\Windows\system32\RPCRT4.dll at 000007fe`fe8c0000</b><BR><b>0904.1014: Load module C:\Windows\system32\GDI32.dll at 000007fe`fea00000</b><BR><b>0904.1014: Load module C:\Windows\system32\USER32.dll at 00000000`76b10000</b><BR><b>0904.1014: Load module C:\Windows\system32\msvcrt.dll at 000007fe`fe450000</b><BR><b>0904.1014: Load module C:\Windows\system32\COMDLG32.dll at 000007fe`fecf0000</b><BR><b>0904.1014: Load module C:\Windows\system32\SHLWAPI.dll at 000007fe`fe1f0000</b><BR><b>0904.1014: Load module C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b6414</b><BR><b>4ccf1df_6.0.6000.16386_none_1559f1c6f365a7fa\COMCTL32.dll at 000007fe`fbda0000</b><BR><b>0904.1014: Load module C:\Windows\system32\SHELL32.dll at 000007fe`fd4a0000</b><BR><b>0904.1014: Load module C:\Windows\system32\WINSPOOL.DRV at 000007fe`f77d0000</b><BR><b>0904.1014: Load module C:\Windows\system32\ole32.dll at 000007fe`feb10000</b><BR><b>0904.1014: Load module C:\Windows\system32\OLEAUT32.dll at 000007fe`feeb0000</b><BR><b>Last event: Break instruction exception - code 80000003 (first chance)</b><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .eventlog (Display Recent Events) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

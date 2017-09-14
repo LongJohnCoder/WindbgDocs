@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Sample Configuration File for Conditional Breakpoints</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Sample Configuration File for Conditional Breakpoints"><xml><MSHelp:Keyword Index="A" Term="ADPlus_c12713ae-ba4f-4fb8-95fb-9cadbeb39f24.xml"/>
+<META NAME="MS-HKWD" CONTENT="ADPlus, configuration files, conditional breakpoints"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_c12713ae-ba4f-4fb8-95fb-9cadbeb39f24.xml"></A>Sample Configuration File for Conditional Breakpoints</H1>
+<P>The following sample shows you how to configure ADPlus for conditional breakpoints.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>ADPlus&gt;<BR>    &lt;!--<BR>      Configuring ADPlus to create a conditional breakpoint<BR>      When using j we need to include the "g" command into each branch due to its special syntax<BR>        with j everything after the two branches is ignored<BR>      For this reason we need to use VOID in ReturnAction<BR>      Note - when using j commands with breakpoints it may be more convenient to use gc instead of g<BR>             if you plan to do live debug; see documentation for gc in debugger.chm<BR>     --&gt;<BR>    &lt;!-- defining breakpoints --&gt;<BR>    &lt;Breakpoints&gt;<BR>      &lt;NewBP&gt;<BR>          &lt;Address&gt; mscorsvr!RaiseTheException &lt;/Address&gt;<BR>          &lt;Type&gt; BU &lt;/Type&gt;<BR>          &lt;Actions&gt; VOID &lt;/Actions&gt;<BR>         &lt;CustomActions&gt; j (poi(poi(poi(poi(esp+4))+8)+48) = 02000004) '.time;du poi((poi(esp+4)+10))+c;.dump /u /mfh d:\dumps\Insite.dmp;gc';'.time;du poi((poi(esp+4)+10))+c;gc'&lt;/CustomActions&gt;<BR>           &lt;ReturnAction&gt; VOID &lt;/ReturnAction&gt;<BR>       &lt;/NewBP&gt;  <BR>    &lt;/Breakpoints&gt;<BR>&lt;/ADPlus&gt;<BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Sample Configuration File for Conditional Breakpoints RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

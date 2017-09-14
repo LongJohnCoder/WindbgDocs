@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!xpoolmap</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !xpoolmap"><xml><MSHelp:Keyword Index="A" Term="r30_exts_kernel_U_9670dee1-e1ee-403a-a972-8d230bda949f.xml"/>
+<META NAME="MS-HKWD" CONTENT="!xpoolmap extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r30_exts_kernel_U_9670dee1-e1ee-403a-a972-8d230bda949f.xml"></A>!xpoolmap</H1>
+<P><P>(<i>Windows XP only</i>.) The <b>!xpoolmap </b>extension displays a map of pool use.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!xpoolmap</b> [<i>Pool</i>] <BR><b>!xpoolmap</b> -<b>?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Pool</i></DT>
+<DD>Specifies the paged or nonpaged pool. Use <b>0</b> or <b>1</b>.  <b>0</b>  represents the non-paged pool. <b>1</b> represents the paged pool. <b>0</b> is the default.</DD>
+<DT><b>-?</b></DT>
+<DD>Displays help for this extension in the Debugger Command window.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension command can only be used with an x86-based target computer.</P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!xpoolmap</b> extension is supported only on Windows XP. On Windows 2000, use <b>!kdex2x86.xpool -map</b>. This extension is part of the OEM Support Extensions package. For information about installing this package, see <a href="r34_exts_wmi_7c4f16df-6a06-4c6a-a6e4-79d8c59f6ea7.xml.htm"><u>OEM Support Extensions (</u><i><u>kdex2x86.dll</u></i><u>)</u></a>.</P>
+<P>Here is a partial example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!xpoolmap</b><BR>unable to get nt!MmSubsectionTopPage<BR>unable to get nt!MmNonPagedMustSucceed<BR>.....................................................<BR>Status Map of Pool Area Pages<BR>==============================<BR>'O': one page in use                              ('P': paged out)<BR>'&lt;': start page of contiguous pages in use        ('{': paged out)<BR>'&gt;': last page of contiguous pages in use         ('}': paged out)<BR>'=': intermediate page of contiguous pages in use ('-': paged out)<BR>'.': one page not used<BR><BR>Non-Paged Pool Area Summary<BR>----------------------------<BR>Maximum Number of Pages  = 52691 pages<BR>Number of Pages In Use   = 52689 pages (100.0%)<BR><BR>          +00000  +08000   +10000  +18000   +20000  +28000   +30000  +38000<BR>81653000: OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO<BR>81693000: OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO<BR>816d3000: OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO<BR><BR>...<BR><BR>86753000: OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO<BR>86793000: OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO<BR>867d3000: OOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOO OOOOOOOOOOOO&lt;<BR>f7fba000: .&gt;OOOOOOOOO&lt;==== &gt;O&lt;=&gt;&lt;&gt;OOOO&lt;&gt;&lt;&gt;O O&lt;=======&gt;OOOO&lt;= &gt;OO&lt;&gt;OOOOOOOOOOO<BR>f7ffa000: OOOO&lt;=&gt;&lt;&gt;&lt;=&gt;&lt;=== &gt;OOOO&lt;&gt;OO&lt;=&gt;&lt;&gt;OO OOO&lt;&gt;&lt;=&gt;O&lt;=====&gt; &lt;=&gt;OOOOO&lt;&gt;O&lt;==&gt;&lt;<BR>f803a000: &gt;O&lt;===&gt;&lt;==&gt;OOOOO OOOOOOOOOOOOO&lt;=&gt; OOOOO&lt;=&gt;O&lt;==&gt;&lt;&gt;O OOO&lt;&gt;OO&lt;=====&gt;&lt;=<BR>f807a000: &gt;&lt;&gt;OOOOO&lt;=&gt;O&lt;=&gt;O &lt;&gt;OOOOOOOO&lt;==&gt;OO &lt;&gt;OOOOOOO&lt;====&gt;O &lt;&gt;OO&lt;&gt;&lt;&gt;OOOOO&lt;&gt;O<BR><BR>...<BR><BR>ffafa000: &gt;OOO&lt;&gt;OOOOOOOOOO OOO&lt;==&gt;OOO&lt;&gt;O&lt;&gt;O OO&lt;=======&gt;OOOOO O&lt;===&gt;OOOOOOOOOO<BR>ffb3a000: O&lt;&gt;OO&lt;&gt;OOOOOOOOO O&lt;==&gt;OOOOO&lt;&gt;OO&lt;&gt; OO&lt;=&gt;O&lt;=&gt;&lt;&gt;OOOO&lt; &gt;OOOOOOOOOOO&lt;&gt;&lt;&gt;<BR>ffb7a000: &lt;==&gt;OO&lt;&gt;OOOOO&lt;=&gt; OOOO&lt;=&gt;O&lt;==&gt;&lt;=== ====&gt;OOOO&lt;&gt;OOOOO OOO&lt;&gt;O&lt;&gt;OOO&lt;==&gt;&lt;<BR>ffbba000: =&gt;OOO&lt;=====&gt;O&lt;== &gt;OOO&lt;=&gt;&lt;=&gt;OOOO&lt;= &gt;OO&lt;=.<BR><BR></nobr></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !xpoolmap RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

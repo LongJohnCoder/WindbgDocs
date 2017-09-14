@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ubp</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ubp"><xml><MSHelp:Keyword Index="A" Term="r30_exts_kernel_U_8b0bf882-3ee6-49ac-876f-107a5e602779.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ubp extension">
+<META NAME="MS-HKWD" CONTENT="breakpoints, user-space breakpoints">
+<META NAME="MS-HKWD" CONTENT="breakpoints, User Breakpoint (!ubp) extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r30_exts_kernel_U_8b0bf882-3ee6-49ac-876f-107a5e602779.xml"></A>!ubp</H1>
+<P>The <b>!ubp</b> extension sets a breakpoint in user space.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ubp</b> <i>Address</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the hexadecimal virtual address of the location in user space where the breakpoint is to be set.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!ubp</b> extension sets a breakpoint in user space. The breakpoint is set on the actual physical page, not just the virtual page.</P>
+<P>Setting a physical breakpoint will simultaneously modify every virtual copy of a page, with unpredictable results. One possible consequence is corruption of the system state, possibly followed by a bug check or other system crash. Therefore, these breakpoints should be used cautiously, if at all.</P>
+<P>This extension cannot be used to set breakpoints on pages that have been swapped out of memory. If a page is swapped out of memory after a breakpoint is set, the breakpoint ceases to exist.</P>
+<P>It is not possible to set a breakpoint inside a page table or a page directory.</P>
+<P>Each breakpoint is assigned a <i>breakpoint number</i>. To find out the breakpoint number assigned, use <a href="r30_exts_kernel_u_77af4ef1-f9e1-459f-a90b-447d637812c5.xml.htm"><b>!ubl</b></a>. Breakpoints are enabled upon creation. To step over a breakpoint, you must first disable it by using <a href="r30_exts_kernel_u_53b140b2-d6e3-4183-88ce-4a28b6be1f70.xml.htm"><b>!ubd</b></a>. To clear a breakpoint, use <a href="r30_exts_kernel_u_5a1d83d1-e55f-4d6f-801c-eaa443f85fce.xml.htm"><b>!ubc</b></a>.</P>
+<H4>See Also</H4>
+<P><a href="r30_exts_kernel_u_5a1d83d1-e55f-4d6f-801c-eaa443f85fce.xml.htm"><b>!ubc</b></a>, <a href="r30_exts_kernel_u_53b140b2-d6e3-4183-88ce-4a28b6be1f70.xml.htm"><b>!ubd</b></a>, <a href="r30_exts_kernel_u_ef107e40-7ccd-40b7-866c-2a41bcf8a288.xml.htm"><b>!ube</b></a>, <a href="r30_exts_kernel_u_77af4ef1-f9e1-459f-a90b-447d637812c5.xml.htm"><b>!ubl</b></a>, <a href="r07_use_operation_d08cb60d-2986-48e8-87a7-ebbfec447f93.xml.htm">User Space and System Space</a> </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ubp RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

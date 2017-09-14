@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SetExceptionFilterParameters</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SetExceptionFilterParameters"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="SetExceptionFilterParameters"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_4e60bce4-e40d-46b6-83ad-55559b97fbad.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::SetExceptionFilterParameters method">
+<META NAME="MS-HKWD" CONTENT="SetExceptionFilterParameters (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_4e60bce4-e40d-46b6-83ad-55559b97fbad.xml"></A>SetExceptionFilterParameters</H1>
+<P><P>The <b>SetExceptionFilterParameters</b> method changes the <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#f661734a-d279-4ca5-b9bd-802dad9782af">break status</a> and <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#2ed842be-ebe1-40fa-8a33-cf3a9364b7ee">handling status</a> for some <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8998765a-accc-4fd3-b1fd-cb82527e37b9">exception filters</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::SetExceptionFilterParameters(</b><BR><b>    IN ULONG  </b><i>Count</i><b>,</b><BR><b>    IN DEBUG_EXCEPTION_FILTER_PARAMETERS *  </b><i>Params</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Count</i></DT>
+<DD>Specifies the number of exception filters to change the parameters for.</DD>
+<DT><i>Params</i></DT>
+<DD>Specifies an array of exception filter parameters of type <a href="structures_f3f2b1ac-e10c-439e-9de9-6b4161bf3c28.xml.htm">DEBUG_EXCEPTION_FILTER_PARAMETERS</a>.  Only the <b>ExecutionOption</b>, <b>ContinueOption</b>, and <b>ExceptionCode</b> fields of these parameters are used.  The <b>ExceptionCode</b> field is used to identify the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exception</a> whose exception filter will be changed.  <b>ExceptionOption</b> specifies the new break status and <b>ContinueOption</b> specifies the new handling status.<P>If the value of the <b>ExceptionOption</b> field is DEBUG_FILTER_REMOVE and the exception filter is an <a href="dbg_glossary_f75f2990-56bc-4632-bcba-2e994cbb39af.xml.htm#ac40e553-dd44-4cd0-aa79-5d58865fbb5f">arbitrary exception filter</a>, the exception filter will be removed.</P>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_OUTOFMEMORY</DT>
+<DD>The maximum number of arbitrary exception filters has been exceeded.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>SetExceptionFilterParameters</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>For each of the exception filter parameters in <i>Params</i>, if the exception, identified by <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#0b476356-a48f-4e4f-84af-936458a97797">exception code</a>, already has a filter (specific or arbitrary), that filter will be changed.  Otherwise, a new arbitrary exception filter will be added for the exception.</P>
+<P>For more information about <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8c64ad6b-a845-4f5d-b862-f4e23db322a2">event filters</a>, see <a href="engine_dg_feda793f-b9e8-402f-9953-409e0e94247f.xml.htm">Event Filters</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>sx, sxd, sxe, sxi, sxn (Set Exceptions)</b></a>, <a href="idebugcontrol_012d902c-ff4c-4ac8-9a35-b6cdcd1e2894.xml.htm"><b>GetExceptionFilterParameters</b></a>, <a href="idebugcontrol_9bf01d08-9fc1-4ddf-b8dd-c6db0b568f83.xml.htm"><b>SetSpecificFilterParameters</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SetExceptionFilterParameters RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

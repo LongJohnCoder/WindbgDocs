@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging a Processing Stall</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging a Processing Stall"><xml><MSHelp:Keyword Index="A" Term="t11~b_ks_d780de71-476c-4eb2-8e51-64acb0a3bf24.xml"/>
+<META NAME="MS-HKWD" CONTENT="kernel streaming debugging, video stream stall, processing stall"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~b_ks_d780de71-476c-4eb2-8e51-64acb0a3bf24.xml"></A>Debugging a Processing Stall</H1>
+<P>Begin by finding the relevant pin. In a hypothetical case, the relevant video capture pin has address <b>8160DDE0</b>, so we use the <a href="r33~b_exts_ks_9116ca53-f889-4849-b200-270e37aef1d3.xml.htm">!ks.dump</a> extension command on this address to get more details:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!ks.dump 8160DDE0 7</b><BR>Pin object 8160DDE0 [CKsPin = 8160DD50]<BR>    DeviceState    KSSTATE_RUN<BR>    ClientState    KSSTATE_RUN<BR>    CKsPin object 8160DD50 [KSPIN = 8160DDE0]<BR>        State                    KSSTATE_RUN<BR>        Processing Mutex         8160DFD0 is not held<BR>        And Gate &amp;               8160DF88<BR>        And Gate Count           1<BR><BR></nobr></P>
+<P>First, determine if the pin is in the appropriate state and whether the processing mutex is being held by another thread. In this case, the pin state is <b>KSSTATE_RUN</b>, as it should be, and the processing mutex is not being held, so we next use the <a href="r33~b_exts_ks_206e511d-6a33-4478-8466-edb1509eb826.xml.htm">!ks.dumpqueue</a> extension to determine if there are frames available:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!ks.dumpqueue 8160DDE0 7</b><BR>Queue 8172D5D8:<BR>    Frames Received  : 763<BR>    Frames Waiting   : 5<BR>...&lt;this part of display not shown&gt;...<BR>Queue 8172D5D8:<BR>    Frame Header 81B77E60:<BR>        Irp = 816EE008<BR>        Refcount = 1<BR>    Frame Header 81A568D0:<BR>        Irp = 816DE008<BR>        Refcount = 0<BR>    Frame Header 81844ED8:<BR>        Irp = FFA0F650<BR>        Refcount = 0<BR>    Frame Header 8174B0B0:<BR>        Irp = FFABB460<BR>        Refcount = 0<BR>    Leading Edge:<BR>        Stream Pointer 8183EA58 [Public 8183EA90]:<BR>            Frame Header = 81B77E60<BR>...&lt;this part of display not shown&gt;...<BR><BR></nobr></P>
+<P>In the above partial display of the <b>!ks.dumpqueue</b> output, we see that there are five frames waiting, or available. Are these frames ahead of or behind the leading edge?  In the <b>!ks.dumpqueue</b> display, the frames are always listed from oldest to newest. The frame header of the leading edge matches that of the first frame listed, the oldest frame.  Thus all of the available frames are ahead of the leading edge.</P>
+<P>If this were not the case, and instead all of the frames were behind the leading edge, and they had a reference count due to clone pointers, the problems most likely originate with either the hardware or the driver's programming of hardware.  Make sure that the hardware is signaling buffer completions (check interrupts and DPCs) and determine that the driver is responding appropriately to those notifications (by deleting clones upon buffer completion, for example).</P>
+<P>If, as in our example, all of the frames are ahead of the leading edge, the problem is almost certainly a software issue.  Further information can be obtained by looking at the pin's And gate.</P>
+<H4>Interpreting the And Gate</H4>
+<P>The pin's And gate controls processing. If the gate count is one, processing can occur. Obtain the current status of the And gate by using the <b>!ks.dump</b> extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!ks.dump 8160DDE0 7</b><BR>Pin object 8160DDE0 [CKsPin = 8160DD50]<BR>    DeviceState    KSSTATE_RUN<BR>    ClientState    KSSTATE_RUN<BR>    CKsPin object 8160DD50 [KSPIN = 8160DDE0]<BR>        State                    KSSTATE_RUN<BR>        Processing Mutex         8160DFD0 is not held<BR>        And Gate &amp;               8160DF88<BR>        And Gate Count           1<BR><BR></nobr></P>
+<P>Because the gate count is one, the And gate is open.  In this case, investigate the following potential causes for the processing stall:</P><B></B><UL type="disc">
+<LI>  The process dispatch incorrectly returned STATUS_PENDING.</LI>
+<LI>  The data availability case is missing a <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=56545" target="_blank"><b><u>KsPinAttemptProcessing</u></b></a><b> </b>call.  </LI>
+<P></P>
+</UL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging a Processing Stall RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging a Stalled System</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging a Stalled System"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_73fd075e-9d2a-44ba-823d-9e9d021c2670.xml"/>
+<META NAME="MS-HKWD" CONTENT="stalled system debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_73fd075e-9d2a-44ba-823d-9e9d021c2670.xml"></A>Debugging a Stalled System</H1>
+<P>There are times when the computer can stop responding without actually initiating a bug check. This "freeze" can appear in a variety of forms:</P><B></B><UL type="disc">
+<LI>The mouse pointer can be moved, but does not affect any windows on the screen.</LI>
+<LI>The entire screen is still and the mouse pointer does not move, but paging continues between the memory and the disk.</LI>
+<LI>The screen is still and the disk is silent.</LI>
+</UL>
+<P></P>
+<P>If the mouse pointer moves or there is paging to the disk, this is usually due to a problem within the Client Server Run-Time Subsystem (CSRSS).</P>
+<P>If NTSD is running on CSRSS, press F12 and dump out each thread to see if there is anything out of the ordinary. (See <a href="t13_advanced_ca72febd-3528-4880-aba8-fed799ea20d5.xml.htm">Debugging CSRSS</a> for more details.)</P>
+<P>If an examination of CSRSS reveals nothing, then the problem may be with the kernel after all.</P>
+<P>If there is no mouse movement or paging, then it is almost certainly a kernel problem.</P>
+<P>Analyzing a kernel crash of this sort is generally a difficult task. To begin, break into KD (with <a href="r23_keys_5e05b1f2-1c9d-4f1a-a681-4994b0fe679c.xml.htm">CTRL+C</a>) or WinDbg (with <a href="r23_keys_5e05b1f2-1c9d-4f1a-a681-4994b0fe679c.xml.htm">CTRL+BREAK</a>). You can now use the debugger commands to examine the situation.</P>
+<P>Some useful techniques in this case include:</P><B></B><div class="indent1">
+<P><a href="t13_advanced_27379023-e6dc-46ee-a2b5-2d8783e2782d.xml.htm">Finding the Failed Process</a></P>
+</div>
+<div class="indent1">
+<P><a href="t13_advanced_6f4cdf6e-826d-436d-9b10-9865703b154e.xml.htm">Debugging an Interrupt Storm</a></P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging a Stalled System RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

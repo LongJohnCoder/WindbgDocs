@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!mui</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !mui"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_7d0b8440-41bb-4caf-af38-dc4e9499bf55.xml"/>
+<META NAME="MS-HKWD" CONTENT="!mui extension">
+<META NAME="MS-HKWD" CONTENT="multi-language user interface"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_7d0b8440-41bb-4caf-af38-dc4e9499bf55.xml"></A>!mui</H1>
+<P><P>The <b>!mui</b> extension displays the Multilingual User Interface (MUI) cache information. The implementation of MUI was vastly improved in Windows Vista. As a result, the behavior of this extension on earlier implementations is undefined.</P>
+</P>
+<H4>Syntax</H4>
+<P></P>
+<P>User-Mode Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!mui</b> <b>&#8211;c</b><BR><b>!mui &#8211;f</b><BR><b>!mui -i</b><BR><b>!mui -r </b><i>ModuleAddress</i><BR><b>!mui -t</b><BR><b>!mui -?</b> <BR></nobr></P>
+<P></P>
+<P>Kernel-Mode Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!mui</b> <b>-c</b><BR><b>!mui &#8211;f</b><BR><b>!mui -i</b><BR><b>!mui -s</b><BR><b>!mui -r </b><i>ModuleAddress</i><BR><b>!mui -t</b><BR><b>!mui -?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-c</b></DT>
+<DD>Causes the output to include the language identifier (ID), a pointer to the module, a pointer to the resource configuration data, and a pointer to the associated MUI DLL for each module.  </DD>
+<DT><b>-f</b></DT>
+<DD>Causes the output to include the loader merged language fallback list.</DD>
+<DT><b>-i</b></DT>
+<DD>Causes the output to include the installed and licensed MUI languages and their associated information.</DD>
+<DT><b>-r </b><i>ModuleAddress</i></DT>
+<DD>Causes the resource configuration data for the module at <i>ModuleAddress</i> to be displayed.  This includes the file type, the checksum value, and the resource types.  </DD>
+<DT><b>-s</b></DT>
+<DD>(<i>Kernel Mode Only</i>)  Causes the display to include the full file paths for the module and associated MUI DLL for each module. </DD>
+<DT><b>-t</b></DT>
+<DD>Causes the output to include the thread preference language.</DD>
+<DT><b>-?</b></DT>
+<DD>Displays some brief Help text for this extension in the Debugger Command window.</DD>
+</DL>
+<P></P>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows Vista and later</b></TD>
+<TD Width=""><i>Exts.dll</i></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about MUI and resource configuration data format, see the Microsoft Windows SDK documentation.  </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !mui RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

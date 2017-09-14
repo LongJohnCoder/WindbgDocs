@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Anatomy of a Stack Trace</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Anatomy of a Stack Trace"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_8854f759-d8a3-4c7d-8355-8b3825eca486.xml"/>
+<META NAME="MS-HKWD" CONTENT="stack trace, anatomy"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_8854f759-d8a3-4c7d-8355-8b3825eca486.xml"></A>Anatomy of a Stack Trace</H1>
+<P>Basic stack information is stored in the registers. Use the <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command to display these:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt;<b> r</b>  <i>[This command displays register values.]</i><BR>eax=c0000018 ebx=80621828 ecx=00000000 edx=807da761 esi=e12e0e28 edi=e12df868<BR>eip=f28343b3 esp=f2c132cc ebp=f2c132f0 iopl=0         nv up ei pl zr na po nc<BR>cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00000246<BR>VIDEOPRT!pVideoPortReportResourceList+0x263:<BR>f28343b3 8db340010000     lea     esi,[ebx+0x140]   ds:0023:80621968=00000000 <BR></nobr></P>
+<P>The registers are used as follows:</P><B></B><UL type="disc">
+<LI>esp = stack pointer</LI>
+<LI>ebp = base pointer</LI>
+<LI>eip = instruction pointer</LI>
+<LI>eax, ebx, ecx, edx = general-purpose registers for storing intermediate results</LI>
+<LI>edi, esi = often used as general registers</LI>
+</UL>
+<P></P>
+<P>A stack trace could be diagrammed in the following manner:</P><B></B><UL type="disc">
+<LI>Arguments</LI>
+<LI>Return Address</LI>
+<LI>Caller's EBP</LI>
+<LI>Local Variables</LI>
+</UL>
+<P></P>
+<P>The stack trace displayed on a kernel debugger is written in assembly code. A simple set of instructions in assembly code could look like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>push ebp      ;Places the caller's base pointer (ebp) onto the stack<BR>mov ebp,esp         ;Sets the base pointer (ebp) equal to the stack pointer (esp)<BR>mov eax, [ebp+8]    ;Grab the value of the first argument off the stack and store it in eax<BR>add eax, [ebp+c]    ;Add the second argument's value to the value in eax<BR>pop ebp             ;Restore the caller's base pointer<BR>ret 8               ;Return to the calling function and remove 8 bytes from the stack <BR></nobr></P>
+<P>The compiler can optimize this code, simplifying it so it is shorter and more direct. An optimized routine might look like the following (note how the code omits references to the base pointer):</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>mov eax, [esp+4]<BR>add eax, [esp+8]<BR>ret 8 <BR></nobr></P>
+<P>Finally following is how it would look in C:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>ULONG Add(ULONG a, ULONG b)<BR>{<BR>    return a + b;<BR>} <BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Anatomy of a Stack Trace RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

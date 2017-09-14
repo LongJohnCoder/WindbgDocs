@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Preparing to Debug the Service Application</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Preparing to Debug the Service Application"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_1d91f582-44b7-4603-804b-8ed48a14a2cf.xml"/>
+<META NAME="MS-HKWD" CONTENT="Enabling the Debugging of the Initialization Code">
+<META NAME="MS-HKWD" CONTENT="Enabling the Service Application to Break Into the Debugger">
+<META NAME="MS-HKWD" CONTENT="Adjusting the Service Application Timeout">
+<META NAME="MS-HKWD" CONTENT="Isolating the Service"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_1d91f582-44b7-4603-804b-8ed48a14a2cf.xml"></A>Preparing to Debug the Service Application</H1>
+<P>This topic lists all the preparatory steps that may be required prior to debugging a service application. Which steps are required in your scenario depends on which attach option you have chosen and which debugging configuration you have chosen. For a list of these choices, see <a href="t13_advanced_421325cc-6e83-41aa-81d5-57a3ba622c23.xml.htm">Choosing the Best Method</a>. </P>
+<P>Each of the preparatory steps described in this topic specifies the conditions under which it is required. These steps can be done in any order.</P>
+<H4><A NAME="79122a2e-368f-45dd-9ce4-f018c72f09e0"></A>Enabling the Debugging of the Initialization Code</H4>
+<P>If you plan to debug the service application from the beginning of its execution, including its initialization code, this preparatory step is required.</P>
+<P>Locate or create the following registry key, where <i>ProgramName</i> is the name of the service application's executable file:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\<i>ProgramName</i> <BR></nobr></P>
+<P><i>ProgramName</i> should include the file name extension, but not the path. For example, <i>ProgramName</i> might be <i>Myservice.exe</i> or <i>Thisservice.dll</i>.</P>
+<P>Under this registry key, create a string data value entitled <b>Debugger</b>. The value of this string should be set to the full path and file name of a debugger to be attached to the service application.</P>
+<P></P><B></B><UL type="disc">
+<LI>If you plan to debug locally, use a string such as the following: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>c:\Debuggers\windbg.exe</b> <BR></nobr></P>
+<P>Do not choose this option if you are running Windows Vista or a later version of Windows. </P>
+</LI>
+<LI>If you plan to use remote debugging, specify NTSD with the <nobr><b>-noio</b></nobr> option. This causes NTSD to run without any console of its own, accessible only through the remote connection. For example: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>c:\Debuggers\ntsd.exe -server</b> <i>ServerTransport</i> <b>-noio -y</b> <i>SymbolPath</i> <BR></nobr></P>
+<P>If your debugging session begins before Windows is fully loaded, you may not be able to access symbols from a remote share; in such a case, you must use local symbols. <i>ServerTransport</i> must specify a transport protocol that is implemented by the Windows kernel without interfacing with a user-mode service, such as TCP or NPIPE.  For the syntax of <i>ServerTransport</i>, see <a href="r08_use_remote_2cf49506-2562-4684-b843-be4726f59691.xml.htm">Activating a Debugging Server</a>. </P>
+</LI>
+<LI>If you plan to control the user-mode debugger from a kernel-mode debugger, specify NTSD with the <nobr><b>-d</b></nobr> option. For example: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>c:\Debuggers\ntsd.exe -d -y</b> <i>SymbolPath</i> <BR></nobr></P>
+<P>If you plan to use this method and your user-mode symbols will be accessed from a symbol server, you should combine this method with remote debugging. In this case, specify NTSD with the <nobr><b>-ddefer</b></nobr> option. Choose a transport protocol that is implemented by the Windows kernel without interfacing with a user-mode service, such as TCP or NPIPE. For example: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>c:\Debuggers\ntsd.exe -server</b> <i>ServerTransport</i> <b>-ddefer -y</b> <i>SymbolPath</i> <BR></nobr></P>
+<P>For details, see <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a>. </P>
+</LI>
+</UL>
+<P></P>
+<P>After this registry edit is complete, the debugger is launched whenever a service with this name is started or restarted.</P>
+<P></P>
+<H4><A NAME="29cf2a2b-7e71-499b-a0fe-6e8be975b9b2"></A>Enabling the Service Application to Break Into the Debugger</H4>
+<P>If you want the service application to break into the debugger when it crashes or encounters an exception, this preparatory step is required. This step is also required if you want the service application to break into the debugger by calling the <b>DebugBreak</b> function.</P>
+<P class="note"><b>Note:</b>  If you have enabled debugging of the initialization code (the step described in the subsection <b>Enabling the Debugging of the Initialization Code</b>), you should skip this step. When initialization code debugging is enabled, the debugger attaches to the service application when it starts, which causes all crashes, exceptions, and calls to <b>DebugBreak</b> to be routed to the debugger without additional preparations being needed. </P>
+<P>This preparatory step involves registering the chosen debugger as the postmortem debugger. This is done by using the <nobr><b>-iae</b></nobr> or <nobr><b>-iaec</b></nobr> options on the debugger command line. We recommend the following commands, but if you want to vary them, see the syntax details in <a href="r04_setup_3_40cc08bd-c0da-4d75-90cd-f677b4f63d68.xml.htm">Enabling Postmortem Debugging</a>. </P>
+<P></P><B></B><UL type="disc">
+<LI>If you plan to debug locally, use a command such as the following: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg -iae</b> <BR></nobr></P>
+<P>Do not choose this option if you are running Windows Vista or a later version of Windows. </P>
+</LI>
+<LI>If you plan to use remote debugging, specify NTSD with the <nobr><b>-noio</b></nobr> option. This causes NTSD to run without any console of its own, accessible only through the remote connection. To install a postmortem debugger that includes the <nobr><b>-server</b></nobr> parameter, you must manually edit the registry; for details, see <a href="r04_setup_3_40cc08bd-c0da-4d75-90cd-f677b4f63d68.xml.htm">Enabling Postmortem Debugging</a>. For example, the <b>Debugger</b> value of the <b>AeDebug</b> key could be the following: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ntsd -server npipe:pipe=myproc%x -noio -p %ld -e %ld -g -y</b> <i>SymbolPath</i> <BR></nobr></P>
+<P>In the pipe specification, the <b>%x</b> token is replaced with the process ID of the process that launches the debugger. This guarantees that if more than one process launches a postmortem debugger, each has a unique pipe name.  If your debugging session begins before Windows is fully loaded, you may not be able to access symbols from a remote share; in such a case, you must use local symbols.  <i>ServerTransport</i> must specify a transport protocol that is implemented by the Windows kernel without interfacing with a user-mode service, such as TCP or NPIPE.  For the syntax of <i>ServerTransport</i>, see <a href="r08_use_remote_2cf49506-2562-4684-b843-be4726f59691.xml.htm">Activating a Debugging Server</a>. </P>
+</LI>
+<LI>If you plan to control the user-mode debugger from a kernel-mode debugger, specify NTSD with the <nobr><b>-d</b></nobr> option. For example: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>ntsd -iaec -d -y <i>SymbolPath</i> <BR></nobr></P>
+<P>If you choose this method and intend to access user-mode symbols from a symbol server, you should combine this method with remote debugging. In this case, specify NTSD with the <nobr><b>-ddefer</b></nobr> option. Choose a transport protocol that is implemented by the Windows kernel without interfacing with a user-mode service, such as TCP or NPIPE. To install a postmortem debugger that includes the <nobr><b>-server</b></nobr> parameter, you must manually edit the registry; for details, see <a href="r04_setup_3_40cc08bd-c0da-4d75-90cd-f677b4f63d68.xml.htm">Enabling Postmortem Debugging</a>. For example, the <b>Debugger</b> value of the <b>AeDebug</b> key could be the following: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ntsd -server npipe:pipe=myproc%x -ddefer -p %ld -e %ld -g -y</b> <i>SymbolPath</i> <BR></nobr></P>
+<P>For details, see <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a>. </P>
+</LI>
+</UL>
+<P></P>
+<P>When you issue one of these commands, the postmortem debugger is registered. This debugger will be launched whenever any user-mode program, including a service application, encounters an exception or runs a <b>DebugBreak</b> function.</P>
+<P></P>
+<H4><A NAME="98ef593d-7d83-4b6c-a7cb-4742103b9144"></A>Adjusting the Service Application Timeout</H4>
+<P>If you plan to launch the debugger automatically (either when the service starts or when it encounters an exception), this preparatory step is required. </P>
+<P>Locate the following registry key:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control<i> </i><BR></nobr></P>
+<P>Under this key, locate or create a DWORD data value called <b>ServicesPipeTimeout</b>. Set this entry to the amount of time in milliseconds that you want the service to wait before timing out. For example, a value of 60,000 is one minute, while a value of 86,400,000 is 24 hours. When this registry value is not set, the default timeout is about thirty seconds. </P>
+<P>The significance of this value is that a clock starts to run when each service is launched, and when the timeout value is reached, any debugger attached to the service is terminated.  Therefore, the value you choose should be longer than the total amount of time that elapses between the launching of the service and the completion of your debugging session.</P>
+<P>This setting applies to every service that is started or restarted after the registry edit is complete.  If some service crashes or hangs and this setting is still in effect, the problem is not detected by Windows.  Therefore, you should use this setting only while you are debugging, and return the registry key to its original value after your debugging is complete.</P>
+<P></P>
+<H4><A NAME="a59821de-7863-44d3-85be-fb0165d63db0"></A>Isolating the Service</H4>
+<P>Sometimes, multiple services are combined in a single Service Host (Svchost) process. If you want to debug such a service, you must first isolate it into a separate Svchost process.</P>
+<P>There are three methods by which you can isolate a service. Microsoft recommends the Moving the Service to its Own Group method, as follows. The alternative methods (Changing the Service Type and Duplicating the SvcHost Binary) can be used on a temporary basis for debugging, but because they alter the way the service runs, they are not as reliable as the first method.</P>
+<P></P><B>Preferred Method:  Moving the Service to its Own Group</B><OL type="1">
+<LI>Issue the following Service Configuration tool (<i>Sc.exe</i>) command, where <i>ServiceName</i> is the name of the service:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>sc qc </b><i>ServiceName</i> <BR></nobr></P>
+<P>This displays the current configuation values for the service. The value of interest is BINARY_PATH_NAME, which specifies the command line used to launch the service control program. In this scenario, because your service is not yet isolated, this command line includes a directory path, <i>Svchost.exe</i>, and some SvcHost parameters, including the <nobr><b>-k</b></nobr> switch, followed by a group name. For example, it may look something like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>%SystemRoot%\System32\svchost.exe -k LocalServiceNoNetwork <BR></nobr></P>
+<P>Remember this path and the group name; they are used in steps 5 and 6.</P>
+<P></P>
+</LI>
+<LI>Locate the following registry key:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\SvcHost <BR></nobr></P>
+<P>Create a new REG_MULTI_SZ value with a unique name (for example, <b>TempGrp</b>). </P>
+</LI>
+<LI>Set this new value equal to the name of the service that you want to isolate. Do not include any directory path or file name extension. For example, you might set the new value <b>TempGrp</b> equal to <b>MyService</b>.   </LI>
+<LI>Under the same registry key, create a new key with the same name you used in step 2. For example:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\SvcHost\TempGrp <BR></nobr></P>
+<P>Now the SvcHost key contains a value with the new name and also has a subordinate key with this same name. </P>
+</LI>
+<LI>Look for another key subordinate to the SvcHost key that has the same name as the group you found in step 1. If such a key exists, examine all the values in it, and create duplicates of them in the new key you created in step 4. <P>For example, the old key might be named this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\SvcHost\LocalServiceNoNetwork <BR></nobr></P>
+<P>and it might contain values such as <b>CoInitializeSecurityParam</b>, <b>AuthenticationCapabilities</b>, and other values. You would go to the newly created key:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\SvcHost\TempGrp <BR></nobr></P>
+<P>and create values in it that are identical in name, type, and data to those in the old key.   </P>
+<P>If the old key does not exist, you do not need to create a new key.  </P>
+</LI>
+<LI>Use the following Service Configuration tool command to revise the path found in step 1:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>sc config </b><i>ServiceName</i><b> binPath= "</b><i>RevisedPath</i><b>"</b> <BR></nobr></P>
+<P>In this command, <i>ServiceName</i> is the name of the service, and <i>RevisedPath</i> is the new value you are supplying for BINARY_PATH_NAME. For <i>RevisedPath</i>, use the exact same path as the one displayed in step 1, including all the options shown on that line, making only one change: replace the parameter following the <nobr><b>-k</b></nobr> switch with the name of the new registry value you created in step 2. Enclose <i>RevisedPath</i> in quotation marks. The space after the equal sign is required. </P>
+<P>For example, your command might look like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>sc config MyService binPath= "%SystemRoot%\System32\svchost.exe -k TempGrp" </b><BR></nobr></P>
+<P>You may want to use the <b>sc qc</b> command again to review the change you have made.</P>
+</LI>
+</OL>
+<P></P>
+<P>These settings will take effect the next time the service is started.  To clear the effects of the old service, we recommend that you restart Windows rather than just restarting the service.</P>
+<P>After you have completed your debugging, if you want to return this service to the shared service host, use the <b>sc config</b> command again to return the binary path to its original value, and delete the new registry keys and values you created..</P>
+<P></P><B>Alternative Method:  Changing the Service Type</B><OL type="1">
+<LI>Issue the following Service Configuration tool (<i>Sc.exe</i>) command, where <i>ServiceName</i> is the name of the service:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>sc config </b><i>ServiceName</i> <b>type= own</b> <BR></nobr></P>
+<P>The space after the equal sign is required. </P>
+</LI>
+<LI>Restart the service, by using the following commands:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>net stop </b><i>ServiceName</i> <BR><b>net start </b><i>ServiceName</i> <BR></nobr></P>
+</LI>
+</OL>
+<P></P>
+<P>This alternative is not the recommended method because it can alter the behavior of the service. If you do use this method, use the following command to revert to the normal behavior after you have completed your debugging:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>sc config </b><i>ServiceName</i> <b>type= share</b> <BR></nobr></P>
+<P></P><B>Alternative Method:  Duplicating the SvcHost Binary</B><OL type="1">
+<LI>The <i>Svchost.exe </i>executable file  is located in the <i>system32</i> directory of Windows. Make a copy of this file, name it <i>svhost2.exe</i>, and place it in the <i>system32</i> directory as well. </LI>
+<LI>Issue the following Service Configuration tool (<i>Sc.exe</i>) command, where <i>ServiceName</i> is the name of the service:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>sc qc </b><i>ServiceName</i> <BR></nobr></P>
+<P>This command displays the current configuation values for the service. The value of interest is BINARY_PATH_NAME, which specifies the command line used to launch the service control program. In this scenario, because your service is not yet isolated, this command line will include a directory path, <i>Svchost.exe</i>, and probably some SvcHost parameters. For example, it may look something like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>%SystemRoot%\System32\svchost.exe -k LocalServiceNoNetwork <BR></nobr></P>
+</LI>
+<LI>To revise this path, issue the following command:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>sc config </b><i>ServiceName</i><b> binPath= "</b><i>RevisedPath</i><b>"</b> <BR></nobr></P>
+<P>In this command, <i>ServiceName</i> is the name of the service, and <i>RevisedPath</i> is the new value you are supplying for BINARY_PATH_NAME. For <i>RevisedPath</i>, use the exact same path as the one displayed in step 2, including all the options shown on that line, making only one change: replace <i>Svchost.exe</i> with <i>Svchost2.exe</i>. Enclose <i>RevisedPath</i> in quotation marks. The space after the equal sign is required. </P>
+<P>For example, your command might look like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>sc config MyService binPath= "%SystemRoot%\System32\svchost2.exe -k LocalServiceNoNetwork" </b><BR></nobr></P>
+<P>You can use the <b>sc qc</b> command again to review the change you have made.</P>
+</LI>
+<LI>Restart the service by using the following commands:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>net stop </b><i>ServiceName</i> <BR><b>net start </b><i>ServiceName</i> <BR></nobr></P>
+</LI>
+</OL>
+<P></P>
+<P>This alternative is not the recommended method because it can alter the behavior of the service. If you do use this method, use the <b>sc config</b> command to change the path back to its original value after you have completed your debugging.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Preparing to Debug the Service Application RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

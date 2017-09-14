@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_STATUS_XXX</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_STATUS_XXX"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_STATUS_XXX"/>
+<MSHelp:Keyword Index="A" Term="Structures_c68bce96-5dba-43bb-a3dd-3f8f3b11520e.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_STATUS_XXX status codes"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_c68bce96-5dba-43bb-a3dd-3f8f3b11520e.xml"></A>DEBUG_STATUS_<i>XXX</i></H1>
+<P></P>
+<P>The DEBUG_STATUS_<i>XXX</i> status codes have two purposes. They instruct the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> on how execution in the target should proceed, and they are used by the engine to report the execution status of the target.</P>
+<P>After an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurs, the engine can receive several instructions that tell it how execution in the target should proceed. In this case, it acts on the instruction with the highest precedence.  Typically, the higher precedence status codes represent less execution for the target.</P>
+<P>The values in the following table are reverse ordered by precedence; the values that appear earlier in the table have higher precedence.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Status Code</TH>
+<TH Width="">When reporting</TH>
+<TH Width="">When instructing</TH>
+<TH Width="">Precedence</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_NO_DEBUGGEE</TD>
+<TD Width="">No debugging session is active.</TD>
+<TD Width="">N/A</TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_BREAK</TD>
+<TD Width="">The target is <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#0a6b6a99-2d54-46ab-99eb-d47231b221e6">suspended</a>.</TD>
+<TD Width="">Suspend the target.</TD>
+<TD Width="">Highest precedence</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_STEP_INTO</TD>
+<TD Width="">The target is executing a single instruction.</TD>
+<TD Width="">Continue execution of the target for a single instruction.</TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_STEP_BRANCH</TD>
+<TD Width="">The target is executing until the next branch instruction.</TD>
+<TD Width="">Continue execution of the target until the next branch instruction.</TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_STEP_OVER</TD>
+<TD Width="">The target is executing a single instruction or&#8212;if that instruction is a subroutine call&#8212;subroutine.</TD>
+<TD Width="">Continue execution of the target for a single instruction.  If the instruction is a subroutine call, the call is entered and the target is allowed to run until the subroutine returns.</TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_GO_NOT_HANDLED</TD>
+<TD Width="">N/A</TD>
+<TD Width="">Continue execution of the target, flagging the event as not handled.</TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_GO_HANDLED</TD>
+<TD Width="">N/A</TD>
+<TD Width="">Continue execution of the target, flagging the event as handled.</TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_GO</TD>
+<TD Width="">The target is executing normally.</TD>
+<TD Width="">Continue normal execution of the target.</TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_IGNORE_EVENT</TD>
+<TD Width="">N/A</TD>
+<TD Width="">Continue previous execution of the target, ignoring the event.</TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_RESTART_REQUESTED</TD>
+<TD Width="">The target is restarting.</TD>
+<TD Width="">Restart the target.</TD>
+<TD Width=""></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_STATUS_NO_CHANGE</TD>
+<TD Width="">N/A</TD>
+<TD Width="">No instruction.  This value is returned by an event callback method when it does not wish to instruct the engine how to proceed with execution in the target.</TD>
+<TD Width="">Lowest precedence</TD>
+</TR>
+</table>
+<P class="note"><b>Note</b>  The precedence of the status codes does not follow the numeric values of the constants.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_STATUS_XXX RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

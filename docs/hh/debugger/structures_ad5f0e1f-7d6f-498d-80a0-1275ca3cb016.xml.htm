@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_BREAKPOINT_PARAMETERS</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_BREAKPOINT_PARAMETERS"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_BREAKPOINT_PARAMETERS"/>
+<MSHelp:Keyword Index="A" Term="Structures_ad5f0e1f-7d6f-498d-80a0-1275ca3cb016.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_BREAKPOINT_PARAMETERS structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_ad5f0e1f-7d6f-498d-80a0-1275ca3cb016.xml"></A>DEBUG_BREAKPOINT_PARAMETERS</H1>
+<P><P>The DEBUG_BREAKPOINT_PARAMETERS structure contains most of the parameters for describing a <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoint</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_BREAKPOINT_PARAMETERS {</b><BR><b>  ULONG64  Offset;</b><BR><b>  ULONG  Id;</b><BR><b>  ULONG  BreakType;</b><BR><b>  ULONG  ProcType;</b><BR><b>  ULONG  Flags;</b><BR><b>  ULONG  DataSize;</b><BR><b>  ULONG  DataAccessType;</b><BR><b>  ULONG  PassCount;</b><BR><b>  ULONG  CurrentPassCount;</b><BR><b>  ULONG  MatchThread;</b><BR><b>  ULONG  CommandSize;</b><BR><b>  ULONG  OffsetExpressionSize;</b><BR><b>} DEBUG_BREAKPOINT_PARAMETERS, * PDEBUG_BREAKPOINT_PARAMETERS;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>Offset</b></DT>
+<DD>The location in the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>'s memory address space that will trigger the breakpoint.  If the breakpoint is deferred (see <a href="comother_5898a703-87fb-4d47-9d06-026783243e10.xml.htm"><b>GetFlags</b></a>), <b>Offset</b> is DEBUG_INVALID_OFFSET.  See <a href="comother_020a92c1-effa-4b14-9198-153641401e46.xml.htm"><b>GetOffset</b></a>.</DD>
+<DT><b>Id</b></DT>
+<DD>The breakpoint ID.  See <a href="comother_408e8e80-f34e-4895-9bae-66dbb0f9aa97.xml.htm"><b>GetId</b></a>.</DD>
+<DT><b>BreakType</b></DT>
+<DD>Specifies if the breakpoint is a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#966bf102-d48c-4c87-9dea-3bed91a69ee0">software breakpoint</a> or a <a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#4d5a4a35-a0a2-49c3-87f8-97d78cb0284a">processor breakpoint</a>.  See <a href="comother_3305c400-f816-463b-a643-4495bf546460.xml.htm"><b>GetType</b></a>.</DD>
+<DT><b>ProcType</b></DT>
+<DD>The <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#ba5af89e-695c-44ee-98cc-bdb218ce8d1c">processor type</a> for which the breakpoint is set.  See <a href="comother_3305c400-f816-463b-a643-4495bf546460.xml.htm"><b>GetType</b></a>.</DD>
+<DT><b>Flags</b></DT>
+<DD>The flags for the breakpoint.  See <a href="comother_5898a703-87fb-4d47-9d06-026783243e10.xml.htm"><b>GetFlags</b></a>.</DD>
+<DT><b>DataSize</b></DT>
+<DD>The size, in bytes, of the memory block whose access will trigger the breakpoint.  If the type of the breakpoint is not a data breakpoint, this is zero.  See <a href="comother_297fe316-4a1a-476b-a804-056bb56b6e77.xml.htm"><b>GetDataParameters</b></a>.</DD>
+<DT><b>DataAccessType</b></DT>
+<DD>The type of access that will trigger the breakpoint.  If the type of the breakpoint is not a data breakpoint, this is zero.  See <a href="comother_297fe316-4a1a-476b-a804-056bb56b6e77.xml.htm"><b>GetDataParameters</b></a>.</DD>
+<DT><b>PassCount</b></DT>
+<DD>The number of times the target will hit the breakpoint before it is triggered.  See <a href="comother_bf916108-efd7-436f-a89e-a26826e2e258.xml.htm"><b>GetPassCount</b></a>.</DD>
+<DT><b>CurrentPassCount</b></DT>
+<DD>The remaining number of times that the target will hit the breakpoint before it is triggered.  See <a href="comother_b9308489-679e-4ced-bd73-84cbeaadc669.xml.htm"><b>GetCurrentPassCount</b></a>.</DD>
+<DT><b>MatchThread</b></DT>
+<DD>The engine thread ID of the thread that can trigger this breakpoint.  If any thread can trigger this breakpoint, <b>MatchThread</b> is DEBUG_ANY_ID.  See <a href="comother_6a9afca5-8445-48d9-8e28-8d38e6cf2658.xml.htm"><b>GetMatchThreadId</b></a>.</DD>
+<DT><b>CommandSize</b></DT>
+<DD>The size, in characters, of the command string that will be executed when the breakpoint is triggered.  If no command is set, <b>CommandSize</b> is zero.  See <a href="comother_4bb08d44-5a99-4177-b8a4-8926f1e45dcf.xml.htm"><b>GetCommand</b></a>.</DD>
+<DT><b>OffsetExpressionSize</b></DT>
+<DD>The size, in characters, of the expression string that evaluates to the location in the target's memory address space where the breakpoint is triggered.  If no expression string is set, <b>OffsetExpressionSize</b> is zero.  See <a href="comother_08bb15b2-f37d-4bd2-b19a-899ab9293f4a.xml.htm"><b>GetOffsetExpression</b></a>.</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>For an overview of how to use breakpoints, and a description of all breakpoint-related methods, see <a href="engine_dg_4f9c88b1-f2a7-4a25-b1ff-ac050eb5c42d.xml.htm">Breakpoints</a>.</P>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_BREAKPOINT_PARAMETERS RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

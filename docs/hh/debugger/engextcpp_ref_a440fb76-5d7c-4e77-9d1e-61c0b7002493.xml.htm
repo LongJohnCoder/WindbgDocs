@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ExtRemoteData::GetData</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ExtRemoteData::GetData"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="ExtRemoteData::GetData"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_a440fb76-5d7c-4e77-9d1e-61c0b7002493.xml"/>
+<META NAME="MS-HKWD" CONTENT="ExtRemoteData::GetData">
+<META NAME="MS-HKWD" CONTENT="GetData (ExtRemoteData)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_a440fb76-5d7c-4e77-9d1e-61c0b7002493.xml"></A>ExtRemoteData::GetData</H1>
+<P><P>The <b>GetData</b> method returns the contents of the target's memory, represented by the <a href="engextcpp_ref_e84c03ce-1156-481b-a429-f0a918797565.xml.htm"><b>ExtRemoteData</b></a> object.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>ULONG64</b><BR><b>  ExtRemoteData::GetData(</b><BR><b>    IN ULONG  </b><i>Request</i><BR><b>    ) throw(...)</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Request</i></DT>
+<DD>Number of bytes requested.  This must be the same as the size of the memory specified by the <a href="engextcpp_ref_8e376094-9e23-4ea4-81e3-c47e6695a687.xml.htm"><b>ExtRemoteData::ExtRemoteData</b></a> constructor or the <a href="engextcpp_ref_4c160aa2-67b7-4dcf-826a-aa9849bde31d.xml.htm"><b>ExtRemoteData::Set</b></a> method.  If it is not the same, <b>ExtRemoteException</b> is thrown.</DD>
+</DL>
+<H4>Return Value</H4>
+<P><b>GetData</b> returns the cached contents of the target's memory, represented by the <a href="engextcpp_ref_e84c03ce-1156-481b-a429-f0a918797565.xml.htm"><b>ExtRemoteData</b></a> object.</P>
+<H4>Comments</H4>
+<P>The contents of the region of memory represented by an <b>ExtRemoteData</b> object are only cached if the size of the region is less than 8 bytes.  If the size of the region is greater than 8 bytes, the <b>GetData</b> method does not return a meaningful value.</P>
+<P>A number of convenience methods are available for various primitive types. These methods will automatically provide the size of the type and cast the return value to that type.  These methods are listed in the <b>See Also</b> section.</P>
+<H4>Requirements</H4>
+<p><b>Headers:</b> Defined in <i>Engextcpp.hpp</i>.  Include <i>Engextcpp.hpp</i>.</p>
+<H4>See Also</H4>
+<P><a href="engextcpp_ref_e84c03ce-1156-481b-a429-f0a918797565.xml.htm"><b>ExtRemoteData</b></a>, <a href="engextcpp_ref_8e376094-9e23-4ea4-81e3-c47e6695a687.xml.htm"><b>ExtRemoteData::ExtRemoteData</b></a>, <a href="engextcpp_ref_4c160aa2-67b7-4dcf-826a-aa9849bde31d.xml.htm"><b>ExtRemoteData::Set</b></a>, <a href="engextcpp_ref_791b0934-9cb7-430a-8b80-d7fe4f458f49.xml.htm"><b>GetBoolean</b></a>, <a href="engextcpp_ref_98ced053-a952-4c9f-af2b-0aab9d20e311.xml.htm"><b>GetChar</b></a>, <a href="engextcpp_ref_8776e6fd-9e13-4502-a445-da65a8fcfe41.xml.htm"><b>GetDouble</b></a>, <a href="engextcpp_ref_f1ca75e4-6dea-4237-b76a-04b3af234060.xml.htm"><b>GetFloat</b></a>, <a href="engextcpp_ref_10a1810d-2e15-490a-baeb-8881106f41a6.xml.htm"><b>GetLong</b></a>, <a href="engextcpp_ref_4b2bf03d-7a55-4cee-826b-2b384972392f.xml.htm"><b>GetLong64</b></a>, <a href="engextcpp_ref_3160f5ef-8983-40b4-a7f8-95a1a40d67ac.xml.htm"><b>GetLongPtr</b></a>, <a href="engextcpp_ref_6aea2145-72ce-4bdc-afb2-1fa360e643da.xml.htm"><b>GetPtr</b></a>, <a href="engextcpp_ref_c2fffdd2-e899-4f87-bd00-415bafa3b84f.xml.htm"><b>GetShort</b></a>, <a href="engextcpp_ref_65fe8202-99dc-45b3-9b38-5fca10341b1b.xml.htm"><b>GetStdBool</b></a>, <a href="engextcpp_ref_687a7887-560a-4565-8417-ec46cc1ee254.xml.htm"><b>GetUchar</b></a>, <a href="engextcpp_ref_41a112c3-0350-4e54-981c-b5c11697ef2d.xml.htm"><b>GetUlong</b></a>, <a href="engextcpp_ref_8310177e-7943-4f2c-92bd-b69848c9e9f0.xml.htm"><b>GetUlong64</b></a>, <a href="engextcpp_ref_22ba632d-a45b-40de-b8d7-269c917357d5.xml.htm"><b>GetUlongPtr</b></a>, <a href="engextcpp_ref_5429785d-2f76-434d-96c6-4fa7298aa32e.xml.htm"><b>GetUshort</b></a>, <a href="engextcpp_ref_367ee79b-5fdf-41ca-b43c-f9f29b3a872c.xml.htm"><b>GetW32Bool</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ExtRemoteData::GetData RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

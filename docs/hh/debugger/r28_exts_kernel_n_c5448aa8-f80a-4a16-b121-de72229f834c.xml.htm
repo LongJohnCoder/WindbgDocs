@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!pci</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !pci"><xml><MSHelp:Keyword Index="A" Term="r28_exts_kernel_N_c5448aa8-f80a-4a16-b121-de72229f834c.xml"/>
+<META NAME="MS-HKWD" CONTENT="!pci extension">
+<META NAME="MS-HKWD" CONTENT="PCI bus">
+<META NAME="MS-HKWD" CONTENT="PCI device">
+<META NAME="MS-HKWD" CONTENT="PCI configuration space"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r28_exts_kernel_N_c5448aa8-f80a-4a16-b121-de72229f834c.xml"></A>!pci</H1>
+<P>The <b>!pci</b> extension displays the current status of the peripheral component interconnect (PCI) buses, as well as any devices attached to those buses.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!pci</b> [<i>Flags </i>[<i>Segment</i>] [<i>Bus</i> [<i>Device</i> [<i>Function</i> [<i>MinAddress</i> <i>MaxAddress</i>]]]]] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Specifies the level of output. Can be any combination of the following bits:<DL><DT>Bit 0 (0x1)</DT>
+<DD>Causes a verbose display.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Causes the display to include all buses in the range from bus 0 (zero) to the specified <i>Bus</i>.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>Causes the display to include information in raw byte format. If <i>MinAddress</i>, <i>MaxAddress</i>, or flag bit 0x8 is set, this bit is automatically set as well.</DD>
+<DT>Bit 3 (0x8)</DT>
+<DD>Causes the display to include information in raw DWORD format.</DD>
+<DT>Bit 4 (0x10)</DT>
+<DD>Causes the display to include invalid device numbers. If <i>Device</i> is specified, this flag is ignored.</DD>
+<DT>Bit 5 (0x20)</DT>
+<DD>Causes the display to include invalid function numbers.</DD>
+<DT>Bit 6 (0x40)</DT>
+<DD>Causes the display to include capabilities.</DD>
+<DT>Bit 7 (0x80)</DT>
+<DD>Causes the display to include Intel 8086 device-specific information.</DD>
+<DT>Bit 8 (0x100)</DT>
+<DD>Causes the display to include the PCI configuration space. </DD>
+<DT>Bit 9 (0x200)</DT>
+<DD>Causes the display to include segment information.  When this bit is included, the <i>Segment</i> parameter must be included.</DD>
+<DT>Bit 10 (0x400)</DT>
+<DD>Causes the display to include all valid segments in the range from segment 0 to the specified segment.  When this bit is included, the <i>Segment </i>parameter must be included. </DD>
+</DL>
+</DD>
+<DT><i>Segment</i></DT>
+<DD>Specifies the number of the segment to be displayed.  Segment numbers range from 0 to 0xFFFF.  If <i>Segment</i> is omitted, information about the primary segment (segment 0) is displayed.  If <i>Flags</i> includes bit 10 (0x400), <i>Segment</i> specifies the highest valid segment to be displayed.  </DD>
+<DT><i>Bus</i></DT>
+<DD>Specifies the bus to be displayed. <i>Bus</i> can range from 0 to 0xFF. If it is omitted, information about the primary bus (bus 0) is displayed. If <i>Flags</i> includes bit 1 (0x2), <i>Bus</i> specifies the highest bus number to be displayed.</DD>
+<DT><i>Device</i></DT>
+<DD>Specifies the slot device number for the device. If this is omitted, information about all devices is printed.</DD>
+<DT><i>Function</i></DT>
+<DD>Specifies the slot function number for the device. If this is omitted, all information about all device functions is printed.</DD>
+<DT><i>MinAddress</i></DT>
+<DD>Specifies the first address from which raw bytes or DWORDs are to be displayed. This must be between 0 and 0xFF.</DD>
+<DT><i>MaxAddress</i></DT>
+<DD>Specifies the last address from which raw bytes or DWORDs are to be displayed. This must be between 0 and 0xFF, and not less than <i>MinAddress</i>.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kext.dll</i> <BR><i>Kdextx86.dll</i>   </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension command can only be used with an x86-based target computer.</P>
+<P></P>
+<H4>Comments</H4>
+<P>To edit the PCI configuration space, use <a href="r27_exts_kernel_e_4226d023-93d5-4be6-9f95-e301a3fdb99f.xml.htm"><b>!ecb</b></a>, <a href="r27_exts_kernel_e_4226d023-93d5-4be6-9f95-e301a3fdb99f.xml.htm"><b>!ecd</b></a>, or <a href="r27_exts_kernel_e_4226d023-93d5-4be6-9f95-e301a3fdb99f.xml.htm"><b>!ecw</b></a>.</P>
+<P>The following example displays a list of all buses and their devices. This command will take a long time to execute. You will see a moving counter at the bottom of the display while the debugger scans the target system for PCI buses:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!pci 2 ff</b><BR>PCI Bus 0<BR>00:0  8086:1237.02  Cmd[0106:.mb..s]  Sts[2280:.....]  Device  Host bridge<BR>0d:0  8086:7000.01  Cmd[0007:imb...]  Sts[0280:.....]  Device  ISA bridge<BR>0d:1  8086:7010.00  Cmd[0005:i.b...]  Sts[0280:.....]  Device  IDE controller<BR>0e:0  1011:0021.02  Cmd[0107:imb..s]  Sts[0280:.....]  PciBridge 0-&gt;1-1  PCI-PCI bridge<BR>10:0  102b:0519.01  Cmd[0083:im....]  Sts[0280:.....]  Device  VGA compatible controller<BR>PCI Bus 1<BR>08:0  10b7:9050.00  Cmd[0107:imb..s]  Sts[0200:.....]  Device  Ethernet<BR>09:0  9004:8178.00  Cmd[0117:imb..s]  Sts[0280:.....]  Device  SCSI controller<BR><BR></nobr></P>
+<P>This example displays verbose information about the devices on the primary bus. The two-digit number at the beginning of each line is the device number; the one-digit number following it is the function number:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!pci 1 0</b><BR>PCI Bus 0<BR>00:0  8086:1237.02  Cmd[0106:.mb..s]  Sts[2280:.....]  Device  Host bridge<BR>      cf8:80000000  IntPin:0  IntLine:0  Rom:0  cis:0  cap:0<BR><BR>0d:0  8086:7000.01  Cmd[0007:imb...]  Sts[0280:.....]  Device  ISA bridge<BR>      cf8:80006800  IntPin:0  IntLine:0  Rom:0  cis:0  cap:0<BR><BR>0d:1  8086:7010.00  Cmd[0005:i.b...]  Sts[0280:.....]  Device  IDE controller<BR>      cf8:80006900  IntPin:0  IntLine:0  Rom:0  cis:0  cap:0<BR>      IO[4]:fff1       <BR><BR>0e:0  1011:0021.02  Cmd[0107:imb..s]  Sts[0280:.....]  PciBridge 0-&gt;1-1  PCI-PCI bridge<BR>      cf8:80007000  IntPin:0  IntLine:0  Rom:0  cap:0  2sts:2280  BCtrl:6 ISA<BR>      IO:f000-ffff  Mem:fc000000-fdffffff  PMem:fff00000-fffff<BR><BR>10:0  102b:0519.01  Cmd[0083:im....]  Sts[0280:.....]  Device  VGA compatible controller<BR>      cf8:80008000  IntPin:1  IntLine:9  Rom:80000000  cis:0  cap:0<BR>      MEM[0]:fe800000  MPF[1]:fe000008  <BR><BR></nobr></P>
+<P>This example shows even more detailed information about bus 0 (zero), device 0x0D, and function 0x1, including the raw DWORDS from addresses between 0x00 and 0x3F:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!pci f 0 d 1 0 3f</b><BR>PCI Bus 0<BR>0d:1  8086:7010.00  Cmd[0005:i.b...]  Sts[0280:.....]  Device  IDE controller<BR>      cf8:80006900  IntPin:0  IntLine:0  Rom:0  cis:0  cap:0<BR>      IO[4]:fff1       <BR>      00000000:  70108086 02800005 01018000 00002000<BR>      00000010:  00000000 00000000 00000000 00000000<BR>      00000020:  0000fff1 00000000 00000000 00000000<BR>      00000030:  00000000 00000000 00000000 00000000<BR><BR></nobr></P>
+<P></P>
+<P>This example displays the configuration space for segment 1, bus 0, device 1:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!pci 301 1 0 1</b><BR> <BR>PCI Configuration Space (Segment:0001 Bus:00 Device:01 Function:00)<BR>Common Header:<BR>    00: VendorID       14e4 Broadcom Corporation<BR>    02: DeviceID       16c7<BR>    04: Command        0146 MemSpaceEn BusInitiate PERREn SERREn<BR>    06: Status         02b0 CapList 66MHzCapable FB2BCapable DEVSELTiming:1<BR>.<BR>.<BR>.<BR>    5a: MsgCtrl        64BitCapable MultipleMsgEnable:0 (0x1) MultipleMsgCapable:3 (0x8)<BR>    5c: MsgAddr        2d4bff00<BR>    60: MsgAddrHi      1ae09097<BR>    64: MsData         9891<BR> <BR></nobr></P>
+<P>To display all devices and buses on valid segments, issue the command <b>!pci 602 ffff ff</b>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!pci 602 ffff ff</b><BR>Scanning the following PCI segments: 0 0x1<BR>PCI Segment 0 Bus 0<BR>01:0  14e4:16c7.10  Cmd[0146:.mb.ps]  Sts[02b0:c6...]  Ethernet Controller  SubID:103c:1321<BR>02:0  1000:0030.08  Cmd[0147:imb.ps]  Sts[0230:c6...]  LSI SCSI Controller  SubID:103c:1323<BR>02:1  1000:0030.08  Cmd[0147:imb.ps]  Sts[0230:c6...]  LSI SCSI Controller  SubID:103c:1323<BR>03:0  1000:0030.08  Cmd[0147:imb.ps]  Sts[0230:c6...]  LSI SCSI Controller  SubID:103c:1323<BR>03:1  1000:0030.08  Cmd[0147:imb.ps]  Sts[0230:c6...]  LSI SCSI Controller  SubID:103c:1323<BR>PCI Segment 0 Bus 0x38<BR>01:0  14e4:1644.12  Cmd[0146:.mb.ps]  Sts[02b0:c6...]  Ethernet Controller  SubID:10b7:1000<BR>PCI Segment 0 Bus 0x54<BR>00:0  103c:403b.00  Cmd[0547:imb.ps]  Sts[0010:c....]  HP PCI-PCI Bridge 0x54-&gt;0x55-0x55<BR>PCI Segment 0 Bus 0x70<BR>00:0  103c:403b.00  Cmd[0547:imb.ps]  Sts[0010:c....]  HP PCI-PCI Bridge 0x70-&gt;0x71-0x71<BR>PCI Segment 0 Bus 0xa9<BR>01:0  8086:b154.00  Cmd[0147:imb.ps]  Sts[0ab0:c6.A.]  Intel PCI-PCI Bridge 0xa9-&gt;0xaa-0xaa<BR>PCI Segment 0 Bus 0xaa<BR>04:0  1033:0035.41  Cmd[0146:.mb.ps]  Sts[0210:c....]  NEC USB Controller  SubID:103c:1293<BR>04:1  1033:0035.41  Cmd[0146:.mb.ps]  Sts[0210:c....]  NEC USB Controller  SubID:103c:aa55<BR>04:2  1033:00e0.02  Cmd[0146:.mb.ps]  Sts[0210:c....]  NEC USB2 Controller  SubID:103c:aa55<BR>05:0  1002:5159.00  Cmd[0187:imb..s]  Sts[0290:c....]  ATI VGA Compatible Controller  SubID:103c:1292<BR>PCI Segment 0 Bus 0xc6<BR>00:0  103c:403b.00  Cmd[0547:imb.ps]  Sts[0010:c....]  HP PCI-PCI Bridge 0xc6-&gt;0xc7-0xc7<BR>PCI Segment 0 Bus 0xe3<BR>00:0  103c:403b.00  Cmd[0547:imb.ps]  Sts[0010:c....]  HP PCI-PCI Bridge 0xe3-&gt;0xe4-0xe4<BR>PCI Segment 0x1 Bus 0<BR>01:0  14e4:16c7.10  Cmd[0146:.mb.ps]  Sts[02b0:c6...]  Ethernet Controller  SubID:103c:1321<BR>02:0  1000:0030.08  Cmd[0147:imb.ps]  Sts[0230:c6...]  LSI SCSI Controller  SubID:103c:1323<BR>02:1  1000:0030.08  Cmd[0147:imb.ps]  Sts[0230:c6...]  LSI SCSI Controller  SubID:103c:1323<BR>03:0  1000:0030.08  Cmd[0147:imb.ps]  Sts[0230:c6...]  LSI SCSI Controller  SubID:103c:1323<BR>03:1  1000:0030.08  Cmd[0147:imb.ps]  Sts[0230:c6...]  LSI SCSI Controller  SubID:103c:1323<BR>PCI Segment 0x1 Bus 0x54<BR>00:0  103c:403b.00  Cmd[0547:imb.ps]  Sts[0010:c....]  HP PCI-PCI Bridge 0x54-&gt;0x55-0x55<BR>PCI Segment 0x1 Bus 0x55<BR>00:0  8086:10b9.06  Cmd[0147:imb.ps]  Sts[0010:c....]  Intel Ethernet Controller  SubID:8086:1083<BR>PCI Segment 0x1 Bus 0x70<BR>00:0  103c:403b.00  Cmd[0547:imb.ps]  Sts[0010:c....]  HP PCI-PCI Bridge 0x70-&gt;0x71-0x71<BR>PCI Segment 0x1 Bus 0xc6<BR>00:0  103c:403b.00  Cmd[0547:imb.ps]  Sts[0010:c....]  HP PCI-PCI Bridge 0xc6-&gt;0xc7-0xc7<BR>PCI Segment 0x1 Bus 0xe3<BR>00:0  103c:403b.00  Cmd[0547:imb.ps]  Sts[0010:c....]  HP PCI-PCI Bridge 0xe3-&gt;0xe4-0xe4<BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>See <a href="t12_drivers_ba75fa45-397b-473d-88dc-c5e0d598456a.xml.htm">Plug and Play Debugging</a> for applications of this extension command and additional examples. For information about PCI buses, see the Windows Driver Kit (WDK) documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !pci RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

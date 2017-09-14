@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_THREAD_BASIC_INFORMATION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_THREAD_BASIC_INFORMATION"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_THREAD_BASIC_INFORMATION"/>
+<MSHelp:Keyword Index="A" Term="Structures_e48c9daa-ce4f-4131-9ca6-cb1a7a129fcc.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_THREAD_BASIC_INFORMATION structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_e48c9daa-ce4f-4131-9ca6-cb1a7a129fcc.xml"></A>DEBUG_THREAD_BASIC_INFORMATION</H1>
+<P><P>The DEBUG_THREAD_BASIC_INFORMATION structure describes an operating system thread.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_THREAD_BASIC_INFORMATION</b><BR><b>{</b><BR><b>    ULONG  Valid;</b><BR><b>    ULONG  ExitStatus;</b><BR><b>    ULONG  PriorityClass;</b><BR><b>    ULONG  Priority;</b><BR><b>    ULONG64  CreateTime;</b><BR><b>    ULONG64  ExitTime;</b><BR><b>    ULONG64  KernelTime;</b><BR><b>    ULONG64  UserTime;</b><BR><b>    ULONG64  StartOffset;</b><BR><b>    ULONG64  Affinity;</b><BR><b>} DEBUG_THREAD_BASIC_INFORMATION, *PDEBUG_THREAD_BASIC_INFORMATION;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>Valid</b></DT>
+<DD>A bitset that specifies which other members of the structure contain valid information. A member of the structure is valid if the corresponding bit flag is set in <b>Valid</b>.<B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Members</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TBINFO_EXIT_STATUS</TD>
+<TD Width=""><b>ExitStatus</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TBINFO_PRIORITY_CLASS</TD>
+<TD Width=""><b>PriorityClass</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TBINFO_PRIORITY</TD>
+<TD Width=""><b>Priority</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TBINFO_TIMES</TD>
+<TD Width=""><b>CreateTime</b>, <b>ExitTime</b>, <b>KernelTime</b>, <b> UserTime</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TBINFO_START_OFFSET</TD>
+<TD Width=""><b>StartOffset</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_TBINFO_AFFINITY</TD>
+<TD Width=""><b>Affinity</b></TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>ExitStatus</b></DT>
+<DD>The exit code of the thread. If the thread is still running, <b>ExitStatus</b> is set to STILL_ACTIVE.<P><b>ExitStatus</b> is only valid if the  DEBUG_TBINFO_EXIT_STATUS bit flag is set in <b>Valid</b>.</P>
+</DD>
+<DT><b>PriorityClass</b></DT>
+<DD>The priority class of the thread. The priority classes are defined by the <i>XXX</i>_PRIORITY_CLASS constants in <i>WinBase.h</i>. For more information about thread priority classes, see the Platform SDK.<P><b>PriorityClass</b> is only valid if the DEBUG_TBINFO_PRIORITY_CLASS bit flag is set in <b>Valid</b>.</P>
+</DD>
+<DT><b>Priority</b></DT>
+<DD>The priority of the thread relative to the priority class. Some thread priorities are defined by the THREAD_PRIORITY_<i>XXX</i> constants in <i>WinBase.h</i>.  For more information about thread priorities,  see the Platform SDK.<P><b>Priority</b> is only valid if the DEBUG_TBINFO_PRIORITY bit flag is set in <b>Valid</b>.</P>
+</DD>
+<DT><b>CreateTime</b></DT>
+<DD>The creation time of the thread.<P><b>CreateTime</b> is only valid if the DEBUG_TBINFO_TIMES bit flag is set in <b>Valid</b>.</P>
+</DD>
+<DT><b>ExitTime</b></DT>
+<DD>The exit time of the thread.<P><b>ExitTime</b> is only valid if the DEBUG_TBINFO_TIMES bit flag is set in <b>Valid</b>.</P>
+</DD>
+<DT><b>KernelTime</b></DT>
+<DD>The amount of time the thread has executed in kernel mode.<P><b>KernelTime</b> is only valid if the DEBUG_TBINFO_TIMES bit flag is set in <b>Valid</b>.</P>
+</DD>
+<DT><b>UserTime</b></DT>
+<DD>The amount of time the thread has executed in user-mode.<P><b>UserTime</b> is only valid if the DEBUG_TBINFO_TIMES bit flag is set in <b>Valid</b>.</P>
+</DD>
+<DT><b>StartOffset</b></DT>
+<DD>The starting address of the thread.<P><b>StartOffset</b> is only valid if the DEBUG_TBINFO_START_OFFSET bit flag is set in <b>Valid</b>.</P>
+</DD>
+<DT><b>Affinity</b></DT>
+<DD>The thread affinity mask for the thread in a Symmetric Multiple Processor (SMP) computer. For more information about the thread affinity mask, see the Platform SDK.<P><b>Affinity</b> is only valid if the DEBUG_TBINFO_AFFINITY bit flag is set in <b>Valid</b>.</P>
+</DD>
+</DL>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>. Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_THREAD_BASIC_INFORMATION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

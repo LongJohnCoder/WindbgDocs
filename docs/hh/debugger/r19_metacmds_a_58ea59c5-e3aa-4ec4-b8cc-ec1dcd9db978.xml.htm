@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.createdir (Set Created Process Directory)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .createdir (Set Created Process Directory)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_58ea59c5-e3aa-4ec4-b8cc-ec1dcd9db978.xml"/>
+<META NAME="MS-HKWD" CONTENT=".createdir (Set Created Process Directory) command">
+<META NAME="MS-HKWD" CONTENT="Set Created Process Directory (.createdir) command">
+<META NAME="MS-HKWD" CONTENT="process, Set Created Process Directory (.createdir) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_58ea59c5-e3aa-4ec4-b8cc-ec1dcd9db978.xml"></A>.createdir (Set Created Process Directory)</H1>
+<P>The <b>.createdir</b> command controls the starting directory and handle inheritance for any processes created by the debugger.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.createdir</b> [<b>-i</b> | <b>-I</b>] [<i>Path</i>] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>-i</b></DT>
+<DD>Causes processes created by the debugger to inherit handles from the debugger. This is the default.</DD>
+<DT><b>-I</b></DT>
+<DD>Prevents processes created by the debugger from inheriting handles from the debugger.</DD>
+<DT><i>Path</i></DT>
+<DD>Specifies the starting directory for all child processes created by any target process. If <i>Path</i> contains spaces, it must be enclosed in quotation marks.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If <b>.createdir</b> is used with no parameters, the current starting directory and handle inheritance status are displayed.</P>
+<P>If <b>.createdir</b> has never been used, any created process will use its usual default directory as its starting directory. If you have already set a path with <b>.createdir</b> and want to return to the default status, use <b>.createdir ""</b> with nothing inside the quotation marks.</P>
+<P>The <b>.createdir</b> setting affects all processes created by <a href="r19_metacmds_a_90b70ef1-43b7-4dd2-87cf-8f6df0d6108d.xml.htm"><b>.create (Create Process)</b></a>. It also affects processes created by WinDbg's <a href="r36_gui_1_11bd83b0-34a0-44fe-be7c-1a0f16f91d80.xml.htm"><b>File | Open Executable</b></a> menu command, unless the <b>Start directory</b> text box is used to override this setting.</P>
+<H4>Additional Information</H4>
+<P>For other ways of controlling these features, and information about starting new processes for debugging, see <a href="r05_use_start_77acc3de-f774-4eba-8804-ae878cd5e99d.xml.htm">Spawning a New Process (User Mode)</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .createdir (Set Created Process Directory) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using DBH</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using DBH"><xml><MSHelp:Keyword Index="A" Term="SymChk_f9e919d7-c05c-4f74-9972-bb1e1870da84.xml"/>
+<META NAME="MS-HKWD" CONTENT="DBH, using"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_f9e919d7-c05c-4f74-9972-bb1e1870da84.xml"></A>Using DBH</H1>
+<P>DBH is a command-line tool that exposes many of the functions in the DbgHelp API (<i>dbghelp.dll</i>). It can display information about the contents of a symbol file, display specific details of the symbols in the file, and search through the file for symbols matching various criteria.</P>
+<P>The functionality provided by DBH is similar to that provided within WinDbg, KD, and CDB by commands such as <a href="r18_cmds_s_717feb00-25c4-4911-be94-52c11698f782.xml.htm"><b>x (Examine Symbols)</b></a>. </P>
+<H4>Running DBH in Interactive Mode</H4>
+<P>You start DBH with a simple command line, on which you specify the target module whose symbols you wish to investigate.  See <a href="symchk_f631eeda-69c7-4c98-b06e-2179101dec2f.xml.htm">DBH Command-Line Options</a> for the full syntax.</P>
+<P>When DBH starts, it loads the symbols for the specified module, and then presents you with a prompt at which you can type a variety of commands.  See <a href="symchk_57318acb-a1c1-4b17-82c3-1760cb7bca17.xml.htm">DBH Commands</a> for a list of available commands.</P>
+<P>For example, the following sequence starts DBH by specifying the target process with process ID 4672, then executes the <b>enum</b> command at the DBH prompt to display symbols matching a specific pattern, and then executes the <b>q</b> command to quit DBH:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>C:\&gt; <b>dbh -p:4672</b> <BR>            400000 : TimeTest<BR>          77820000 : ntdll<BR>          77740000 : kernel32<BR><BR>pid:4672 mod:TimeTest[400000]: <b>enum TimeTest!ma*</b> <BR><BR> index            address     name<BR>     1             42cc56 :   main<BR>     3             415810 :   malloc<BR>     5             415450 :   mainCRTStartup<BR><BR>pid:4672 mod:TimeTest[400000]: <b>q</b> <BR><BR>goodbye <BR></nobr></P>
+<H4>Running DBH in Batch Mode</H4>
+<P>If you wish to run only a single DBH command, you can specify it at the end of the command line.  This causes DBH to start, load the specified module, run the specified command, and then exit.</P>
+<P>For example, the previous example could be replaced with a single command line:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>C:\&gt; <b>dbh -p:4672 enum TimeTest!ma*</b> <BR>           400000 : TimeTest<BR>         77820000 : ntdll<BR>         77740000 : kernel32<BR><BR>index            address     name<BR>    1             42cc56 :   main<BR>    3             415810 :   malloc<BR>    5             415450 :   mainCRTStartup <BR></nobr></P>
+<P>This method of running DBH is called <i>batch mode</i>, because it can be easily used in batch files.  This version of the command line can also be followed by a pipe ( <b>|</b> ) which redirects the DBH output to another program.</P>
+<H4>Specifying the Target</H4>
+<P>DBH can select a target in three ways:  by the process ID of a running process, by the name of the executable, or by the name of the symbol file.  For example, if there is exactly one instance of <i>MyProg.exe</i> currently running, with process ID 1234, then the following commands are almost equivalent:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>C:\&gt; <b>dbh -v -p:1234</b> <BR>C:\&gt; <b>dbh -v c:\mydir\myprog.exe</b> <BR>C:\&gt; <b>dbh -v c:\mydir\myprog.pdb</b> <BR></nobr></P>
+<P>One difference between these commands is that when you start DBH by specifying the process ID, DBH uses the actual virtual addresses being used by this process.  When you start DBH by specifying the executable name or the symbol file name, DBH assumes that the module's base address is a standard value (for example, 0x01000000). You can then use the <b>base</b> command to specify the actual base address, thus shifting the addresses of all the symbols in the module.</P>
+<P>DBH does not attach to the target process in the way that a debugger does.  DBH cannot cause a process to begin or end, nor can it alter how that process runs.  For DBH to attach to a process by its process ID, the target process has to be running, but once DBH has been started the target process can be terminated and DBH will continue to access its symbols.</P>
+<H4>Decorated and Undecorated Symbols</H4>
+<P>By default, DBH uses undecorated symbol names when displaying and searching for symbols.  If you turn off the <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#d8974df2-0d92-4406-b818-8adba87cae13">SYMOPT_UNDNAME</a> symbol option, or include the <nobr><b>-d</b></nobr> option on the DBH command line, decorations will be included.</P>
+<P>For information on symbol decorations, see <a href="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml.htm">Public and Private Symbols</a>.</P>
+<H4>Exiting DBH</H4>
+<P>To exit DBH, use the <b>q</b> command at the DBH prompt.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using DBH RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

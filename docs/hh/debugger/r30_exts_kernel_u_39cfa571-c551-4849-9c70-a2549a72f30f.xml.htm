@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wsle</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wsle"><xml><MSHelp:Keyword Index="A" Term="r30_exts_kernel_U_39cfa571-c551-4849-9c70-a2549a72f30f.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wsle extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r30_exts_kernel_U_39cfa571-c551-4849-9c70-a2549a72f30f.xml"></A>!wsle</H1>
+<P>The <b>!wsle</b> extension displays all working set list entries (WSLEs).</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wsle</b> [<i>DisplayMode</i> [<i>Address</i>]] <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wsle</b> [<i>Flags</i> [<i>Address</i>]] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>DisplayMode</i></DT>
+<DD><i>(Windows 2000 only)</i>  Specifies the information to include in the display. This can be one of the following values (the default is zero):   <DL><DT>0</DT>
+<DD>Displays only basic information about the working set list.</DD>
+<DT>7</DT>
+<DD>Displays basic information about the working set list, plus information about each WSLE's address, age, lock status, and reference count. If a WSLE has an invalid page table entry (PTE) or page directory entry (PDE) associated with it, this is displayed as well.</DD>
+<DT>8</DT>
+<DD>Displays basic information about the working set list, plus the index and value of each WSLE.</DD>
+</DL>
+</DD>
+<DT><i>Flags</i></DT>
+<DD><i>(Windows XP and later)</i>  Specifies the information to include in the display. This can be any combination of the following bits. The default is zero. If this is used, only basic information about the working set is displayed.<DL><DT>Bit 0 (0x1)</DT>
+<DD>Causes the display to include information about each WSLE's address, age, lock status, and reference count. If a WSLE has an invalid page table entry (PTE) or page directory entry (PDE) associated with it, this is also displayed.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Causes the display to include the total number of valid WSLEs, the index of the last WSLE, and the index of the first free WSLE.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>Causes the display to include the total number of free WSLEs, as well as the index of each free WSLE. If bit 1 is also set, then a check is done to make sure that the number of free WSLEs plus the number of valid WSLEs is actually equal to the total number of WSLEs.</DD>
+</DL>
+</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the working set list. If this is omitted, the default working set list is used. (In Windows 2000, specifying -1 for <i>Address</i> is the same as omitting it. In Windows XP and later versions of Windows, specifying zero for <i>Address</i> is the same as omitting it.)<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension can take a significant amount of time to execute.   </P>
+<P>Here is an example from an x86 target computer running Windows Server 2003:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wsle 3</b><BR><BR>Working Set @ c0503000<BR>    FirstFree:       a7  FirstDynamic:          4<BR>    LastEntry      23d  NextSlot:         4  LastInitialized      259<BR>    NonDirect       65  HashTable:        0  HashTableSize:         0<BR><BR>Reading the WSLE data...<BR><BR>Virtual Address           Age  Locked  ReferenceCount<BR>        c0300203          0        1        1<BR>        c0301203          0        1        1<BR>        c0502203          0        1        1<BR>        c0503203          0        1        1<BR>        c01ff201          0        0        1<BR>        77f74d19          3        0        1<BR>        7ffdfa01          2        0        1<BR>        c0001201          0        0        1<BR><BR>.....<BR><BR>Reading the WSLE data...<BR>Valid WSLE entries = 0xa7<BR>found end @ wsle index 0x259<BR><BR>.....<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about working sets, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wsle RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

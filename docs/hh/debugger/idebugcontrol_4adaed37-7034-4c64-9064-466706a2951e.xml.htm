@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetSystemVersionString</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetSystemVersionString"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetSystemVersionString"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_4adaed37-7034-4c64-9064-466706a2951e.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetSystemVersionString method">
+<META NAME="MS-HKWD" CONTENT="GetSystemVersionString (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_4adaed37-7034-4c64-9064-466706a2951e.xml"></A>GetSystemVersionString</H1>
+<P><P>The <b>GetSystemVersionString</b> and <b>GetSystemVersionStringWide</b> methods return a string that describes the target's operating system version.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl4::GetSystemVersionString(</b><BR><b>    IN ULONG  </b><i>Which</i><b>,</b><BR><b>    OUT OPTIONAL PSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>StringSize</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::GetSystemVersionStringWide(</b><BR><b>    IN ULONG  </b><i>Which</i><b>,</b><BR><b>    OUT OPTIONAL PWSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>StringSize</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetSystemVersionStringT GetSystemVersionStringWide</b><BR><b>#else</b><BR><b>#define GetSystemVersionStringT GetSystemVersionString</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Which</i></DT>
+<DD>Specifies which version string to return.  The possible values are listed in the following table.<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Version string</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYSVERSTR_SERVICE_PACK</TD>
+<TD Width="">Returns a description of the service pack for the target's operating system.  For example, "Service Pack 1".</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYSVERSTR_BUILD</TD>
+<TD Width="">Returns a description of the target's operating system build version.  For example, "kernel32.dll version: 5.1.2600.1106 (xpsp1.020828-1920)".</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the version string.  If <i>Buffer</i> is NULL, this information is not returned.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size, in characters, of the buffer that <i>Buffer</i> specifies.</DD>
+<DT><i>StringSize</i></DT>
+<DD>Receives the size, in characters, of the string that identifies the build.  If <i>SizeString</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful. However, the buffer was too small, so the string was truncated.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetSystemVersionString</b> and <b>GetSystemVersionStringWide</b> are available in <b>IDebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>For more information, see <a href="engine_dg_e6d71f34-178f-47ae-ab7c-7e7dc07927d9.xml.htm">Target Information</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_92a4c34c-aa39-43e5-ad31-0ce26e45c246.xml.htm"><b>GetSystemVersion</b></a>, <a href="idebugcontrol_32de1433-8721-41c0-9b14-43ef8f7bcf70.xml.htm"><b>GetSystemVersionValues</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetSystemVersionString RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

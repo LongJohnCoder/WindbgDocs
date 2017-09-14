@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x19: BAD_POOL_HEADER</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x19: BAD_POOL_HEADER"><xml><MSHelp:Keyword Index="A" Term="t04_bugs_00_05b02e19-7f89-4715-9d17-a015b21cc8e5.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x19: BAD_POOL_HEADER">
+<META NAME="MS-HKWD" CONTENT="BAD_POOL_HEADER"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t04_bugs_00_05b02e19-7f89-4715-9d17-a015b21cc8e5.xml"></A>Bug Check 0x19: BAD_POOL_HEADER</H1>
+<P>The BAD_POOL_HEADER bug check has a value of 0x00000019. This indicates that a pool header is corrupt.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen. Parameter 1 indicates the type of violation. The meaning of the other parameters depends on the value of Parameter 1.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">The pool entry being checked</TD>
+<TD Width="">The size of the pool block</TD>
+<TD Width="">0</TD>
+<TD Width="">The special pool pattern check failed.<BR><BR>(The owner has likely corrupted the pool block.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">The pool entry being checked</TD>
+<TD Width="">The read-back <b>flink</b> freelist value</TD>
+<TD Width="">The read-back <b>blink</b> freelist value</TD>
+<TD Width="">The pool freelist is corrupt.<BR><BR>(In a healthy list, the values of Parameters 2, 3, and 4 should be identical.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">One of the pool entries</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">The other pool entry</TD>
+<TD Width="">A pair of adjacent pool entries have headers that contradict each other. At least one of them is corrupt.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6</TD>
+<TD Width="">One incorrectly-calculated entry</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">The bad entry that caused the miscalculation</TD>
+<TD Width="">The pool block header's previous size is too large.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7</TD>
+<TD Width="">0</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">The bad pool entry</TD>
+<TD Width="">The pool block header size is corrupt.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8</TD>
+<TD Width="">0</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">The bad pool entry</TD>
+<TD Width="">The pool block header size is zero.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x9</TD>
+<TD Width="">One incorrectly-calculated entry</TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">The bad entry that caused the miscalculation</TD>
+<TD Width="">The pool block header size is corrupted (it is too large).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xA</TD>
+<TD Width="">The pool entry that should have been found </TD>
+<TD Width="">Reserved    </TD>
+<TD Width="">The virtual address of the page that should have contained the pool entry</TD>
+<TD Width="">The pool block header size is corrupt.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x20</TD>
+<TD Width="">The pool entry that should have been found</TD>
+<TD Width="">The next pool entry</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The pool block header size is corrupt.</TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>The pool is already corrupted at the time of the current request. </P>
+<P>This may or may not be due to the caller. </P>
+<H4>Resolving the Problem</H4>
+<P>The internal pool links must be walked to figure out a possible cause of the problem.</P>
+<P>Then you can use special pool for the suspect pool tags, or use Driver Verifier on the suspect driver.  The <a href="r24_exts_general_a_6e1c68d6-f825-4a02-a9ba-2b0cd08cded8.xml.htm"><b>!analyze</b></a> extension may be of help in pinpointing the suspect driver, but this is frequently not the case with pool corrupters.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x19: BAD_POOL_HEADER RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

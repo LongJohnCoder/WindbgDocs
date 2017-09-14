@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Activating Secure Mode</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Activating Secure Mode"><xml><MSHelp:Keyword Index="A" Term="r11_security_f73108d0-0629-492f-b782-2e9a3ba95244.xml"/>
+<META NAME="MS-HKWD" CONTENT="Secure Mode, how to activate"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r11_security_f73108d0-0629-492f-b782-2e9a3ba95244.xml"></A>Activating Secure Mode</H1>
+<P>Secure Mode is only available for kernel-mode debugging. It must be activated before the debugging session has begun &#8212; either on the debugger's command line, or when the debugger is completely dormant and is not yet being used as a server.</P>
+<P></P>
+<P>To activate Secure Mode, use one of the following methods:</P><B></B><UL type="disc">
+<LI>The <b>-secure</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> </LI>
+<LI>The <a href="r22_metacmds_s_1300bc2c-3e5b-47f2-85d5-5e65bde5049e.xml.htm"><b>.secure 1</b></a> command </LI>
+<LI>The <a href="r22_metacmds_s_1fcea95c-6db6-4fa7-9087-37fdce3d4f0f.xml.htm"><b>.symopt+0x40000</b></a> command</LI>
+</UL>
+<P></P>
+<P>If you have an existing kernel debugging session and need to discover whether you are already in Secure Mode, use the <a href="r22_metacmds_s_1300bc2c-3e5b-47f2-85d5-5e65bde5049e.xml.htm"><b>.secure</b></a> command with no arguments. This will tell you the current status of Secure Mode. </P>
+<P></P>
+<P>After Secure Mode has been activated, it cannot be turned off. Even ending the debugging session will not turn it off. Secure Mode persists as long as the debugger itself is running.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Activating Secure Mode RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

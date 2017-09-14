@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using a Manifest File with SymChk</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using a Manifest File with SymChk"><xml><MSHelp:Keyword Index="A" Term="SymChk_d6695d21-0614-4dd6-bd17-2bf82da20111.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_d6695d21-0614-4dd6-bd17-2bf82da20111.xml"></A>Using a Manifest File with SymChk</H1>
+<P>In some cases, you might need to retrieve symbols for files that are on an isolated computer; that is, a computer that is either not on any network or is on a network that has no symbol store. In that situation, you can use the following procedure to retrieve symbols.</P><B></B><OL type="1">
+<LI>Run SymChk with the <b>/om</b> parameter to create a manifest file that describes the files for which you want to retrieve symbols.</LI>
+<LI>Move the manifest file to a network that has a symbol store.</LI>
+<LI>Run SymChk with <b>/im</b> parameter to retrieve symbols for the files described int the manifest file.</LI>
+<LI>Move the symbol files back to the isolated computer.</LI>
+</OL>
+<H4>Example</H4>
+<P>Suppose yourApp.exe is running on an isolated computer. The following command creates a manifest file that describes all the symbols needed to debug the yourApp.exe pocess.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>C:\&gt;<b>SymChk /om c:\Manifest\man.txt /ie yourApp.exe</b><BR><BR>SYMCHK: FAILED files = 0<BR>SYMCHK: PASSED + IGNORED files = 28<BR><BR></nobr></P>
+<P>Now assume you have moved the manifest file to a different computer that is on a network that has access to a symbol store. The following command retrieves the symbols described in the manifest file and places them in the mySymbols folder.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>C:\&gt;<b>SymChk /im c:\FolderOnOtherComputer\man.txt /s srv*c:\mysymbols*\\aServer\symbols</b><BR><BR>SYMCHK: myApp.exe             ERROR - Unable to download file. Error reported was 2<BR>. . .<BR>SYMCHK: FAILED files = 28<BR>SYMCHK: PASSED + IGNORED files = 28<BR><BR></nobr></P>
+<P>Now you can move the symbols to the isolated computer and use them for debugging.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using a Manifest File with SymChk RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

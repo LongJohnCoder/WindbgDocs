@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Deferred Symbol Loading</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Deferred Symbol Loading"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_538315dc-6582-4a76-9725-d9d53b52e4a0.xml"/>
+<META NAME="MS-HKWD" CONTENT="deferred symbol loading">
+<META NAME="MS-HKWD" CONTENT="symbols, deferred symbol loading">
+<META NAME="MS-HKWD" CONTENT="lazy symbol loading">
+<META NAME="MS-HKWD" CONTENT="symbols, lazy symbol loading"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_538315dc-6582-4a76-9725-d9d53b52e4a0.xml"></A>Deferred Symbol Loading</H1>
+<P>By default, symbol information is not actually loaded when the target modules are loaded. Instead, symbols are loaded by the debugger as they are needed. This is called <i>deferred symbol loading</i> or <i>lazy symbol loading</i>. When this option is enabled, the debugger loads symbols whenever it encounters an unrecognized symbol.</P>
+<P>When deferred symbol loading is disabled, process startup can be much slower, because all symbols are read whenever a module is loaded.</P>
+<P>In WinDbg, the deferred symbol loading behavior can be modified for symbols that have no module prefix by using the <a href="r37_gui_2_45b6e698-e7ba-4995-8ef4-e8593296172e.xml.htm"><b>Resolve Unqualified Symbols</b></a> option on the <b>Debug</b> menu.</P>
+<P>You can override deferred symbol loading by using the <a href="r17_cmds_i_4c0144c7-30e4-40ee-a7aa-6ee2c44b143d.xml.htm"><b>ld (Load Symbols)</b></a> command or the <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload (Reload Module)</b></a> command with the <b>/f</b> option. These force the specified symbols to be loaded immediately, although the loading of other symbols is deferred. If the symbol path is changed, symbols are not automatically reloaded.</P>
+<P>By default, deferred symbol loading is enabled. In CDB and KD, the <b>-s</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> will turn this option off. It can also be turned off in CDB by using the <b>LazyLoad</b> variable in the <a href="r04_setup_3_0b710f80-3d76-456f-8081-6db088c4422e.xml.htm"><i>tools.ini</i></a> file. Once the debugger is running, this option can be turned on or off by using <a href="r22_metacmds_s_1fcea95c-6db6-4fa7-9087-37fdce3d4f0f.xml.htm"><b>.symopt+0x4</b></a> or <a href="r22_metacmds_s_1fcea95c-6db6-4fa7-9087-37fdce3d4f0f.xml.htm"><b>.symopt-0x4</b></a>, respectively.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Deferred Symbol Loading RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

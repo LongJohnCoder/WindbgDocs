@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Manifest File Placement</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Manifest File Placement"><xml><MSHelp:Keyword Index="A" Term="Logger+LogViewer_97831890-fb32-4c3a-9c80-7c34e6f85ad2.xml"/>
+<META NAME="MS-HKWD" CONTENT="LogViewer, manifest, file placement"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Logger+LogViewer_97831890-fb32-4c3a-9c80-7c34e6f85ad2.xml"></A>Manifest File Placement</H1>
+<P>The primary manifest file must be named <i>Main.h</i>.</P>
+<P>When Logger is running, <i>Main.h</i> must be located in the <i>Manifest</i> subdirectory of the directory containing <i>Logexts.dll</i>.</P>
+<P>LogViewer is more flexible than Logger. It will search for <i>Main.h</i> in the following directories in this order:</P><B></B><OL type="1">
+<LI>The <i>Manifest</i> directory subordinate to the directory containing <i>Logviewer.exe</i> </LI>
+<LI>The <i>WinExt\Manifest</i> directory subordinate to the directory containing <i>logviewer.exe</i></LI>
+<LI>The <i>%WinDir%\System32\Manifest</i> directory</LI>
+<LI>The <i>%WinDir%\System\Manifest</i> directory</LI>
+</OL>
+<P></P>
+<P>All additional manifest files must reside in the same directory as <i>Main.h</i>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Manifest File Placement RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

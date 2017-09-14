@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Input and Output</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Input and Output"><xml><MSHelp:Keyword Index="A" Term="Engine_Overview_21beeb6d-d7a0-454d-9f9d-ebbab52e3664.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine, input and output">
+<META NAME="MS-HKWD" CONTENT="input and output">
+<META NAME="MS-HKWD" CONTENT="output"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_Overview_21beeb6d-d7a0-454d-9f9d-ebbab52e3664.xml"></A>Input and Output</H1>
+<P>The input and output facilities of the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> can be used for interactive debugger operation and logging.  The input usually represents commands and responses that are typed by the user, and the output usually represents information presented to the user or sent to log files.</P>
+<P>The debugger engine maintains an <i>input stream</i> and an <i>output stream</i>.  Input can be requested from the input stream, and output sent to the output stream.</P>
+<P>When the <a href="idebugcontrol_10615761-d032-439f-955b-220def3835a9.xml.htm"><b>Input</b></a> method is called to request input from the engine's input stream, the engine will call all the registered <a href="dbg_glossary_48d73de7-50e9-4e41-8a7f-0207d5301620.xml.htm#8403e17d-255f-4066-8d17-9f6d93ec52e6">input callbacks</a> to inform them that it is waiting for input.  It then waits for the input callbacks to provide the input by calling the <a href="idebugcontrol_e060c1a6-43cd-46a1-ba4c-e9aa69bcf205.xml.htm"><b>ReturnInput</b></a> method.</P>
+<P>When output is sent to the engine's output stream, the engine will call the registered <a href="dbg_glossary_bd74f9e2-0647-457f-b229-a732edd24da4.xml.htm#ee29b70e-9ee5-4f78-81f7-d86e41b0969b">output callbacks</a> passing the output to them.  When sending output to the output stream, it can be filtered by the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a>; in which case, only output callbacks that are registered with particular client objects will receive the output.</P>
+<P>The input and output streams are transparently available to the remote clients.  Remote clients can request input and send output to the engine's input and output stream, and the engine will call the callbacks registered with remote clients to request input or send output.</P>
+<H4>Additional Information</H4>
+<P>For details about using input and output, see <a href="engine_dg_ce5dd9cd-7068-4ca7-95d9-f4985a9812c2.xml.htm">Using Input and Output</a>.  For more information about client objects and input and output callbacks, see <a href="engine_overview_2838c538-1dc7-4494-b92d-49e58a4ad2aa.xml.htm">Client Objects</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Input and Output RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

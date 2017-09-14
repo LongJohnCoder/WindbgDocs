@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetStackTrace</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetStackTrace"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetStackTrace"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_ef51127a-c022-4e3d-bb63-55553daea893.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetStackTrace method">
+<META NAME="MS-HKWD" CONTENT="GetStackTrace (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_ef51127a-c022-4e3d-bb63-55553daea893.xml"></A>GetStackTrace</H1>
+<P><P>The <b>GetStackTrace</b> method returns the frames at the top of the specified <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#81c37228-c201-48ad-9f7a-85d8b1ade52c">call stack</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::GetStackTrace(</b><BR><b>    IN ULONG64  </b><i>FrameOffset</i><b>,</b><BR><b>    IN ULONG64  </b><i>StackOffset</i><b>,</b><BR><b>    IN ULONG64  </b><i>InstructionOffset</i><b>,</b><BR><b>    OUT PDEBUG_STACK_FRAME  </b><i>Frames</i><b>,</b><BR><b>    IN ULONG  </b><i>FramesSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FramesFilled</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>FrameOffset</i></DT>
+<DD>Specifies the location of the <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#ab5b362b-84d0-4128-bd43-7e3d5014f81f">stack frame</a> at the top of the stack.  If <i>FrameOffset</i> is set to zero, the current frame pointer is used instead.</DD>
+<DT><i>StackOffset</i></DT>
+<DD>Specifies the location of the current stack.  If <i>StackOffset</i> is set to zero, the current stack pointer is used instead.</DD>
+<DT><i>InstructionOffset</i></DT>
+<DD>Specifies the location of the instruction of interest for the function that is represented by the stack frame at the top of the stack.  If <i>InstructionOffset</i> is set to zero, the current instruction is used instead.</DD>
+<DT><i>Frames</i></DT>
+<DD>Receives the stack frames.  The number of elements this array holds is <i>FrameSize</i>.</DD>
+<DT><i>FrameSize</i></DT>
+<DD>Specifies the number of items in the <i>Frames</i> array.</DD>
+<DT><i>FramesFilled</i></DT>
+<DD>Receives the number of frames that were placed in the array <i>Frames</i>.  If <i>FramesFilled</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_FAIL</DT>
+<DD>No stack frames were returned.</DD>
+</DL>
+<P>This method may also return other error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetStackTrace</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>The stack trace returned to <i>Frames</i> can be printed using <a href="idebugcontrol_07d53535-7d91-4771-84b1-f4ac4895a158.xml.htm"><b>OutputStackTrace</b></a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_ae12ec1a-8839-49cc-8082-c328a570188b.xml.htm"><b>GetContextStackTrace</b></a>, <a href="idebugregisters_9b3855a5-d5e4-4485-81f3-1584b707f73a.xml.htm"><b>GetFrameOffset2</b></a>, <a href="idebugregisters_92189e99-c8f6-4422-8421-62fe194a05b6.xml.htm"><b>GetInstructionOffset2</b></a>, <a href="idebugregisters_ec4e5846-b785-4b82-9670-04e7087b7d99.xml.htm"><b>GetStackOffset2</b></a>, <a href="idebugcontrol_07d53535-7d91-4771-84b1-f4ac4895a158.xml.htm"><b>OutputStackTrace</b></a>, <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>k, kb, kc, kd, kp, kP, kv (Display Stack Backtrace)</b></a>, <a href="wdbgexts_ref_5ccc4adf-2b59-4373-8e4a-3bc8847c5749.xml.htm"><b>StackTrace</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetStackTrace RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

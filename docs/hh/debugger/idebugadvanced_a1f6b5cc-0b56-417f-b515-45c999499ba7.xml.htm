@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetSystemObjectInformation</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetSystemObjectInformation"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetSystemObjectInformation"/>
+<MSHelp:Keyword Index="A" Term="IDebugAdvanced_a1f6b5cc-0b56-417f-b515-45c999499ba7.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugAdvanced*::GetSystemObjectInformation method">
+<META NAME="MS-HKWD" CONTENT="GetSystemObjectInformation (IDebugAdvanced*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugAdvanced_a1f6b5cc-0b56-417f-b515-45c999499ba7.xml"></A>GetSystemObjectInformation</H1>
+<P><P>The <b>GetSystemObjectInformation</b> method returns information about operating system objects on the target.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugAdvanced2::GetSystemObjectInformation(</b><BR><b>    IN ULONG  </b><i>Which</i><b>,</b><BR><b>    IN ULONG64  </b><i>Arg64</i><b>,</b><BR><b>    IN ULONG  </b><i>Arg32</i><b>,</b><BR><b>    OUT OPTIONAL PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>InfoSize</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Which</i></DT>
+<DD>Specifies the type of object and the type of information to return about that object.  <i>Which</i> can take the following value.<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Information returned</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYSOBJINFO_THREAD_BASIC_INFORMATION</TD>
+<TD Width="">Returns details of the thread specified by engine thread ID.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>Arg64</i></DT>
+<DD>Specifies a 64-bit argument.  This parameter has the following interpretations depending on the value of <i>Which</i>:<DL><DT>DEBUG_SYSOBJINFO_THREAD_BASIC_INFORMATION</DT>
+<DD>Not used.</DD>
+</DL>
+</DD>
+<DT><i>Arg32</i></DT>
+<DD>Specifies a 32-bit argument.  This parameter has the following interpretations depending on the value of <i>Which</i>:<DL><DT>DEBUG_SYSOBJINFO_THREAD_BASIC_INFORMATION</DT>
+<DD>The engine thread ID of the desired thread.</DD>
+</DL>
+</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the requested information.  The type of data returned in <i>Buffer</i> depends on the value of <i>Which</i>.<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Return type</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYSOBJINFO_THREAD_BASIC_INFORMATION</TD>
+<TD Width=""><a href="structures_e48c9daa-ce4f-4131-9ca6-cb1a7a129fcc.xml.htm">DEBUG_THREAD_BASIC_INFORMATION</a> </TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size, in bytes, of the buffer <i>Buffer</i>.</DD>
+<DT><i>InfoSize</i></DT>
+<DD>Receives the size of the information that is returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful. However, the information would not fit in the buffer <i>Buffer</i>, so the information was truncated.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetSystemObjectInformation</b> is available in <b>IDebugAdvanced2</b> and later versions.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><b>IDebugSystemObjects</b></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetSystemObjectInformation RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>KDbgCtrl Command-Line Options</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, KDbgCtrl Command-Line Options"><xml><MSHelp:Keyword Index="A" Term="r12_cmdline_a9393ea1-02b9-4fd2-9e74-ee7db7287a66.xml"/>
+<META NAME="MS-HKWD" CONTENT="command-line options, KDbgCtrl">
+<META NAME="MS-HKWD" CONTENT="KDbgCtrl, command-line options"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_COMMAND_LINE_KDBGCTRL"></a><H1><A NAME="r12_cmdline_a9393ea1-02b9-4fd2-9e74-ee7db7287a66.xml"></A>KDbgCtrl Command-Line Options</H1>
+<P><P></P>
+<P>The KDbgCtrl command line uses the following syntax:</P>
+<P></P>
+<P></P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>kdbgctrl</b> [<b>-e</b>|<b>-d</b>|<b>-c</b>] [<b>-ea</b>|<b>-da</b>|<b>-ca</b>] [<b>-eu</b>|<b>-du</b>|<b>-cu</b>] [<b>-sdb</b> <i>Size</i> | <b>-cdb</b>] <BR><BR><b>kdbgctrl -cx</b> <BR><BR><b>kdbgctrl -?</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-e</b></DT>
+<DD>Enables the Full Kernel Debugging setting.</DD>
+<DT><b>-d</b></DT>
+<DD>Disables the Full Kernel Debugging setting.</DD>
+<DT><b>-c</b></DT>
+<DD>Displays the current Full Kernel Debugging setting.</DD>
+<DT><b>-ea</b></DT>
+<DD>Enables the Automatic Kernel Debugging setting.</DD>
+<DT><b>-da</b></DT>
+<DD>Disables the Automatic Kernel Debugging setting.</DD>
+<DT><b>-ca</b></DT>
+<DD>Displays the Automatic Full Kernel Debugging setting.</DD>
+<DT><b>-eu</b></DT>
+<DD>Enables the User-Mode Error Handling setting.</DD>
+<DT><b>-du</b></DT>
+<DD>Disables the User-Mode Error Handling setting.</DD>
+<DT><b>-cu</b></DT>
+<DD>Displays the User-Mode Error Handling setting.</DD>
+<DT><b>-sdb</b> <i>Size</i></DT>
+<DD>Sets the size of the DbgPrint buffer. If <i>Size</i> is prefixed with <b>0x</b> it will be interpreted as a hexadecimal number. If it is prefixed with <b>0</b> (zero), it will be interpreted as octal. Otherwise, it will be interpreted as decimal.</DD>
+<DT><b>-cdb</b></DT>
+<DD>Displays the current size of the DbgPrint buffer, in bytes.</DD>
+<DT><b>-cx</b></DT>
+<DD>Determines the current Full Kernel Debugging setting and returns an appropriate value. This option cannot be combined with other options, and it does not display any output. It is designed for use in a batch file where the return value of the KDbgCtrl program can be tested. Possible return values are as follows:<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>0x10001</b></TD>
+<TD Width="">Full Kernel Debugging is enabled.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>0x10002</b></TD>
+<TD Width="">Full Kernel Debugging is disabled.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>Any other value</i></TD>
+<TD Width="">An error occurred. KDbgCtrl was unable to determine the current status of Full Kernel Debugging.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>-?</b></DT>
+<DD>Displays command-line help for KDbgCtrl.<P></P>
+</DD>
+</DL>
+<H4>Additional Information</H4>
+<P>For a description of all the KDbgCtrl settings, see <a href="r02~a_setup_1a_eecafec5-45df-4944-8b73-c27a452f33db.xml.htm">Using KDbgCtrl</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: KDbgCtrl Command-Line Options RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

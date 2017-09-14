@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetFieldTypeAndOffset</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetFieldTypeAndOffset"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetFieldTypeAndOffset"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_032d7936-6c9c-4748-ac81-a15673aa4e0f.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::GetFieldTypeAndOffset method">
+<META NAME="MS-HKWD" CONTENT="GetFieldTypeAndOffset (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_032d7936-6c9c-4748-ac81-a15673aa4e0f.xml"></A>GetFieldTypeAndOffset</H1>
+<P><P>The <b>GetFieldTypeAndOffset</b> and <b>GetFieldTypeAndOffsetWide</b> methods return the type of a field and its offset within a container.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>IDebugSymbols3::GetFieldTypeAndOffset(</b><BR><b>    IN ULONG64  </b><i>Module</i><b>,</b><BR><b>    IN ULONG  </b><i>ContainerTypeId</i><b>,</b><BR><b>    IN PCSTR  </b><i>Field</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FieldTypeId</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>Offset</i><BR><b>    );</b><BR><BR><b>IDebugSymbols3::GetFieldTypeAndOffsetWide(</b><BR><b>    IN ULONG64  </b><i>Module</i><b>,</b><BR><b>    IN ULONG  </b><i>ContainerTypeId</i><b>,</b><BR><b>    IN PCWSTR  </b><i>Field</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>FieldTypeId</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>Offset</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetFieldTypeAndOffsetT GetFieldTypeAndOffsetWide</b><BR><b>#else</b><BR><b>#define GetFieldTypeAndOffsetT GetFieldTypeAndOffset</b><BR><b>#endif</b><BR><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Module</i></DT>
+<DD>Specifies the <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> containing the types of both the container and the field.</DD>
+<DT><i>ContainerTypeId</i></DT>
+<DD>Specifies the type ID for the container's type.  Examples of containers include structures, unions, and classes.</DD>
+<DT><i>Field</i></DT>
+<DD>Specifies the name of the field whose type and offset are requested.  Subfields may be specified by using a dot-separated path.</DD>
+<DT><i>FieldTypeId</i></DT>
+<DD>Receives the type ID of the field.</DD>
+<DT><i>Offset</i></DT>
+<DD>Receives the offset of the field <i>Field</i> from the base memory location of an instance of the container.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>The field <i>Field</i> could not be found in the type specified by <i>ContainerTypeId</i>.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetFieldTypeAndOffset</b> and <b>GetFieldTypeAndOffsetWide</b> are available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4>Comments</H4>
+<P>An example of a dot-separated path for the <i>Field</i> parameter is as follows.  Suppose the MyStruct structure contains a field <b>MyField</b> of type MySubStruct, and the MySubStruct structure contains the field <b>MySubField</b>.  Then the type of this field and its location relative to the location of MyStruct structure can be found by passing "MyField.MySubField" as the <i>Field</i> parameter to this method.</P>
+<P>For more information about types, see <a href="engine_dg_20e559a0-525c-4e47-ba69-b70d3576e059.xml.htm">Types</a>.  For more information about symbols, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Symbols</a>.</P>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugsymbols_3e5be57a-3af9-4fe3-a7cc-4f31fb9b54f0.xml.htm"><b>GetFieldOffset</b></a>, <a href="idebugsymbols_cf0d81fd-9bd1-4b90-a7d5-99f1cb225036.xml.htm"><b>GetTypeId</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetFieldTypeAndOffset RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

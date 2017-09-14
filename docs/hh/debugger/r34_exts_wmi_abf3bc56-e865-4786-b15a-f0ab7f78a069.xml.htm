@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wmitrace.logger</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wmitrace.logger"><xml><MSHelp:Keyword Index="A" Term="r34_exts_WMI_abf3bc56-e865-4786-b15a-f0ab7f78a069.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wmitrace.logger extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r34_exts_WMI_abf3bc56-e865-4786-b15a-f0ab7f78a069.xml"></A>!wmitrace.logger</H1>
+<P><P>The <b>!wmitrace.logger</b> extension displays data about the trace session, including the session configuration data.  This extension does not display trace messages generated during the session. </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wmitrace.logger</b><I><B> </B></I>[ <i>LoggerID</i> | <i>LoggerName</i> ] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>LoggerID</i></DT>
+<DD>Specifies the trace session. <i>LoggerID</i> is an ordinal number that the system assigns to each trace session on the computer. If no parameter is specified, the trace session with ID equal to 1 is used. </DD>
+<DT><i>LoggerName</i></DT>
+<DD>Specifies the trace session. <i>LoggerName</i> is the text name that was specified when the trace session was started. </DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P>This extension is exported by <i>Wmitrace.dll</i>. </P>
+<P>This extension is available in Windows 2000 and later versions of Windows. If you want to use this extension with Windows 2000, you must first copy the <i>Wmitrace.dll</i> file from the <i>winxp</i> subdirectory of the Debugging Tools for Windows installation directory to the <i>w2kfre</i> subdirectory. </P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension is designed for performance logs and events, which cannot be formatted for human-readable display. To display the trace messages in a trace session buffer, along with header data, use <a href="r34_exts_wmi_cda1a996-6130-4728-809c-2d0cf5eba21c.xml.htm"><b>!wmitrace.logdump</b></a>.</P>
+<P>To find the logger ID of a trace session, use the <a href="r34_exts_wmi_b09e3b0e-6509-4ace-a081-78182d17788e.xml.htm"><b>!wmitrace.strdump</b></a> extension. Alternatively, you can use the Tracelog command <nobr><b>tracelog -l</b></nobr> to list the trace sessions and their basic properties, including the logger ID.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For a conceptual overview of event tracing, see the Microsoft Windows SDK.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wmitrace.logger RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

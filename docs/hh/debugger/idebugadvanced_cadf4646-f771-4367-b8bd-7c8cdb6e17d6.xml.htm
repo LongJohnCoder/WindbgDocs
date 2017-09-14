@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_REQUEST_TARGET_EXCEPTION_CONTEXT</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_REQUEST_TARGET_EXCEPTION_CONTEXT"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_REQUEST_TARGET_EXCEPTION_CONTEXT"/>
+<MSHelp:Keyword Index="A" Term="IDebugAdvanced_cadf4646-f771-4367-b8bd-7c8cdb6e17d6.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_REQUEST_TARGET_EXCEPTION_CONTEXT request operation"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugAdvanced_cadf4646-f771-4367-b8bd-7c8cdb6e17d6.xml"></A>DEBUG_REQUEST_TARGET_EXCEPTION_CONTEXT</H1>
+<P>The DEBUG_REQUEST_TARGET_EXCEPTION_CONTEXT <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation returns the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#55d53254-4010-4b02-b11f-938de8c2622b">thread context</a> for the stored event in a user-mode minidump file.</P>
+<DL><H4>Parameters</H4>
+<DT><i>InBuffer</i></DT>
+<DD>Not used.</DD>
+<DT><i>OutBuffer</i></DT>
+<DD>The thread context for the stored event.  The type of the thread context is the CONTEXT structure for the target's <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#ba5af89e-695c-44ee-98cc-bdb218ce8d1c">effective processor</a> at the time of the event.  <i>OutBuffer</i> must be large enough to hold this structure.</DD>
+</DL>
+<H4>Comments</H4>
+<P>This information is also returned to the <i>Context</i> parameter by the  <a href="idebugcontrol_2d615fc9-52f1-4169-9265-430a1ce0f940.xml.htm"><b>GetStoredEventInformation</b></a> method.</P>
+<H4>See Also</H4>
+<P><a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a>, <a href="idebugcontrol_2d615fc9-52f1-4169-9265-430a1ce0f940.xml.htm"><b>GetStoredEventInformation</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_REQUEST_TARGET_EXCEPTION_CONTEXT RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

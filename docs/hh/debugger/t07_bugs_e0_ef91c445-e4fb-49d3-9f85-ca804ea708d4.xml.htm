@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x112: MSRPC_STATE_VIOLATION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x112:  MSRPC_STATE_VIOLATION"><xml><MSHelp:Keyword Index="A" Term="t07_bugs_E0_ef91c445-e4fb-49d3-9f85-ca804ea708d4.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x112: MSRPC_STATE_VIOLATION">
+<META NAME="MS-HKWD" CONTENT="MSRPC_STATE_VIOLATION"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t07_bugs_E0_ef91c445-e4fb-49d3-9f85-ca804ea708d4.xml"></A>Bug Check 0x112:  MSRPC_STATE_VIOLATION</H1>
+<P>The MSRPC_STATE_VIOLATION bug check has a value of 0x00000112. This indicates that the <i>Msrpc.sys</i> driver has initiated a bug check.  </P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen. Parameters 1 and 2 are the only parameters of interest.  Parameter 1 indicates the state violation type; the value for Parameter 2 is determined by the value of Parameter 1.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x01</TD>
+<TD Width="">The exception code </TD>
+<TD Width="">A non-continuable exception was continued by the caller. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x02</TD>
+<TD Width="">The error </TD>
+<TD Width="">The advanced local procedure call (ALPC) returned an invalid error. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x03</TD>
+<TD Width="">The session to the server </TD>
+<TD Width="">The caller unloaded the Microsoft remote procedure call (MSRPC) driver while it was still in use.  It is likely that open binding handles remain.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x04<BR>and<BR>0x05</TD>
+<TD Width="">The session to the server </TD>
+<TD Width="">An invalid close command was received from the ALPC. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x06</TD>
+<TD Width="">The binding handle </TD>
+<TD Width="">An attempt was made to bind a remote procedure call (RPC) handle a second time. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x07</TD>
+<TD Width="">The binding handle</TD>
+<TD Width="">An attempt was made to perform an operation on a binding handle that was not bound. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x08</TD>
+<TD Width="">The binding handle </TD>
+<TD Width="">An attempt was made to set security information on a binding handle that was already bound. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x09</TD>
+<TD Width="">The binding handle </TD>
+<TD Width="">An attempt was made to set an option on a binding handle that was already bound. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0A<BR></TD>
+<TD Width="">The call object </TD>
+<TD Width="">An attempt was made to cancel an invalid asynchronous remote procedure call.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0B</TD>
+<TD Width="">The call object</TD>
+<TD Width="">An attempt was made to push on an asynchronous pipe call when it was not expected.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0C<BR>and<BR>0x0E</TD>
+<TD Width="">The pipe object </TD>
+<TD Width="">An attempt was made to push on an asynchronous pipe without waiting for notification. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x0F</TD>
+<TD Width="">The pipe object </TD>
+<TD Width="">An attempt was made to synchronously terminate a pipe a second time. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x15</TD>
+<TD Width="">The object closest to the error </TD>
+<TD Width="">An RPC internal error occurred. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x16</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Two causally ordered calls were issued in an order that cannot be enforced by the RPC. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x17</TD>
+<TD Width="">The call object </TD>
+<TD Width="">A server manager routine did not unsubscribe from notifications prior to completing the call. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x18</TD>
+<TD Width="">The async handle</TD>
+<TD Width="">An invalid operation on the asynchronous handle occurred. </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>The most common cause of this bug check is that the caller of the <i>Msrpc.sys</i> driver violated the state semantics for such a call.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x112:  MSRPC_STATE_VIOLATION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

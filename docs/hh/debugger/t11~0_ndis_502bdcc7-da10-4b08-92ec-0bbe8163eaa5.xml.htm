@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Overview of NDIS Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Overview of NDIS Debugging"><xml><MSHelp:Keyword Index="A" Term="t11~0_ndis_502bdcc7-da10-4b08-92ec-0bbe8163eaa5.xml"/>
+<META NAME="MS-HKWD" CONTENT="NDIS debugging, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~0_ndis_502bdcc7-da10-4b08-92ec-0bbe8163eaa5.xml"></A>Overview of NDIS Debugging</H1>
+<P>The two primary tools for debugging a network driver are debug tracing and the Network Driver Interface Specification (NDIS) extensions.  For more information on debug tracing, see <a href="t11~0_ndis_b9e5a4b7-1dc9-4b95-be86-7f5515ab5064.xml.htm">Enabling NDIS Debug Tracing</a>.  For more information on the NDIS debugging extensions, see <a href="r32_exts_lg_nd_rpc_fe1e2741-8160-432f-9492-2b6680e89293.xml.htm">NDIS Extensions</a>, which provides a complete list of the extension commands found in the extension module <i>Ndiskd.dll</i>.  The Windows 2000 version of this extension module appears in the <i>w2kfre</i> and <i>w2kchk</i> directories. The Windows XP and later version of this extension module appear in the <i>winxp</i> directory.</P>
+<P>An additional tool for debugging a network driver is the collection of regular debugging extensions, which are useful for obtaining debugging information.  For example, entering <a href="r29_exts_kernel_q_e8bc89db-0e90-49e2-9899-99461f099edf.xml.htm"><b>!stacks 2 ndis!</b></a> displays all threads in the stack beginning with <b>ndis!</b>.  This information can be useful for debugging hangs and stalls.</P>
+<P>There is also an NDIS-specific bug check code, bug check 0x7C (BUGCODE_NDIS_DRIVER).  For a complete list of its parameters,  see <a href="t05_bugs_60_91b81505-4a6e-4e6d-ab25-4b86f9a86e98.xml.htm">Bug Check 0x7C</a>.  </P>
+<P>Another useful tool for testing an NDIS driver is NDIS Verifier.  For more information, consult the NDIS Verifier topic in the Windows Driver Kit (WDK) documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Overview of NDIS Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

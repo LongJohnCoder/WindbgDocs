@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Matching Symbol Names</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Matching Symbol Names"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_3dda96c3-bcd7-41c7-9905-a4e8685af077.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_3dda96c3-bcd7-41c7-9905-a4e8685af077.xml"></A>Matching Symbol Names</H1>
+<P></P>
+<P>In certain situations, the actual name of a symbol is replaced with an alternative form which can then result in symbol matching problems.  This most commonly happens when changing between public and private symbols or when using MS-DOS compatability 8.3 short names for files.</P>
+<H4>Public vs. Private Symbol Matching</H4>
+<P>Switching between public symbols and private symbols can sometimes cause symbol matching problems. Typically, a public symbol and the corresponding private symbol have the same name with different symbol decorations. But in some cases, they may have entirely different names. In such cases, you might have to explicitly reference both names. For example, you could set up two breakpoints: one on the public symbol, and a second one on the private symbol.  For more details, see <a href="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml.htm">Public and Private Symbols</a>. </P>
+<P></P>
+<H4>MS-DOS Compatability 8.3 Short Name Symbol Matching</H4>
+<P>Files that have very long names are sometimes given auto-generated MS-DOS compatibility 8.3 short names.  Depending on the tools and options used for creating symbol files and for debugging, the file name stored in the image's debug record can be either the long name or one of these short names.  If the short names is used, this can cause symbol matching problems because the short name assigned is system dependent.</P>
+<P>For example, suppose there are two files, <i>Longfilename1.pdb</i> and <i>Longfilename2.pdb</i>.  If they are put in the same directory one will have an MS-DOS compatability 8.3 name of <i>Longfi~1.pdb</i> and the other will be <i>Longfi~2.pdb</i>.  If they are not put in the same directory they will both be <i>Longfi~1.pdb</i>.  Thus, if the associated <i>.pdb</i> files are copied carelessly, the short filenames can change, causing symbol matching problems. For more details, see <a href="r09_symbols_0f3438de-8a58-4278-a13d-28cbbb82db75.xml.htm">File System References and Symbol Files</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Matching Symbol Names RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

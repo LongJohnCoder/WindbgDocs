@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ReadPhysicalWithFlags</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ReadPhysicalWithFlags"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="ReadPhysicalWithFlags"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_cf166083-f21a-4cfd-8daa-90c3f6bbcdcb.xml"/>
+<META NAME="MS-HKWD" CONTENT="ReadPhysicalWithFlags function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_cf166083-f21a-4cfd-8daa-90c3f6bbcdcb.xml"></A>ReadPhysicalWithFlags</H1>
+<P><P>The <b>ReadPhysicalWithFlags</b> function reads from physical memory.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>VOID</b><BR><b>ReadPhysicalWithFlags(</b><BR><b>    ULONG64  </b><i>address</i><b>,</b><BR><b>    PVOID  </b><i>buf</i><b>,</b><BR><b>    ULONG  </b><i>size</i><b>,</b><BR><b>    ULONG  </b><i>flags</i><b>,</b><BR><b>    PULONG  </b><i>sizer</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>address</i></DT>
+<DD>Specifies the physical address to read.</DD>
+<DT><i>buf</i></DT>
+<DD>Specifies the address of an array of bytes to hold the data that is read.</DD>
+<DT><i>size</i></DT>
+<DD>Specifies the number of bytes to read. </DD>
+<DT><i>flags</i></DT>
+<DD>Specifies the properties of the physical memory to be read.  This must match the way the physical memory was advertised to the operating system on the target.  Possible values are listed in the following table.<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">PHYS_FLAG_DEFAULT</TD>
+<TD Width="">Use the default memory caching.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">PHYS_FLAG_CACHED</TD>
+<TD Width="">The physical memory is cached.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">PHYS_FLAG_UNCACHED</TD>
+<TD Width="">The physical memory is uncached.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">PHYS_FLAG_WRITE_COMBINED</TD>
+<TD Width="">The physical memory is write-combined.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>sizer</i></DT>
+<DD>Receives the number of bytes actually read.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>None</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this function, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_4eaa6edb-2297-4454-b4aa-ea69aa5a073c.xml.htm"><b>ReadPhysical</b></a>, <a href="wdbgexts_ref_7ef1e63e-87e2-4bf3-a432-78639684a18c.xml.htm"><b>WritePhysicalWithFlags</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ReadPhysicalWithFlags RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_REGISTER_DESCRIPTION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_REGISTER_DESCRIPTION"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_REGISTER_DESCRIPTION"/>
+<MSHelp:Keyword Index="A" Term="Structures_a7dd005e-3383-4c58-8b01-fe2127d6bc20.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_REGISTER_DESCRIPTION structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_a7dd005e-3383-4c58-8b01-fe2127d6bc20.xml"></A>DEBUG_REGISTER_DESCRIPTION</H1>
+<P><P>The <b>DEBUG_REGISTER_DESCRIPTION</b> structure is returned by <a href="idebugregisters_aa062ab9-e090-4cad-b875-b6e99a019c16.xml.htm"><b>GetDescription</b></a> to describe a processor's <a href="dbg_glossary_67e8768c-0585-41a5-ab7c-f8d2b5978663.xml.htm#14df9d28-2548-44c6-b68f-410607212d6c">register</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_REGISTER_DESCRIPTION</b><BR><b>{</b><BR><b>    ULONG  Type;</b><BR><b>    ULONG  Flags;</b><BR><b>    ULONG  SubregMaster;</b><BR><b>    ULONG  SubregLength;</b><BR><b>    ULONG64  SubregMask;</b><BR><b>    ULONG  SubregShift;</b><BR><b>    ...</b><BR><b>} DEBUG_REGISTER_DESCRIPTION, *PDEBUG_REGISTER_DESCRIPTION;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>Type</b></DT>
+<DD>The type of value that this register holds.  The possible values are the same as for the <b>Type</b> field in the <a href="structures_2486f31c-2a25-41eb-ac3f-9cc1d62dd2e0.xml.htm">DEBUG_VALUE</a> structure.</DD>
+<DT><b>Flags</b></DT>
+<DD>A bit field of flags for the register.  Currently, the only bit that can be set is DEBUG_REGISTERS_SUB_REGISTER, which indicates that this register is a subregister.</DD>
+<DT><b>SubregMaster</b></DT>
+<DD>The index of the register of which this register is a sub-register.  This field is only used if the DEBUG_REGISTERS_SUB_REGISTER bit is set in <b>Flags</b>; otherwise, it is set to zero.</DD>
+<DT><b>SubregLength</b></DT>
+<DD>The size, in bits, of this sub-register.  This field is only used if the DEBUG_REGISTERS_SUB_REGISTER bit is set in <b>Flags</b>; otherwise, it is set to zero.</DD>
+<DT><b>SubregMask</b></DT>
+<DD>The bit mask that converts the register specified in <b>SubregMaster</b> into this sub-register.  This field is only used if the DEBUG_REGISTERS_SUB_REGISTER bit is set in <b>Flags</b>; otherwise, it is set to zero.</DD>
+<DT><b>SubregShift</b></DT>
+<DD>The bit shift that converts the register specified in <b>SubregMaster</b> into this sub-register.  This field is only used if the DEBUG_REGISTERS_SUB_REGISTER bit is set in <b>Flags</b>; otherwise, it is set to zero.</DD>
+</DL>
+<H4>Comments</H4>
+<P>If this register is a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#bc60aae0-7ae8-4a07-84ce-cd7cd778d15e">subregister</a>, the value of the full register can be turned into the value of the sub-register by first shifting <b>SubregShift</b> bits to the right and then combining the result with <b>SubregMask</b> using the bitwise-AND operator.  The size of the sub-register (<b>SubregLength</b>) is the number of bits set in <b>SubregMask</b>.</P>
+<P>For general information about registers, see <a href="engine_dg_eaa71da7-23ac-4464-9142-23c89a31e14e.xml.htm">Registers</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_REGISTER_DESCRIPTION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

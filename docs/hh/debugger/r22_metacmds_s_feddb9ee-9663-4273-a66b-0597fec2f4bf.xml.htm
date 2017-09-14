@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.srcnoisy (Noisy Source Loading)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .srcnoisy (Noisy Source Loading)"><xml><MSHelp:Keyword Index="A" Term="r22_metacmds_S_feddb9ee-9663-4273-a66b-0597fec2f4bf.xml"/>
+<META NAME="MS-HKWD" CONTENT=".srcnoisy (Noisy Source Loading) command">
+<META NAME="MS-HKWD" CONTENT="Noisy Source Loading (.srcnoisy) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r22_metacmds_S_feddb9ee-9663-4273-a66b-0597fec2f4bf.xml"></A>.srcnoisy (Noisy Source Loading)</H1>
+<P>The <b>.srcnoisy</b> command controls the verbosity level for source file loading.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.srcnoisy </b>[<i>Options</i>]<BR><BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Can be any one of the following options:<DL><DT><b>0</b></DT>
+<DD>Disables the display of extra messages.</DD>
+<DT><b>1</b></DT>
+<DD>Displays information about the progress of source file loading and unloading.</DD>
+<DT><b>2</b></DT>
+<DD>Displays information about the progress of symbol file loading and unloading.</DD>
+<DT><b>3</b></DT>
+<DD>Displays all information displayed by options 1 and 2. </DD>
+<P></P>
+</DL>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>With no parameters, <b>.srcnoisy</b> will display the current status of noisy source loading.</P>
+<P>When parameter 2 (or 3) is selected, symbol loading information is filtered so that only symbol loading messages beginning with <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr></nobr></P> are displayed.  However, if the symbol information is already set to be displayed because SYMOPT_DEBUG is on, then this option will display symbol loading information without filtering.</P>
+<P class="note"><b>Note</b>  Noisy source loading should not be confused with noisy <i>symbol</i> loading &#8212; that is controlled by the <a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym noisy</b></a> extension and by other means of controlling the <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#1be46490-3471-415d-a405-14806d2de877">SYMOPT_DEBUG</a> setting.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .srcnoisy (Noisy Source Loading) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

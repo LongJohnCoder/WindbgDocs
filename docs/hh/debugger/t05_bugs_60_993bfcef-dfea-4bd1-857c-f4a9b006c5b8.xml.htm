@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x9F: DRIVER_POWER_STATE_FAILURE</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x9F: DRIVER_POWER_STATE_FAILURE"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_993bfcef-dfea-4bd1-857c-f4a9b006c5b8.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x9F: DRIVER_POWER_STATE_FAILURE">
+<META NAME="MS-HKWD" CONTENT="DRIVER_POWER_STATE_FAILURE"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_993bfcef-dfea-4bd1-857c-f4a9b006c5b8.xml"></A>Bug Check 0x9F: DRIVER_POWER_STATE_FAILURE</H1>
+<P>The DRIVER_POWER_STATE_FAILURE bug check has a value of 0x0000009F. This bug check indicates that the driver is in an inconsistent or invalid power state.</P>
+<H4>Parameters</H4>
+<P>The following parameters appear on the blue screen. Parameter 1 indicates the type of violation.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1  </TD>
+<TD Width="">The device object</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">The device object that is being freed still has an outstanding power request that it has not completed.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2  </TD>
+<TD Width="">The target device's device object, if it is available </TD>
+<TD Width="">The device object</TD>
+<TD Width="">The driver object, if it is available </TD>
+<TD Width="">The device object completed the I/O request packet (IRP) for the system power state request, but it failed to call <b>PoStartNextPowerIrp</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3  (<i>Windows 2000 only</i>)</TD>
+<TD Width="">A pointer to the target device object</TD>
+<TD Width="">A pointer to the device object</TD>
+<TD Width="">The IRP</TD>
+<TD Width="">The device driver did not properly set the IRP as "pending" or complete the IRP. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3 (<i>Windows XP and later</i>)</TD>
+<TD Width="">The physical device object (PDO) of the stack</TD>
+<TD Width="">The functional device object (FDO) of the stack </TD>
+<TD Width="">The blocked IRP</TD>
+<TD Width="">A device object has been blocking an IRP for too long a time.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x100  (<i>Windows 2000 only</i>)</TD>
+<TD Width="">A pointer to the nonpaged device object</TD>
+<TD Width="">A pointer to the target device object</TD>
+<TD Width="">A pointer to the device object to notify</TD>
+<TD Width="">The device objects in the devnode inconsistently used DO_POWER_PAGABLE. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x101  (<i>Windows 2000 only</i>)</TD>
+<TD Width="">The child device object (FDO)</TD>
+<TD Width="">The child device object (PDO)</TD>
+<TD Width="">The parent device object</TD>
+<TD Width="">A parent device object has detected that a child device has not set the DO_POWER_PAGABLE bit. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x500 (<i>Windows XP and Windows Server 2003 only</i>)</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">The target device's device object, if available </TD>
+<TD Width="">Device object </TD>
+<TD Width="">The device object completed the IRP for the system power state request, but it failed to call <b>PoStartNextPowerIrp</b>. </TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>For a description of the possible causes, see the description of each code in the Parameters section.</P>
+<P>The errors that cause Parameter 1 to be 0x3, 0x100, or 0x101 only exist in Microsoft Windows 2000. In Windows XP and later versions of Windows, these errors are superseded by Driver Verifier tests. For more information about Driver Verifier, see the Driver Verifier section of the Windows Driver Kit.  </P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x9F: DRIVER_POWER_STATE_FAILURE RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

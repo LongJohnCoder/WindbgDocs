@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Changing the Friendly Name of a Boot Entry</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Changing the Friendly Name of a Boot Entry"><xml><MSHelp:Keyword Index="A" Term="bootini_a38a0af6-fdcd-4fde-a2d0-842754545340.xml"/>
+<META NAME="MS-HKWD" CONTENT="names [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="friendly names [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="renaming boot entries [WDK]">
+<META NAME="MS-HKWD" CONTENT="Boot.ini files [WDK], friendly names">
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], friendly names"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_a38a0af6-fdcd-4fde-a2d0-842754545340.xml"></A>Changing the Friendly Name of a Boot Entry</H1>
+<P>On Windows Server 2003 and earlier versions of NT-based Windows, the boot loader generates the boot menu from the boot entries. The items that appear in the boot menu are the friendly names of each boot entry. Similarly, on Windows Vista and later versions of Windows, the items that appear in the Windows Boot Manager are the descriptions of each boot entry. </P>
+<P>Typically, after you copy a boot entry, you change the friendly name of the newly created entry to distinguish it from the original. </P>
+<P>You can also change the friendly name to make it easier to recognize customized boot entries. A string that precisely describes the entry can save significant time and effort.</P>
+<P>For example, the following friendly name strings add little value.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>"Windows XP Debug1"<BR>"Windows XP Debug2"<BR><BR></nobr></P>
+<P>However, more precise strings, such as the ones that follow, make the boot choice much easier.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>"Windows XP NullModem"<BR>"Windows XP 1394"<BR><BR></nobr></P>
+<P class="note"><b>Note</b>  When a boot entry is configured for debugging (<a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug /debugport</b></a>) or for Emergency Management Services (EMS) (<a href="bootini_96449c67-8fa8-4501-bfc2-783309c51f83.xml.htm"><b>/redirect</b></a>) on an x86- or an x64-based system, the boot loader appends a bracketed phrase ([debugger enabled] or [ems enabled]) to the friendly name that appears in the boot menu.<P class="note">However, the boot loader omits the bracketed phrase from the boot menu when the friendly name and the bracketed phrase together exceed 70 characters. To restore the bracketed phrase, shorten the friendly name.</P>
+</P>
+<P>To change the friendly name of a boot entry in a <i>Boot.ini</i> file, you can use Bootcfg or edit the <i>Boot.ini</i> file in Notepad. On systems that store boot options in EFI NVRAM, use Bootcfg. </P>
+<P>To change the friendly name of a boot entry for Windows Vista or later versions of Windows, use BCDEdit. </P>
+<H4>Using Bootcfg</H4>
+<P>With Bootcfg, you can change the friendly name of a boot entry only while copying the entry. Use the Bootcfg <b>/copy</b> switch to copy the entry and change its friendly name.</P>
+<P>The following Bootcfg command copies the first boot entry to create a new entry. The <b>/ID</b> switch specifies the line number of the entry being copied. The <b>/d</b> (description) switch specifies the friendly name of the newly-created entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bootcfg /copy /ID 1 /d "Windows XP Debug"</b><BR><BR></nobr></P>
+<P>For complete instructions for using Bootcfg, see Help and Support Services. For examples, see <a href="bootini_eca9701d-6f34-4e1c-a9ad-f2e14ba189d5.xml.htm">Using Boot Parameters</a>.</P>
+<H4>Editing the <i>Boot.ini</i> File</H4>
+<P>In the <i>Boot.ini</i> file, the friendly name of a boot entry appears in the boot entry in quotation marks. </P>
+<P>For example, the following sample from a <i>Boot.ini</i> file has duplicate boot entries for Microsoft Windows XP Professional. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional<b>"</b> /fastdetect<BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect<BR><BR></nobr></P>
+<P>To change the friendly name of a boot entry, type over the quoted string in the boot entry. In the following example, because the first entry will be customized for debugging, the name is changed to Windows XP Debug.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS=<b>"Windows XP Debug"</b> /fastdetect<BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS=<b>"</b>Microsoft Windows XP Professional<b>"</b> /fastdetect<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Using BCDEdit</H4>
+<P>To change the description of a boot entry as it appears on the boot menu, you can use the <b>/set </b><i>ID</i><b> description </b>option. The command uses the following syntax. The ID is the GUID that is associated with the boot entry (or one of the well-known identifiers, for example, {current}). </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set</b> <i>ID</i> <b>description</b> <b>"</b><i>The new description</i><b>"</b><BR></nobr></P>
+<P></P>
+<P></P>
+<P>For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /set {802d5e32-0784-11da-bd33-000476eba25f} description "Windows Vista NullModem"<BR></nobr></P>
+<P></P>
+<P>To change the description of the boot entry that corresponds to the operating system that is currently running, use the following example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /set {current} description "Windows Vista NullModem"<BR></nobr></P>
+<P></P>
+<P>You can also change the description when you copy an existing boot entry using the <b>/d</b> option. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /copy {current} /d "Windows Vista NullModem"<BR></nobr></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Changing the Friendly Name of a Boot Entry RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

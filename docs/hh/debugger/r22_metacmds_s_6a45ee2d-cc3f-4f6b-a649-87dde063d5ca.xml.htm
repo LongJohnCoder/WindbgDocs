@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.shell (Command Shell)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .shell (Command Shell)"><xml><MSHelp:Keyword Index="A" Term="r22_metacmds_S_6a45ee2d-cc3f-4f6b-a649-87dde063d5ca.xml"/>
+<META NAME="MS-HKWD" CONTENT=".shell (Command Shell) command">
+<META NAME="MS-HKWD" CONTENT="Command Shell (.shell) command">
+<META NAME="MS-HKWD" CONTENT="MS-DOS Shell (.shell) command">
+<META NAME="MS-HKWD" CONTENT="DOS Shell (.shell) command">
+<META NAME="MS-HKWD" CONTENT="shell commands, Command Shell (.shell) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r22_metacmds_S_6a45ee2d-cc3f-4f6b-a649-87dde063d5ca.xml"></A>.shell (Command Shell)</H1>
+<P>The <b>.shell</b> command launches a shell process and redirects its output to the debugger, or to a specified file.<P></P>
+<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.shell</b> [<i>Options</i>] [<i>ShellCommand</i>] <BR><b>.shell</b> <b>-i</b> <i>InFile</i> [<b>-o</b> <i>OutFile</i> [<b>-e</b> <i>ErrFile</i>]] [<i>Options</i>] <i>ShellCommand</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>InFile</i></DT>
+<DD>Specifies the path and file name of a file to be used for input. If you intend to offer no input after the initial command, you can specify a single hyphen (<b>-</b>) instead of <i>InFile</i>, with no space before the hyphen.</DD>
+<DT><i>OutFile</i></DT>
+<DD>Specifies the path and file name of a file to be used for standard output. If <b>-o</b> <i>OutFile</i> is omitted, output is sent to the Debugger Command window. If you do not want this output displayed <i>or</i> saved in a file, you can specify a single hyphen (<b>-</b>) instead of <i>OutFile</i>, with no space before the hyphen.</DD>
+<DT><i>ErrFile</i></DT>
+<DD>Specifies the path and file name of a file to be used for error output. If <nobr><b>-e</b> <i>ErrFile</i></nobr> is omitted, error output is sent to the same place as standard output. If you do not want this output displayed <i>or</i> saved in a file, you can specify a single hyphen (<b>-</b>) instead of <i>ErrFile</i>, with no space before the hyphen.</DD>
+<DT><i>Options</i></DT>
+<DD>Can be any number of the following options:<DL><DT><b>-ci "</b><i>Commands</i><b>"</b></DT>
+<DD>Processes the specified debugger commands, and then passes their output as an input file to the process being launched. <i>Commands</i> can be any number of debugger commands, separated by semicolons, and enclosed in quotation marks.</DD>
+<DT><b>-x</b></DT>
+<DD>Causes any process being spawned to be completely detached from the debugger. This allows you to create processes which will continue running even after the debugging session ends.</DD>
+</DL>
+<P></P>
+</DD>
+<DT><i>ShellCommand</i></DT>
+<DD>Specifies the application command line or Microsoft MS-DOS command to be executed.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The entire line after the <b>.shell</b> command will be interpreted as a Windows command (even if it contains a semicolon). This line should not be enclosed in quotation marks. There must be a space between <b>.shell</b> and the <i>ShellCommand</i> (additional leading spaces are ignored).</P>
+<P>The output from the command will appear in the Debugger Command window, unless the <nobr><b>-o</b> <i>OutFile</i></nobr> parameter is used.</P>
+<P>Issuing a <b>.shell</b> command with no parameters will activate the shell and leave it open. All subsequent commands will be interpreted as Windows commands. During this time, the debugger will display messages reading <b>&lt;.shell process may need input&gt;</b>, and the WinDbg prompt will be replaced with an <b>Input&gt;</b> prompt. Sometimes,  a separate Command Prompt window will appear when the debugger leaves the shell open. This window should be ignored; all input and output will be done through the Debugger Command window.</P>
+<P>To close this shell and return to the debugger itself, type <b>exit</b> or <b>.shell_quit</b>. (The <b>.shell_quit</b> command is more powerful, because it works even if the shell is frozen.)    </P>
+<P>This command cannot be used while debugging CSRSS, because new processes cannot be created without CSRSS being active.</P>
+<P>You can use the <nobr><b>-ci</b></nobr> flag to run one or more debugger commands and then pass their output to a shell process. For example, you could pass the output from the <b>!process 0 7</b> command to a Perl script by using the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.shell -ci "!process 0 7" perl.exe parsemyoutput.pl</b> <BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For other ways of accessing the command shell, see <a href="r05_use_start_f999ba17-ca66-4b05-bce4-9bc4671308e3.xml.htm">Using Shell Commands</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .shell (Command Shell) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

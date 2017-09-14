@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.opendump (Open Dump File)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .opendump (Open Dump File)"><xml><MSHelp:Keyword Index="A" Term="r21_metacmds_L_7e3720ef-d5f9-4717-ac69-9aa308d9b576.xml"/>
+<META NAME="MS-HKWD" CONTENT=".opendump (Open Dump File) command">
+<META NAME="MS-HKWD" CONTENT="Open Dump File (.opendump) command">
+<META NAME="MS-HKWD" CONTENT="dump file, Open Dump File (.opendump) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r21_metacmds_L_7e3720ef-d5f9-4717-ac69-9aa308d9b576.xml"></A>.opendump (Open Dump File)</H1>
+<P>The <b>.opendump</b> command opens a dump file for debugging.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.opendump</b> <i>DumpFile</i> <BR><b>.opendump</b> <b>/c</b> <b>"</b><i>DumpFileInArchive</i><b>"</b> [<i>CabFile</i>] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>DumpFile</i></DT>
+<DD>Specifies the name of the dump file to open.  <i>DumpFile</i> should include the file name extension (typically <i>.dmp</i> or <i>.mdmp</i>) and can include an absolute or relative path.  Relative paths are relative to the directory that you started the debugger in.</DD>
+<DT><b>/c</b> <b>"</b><i>DumpFileInArchive</i><b>"</b></DT>
+<DD>Specifies the name of a dump file to debug.  This dump file must be contained in the archive file that <i>CabFile</i> specifies.  You must enclose the <i>DumpFileInArchive</i> file in quotation marks.</DD>
+<DT><i>CabFile</i></DT>
+<DD>Specifies the name of an archive file to open.  <i>CabFile </i>should include the file name extension (typically <i>.cab</i>) and can include an absolute or relative path.  Relative paths are relative to the directory that you started the debugger in.  If you use the <b>/c</b> switch to specify a dump file in an archive but you omit <i>CabFile</i>, the debugger reuses the archive file that you most recently opened.</DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Crash dump only (but you can use this command if other sessions are running)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>After you use the <b>.opendump</b> command, you must use the <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command to finish loading the dump file.</P>
+<P>When you are opening an archive file (such as a CAB file), you should use the <b>/c</b> switch.  If you do not use this switch and you specify an archive for <i>DumpFile</i>, the debugger opens the first file that has an <i>.mdmp</i> or <i>.dmp</i> file name extension within this archive.</P>
+<P>You can use <b>.opendump</b> even if a debugging session is already in progress. This feature enables you to debug more than one crash dump at the same time. For more information about how to control a multiple-target session, see <a href="r07_use_operation_6930fe2c-a632-474c-9f8c-5bdd3aa9349d.xml.htm">Debugging Multiple Targets</a>.</P>
+<H4>Additional Information</H4>
+<P>For more information about dump files, see <a href="r05_use_start_6d6822e5-6ee5-4b68-9105-cb668b94a7d4.xml.htm">Opening a Crash Dump</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .opendump (Open Dump File) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

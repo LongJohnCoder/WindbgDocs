@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>e, ea, eb, ed, eD, ef, ep, eq, eu, ew, eza, ezu (Enter Values)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, e, ea, eb, ed, eD, ef, ep, eq, eu, ew, eza, ezu (Enter Values)"><xml><MSHelp:Keyword Index="A" Term="r16_cmds_C_01f3ea78-e52a-4c87-a1cb-071feb0e422c.xml"/>
+<META NAME="MS-HKWD" CONTENT="e (Enter Values) command">
+<META NAME="MS-HKWD" CONTENT="ea (Enter Values) command">
+<META NAME="MS-HKWD" CONTENT="eb (Enter Values) command">
+<META NAME="MS-HKWD" CONTENT="ed (Enter Values) command">
+<META NAME="MS-HKWD" CONTENT="eD (Enter Values) command">
+<META NAME="MS-HKWD" CONTENT="ef (Enter Values) command">
+<META NAME="MS-HKWD" CONTENT="ep (Enter Values) command">
+<META NAME="MS-HKWD" CONTENT="eq (Enter Values) command">
+<META NAME="MS-HKWD" CONTENT="eu (Enter Values) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r16_cmds_C_01f3ea78-e52a-4c87-a1cb-071feb0e422c.xml"></A>e, ea, eb, ed, eD, ef, ep, eq, eu, ew, eza, ezu (Enter Values)</H1>
+<P>The <b>e*</b> commands enter into memory the values that you specify.<P></P>
+<P>This command should not be confused with the <a href="r15_cmds_a_717bf87c-c880-4b3d-9c78-d5e4d80b5ff3.xml.htm"><b>~E (Thread-Specific Command)</b></a> qualifier.</P>
+</P>
+<H4>Syntax  eD ef  </H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>e</b>{<b>b</b>|<b>d</b>|<b>D</b>|<b>f</b>|<b>p</b>|<b>q</b>|<b>w</b>} <i>Address</i> [<i>Values</i>] <BR><b>e</b>{<b>a</b>|<b>u</b>|<b>za</b>|<b>zu</b>} <i>Address</i> <b>"</b><i>String</i><b>"</b> <BR><b>e</b> <i>Address</i> [<i>Values</i>] <BR><BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the starting address where to enter values. The debugger replaces the value at <i>Address</i> and each subsequent memory location until all <i>Values </i>have been used.</DD>
+<DT><i>Values</i></DT>
+<DD>Specifies one or more values to enter into memory. Multiple numeric values should be separated with spaces. If you do not specify any values, the current address and the value at that address will be displayed, and you will be prompted for input.</DD>
+<DT><i>String</i></DT>
+<DD>Specifies a string to be entered into memory. The <b>ea</b> and <b>eza</b> commands will write this to memory as an ASCII string; the <b>eu</b> and <b>ezu</b> commands will write this to memory as a Unicode string. The <b>eza</b> and <b>ezu</b> commands write a terminal NULL; the <b>ea</b> and <b>eu</b> commands do not. <i>String</i> must be enclosed in quotation marks.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>This command exists in the following forms. The second characters of the <b>ed</b> and <b>eD</b> commands are case-sensitive.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Enter</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>e</b></TD>
+<TD Width="">This enters data in the same format as the most recent <b>e*</b> command. (If the most recent <b>e*</b> command was <b>ea</b>, <b>eza</b>, <b>eu</b>, or <b>ezu</b>, the final parameter will be <i>String</i> and may not be omitted.)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ea</b></TD>
+<TD Width="">ASCII string (not NULL-terminated).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>eb</b></TD>
+<TD Width="">Byte values.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ed</b></TD>
+<TD Width="">Double-word values (4 bytes).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>eD</b></TD>
+<TD Width="">Double-precision floating-point numbers (8 bytes).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ef</b></TD>
+<TD Width="">Single-precision floating-point numbers (4 bytes).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ep</b></TD>
+<TD Width="">Pointer-sized values. This command is equivalent to <b>ed</b> or <b>eq</b>, depending on whether the target computer's processor architecture is 32-bit or 64-bit, respectively.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>eq</b></TD>
+<TD Width="">Quad-word values (8 bytes).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>eu</b></TD>
+<TD Width="">Unicode string (not NULL-terminated).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ew</b></TD>
+<TD Width="">Word values (2 bytes).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>eza</b></TD>
+<TD Width="">NULL-terminated ASCII string.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ezu</b></TD>
+<TD Width="">NULL-terminated Unicode string.</TD>
+</TR>
+</table>
+<P></P>
+<P>Numeric values will be interpreted as numbers in the current radix (16, 10, or 8). To change the default radix, use the <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command. The default radix can be overridden by specifying the <b>0x</b> prefix (hexadecimal), the <b>0n</b> prefix (decimal), the <b>0t</b> prefix (octal), or the <b>0y</b> prefix (binary).</P>
+<P class="note"><b>Note</b>  The default radix behaves differently when C++ expressions are being used. See <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a> for details.</P>
+<P>When entering byte values with the <b>eb</b> command, you can use single straight quotation marks to specify characters. If you want to include multiple characters, each must be surrounded with its own quotation marks. This allows you to enter a character string that is not terminated by a null character. For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>eb 'h' 'e' 'l' 'l' 'o'<BR><BR></nobr></P>
+<P>C-style escape characters (such as '\0' or '\n') may not be used with these commands.   </P>
+<P>If you omit the <i>Values</i> parameter, you will be prompted for input. The address and its current contents will be displayed, and an <b>Input&gt;</b> prompt will appear. You can then do any of the following:</P><B></B><UL type="disc">
+<LI>Enter a new value, by typing the value and pressing ENTER.</LI>
+<LI>Preserve the current value in memory by pressing SPACE followed by ENTER.    </LI>
+<LI>Exit from the command by pressing ENTER.</LI>
+</UL>
+<P></P>
+<H4>Additional Information</H4>
+<P>For an overview of memory manipulation and a description of other memory-related commands, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: e, ea, eb, ed, eD, ef, ep, eq, eu, ew, eza, ezu (Enter Values) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

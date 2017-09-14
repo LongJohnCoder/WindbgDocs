@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ExtRemoteData::ReadBuffer</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ExtRemoteData::ReadBuffer"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="ExtRemoteData::ReadBuffer"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_b27c97d0-4083-4773-b323-55f915dfdd05.xml"/>
+<META NAME="MS-HKWD" CONTENT="ExtRemoteData::ReadBuffer">
+<META NAME="MS-HKWD" CONTENT="ReadBuffer (ExtRemoteData)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_b27c97d0-4083-4773-b323-55f915dfdd05.xml"></A>ExtRemoteData::ReadBuffer</H1>
+<P><P>The <b>ReadBuffer</b> method reads data from the target's memory.  The data is located in the beginning of the region represented by the <a href="engextcpp_ref_e84c03ce-1156-481b-a429-f0a918797565.xml.htm"><b>ExtRemoteData</b></a> object.  However, the size of the data can be different.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>ULONG</b><BR><b>  ExtRemoteData::ReadBuffer(</b><BR><b>    OUT PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>Bytes</i><b>,</b><BR><b>    IN bool  </b><i>MustReadAll</i><b> = true</b><BR><b>    ) throw(...);</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Buffer</i></DT>
+<DD>Pointer that receives the data read from the target.</DD>
+<DT><i>Bytes</i></DT>
+<DD>Specifies the number of bytes to read.  The <i>Buffer</i> buffer must be at least this size.</DD>
+<DT><i>MustReadAll</i></DT>
+<DD>Specifies what happens if the debugger engine is unable to read all the data from the target.  If <i>MustReadAll</i> is <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">true</span> and the debugger engine is unable to read <i>Bytes</i> bytes from the target, an <b>ExtRemoteException</b> will be thrown.  If <i>MustReadAll</i>  is <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">false</span>, no exception will be thrown if the engine is unable to read the requested number of bytes from the target.</DD>
+</DL>
+<H4>Return Value</H4>
+<P><b>ReadBuffer</b> returns the number of bytes read from the target and copied into the <i>Buffer</i> buffer.  If <i>MustReadAll</i> is <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">true</span>, the value of <i>Bytes</i> will be returned (unless an exception is thrown).</P>
+<H4>Requirements</H4>
+<p><b>Headers:</b> Defined in <i>Engextcpp.hpp</i>.  Include <i>Engextcpp.hpp</i>.</p>
+<H4>See Also</H4>
+<P><a href="engextcpp_ref_e84c03ce-1156-481b-a429-f0a918797565.xml.htm"><b>ExtRemoteData</b></a>, <a href="engextcpp_ref_0a08b058-ddc3-44e4-9d80-bb20d6e8f952.xml.htm"><b>ExtRemoteData::WriteBuffer</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ExtRemoteData::ReadBuffer RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

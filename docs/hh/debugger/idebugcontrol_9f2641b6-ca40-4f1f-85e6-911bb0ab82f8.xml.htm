@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>OutputDisassembly</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, OutputDisassembly"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="OutputDisassembly"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_9f2641b6-ca40-4f1f-85e6-911bb0ab82f8.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::OutputDisassembly method">
+<META NAME="MS-HKWD" CONTENT="OutputDisassembly (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_9f2641b6-ca40-4f1f-85e6-911bb0ab82f8.xml"></A>OutputDisassembly</H1>
+<P>The <b>OutputDisassembly</b> method disassembles a processor instruction and sends the disassembly to the <a href="dbg_glossary_bd74f9e2-0647-457f-b229-a732edd24da4.xml.htm#294a16a9-426d-4afb-9c41-8b7954b534db">output callbacks</a>.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::OutputDisassembly(</b><BR><b>    IN ULONG  </b><i>OutputControl</i><b>,</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    OUT PULONG64  </b><i>EndOffset</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>OutputControl</i></DT>
+<DD>Specifies the output control that determines which client's output callbacks receive the output.  For possible values, see <a href="structures_498e4f9e-99c5-4fec-8aaf-0d84d2d097d0.xml.htm">DEBUG_OUTCTL_<i>XXX</i></a>.  For more information about output, see <a href="engine_dg_ce5dd9cd-7068-4ca7-95d9-f4985a9812c2.xml.htm">Input and Output</a>.</DD>
+<DT><i>Offset</i></DT>
+<DD>Specifies the location in the target's memory of the instruction to disassemble.</DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies the bit-flags that affect the behavior of this method.  The following table lists the bits that can be set.<B></B><table>
+<TR valign="top">
+<TH Width="">Bit-Flag</TH>
+<TH Width="">Effect when set</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DISASM_EFFECTIVE_ADDRESS</TD>
+<TD Width="">Compute the effective address from the current register information and display it.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DISASM_MATCHING_SYMBOLS</TD>
+<TD Width="">If the address of the instruction has an exact symbol match, output the symbol.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DISASM_SOURCE_LINE_NUMBER</TD>
+<TD Width="">Include the source line number of the instruction in the output.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DISASM_SOURCE_FILE_NAME</TD>
+<TD Width="">Include the source file name in the output.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>EndOffset</i></DT>
+<DD>Receives the location in the target's memory of the instruction that follows the disassembled instruction.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>OutputDisassembly</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>The assembly language depends on the effective processor type of the target system.  For information about the assembly language, see the processor documentation.</P>
+<P>For an overview of using assembly in <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#75adb4be-6841-48ba-8227-9b322bfa7dd4">debugger applications</a>, see <a href="r07_use_operation_9afb8c89-95fa-499e-bc4e-98f0365df573.xml.htm">Debugging in Assembly Mode</a>.  For more information about using assembly with the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#98ac5bd2-076f-48f9-94e6-2a4518471d3c">debugger engine API</a>, see <a href="engine_dg_8c5b4c23-1d98-4736-be58-777a5a30520c.xml.htm">Assembling and Disassembling Instructions</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_7eb9fdc3-f2a0-4239-a035-9abb8e85cd28.xml.htm"><b>Disassemble</b></a>, <a href="idebugcontrol_51f0991b-9b9d-4a21-89be-099537a78ea5.xml.htm"><b>OutputDisassemblyLines</b></a>, <b>u (Unassemble)</b></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: OutputDisassembly RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

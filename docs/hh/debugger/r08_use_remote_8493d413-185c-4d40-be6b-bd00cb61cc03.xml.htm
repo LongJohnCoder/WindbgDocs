@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Debugger Extension Commands</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Debugger Extension Commands"><xml><MSHelp:Keyword Index="A" Term="r08_use_remote_8493d413-185c-4d40-be6b-bd00cb61cc03.xml"/>
+<META NAME="MS-HKWD" CONTENT="extension commands (! commands), using">
+<META NAME="MS-HKWD" CONTENT="extension commands (! commands), default search order"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r08_use_remote_8493d413-185c-4d40-be6b-bd00cb61cc03.xml"></A>Using Debugger Extension Commands</H1>
+<P>The use of debugger extension commands is very similar to the use of <a href="r05_use_start_0d2d0e09-870d-4d87-a7c7-2cac43538545.xml.htm">debugger commands</a>. The command is typed in the Debugger Command window, producing either output in this window or a change in the target application or target computer.</P>
+<P>An actual debugger extension command is an entry point in a DLL called by the debugger.</P>
+<P>Debugger extensions are invoked by the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>![</b><I><B>module</B></I><b>.]</b><I><B>extension</B></I><b> [</b><I><B>arguments</B></I><b>]</b><BR><BR></nobr></P>
+<P>The <i>module</i> name should <b>not</b> be followed with the <i>.dll</i> file name extension. If <i>module </i>includes a full path, the default string size limit is 255 characters.</P>
+<P>If the module has not already been loaded, it will be loaded into the debugger using a call to <b>LoadLibrary</b>(<i>module</i>). After the debugger has loaded the extension library, it calls the <b>GetProcAddress</b> function to locate the extension name in the extension module. The extension name is case-sensitive and must be entered exactly as it appears in the extension module's <i>.def</i> file. If the extension address is found, the extension is called.</P>
+<H4>Search Order</H4>
+<P>If the module name is not specified, the debugger will search the loaded extension modules for this export.</P>
+<P>The default search order is as follows:</P><B></B><OL type="1">
+<LI>The extension modules that work with all operating systems and in both modes: <i>dbghelp.dll</i> and <i>winext\ext.dll</i>.</LI>
+<LI>The extension module that works in all modes but is operating-system-specific. For Windows XP and later versions of Windows, this is <i>winxp\exts.dll</i>. There is no corresponding module for Windows 2000.</LI>
+<LI>The extension module that works with all operating systems but is mode-specific. For kernel mode, this is <i>winext\kext.dll</i>. For user mode, this is <i>winext\uext.dll</i>.</LI>
+<LI>The extension module that is both operating-system-specific and mode-specific. The following table specifies this module.<B></B><table>
+<TR valign="top">
+<TH Width="">Windows Build</TH>
+<TH Width="">User Mode</TH>
+<TH Width="">Kernel Mode</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows 2000<BR>(free build)</b></TD>
+<TD Width=""><i>w2kfre \ ntsdexts.dll</i> </TD>
+<TD Width=""><i>w2kfre \ kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows 2000<BR>(checked build)</b></TD>
+<TD Width=""><i>w2kchk \ ntsdexts.dll</i> </TD>
+<TD Width=""><i>w2kchk \ kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>winxp \ ntsdexts.dll</i> </TD>
+<TD Width=""><i>winxp \ kdexts.dll</i> </TD>
+</TR>
+</table>
+</LI>
+</OL>
+<P></P>
+<P></P>
+<P>When an extension module is unloaded, it is removed from the search chain. When an extension module is loaded, it is added to the <i>beginning</i> of the search order. The <a href="r22_metacmds_s_505955dc-f0fc-4835-9f56-0e0eabda4bef.xml.htm"><b>.setdll (Set Default Extension DLL)</b></a> command can be used to promote any module to the top of the search chain. By using this command repeatedly, you can completely control the search chain.</P>
+<P>Use the <a href="r19_metacmds_a_567f77fe-498c-42a5-8155-21ffea0c0fb2.xml.htm"><b>.chain (List Debugger Extensions)</b></a> command to display a list of all loaded extension modules in their current search order.</P>
+<P>If you attempt to execute an extension command that is not in any of the loaded extension modules, you will get an Export Not Found error message.</P>
+<H4>Additional Information</H4>
+<P>For information about specific extension commands, see the <a href="r24_exts_general_a_ce9f99ae-4309-4ad4-9924-17f9a87297f1.xml.htm">Debugger Extension Commands</a> reference section.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Debugger Extension Commands RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

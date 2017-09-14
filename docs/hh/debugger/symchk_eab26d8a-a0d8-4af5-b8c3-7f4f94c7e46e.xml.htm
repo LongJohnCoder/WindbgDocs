@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using PDBCopy</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using PDBCopy"><xml><MSHelp:Keyword Index="A" Term="SymChk_eab26d8a-a0d8-4af5-b8c3-7f4f94c7e46e.xml"/>
+<META NAME="MS-HKWD" CONTENT="PDBCopy, using"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_eab26d8a-a0d8-4af5-b8c3-7f4f94c7e46e.xml"></A>Using PDBCopy</H1>
+<P>PDBCopy is a command-line tool that creates a stripped symbol file from a full symbol file.  In other words, it takes a symbol file that contains both private symbol data and a public symbol table, and creates a copy of that file that contains only the public symbol table.  Depending on which PDBCopy options are used, the stripped symbol file contains either the entire public symbol table or a specified subset of the public symbol table.</P>
+<P>PDBCopy works with any PDB-format symbol file (with file name extension <i>.pdb</i>), but not with the older format (<i>.dbg</i>) symbol files.</P>
+<P>For a description of public symbol tables and private symbol data, see <a href="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml.htm">Public and Private Symbols</a>.</P>
+<H4>Removing Private Symbols</H4>
+<P>If you wish to create a stripped symbol file that contains all the public symbols and none of the private symbols, use PDBCopy with three parameters:  the path and name of the original symbol file, the path and name of the new symbol file, and the <nobr><b>-p</b></nobr> option.</P>
+<P>For example, the following command creates a new file, named <i>publicsymbols.pdb</i>, which contains the same public symbol table as <i>mysymbols.pdb</i> but contains none of the private symbol data:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>pdbcopy mysymbols.pdb publicsymbols.pdb -p</b> <BR></nobr></P>
+<P>If <i>mysymbols.pdb</i> happens to already be a stripped symbol file, the symbolic content of the new file and the old file will be identical.</P>
+<P>After issuing this command, you should move the new file to a new location and rename it to the original name of the symbol file (in this example, <i>mysymbols.pdb</i>), because most debugging programs and symbol extraction programs look for symbols based on a specific file name.  Alternatively, you could use the same file name for the input file and the output file on the PDBCopy command line, as long as different directories are specified:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>pdbcopy c:\dir1\mysymbols.pdb c:\dir2\mysymbols.pdb -p</b> <BR></nobr></P>
+<P class="note"><b>Note</b>  The destination file should not exist before PDBCopy is run.  If a file with this name exists, various errors may occur.  </P>
+<H4>Removing Private Symbols and Selected Public Symbols</H4>
+<P>If you wish to not only remove the private symbol data, but also reduce the amount of information in the public symbol table, you can use the <nobr><b>-f</b></nobr> option to specify a list of public symbols that are to be removed.</P>
+<P>The following example illustrates this procedure: </P><B></B><OL type="1">
+<LI>Determine the full names, including decorations, of the symbols you wish to remove.  If you are not sure of the decorated symbol names, you can use the <a href="symchk_fe7c1f84-3a50-410a-a8fd-2fa5ec6ab4dd.xml.htm">DBH</a> tool to determine them.  See <a href="symchk_1a9bea15-4bd0-445d-8795-876edcc13228.xml.htm#475300b2-9e03-47da-b83b-2c8187bfbc6d">Determining the Decorations of a Specific Symbol</a> for details.  In this example, let us suppose that the decorated names of the symbols you wish to remove are <b>_myGlobal1</b> and <b>_myGlobal2</b>.</LI>
+<LI>Create a text file containing a list of the symbols to be removed.  Each line in this file should include the name of one symbol, including decorations, but not including module names.  In this example, the file would contain the following two lines:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>_myGlobal1<BR>_myGlobal2 <BR></nobr></P>
+<P>The file can be given any name you choose.  Let us suppose that you name this file <i>listfile.txt</i> and place it in the directory <i>C:\Temp</i>.</P>
+</LI>
+<LI>Use the following PDBCopy command line:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>pdbcopy</b> <i>OldPDB</i> <i>NewPDB<B> </B></I><b>-p -f:@</b><i>TextFile</i> <BR></nobr></P>
+<P>where <i>OldPDB</i> and <i>NewPDB</i> are the original symbol file and the new symbol file, and <i>TextFile</i> is the file created in step two.  The <nobr><b>-f</b></nobr> option indicates that certain public symbols are to be removed, and the ampersand ( <b>@</b> ) indicates that these symbols are listed in the specified text file.</P>
+<P>In the current example, the command would look like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>pdbcopy c:\dir1\mysymbols.pdb c:\dir3\mysymbols.pdb -p -f:@c:\temp\listfile.txt</b> <BR></nobr></P>
+<P>This creates a new symbol file, <i>C:\dir2\mysymbols.pdb</i>, which does not contain any private symbols and does not contain the two global variables you listed in <i>listfile.txt</i>. </P>
+</LI>
+</OL>
+<P></P>
+<P>As shown in this example, PDBCopy's <nobr><b>-f</b></nobr> option removes a specific list of public symbols.  The ampersand ( <b>@</b> ) indicates that these symbols are listed in a text file.  An alternate method is to list all the symbols on the command line, using the <nobr><b>-f</b></nobr> option without an ampersand.  Thus the following command line is equivalent to the example in the procedure above:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>pdbcopy c:\dir1\mysymbols.pdb c:\dir3\mysymbols.pdb -p -f:_myGlobal1 -f:_myGlobal2</b> <BR></nobr></P>
+<P>Unless you wish to remove only one or two symbols, it is simpler to use a text file than to list them on the command line.</P>
+<P>If you wish to remove the majority of public symbols from your <i>.pdb</i> file, the <nobr><b>-F</b></nobr> option is the easiest method.  While the <nobr><b>-f</b></nobr> option requires you to list those public symbols you wish to remove, the <nobr><b>-F</b></nobr> option requires you to list those public symbols you do <i>not</i> wish to remove.  All other public symbols (as well as all private symbols) will be removed.  The <nobr><b>-F</b></nobr> option supports the same two syntax options as the <nobr><b>-f</b></nobr> option:  either <nobr><b>-F:</b></nobr> followed by the name of a symbol to be retained, or <nobr><b>-F:@</b></nobr> followed by the name of a text file that contains a list of the symbols to be retained. In either case, decorated symbol names must be used.</P>
+<P>For example, the following command removes all private symbols and almost all public symbols, leaving only the symbols <b>_myFunction5</b> and <b>_myGlobal7</b>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>pdbcopy c:\dir1\mysymbols.pdb c:\dir3\mysymbols.pdb -p -F:_myFunction5 -F:_myGlobal7</b> <BR></nobr></P>
+<P>If you combine multiple instances of the <nobr><b>-f</b></nobr> option on one line, all the specified symbols are removed.  If you combine multiple instances of the <nobr><b>-F</b></nobr> option on one line, all the specified symbols are retained, and all other symbols are removed.  You cannot combine <nobr><b>-f</b></nobr> with <nobr><b>-F</b></nobr>.</P>
+<P>The <nobr><b>-f</b></nobr> and <nobr><b>-F</b></nobr> options cannot be used without the <nobr><b>-p</b></nobr> option, which removes all private symbol data.  Even if your original file contains no private symbols, you must still include the <nobr><b>-p</b></nobr> option (although it has no effect in this case).</P>
+<P>The <nobr><b>-F</b></nobr> option cannot be used to prevent the private symbol data from being removed. If you use this option with a symbol that is not included in the public symbol table, PDBCopy ignores it.</P>
+<H4>The <i>mspdb*.dll</i> File</H4>
+<P>PDBCopy must access either the <i>mspdb80.dll</i> file or the <i>mspdb60.dll</i> file in order to run.    By default, PDBCopy uses <i>mspdb80.dll</i>, which is the version used by Visual Studio .NET 2002 and later versions of Visual Studio.  If your symbols were built using Visual Studio 6.0 or an earlier version, you can specify the <nobr><b>-vc6</b></nobr> command-line option so that PDBCopy uses <i>mspdb60.dll</i> instead, although this is not required. PDBCopy looks for the appropriate file even if the <nobr><b>-vc6</b></nobr> option is not used.  You can find these files within your installation of Visual Studio, the Platform SDK, or the Windows Driver Kit (WDK).</P>
+<P>Before running PDBCopy, make sure that the correct version of <i>mspdb*.dll</i> file is accessible to your computer, and make sure that its location is part of the command path.  If it is not, you should use the <b>path</b> command to add this location to the command path.</P>
+<H4>The File Signature and the SymSrv Index</H4>
+<P>Each symbol file has a fixed signature that uniquely identifies it.  SymSrv uses the signature to generate a unique "index value" for the file. If two files have different contents or different creation times, they will also have distinct signatures and distinct SymSrv index values.</P>
+<P>Files created with PDBCopy are an exception to the rule of unique index values.  When PDBCopy creates a new symbol file, it has the same signature and SymSrv index value as the old file. This feature allows one file to be replaced with the other without altering the behavior of symbol-related tools.</P>
+<P>If you wish the new file to have a distinct signature and SymSrv index, use the <nobr><b>-s</b></nobr> option.  In most cases you will not wish to use this option, since the most common use of PDBCopy is to create an altered symbol file that can replace the old file without causing a mismatch. A new signature may cause SymSrv to assign a different index value to the new file than to the old file, preventing new file from properly replacing the old one.</P>
+<P>For the complete command line syntax, see <a href="symchk_d1eaeede-1831-4ca1-adf7-bee43362f20d.xml.htm">PDBCopy Command-Line Options</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using PDBCopy RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

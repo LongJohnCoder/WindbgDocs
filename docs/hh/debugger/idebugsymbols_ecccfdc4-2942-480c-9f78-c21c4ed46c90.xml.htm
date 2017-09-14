@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>AddSyntheticModule</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, AddSyntheticModule"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="AddSyntheticModule"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_ecccfdc4-2942-480c-9f78-c21c4ed46c90.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::AddSyntheticModule method">
+<META NAME="MS-HKWD" CONTENT="AddSyntheticModule (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_ecccfdc4-2942-480c-9f78-c21c4ed46c90.xml"></A>AddSyntheticModule</H1>
+<P><P>The <b>AddSyntheticModule</b> and <b>AddSyntheticModuleWide</b> methods add a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#ee28acb0-9eac-4a3b-92f9-6f33162b568c">synthetic module</a> to the module list the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger</a> maintains for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbols3::AddSyntheticModule(</b><BR><b>    IN ULONG64  </b><i>Base</i><b>,</b><BR><b>    IN ULONG  </b><i>Size</i><b>,</b><BR><b>    IN PCSTR  </b><i>ImagePath</i><b>,</b><BR><b>    IN PCSTR  </b><i>ModuleName</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugSymbols3::AddSyntheticModuleWide(</b><BR><b>    IN ULONG64  </b><i>Base</i><b>,</b><BR><b>    IN ULONG  </b><i>Size</i><b>,</b><BR><b>    IN PCWSTR  </b><i>ImagePath</i><b>,</b><BR><b>    IN PCWSTR  </b><i>ModuleName</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define AddSyntheticModuleT AddSyntheticModuleWide</b><BR><b>#else</b><BR><b>#define AddSyntheticModuleT AddSyntheticModule</b><BR><b>#endif</b><BR></P>
+<DL><H4><b>Parameters</b></H4>
+<DT><i>Base</i></DT>
+<DD>Specifies the location in the process's virtual address space of the base of the synthetic module.</DD>
+<DT><i>Size</i></DT>
+<DD>Specifies the size in bytes of the synthetic module.</DD>
+<DT><i>ImagePath</i></DT>
+<DD>Specifies the image name of the synthetic module.  This is the name that will be returned as the name of the executable file for the synthetic module.  The full path should be included if known.</DD>
+<DT><i>ModuleName</i></DT>
+<DD>Specifies the module name for the synthetic module.</DD>
+<DT><i>Flags</i></DT>
+<DD>Set to DEBUG_ADDSYNTHMOD_DEFAULT.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>AddSyntheticModule</b> and <b>AddSyntheticModuleWide</b> are available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4><b>Comments</b></H4>
+<P>The memory region of the synthetic module, described by the <i>Base</i> and <i>Size</i> parameters, must not overlap the memory region of any other module.</P>
+<P>If all the modules are reloaded &#8209; for example, by calling <a href="idebugsymbols_ec5df701-b081-45c4-b2e4-10c101ce69a4.xml.htm"><b>Reload</b></a> with the  <i>Module</i> parameter set to an empty string &#8209; all synthetic modules will be discarded.</P>
+<P>For more information about synthetic modules, see <a href="engine_dg_7c681050-ba73-4e87-818f-a9fac75a720b.xml.htm">Synthetic Modules</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="idebugsymbols_f1ed1ce4-53ad-469f-9ab8-17900b6870e8.xml.htm"><b>RemoveSyntheticModule</b></a>, <a href="idebugsymbols_8dcf97a7-eb9c-44aa-a2a7-1ad74cb396c1.xml.htm"><b>AddSyntheticSymbol</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: AddSyntheticModule RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

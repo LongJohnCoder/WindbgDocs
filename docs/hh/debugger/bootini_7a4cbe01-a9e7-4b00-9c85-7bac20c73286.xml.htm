@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Boot Parameters to Enable Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Boot Parameters to Enable Debugging"><xml><MSHelp:Keyword Index="A" Term="bootini_7a4cbe01-a9e7-4b00-9c85-7bac20c73286.xml"/>
+<META NAME="MS-HKWD" CONTENT="boot parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot entry parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="kernel debugging support [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="local debugging [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="single-computer debugging [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="cable debugging [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="IEEE 1394 cable [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="1394 connection [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="USB 2.0 debugging connection [WDK boot parameters]">
+<META NAME="MS-HKWD" CONTENT="null-modem cable [WDK boot parameters]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_7a4cbe01-a9e7-4b00-9c85-7bac20c73286.xml"></A>Boot Parameters to Enable Debugging</H1>
+<P>When a kernel debugging connection is established, the system gives a kernel debugger control over its execution. Also, when a bug check occurs or a kernel-mode program communicates with a debugger, the computer waits for a response from a kernel debugger before it continues.</P>
+<P>There are four basic debugging methods that you can configure by using boot parameters:</P><B></B><UL type="disc">
+<LI>Single-computer (local) debugging</LI>
+<LI>Debugging with a null-modem cable</LI>
+<LI>Debugging with an IEEE 1394 cable (only if the target computer and the host computer are both running Microsoft Windows XP or a later version of Windows)</LI>
+<LI>Debugging with a USB 2.0 debug cable (only if the target computer is running Windows Vista or a later version of Windows and the host computer is running Windows 2000 or a later version of Windows)</LI>
+</UL>
+<P></P>
+<H4>Boot Parameters for Local Debugging in Operating Systems Prior to Windows Vista</H4>
+<P>To enable kernel debugging on a single computer, add the <a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug</b></a> parameter to a boot entry. Do not add any other debugging-related parameters to a boot entry. </P>
+<P>The first boot entry in the following sample <i>Boot.ini</i> file includes the <b>/debug</b> parameter.</P>
+<P></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Local Debugging" /fastdetect <b>/debug</b><BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect <BR></nobr></P>
+<P></P>
+<P>The following Bootcfg command enables local debugging. The Bootcfg <b>/debug</b> switch, with a value of <b>ON</b>, adds the <b>/debug</b> parameter to a boot entry. The <b>/ID</b> switch identifies the boot entry. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bootcfg /debug ON /ID 1 </b><BR></nobr></P>
+<P></P>
+<P>The following sample Bootcfg display of a system with a <i>Boot.ini</i> file shows the result. The first boot entry is configured for local debugging.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot Entries<BR>------------<BR>Boot entry ID:    1<BR>OS Friendly Name: Windows XP Local Debugging<BR>Path:             multi(0)disk(0)rdisk(0)partition(2)\WINDOWS<BR>OS Load Options:  /fastdetect <b>/debug</b><BR><BR>Boot entry ID:    2<BR>OS Friendly Name: Microsoft Windows XP<BR>Path:             multi(0)disk(0)rdisk(0)partition(2)\WINDOWS<BR>OS Load Options:  /fastdetect<BR><BR></nobr></P>
+<P></P>
+<H4>Boot Option for Local Debugging in Windows Vista and Later</H4>
+<P>To enable kernel debugging on a single computer, use the BCDEdit <b>/debug</b> boot option. </P>
+<P>To use BCDEdit, open a Command Prompt window with elevated privileges (right click <b>Command Prompt</b> and click <b>Run as administrator</b> from the shortcut menu).</P>
+<P>The <b>/debug</b> option has the following syntax: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /debug</b> [<b>{</b><i>ID</i><b>}</b>] { <b>on</b> | <b>off</b> }<BR></nobr></P>
+<P></P>
+<P></P>
+<P>The <b>{</b><i>ID</i><b>}</b> is the GUID associated with a boot entry. If an <b>{</b><i>ID</i><b>}</b> is not specified, the settings apply to the current boot entry. The following command enables kernel debugging for the current Windows operating system boot entry:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /debug on</b><BR></nobr></P>
+<P></P>
+<P>The following command enables kernel debugging for the specified Windows operating system boot entry:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /debug  {18b123cd-2bf6-11db-bfae-00e018e2b8db} on</b><BR></nobr></P>
+<P></P>
+<P>You can use the <b>bcdedit /enum</b> command to view the current boot entries, their settings, and to identify the GUID associated with each entry.</P>
+<P>For more details, see <a href="bootini_4164b1eb-4436-42f3-9462-e31c06b892cc.xml.htm">BCDEdit /debug</a>. </P>
+<P></P>
+<H4>Boot Parameters to Debug with a Null-modem Cable in Operating Systems prior to Windows Vista</H4>
+<P>To enable debugging with a null-modem cable, add the <a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug</b></a> parameter with the <b>/debugport</b> and <b>/baudrate</b> subparameters to a boot entry.</P>
+<P>The first boot entry in the following sample <i>Boot.ini</i> file is configured for debugging with a null modem cable. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>[operating systems]<BR><b>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Debugging with Cable" /fastdetect /debug /debugport=COM1 /baudrate=57600</b><BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect <BR></nobr></P>
+<P></P>
+<P>Set the value of the <b>/debugport</b> subparameter to a COM port on the computer. Set the value of the <b>/baudrate</b> subparameter to the connection speed of the cable. (19200 bits per second is the default.)</P>
+<P>The following Bootcfg command enables debugging on the first boot entry. It sets the debugging port to COM1, and it sets the baud rate to 57,600 BPS.</P>
+<P>The Bootcfg <b>/debug</b> switch with a value of <b>ON</b> adds the <b>/debug</b> parameter to the boot entry. The Bootcfg <b>/port</b> switch adds the <b>/debugport</b> subparameter with a value of COM1. The Bootcfg <b>/baud</b> switch adds the <b>/baudrate</b> subparameter with a value of 57600. The <b>/ID</b> switch identifies the boot entry. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bootcfg /debug ON /port COM1 /baud 57600 /ID 1 </b><BR></nobr></P>
+<P></P>
+<P>The following Bootcfg sample shows the resulting boot entry on an Itanium-based system. The newly added parameters are displayed in bold type.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><BR>Boot Entries<BR>------------<BR>Boot entry ID:    1<BR>OS Friendly Name: Windows Server 2003, Enterprise<BR>OsLoadOptions:     <b>/debug /debugport=COM1 /baudrate=57600</b><BR>BootFilePath:     \Device\HarddiskVolume1\EFI\Microsoft\WINNT50\ia64ldr.efi<BR>OsFilePath:       \Device\HarddiskVolume3\WINDOWS<BR><BR></nobr></P>
+<P></P>
+<H4>Boot Options to Debug with a Null-modem Cable in Windows Vista and Later</H4>
+<P>To enable debugging with a null-modem cable in Windows Vista and later, use BCDEdit and set the debugging connection type to "SERIAL". You can set this globally by using the <a href="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml.htm"><b>BCDEdit /dbgsettings</b></a> command followed by <b>serial</b>, or set it for a specific boot entry by using the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDEdit /set</b></a> command followed by <b>debugtype serial</b>.  You must also use the <a href="bootini_4164b1eb-4436-42f3-9462-e31c06b892cc.xml.htm"><b>BCDEdit /debug</b></a> command to enable kernel debugging globally or for the desired operating system. </P>
+<P>If BCDEdit has not been used, the default global debug settings are for serial communications, using COM1 and a baud rate of 115,200. </P>
+<P>To display the current settings, use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /dbgsettings</b><BR><BR>debugtype               Serial<BR>debugport               1<BR>baudrate                115200<BR></nobr></P>
+<P></P>
+<P></P>
+<P>To use BCDEdit, open a Command Prompt window with elevated privileges (right click <b>Command Prompt</b> and click <b>Run as administrator</b> from the shortcut menu).</P>
+<P>To set the global debug settings to serial communications, use the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /dbgsettings serial</b> [<b>DEBUGPORT:</b><i>port</i>] [<b>BAUDRATE:</b><i>baud</i>] <BR></nobr></P>
+<P></P>
+<P>The following example shows how to specify serial communications as the global debug setting.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /dbgsettings serial debugport:1 baudrate:115200</b><BR></nobr></P>
+<P></P>
+<P>To set the debug settings to serial for a specific boot entry, or for the current entry, use the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set</b> [<b>{</b><i>ID</i><b>}</b>] [ <b>debugtype serial</b> | [<b>DEBUGPORT </b><i>port</i>] | [<b>BAUDRATE </b><i>baud</i>] ]<BR></nobr></P>
+<P></P>
+<P>If no <b>{</b><i>ID</i><b>}</b> is specified, the settings apply to the currently active boot entry. </P>
+<P>The following example shows how to specify the serial debug settings for a specific boot entry. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} debugtype serial</b><BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} debugport 1</b><BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} baudrate 115200</b><BR></nobr></P>
+<P></P>
+<P>You can use the <b>bcdedit /enum</b> command to view the current boot entries and their settings.</P>
+<P>For more details, see <a href="bootini_4164b1eb-4436-42f3-9462-e31c06b892cc.xml.htm">BCDEdit /debug</a> and <a href="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml.htm">BCDEdit /dbgsettings</a>.  </P>
+<P></P>
+<H4>Boot Parameters to Debug with a 1394 Cable in Operating Systems prior to Windows Vista</H4>
+<P>If your host computer and target computer are both running Windows XP or later, you can perform kernel debugging with an IEEE 1394 (FireWire) cable.</P>
+<P>To enable debugging with an IEEE 1394 cable, add the <a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug</b></a> parameter with the <b>/debugport</b> and <b>/channel</b> subparameters to a boot entry. Set the value of the <b>/debugport</b> subparameter to <b>1394</b>. Set the value of the <b>/channel</b> subparameter to the cable channel.</P>
+<P>The first boot entry in the following sample <i>Boot.ini</i> file is configured for debugging with a 1394 cable. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>[operating systems]<BR><b>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Debugging with 1394" /fastdetect /debug /debugport=1394 /channel=44</b><BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect<BR><BR></nobr></P>
+<P></P>
+<P>The following Bootcfg command enables debugging with a 1394 cable and sets the debugging channel to 44. The <b>/dbg1394</b> switch with a value of <b>ON</b> adds the <b>/debug</b> parameter and <b>/debugport=1394</b> subparameter to the boot entry, and the <b>/ch</b> switch adds the <b>/channel</b> subparameter to the boot entry. The <b>/id</b> switch identifies the second boot entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bootcfg /dbg1394 ON /ch 44 /id 2 </b><BR></nobr></P>
+<P></P>
+<P>The following Bootcfg displays shows the result of the command on a system with a <i>Boot.ini</i> file. The newly added parameters are displayed in bold type. The computer now has boot options for both a nondebug startup of Windows XP and a startup that enables debugging with a 1394 cable. The nondebugging startup is the default.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot Entries<BR>------------<BR>Boot entry ID:   1<BR>Friendly Name:   "Microsoft Windows XP Professional"<BR>Path:            multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>OS Load Options: /fastdetect<BR><BR>Boot entry ID:   2<BR>Friendly Name:   "1394 Debug Windows XP"<BR>Path:            multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>OS Load Options: /fastdetect <b>/debug /debugport=1394 /channel=44</b><BR><BR></nobr></P>
+<P></P>
+<P><P class="note"><b>Note</b>  Before performing kernel debugging over a 1394 cable, you must properly configure the software on both the target and the host. See <a href="r02~a_setup_1a_fcdec49c-b16c-4f8e-b1df-c1ceea0815f3.xml.htm">Disabling the 1394 Host Controller</a> and <a href="r03_setup_2_d48986aa-46cb-41a8-9be9-925545754d3a.xml.htm">Installing the 1394 Virtual Driver</a> for details.</P>
+</P>
+<P></P>
+<H4>Boot Parameters to Debug with a 1394 Cable in Windows Vista and Later</H4>
+<P>To enable debugging with an IEEE 1394 cable in Windows Vista and later, use BCDEdit and set the debugging connection type to "1394". You can set this globally by using the <a href="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml.htm"><b>BCDEdit /dbgsettings</b></a> command followed by <b>1394</b>, or set it for a specific boot entry by using the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDEdit /set</b></a> command followed by <b>debugtype 1394</b>.  You must also use the <a href="bootini_4164b1eb-4436-42f3-9462-e31c06b892cc.xml.htm"><b>BCDEdit /debug</b></a> command to enable kernel debugging globally or for the desired operating system. </P>
+<P>To use BCDEdit, open a Command Prompt window with elevated privileges (right click <b>Command Prompt</b> and click <b>Run as administrator</b> from the shortcut menu).</P>
+<P>To set the debug settings for 1394 globally, use the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /dbgsettings</b> <b>1394</b> [<b>channel:</b><i>channel</i>] <BR></nobr></P>
+<P></P>
+<P>The following example shows how to specify 1394 as the global debug setting.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /dbgsettings 1394 channel:32 </b><BR></nobr></P>
+<P></P>
+<P>To set the debug settings to serial for a specific boot entry, or for the current entry, use the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set</b> [<b>{</b><i>ID</i><b>}</b>] [ <b>debugtype 1394</b> | <b>channel </b><i>channel </i>] <BR></nobr></P>
+<P></P>
+<P>If an <b>{</b><i>ID</i><b>}</b> is not specified, the settings apply to the current boot entry. </P>
+<P>The following example shows how to specify the 1394 debug settings for a specific boot entry, and how to use the <b>/debug</b> option to enable kernel debugging for that boot entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} debugtype 1394</b><BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} channel 32</b><BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /debug {18b123cd-2bf6-11db-bfae-00e018e2b8db} on</b><BR></nobr></P>
+<P></P>
+<P>You can use the <b>bcdedit /enum</b> command to view the current boot entries and their settings.</P>
+<P>For more details, see <a href="bootini_4164b1eb-4436-42f3-9462-e31c06b892cc.xml.htm">BCDEdit /debug</a> and <a href="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml.htm">BCDEdit /dbgsettings</a>.  </P>
+<P></P>
+<H4>Boot Parameters to Debug with a USB 2.0 Debugging Cable in Operating Systems prior to Windows Vista</H4>
+<P>Debugging with a USB 2.0 debugging cable is not supported on a target computer running a version of Windows prior to Windows Vista.</P>
+<P></P>
+<H4>Boot Parameters to Debug with a USB 2.0 Debugging Cable in Windows Vista and Later</H4>
+<P>If your target computer is running Windows Vista or later, and your host computer is running Windows 2000 or later, you can perform kernel debugging with a USB 2.0 debugging cable.</P>
+<P>To enable debugging with a USB cable in these versions of Windows, use BCDEdit and set the debugging connection type to "USB". You can set this globally by using the <a href="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml.htm"><b>BCDEdit /dbgsettings</b></a> command followed by <b>usb</b>, or set it for a specific boot entry by using the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDEdit /set</b></a> command followed by <b>debugtype usb</b>.  You must also use the <a href="bootini_4164b1eb-4436-42f3-9462-e31c06b892cc.xml.htm"><b>BCDEdit /debug</b></a> command to enable kernel debugging globally or for the desired operating system. </P>
+<P>To use BCDEdit, open a Command Prompt window with elevated privileges (right click <b>Command Prompt</b> and click <b>Run as administrator</b> from the shortcut menu).</P>
+<P>To set the debug settings for USB globally, use the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /dbgsettings</b> <b>usb</b> [<b>targetname:</b><i>targetname</i>] <BR></nobr></P>
+<P></P>
+<P>The following example shows how to specify USB as the global debug setting.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /dbgsettings usb targetname:U1</b><BR></nobr></P>
+<P></P>
+<P>To set the debug settings to serial for a specific boot entry, or for the current entry, use the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set</b> [<b>{</b><i>ID</i><b>}</b>] [ <b>debugtype usb</b> | <b>targetname </b><i>targetname </i>]<BR></nobr></P>
+<P></P>
+<P>If no <b>{</b><i>ID</i><b>}</b> is specified, the settings apply to the current boot entry. </P>
+<P>The following example shows how to specify the USB debug settings for a specific boot entry, and how to use the <b>/debug</b> command to enable kernel debugging for that boot entry.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} debugtype usb</b><BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} targetname u2</b><BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /debug {18b123cd-2bf6-11db-bfae-00e018e2b8db} on</b><BR></nobr></P>
+<P></P>
+<P>You can use the <b>bcdedit /enum</b> command to view the current boot entries and their settings.</P>
+<P>For more details, see <a href="bootini_4164b1eb-4436-42f3-9462-e31c06b892cc.xml.htm">BCDEdit /debug</a> and <a href="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml.htm">BCDEdit /dbgsettings</a>.  </P>
+<P></P>
+<H4>Boot Parameters to Debug the Boot Process in Windows Vista and Later</H4>
+<P>If your target computer is running Windows Vista or later, and your host computer is running Windows 2000 or later, you can perform boot debugging of one of the boot components.</P>
+<P>To enable boot debugging, use the <a href="bootini_1b7477e9-580d-46e8-a37d-9f715ef4e5fa.xml.htm"><b>BCDEdit /bootdebug</b></a> command and specify the appropriate boot component. If you wish to perform kernel debugging after Windows starts, use the <a href="bootini_4164b1eb-4436-42f3-9462-e31c06b892cc.xml.htm"><b>BCDEdit /debug</b></a> command as well.</P>
+<P>You must also select a debugging connection (serial, 1394, or USB 2.0). This can be done with either the <a href="bootini_d293e411-5595-4c43-8060-4c6b07cbfb29.xml.htm"><b>BCDEdit /dbgsettings</b></a> or <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDEdit /set</b></a> command, just as in normal kernel debugging. command to enable debugging. </P>
+<P>For more details, see <a href="bootini_1b7477e9-580d-46e8-a37d-9f715ef4e5fa.xml.htm">BCDEdit /bootdebug</a>. </P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Boot Parameters to Enable Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

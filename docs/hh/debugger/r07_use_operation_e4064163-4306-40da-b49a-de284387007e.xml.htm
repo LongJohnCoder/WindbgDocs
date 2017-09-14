@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Accessing Memory by Virtual Address</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Accessing Memory by Virtual Address"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_e4064163-4306-40da-b49a-de284387007e.xml"/>
+<META NAME="MS-HKWD" CONTENT="virtual address, accessing memory"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_e4064163-4306-40da-b49a-de284387007e.xml"></A>Accessing Memory by Virtual Address</H1>
+<P>To access specified memory addresses or address ranges, you can use several commands.</P>
+<P>The following commands can read or write memory in a variety of formats. These formats include hexadecimal bytes, words (words, double words, and quad-words), integers (short, long, and quad integers and unsigned integers), floating-point numbers (10-byte, 16-byte, 32-byte, and 64-byte real numbers), and ASCII characters.</P><B></B><UL type="disc">
+<LI>The <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>d* (Display Memory)</b></a> command displays the contents of a specified memory address or range.</LI>
+<LI>The <a href="r16_cmds_c_01f3ea78-e52a-4c87-a1cb-071feb0e422c.xml.htm"><b>e* (Enter Values)</b></a> command writes a value to the specified memory address.</LI>
+<LI><i>(WinDbg only)</i>  The <a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory window</a> displays the contents of a specified memory range and writes to any location in that range.</LI>
+</UL>
+<P></P>
+<P>You can use the following commands to handle more specialized data types:</P><B></B><UL type="disc">
+<LI>The <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a> command finds a variety of data types and displays data structures that have been created by the application that is being debugged. This command is highly versatile and has many variations and options.</LI>
+<LI>The <a href="r16_cmds_c_693f2b7e-acb9-4200-8292-767072a8000d.xml.htm"><b>ds, dS (Display String)</b></a> command displays a STRING, ANSI_STRING, or UNICODE_STRING data structure.</LI>
+<LI>The <a href="r16_cmds_c_637e6a63-a643-4ce5-8e4b-e4ddc70f49cb.xml.htm"><b>dl (Display Linked List)</b></a> command traces and displays a linked list.</LI>
+<LI>The <a href="r16_cmds_c_4865ae85-0c91-47f6-ad21-fa4c1db674be.xml.htm"><b>d*s (Display Words and Symbols)</b></a> command finds double-words or quad-words that might contain symbol information and then displays the data and the symbol information.</LI>
+<LI>The <a href="r24_exts_general_a_881d012e-2175-492d-84fe-ce4d12f80691.xml.htm"><b>!address</b></a> extension command displays information about the properties of the memory that is located at a specific address.</LI>
+</UL>
+<P></P>
+<P>You can use the following commands to manipulate memory ranges:</P><B></B><UL type="disc">
+<LI>The <a href="r17_cmds_i_5b3de760-98e6-4da5-8d5c-cb48cfd3d03e.xml.htm"><b>m (Move Memory)</b></a> command moves the contents of one memory range to another.</LI>
+<LI>The <a href="r16_cmds_c_8a73604a-382c-4d01-ba56-871a7675f6bc.xml.htm"><b>f (Fill Memory)</b></a> command writes a pattern to a memory range, repeating it until the range is full.</LI>
+<LI>The <a href="r16_cmds_c_fc4bffa8-b064-48f3-b2a6-b3985c6d68d3.xml.htm"><b>c (Compare Memory)</b></a> command compares the contents of two memory ranges.</LI>
+<LI>The <a href="r18_cmds_s_7a06634c-21dc-40a0-9b81-d3449a652870.xml.htm"><b>s (Search Memory)</b></a> command searches for a specified pattern within a memory range or searches for any ASCII or Unicode characters that exist in a memory range.</LI>
+<LI>The <a href="r20_metacmds_e_0bdc3210-dfc8-46f0-81d9-9b195551fb6d.xml.htm"><b>.holdmem (Hold and Compare Memory)</b></a> command compares one memory range to another.</LI>
+</UL>
+<P></P>
+<P>In most situations, these commands interpret their parameters in the current radix. Therefore, you should add <b>0x</b> before hexadecimal addresses if the current radix is not 16. However, the display output of these commands is typically in hexadecimal format, regardless of the current radix. (For more information about the output, see the individual command topics.) The <a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory window</a> displays integers and real numbers in decimal format and displays other formats in hexadecimal format.</P>
+<P>To change the default radix, use the <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command. To quickly convert numbers from one base to another, use the <a href="r15_cmds_a_c6ea44eb-73b8-451d-8054-ded9b17ac2bd.xml.htm"><b>? (Evaluate Expression)</b></a> command or the <a href="r20_metacmds_e_231f22c0-4744-4c01-ac46-372b490bab6e.xml.htm"><b>.formats (Show Number Formats)</b></a> command.</P>
+<P>When you are performing user-mode debugging, the meaning of virtual addresses is determined by the current process. When you are performing kernel-mode debugging, the meaning of virtual addresses can be controlled by the debugger. For more information, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#e761ea09-6dde-4444-9472-9e71933f4e71">Process Context</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Accessing Memory by Virtual Address RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

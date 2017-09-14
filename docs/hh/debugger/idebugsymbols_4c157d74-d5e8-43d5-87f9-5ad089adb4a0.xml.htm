@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetSymbolEntriesByName</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetSymbolEntriesByName"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetSymbolEntriesByName"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_4c157d74-d5e8-43d5-87f9-5ad089adb4a0.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::GetSymbolEntriesByName method">
+<META NAME="MS-HKWD" CONTENT="GetSymbolEntriesByName (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_4c157d74-d5e8-43d5-87f9-5ad089adb4a0.xml"></A>GetSymbolEntriesByName</H1>
+<P><P>The <b>GetSymbolEntriesByName</b> and <b>GetSymbolEntriesByNameWide</b> methods return the <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35">symbols</a> whose names match a given pattern.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbols3::GetSymbolEntriesByName(</b><BR><b>    IN PCSTR  </b><i>Symbol</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    OUT OPTIONAL PDEBUG_MODULE_AND_ID  </b><i>Ids</i><b>,</b><BR><b>    IN ULONG  </b><i>IdsCount</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>Entries</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugSymbols3::GetSymbolEntriesByNameWide(</b><BR><b>    IN PCWSTR  </b><i>Symbol</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    OUT OPTIONAL PDEBUG_MODULE_AND_ID  </b><i>Ids</i><b>,</b><BR><b>    IN ULONG  </b><i>IdsCount</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>Entries</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetSymbolEntriesByNameT GetSymbolEntriesByNameWide</b><BR><b>#else</b><BR><b>#define GetSymbolEntriesByNameT GetSymbolEntriesByName</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Symbol</i></DT>
+<DD>Specifies the pattern used to determine which symbols to return.  This method returns the symbols whose name matches the <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">string wildcard syntax</a> pattern <i>Symbol</i>.</DD>
+<DT><i>Flags</i></DT>
+<DD>Set to zero.</DD>
+<DT><i>Ids</i></DT>
+<DD>Receives the symbols.  This is an array of <i>IdsCount</i> entries of type <a href="structures_d53c2a34-f855-45a0-918b-0a8dfb936828.xml.htm">DEBUG_MODULE_AND_ID</a>.  If <i>Ids</i> is NULL, this information is not returned.</DD>
+<DT><i>IdsCount</i></DT>
+<DD>Specifies the number of entries that the array <i>Ids</i> can hold.</DD>
+<DT><i>Entries</i></DT>
+<DD>Receives the number of symbols whose names match the pattern <i>Symbol</i>.  If <i>entries</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetSymbolEntriesByName</b> and <b>GetSymbolEntriesByNameWide</b> are available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4><b>Comments</b></H4>
+<P>For more information about symbols, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Symbols</a>.</P>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="idebugsymbols_dba4bc10-a8a8-476d-b668-652c24743ea5.xml.htm"><b>GetSymbolEntriesByOffset</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetSymbolEntriesByName RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

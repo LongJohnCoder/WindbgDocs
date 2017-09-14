@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wudfext.wudfdumpobjects</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wudfext.wudfdumpobjects"><xml><MSHelp:Keyword Index="A" Term="r33~e_exts_umdf_0047d2cf-5cb8-4cea-bb15-9f95035573b4.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wudfext.wudfdumpobjects extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~e_exts_umdf_0047d2cf-5cb8-4cea-bb15-9f95035573b4.xml"></A>!wudfext.wudfdumpobjects</H1>
+<P><P>The <b>!wudfext.wudfdumpobjects</b> extension displays outstanding UMDF objects.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wudfext.wudfdumpobjects</b> <i>ObjTrackerAddress</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>ObjTrackerAddress</i></DT>
+<DD>Specifies the address to track leaked objects. This address is displayed in the driver-stop message in the debugger when a leak occurs. </DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP with UMDF version 1.7 and later</b></TD>
+<TD Width=""><i>Wudfext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If the UMDF object tracking option (<b>TrackObjects</b>) has been enabled in WDF Verifier, you can use <b>!wudfext.wudfdumpobjects</b> to see any leaked objects that remain after the driver unloads. </P>
+<P>If the <b>TrackObjects</b> option has been enabled, the address of the object tracker is automatically displayed when a leak is detected.  Use this address as <i>ObjTrackerAddress</i> when executing <b>!wudfext.wudfdumpobjects</b>. </P>
+<P>This extension can be used at any time, even if UMDF has not broken in to the debugger. </P>
+<P>If UMDF is version 1.9 or above, you can use either <a href="r33~e_exts_umdf_44e63815-7c05-4cdb-b157-ec323db05ff5.xml.htm"><b>!wudfext.umdevstack</b></a> or <a href="r33~e_exts_umdf_a5326621-e8ae-4c14-91c3-4cb79fc4f618.xml.htm"><b>!wudfext.umdevstacks</b></a> to determine the address of the object tracker. This address can then be passed to <b>!wudfext.wudfdumpobjects</b>.  Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!umdevstacks</b> <BR>Number of device stacks: 1<BR>  Device Stack: 0x038c6f08    Pdo Name: \Device\USBPDO-11<BR>    Number of UM devices: 1<BR>    Device 0<BR>      Driver Config Registry Path: WUDFOsrUsbFx2<BR>      UMDriver Image Path: D:\Windows\system32\DRIVERS\UMDF\WUDFOsrUsbFx2.dll<BR>      Fx Driver: IWDFDriver 0x3076ff0<BR>      Fx Device: IWDFDevice 0x3082e70<BR>        IDriverEntry: WUDFOsrUsbFx2!CMyDriver 0x0306eff8<BR>      Open UM files (use !umfile &lt;addr&gt; for details): <BR>        0x04a8ef84<BR>      Device XFerMode: CopyImmediately RW: Buffered CTL: Buffered<BR>      Object Tracker Address: 0x03074fd8<BR>        Object   Tracking ON<BR>        Refcount Tracking OFF<BR>    DevStack XFerMode: CopyImmediately RW: Buffered CTL: Buffered<BR><BR>0: kd&gt; <b>!wudfdumpobjects 0x03074fd8</b> <BR>WdfTypeDriver    Object: 0x03076fb0, Interface: 0x03076ff0<BR>WdfTypeDevice   Object: 0x03082e30, Interface: 0x03082e70<BR>WdfTypeIoTarget Object: 0x03088f50, Interface: 0x03088f90<BR>WdfTypeIoQueue                Object: 0x0308ce58, Interface: 0x0308ce98<BR>WdfTypeIoQueue                Object: 0x03090e58, Interface: 0x03090e98<BR>WdfTypeIoQueue                Object: 0x03092e58, Interface: 0x03092e98<BR>WdfTypeIoTarget Object: 0x03098f40, Interface: 0x03098f80<BR>WdfTypeFile         Object: 0x0309cfa0, Interface: 0x0309cfe0<BR>WdfTypeUsbInterface         Object: 0x030a0f98, Interface: 0x030a0fd8<BR>WdfTypeRequest Object: 0x030a2ef8, Interface: 0x030a2f38<BR>WdfTypeIoTarget Object: 0x030a6f30, Interface: 0x030a6f70<BR>WdfTypeIoTarget Object: 0x030aaf30, Interface: 0x030aaf70<BR>WdfTypeIoTarget Object: 0x030aef30, Interface: 0x030aef70<BR>WdfTypeRequest Object: 0x030c6ef8, Interface: 0x030c6f38<BR>WdfTypeRequest Object: 0x030ceef8, Interface: 0x030cef38<BR>WdfTypeMemoryObject    Object: 0x030d6fb0, Interface: 0x030d6ff0<BR>WdfTypeMemoryObject    Object: 0x030dcfb0, Interface: 0x030dcff0<BR>WdfTypeFile         Object: 0x030e4fa8, Interface: 0x030e4fe8<BR>WdfTypeFile         Object: 0x030e6fa8, Interface: 0x030e6fe8<BR>WdfTypeFile         Object: 0x030e8fa8, Interface: 0x030e8fe8<BR>WdfTypeRequest Object: 0x030eaef8, Interface: 0x030eaf38<BR>WdfTypeMemoryObject    Object: 0x030ecfb0, Interface: 0x030ecff0<BR>WdfTypeMemoryObject    Object: 0x030eefb0, Interface: 0x030eeff0<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~e_umdf_274b4c46-4590-4992-9646-2353377d7549.xml.htm">User-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wudfext.wudfdumpobjects RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

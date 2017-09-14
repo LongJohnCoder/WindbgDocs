@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!obtrace</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !obtrace"><xml><MSHelp:Keyword Index="A" Term="r28_exts_kernel_N_7997a09f-935a-4f81-b729-80fb86b86f79.xml"/>
+<META NAME="MS-HKWD" CONTENT="!obtrace extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r28_exts_kernel_N_7997a09f-935a-4f81-b729-80fb86b86f79.xml"></A>!obtrace</H1>
+<P><P>The <b>!obtrace </b>extension displays object reference tracing data for the specified object.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!obtrace</b> <i>Object</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Object</i></DT>
+<DD>A pointer to the object or a path.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The object reference tracing feature of Windows records sequential stack traces whenever an object reference counter is incremented or decremented. </P>
+<P></P>
+<P>Before using this extension to display object reference tracing data, you must use <a href="gflags_ea035958-0ade-4e07-856e-cfd1ed0b4df0.xml.htm">GFlags</a> to enable <a href="gflags_29eddbe3-a557-4bd0-8907-2a58e7b7d9f3.xml.htm">object reference tracing</a> for the specified object. You can enable object reference tracing as a kernel flag (run-time) setting, in which the change is effective immediately, but disappears if you shut down or restart; or as a registry setting, which requires a restart, but remains effective until you change it. </P>
+<P></P>
+<P>Here is an example of the output from the <b>!obtrace</b> extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!obtrace 0xfa96f700</b><BR>Object: fa96f700        Image: cmd.exe<BR>Sequence  (+/-)  Stack<BR>--------  -----  ---------------------------------------------------<BR>   2421d    +1  nt!ObCreateObject+180<BR>                nt!NtCreateEvent+92<BR>                nt!KiFastCallEntry+104<BR>                nt!ZwCreateEvent+11<BR>                win32k!UserThreadCallout+6f<BR>                win32k!W32pThreadCallout+38<BR>                nt!PsConvertToGuiThread+174<BR>                nt!KiBBTUnexpectedRange+c<BR><BR>   2421e    -1  nt!ObfDereferenceObject+19<BR>                nt!NtCreateEvent+d4<BR>                nt!KiFastCallEntry+104<BR>                nt!ZwCreateEvent+11<BR>                win32k!UserThreadCallout+6f<BR>                win32k!W32pThreadCallout+38<BR>                nt!PsConvertToGuiThread+174<BR>                nt!KiBBTUnexpectedRange+c<BR><BR>   2421f    +1  nt!ObReferenceObjectByHandle+1c3<BR>                win32k!xxxCreateThreadInfo+37d<BR>                win32k!UserThreadCallout+6f<BR>                win32k!W32pThreadCallout+38<BR>                nt!PsConvertToGuiThread+174<BR>                nt!KiBBTUnexpectedRange+c<BR><BR>   24220    +1  nt!ObReferenceObjectByHandle+1c3<BR>                win32k!ProtectHandle+22<BR>                win32k!xxxCreateThreadInfo+3a0<BR>                win32k!UserThreadCallout+6f<BR>                win32k!W32pThreadCallout+38<BR>                nt!PsConvertToGuiThread+174<BR>                nt!KiBBTUnexpectedRange+c<BR><BR>   24221    -1  nt!ObfDereferenceObject+19<BR>                win32k!xxxCreateThreadInfo+3a0<BR>                win32k!UserThreadCallout+6f<BR>                win32k!W32pThreadCallout+38<BR>                nt!PsConvertToGuiThread+174<BR>                nt!KiBBTUnexpectedRange+c<BR><BR>----  ----------------------------------------------------------<BR>References: 3, Dereferences 2<BR><BR></nobr></P>
+<P></P>
+<P>The primary indicators in the <b>!obtrace 0xfa96f700</b> display are listed in the following table.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Sequence</b></TD>
+<TD Width="">Represents the order of operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>+/-</b></TD>
+<TD Width="">Indicates a reference or a dereference operation. <BR><BR><b>+1</b> indicates a reference operation.<BR><BR><b>-1</b> indicates a dereference operation.<BR><BR><b>+/-</b><i>n</i> indicates multiple reference/dereference operations.<BR><BR></TD>
+</TR>
+</table>
+<P></P>
+<P>The object reference traces on x64-based target computers might be incomplete because it is not always possible to acquire stack traces at IRQL levels higher than PASSIVE_LEVEL.</P>
+<P></P>
+<P>You can stop execution at any time by pressing CTRL+BREAK (in WinDbg) or CTRL+C (in KD).</P>
+<H4><b>Additional Information</b></H4>
+<P>For more information about the Global Flags utility (GFlags), see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !obtrace RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

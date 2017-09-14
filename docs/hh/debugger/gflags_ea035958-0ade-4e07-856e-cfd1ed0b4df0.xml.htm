@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GFlags</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GFlags"><xml><MSHelp:Keyword Index="A" Term="GFlags_ea035958-0ade-4e07-856e-cfd1ed0b4df0.xml"/>
+<META NAME="MS-HKWD" CONTENT="GFlags">
+<META NAME="MS-HKWD" CONTENT="Global Flags Editor (gflags.exe)">
+<META NAME="MS-HKWD" CONTENT="Global Flags Editor (gflags.exe), [See &quot;GFlags&quot;]">
+<META NAME="MS-HKWD" CONTENT="gflags.exe (Global Flags Editor)">
+<META NAME="MS-HKWD" CONTENT="gflags.exe (Global Flags Editor), [See &quot;GFlags&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_ea035958-0ade-4e07-856e-cfd1ed0b4df0.xml"></A>GFlags</H1>
+<P>GFlags (the Global Flags Editor), <i>gflags.exe</i>, enables and disables advanced debugging, diagnostic, and troubleshooting features. It is most often used to turn on indicators that other tools track, count, and log.</P>
+<P>Driver developers and testers often use GFlags to turn on debugging, logging and test features, either directly, or by including GFlags commands in a test script. The page heap verification features can help you to identify memory leaks and buffer errors in kernel-mode drivers.</P>
+<P>GFlags has both a dialog box and a command-line interface. Most features are available from both interfaces, but some features are accessible from only one of the interfaces. (See <a href="gflags_efb81e97-b5df-48b2-b164-8d4ac68c90a5.xml.htm">GFlags Details</a>.)</P>
+<P>The version of GFlags described in this document is included in Debugging Tools for Windows. </P>
+<H4>New Features</H4><B></B><UL type="disc">
+<LI>Page heap verification. GFlags now includes the functions of PageHeap (<i>pageheap.exe</i>), a tool that enables heap allocation monitoring. PageHeap was included in previous versions of Windows. </LI>
+<LI>No reboot required for the Special Pool feature. On Windows Vista and later versions of Windows, you can enable, disable, and configure the Special Pool feature without restarting ("rebooting") the computer. For information, see <a href="gflags_49d59420-7de8-4925-8f99-7ee0e8acd8ec.xml.htm">Special Pool</a>.</LI>
+<LI>Object Reference Tracing. A new flag enables tracing of object referencing and object dereferencing in the kernel. This new feature of Windows detects when an object reference count is decremented too many times or not decremented even though an object is no longer used. This flag is supported only in Windows Vista and later versions of Windows.</LI>
+<LI>New dialog box design. The GFlags dialog box has tabbed pages for easier navigation.</LI>
+<LI></LI>
+</UL>
+<P></P>
+<H4>Requirements</H4>
+<P>To use most GFlags features, including setting flags in the registry or in kernel mode, or enabling page heap verification, you must be a member of the Administrators group on the computer. However, prior to Windows Vista, users with at least Guest account access can launch a program from the <b>Global Flags</b> dialog box. </P>
+<P>When features do not work, or work differently, on particular operating system versions, the differences are explained in the description of the feature.</P>
+<P>This topic includes:</P><B></B><div class="indent1">
+<P><a href="gflags_8115603b-a900-4412-a524-4cf25b0481bb.xml.htm">GFlags Overview</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_efb81e97-b5df-48b2-b164-8d4ac68c90a5.xml.htm">GFlags Details</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_63e1eba1-7ac0-4577-b130-ed091210a4c6.xml.htm">GFlags Commands</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_bf174207-b0ea-40b3-b4d7-fc7e921e119e.xml.htm">GFlags Flag Table</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_dfff1d36-2831-4e62-b8ce-16457d783651.xml.htm">GFlags and PageHeap</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_386ff394-9e91-4dd3-b0bf-5cea6e18a02d.xml.htm">Global Flags Dialog Box</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_4c304bbf-dbf7-4a8a-bfd8-5235e9841ade.xml.htm">GFlags Examples</a> </P>
+</div>
+<div class="indent1">
+<P><a href="gflags_a79083df-57a3-487a-92b0-a05402c20b93.xml.htm">Global Flag Reference</a> </P>
+</div>
+<P></P>
+<P class="note"><b>Caution</b>  Incorrect use of this tool can degrade system performance or prevent Windows from starting, requiring you to reinstall Windows. <P class="note"><b>Important</b>  Pool tagging is permanently enabled on Windows Server 2003 and later versions of Windows, including Windows Vista. On these systems, the <b>Enable pool tagging</b> check box on the <b>Global Flags</b> dialog box is dimmed and commands to enable or disable pool tagging fail.</P>
+</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GFlags RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debug Privilege</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debug Privilege"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_20d9b919-3b1a-4913-84cb-200bc527ce71.xml"/>
+<META NAME="MS-HKWD" CONTENT="debug privilege">
+<META NAME="MS-HKWD" CONTENT="debug privilege, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_20d9b919-3b1a-4913-84cb-200bc527ce71.xml"></A>Debug Privilege</H1>
+<P>Debug privilege is a security policy setting that allows users to attach a debugger to a process or to the kernel. An administrator can modify a security policy for a user group to include or to remove this functionality. Developers who are debugging their own applications do not need this user privilege. Developers who are debugging system components or who are debugging remote components will need this user privilege. This user privilege provides complete access to sensitive and critical operating system components. By default, this property is enabled for users with Administrator rights. A user with Administrator privileges can enable this property for other user groups. </P>
+<H4>Modifying Debug Privilege for a Process</H4>
+<P>A developer can programmatically alter the debug privilege for a specific process to prevent anyone from debugging that process. Disabling this privilege from within a process prevents anyone from attaching a debugger to the process. The following example illustrates how one can disable the debug privilege.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>//<BR>//  SetPrivilege enables/disables process token privilege.<BR>//<BR>BOOL SetPrivilege(HANDLE hToken, LPCTSTR lpszPrivilege, BOOL bEnablePrivilege)<BR>{<BR>    LUID luid;<BR>    BOOL bRet=FALSE;<BR><BR>    if (LookupPrivilegeValue(NULL, lpszPrivilege, &amp;luid))<BR>    {<BR>        TOKEN_PRIVILEGE tp;<BR><BR>        tp.PrivilegeCount=1;<BR>        tp.Privileges[0].Luid=luid;<BR>        tp.Privileges[0].Attributes=(bEnablePrivilege) ? SE_PRIVILEGE_ENABLED: 0;<BR>        //<BR>        //  Enable the privilege or disable all privileges.<BR>        //<BR>        if (AdjustTokenPrivileges(hToken, FALSE, &amp;tp, NULL, (PTOKEN_PRIVILEGES)NULL, (PDWORD)NULL))<BR>        {<BR>            //<BR>            //  Check to see if you have proper access.<BR>            //  You may get "ERROR_NOT_ALL_ASSIGNED".<BR>            //<BR>            bRet=(GetLastError() == ERROR_SUCCESS);<BR>        }<BR>    }<BR>    return bRet;<BR>}<BR></nobr></P>
+<P></P>
+<P>The following  example shows how to use this function:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HANDLE hProcess=GetCurrentProcess();<BR>HANDLE hToken;<BR><BR>if (OpenProcessToken(hProcess, TOKEN_ADJUST_PRIVILEGES, &amp;hToken))<BR>{<BR>    SetPrivilege(hToken, SE_DEBUG_NAME, FALSE);<BR>    CloseHandle(hToken);<BR>}<BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debug Privilege RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

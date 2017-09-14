@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wdfkd.wdftmffile</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wdfkd.wdftmffile"><xml><MSHelp:Keyword Index="A" Term="r33~c_exts_WDF_2fbedc41-a957-49aa-bd1b-53c6662106e0.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wdfkd.wdftmffile extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~c_exts_WDF_2fbedc41-a957-49aa-bd1b-53c6662106e0.xml"></A>!wdfkd.wdftmffile</H1>
+<P>The <b>!wdfkd.wdftmffile </b>extension sets the trace message format (.<i>tmf</i>) file to use when the debugger is formatting Kernel-Mode Driver Framework (KMDF) error log records for the <a href="r33~c_exts_wdf_b04c0ea2-3c82-41c1-abd2-61e5e57d29da.xml.htm"><b>!wdfkd.wdflogdump</b></a> or <a href="r33~c_exts_wdf_cd751746-4ee3-4cd0-84a9-e3e726c8242c.xml.htm"><b>!wdfkd.wdfcrashdump</b></a> extensions.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>!wdfkd.wdftmffile </b><i>TMFpath</i><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>TMFpath</i></DT>
+<DD>A path that contains the <i>.tmf</i> file. </DD>
+</DL>
+<H4>DLL</H4>
+<P><i>Wdfkd.dll</i></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>You must use the <b>!wdfkd.wdftmffile</b> extension before you can use the <a href="r33~c_exts_wdf_b04c0ea2-3c82-41c1-abd2-61e5e57d29da.xml.htm"><b>!wdfkd.wdflogdump</b></a> or <a href="r33~c_exts_wdf_cd751746-4ee3-4cd0-84a9-e3e726c8242c.xml.htm"><b>!wdfkd.wdfcrashdump</b></a> extensions. </P>
+<P>The following example shows how to use the <b>!wdfkd.wdftmffile</b> extension from the root WDK directory, for KMDF version 1.5.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; !wdftmffile tools\tracing\&lt;<i>platform</i>&gt;\wdf1005.tmf<BR><BR></nobr></P>
+<P>Note that the path might be different for the version of the Windows Driver Kit (WDK) that you are using. Also note that the <i>.tmf</i> file's name represents the version of KMDF that you are using. For example, <i>Wdf1005.tmf</i> is the <i>.tmf</i> file for KMDF version 1.5.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~c_wdf_b21958be-e8b5-460c-87b7-a755da1cf37e.xml.htm">Kernel-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wdfkd.wdftmffile RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

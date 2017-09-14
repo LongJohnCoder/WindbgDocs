@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.bpsync (Synchronize Threads at Breakpoint)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .bpsync (Synchronize Threads at Breakpoint)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_1f20df03-332b-4abc-b513-db12a008b009.xml"/>
+<META NAME="MS-HKWD" CONTENT=".bpsync (Synchronize Threads at Breakpoint)">
+<META NAME="MS-HKWD" CONTENT="Synchronize Threads at a Breakpoint (.bpsync) command">
+<META NAME="MS-HKWD" CONTENT="breakpoints, Synchronize Threads at a Breakpoint (.bpsync) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_1f20df03-332b-4abc-b513-db12a008b009.xml"></A>.bpsync (Synchronize Threads at Breakpoint)</H1>
+<P>When a thread reaches a breakpoint, the <b>.bpsync</b> command freezes all other threads, until the thread to which the breakpoint applies has stepped through the breakpoint.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.bpsync 1</b><BR><b>.bpsync 0</b><BR><b>.bpsync </b><BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>1</b></DT>
+<DD>Causes all threads to freeze when one thread has reached a breakpoint. After the thread to which the breakpoint applies has stepped through the breakpoint, the other threads are unfrozen. </DD>
+<DT><b>0</b></DT>
+<DD>Allows other threads to continue executing when one thread has reached a breakpoint. This is the default behavior. </DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>With no parameters. the <b>.bpsync</b> command displays the current rule governing breakpoint synchronization behavior. </P>
+<P>The <b>.bpsync</b> command applies both to software breakpoints (set with <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bp</b></a>, <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bu</b></a>, or <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bm</b></a>) and to processor breakpoints (set with <a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba</b></a>).</P>
+<P>If there is a possibility of multiple threads running through the same code, the <b>.bpsync 1</b> command can be useful for capturing all breakpoint occurrences. Without this command, a breakpoint occurrence could be missed because the first thread to reach the breakpoint always causes the debugger to temporarily remove the breakpoint. In the short period when the breakpoint is removed, other threads could reach the same place in the code and not trigger the breakpoint as intended.</P>
+<P>The temporary removal of breakpoints is a normal aspect of debugger operation. When the target reaches a breakpoint and is resumed, the debugger has to remove the breakpoint temporarily so that the target can execute the real code. After the real instruction has been executed, the debugger reinserts the break. To do this, the debugger restores the code (or turns off data breaks), does a single-step, and then puts the break back.</P>
+<P>Note that if you use <b>.bpsync 1</b>, there is a risk of deadlocks among the threads that have been frozen. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .bpsync (Synchronize Threads at Breakpoint) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

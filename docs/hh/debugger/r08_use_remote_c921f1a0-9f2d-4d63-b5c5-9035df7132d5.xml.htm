@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Process Server Examples</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Process Server Examples"><xml><MSHelp:Keyword Index="A" Term="r08_use_remote_c921f1a0-9f2d-4d63-b5c5-9035df7132d5.xml"/>
+<META NAME="MS-HKWD" CONTENT="process server, examples"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r08_use_remote_c921f1a0-9f2d-4d63-b5c5-9035df7132d5.xml"></A>Process Server Examples</H1>
+<P>Suppose one person is running an application on a computer named <i>\\BOX17</i>. This application has problems, but the debugging technician is at a different site.</P>
+<P>The first person sets up a process server using DbgSrv on <i>\\BOX17</i>. The target application has a process ID of 122. TCP protocol is chosen, with a socket port number of 1025. The server is started with the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>E:\Debugging Tools for Windows&gt; <b>dbgsrv -t tcp:port=1025</b> <BR><BR></nobr></P>
+<P>On the other computer, the technician starts WinDbg as a smart client with this command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>G:\Debugging Tools&gt; <b>windbg -premote tcp:server=BOX17,port=1025 -p 122 </b><BR><BR></nobr></P>
+<P>Here is another example. In this case, NPIPE protocol is chosen, and CDB is used instead of WinDbg. The first user chooses a pipe name. This can be any alphanumeric string &#8212; in this example, "AnotherPipe". The process server is started with this command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>E:\Debugging Tools for Windows&gt; <b>dbgsrv -t npipe:pipe=AnotherPipe</b> <BR><BR></nobr></P>
+<P>The technician is not sure what name was used, so he or she queries the network for pipe names:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>G:\Debugging Tools&gt; <b>cdb -QR \\BOX17</b> <BR>Servers on \\BOX17:<BR>Debugger Server - npipe:Pipe=MainPipe<BR>Remote Process Server - npipe:Pipe=AnotherPipe<BR><BR></nobr></P>
+<P>Two pipes are shown. However, only one is a process server &#8212; the other is a debugging server, and we are not interested in that. So <b>AnotherPipe</b> must be the correct name. Then the following command can be used to start the smart client:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>G:\Debugging Tools&gt; <b>cdb -premote npipe:server=BOX17,pipe=AnotherPipe</b> <b>-v sol.exe</b> <BR><BR></nobr></P>
+<P>For a more complicated example using a process server, see <a href="r08_use_remote_a8696130-ff1b-4f54-9341-24de2a93942e.xml.htm">Symbols in the Middle</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Process Server Examples RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

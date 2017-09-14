@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM"/>
+<MSHelp:Keyword Index="A" Term="IDebugAdvanced_60564876-4bdf-4236-875e-f094d8b0e84a.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM request operation"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugAdvanced_60564876-4bdf-4236-875e-f094d8b0e84a.xml"></A>DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM</H1>
+<P>The DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation reads a stream from a user-mode minidump target.</P>
+<DL><H4>Parameters</H4>
+<DT><i>InBuffer</i></DT>
+<DD>The stream to read and the buffer into which to place the contents of the stream.  The type of this parameter is DEBUG_READ_USER_MINIDUMP_STREAM.</DD>
+<DT><i>OutBuffer</i></DT>
+<DD>Not used.</DD>
+</DL>
+<P></P>
+<P>The DEBUG_READ_USER_MINIDUMP_STREAM structure holds the parameters for the DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_READ_USER_MINIDUMP_STREAM</b><BR><b>{</b><BR><b>    IN ULONG  StreamType;</b><BR><b>    IN ULONG  Flags;</b><BR><b>    IN ULONG64  Offset;</b><BR><b>    OUT PVOID  Buffer;</b><BR><b>    IN ULONG  BufferSize;</b><BR><b>    OUT ULONG  BufferUsed;</b><BR><b>} DEBUG_READ_USER_MINIDUMP_STREAM, *PDEBUG_READ_USER_MINIDUMP_STREAM;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>StreamType</b></DT>
+<DD>Specifies the stream to read from the minidump file.  The possible values for <b>StreamType</b> come from the MINIDUMP_STREAM_TYPE enumeration .<P>For a list of possible values and their interpretation, see the MINIDUMP_STREAM_TYPE topic in the Debug Help Library documentation in <i>dbghelp.chm</i>.</P>
+</DD>
+<DT><b>Flags</b></DT>
+<DD>Set to zero.</DD>
+<DT><b>Offset</b></DT>
+<DD>Specifies the offset within the stream to start reading.  To start reading from the beginning of the stream, set <b>Offset</b> to zero.</DD>
+<DT><b>Buffer</b></DT>
+<DD>Receives the bytes read from the minidump stream.  <b>Buffer</b> can not be NULL.</DD>
+<DT><b>BufferSize</b></DT>
+<DD>Specifies the size, in bytes, of the buffer <b>Buffer</b>.</DD>
+<DT><b>BufferUsed</b></DT>
+<DD>Receives the number of bytes read into the buffer <b>Buffer</b>.</DD>
+</DL>
+<H4>Comments</H4>
+<P>The target must be a user-mode minidump file.</P>
+<P>Each minidump file contains a number of <i>streams</i>.  These streams are blocks of data written to the minidump file.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_REQUEST_READ_USER_MINIDUMP_STREAM RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

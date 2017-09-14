@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Crashing and Rebooting the Target Computer</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Crashing and Rebooting the Target Computer"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_8338d017-7a53-4d82-bd91-bd0eaebe319a.xml"/>
+<META NAME="MS-HKWD" CONTENT="controlling the target, crashing the target computer">
+<META NAME="MS-HKWD" CONTENT="controlling the target, rebooting the target computer">
+<META NAME="MS-HKWD" CONTENT="reboot">
+<META NAME="MS-HKWD" CONTENT="reboot, [See &quot;boot process&quot;]">
+<META NAME="MS-HKWD" CONTENT="boot process">
+<META NAME="MS-HKWD" CONTENT="boot process, debugging during">
+<META NAME="MS-HKWD" CONTENT="system crash, deliberately causing">
+<META NAME="MS-HKWD" CONTENT="bug check, deliberately causing"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_8338d017-7a53-4d82-bd91-bd0eaebe319a.xml"></A>Crashing and Rebooting the Target Computer</H1>
+<P>When you perform kernel debugging, you can cause the target computer to stop responding (that is, <i>crash</i> or <i>bug check</i>) by issuing the <a href="r19_metacmds_a_b5a32d1f-fcb6-410b-9380-5a190599e32f.xml.htm"><b>.crash (Force System Crash)</b></a> command. This command immediately causes the target computer to stop responding. The debugger writes a kernel-mode dump file if you have enabled crash dumps. (For more information about these files, see <a href="r10_dump_files_ca552a36-aba9-41aa-9065-6f2fa8cff82a.xml.htm">Creating a Kernel-Mode Dump File</a>.)</P>
+<P>To restart the target computer, use the <a href="r21_metacmds_l_d7228edd-295a-4acf-a632-fcb544f9522b.xml.htm"><b>.reboot (Reboot Target Computer)</b></a> command.</P>
+<P>If you want the target computer to create a crash dump file and then restart, you should issue the <b>.crash</b> command, followed by the <b>.reboot</b> command. If you want only to restart, the <b>.crash</b> command is not required.</P>
+<P>In the early stages of the boot process, the connection between the host computer and the target computer is lost. No information about the target computer is available to the debugger.</P>
+<P>After the connection is broken, the debugger closes all symbol files and unloads all debugger extensions. At this point, all breakpoints are lost if you are running KD or CDB. In WinDbg, you can save the current workspace. This action saves all breakpoints.</P>
+<P>If you want to end the debugging session at this point, use the <a href="r23_keys_847bf5ac-4c45-4a3c-bb2b-bed857dfa042.xml.htm">CTRL+B</a> command (in KD) or click <b>Exit</b> on the <b>File</b> menu (in WinDbg).</P>
+<P>If you do not exit the debugger, the connection is reestablished after enough of the boot process has completed. Symbols and extensions are reloaded at this point. If you are running WinDbg, the kernel-mode workspace is reloaded.</P>
+<P>You can tell the debugger to automatically break into the target computer during the restart process at two possible times:</P><B></B><UL type="disc">
+<LI>When the first kernel module is loaded into memory </LI>
+<LI>When the kernel initializes</LI>
+</UL>
+<P>To set an automatic breakpoint when the first kernel module loads, use the <b>-d</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>.</P>
+<P>To set an automatic breakpoint when the kernel initializes, use the <b>-b</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>.</P>
+<P>You can also change the break state after the debugger is running:</P><B></B><UL type="disc">
+<LI>Control the initial module load and kernel initialization breakpoints like all exceptions and events. You can break into the debugger when these events occur, or ignore them. You can also have a specified command automatically execute when these breakpoints are hit. For more information, see <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a>.</LI>
+<LI>Use the <a href="r23_keys_79aa3c00-93cf-4c56-956a-8ba0f4ae8b43.xml.htm">CTRL+K</a> shortcut keys in KD, the <a href="r37_gui_2_7cfed5e8-7783-42c7-b6e7-5bf28313bafd.xml.htm">CTRL+ALT+K</a> shortcut keys in WinDbg, and the <a href="r37_gui_2_7cfed5e8-7783-42c7-b6e7-5bf28313bafd.xml.htm"><b>Debug | Kernel Connection | Cycle Initial Break</b></a> command in WinDbg to change the break state. Every time that you use these commands, the debugger switches between three states: no automatic break, break upon kernel initialization, and break on first kernel module load. This method cannot activate <i>both</i> automatic breakpoints at the same time.</LI>
+</UL>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Crashing and Rebooting the Target Computer RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

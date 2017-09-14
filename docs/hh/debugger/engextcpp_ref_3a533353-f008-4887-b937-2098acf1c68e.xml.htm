@@ -1,0 +1,436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ExtExtension</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ExtExtension"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="ExtExtension"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_3a533353-f008-4887-b937-2098acf1c68e.xml"/>
+<META NAME="MS-HKWD" CONTENT="ExtExtension class"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_3a533353-f008-4887-b937-2098acf1c68e.xml"></A>ExtExtension</H1>
+<P>The <b>ExtExtension</b> class is the base class for the C++ class that represents the EngExtCpp extension library.</P>
+<P>The <b>ExtExtension</b> class includes the following methods, which can be used by the subclass:</P><B></B><div class="indent1">
+<P><a href="engextcpp_ref_e6893e43-8573-4f07-baee-e9f4adcde156.xml.htm"><b>Initialize</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_614648b0-a948-4066-bec1-0840e2cf08ec.xml.htm"><b>Uninitialize</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_251ac958-396c-414a-92a5-e1b02e453a69.xml.htm"><b>OnSessionActive</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_2d9d9c48-9c19-4aa7-b0c5-852643eadcee.xml.htm"><b>OnSessionInactive</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_88df5a39-051b-4d84-840e-8caf5414a0e6.xml.htm"><b>OnSessionAccessible</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_3b2329d1-7a01-42d7-951c-777d9b93faa7.xml.htm"><b>OnSessionInaccessible</b></a> </P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><b>IsUserMode</b>    </P>
+</div>
+<div class="indent1">
+<P><b>IsKernelMode</b>    </P>
+</div>
+<div class="indent1">
+<P><b>IsLiveLocalUser</b>    </P>
+</div>
+<div class="indent1">
+<P><b>IsMachine32</b>    </P>
+</div>
+<div class="indent1">
+<P><b>IsCurMachine32</b>    </P>
+</div>
+<div class="indent1">
+<P><b>IsMachine64</b>    </P>
+</div>
+<div class="indent1">
+<P><b>IsCurMachine64</b>    </P>
+</div>
+<div class="indent1">
+<P><b>Is32On64</b>    </P>
+</div>
+<div class="indent1">
+<P><b>CanQueryVirtual</b>    </P>
+</div>
+<div class="indent1">
+<P><b>HasFullMemBasic</b>    </P>
+</div>
+<div class="indent1">
+<P><b>IsExtensionRemote</b>    </P>
+</div>
+<div class="indent1">
+<P><b>AreOutputCallbacksDmlAware</b>    </P>
+</div>
+<div class="indent1">
+<P><b>RequireUserMode</b>    </P>
+</div>
+<div class="indent1">
+<P><b>RequireKernelMode</b>    </P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_8ca2186f-dcda-422a-948f-ead63f451ff2.xml.htm"><b>GetNumUnnamedArgs</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_68f021ae-574a-4bc5-bea2-545f59b8ea74.xml.htm"><b>GetUnnamedArgStr</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_94c8c0d8-bc72-4357-bcba-f2e8598aabff.xml.htm"><b>GetUnnamedArgU64</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_5d191b46-bac6-415e-8c02-732ce433f950.xml.htm"><b>HasUnnamedArg</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_0a1f3246-41a5-4a2f-8656-45f8c17b6418.xml.htm"><b>GetArgStr</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_02971a20-02b8-4655-a1e5-8f287b4b0182.xml.htm"><b>GetArgU64</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_a4d457bf-6e64-46d7-892a-5ddda81c7f9d.xml.htm"><b>HasArg</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_1ef6d849-e279-4705-b0fe-8147fbd7daf8.xml.htm"><b>HasCharArg</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_662530e0-caca-43f0-8b46-b21c8a1f00da.xml.htm"><b>SetUnnamedArg</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_0d8a550a-c727-47e5-a5fe-10971e373a9d.xml.htm"><b>SetUnnamedArgStr</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_65080cf5-2492-440b-a496-869faf8c9c49.xml.htm"><b>SetUnnamedArgU64</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_20376f38-03cf-4e1c-a4af-6b318a425ebc.xml.htm"><b>SetArg</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_768f449e-fa81-4759-a16d-a8dfe1d3bf61.xml.htm"><b>SetArgStr</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_05510fa7-509e-49a2-97a3-7a1c4494350a.xml.htm"><b>SetArgU64</b></a> </P>
+</div>
+<div class="indent1">
+<P><a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>GetRawArgStr</b></a> </P>
+</div>
+<div class="indent1">
+<P><b>GetRawArgCopy</b>   </P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><b>Out</b>    </P>
+</div>
+<div class="indent1">
+<P><b>Warn</b>    </P>
+</div>
+<div class="indent1">
+<P><b>Err</b>    </P>
+</div>
+<div class="indent1">
+<P><b>Verb</b>    </P>
+</div>
+<div class="indent1">
+<P><b>Dml</b>    </P>
+</div>
+<div class="indent1">
+<P><b>DmlWarn</b>    </P>
+</div>
+<div class="indent1">
+<P><b>DmlErr</b>    </P>
+</div>
+<div class="indent1">
+<P><b>DmlVerb</b>    </P>
+</div>
+<div class="indent1">
+<P><b>DmlCmdLink</b>    </P>
+</div>
+<div class="indent1">
+<P><b>DmlCmdExec</b>    </P>
+</div>
+<div class="indent1">
+<P><b>RefreshOutputCallbackFlags</b>    </P>
+</div>
+<div class="indent1">
+<P><b>WrapLine</b>    </P>
+</div>
+<div class="indent1">
+<P><b>OutWrapStr</b>    </P>
+</div>
+<div class="indent1">
+<P><b>OutWrapVa</b>    </P>
+</div>
+<div class="indent1">
+<P><b>OutWrap</b>    </P>
+</div>
+<div class="indent1">
+<P><b>DemandWrap</b>    </P>
+</div>
+<div class="indent1">
+<P><b>AllowWrap</b>    </P>
+</div>
+<div class="indent1">
+<P><b>TestWrap</b>    </P>
+</div>
+<div class="indent1">
+<P><b>RequestCircleString</b>    </P>
+</div>
+<div class="indent1">
+<P><b>CopyCircleString</b>    </P>
+</div>
+<div class="indent1">
+<P><b>PrintCircleStringVa</b>    </P>
+</div>
+<div class="indent1">
+<P><b>PrintCircleString</b>    </P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><b>SetAppendBuffer</b>    </P>
+</div>
+<div class="indent1">
+<P><b>AppendBufferString</b>   </P>
+</div>
+<div class="indent1">
+<P><b>AppendStringVa</b>    </P>
+</div>
+<div class="indent1">
+<P><b>AppendString</b>    </P>
+</div>
+<div class="indent1">
+<P><b>IsAppendStart</b>    </P>
+</div>
+<div class="indent1">
+<P><b>SetCallStatus</b>    </P>
+</div>
+<div class="indent1">
+<P><b>GetCachedSymbolTypeId</b>    </P>
+</div>
+<div class="indent1">
+<P><b>GetCachedFieldOffset</b>    </P>
+</div>
+<div class="indent1">
+<P><b>GetCachedFieldOffset</b>    </P>
+</div>
+<div class="indent1">
+<P><b>AddCachedSymbolInfo</b>    </P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><b>GetExpr64</b>    </P>
+</div>
+<div class="indent1">
+<P><b>GetExprU64</b>    </P>
+</div>
+<div class="indent1">
+<P><b>GetExprS64</b>    </P>
+</div>
+<div class="indent1">
+<P><b>ThrowCommandHelp</b>    </P>
+</div>
+<div class="indent1">
+<P><b>ThrowInterrupt</b>    </P>
+</div>
+<div class="indent1">
+<P><b>ThrowOutOfMemory</b>    </P>
+</div>
+<div class="indent1">
+<P><b>ThrowContinueSearch</b>    </P>
+</div>
+<div class="indent1">
+<P><b>ThrowReloadExtension</b>    </P>
+</div>
+<div class="indent1">
+<P><b>ThrowInvalidArg</b>    </P>
+</div>
+<div class="indent1">
+<P><b>ThrowRemote</b>    </P>
+</div>
+<div class="indent1">
+<P><b>ThrowStatus</b>    </P>
+</div>
+<div class="indent1">
+<P><b>ThrowLastError</b>    </P>
+</div>
+<P></P>
+<P></P>
+<P>The <b>ExtExtension</b> class also contains the following fields that can be used by the subclass:</P>
+<P></P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>class ExtExtension</b><BR><b>{</b><BR><b>public:</b><BR><b>    USHORT  m_ExtMajorVersion;</b><BR><b>    USHORT  m_ExtMinorVersion;</b><BR><b>    ULONG  m_ExtInitFlags;</b><BR><b>    ExtKnownStruct *  m_KnownStructs;</b><BR><b>    ExtProvidedValue *  m_ProvidedValues;</b><BR><b>    ExtCheckedPointer&lt;IDebugAdvanced&gt;  m_Advanced;</b><BR><b>    ExtCheckedPointer&lt;IDebugClient&gt;  m_Client;</b><BR><b>    ExtCheckedPointer&lt;IDebugControl&gt;  m_Control;</b><BR><b>    ExtCheckedPointer&lt;IDebugDataSpaces&gt;  m_Data;</b><BR><b>    ExtCheckedPointer&lt;IDebugRegisters&gt;  m_Registers;</b><BR><b>    ExtCheckedPointer&lt;IDebugSymbols&gt;  m_Symbols;</b><BR><b>    ExtCheckedPointer&lt;IDebugSystemObjects&gt;  m_System;</b><BR><b>    ExtCheckedPointer&lt;IDebugAdvanced2&gt;  m_Advanced2;</b><BR><b>    ExtCheckedPointer&lt;IDebugAdvanced3&gt;  m_Advanced3;</b><BR><b>    ExtCheckedPointer&lt;IDebugClient2&gt;  m_Client2;</b><BR><b>    ExtCheckedPointer&lt;IDebugClient3&gt;  m_Client3;</b><BR><b>    ExtCheckedPointer&lt;IDebugClient4&gt;  m_Client4;</b><BR><b>    ExtCheckedPointer&lt;IDebugClient5&gt;  m_Client5;</b><BR><b>    ExtCheckedPointer&lt;IDebugControl2&gt;  m_Control2;</b><BR><b>    ExtCheckedPointer&lt;IDebugControl3&gt;  m_Control3;</b><BR><b>    ExtCheckedPointer&lt;IDebugControl4&gt;  m_Control4;</b><BR><b>    ExtCheckedPointer&lt;IDebugDataSpaces2&gt;  m_Data2;</b><BR><b>    ExtCheckedPointer&lt;IDebugDataSpaces3&gt;  m_Data3;</b><BR><b>    ExtCheckedPointer&lt;IDebugDataSpaces4&gt;  m_Data4;</b><BR><b>    ExtCheckedPointer&lt;IDebugRegisters2&gt;  m_Registers2;</b><BR><b>    ExtCheckedPointer&lt;IDebugSymbols2&gt;  m_Symbols2;</b><BR><b>    ExtCheckedPointer&lt;IDebugSymbols3&gt;  m_Symbols3;</b><BR><b>    ExtCheckedPointer&lt;IDebugSystemObjects2&gt;  m_System2;</b><BR><b>    ExtCheckedPointer&lt;IDebugSystemObjects3&gt;  m_System3;</b><BR><b>    ExtCheckedPointer&lt;IDebugSystemObjects4&gt;  m_System4;</b><BR><b>    ULONG  m_OutputWidth;</b><BR><b>    ULONG  m_ActualMachine;</b><BR><b>    ULONG  m_Machine;</b><BR><b>    ULONG  m_PageSize;</b><BR><b>    ULONG  m_PtrSize;</b><BR><b>    ULONG  m_NumProcessors;</b><BR><b>    ULONG64  m_OffsetMask;</b><BR><b>    ULONG  m_DebuggeeClass;</b><BR><b>    ULONG  m_DebuggeeQual;</b><BR><b>    ULONG  m_DumpFormatFlags;</b><BR><b>    bool  m_IsRemote;</b><BR><b>    bool  m_OutCallbacksDmlAware;</b><BR><b>    ULONG  m_OutMask;</b><BR><b>    ULONG  m_CurChar;</b><BR><b>    ULONG  m_LeftIndent;</b><BR><b>    bool  m_AllowWrap;</b><BR><b>    bool  m_TestWrap;</b><BR><b>    ULONG  m_TestWrapChars;</b><BR><b>    PSTR  m_AppendBuffer;</b><BR><b>    ULONG  m_AppendBufferChars;</b><BR><b>    PSTR  m_AppendAt;</b><BR><b>};</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>m_ExtMajorVersion</b></DT>
+<DD>The major version number of the extension library.  This should be set by the <a href="engextcpp_ref_e6893e43-8573-4f07-baee-e9f4adcde156.xml.htm"><b>Initialize</b></a> method.  If it is not set, it defaults to <b>1</b>.</DD>
+<DT><b>m_ExtMinorVersion</b></DT>
+<DD>The minor version number of the extension library.  This should be set by the <a href="engextcpp_ref_e6893e43-8573-4f07-baee-e9f4adcde156.xml.htm"><b>Initialize</b></a> method.  If it is not set, it defaults to <b>0</b> (zero).</DD>
+<DT><b>m_ExtInitFlags</b></DT>
+<DD>The DbgEng extension initialization flags for <a href="extensions_ref_e260c42c-8299-4578-8919-3b2167701275.xml.htm"><b>DebugExtensionInitialize</b></a>.</DD>
+<DT><b>m_KnownStructs</b></DT>
+<DD>An array of <a href="engextcpp_ref_b59346d2-06da-4112-9bed-ce64de0f2807.xml.htm"><b>ExtKnownStruct</b></a> structures that the extension library is capable of formatting for output.   This member should be set by the <a href="engextcpp_ref_e6893e43-8573-4f07-baee-e9f4adcde156.xml.htm"><b>Initialize</b></a> method and should not be changed once this method returns.<P>If <b>m_KnownStructs</b> is not NULL, the <b>TypeName</b> member of the last <b>ExtKnownStruct</b> structure in the array must be NULL.</P>
+<P>When formatting a <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>'s structure for output, if the name of the structure's type matches the <b>TypeName</b> member of one of the <b>ExtKnownStruct</b> structures in this array, the callback function specified in the <b>Method</b> member is called to perform the formatting.</P>
+</DD>
+<DT><b>m_ProvidedValues</b></DT>
+<DD>An array of <b>ExtProvidedValue</b> structures listing the pseudo registers that the extension library can provide values for.   This member should be set by the <a href="engextcpp_ref_e6893e43-8573-4f07-baee-e9f4adcde156.xml.htm"><b>Initialize</b></a> method and should not be changed once this method returns.<P>If <b>m_ProvidedValues</b> is not NULL, the <b>ValueName</b> member of the last <b>ExtProvidedValue</b> structure in the array must be NULL.</P>
+<P>When evaluating a pseudo register, if the name of the pseudo register matches the <b>ValueName</b> member of one of the <b>ExtProvidedValue</b> structures in this array, the callback function specified in the <b>Method</b> member is called to evaluate the pseudo register.</P>
+</DD>
+<DT><b>m_Advanced</b></DT>
+<DD>The <a href="idebugadvanced_73a2f722-f225-466b-aecc-2c7e6999e25f.xml.htm"><b>IDebugAdvanced</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.</DD>
+<DT><b>m_Client</b></DT>
+<DD>The <a href="idebugclient_3f5f6372-0e7d-4050-b09a-b7776ff8bf7c.xml.htm"><b>IDebugClient</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.</DD>
+<DT><b>m_Control</b></DT>
+<DD>The <a href="idebugcontrol_ce0030b2-73a7-49a8-9d21-942922a69184.xml.htm"><b>IDebugControl</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.</DD>
+<DT><b>m_Data</b></DT>
+<DD>The <a href="idebugdataspaces_83f3a88c-f7e6-4b5c-a2b2-4e8bccef4281.xml.htm"><b>IDebugDataSpaces</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.</DD>
+<DT><b>m_Registers</b></DT>
+<DD>The <a href="idebugregisters_ca710692-a977-4276-b779-2b66311938dc.xml.htm"><b>IDebugRegisters</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.</DD>
+<DT><b>m_Symbols</b></DT>
+<DD>The <a href="idebugsymbols_4046a7ad-b8ed-4a10-991e-f7d63f9e35d0.xml.htm"><b>IDebugSymbols</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.</DD>
+<DT><b>m_System</b></DT>
+<DD>The <a href="idebugsystemobjects_82c2f1f3-4eb4-4071-ba0b-d2e4d2929ce2.xml.htm"><b>IDebugSystemObjects</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.</DD>
+<DT><b>m_Advanced2</b></DT>
+<DD>The <a href="idebugadvanced_73a2f722-f225-466b-aecc-2c7e6999e25f.xml.htm"><b>IDebugAdvanced2</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Advanced3</b></DT>
+<DD>The <a href="idebugadvanced_73a2f722-f225-466b-aecc-2c7e6999e25f.xml.htm"><b>IDebugAdvanced3</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Client2</b></DT>
+<DD>The <a href="idebugclient_3f5f6372-0e7d-4050-b09a-b7776ff8bf7c.xml.htm"><b>IDebugClient2</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Client3</b></DT>
+<DD>The <a href="idebugclient_3f5f6372-0e7d-4050-b09a-b7776ff8bf7c.xml.htm"><b>IDebugClient3</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Client4</b></DT>
+<DD>The <a href="idebugclient_3f5f6372-0e7d-4050-b09a-b7776ff8bf7c.xml.htm"><b>IDebugClient4</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Client5</b></DT>
+<DD>The <a href="idebugclient_3f5f6372-0e7d-4050-b09a-b7776ff8bf7c.xml.htm"><b>IDebugClient5</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Control2</b></DT>
+<DD>The <a href="idebugcontrol_ce0030b2-73a7-49a8-9d21-942922a69184.xml.htm"><b>IDebugControl2</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Control3</b></DT>
+<DD>The <a href="idebugcontrol_ce0030b2-73a7-49a8-9d21-942922a69184.xml.htm"><b>IDebugControl3</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Control4</b></DT>
+<DD>The <a href="idebugcontrol_ce0030b2-73a7-49a8-9d21-942922a69184.xml.htm"><b>IDebugControl4</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Data2</b></DT>
+<DD>The <a href="idebugdataspaces_83f3a88c-f7e6-4b5c-a2b2-4e8bccef4281.xml.htm"><b>IDebugDataSpaces2</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Data3</b></DT>
+<DD>The <a href="idebugdataspaces_83f3a88c-f7e6-4b5c-a2b2-4e8bccef4281.xml.htm"><b>IDebugDataSpaces3</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Data4</b></DT>
+<DD>The <a href="idebugdataspaces_83f3a88c-f7e6-4b5c-a2b2-4e8bccef4281.xml.htm"><b>IDebugDataSpaces4</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Registers2</b></DT>
+<DD>The <a href="idebugregisters_ca710692-a977-4276-b779-2b66311938dc.xml.htm"><b>IDebugRegisters2</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Symbols2</b></DT>
+<DD>The <a href="idebugsymbols_4046a7ad-b8ed-4a10-991e-f7d63f9e35d0.xml.htm"><b>IDebugSymbols2</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_Symbols3</b></DT>
+<DD>The <a href="idebugsymbols_4046a7ad-b8ed-4a10-991e-f7d63f9e35d0.xml.htm"><b>IDebugSymbols3</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_System2</b></DT>
+<DD>The <a href="idebugsystemobjects_82c2f1f3-4eb4-4071-ba0b-d2e4d2929ce2.xml.htm"><b>IDebugSystemObjects2</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_System3</b></DT>
+<DD>The <a href="idebugsystemobjects_82c2f1f3-4eb4-4071-ba0b-d2e4d2929ce2.xml.htm"><b>IDebugSystemObjects3</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_System4</b></DT>
+<DD>The <a href="idebugsystemobjects_82c2f1f3-4eb4-4071-ba0b-d2e4d2929ce2.xml.htm"><b>IDebugSystemObjects4</b></a> interface pointer for the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that can be used by the extension library.  It is valid during the invocation of externally-called extension methods&#8209;for example, the execution of an extension command, a call to <a href="engextcpp_ref_bd64fb5a-ca77-4195-b5ba-6d647c133353.xml.htm"><b>ExtKnownStructMethod</b></a> and <b>ExtProvideValueMethod</b>.  This interface might not be available in all versions of the debugger engine.</DD>
+<DT><b>m_PtrSize</b></DT>
+<DD>The size of a pointer on the current target.  If the target uses 32-bit pointers, <b>m_PtrSize</b> is 4.  If the target uses 64-bit pointers, <b>m_PtrSize</b> is 8.</DD>
+<DT><b>m_AppendBuffer</b></DT>
+<DD>A character buffer used to return strings from the extension library to the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2dbaa658-dbfe-47de-8266-97ed86c41aea">engine</a>.  The size of this buffer is <b>m_AppendBufferChars</b>.  The methods <b>AppendBufferString</b>, <b>AppendStringVa</b>, and <b>AppendString</b> can be used to write strings to this buffer.</DD>
+<DT><b>m_AppendBufferChars</b></DT>
+<DD>The size, in characters, of the buffer <b>m_AppendBuffer</b>.</DD>
+</DL>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ExtExtension RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!exchain</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !exchain"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_43f96049-16ad-4788-921a-8946d30b0c5c.xml"/>
+<META NAME="MS-HKWD" CONTENT="!exchain extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_43f96049-16ad-4788-921a-8946d30b0c5c.xml"></A>!exchain</H1>
+<P><P>The <b>!exchain</b> extension displays the current exception handler chain.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!exchain </b>[<i>Options</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>One of the following values:<DL><DT><b>/c</b></DT>
+<DD>Displays information that is relevant for debugging a C++ <b>try</b>/<b>catch</b> exception, if such an exception is detected.</DD>
+<DT><b>/C</b></DT>
+<DD>Displays information that is relevant for debugging a C++ <b>try</b>/<b>catch</b> exception, even when such an exception has not been detected.</DD>
+<DT><b>/f</b></DT>
+<DD>Displays information that is obtained by walking the CRT function tables, even if a CRT exception handler was not detected.</DD>
+</DL>
+</DD>
+<P></P>
+</DL>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>The <b>!exchain </b>extension is available only for an x86-based target computer.</P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!exchain</b> extension displays the list of exception handlers for the current thread.</P>
+<P>The list begins with the first handler on the chain (the one that is given the first opportunity to handle an exception) and continues on to the end. The following example shows this extension.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!exchain</b><BR>0012fea8: Prymes!_except_handler3+0 (00407604)<BR>  CRT scope  0, filter: Prymes!dzExcepError+e6 (00401576)<BR>                func:   Prymes!dzExcepError+ec (0040157c)<BR>0012ffb0: Prymes!_except_handler3+0 (00407604)<BR>  CRT scope  0, filter: Prymes!mainCRTStartup+f8 (004021b8)<BR>                func:   Prymes!mainCRTStartup+113 (004021d3)<BR>0012ffe0: KERNEL32!GetThreadContext+1c (77ea1856)<BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !exchain RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

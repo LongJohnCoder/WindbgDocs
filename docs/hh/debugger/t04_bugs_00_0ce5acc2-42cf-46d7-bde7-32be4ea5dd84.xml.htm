@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x5: INVALID_PROCESS_ATTACH_ATTEMPT</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x5: INVALID_PROCESS_ATTACH_ATTEMPT"><xml><MSHelp:Keyword Index="A" Term="t04_bugs_00_0ce5acc2-42cf-46d7-bde7-32be4ea5dd84.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x5: INVALID_PROCESS_ATTACH_ATTEMPT">
+<META NAME="MS-HKWD" CONTENT="INVALID_PROCESS_ATTACH_ATTEMPT"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t04_bugs_00_0ce5acc2-42cf-46d7-bde7-32be4ea5dd84.xml"></A>Bug Check 0x5: INVALID_PROCESS_ATTACH_ATTEMPT</H1>
+<P>The INVALID_PROCESS_ATTACH_ATTEMPT bug check has a value of 0x00000005. This generally indicates that the thread was attached to a process in a situation where that is not allowed. For example, this bug check could occur if <b>KeAttachProcess</b> was called when the thread was already attached to a process (which is illegal), or if the thread returned from certain function calls in an attached state (which is invalid), <P></P>
+<P>This bug check appears very infrequently.</P>
+<P></P>
+</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">The pointer to the dispatcher object for the target process, or if the thread is already attached, the pointer to the object for the original process.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">The pointer to the dispatcher object of the process that the current thread is currently attached to.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">The value of the thread&#8217;s APC state index.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">A non-zero value<b> </b>indicates that a DPC is running on the current processor.  </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comment</H4>
+<P>This bug check can occur if the driver calls the <b>KeAttachProcess</b> function and the thread is already attached to another process. It is better to use the <b>KeStackAttachProcess </b>function. If the current thread was already attached to another process, the <b>KeStackAttachProcess</b> function saves the current APC state before it attaches the current thread to the new process.</P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x5: INVALID_PROCESS_ATTACH_ATTEMPT RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

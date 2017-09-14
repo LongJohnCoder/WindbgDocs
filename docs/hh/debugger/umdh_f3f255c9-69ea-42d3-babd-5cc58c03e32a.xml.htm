@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Preparing to Use UMDH</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Preparing to Use UMDH"><xml><MSHelp:Keyword Index="A" Term="UMDH_f3f255c9-69ea-42d3-babd-5cc58c03e32a.xml"/>
+<META NAME="MS-HKWD" CONTENT="UMDH, preparing to use UMDH">
+<META NAME="MS-HKWD" CONTENT="UMDH, disabling BSTR caching">
+<META NAME="MS-HKWD" CONTENT="SetNoOaCache function">
+<META NAME="MS-HKWD" CONTENT="OANOCACHE environment variable">
+<META NAME="MS-HKWD" CONTENT="stack trace database"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="UMDH_f3f255c9-69ea-42d3-babd-5cc58c03e32a.xml"></A>Preparing to Use UMDH</H1>
+<P>You must complete the configuration tasks described in this section before using UMDH to capture the heap allocations for a process. If the computer is not configured correctly, UMDH will not generate any results or the results will be incomplete or incorrect.</P>
+<H4>Create the user-mode stack trace database</H4>
+<P>Before using UMDH to capture the heap allocations for a process, you must configure Windows to capture stack traces.</P>
+<P>To enable stack trace capturing for a process, use <a href="gflags_ea035958-0ade-4e07-856e-cfd1ed0b4df0.xml.htm">GFlags</a> to set the <b>Create user mode stack trace database</b> flag for the process. This can be done by either of the following methods:</P><B></B><UL type="disc">
+<LI>In the GFlags graphical interface, choose the Image File tab. Type the process name, including the file name extension (for example, <i>Notepad.exe</i>).  Press the TAB key, select <b>Create user mode stack trace database</b>, and then click <b>Apply</b>. </LI>
+<LI>Or, equivalently, use the following GFlags command line, where <i>ImageName</i> is the process name (including the file name extension):<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /i</b> <i>ImageName</i> <b>+ust </b><BR></nobr></P>
+</LI>
+</UL>
+<P></P>
+<P>By default, the amount of stack trace data that Windows gathers is limited to 32 MB on an x86 processor, and 64 MB on an x64 or Itanium-based processor.    If you must increase the size of this database, choose the <b>Image File</b> tab in the GFlags graphical interface, type the process name, press the TAB key, check the <b>Stack Backtrace (Megs)</b> check box, type a value (in MB) in the associated text box, and then click <b>Apply</b>. </P>
+<P class="note"><b>Note:  </b>Increase this database only when necessary, because it may deplete limited Windows resources. When you no longer need the larger size, return this setting to its original value. </P>
+<P>These settings affects all new instances of the program. It does not affect currently running instances of the program.</P>
+<P></P>
+<H4>Access the Necessary Symbols</H4>
+<P>Before using UMDH, you must have access to the proper symbols for your application. UMDH uses the symbol path specified by the environment variable _NT_SYMBOL_PATH. Set this variable equal to a path containing the symbols for your application.</P>
+<P>If you also include a path to Windows symbols, the analysis may be more complete. The syntax for this symbol path is the same as that used by the debugger; for details, see <a href="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml.htm">Symbol Path</a>.</P>
+<P>For example, if the symbols for your application are located at <i>C:\MyApp\Symbols</i>, and you have <a href="r09_symbols_02a93db3-239a-4416-8bd5-2630a8eaa4f1.xml.htm">installed the Windows symbol files</a> to <i>\\myshare\winsymbols</i>, you would use the following command to set your symbol path: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>set _NT_SYMBOL_PATH=c:\myapp\symbols;\\myshare\winsymbols </b><BR></nobr></P>
+<P>As another example, if the symbols for your application are located at <i>C:\MyApp\Symbols</i>, and you want to use the public Microsoft symbol store for your Windows symbols, using <i>C:\MyCache</i> as your downstream store, you would use the following command to set your symbol path: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>set _NT_SYMBOL_PATH=c:\myapp\symbols;srv*c:\mycache*http://msdl.microsoft.com/download/symbols </b><BR></nobr></P>
+<P></P>
+<H4>Disable BSTR Caching</H4>
+<P>Automation (formerly known as OLE Automation) caches the memory used by BSTR strings. This can prevent UMDH from correctly determining the owner of a memory allocation.  To avoid this problem, you must disable BSTR caching.</P>
+<P>To disable BSTR caching, set the OANOCACHE environment variable equal to one (1). This setting must be made before launching the application whose allocations are to be traced.</P>
+<P>Alternatively, you can disable BSTR caching from within the application itself by calling the .NET Framework <b>SetNoOaCache</b> function. If you choose this method, you should call this function early, because any BSTR allocations that have already been cached when <b>SetNoOaCache</b> is called will remain cached. </P>
+<P>If you need to trace the allocations made by a service, you must set OANOCACHE as a system environment variable and then restart Windows for this setting to take effect. </P>
+<P>On Windows 2000, in addition to setting OANOCACHE equal to 1, you must also install the hotfix available with <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=3100&amp;id=139071" target="_blank"><u>KB 139071</u></a>. This hotfix is not needed on Windows XP and later versions of Windows. </P>
+<P></P>
+<P></P>
+<H4>Find the Process ID</H4>
+<P>UMDH identifies the process by its process identifier (PID). You can find the PID of any running process by using Task Manager, Tasklist (Windows XP and later operating systems), or <a href="tlist_d98fd688-471d-4855-aa5c-997719bd11c3.xml.htm">TList</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Preparing to Use UMDH RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wdfkd.wdftagtracker</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wdfkd.wdftagtracker"><xml><MSHelp:Keyword Index="A" Term="r33~c_exts_WDF_75be6e99-7a98-4f80-a7f5-947e3d23cf1f.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wdfkd.wdftagtracker extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~c_exts_WDF_75be6e99-7a98-4f80-a7f5-947e3d23cf1f.xml"></A>!wdfkd.wdftagtracker</H1>
+<P><P>The <b>!wdfkd.wdftagtracker</b> extension displays all available tag information (including tag value, line, file, and time) for a specified tag tracker.   </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wdfkd.wdftagtracker</b> <i>TagObjectPointer</i> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>TagObjectPointer</i></DT>
+<DD>A pointer to a tag tracker. </DD>
+<DT><i>Flags</i></DT>
+<DD>Optional. The kind of information to display.  <i>Flags</i> can be any combination of the following bits. The default value is 0x0.<DL><DT>Bit 0 (0x1)</DT>
+<DD>Displays the history of acquire operations and release operations on the object. </DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Displays the line number of the object in hexadecimal instead of decimal. </DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P><i>Wdfkd.dll</i></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>To retrieve a pointer to a tag tracker, use the <a href="r33~c_exts_wdf_aa0a2df4-1112-428d-85aa-e53be7b3b75e.xml.htm"><b>!wdfkd.wdfobject</b></a> extension on an internal framework object pointer. </P>
+<P>To use tag tracking, you must enable both the Kernel-Mode Driver Framework (KMDF) verifier and handle tracking in the registry. Both of these settings are stored in the driver&#8217;s <b>Parameters\Wdf</b> subkey of the <b>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services </b>key.</P>
+<P>To enable the KMDF verifier, set a nonzero value for <b>VerifierOn</b>. </P>
+<P>To enable handle tracking, set the value of <b>TrackHandles</b> to the name of one or more object types, or specify an asterisk (*) to track all object types. For example, the following example specifies the tracking of references to all WDFDEVICE and WDFQUEUE objects.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>TrackHandles</b>: MULTI_SZ: WDFDEVICE WDFQUEUE<BR></nobr></P>
+<P>When you enable handle tracking for an object type, the framework tracks the references that are taken on any object of that type. This setting is useful in finding driver memory leaks that unreleased references cause. <b>TrackHandles</b> works only if the KMDF verifier is enabled. </P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~c_wdf_b21958be-e8b5-460c-87b7-a755da1cf37e.xml.htm">Kernel-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wdfkd.wdftagtracker RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

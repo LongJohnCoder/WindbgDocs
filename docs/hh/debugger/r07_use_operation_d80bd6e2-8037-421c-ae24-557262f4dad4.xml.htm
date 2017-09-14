@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Processor Breakpoints (ba Breakpoints)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Processor Breakpoints  (ba Breakpoints)"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_d80bd6e2-8037-421c-ae24-557262f4dad4.xml"/>
+<META NAME="MS-HKWD" CONTENT="breakpoints, processor breakpoints">
+<META NAME="MS-HKWD" CONTENT="breakpoints, data breakpoints">
+<META NAME="MS-HKWD" CONTENT="breakpoints, software breakpoints">
+<META NAME="MS-HKWD" CONTENT="breakpoints, BP versus BA">
+<META NAME="MS-HKWD" CONTENT="software breakpoint">
+<META NAME="MS-HKWD" CONTENT="software breakpoint, overview">
+<META NAME="MS-HKWD" CONTENT="software breakpoint, limitations">
+<META NAME="MS-HKWD" CONTENT="processor breakpoint">
+<META NAME="MS-HKWD" CONTENT="processor breakpoint, overview">
+<META NAME="MS-HKWD" CONTENT="processor breakpoint, limitations">
+<META NAME="MS-HKWD" CONTENT="data breakpoint">
+<META NAME="MS-HKWD" CONTENT="data breakpoint, [See &quot;processor breakpoint&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_d80bd6e2-8037-421c-ae24-557262f4dad4.xml"></A>Processor Breakpoints  (ba Breakpoints)</H1>
+<P>Breakpoints that are controlled by the processor at the request of the debugger are known as <i>processor breakpoints</i> or <i>data breakpoints</i>.  Breakpoints that are controlled directly by the debugger are known as <i>software breakpoints</i>. </P>
+<P class="note"><b>Note</b>  Although the term <i>data breakpoint</i> is commonly used as a synonym for <i>processor breakpoint</i>, this term can be misleading. There are two fundamental types of breakpoints: processor breakpoints, which are controlled by the processor, and software breakpoints, which are controlled by the debugger. Processor breakpoints are <i>usually</i> set on program data &#8212; this is the reason they are called "data breakpoints" &#8212; but they can also be set on executable code.  Software breakpoints are <i>usually</i> set on executable code, but they can also be set on program data. Unfortunately, it is common in debugging literature to refer to processor breakpoints as "data breakpoints", even when they are set on executable code. </P>
+<H4>Processor Breakpoints</H4>
+<P>A processor breakpoint is triggered when a specific memory location is accessed. There are four types of processor breakpoints, corresponding to the kind of memory access that triggers it:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Breakpoint type</TH>
+<TH Width="">Action</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>e</b> (execute)</TD>
+<TD Width="">Triggered when the processor retrieves an instruction from the specified address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r</b> (read/write)</TD>
+<TD Width="">Triggered when the processor reads or writes memory at the specified address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>w</b> (write)</TD>
+<TD Width="">Triggered when the processor writes memory at the specified address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>i</b> (i/o)</TD>
+<TD Width="">Triggered when the I/O port at the specified <i>Address</i> is accessed. </TD>
+</TR>
+</table>
+<P></P>
+<P>Each processor breakpoint has a size associated with it.  For example, a <b>w</b> (write) processor breakpoint could be set at the address 0x70001008 with a size of four bytes. This would monitor the block of addresses from 0x70001008 to 0x7000100B, inclusive. If this block of memory is written to, the breakpoint will be triggered. </P>
+<P>It can happen that the processor performs an operation on a memory region that <i>overlaps</i> with, but is not identical to, the specified region. In the example given in the preceding paragraph, a single write operation that includes the range 0x70001000 to 0x7000100F, or a write operation that includes only the byte at 0x70001009, would be an overlapping operation. In such a situation, whether the breakpoint is triggered is processor-dependent. For details of how this situation is handled on a specific processor, consult the processor archictecture manual and look for "debug register" or "debug control register". To take one specific processor type as an example, on an x86 processor, a read or write breakpoint is triggered whenever the accessed range overlaps the breakpoint range.  </P>
+<P>Similarly, if an <b>e</b> (execute) breakpoint is set on the address 0x00401003, and then a two-byte instruction spanning the addresses 0x00401002 and 0x00401003 is executed, the result is processor-dependent. Again, consult the processor architecture manual for details. </P>
+<P>The processor distinguishes between breakpoints set by a user-mode debugger and breakpoints set by a kernel-mode debugger. A user-mode processor breakpoint does not affect any kernel-mode processes. A kernel-mode processor breakpoint might or might not affect a user-mode process, depending on whether the user-mode code is using the debug register state and whether there is a user-mode debugger that is attached.</P>
+<P>To apply the current process' existing data breakpoints to a different register context, use the <a href="r19_metacmds_a_b9e14456-09b9-431f-89fa-b50fd865be97.xml.htm"><b>.apply_dbp (Apply Data Breakpoint to Context)</b></a> command.</P>
+<P>On a multiprocessor computer, each processor breakpoint applies to all processors. For example, if the current processor is 3 and you use the command <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">ba e1 MyAddress</span> to put a breakpoint at <b>MyAddress</b>, any processor &#8212; not only processor 3 &#8212; that executes at that address triggers the breakpoint. This holds for software breakpoints as well. </P>
+<H4>Software Breakpoints</H4>
+<P>Software breakpoints, unlike processor breakpoints, are controlled by the debugger. When the debugger sets a software breakpoint at some location, it temporarily replaces the contents of that memory location with a break instruction. The debugger remembers the original contents of this location, so that if this memory is displayed in the debugger, the debugger will show the original contents of that memory location, not the break instruction. When the target process executes the code at this location, the break instruction causes the process to break into the debugger. After you have performed whatever actions you choose, you can cause the target to resume execution, and execution will resume with the instruction that was originally in that location.</P>
+<H4>Availability of Processor Breakpoint Types</H4>
+<P>On Windows Server 2003 with Service Pack 1 (SP1), on an Itanium-based computer that uses WOW64 to emulate x86, processor breakpoints do not work with the <b>e</b> (execute) option but they do work with the <b>r</b> (read/write) and <b>w</b> (write) options.</P>
+<P>The <b>i</b> (i/o) option is available only during kernel-mode debugging, with a target computer that is running Windows XP or a later version of Windows on an x86-based processor. </P>
+<P>Not all data sizes can be used with all processor breakpoint types. The permitted sizes depend on the processor of the target computer.  For details, see <a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba (Break on Access)</b></a>. </P>
+<H4>Limitations of Software Breakpoints and Processor Breakpoints</H4>
+<P>It is possible to specify a data address rather than a program address when using the <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bp</b></a> or <nobr><a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bm /a</b></a></nobr> commands. However, even if a data location is specified, these commands create software breakpoints, not processor breakpoints. When the debugger places a software breakpoint at some location, it temporarily replaces the contents of that memory location with a break instruction. This does not corrupt the executable image, because the debugger remembers the original contents of this location, and when the target process attempts to execute this code the debugger can respond appropriately. But when a software breakpoint is set in a data location, the resulting overwrite can lead to data corruption. Therefore, setting a software breakpoint on a data location is safe only if you are certain that this location will be used only as executable code.</P>
+<P>The <b>bp</b>, <b>bu</b>, and <b>bm</b> commands set software breakpoints by replacing the processor instruction with a break instruction. Therefore these cannot be used in read-only code or any other code that cannot be overwritten. To set a breakpoint in such code, you must use <a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba (Break on Access)</b></a> with the <b>e</b> (execute) option. </P>
+<P>You cannot create multiple processor breakpoints at the same address that differ only in the command that is automatically executed when the breakpoint is triggered. However, you can create multiple breakpoints at the same address that differ in their other restrictions (for example, you can create multiple breakpoints at the same address by using the <b>ba</b> command with different values of the <b>/p</b>, <b>/t</b>, <b>/c</b>, and <b>/C</b> options).</P>
+<P>The initial breakpoint in a user-mode process (typically set on the <b>main</b> function or its equivalent) cannot be a processor breakpoint.  </P>
+<P>The number of processor breakpoints that are supported depends on the target processor architecture. </P>
+<H4>Controlling Software Breakpoints and Processor Breakpoints</H4>
+<P>Software breakpoints can be created with the <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bp (Set Breakpoint)</b></a>, <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bm (Set Symbol Breakpoint)</b></a>, and <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bu (Set Unresolved Breakpoint)</b></a> commands.  Processor breakpoints can be created with the <a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba (Break on Access)</b></a> command.  Commands that disable, enable, and modify breakpoints apply to all kinds of breakpoints.  Commands that display a list of breakpoints include all breakpoints, and indicate the type of each. For a listing of these commands, see <a href="r07_use_operation_9046922f-e012-41ac-a685-01804f6ec8ec.xml.htm">Methods of Controlling Breakpoints</a>.</P>
+<P>The WinDbg <b>Breakpoints</b> dialog box displays all breakpoints, indicating processor breakpoints with the notation "e", "r", "w", or "i' followed by the size of the block. This dialog box can be used to modify any breakpoint. The <b>Command</b> text box on this dialog box can be used to create any type of breakpoint.If a processor breakpoint is desired, begin the input with "ba". For details, see <a href="r37_gui_2_5abe2105-cf44-4d1e-a4ae-f4d44409ed58.xml.htm"><b>Edit | Breakpoints</b></a>. When you set a breakpoint by using the mouse in the WinDbg <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a> or <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a>, the debugger creates an unresolved software breakpoint.</P>
+<P>Processor breakpoints are stored in the processor's debug registers. It is possible to set a breakpoint by manually editing a debug register value, but this is strongly discouraged. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Processor Breakpoints  (ba Breakpoints) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

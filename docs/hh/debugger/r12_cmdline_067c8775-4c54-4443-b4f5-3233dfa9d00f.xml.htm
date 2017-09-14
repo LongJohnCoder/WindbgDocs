@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>General Environment Variables</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, General Environment Variables"><xml><MSHelp:Keyword Index="A" Term="r12_cmdline_067c8775-4c54-4443-b4f5-3233dfa9d00f.xml"/>
+<META NAME="MS-HKWD" CONTENT="environment variables, general">
+<META NAME="MS-HKWD" CONTENT="_NO_DEBUG_HEAP environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_ALT_SYMBOL_PATH environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUG_HISTORY_SIZE environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUG_LOG_FILE_APPEND environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUG_LOG_FILE_OPEN environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUGGER_EXTENSION_PATH environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_EXECUTABLE_IMAGE_PATH environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_SOURCE_PATH environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_SYMBOL_PATH environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_SYMBOL_PROXY environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_EXPR_EVAL environment variable">
+<META NAME="MS-HKWD" CONTENT="DBGENG_NO_DEBUG_PRIVILEGE environment variable">
+<META NAME="MS-HKWD" CONTENT="DBGHELP_HOMEDIR environment variable">
+<META NAME="MS-HKWD" CONTENT="debug privilege, DBGENG_NO_DEBUG_PRIVILEGE environment variable"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r12_cmdline_067c8775-4c54-4443-b4f5-3233dfa9d00f.xml"></A>General Environment Variables</H1>
+<P>The following table lists the environment variables that can be used in both user-mode and kernel-mode debugging.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Variable</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUGGER_EXTENSION_PATH = <i>Path</i></TD>
+<TD Width="">Specifies the path that the debugger will first search for extension DLLs. <i>Path</i> can contain a drive letter followed by a colon (<b>:</b>). Separate multiple directories with semicolons (<b>;</b>). For details, see <a href="r08_use_remote_ac80d1f3-ff3f-4374-9e70-2a73b84ac647.xml.htm">Loading Debugger Extension DLLs</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_EXECUTABLE_IMAGE_PATH = <i>Path</i></TD>
+<TD Width="">Specifies the path containing the binary executable files. <i>Path</i> can contain a drive letter followed by a colon (<b>:</b>). Separate multiple directories with semicolons (<b>;</b>). For details, and for other ways to change this path, see <a href="r06_use_gui_8f9c224f-0972-4b0f-941d-cfaac48c608c.xml.htm">Executable Image Path</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_SOURCE_PATH = <i>Path</i>  </TD>
+<TD Width="">Specifies the path containing the source files for the target. <i>Path</i> can contain a drive letter followed by a colon (<b>:</b>). Separate multiple directories with semicolons (<b>;</b>). For details, and for other ways to change this path, see <a href="r06_use_gui_b85f4b8e-eb5f-4502-9a0e-92d84cd3d8f1.xml.htm">Source Path</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_SYMBOL_PATH = <i>Path</i></TD>
+<TD Width="">Specifies the root of a directory tree containing the symbol files. <i>Path</i> can contain a drive letter followed by a colon (<b>:</b>). Separate multiple directories with semicolons (<b>;</b>). For details, and for other ways to change this path, see <a href="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml.htm">Symbol Path</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_ALT_SYMBOL_PATH = <i>Path</i></TD>
+<TD Width="">Specifies an alternate symbol path searched before _NT_SYMBOL_PATH. This is useful for keeping private versions of symbol files. <i>Path</i> can contain a drive letter followed by a colon (<b>:</b>). Separate multiple directories with semicolons (<b>;</b>). For details, see <a href="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml.htm">Symbol Path</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_SYMBOL_PROXY = <i>Proxy</i><b>:</b><i>Port</i></TD>
+<TD Width="">Specifies the proxy server to be used by SymSrv. For details, see <a href="r09_symbols_ee8ab129-5530-41ad-af38-8a777fde7b79.xml.htm">Firewalls and Proxy Servers</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUG_HISTORY_SIZE = <i>Number</i> </TD>
+<TD Width="">Specifies the number of commands in the command history that can be accessed during remote debugging. Because commands vary in length, the number of lines available may not exactly match <i>Number</i>. For details, and for other ways to change this number, see <a href="r05_use_start_0d2d0e09-870d-4d87-a7c7-2cac43538545.xml.htm">Using Debugger Commands</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUG_LOG_FILE_OPEN = <i>Filename</i></TD>
+<TD Width=""><i>(CDB and KD only)</i>  Specifies the log file to which the debugger should send output. For details, and for other methods of writing to log files, see <a href="r06_use_gui_8de5bdb2-e273-490d-b44f-359fa85f28da.xml.htm">Keeping a Log File</a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUG_LOG_FILE_APPEND = <i>Filename</i></TD>
+<TD Width=""><i>(CDB and KD only)</i>  Specifies the log file to which the debugger should append output. For details, and for other methods of appending to log files, see <a href="r06_use_gui_8de5bdb2-e273-490d-b44f-359fa85f28da.xml.htm">Keeping a Log File</a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_EXPR_EVAL = {<b>masm</b> | <b>c++</b>} </TD>
+<TD Width="">Specifies the default expression evaluator. If <b>masm</b> is specified, MASM expression syntax will be used. If <b>c++</b> is specified, C++ expression syntax will be used. MASM expression syntax is the default. See <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a> for details.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NO_DEBUG_HEAP</TD>
+<TD Width=""><i>(Windows XP and later)</i>  Specifies that the debug heap should not be used for user-mode debugging. See <a href="r07_use_operation_984a2aed-0e63-432c-81fd-b03bd183da5d.xml.htm">Behavior of Spawned Processes</a> for details. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBGENG_NO_DEBUG_PRIVILEGE </TD>
+<TD Width="">Prevents processes spawned by the debugger from inheriting SeDebugPrivilege. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBGHELP_HOMEDIR </TD>
+<TD Width="">Specifies the path for the root of the default downstream store used by SymSrv and SrcSrv.  <i>Path</i> can contain a drive letter followed by a colon (<b>:</b>). Separate multiple directories with semicolons (<b>;</b>). </TD>
+</TR>
+<TR valign="top">
+<TD Width="">SRCSRV_INI_FILE </TD>
+<TD Width="">Specifies the path and name of the configuration file used by <a href="symchk_c1ea56ff-ef8a-46ab-bfd8-ee049ef81d2a.xml.htm">SrcSrv</a>. By default, the path is the <i>srcsrv</i> subdirectory of the Debugging Tools for Windows installation directory, and the file name is <i>Srcsrv.ini</i>. See <a href="symchk_182c748c-4b0a-4bfb-afd8-1f7fc73ca47d.xml.htm">Source Indexing</a> for details. </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: General Environment Variables RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

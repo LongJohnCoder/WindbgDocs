@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Displaying RPC State Information</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Displaying RPC State Information"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_27d1302a-e73c-411f-bd7a-62a396ee166a.xml"/>
+<META NAME="MS-HKWD" CONTENT="RPC debugging, displaying RPC state information"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_27d1302a-e73c-411f-bd7a-62a396ee166a.xml"></A>Displaying RPC State Information</H1>
+<P>All RPC run-time state information is contained in cells. A cell is the smallest unit of information that can be viewed and updated individually. Both the DbgRpc tool and the RPC debugger extensions allow you to view the contents of any given cell or to run high-level queries.</P>
+<P>Each key object in the RPC Run-Time will maintain one or more cells of information about its state. Each cell has a cell ID. When an object refers to another object, it does so by specifying that object's cell ID.</P>
+<P>The key objects that the RPC Run-Time can maintain information about are endpoints, threads, connection objects, Server Call (SCALL) objects, and Client Call (CCALL) objects. Server Call objects are usually referred to simply as <i>call objects</i>.</P>
+<P>The RPC state information queries produce the same information whether you are using the DbgRpc tool or the RPC debugger extensions. The following sections describe how queries are used in each vehicle:</P><B></B><div class="indent1">
+<P><a href="t11_rpc_acpi_92512c41-c70b-4bca-84a6-0a86397463f9.xml.htm">Using the RPC Debugger Extensions</a> </P>
+</div>
+<div class="indent1">
+<P><a href="t11_rpc_acpi_ffe18735-edab-4192-8bb2-17cbfc9a0ad7.xml.htm">Using the DbgRpc Tool</a> </P>
+</div>
+<P></P>
+<P>The most basic query simply displays an individual cell:</P><B></B><div class="indent1">
+<P><a href="t11_rpc_acpi_b0722c15-08b6-4d36-980c-20b8e208492c.xml.htm">Get RPC Cell Information</a> </P>
+</div>
+<P></P>
+<P>The following high-level queries are also available:</P><B></B><div class="indent1">
+<P><a href="t11_rpc_acpi_ecadb256-27c9-45e4-8fb2-4e7752ff6ca4.xml.htm">Get RPC Endpoint Information</a> </P>
+</div>
+<div class="indent1">
+<P><a href="t11_rpc_acpi_0a6e6c3c-e352-4581-a39f-58e88e5ce4b9.xml.htm">Get RPC Thread Information</a> </P>
+</div>
+<div class="indent1">
+<P><a href="t11_rpc_acpi_6325b497-2169-4af8-b7c4-a3b07a2b6be3.xml.htm">Get RPC Call Information</a> </P>
+</div>
+<div class="indent1">
+<P><a href="t11_rpc_acpi_043c8f1b-d4f6-4058-8cf3-cd0956ba302f.xml.htm">Get RPC Client Call Information</a> </P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Displaying RPC State Information RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

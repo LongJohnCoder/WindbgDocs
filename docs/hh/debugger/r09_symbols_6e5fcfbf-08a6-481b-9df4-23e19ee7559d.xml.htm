@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Symbol Syntax and Symbol Matching</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Symbol Syntax and Symbol Matching"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_6e5fcfbf-08a6-481b-9df4-23e19ee7559d.xml"/>
+<META NAME="MS-HKWD" CONTENT="symbols, symbol syntax">
+<META NAME="MS-HKWD" CONTENT="symbols, symbol matching">
+<META NAME="MS-HKWD" CONTENT="symbols, symbol suffix">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, $! (local symbol identifier)">
+<META NAME="MS-HKWD" CONTENT="$! (local symbol identifier)">
+<META NAME="MS-HKWD" CONTENT="local symbol identifier ( $! )">
+<META NAME="MS-HKWD" CONTENT="local variables, local symbol identifier ( $! )"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_6e5fcfbf-08a6-481b-9df4-23e19ee7559d.xml"></A>Symbol Syntax and Symbol Matching</H1>
+<P>Symbols allow you to directly manipulate tokens that are used by the program being debugged. For example, you can set a breakpoint at the function <b>main</b> with the command <b>bp main</b>, or display the integer variable <b>MyInt</b> with the command <b>dd MyInt L1</b>.</P>
+<P>In many cases, symbols can be used as parameters in debugger commands. This is supported for most numerical parameters, and is also supported in some text parameters. In addition to general rules for symbol syntax, there are also symbol syntax rules that apply in each of these cases.</P>
+<H4>General Symbol Syntax Rules</H4>
+<P>A symbol name consists of one or more characters, but always begins with a letter, underscore (<b>_</b>), question mark (<b>?</b>), or dollar sign (<b>$</b>).</P>
+<P>A symbol name may be qualified by a module name. An exclamation mark (<b>!</b>) separates the module name from the symbol (for instance, <b>mymodule!main</b>). If no module name is used, the symbol can still be prefixed with an exclamation mark.  Using an exclamation mark with no module name can be especially useful, even for local variables, to indicate to a debugger command that a parameter is a name and not a hexadecimal number.  For example, the variable <b>fade</b> will be read by the <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a> command as an address, unless it is prefixed by an exclamation mark or the <nobr><b>-n</b></nobr> option is used.  However, to specify that a symbol is local, precede it with a dollar sign ( $ ) and an exclamation point ( ! ), as in <b>$!lime</b>.</P>
+<P>Symbol names are completely case-insensitive. This means that the presence of a <b>myInt</b> and a <b>MyInt</b> in your program will not be correctly understood by the debuggers; any command that references one of these may access the other one, regardless of how the command is capitalized.</P>
+<P><H4>Symbol Syntax in Numerical Expressions</H4>
+</P>
+<P>The debugger understands two different kinds of expressions: Microsoft Macro Assembler (MASM) expressions and C++ expressions. As far as symbols are concerned, these two forms of syntax differ as follows:</P><B></B><UL type="disc">
+<LI>In MASM expressions, each symbol is interpreted as an address. Depending on what the symbol refers to, this will be the address of a global variable, local variable, function, segment, module, or any other recognized label.</LI>
+<LI>In C++ expressions, each symbol is interpreted according to its type. Depending on what the symbol refers to, it may be interpreted as an integer, a data structure, a function pointer, or any other data type. A symbol that does not correspond to a C++ data type (such as an unmodified module name) will result in a syntax error.</LI>
+</UL>
+<P></P>
+<P>For an explanation of when and how to use each type of syntax, see <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a>.</P>
+<P>If you are using MASM expression syntax, any symbol that could be interpreted as a hexadecimal number or as a register (e.g., <b>BadFeed</b>, <b>ebX</b>) should always be prefixed by an exclamation point. This makes sure the debugger recognizes it as a symbol.</P>
+<P>The <a href="r18_cmds_s_9dfba3f9-c225-429b-a29c-0b29fbe28a7b.xml.htm"><b>ss (Set Symbol Suffix)</b></a> command can be used to set the symbol suffix. This instructs the debugger to automatically append "A" or "W" to any symbol name it cannot find otherwise.</P>
+<P>Many Win32 routines exist in both ASCII and Unicode versions. These routines often have an "A" or "W" appended to the end of their names, respectively. Using a symbol suffix will aid the debugger when searching for these symbols.</P>
+<P>Suffix matching is <i>not</i> active by default.   </P>
+<H4>Symbol Syntax in Text Expressions</H4>
+<P>Symbols can be used in the text parameters of some commands &#8212; for example, <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bm (Set Breakpoint)</b></a> and <a href="r18_cmds_s_717feb00-25c4-4911-be94-52c11698f782.xml.htm"><b>x (Examine Symbols)</b></a>.</P>
+<P>These text parameters support a variety of wildcards and specifiers. See <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a> for details. In addition to the standard string wildcards, a text expression used to specify a symbol can be prefixed with a leading underscore. When matching this to a symbol, the debugger will treat this as <i>any quantity of underscores</i>, even zero.</P>
+<P>The symbol suffix is <i>not</i> used when matching symbols in text expressions.   </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Symbol Syntax and Symbol Matching RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xF1: SCSI_VERIFIER_DETECTED_VIOLATION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xF1: SCSI_VERIFIER_DETECTED_VIOLATION"><xml><MSHelp:Keyword Index="A" Term="t07_bugs_E0_bb054e47-c1da-428d-8821-7d2a15a67270.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xF1: SCSI_VERIFIER_DETECTED_VIOLATION">
+<META NAME="MS-HKWD" CONTENT="SCSI_VERIFIER_DETECTED_VIOLATION">
+<META NAME="MS-HKWD" CONTENT="Driver Verifier, bug check 0xF1"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t07_bugs_E0_bb054e47-c1da-428d-8821-7d2a15a67270.xml"></A>Bug Check 0xF1: SCSI_VERIFIER_DETECTED_VIOLATION</H1>
+<P>The SCSI_VERIFIER_DETECTED_VIOLATION bug check has a value of 0x000000F1. This is the bug check code for all Driver Verifier <b>SCSI Verification</b> violations.</P>
+<H4>Parameters</H4>
+<P>The four bug check parameters are displayed on the blue screen. Parameter 1 identifies the type of violation.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1000</TD>
+<TD Width="">First argument passed</TD>
+<TD Width="">Second argument passed</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The miniport driver passed bad arguments to <b>ScsiPortInitialize</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1001</TD>
+<TD Width="">Delay, in microseconds</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The miniport driver called <b>ScsiPortStallExecution</b> and specified a delay greater than 0.1 second, stalling the processor too long.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1002</TD>
+<TD Width="">Address of routine that took too long</TD>
+<TD Width="">Address of miniport's HW_DEVICE_EXTENSION</TD>
+<TD Width="">Duration of the routine, in microseconds</TD>
+<TD Width="">A miniport routine called by the port driver took longer than 0.5 second to execute.<BR><BR>(0.5 seconds is the limit for most routines. However, the <b>HwInitialize</b> routine is allowed 5 seconds, and the <b>FindAdapter</b> routine is exempt.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1003</TD>
+<TD Width="">Address of miniport's HW_DEVICE_EXTENSION </TD>
+<TD Width="">Address of the SRB</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The miniport driver completed a request more than once.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1004</TD>
+<TD Width="">Address of the SRB</TD>
+<TD Width="">Address of miniport's HW_DEVICE_EXTENSION</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The miniport driver completed a request with an invalid SRB status.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1005</TD>
+<TD Width="">Address of miniport's HW_DEVICE_EXTENSION</TD>
+<TD Width="">Address of LOGICAL_UNIT_EXTENSION</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The miniport driver called <b>ScsiPortNotification</b> to ask for <b>NextLuRequest</b>, but an untagged request is still active.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1006</TD>
+<TD Width="">Address of miniport's HW_DEVICE_EXTENSION</TD>
+<TD Width="">Invalid virtual address</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The miniport driver passed an invalid virtual address to <b>ScsiPortGetPhysicalAddress</b>.<BR><BR>(This usually means the address supplied doesn't map to the common buffer area.)<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1007</TD>
+<TD Width="">Address of ADAPTER_EXTENSION</TD>
+<TD Width="">Address of miniport's HW_DEVICE_EXTENSION</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">The reset hold period for the bus ended, but the miniport driver still has outstanding requests.</TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>See the description of each code in the Parameters section for an explanation of the cause.</P>
+<H4>Resolving the Problem</H4>
+<P>This bug check can only occur when Driver Verifier has been instructed to monitor one or more drivers. If you did not intend to use Driver Verifier, you should deactivate it. You might consider removing the driver which caused this problem as well.</P>
+<P>If you are the driver writer, use the information obtained through this bug check to fix the bugs in your code.</P>
+<P>The Driver Verifier <b>SCSI Verification</b> option is only available in Windows XP and later. For full details on Driver Verifier, see the Windows Driver Kit.  </P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xF1: SCSI_VERIFIER_DETECTED_VIOLATION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

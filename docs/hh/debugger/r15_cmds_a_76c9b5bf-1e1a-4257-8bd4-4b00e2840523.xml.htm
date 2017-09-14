@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>bp, bu, bm (Set Breakpoint)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, bp, bu, bm (Set Breakpoint)"><xml><MSHelp:Keyword Index="A" Term="r15_cmds_A_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml"/>
+<META NAME="MS-HKWD" CONTENT="bp (Set Breakpoint) command">
+<META NAME="MS-HKWD" CONTENT="bu (Set Unresolved Breakpoint) command">
+<META NAME="MS-HKWD" CONTENT="bm (Set Symbol Breakpoint) command">
+<META NAME="MS-HKWD" CONTENT="Set Breakpoint (bp - bu - bm) command">
+<META NAME="MS-HKWD" CONTENT="breakpoints, Set Breakpoint (bp) command">
+<META NAME="MS-HKWD" CONTENT="breakpoints, Set Unresolved Breakpoint (bu) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r15_cmds_A_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml"></A>bp, bu, bm (Set Breakpoint)</H1>
+<P>The <b>bp</b>, <b>bu</b>, and <b>bm</b> commands set one or more software breakpoints. You can combine locations, conditions, and options to set different kinds of software breakpoints. <P></P>
+</P>
+<H4>Syntax</H4>
+<P>User-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr>[<b>~</b><i>Thread</i>] <b>bp</b>[<i>ID</i>] [<i>Options</i>] [<i>Address</i> [<i>Passes</i>]] [<b>"</b><i>CommandString</i><b>"</b>] <BR>[<b>~</b><i>Thread</i>] <b>bu</b>[<i>ID</i>] [<i>Options</i>] [<i>Address</i> [<i>Passes</i>]] [<b>"</b><i>CommandString</i><b>"</b>] <BR>[<b>~</b><i>Thread</i>] <b>bm</b> [<i>Options</i>] <i>SymbolPattern</i> [<i>Passes</i>] [<b>"</b><i>CommandString</i><b>"</b>]<BR></nobr></P>
+<P></P>
+<P>Kernel-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>bp</b>[<i>ID</i>] [<i>Options</i>] [<i>Address</i> [<i>Passes</i>]] [<b>"</b><i>CommandString</i><b>"</b>] <BR><b>bu</b>[<i>ID</i>] [<i>Options</i>] [<i>Address</i> [<i>Passes</i>]] [<b>"</b><i>CommandString</i><b>"</b>] <BR><b>bm</b> [<i>Options</i>] <i>SymbolPattern</i> [<i>Passes</i>] [<b>"</b><i>CommandString</i><b>"</b>]<BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Thread</i></DT>
+<DD>Specifies the thread that the breakpoint applies to. For more information about the syntax, see <a href="r13_syntax_5bebd798-3782-4d86-8a4f-33b8f2488b7a.xml.htm">Thread Syntax</a>. You can specify threads only in user mode. If you do not specify a thread, the breakpoint applies to all threads. </DD>
+<DT><i>ID</i></DT>
+<DD>Specifies a decimal number that identifies a breakpoint.<P>The debugger assigns the <i>ID</i> when it creates the breakpoint, but you can change it by using the <a href="r15_cmds_a_a5203f1e-08a8-4990-8737-0b4d09210fa5.xml.htm"><b>br (Breakpoint Renumber)</b></a> command. You can use the <i>ID</i> to refer to the breakpoint in later debugger commands. To display the <i>ID</i> of a breakpoint, use the <a href="r15_cmds_a_4239e89a-bfe7-423f-ab96-4f0725cef52a.xml.htm"><b>bl (Breakpoint List)</b></a> command.</P>
+<P>When you use <i>ID</i> in a command, do not type a space between the command (<b>bp</b> or <b>bu</b>) and the ID number. </P>
+<P>The <i>ID</i> parameter is always optional. If you do not specify <i>ID</i>, the debugger uses the first available breakpoint number. In kernel mode, you can set only 32 breakpoints. In user mode, you can set any number of breakpoints. In either case, there is no restriction on the value of the <i>ID</i> number. If you enclose <i>ID</i> in square brackets (<b>[]</b>), <i>ID</i> can include any expression. For more information about the syntax, see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a>. </P>
+</DD>
+<DT><i>Options</i></DT>
+<DD>Specifies breakpoint options. You can specify any number of the following options, except as indicated:<DL><DT><b>/1</b></DT>
+<DD>Creates a "one-shot" breakpoint. After this breakpoint is triggered, it is deleted from the breakpoint list.</DD>
+<DT><b>/f</b> <i>PredNum</i></DT>
+<DD><i>(Itanium-based only, user mode only)</i>  Specifies a predicate number. The breakpoint is predicated with the corresponding predicate register. (For example, <b>bp /f 4 </b><I><B>address</B></I> sets a breakpoint that is predicated with the <b>p4</b> predicate register.) For more information about predicate registers, see <a href="t10_arch_ia64_058d30c8-b157-4fed-8317-371ffe0d0942.xml.htm">Itanium Architecture</a>.</DD>
+<DT><b>/p</b> <i>EProcess</i></DT>
+<DD><i>(Kernel-mode only)</i>  Specifies a process that is associated with this breakpoint. <i>EProcess</i> should be the actual address of the EPROCESS structure, not the PID. The breakpoint is triggered only if it is encountered in the context of this process.</DD>
+<DT><b>/t</b> <i>EThread</i></DT>
+<DD><i>(Kernel-mode only)</i>  Specifies a thread that is associated with this breakpoint. <i>EThread</i> should be the actual address of the ETHREAD structure, not the thread ID. The breakpoint is triggered only if it is encountered in the context of this thread. If you use <b>/p </b><i>EProcess</i> and <b>/t </b><i>EThread</i>, you can enter them in any order.   </DD>
+<DT><b>/c</b> <i>MaxCallStackDepth</i></DT>
+<DD>Activates the breakpoint only when the call stack depth is less than <i>MaxCallStackDepth</i>. You cannot use this option together with <b>/C</b>.</DD>
+<DT><b>/C</b> <i>MinCallStackDepth</i></DT>
+<DD>Activates the breakpoint only when the call stack depth is larger than <i>MinCallStackDepth</i>. You cannot use this option together with <b>/c</b>.</DD>
+<DT><b>/a</b></DT>
+<DD><i>(For <B>bm</B> only)</i>  Sets breakpoints on all of the specified locations, whether they are in data space or code space. Because breakpoints on data can cause program failures, use this option only on locations that are known to be safe.</DD>
+<DT><b>/d</b></DT>
+<DD>(<i>For <B>bm</B> only</i>)  Converts the breakpoint locations to addresses. Therefore, if the code is moved, the breakpoints remain at the same address, instead of being set according to <i>SymbolPattern</i>. Use <b>/d</b> to avoid reevaluating changes to breakpoints when modules are loaded or unloaded.</DD>
+<DT><b>/(</b></DT>
+<DD><i>(For <B>bm</B> only)</i>  Includes parameter list information in the symbol string that <i>SymbolString</i> defines. <P>This feature enables you to set breakpoints on overloaded functions that have the same name but different parameter lists. For example, <nobr><b>bm /( myFunc</b></nobr> sets breakpoints on both <b>myFunc(int a)</b> and <b>myFunc(char a)</b>. Without "/(", a breakpoint that is set on <b>myFunc</b> fails because it does not indicate which <b>myFunc</b> function the breakpoint is intended for. </P>
+</DD>
+</DL>
+</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the first byte of the instruction where the breakpoint is set. If you omit <i>Address</i>, the current instruction pointer is used. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>. </DD>
+<DT><i>Passes</i></DT>
+<DD>Specifies the number of the execution pass that the breakpoint is activated on. The debugger skips the breakpoint location until it reaches the specified pass. The value of <i>Passes</i> can be any 16-bit or 32-bit value. <P>By default, the breakpoint is active the first time that the application executes the code that contains the breakpoint location. This default situation is equivalent to a value of <b>1</b> for <i>Passes</i>. To activate the breakpoint only after the application executes the code at least one time, enter a value of <b>2</b> or more. For example, a value of <b>2</b> activates the breakpoint the second time that the code is executed.</P>
+<P>This parameter creates a counter that is decremented on each pass through the code. To see the initial and current values of the <i>Passes</i> counter, use <a href="r15_cmds_a_4239e89a-bfe7-423f-ab96-4f0725cef52a.xml.htm"><b>bl (Breakpoint List)</b></a>.</P>
+<P>The <i>Passes</i> counter is decremented only when the application <i>executes</i> past the breakpoint in response to a <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command. The counter is not decremented if you are stepping through the code or tracing past it. When the <i>Passes</i> counter reaches <b>1</b>, you can reset it only by clearing and resetting the breakpoint. </P>
+</DD>
+<DT><i>CommandString</i></DT>
+<DD>Specifies a list of commands that are executed every time that the breakpoint is encountered the specified number of times. You must enclose the <i>CommandString</i> parameter in quotation marks. Use semicolons to separate multiple commands. <P>Debugger commands in <i>CommandString</i> can include parameters. You can use standard C-control characters (such as <b>\n</b> and <b>\"</b>). Semicolons that are contained in second-level quotation marks (<b>\"</b>) are interpreted as part of the embedded quoted string.</P>
+<P>The <i>CommandString</i> commands are executed only if the breakpoint is reached while the application is <i>executing</i> in response to a <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command. The commands are not executed if you are stepping through the code or tracing past this point.</P>
+<P>Any command that resumes program execution after a breakpoint (such as <b>g</b> or <b>t</b>) ends the execution of the command list. </P>
+</DD>
+<DT><i>SymbolPattern</i></DT>
+<DD>Specifies a pattern. The debugger tries to match this pattern to existing symbols and to set breakpoints on all pattern matches. <i>SymbolPattern</i> can contain a variety of wildcard characters and specifiers. For more information about this syntax, see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a>. Because these characters are being matched to symbols, the match is not case sensitive, and a single leading underscore (_) represents any quantity of leading underscores. </DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>bp</b>, <b>bu</b>, and <b>bm</b> commands set new breakpoints, but they have different characteristics:</P><B></B><UL type="disc">
+<LI>The <b>bp (Set Breakpoint)</b> command sets a new breakpoint at the <i>address</i> of the breakpoint location that is specified in the command. If the debugger cannot resolve the address expression of the breakpoint location when the breakpoint is set, the <b>bp</b> breakpoint is automatically converted to a <b>bu</b> breakpoint. Use a <b>bp</b> command to create a breakpoint that is no longer active if the module is unloaded. </LI>
+<LI>The <b>bu (Set Unresolved Breakpoint)</b> command sets a <i>deferred </i>or <i>unresolved</i> breakpoint. A <b>bu</b> breakpoint is set on a symbolic reference to the breakpoint location that is specified in the command (not on an address) and is activated whenever the module with the reference is resolved. For more information about these breakpoints, see <a href="r07_use_operation_3a87f521-a016-43a6-bc5f-820bfd4fa0c4.xml.htm">Unresolved Breakpoints (<b>bu</b> Breakpoints)</a>. </LI>
+<LI>The <b>bm (Set Symbol Breakpoint)</b> command sets a new breakpoint on symbols that match a specified pattern. This command can create more than one breakpoint. By default, after the pattern is matched, <b>bm</b> breakpoints are the same as <b>bu</b> breakpoints. That is, <b>bm </b>breakpoints are deferred breakpoints that are set on a symbolic reference. However, a <nobr><b>bm /d</b></nobr> command creates one or more <b>bp</b> breakpoints. Each breakpoint is set on the address of a matched location and does not track module state. </LI>
+</UL>
+<P></P>
+<P>If you are not sure what command was used to set an existing breakpoint, use <a href="r19_metacmds_a_fbc53fa8-9480-485b-9b49-64cf24fecd26.xml.htm"><b>.bpcmds (Display Breakpoint Commands)</b></a> to list all breakpoints along with the commands that were used to create them.</P>
+<P>There are three primary differences between <b>bp</b> breakpoints and <b>bu</b> breakpoints:</P><B></B><UL type="disc">
+<LI>A <b>bp</b> breakpoint location is always converted to an address. If a module change moves the code at which a <b>bp</b> breakpoint was set, the breakpoint remains at the same address. On the other hand, a <b>bu</b> breakpoint remains associated with the symbolic value (typically a symbol plus an offset) that was used, and it tracks this symbolic location even if its address changes.</LI>
+<LI>If a <b>bp</b> breakpoint address is found in a loaded module, and if that module is later unloaded, the breakpoint is removed from the breakpoint list.  On the other hand, <b>bu</b> breakpoints persist after repeated unloads and loads. </LI>
+<LI>Breakpoints that you set with <b>bp</b> are not saved in WinDbg <a href="r06_use_gui_913ac9c6-536d-45c5-91b7-61369b2d2854.xml.htm">workspaces</a>. Breakpoints that are set with <b>bu</b> are saved in workspaces. </LI>
+</UL>
+<P></P>
+<P>The <b>bm</b> command is useful when you want to use wildcard characters in the symbol pattern for a breakpoint. The <b>bm </b><i>SymbolPattern</i> syntax is equivalent to using <a href="r18_cmds_s_717feb00-25c4-4911-be94-52c11698f782.xml.htm"><b>x </b><i>SymbolPattern</i></a> and then using <b>bu</b> on each result. For example, to set breakpoints on all of the symbols in the <i>Myprogram</i> module that begin with the string "mem," use the following command. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bm myprogram!mem* </b><BR>  4: 0040d070 MyProgram!memcpy<BR>  5: 0040c560 MyProgram!memmove<BR>  6: 00408960 MyProgram!memset<BR></nobr></P>
+<P></P>
+<P>Because the <b>bm</b> command sets software breakpoints (not processor breakpoints), it automatically excludes data location when it sets breakpoints to avoid corrupting the data.</P>
+<P>It is possible to specify a data address rather than a program address when using the <b>bp</b> or <nobr><b>bm /a</b></nobr> commands. However, even if a data location is specified, these commands create software breakpoints, not processor breakpoints. If a software breakpoint is placed in program data instead of executable code, it can lead to data corruption. Therefore you should use these commands in a data location only if you are certain that the memory stored in that location will be used as executable code and not as program data. Otherwise, you should use the <a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba (Break on Access)</b></a> command instead.  For more details, see <a href="r07_use_operation_d80bd6e2-8037-421c-ae24-557262f4dad4.xml.htm">Processor Breakpoints (<b>ba</b> Breakpoints)</a>. </P>
+<P>For details on how to set a breakpoint on a location specified by a more complicated syntax, such as a member of a C++ public class, or an arbitrary text string containing otherwise restricted characters, see <a href="r07_use_operation_ac8251aa-d8c8-42bf-96b4-686b3bd4f80b.xml.htm">Breakpoint Syntax</a>. </P>
+<P></P>
+<P>If a single logical source line spans multiple physical lines, the breakpoint is set on the last physical line of the statement or call. If the debugger cannot set a breakpoint at the requested position, it puts the breakpoint in the next allowed position.</P>
+<P>If you specify <i>Thread</i>, breakpoints are set on the specified threads. For example, the <b>~*bp</b> command sets breakpoints on all threads, <b>~#bp</b> sets a breakpoint on the thread that causes the current exception, and <b>~123bp</b> sets a breakpoint on thread 123. The <b>~bp</b> and <b>~.bp</b> commands both set a breakpoint on the current thread.</P>
+<P>When you are debugging a multiprocessor system in kernel mode, breakpoints that you set by using <b>bp</b> or <a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba (Break on Access)</b></a> apply to all processors. For example, if the current processor is 3 and you type <b>bp MemoryAddress</b> to put a breakpoint at <b>MemoryAddress</b>. Any processor that is executing at that address  (not only processor 3) causes a breakpoint trap. </P>
+<P>The <b>bp</b>, <b>bu</b>, and <b>bm</b> commands set software breakpoints by replacing the processor instruction with a break instruction. To debug read-only code or code that cannot be changed, use a <nobr><b>ba e</b></nobr> command, where <b>e</b> represents execute-only access. </P>
+<H4>Examples</H4>
+<P>The following command sets a breakpoint 12 bytes past the beginning of the function <b>MyTest</b>. This breakpoint is ignored for the first six passes through the code, but execution stops on the seventh pass through the code.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bp MyTest+0xb 7</b> <BR></nobr></P>
+<P></P>
+<P>The following command sets a breakpoint at <b>RtlRaiseException</b>, displays the <b>eax</b> register, displays the value of the symbol <b>MyVar</b>, and continues.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>bp ntdll!RtlRaiseException "r eax; dt MyVar; g"</b><BR></nobr></P>
+<P></P>
+<P>The following two <b>bm</b> commands set three breakpoints. When the commands are executed, the displayed result does not distinguish between breakpoints created with the <b>/d</b> switch and those created without it. The <a href="r19_metacmds_a_fbc53fa8-9480-485b-9b49-64cf24fecd26.xml.htm"><b>.bpcmds (Display Breakpoint Commands)</b></a> can be used to distinguish between these two types. If the breakpoint was created by <b>bm</b> without the <b>/d</b> switch, the <b>.bpcmds</b> display indicates the breakpoint type as <b>bu</b>, followed by the evaluated symbol enclosed in the <b>@!""</b> token (which indicates it is a literal symbol and not a numeric expression or register). If the breakpoint was created by <b>bm</b> with the <b>/d</b> switch, the <b>.bpcmds</b> display indicates the breakpoint type as <b>bp</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bm myprog!openf*</b> <BR>  0: 00421200 @!"myprog!openFile"<BR>  1: 00427800 @!"myprog!openFilter"<BR><BR>0:000&gt; <b>bm /d myprog!closef*</b> <BR>  2: 00421600 @!"myprog!closeFile"<BR><BR>0:000&gt; <b>.bpcmds</b><BR>bu0 @!"myprog!openFile";<BR>bu1 @!"myprog!openFilter";<BR>bp2 0x00421600 ;<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about and examples of how to use breakpoints, other breakpoint commands and methods of controlling breakpoints, and how to set breakpoints in user space from a kernel debugger, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a>. For more information about conditional breakpoints, see <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm">Setting a Conditional Breakpoint</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: bp, bu, bm (Set Breakpoint) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

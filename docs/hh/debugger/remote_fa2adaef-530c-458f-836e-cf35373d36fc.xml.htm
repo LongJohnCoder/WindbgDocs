@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Remote Server Query Command</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Remote Server Query Command"><xml><MSHelp:Keyword Index="A" Term="Remote_fa2adaef-530c-458f-836e-cf35373d36fc.xml"/>
+<META NAME="MS-HKWD" CONTENT="Remote Tool, Remote Server Query Command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Remote_fa2adaef-530c-458f-836e-cf35373d36fc.xml"></A>Remote Server Query Command</H1>
+<P>To display a list of available sessions on a local or Remote Server, use the following syntax.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>remote /q</b> <i>Computer</i><BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>/q</b></DT>
+<DD>Query. Displays the visible remote sessions on the specified computer. </DD>
+<DT><i>Computer</i></DT>
+<DD>Specifies the name of the computer. This parameter is required (even on the local computer).<P></P>
+</DD>
+</DL>
+<H4>Comments</H4>
+<P>The query display includes only server sessions; it does not display client connections to remote sessions.</P>
+<P>The query display includes only <a href="remote_58739417-0eb2-4500-ba8e-6c8216d6ab86.xml.htm#ea849ebb-8c45-425a-9031-b708fddbc51f"><u>visible sessions</u></a>. There is no command to display invisible sessions.</P>
+<P>The query display includes all visible sessions, including those that restrict users (<b>/u</b> and <b>/ud</b>). The user might not have permission to connect to all of the sessions in the list.</P>
+<P>When there are no remote sessions running on the server, the Remote tool displays the following message:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>No Remote servers running on \\<i>Computer</i><BR><BR></nobr></P>
+<P>However, when the only remote sessions running on the computer are invisible remote sessions, the Remote tool displays the following message:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>No visible sessions on server \\<i>Computer</i><BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Remote Server Query Command RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>OutputPromptVaList</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, OutputPromptVaList"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Stdarg.h, Dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="OutputPromptVaList"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_fc743964-a97c-45d2-8167-0e7401c7a546.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::OutputPromptVaList method">
+<META NAME="MS-HKWD" CONTENT="OutputPromptVaList (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_fc743964-a97c-45d2-8167-0e7401c7a546.xml"></A>OutputPromptVaList</H1>
+<P>The <b>OutputPromptVaList</b> and <b>OutputPromptVaListWide</b> methods format and send a user prompt to the <a href="engine_dg_f76855d1-672f-4a0e-b4da-a2b4c2ac4e5d.xml.htm#584852f1-7157-4b2a-99a4-aa760877a5ae">output callback objects</a>.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::OutputPromptVaList(</b><BR><b>    IN ULONG  </b><i>OutputControl</i><b>,</b><BR><b>    IN OPTIONAL PCSTR  </b><i>Format</i><b>,</b><BR><b>    IN va_list  </b><i>Args</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::OutputPromptVaListWide(</b><BR><b>    IN ULONG  </b><i>OutputControl</i><b>,</b><BR><b>    IN OPTIONAL PCWSTR  </b><i>Format</i><b>,</b><BR><b>    IN va_list  </b><i>Args</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define OutputPromptVaListT OutputPromptVaListWide</b><BR><b>#else</b><BR><b>#define OutputPromptVaListT OutputPromptVaList</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>OutputControl</i></DT>
+<DD>Specifies an output control that determines which of the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#f9f1d5c4-da8d-41b1-aa24-ac5f406e6654">client</a>'s output callbacks will receive the output.  For possible values, see <a href="structures_498e4f9e-99c5-4fec-8aaf-0d84d2d097d0.xml.htm">DEBUG_OUTCTL_XXX</a>.</DD>
+<DT><i>Format</i></DT>
+<DD>Specifies the format string, as in <b>printf</b>.  Typically, conversion characters work exactly as they do in C. For the floating-point conversion characters, the 64-bit argument is interpreted as a 32-bit floating-point number unless the <b>l</b>  modifier is used.<P>The <b>%p</b> conversion character is supported, but it represents a pointer in a target's address space.  It might not have any modifiers and it uses the debugger's internal address formatting.  The following additional conversion characters are supported.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Character</TH>
+<TH Width="">Argument type</TH>
+<TH Width="">Argument</TH>
+<TH Width="">Text printed</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%p</b> </TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Pointer in an address space.</TD>
+<TD Width="">The value of the pointer. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%N</b> </TD>
+<TD Width="">DWORD_PTR (32 or 64 bits, depending on the host's architecture) </TD>
+<TD Width="">Pointer in the host's virtual address space.</TD>
+<TD Width="">The value of the pointer.  (This is equivalent to the standard C <b>%p</b> character.) </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%I</b>  </TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Any 64-bit value.</TD>
+<TD Width="">The specified value.  If this is greater than 0xFFFFFFFF, it is printed as a 64-bit value; otherwise, it is printed as a 32-bit value.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%ma</b> </TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address of a NULL-terminated ASCII string in the process's virtual address space.</TD>
+<TD Width="">The specified string.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%mu</b> </TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address of a NULL-terminated Unicode string in the process's virtual address space.</TD>
+<TD Width="">The specified string.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%msa</b> </TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address of an ANSI_STRING structure in the process's virtual address space.</TD>
+<TD Width="">The specified string.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%msu</b> </TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address of a UNICODE_STRING structure in the process's virtual address space.</TD>
+<TD Width="">The specified string.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%y</b></TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address in the process's virtual address space of an item with symbol information.</TD>
+<TD Width="">String that contains the name of the specified symbol (and displacement, if any). </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>%ly</b></TD>
+<TD Width="">ULONG64 </TD>
+<TD Width="">Address in the process's virtual address space of an item with symbol information.</TD>
+<TD Width="">String that contains the name of the specified symbol (and displacement, if any), as well as any available source line information. </TD>
+</TR>
+</table>
+<P>If <i>Format</i> is NULL, only the standard prompt text is sent to the output callbacks.</P>
+</DD>
+<DT><i>Args</i></DT>
+<DD>Specifies additional parameters that represent values to be inserted into the output during formatting.  <i>Args</i> must be initialized using <b>va_start</b>. This method does not call <b>va_end</b>.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>OutputPromptVaList</b> is available in all versions of <b>IDebugControl</b>.  <b>OutputPromptVaListWide</b> is available in <b>IDebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P><b>OutputPromptVaList</b> and <b>OutputPromptVaListWide</b> can be used to prompt the user for input.</P>
+<P>The standard prompt will be sent to the output callbacks before the formatted text described by <i>Format</i>.  The contents of the standard prompt is returned by the method <a href="idebugcontrol_1f566e74-8920-43ce-8e5f-3c467ddb8d8a.xml.htm"><b>GetPromptText</b></a>.</P>
+<P>The prompt text is sent to the output callbacks with the <a href="structures_d97f5c07-2709-4dcb-8756-da1bc4b31099.xml.htm">DEBUG_OUTPUT_PROMPT</a> output mask set.</P>
+<P>For more information about prompting the user, see <a href="engine_dg_ce5dd9cd-7068-4ca7-95d9-f4985a9812c2.xml.htm">Using Input and Output</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.  The macros <b>va_list</b>, <b>va_start</b>, and <b>va_end</b> are defined in <i>Stdarg.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_bb972181-80f5-4c7a-8705-919273529eee.xml.htm"><b>OutputPrompt</b></a>, <a href="idebugcontrol_1f566e74-8920-43ce-8e5f-3c467ddb8d8a.xml.htm"><b>GetPromptText</b></a>, <a href="idebugcontrol_2ea55393-9577-4639-ac83-5cefb584ff3b.xml.htm"><b>ControlledOutputVaList</b></a>, <a href="structures_d97f5c07-2709-4dcb-8756-da1bc4b31099.xml.htm">DEBUG_OUTPUT_XXX</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: OutputPromptVaList RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

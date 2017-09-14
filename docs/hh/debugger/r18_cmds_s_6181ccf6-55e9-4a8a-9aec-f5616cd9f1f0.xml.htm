@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>tb (Trace to Next Branch)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, tb (Trace to Next Branch)"><xml><MSHelp:Keyword Index="A" Term="r18_cmds_S_6181ccf6-55e9-4a8a-9aec-f5616cd9f1f0.xml"/>
+<META NAME="MS-HKWD" CONTENT="tb (Trace to Next Branch) command">
+<META NAME="MS-HKWD" CONTENT="Trace to Next Branch (tb) command">
+<META NAME="MS-HKWD" CONTENT="controlling the target, Trace to Next Branch (tb) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r18_cmds_S_6181ccf6-55e9-4a8a-9aec-f5616cd9f1f0.xml"></A>tb (Trace to Next Branch)</H1>
+<P>The <b>tb</b> command executes the program until a branch instruction is reached.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>tb</b> [<b>r</b>] [= <i>StartAddress</i>] [<i>Count</i>] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>r</b></DT>
+<DD>Turns on and off the display of registers and flags. By default, the registers and flags are displayed. You can disable register display by using the <b>tbr</b>, <a href="r17_cmds_i_169c2b2f-7f47-4e0a-85a9-506f151f0a8f.xml.htm"><b>pr</b></a>, <a href="r18_cmds_s_fe6d30ae-7c39-40db-a971-2aae584c13d3.xml.htm"><b>tr</b></a>, or <nobr><a href="r21_metacmds_l_55475ec8-bd36-4a0c-b380-0ff50ea3488d.xml.htm"><b>.prompt_allow -reg</b></a></nobr> commands. All of these commands control the same setting and you can use any of them to override any previous use of these commands.  <P>You can also disable register display by using the <nobr><a href="r17_cmds_i_11dcb4d0-b005-46df-b006-79397ff26e7e.xml.htm"><b>l-os</b></a></nobr> command. This setting is separate from the other four commands. To control <i>which</i> registers and flags are displayed, use the <a href="r17_cmds_i_7920456a-7091-467f-a3d0-552c68eee937.xml.htm"><b>rm (Register Mask)</b></a> command.</P>
+</DD>
+<DT><i>StartAddress</i></DT>
+<DD>Specifies the address where the debugger starts execution. If you do not use <i>StartAddress</i>, execution begins at the instruction that the instruction pointer points to. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+<DT><i>Count</i></DT>
+<DD>Specifies the number of branches to allow. Every time that a branch is encountered, the instruction address and the instruction are displayed. If you omit <i>Count</i>, the default number is 1.</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width=""><b>x86-based:</b> Kernel mode only<BR><b>Itanium-based:</b> User mode, kernel mode<BR><b>x64-based:</b> User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">x86-based (GenuineIntel processor family 6 and later), Itanium-based, x64-based</TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>tb</b> command causes the target to begin executing. This execution continues until a branch command is reached.</P>
+<P>Execution stops at any branch command that is to be taken. This stopping of execution is always based on the <i>disassembly </i>code, even when the debugger is in source mode.</P>
+<P>Branch instructions include calls, returns, jumps, counted loops, and while loops. If the debugger encounters an unconditional branch, or a conditional branch for which the condition is true, execution stops. If the debugger encounters a conditional branch whose condition is false, execution continues.</P>
+<P>When execution stops, the address of the branch instruction and any associated symbols are displayed. This information is followed by an arrow and then the address and instructions of the new program counter location.</P>
+<P>The <b>tb</b> command works only on the current processor. If you use <b>tb</b> on a multiprocessor system, execution stops when a branch command is reached or when another processor's event occurs, whichever comes first.</P>
+<P>Usually, branch tracing is enabled after the processor control block (PRCB) has been initialized. (The PRCB is initialized early in the boot process.) However, if you have to use the <b>tb</b> command before this point, you can use <a href="r20_metacmds_e_3e6fc748-0fdd-45e8-966a-ac391a99d43f.xml.htm"><b>.force_tb (Forcibly Allow Branch Tracing)</b></a> to enable branch tracing earlier. Use the <b>.force_tb</b> command cautiously, because it can corrupt your processor state.</P>
+<H4>Additional Information</H4>
+<P>For more information about related commands, see <a href="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml.htm">Controlling the Target</a>. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: tb (Trace to Next Branch) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

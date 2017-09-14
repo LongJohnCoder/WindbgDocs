@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!chkimg</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !chkimg"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_71b37495-6d1e-400f-803e-98e62573a31d.xml"/>
+<META NAME="MS-HKWD" CONTENT="!chkimg extension">
+<META NAME="MS-HKWD" CONTENT="executable files and paths, corruption">
+<META NAME="MS-HKWD" CONTENT="executable files and paths, !chkimg extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_71b37495-6d1e-400f-803e-98e62573a31d.xml"></A>!chkimg</H1>
+<P><P>The <b>!chkimg</b> extension detects corruption in the images of executable files by comparing them to the copy on a symbol store or other file repository.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!chkimg</b> [<i>Options</i>] [<b>-mmw</b> <i>LogFile</i> <i>LogOptions</i>] [<i>Module</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Any combination of the following options:<DL><DT><b>-p</b> <i>SearchPath</i></DT>
+<DD>Recursively searches <i>SearchPath</i> for the file before accessing the symbol server.</DD>
+<DT><b>-f</b></DT>
+<DD>Fixes errors in the image. Whenever the scan detects differences between the file on the symbol store and the image in memory, the contents of the file on the symbol store are copied over the image. If you are performing live debugging, you can create a dump file before you execute the <b>!chkimg -f</b> extension.</DD>
+<DT><b>-nar</b></DT>
+<DD>Prevents the mapped image of the file on the symbol server from being moved. By default, when the copy of the file is located on the symbol server and mapped into memory, <b>!chkimg</b> moves the image of the file on the symbol server. However, if you use the <b>-nar</b> option, the image of the file from the server is not moved. <P>The executable image that is <i>already</i> in memory (that is, the one that is being scanned) is moved, because the debugger always relocates images that it loads. </P>
+<P>This switch is useful only if the operating system already moved the original image. If the image has not been moved, <b>!chkimg</b> and the debugger will move the image. Use of this switch is rare.</P>
+</DD>
+<DT><b>-ss</b> <i>SectionName</i></DT>
+<DD>Limits the scan to those sections whose names contain the string <i>SectionName</i>. The scan will include any non-discardable section whose name contains this string. <i>SectionName</i> is case sensitive and cannot exceed 8 characters.</DD>
+<DT><b>-as</b></DT>
+<DD>Causes the scan to include all sections of the image except discardable sections. By default, (if you do not use <b>-as</b> or <b>-ss</b>), the scan skips sections that are writeable, sections that are not executable, sections that have "PAGE" in their name, and discardable sections.</DD>
+<DT><b>-r</b> <i>StartAddress</i> <i>EndAddress</i></DT>
+<DD>Limits the scan to the memory range that begins with <i>StartAddress</i> and ends with <i>EndAddress</i>. Within this range, any sections that would typically be scanned are scanned. If a section partially overlaps with this range, only that part of the section that overlaps with this range is scanned. The scan is limited to this range even if you also use the <b>-as</b> or <b>-ss</b> switch.</DD>
+<DT><b>-nospec</b></DT>
+<DD>Causes the scan to include the reserved sections of <i>Hal.dll</i> and <i>Ntoskrnl.dll</i>. By default, <b>!chkimg </b>does not check certain parts of these files.</DD>
+<DT><b>-noplock</b></DT>
+<DD>Displays areas that mismatch by having a byte value of 0x90 (a <b>nop</b> instruction) and a byte value of 0xF0 (a <b>lock</b> instruction). By default, these mismatches are not displayed.</DD>
+<DT><b>-np</b></DT>
+<DD>Causes patched instructions to be recognized. .</DD>
+<DT><b>-d</b></DT>
+<DD>Displays a summary of all mismatched areas while the scan is occurring. For more information about this summary text, see the Comments section.</DD>
+<DT><b>-db</b></DT>
+<DD>Displays mismatched areas in a format that is similar to the <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>db</b> debugger command</a>. Therefore, each display line shows the address of the first byte in the line, followed by up to 16 hexadecimal byte values. The byte values are immediately followed by the corresponding ASCII values. All nonprintable characters, such as carriage returns and line feeds, are displayed as periods (<b>.</b>). The mismatched bytes are marked by an asterisk (*). </DD>
+<DT><b>-lo </b><i>lines</i></DT>
+<DD>Limits the number of output lines that <b>-d</b> or <b>-db</b> display to the <i>lines</i> number of lines.</DD>
+<DT><b>-v</b></DT>
+<DD>Displays verbose information.  </DD>
+</DL>
+</DD>
+<DT><b>-mmw</b></DT>
+<DD>Creates a log file and records the activity of <b>!chkimg</b> in this file. Each line of the log file represents a single mismatch.</DD>
+<DT><i>LogFile</i></DT>
+<DD>Specifies the full path of the log file. If you specify a relative path, the path is relative to the current path.</DD>
+<DT><i>LogOptions</i></DT>
+<DD>Specifies the contents of the log file. <i>LogOptions</i> is a string that consists of a concatenation of various letters. Each line in the log file contains several columns that are separated by commas. These columns include the items that the following option letters specify, in the order that the letters appear in the <i>LogOptions</i> string. You can include the following options multiple times. You must include at least one option.<B></B><table>
+<TR valign="top">
+<TH Width="">Log option</TH>
+<TH Width="">Information included in the log file</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>v</b></TD>
+<TD Width="">The virtual address of the mismatch</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r</b></TD>
+<TD Width="">The offset (relative address) of the mismatch within the module</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>s</b></TD>
+<TD Width="">The symbol that corresponds to the address of the mismatch</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>S</b></TD>
+<TD Width="">The name of the section that contains the mismatch</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>e</b></TD>
+<TD Width="">The correct value that was expected at the mismatch location</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>w</b></TD>
+<TD Width="">The incorrect value that was at the mismatch location</TD>
+</TR>
+</table>
+<P></P>
+<P><i>LogOptions</i> can also include some, or none, of the following additional options.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Log option</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>o</b></TD>
+<TD Width="">If a file that has the name <i>LogFile</i> already exists, the existing file is overwritten. By default, the debugger appends new information to the end of any existing file.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>t</b><i>String</i></TD>
+<TD Width="">Adds an extra column to the log file. Each entry in this column contains <i>String</i>. The <b>t</b><i>String</i> option is useful if you are appending new information to an existing log file and you have to distinguish the new records from the old. You cannot add space between <b>t</b> and <i>String</i>. If you use the <b>t</b>I<i>String</i> option, it must be the final option in <i>LogOptions</i>, because <i>String</i> is taken to include all of the characters that are present before the next space.<i> </i></TD>
+</TR>
+</table>
+<P></P>
+<P>For example, if <i>LogOptions</i> is <b>rSewo</b>, each line of the log file contains the relative address and section name of the mismatch location and the expected and actual values at that location.  This option also causes any previous file to be overwritten. You can use the <b>-mmw</b> switch multiple times if you want to create several log files that have different options. You can create up to 10 log files at the same time.</P>
+</DD>
+<DT><i>Module</i></DT>
+<DD>Specifies the module to check. <i>Module</i> can be the name of the module, the starting address of the module, or any address that is contained in the module. If you omit <i>Module</i>, the debugger uses the module that contains the current instruction pointer.</DD>
+<DT></DT>
+<DD></DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>When you use <b>!chkimg</b>, it compares the image of an executable file in memory to the copy of the file that resides on a symbol store.</P>
+<P>All sections of the file are compared, except for sections that are discardable, that are writeable, that are not executable, that have "PAGE" in their name, or that are from INITKDBG. You can change this behavior can by using the <b>-ss</b>, <b>-as</b>, or <b>-r</b> switches.</P>
+<P><b>!chkimg</b> displays any mismatch between the image and the file as an image error, with the following exceptions:</P><B></B><UL type="disc">
+<LI>Addresses that are occupied by the Import Address Table (IAT) are not checked.</LI>
+<LI>Certain specific addresses in <i>Hal.dll</i> and <i>Ntoskrnl.exe</i> are not checked, because certain changes occur when these sections are loaded. To check these addresses, include the <b>-nospec</b> option.   </LI>
+<LI>If the byte value 0x90 is present in the file, and if the value 0xF0 is present in the corresponding byte of the image (or vice versa), this situation is considered a match. Typically, the symbol server holds one version of a binary that exists in both uniprocessor and multiprocessor versions. On an x86-based processor, the <b>lock</b> instruction is 0xF0, and this instruction corresponds to a <b>nop</b> (0x90) instruction in the uniprocessor version. If you want <b>!chkimg</b> to display this pair as a mismatch, set the <b>-noplock</b> option.</LI>
+</UL>
+<P></P>
+<P class="note"><b>Note</b>  If you use the <b>-f</b> option to fix image mismatches, <b>!chkimg</b> fixes only those mismatches that it considers to be errors. For example, <b>!chkimg</b> does not change an 0x90 byte to an 0xF0 byte unless you include <b>-noplock</b>.</P>
+<P>When you include the <b>-d</b> option, <b>!chkimg</b> displays a summary of all mismatched areas while the scan is occurring. Each mismatch is displayed on two lines. The first line includes the start of the range, the end of the range, the size of the range, the symbol name and offset that corresponds to the start of the range, and the number of bytes since the last error (in parentheses). The second line is enclosed in brackets and includes the hexadecimal byte values that were expected, a colon, and then the hexadecimal byte values that were actually encountered in the image. If the range is longer than 8 bytes, only the first 8 bytes are shown before the colon and after the colon. The following example shows this situation.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>be000015-be000016  2 bytes - win32k!VeryUsefulFunction+15 (0x8)<BR>     [ 85 dd:95 23 ]<BR></nobr></P>
+<P>Occasionally, a driver alters part of the Microsoft Windows kernel by using hooks, redirection, or other methods. Even a driver that is no longer on the stack might have altered part of the kernel. You can use the <b>!chkimg</b> extension as a file comparison tool to determine which parts of the Windows kernel (or any other image) are being altered by drivers and exactly how the parts are being changed. This comparison is most effective on full dump files.</P>
+<P>You can also use <b>!chkimg</b> together with the <a href="r24_exts_general_a_50f76fa1-c26f-418f-8cd0-4cfdecc3b07e.xml.htm"><b>!for_each_module</b></a> extension to check the image of each loaded module. The following example shows this situation.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>!for_each_module !chkimg @#ModuleName</b> <BR></nobr></P>
+<P>Suppose that you encounter a bug check, for example, and begin by using <a href="r24_exts_general_a_6e1c68d6-f825-4a02-a9ba-2b0cd08cded8.xml.htm"><b>!analyze</b></a>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!analyze</b> <BR>....<BR>BugCheck 1000008E, {c0000005, bf920e48, baf75b38, 0}<BR>Probably caused by : memory_corruption<BR>CHKIMG_EXTENSION: !chkimg !win32k<BR>....<BR></nobr></P>
+<P>In this example, the <b>!analyze</b> output suggests that memory corruption has occurred and includes a CHKIMG_EXTENSION line that suggests that <i>Win32k.sys</i> could be the corrupted module. (Even if this line is not present, you might consider possible corruption in the module on top of the stack.) Start by using <b>!chkimg</b> without any switches, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!chkimg win32k</b><BR>Number of different bytes for win32k: 31<BR></nobr></P>
+<P>The following example shows that there are indeed memory corruptions. Use <b>!chkimg -d</b> to display all of the errors for the <i>Win32k</i> module.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!chkimg win32k -d</b><BR>    bf920e40-bf920e46  7 bytes - win32k!HFDBASIS32::vSteadyState+1f<BR>        [ 78 08 d3 78 0c c2 04:00 00 00 00 00 01 00 ]<BR>    bf920e48-bf920e5f  24 bytes - win32k!HFDBASIS32::vHalveStepSize (+0x08)<BR>        [ 8b 51 0c 8b 41 08 56 8b:00 00 00 00 00 00 00 00 ]<BR>Number of different bytes for win32k: 31<BR></nobr></P>
+<P>When you try to disassemble the corrupted image of the second section that is listed, the following output might occur.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>u  win32k!HFDBASIS32::vHalveStepSize</b><BR>win32k!HFDBASIS32::vHalveStepSize:<BR>bf920e48 0000             add     [eax],al<BR>bf920e4a 0000             add     [eax],al<BR>bf920e4c 0000             add     [eax],al<BR>bf920e4e 0000             add     [eax],al<BR>bf920e50 7808            js win32k!HFDBASIS32::vHalveStepSize+0x12 (bf920e5a)<BR>bf920e52 d3780c           sar     dword ptr [eax+0xc],cl<BR>bf920e55 c20400           ret     0x4<BR>bf920e58 8b510c           mov     edx,[ecx+0xc]<BR></nobr></P>
+<P>Then, use <b>!chkimg -f</b> to fix the memory corruption.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!chkimg win32k -f</b><BR>Warning: Any detected errors will be fixed to what we expect!<BR>Number of different bytes for win32k: 31 (fixed)<BR></nobr></P>
+<P>Now you can disassemble the corrected view and see the changes that you have made.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>u  win32k!HFDBASIS32::vHalveStepSize</b><BR>win32k!HFDBASIS32::vHalveStepSize:<BR>bf920e48 8b510c           mov     edx,[ecx+0xc]<BR>bf920e4b 8b4108           mov     eax,[ecx+0x8]<BR>bf920e4e 56               push    esi<BR>bf920e4f 8b7104           mov     esi,[ecx+0x4]<BR>bf920e52 03c2             add     eax,edx<BR>bf920e54 c1f803           sar     eax,0x3<BR>bf920e57 2bf0             sub     esi,eax<BR>bf920e59 d1fe             sar     esi,1<BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !chkimg RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

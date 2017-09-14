@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ReadTypedDataVirtual</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ReadTypedDataVirtual"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="ReadTypedDataVirtual"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_c7a6fee6-d6bc-4dd6-923a-7e789801091f.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::ReadTypedDataVirtual method">
+<META NAME="MS-HKWD" CONTENT="ReadTypedDataVirtual (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_c7a6fee6-d6bc-4dd6-923a-7e789801091f.xml"></A>ReadTypedDataVirtual</H1>
+<P><P>The <b>ReadTypedDataVirtual</b> method reads the value of a variable in the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>'s virtual memory.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbols::ReadTypedDataVirtual(</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN ULONG64  </b><i>Module</i><b>,</b><BR><b>    IN ULONG  </b><i>TypeId</i><b>,</b><BR><b>    OUT PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>BytesRead</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Offset</i></DT>
+<DD>Specifies the location in the target's virtual address space of the variable to read.</DD>
+<DT><i>Module</i></DT>
+<DD>Specifies the base address of the <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> containing the type of the variable.</DD>
+<DT><i>TypeId</i></DT>
+<DD>Specifies the type ID of the type.</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the data that is read.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size in bytes of the buffer <i>Buffer</i>.  This is the maximum number of bytes to be read.</DD>
+<DT><i>BytesRead</i></DT>
+<DD>Receives the number of bytes that were read.  If <i>BytesRead</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful.  However, the buffer <i>Buffer</i> was not large enough to hold all the data and it was truncated.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>ReadTypedDataVirtual</b> is available in all versions of <b>IDebugSymbols</b>.</P>
+<H4>Comments</H4>
+<P>The number of bytes this method attempts to read is the smaller of the size of the buffer and the size of the variable.</P>
+<P>This is a convenience method.  The same result can be obtained by calling <a href="idebugsymbols_d1c65bea-0479-4ca8-bdfa-6c7a7376792a.xml.htm"><b>GetTypeSize</b></a> and <a href="idebugdataspaces_8f9b4f7a-04c6-4775-9d15-a4e1c56ca48c.xml.htm"><b>ReadVirtual</b></a>.</P>
+<P>For more information about types, see <a href="engine_dg_20e559a0-525c-4e47-ba69-b70d3576e059.xml.htm">Types</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ReadTypedDataVirtual RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

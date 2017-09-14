@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>CreateProcessAndAttach2</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, CreateProcessAndAttach2"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="CreateProcessAndAttach2"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_898e4cd4-45bf-43b8-80be-f761743e7f5c.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::CreateProcessAndAttach2 method">
+<META NAME="MS-HKWD" CONTENT="CreateProcessAndAttach2 (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_898e4cd4-45bf-43b8-80be-f761743e7f5c.xml"></A>CreateProcessAndAttach2</H1>
+<P><P>The <b>CreateProcessAndAttach2</b> and <b>CreateProcessAndAttach2Wide</b> methods create a <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#869bfa55-1556-4c4d-90ed-7b36f8f114b3">process</a> from a specified command line, then attach to that process or another <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#b9622678-468c-4b90-a002-a3d4280796f0">user-mode</a> process.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient5::CreateProcessAndAttach2(</b><BR><b>    IN ULONG64  </b><i>Server</i><b>,</b><BR><b>    IN OPTIONAL PSTR  </b><i>CommandLine</i><b>,</b><BR><b>    IN PVOID  </b><i>OptionsBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>OptionsBufferSize</i><b>,</b><BR><b>    IN OPTIONAL PCSTR  </b><i>InitialDirectory</i><b>,</b><BR><b>    IN OPTIONAL PCSTR  </b><i>Environment</i><b>,</b><BR><b>    IN ULONG  </b><i>ProcessId</i><b>,</b><BR><b>    IN ULONG  </b><i>AttachFlags</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugClient5::CreateProcessAndAttach2Wide(</b><BR><b>    IN ULONG64  </b><i>Server</i><b>,</b><BR><b>    IN OPTIONAL PWSTR  </b><i>CommandLine</i><b>,</b><BR><b>    IN PVOID  </b><i>OptionsBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>OptionsBufferSize</i><b>,</b><BR><b>    IN OPTIONAL PCWSTR  </b><i>InitialDirectory</i><b>,</b><BR><b>    IN OPTIONAL PCWSTR  </b><i>Environment</i><b>,</b><BR><b>    IN ULONG  </b><i>ProcessId</i><b>,</b><BR><b>    IN ULONG  </b><i>AttachFlags</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define CreateProcessAndAttach2T CreateProcessAndAttach2Wide</b><BR><b>#else</b><BR><b>#define CreateProcessAndAttach2T CreateProcessAndAttach2</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Server</i></DT>
+<DD>Specifies the <a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#927cdf63-ac0c-4f34-af24-1cdc17ca8d68">process server</a> to use to attach to the process.  If <i>Server</i> is zero, the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> will connect to the local process without using a process server.</DD>
+<DT><i>CommandLine</i></DT>
+<DD>Specifies the command line to execute to create the new process.  If <i>CommandLine</i> is NULL, no process is created and these methods will use <i>ProcessId</i> to attach to an existing process.</DD>
+<DT><i>OptionsBuffer</i></DT>
+<DD>Specifies the process creation options.  <i>OptionsBuffer</i> is a pointer to a <a href="structures_2dc7014a-a1c3-4d31-b754-834f5d06c482.xml.htm">DEBUG_CREATE_PROCESS_OPTIONS</a> structure.</DD>
+<DT><i>OptionsBufferSize</i></DT>
+<DD>Specifies the size of the buffer <i>OptionsBuffer</i>.  This should be set to <b>sizeof(DEBUG_CREATE_PROCESS_OPTIONS)</b>.</DD>
+<DT><i>InitialDirectory</i></DT>
+<DD>Specifies the starting directory for the process.  This parameter is used only if <i>CommandLine</i> is not NULL.  If <i>InitialDirectory</i> is NULL, the current directory for the process server is used.</DD>
+<DT><i>Environment</i></DT>
+<DD>Specifies an environment block for the new process.  An environment block consists of a null-terminated block of null-terminated strings.  Each string is of the form:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><i>name</i><b>=</b><i>value</i><BR></nobr></P>
+<P>Note that the last two characters of the environment block are both NULL: one to terminate the string and one to terminate the block.</P>
+<P>If <i>Environment</i> is set to NULL, the new process inherits the environment block of the process server.  If the DEBUG_CREATE_PROCESS_THROUGH_RTL flag is set in <i>OptionsBuffer</i>, then <i>Environment</i> must be NULL.</P>
+</DD>
+<DT><i>ProcessId</i></DT>
+<DD>Specifies the process ID of the target process to which the debugger will attach.  If <i>ProcessID</i> is zero, the debugger will attach to the process it created from <i>CommandLine</i>.</DD>
+<DT><i>AttachFlags</i></DT>
+<DD>Specifies the flags that control how the debugger attaches to the target process.  For details on these flags, see <a href="structures_851d5883-75f7-42eb-98a5-bd59c9617282.xml.htm">DEBUG_ATTACH_<i>XXX</i></a>.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_INVALIDARG</DT>
+<DD>This is returned if <i>CommandLine</i> is NULL and <i>ProcessId</i> is zero.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>CreateProcessAndAttach2</b> and <b>CreateProcessAndAttach2Wide</b> are available in <b>IDebugClient5</b> and later versions.</P>
+<H4>Comments</H4>
+<P>This method is available only for <a href="dbg_glossary_bf550fa0-6430-4ba8-8ea4-50277d85224d.xml.htm#05126786-2493-4948-a5b3-1f3a23f7f320">live user-mode debugging</a>.</P>
+<P>If <i>CommandLine</i> is not NULL and <i>ProcessId</i> is not zero, then the engine will create the process in a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#0a6b6a99-2d54-46ab-99eb-d47231b221e6">suspended</a> state.  The engine will resume this newly created process after it successfully connects to the process specified in <i>ProcessId</i>.</P>
+<P class="note"><b>Note</b>  The engine doesn't completely attach to the process until the <a href="idebugcontrol_19a7d8b3-1f16-400e-bf8f-c782d48b2cf5.xml.htm"><b>WaitForEvent</b></a> method has been called.  Only after the process has generated an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> &#8212; for example, the create-process event &#8212; does it become available in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugger session</a>.</P>
+<P>For more information about creating and attaching to live user-mode targets, see <a href="engine_dg_5e74ebf4-af57-41c3-ad2a-bd87417cd8d9.xml.htm">Live User-Mode Targets</a>.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugclient_032236c1-3072-4226-919b-3f6f95635a20.xml.htm"><b>AttachProcess</b></a>, <a href="r19_metacmds_a_8c6d47be-d1e0-4d39-b0cd-14ac56c87de5.xml.htm"><b>.attach (Attach to Process)</b></a>, <a href="r19_metacmds_a_90b70ef1-43b7-4dd2-87cf-8f6df0d6108d.xml.htm"><b>.create (Create Process)</b></a>, <a href="idebugclient_519f5e11-6f3b-4469-8352-e6cd7c1ed384.xml.htm"><b>ConnectProcessServer</b></a>, <a href="idebugclient_1cf74a01-b7bd-4899-8a17-4fc443ee0fbc.xml.htm"><b>CreateProcess2</b></a>, <a href="idebugclient_f1eed41f-b746-4eb6-b6db-8eef7ac89d6a.xml.htm"><b>GetRunningProcessSystemIds</b></a>, <a href="idebugclient_e5736881-635f-4998-809b-d210bf447a36.xml.htm"><b>GetRunningProcessDescription</b></a> , <a href="idebugclient_cee2b21f-2cbf-449d-a2c8-2006e21074db.xml.htm"><b>DetachCurrentProcess</b></a>, <a href="idebugclient_7129a1e4-f1a5-4dff-a45c-bf759ae410cf.xml.htm"><b>TerminateCurrentProcess</b></a>, <a href="idebugclient_2a3f34d6-591b-4cae-bc28-2da5f05a9548.xml.htm"><b>AbandonCurrentProcess</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: CreateProcessAndAttach2 RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

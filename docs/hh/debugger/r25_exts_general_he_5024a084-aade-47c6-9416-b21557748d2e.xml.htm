@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!help</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !help"><xml><MSHelp:Keyword Index="A" Term="r25_exts_general_He_5024a084-aade-47c6-9416-b21557748d2e.xml"/>
+<META NAME="MS-HKWD" CONTENT="!help extension">
+<META NAME="MS-HKWD" CONTENT="extension commands (! commands), extension help (!help)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r25_exts_general_He_5024a084-aade-47c6-9416-b21557748d2e.xml"></A>!help</H1>
+<P><P>The <b>!help</b> extension displays help text that describes the extension commands exported from the extension DLL.</P>
+<P>Do not confuse this extension command with the <a href="r15_cmds_a_11acf85b-5971-4ab5-b791-7bdd95cec11a.xml.htm"><b>? (Command Help)</b></a> or <a href="r20_metacmds_e_2b7081bd-9eb7-4ffb-b622-9e93fc900231.xml.htm"><b>.help (Meta-Command Help)</b></a> commands.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!</b>[<i>ExtensionDLL</i><b>.</b>]<b>help</b> [<b>-v</b>] [<i>CommandName</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>ExtensionDLL</i></DT>
+<DD>Displays help for the specified extension DLL. Type the name of an extension DLL without the <b>.dll</b> file name extension. If the DLL file is not in the extension search path (as displayed by using <a href="r19_metacmds_a_567f77fe-498c-42a5-8155-21ffea0c0fb2.xml.htm"><b>.chain</b> (List Debugger Extensions)</a>), include the path to the DLL file . For example, to display help for uext.dll, type <b>!uext.help</b> or <b>!</b><i>Path</i><b>\winext\uext.help</b>. <P>If you omit the <i>ExtensionDLL</i>, the debugger will display the help text for the first extension DLL in the list of loaded DLLs.</P>
+</DD>
+<DT><b>-v</b></DT>
+<DD>Displays the most detailed help text available. This feature is not supported in all DLLs.</DD>
+<DT><i>CommandName</i></DT>
+<DD>Displays only the help text for the specified command. This feature is not supported in all DLLs or for all commands.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P>This extension is supported by most extension DLLs.</P>
+<P></P>
+<H4>Comments</H4>
+<P>Some individual commands will also display a help text if you use the <b>/?</b> or <b>-?</b> parameter with the command name.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !help RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

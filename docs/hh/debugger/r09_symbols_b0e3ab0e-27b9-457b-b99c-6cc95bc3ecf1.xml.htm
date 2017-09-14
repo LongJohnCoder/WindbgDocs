@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging User-Mode Processes Without Symbols</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging User-Mode Processes Without Symbols"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_b0e3ab0e-27b9-457b-b99c-6cc95bc3ecf1.xml"/>
+<META NAME="MS-HKWD" CONTENT="symbols, debugging without symbols"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_b0e3ab0e-27b9-457b-b99c-6cc95bc3ecf1.xml"></A>Debugging User-Mode Processes Without Symbols</H1>
+<P>It is important to have symbols on the faulting machine before starting the debugger for a user-mode failure. However, sometimes the debugger is started without symbols. If the problem is easily reproducible, you can just copy symbols and rerun. If, however, the problem may not occur again, some information can still be gleaned from the failure:</P><B></B><OL type="1">
+<LI>To figure out what the addresses mean, you'll need a computer which matches the one with the error. It should have the same platform (x86, Intel Itanium, or x64) and be loaded with the same version of Windows. </LI>
+<LI>When you have the computer configured, copy the user-mode symbols and the binaries you want to debug onto the new machine. </LI>
+<LI>Start CDB or WinDbg on the symbol-less machine. </LI>
+<LI>If you don't know which application failed on the symbol-less machine, issue an <a href="r15_cmds_a_94a10932-6816-4202-8307-985cd46649d1.xml.htm"><b>| (Process Status)</b></a> command. If that doesn't give you a name, break into KD on the symbol-less machine and do a <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process 0 0</b></a>, looking for the process ID given by the CDB command.</LI>
+<LI>When you have the two debuggers set up &#8212; one with symbols which hasn't hit the error, and one which has hit the error but is without symbols &#8212; issue a <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>k (Display Stack Backtrace)</b></a> command on the symbol-less machine. </LI>
+<LI>On the machine with symbols, issue a <a href="r18_cmds_s_51dda883-e059-4b86-9406-a1f16ebd3fc1.xml.htm"><b>u (Unassemble)</b></a> command for each address given on the symbol-less stack. This will give you the stack trace for the error on the symbol-less machine.</LI>
+<LI>By looking at a stack trace you can see the module and function names involved in the call.</LI>
+</OL>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging User-Mode Processes Without Symbols RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

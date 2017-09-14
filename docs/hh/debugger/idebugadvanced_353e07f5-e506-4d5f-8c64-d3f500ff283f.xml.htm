@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetSymbolInformation</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetSymbolInformation"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetSymbolInformation"/>
+<MSHelp:Keyword Index="A" Term="IDebugAdvanced_353e07f5-e506-4d5f-8c64-d3f500ff283f.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugAdvanced*::GetSymbolInformation method">
+<META NAME="MS-HKWD" CONTENT="GetSymbolInformation (IDebugAdvanced*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugAdvanced_353e07f5-e506-4d5f-8c64-d3f500ff283f.xml"></A>GetSymbolInformation</H1>
+<P><P>The <b>GetSymbolInformation</b> and <b>SetSymbolInformationWide</b> methods return specified information about a symbol.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugAdvanced2::GetSymbolInformation(</b><BR><b>    IN ULONG  </b><i>Which</i><b>,</b><BR><b>    IN ULONG64  </b><i>Arg64</i><b>,</b><BR><b>    IN ULONG  </b><i>Arg32</i><b>,</b><BR><b>    OUT OPTIONAL PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>InfoSize</i><b>,</b><BR><b>    OUT OPTIONAL PSTR  </b><i>StringBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>StringBufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>StringSize</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugAdvanced3::GetSymbolInformationWide(</b><BR><b>    IN ULONG  </b><i>Which</i><b>,</b><BR><b>    IN ULONG64  </b><i>Arg64</i><b>,</b><BR><b>    IN ULONG  </b><i>Arg32</i><b>,</b><BR><b>    OUT OPTIONAL PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>InfoSize</i><b>,</b><BR><b>    OUT OPTIONAL PWSTR  </b><i>StringBuffer</i><b>,</b><BR><b>    IN ULONG  </b><i>StringBufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>StringSize</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetSymbolInformationT GetSymbolInformationWide</b><BR><b>#else</b><BR><b>#define GetSymbolInformationT GetSymbolInformation</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Which</i></DT>
+<DD>Specifies the piece of information to return.  <i>Which</i> can take one of the values in the follow table.<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Information returned</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMINFO_BREAKPOINT_SOURCE_LINE</TD>
+<TD Width="">Returns the source code file name and line number for a specified breakpoint.  The line number is returned to <i>Buffer</i> as a ULONG.  The file name is returned to <i>StringBuffer</i>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMINFO_IMAGEHLP_MODULEW64</TD>
+<TD Width="">Returns an IMAGEHLP_MODULEW64 structure that describes a specified module.  For details about this structure, see the IMAGEHELP_MODULE64 topic in the Debug Help Library documentation (<i>dbghelp.chm</i>).<BR><BR>No string is returned and <i>StringBuffer</i>, <i>StringBufferSize</i>, and <i>StringSize</i> must all be set to zero.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMINFO_GET_SYMBOL_NAME_BY_OFFSET_AND_TAG_WIDE</TD>
+<TD Width="">Returns the Unicode name of the symbol specified by location in memory and PDB tag type.  The name is returned to <i>Buffer</i>.  <i>StringBuffer</i> is not used.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMINFO_GET_MODULE_SYMBOL_NAMES_AND_OFFSETS</TD>
+<TD Width="">Returns a list of symbol names and offsets for the symbols in the specified module with the specified PDB tag type.  The offsets are returned as an array of ULONG values to <i>Buffer</i>.  The names are returned in the same order as the offsets to <i>StringBuffer</i>.  Some names might contain embedded zeros because annotations can have multi-part names; hence, each name is terminated with two null characters.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>Arg64</i></DT>
+<DD>Specifies a 64-bit argument.  This parameter has the following interpretations depending on the value of <i>Which</i>:<DL><DT>DEBUG_SYMINFO_BREAKPOINT_SOURCE_LINE</DT>
+<DD>Ignored.</DD>
+<DT>DEBUG_SYMINFO_IMAGEHLP_MODULEW64</DT>
+<DD>The base address of the module whose description is being requested.</DD>
+<DT>DEBUG_SYMINFO_GET_SYMBOL_NAME_BY_OFFSET_AND_TAG_WIDE</DT>
+<DD>Specifies the address in the target's memory of the symbol whose name is being requested.</DD>
+<DT>DEBUG_SYMINFO_GET_MODULE_SYMBOL_NAMES_AND_OFFSETS</DT>
+<DD>Specifies the module whose symbols are requested.  <i>Arg64</i> is a location within the memory allocation of the module.</DD>
+</DL>
+</DD>
+<DT><i>Arg32</i></DT>
+<DD>Specifies a 32-bit argument.  This parameter has the following interpretations depending on the value of <i>Which</i>:<DL><DT>DEBUG_SYMINFO_BREAKPOINT_SOURCE_LINE</DT>
+<DD>The engine breakpoint ID of the desired breakpoint.</DD>
+<DT>DEBUG_SYMINFO_IMAGEHLP_MODULEW64</DT>
+<DD>Set to zero.</DD>
+<DT>DEBUG_SYMINFO_GET_SYMBOL_NAME_BY_OFFSET_AND_TAG_WIDE</DT>
+<DD>The PDB classification of the symbol.  <i>Arg32</i> must be one of the values in the <b>SymTagEnum</b> enumeration defined in <i>Dbghelp.h</i>.  For more information, see PDB documentation.</DD>
+<DT>DEBUG_SYMINFO_GET_MODULE_SYMBOL_NAMES_AND_OFFSETS</DT>
+<DD>The PDB classification of the symbol.  <i>Arg32</i> must be one of the values in the <b>SymTagEnum</b> enumeration defined in <i>Dbghelp.h</i>.  For more information, see PDB documentation.</DD>
+</DL>
+</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the requested symbol information.  The type of the data returned depends on the value of <i>Which</i>.  If <i>Buffer</i> is NULL, this information is not returned.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size, in bytes, of the buffer <i>Buffer</i>.</DD>
+<DT><i>InfoSize</i></DT>
+<DD>Receives the size, in bytes, of the symbol information returned to <i>Buffer</i>.  If <i>InfoSize</i> is NULL, this information is not returned.</DD>
+<DT><i>StringBuffer</i></DT>
+<DD>Receives the requested string.  The interpretation of this string depends on the value of <i>Which</i>.  If <i>StringBuffer</i> is NULL, this information is not returned.</DD>
+<DT><i>StringBufferSize</i></DT>
+<DD>Specifies the size, in characters, of the string buffer <i>StringBuffer</i>.</DD>
+<DT><i>StringSize</i></DT>
+<DD>Receives the size, in characters, of the string returned to <i>StringBuffer</i>.  If <i>StringSize</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful. However, the information would not fit in the buffer <i>Buffer</i> or the string would not fit in the buffer <i>StringBuffer</i>, so the information or name was truncated.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetSymbolInformation</b> is available in <b>IDebugAdvanced2</b> and later versions.  <b>GetSymbolInformationWide</b> is available in <b>IDebugAdvanved3</b> and later versions.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetSymbolInformation RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

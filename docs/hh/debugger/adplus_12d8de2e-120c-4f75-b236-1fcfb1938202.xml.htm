@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using the j Command in Configuration Files</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using the j Command in Configuration Files"><xml><MSHelp:Keyword Index="A" Term="ADPlus_12d8de2e-120c-4f75-b236-1fcfb1938202.xml"/>
+<META NAME="MS-HKWD" CONTENT="ADPlus, configuration files, j command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_12d8de2e-120c-4f75-b236-1fcfb1938202.xml"></A>Using the j Command in Configuration Files</H1>
+<P>When you are using the <a href="r17_cmds_i_d3caf916-24fd-419f-90eb-05a88b72032e.xml.htm"><b>j (Execute If - Else)</b></a> command in custom action tags, you must include a return &#8220;go&#8221; action in each branch of the <b>j</b> command. This action can be a <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (go)</b></a>, <a href="r16_cmds_c_31a4b468-d84d-4bfa-9f2f-178f979bd9f2.xml.htm"><b>gc (Go from Conditional Breakpoint)</b></a>, <a href="r16_cmds_c_bb7ab8a9-efe6-4feb-b234-e94d27848769.xml.htm"><b>gh (Go with Exception Handled)</b></a>, or <a href="r16_cmds_c_3254135f-8902-45ee-a2dc-a52049ea903c.xml.htm"><b>gn (Go with Exception Not Handled)</b></a> command. In addition, you should use VOID in the <b>&lt;ReturnAction&gt;</b> tag.</P>
+<P>When you are using <b>j</b> together with breakpoints, you should use <b>gc</b> instead of <b>g</b>. For a sample configuration file that has a conditional breakpoint, see <a href="adplus_c12713ae-ba4f-4fb8-95fb-9cadbeb39f24.xml.htm">Sample Configuration File for Conditional Breakpoints</a>.</P>
+<P>When you are using a file path (such as in a <b>.dump </b>command), the behavior is different in <b>bp</b> and exceptions. In <b>bp</b>, you must use two backslashes (<b>\\</b>) instead of one backslash (<b>\</b>) in the file path. In exceptions, you do not have to use the second backslash.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using the j Command in Configuration Files RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

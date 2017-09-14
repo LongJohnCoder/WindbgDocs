@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Assembling and Disassembling Instructions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Assembling and Disassembling Instructions"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_8c5b4c23-1d98-4736-be58-777a5a30520c.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, assembling and disassembling"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_8c5b4c23-1d98-4736-be58-777a5a30520c.xml"></A>Assembling and Disassembling Instructions</H1>
+<P>The debugger engine supports the use of assembly language for displaying and changing code in the target.  For an overview of the use of assembly language in the debugger, see <a href="r07_use_operation_9afb8c89-95fa-499e-bc4e-98f0365df573.xml.htm">Debugging in Assembly Mode</a>.</P>
+<P class="note"><b>Note:</b> Assembly language is not supported for all architectures.  And on some architectures not all instructions are supported.</P>
+<P>To assemble a single assembly-language instruction and place the resulting processor instruction in the target's memory, use <a href="idebugcontrol_99336950-ba0b-46e1-871d-582f08ab5519.xml.htm"><b>Assemble</b></a>.</P>
+<P>To disassemble a single instruction by taking a processor instruction from the target and producing a string that represents the assembly instruction, use <a href="idebugcontrol_7eb9fdc3-f2a0-4239-a035-9abb8e85cd28.xml.htm"><b>Disassemble</b></a>.</P>
+<P>The method <a href="idebugcontrol_5593ec3a-31f4-4775-9356-49f1757323c0.xml.htm"><b>GetDisassembleEffectiveOffset</b></a> returns the first effective address of the last instruction to be disassembled.  For example, if the last instruction to be disassembled is <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">move ax, [ebp+4]</span>, the effective address is the value of <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">ebp+4</span>.  This corresponds to the <b>$ea</b> pseudo-register.</P>
+<P>To send disassembled instructions to the output callbacks, use the methods <a href="idebugcontrol_9f2641b6-ca40-4f1f-85e6-911bb0ab82f8.xml.htm"><b>OutputDisassembly</b></a> and <a href="idebugcontrol_51f0991b-9b9d-4a21-89be-099537a78ea5.xml.htm"><b>OutputDisassemblyLines</b></a>.</P>
+<P>The debugger engine has some options that control the assembly and disassembly.  These options are returned by <a href="idebugcontrol_600ee4dc-0a79-42a9-a394-2ff053874f00.xml.htm"><b>GetAssemblyOptions</b></a>.  They can be set using <a href="idebugcontrol_b39768e8-fb98-4056-b548-c568316279e1.xml.htm"><b>SetAssemblyOptions</b></a> and some options can be turned on with <a href="idebugcontrol_9cacf343-5c88-4a06-8f68-7c94b15419b8.xml.htm"><b>AddAssemblyOptions</b></a> or turned off with <a href="idebugcontrol_8d971b27-ff9f-4097-a96a-68dabf08b200.xml.htm"><b>RemoveAssemblyOptions</b></a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Assembling and Disassembling Instructions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

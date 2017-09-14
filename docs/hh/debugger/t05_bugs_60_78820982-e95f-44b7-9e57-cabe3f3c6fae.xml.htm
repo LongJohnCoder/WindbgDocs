@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x85: SETUP_FAILURE</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x85: SETUP_FAILURE"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_78820982-e95f-44b7-9e57-cabe3f3c6fae.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x85: SETUP_FAILURE">
+<META NAME="MS-HKWD" CONTENT="SETUP_FAILURE"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_78820982-e95f-44b7-9e57-cabe3f3c6fae.xml"></A>Bug Check 0x85: SETUP_FAILURE</H1>
+<P>The SETUP_FAILURE bug check has a value of 0x00000085. This bug check indicates that a fatal error occurred during setup.<P><I><B> </B></I></P>
+<P></P>
+</P>
+<H4>Parameters</H4>
+<P>The following parameters appear on the blue screen. Parameter 1 indicates the type of violation. Parameter 4 is not used. The meaning of the other parameters depends on the value of Parameter 1.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Cause</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x0</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">The OEM HAL font is not a valid <i>.fon</i> format file, so setup cannot display text. <BR><BR>This cause indicates that <i>Vgaxxx.fon</i> on the boot floppy or CD is damaged. <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">The precise video initialization failure:<BR><BR><b>0:</b> <b>NtCreateFile</b> of \device\video0 <BR><BR><b>1:</b> IOCTL_VIDEO_QUERY_NUM_AVAIL_MODES <BR><BR><b>2:</b> IOCTL_VIDEO_QUERY_AVAIL_MODES <BR><BR><b>3:</b> The desired video mode is not supported. This value indicates an internal setup error. <BR><BR><b>4:</b> IOCTL_VIDEO_SET_CURRENT_MODE (unable to set video mode) <BR><BR><b>5:</b> IOCTL_VIDEO_MAP_VIDEO_MEMORY <BR><BR><b>6:</b> IOCTL_VIDEO_LOAD_AND_SET_FONT <BR><BR></TD>
+<TD Width="">The status code from the NT API call, if appropriate </TD>
+<TD Width="">Video initialization failed.<BR><BR>This failure might indicate that the disk that contains <i>Vga.sys</i> (or another video driver that is appropriate to the computer) is damaged or that the computer has video hardware that the Microsoft Windows operating system cannot communicate with.<BR><BR><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">Out of memory.<BR><BR><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">The precise keyboard initialization failure:<BR><BR><b>0:</b> <b>NtCreateFile</b> of \device\KeyboardClass0 failed. (Setup did not find a keyboard connected to the computer.)<BR><BR><b>1:</b> Unable to load keyboard layout DLL. (Setup could not load the keyboard layout file. This failure indicates that the CD or floppy disk is missing a file, such as <i>Kbdus.dll</i> for the U.S. release or another layout DLL for localized releases.) <BR><BR></TD>
+<TD Width="">0 </TD>
+<TD Width="">Keyboard initialization failed.<BR><BR>This failure might indicate that the disk that contains the keyboard driver (<i>I8042prt.sys</i> or <i>Kbdclass.sys</i>) is damaged or that the computer has keyboard hardware that Windows cannot communicate with. This failure might also mean that the keyboard layout DLL could not be loaded.<BR><BR><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">0 </TD>
+<TD Width="">0 </TD>
+<TD Width="">Setup could not resolve the ARC device path name of the device that setup was started from.<BR><BR>This error is an internal setup error. <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Partitioning sanity check failed.<BR><BR>This error indicates a bug in a disk driver.<BR><BR><BR><BR></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x85: SETUP_FAILURE RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

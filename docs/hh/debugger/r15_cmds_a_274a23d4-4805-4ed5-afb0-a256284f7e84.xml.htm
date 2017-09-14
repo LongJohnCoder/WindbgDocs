@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ah (Assertion Handling)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ah (Assertion Handling)"><xml><MSHelp:Keyword Index="A" Term="r15_cmds_A_274a23d4-4805-4ed5-afb0-a256284f7e84.xml"/>
+<META NAME="MS-HKWD" CONTENT="ah (Assertion Handling) command">
+<META NAME="MS-HKWD" CONTENT="Assertion Handling (ah) command">
+<META NAME="MS-HKWD" CONTENT="exceptions, Assertion Handling (ah) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r15_cmds_A_274a23d4-4805-4ed5-afb0-a256284f7e84.xml"></A>ah (Assertion Handling)</H1>
+<P>The <b>ah</b> command controls the assertion handling status for specific addresses.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>ahb</b> [<i>Address</i>] <BR><b>ahi</b> [<i>Address</i>] <BR><b>ahd</b> [<i>Address</i>] <BR><b>ahc</b> <BR><b>ah</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>ahb</b></DT>
+<DD>Breaks into the debugger if an assertion fails at the specified address.</DD>
+<DT><b>ahi</b></DT>
+<DD>Ignores an assertion failure at the specified address.</DD>
+<DT><b>ahd</b></DT>
+<DD>Deletes any assertion-handling information at the specified address. This deletion causes the debugger to return to its default state for that address.</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the instruction whose assertion-handling status is being set. If you omit this parameter, the debugger uses the current program counter.</DD>
+<DT><b>ahc</b></DT>
+<DD>Deletes all assertion-handling information for the current process.</DD>
+<DT><b>ah</b></DT>
+<DD>Displays the current assertion-handling settings.</DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>ah*</b> command controls the assertion handling status for a specific address. The <a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>sx* asrt</b></a> command controls the global assertion handling status. If you use <b>ah*</b> for a certain address and then an assert occurs there, the debugger responds based on the <b>ah*</b> settings and ignores the <b>sx* asrt</b> settings.</P>
+<P>When the debugger encounters an assertion, the debugger first checks whether handling has been configured for that specific address. If you have not configured the handling, the debugger uses the global setting.</P>
+<P>The <b>ah*</b> command affects only the current process. When the current process ends, all status settings are lost.   </P>
+<P>Assertion handling status affects only STATUS_ASSERTION_EXCEPTION exceptions. This handling does not affect the kernel-mode ASSERT routine.   </P>
+<H4>Additional Information</H4>
+<P>For more information about break status and handling status, descriptions of all event codes, a list of the default status for all events, and details about other methods of controlling this status, see <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ah (Assertion Handling) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

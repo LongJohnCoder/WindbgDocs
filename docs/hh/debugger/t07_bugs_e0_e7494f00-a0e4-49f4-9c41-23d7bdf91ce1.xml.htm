@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x124: WHEA_UNCORRECTABLE_ERROR</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x124:  WHEA_UNCORRECTABLE_ERROR"><xml><MSHelp:Keyword Index="A" Term="t07_bugs_E0_e7494f00-a0e4-49f4-9c41-23d7bdf91ce1.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x124: WHEA_UNCORRECTABLE_ERROR">
+<META NAME="MS-HKWD" CONTENT="WHEA_UNCORRECTABLE_ERROR"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t07_bugs_E0_e7494f00-a0e4-49f4-9c41-23d7bdf91ce1.xml"></A>Bug Check 0x124:  WHEA_UNCORRECTABLE_ERROR</H1><span style="color:#FF0000">[This is preliminary documentation and subject to change.]<BR><BR></span><P>The WHEA_UNCORRECTABLE_ERROR bug check has a value of 0x00000124. This bug check indicates that a fatal hardware error has occurred. This bug check uses the error data that is provided by the Windows Hardware Error Architecture (WHEA). <P></P>
+</P>
+<H4>Parameters</H4>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause of error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x0</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure.</TD>
+<TD Width="">High 32 bits of MCi_STATUS MSR for the MCA bank that had the error.</TD>
+<TD Width="">Low  32 bits of MCi_STATUS MSR for the MCA bank that had the error.</TD>
+<TD Width="">A machine check exception occurred.<BR><BR>These parameter descriptions apply if the processor is based on the x64 architecture, or the x86 architecture that has the MCA feature available (for example, Intel Pentium Pro, Pentium IV, or Xeon).<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">A corrected machine check exception occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">A corrected platform error occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">A nonmaskable Interrupt (NMI) error occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure.</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">An uncorrectable PCI Express error occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">A generic hardware error occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">An IA64 INIT error occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">A BOOT error occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">A Scalable Coherent Interface (SCI) generic error occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x9</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure.</TD>
+<TD Width="">Length, in bytes, of the SAL log.</TD>
+<TD Width="">Address of the SAL log.</TD>
+<TD Width="">An uncorrectable IA-64 machine check abort error occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xA</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">A corrected IA-64 machine check error occurred.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB</TD>
+<TD Width="">Address of WHEA_ERROR_RECORD structure.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">Reserved.</TD>
+<TD Width="">A corrected IA-64 platform error occurred.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4><b>Comments</b></H4>
+<P>Parameter 1 identifies the type of error source that reported the error. Parameter 2 holds the address of the WHEA_ERROR_RECORD  structure that describes the error condition.</P>
+<P>For information about WHEA, see Windows Hardware Error Architecture Design Guide within the WDK documentation .</P>
+<P class="note"><b>Note  </b>This bug check is not supported in Windows versions prior to Windows Vista. Instead, machine check exceptions are reported through <a href="t05_bugs_60_d9e325c9-274f-4795-af27-2d2d374e628d.xml.htm">bug check 0x9C</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x124:  WHEA_UNCORRECTABLE_ERROR RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

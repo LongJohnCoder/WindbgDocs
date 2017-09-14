@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Kill Tool Commands</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Kill Tool Commands"><xml><MSHelp:Keyword Index="A" Term="Kill_be863b9b-d2ab-43e3-83cf-93792e50726b.xml"/>
+<META NAME="MS-HKWD" CONTENT="Kill Tool, commands"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Kill_be863b9b-d2ab-43e3-83cf-93792e50726b.xml"></A>Kill Tool Commands</H1>
+<P>Use the following command syntax to run the Kill tool.</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><BR><b>kill</b> [<b>/f</b>] { <i>PID</i> | <i>Pattern</i><b>*</b> } <BR><BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>/f</b></DT>
+<DD>Forces the termination of the process without prompting the user for confirmation. This option is required to terminate a protected process, such as a system service.</DD>
+<DT><i>PID</i></DT>
+<DD>Specifies the process identifier (PID) of the task to be terminated.<P>To find the PID for a task, use TaskList in Microsoft Windows XP and later or <a href="tlist_d98fd688-471d-4855-aa5c-997719bd11c3.xml.htm">TList</a> in Windows 2000.</P>
+</DD>
+<DT><i>Pattern</i><b>*</b></DT>
+<DD>Specifies all or part of the name of a task or window. The Kill tool terminates all processes whose process names or window names match the pattern. The asterisk is required.<P>Before using a pattern that might match many process or window names unintentionally, use the <b>tlist </b><I><B>pattern</B></I> command to test the pattern. See <a href="tlist_d98fd688-471d-4855-aa5c-997719bd11c3.xml.htm">TList</a> for details.</P>
+<P></P>
+<P></P>
+</DD>
+</DL>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Kill Tool Commands RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

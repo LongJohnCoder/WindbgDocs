@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetOffsetByLine</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetOffsetByLine"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetOffsetByLine"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_1aa7fddc-6a33-469e-828f-45ff0f31aae7.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::GetOffsetByLine method">
+<META NAME="MS-HKWD" CONTENT="GetOffsetByLine (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_1aa7fddc-6a33-469e-828f-45ff0f31aae7.xml"></A>GetOffsetByLine</H1>
+<P><P>The <b>GetOffsetByLine</b> and <b>GetOffsetByLineWide</b> methods return the location of the instruction that corresponds to a specified line in the source code.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>IDebugSymbols::GetOffsetByLine(</b><BR><b>    IN ULONG  </b><i>Line</i><b>,</b><BR><b>    IN PCSTR  </b><i>File</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Offset</i><BR><b>    );</b><BR><BR><b>IdebugSymbols3::GetOffsetByLineWide(</b><BR><b>    IN ULONG  </b><i>Line</i><b>,</b><BR><b>    IN PCWSTR  </b><i>File</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Offset</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetOffsetByLineT GetOffsetByLineWide</b><BR><b>#else</b><BR><b>#define GetOffsetByLineT GetOffsetByLine</b><BR><b>#endif</b><BR><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Line</i></DT>
+<DD>Specifies the line number in the source file.</DD>
+<DT><i>File</i></DT>
+<DD>Specifies the file name of the source file.</DD>
+<DT><i>Offset</i></DT>
+<DD>Receives the location in the target&#8217;s virtual address space of an instruction for the specified line.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>These methods can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetOffsetByLine</b> is available in all versions of <b>IDebugSymbols</b>.  <b>GetOffsetByLineWide</b> is available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4>Comments</H4>
+<P>A line in a source file might correspond to multiple instructions and this method can return any one of these instructions.</P>
+<P>For more information about source files, see <a href="engine_dg_af98271b-d06b-44e7-b0f6-928ea6579533.xml.htm">Using Source Files</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugsymbols_2ed557af-4f84-46d7-be40-fd37a87cd960.xml.htm"><b>GetLineByOffset</b></a> </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetOffsetByLine RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!apc</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !apc"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_729f0dbf-e54a-4754-a79e-277a4f78804a.xml"/>
+<META NAME="MS-HKWD" CONTENT="!apc extension">
+<META NAME="MS-HKWD" CONTENT="APC (asynchronous procedure call)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_729f0dbf-e54a-4754-a79e-277a4f78804a.xml"></A>!apc</H1>
+<P>The <b>!apc </b>extension formats and displays the contents of one or more asynchronous procedure calls (APCs).</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!apc</b> <BR><b>!apc proc</b> <i>Process</i> <BR><b>!apc thre</b> <i>Thread</i> <BR><b>!apc</b> <i>KAPC</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Process</i></DT>
+<DD>Specifies the address of the process whose APCs are to be displayed.</DD>
+<DT><i>Thread</i></DT>
+<DD>Specifies the address of the thread whose APCs are to be displayed.</DD>
+<DT><i>KAPC</i></DT>
+<DD>Specifies the address of the kernel APC to be displayed.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Without any parameters, <b>!apc</b> displays all APCs.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!apc</b><BR>*** Enumerating APCs in all processes<BR>Process e0000000858ba8b0 System<BR>Process e0000165fff86040 smss.exe<BR>Process e0000165fff8c040 csrss.exe<BR>Process e0000165fff4e1d0 winlogon.exe<BR>Process e0000165fff101d0 services.exe<BR>Process e0000165fffa81d0 lsass.exe<BR>Process e0000165fff201d0 svchost.exe<BR>Process e0000165fff8e040 svchost.exe<BR>Process e0000165fff3e040 svchost.exe<BR>Process e0000165fff6e040 svchost.exe<BR>Process e0000165fff24040 spoolsv.exe<BR>Process e000000085666640 wmiprvse.exe<BR>Process e00000008501e520 wmiprvse.exe<BR>Process e0000000856db480 explorer.exe<BR>Process e0000165fff206a0 ctfmon.exe<BR>Process e0000000850009d0 ctfmon.exe<BR>Process e0000165fff51600 conime.exe<BR>Process e000000085496340 taskmgr.exe<BR>Process e000000085489c30 userinit.exe<BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about APCs, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !apc RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

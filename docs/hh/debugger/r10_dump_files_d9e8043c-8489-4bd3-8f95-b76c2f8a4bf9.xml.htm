@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Enabling a Kernel-Mode Dump File</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Enabling a Kernel-Mode Dump File"><xml><MSHelp:Keyword Index="A" Term="r10_dump_files_d9e8043c-8489-4bd3-8f95-b76c2f8a4bf9.xml"/>
+<META NAME="MS-HKWD" CONTENT="dump file, enabling kernel-mode dump file"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r10_dump_files_d9e8043c-8489-4bd3-8f95-b76c2f8a4bf9.xml"></A>Enabling a Kernel-Mode Dump File</H1>
+<P>During a system crash, the Windows crash dump settings determine whether a dump file will be created, and if so, what size the dump file will be.</P>
+<P>The Windows Control Panel controls the kernel-mode crash dump settings. Only a system administrator can modify these settings.</P>
+<P>To change these settings, go to Control Panel and click on the <b>System</b> icon. Select the <b>Advanced</b> panel. In Windows 2000, click on <b>Startup and Recovery</b>. In Windows XP and later versions of Windows, click on the <b>Settings</b> button in the <b>Startup and Recovery</b> section.</P>
+<P>You will see the following dialog box:</P>
+<p><img src="crashpanel.bmp"><p><b>Control Panel: Startup and Recovery Dialog Box</b></p>
+</p>
+<P>Under <b>Write Debugging Information</b>, you can select which of the three sizes of dump files you wish to have as the default. Only one dump file can be created for any given crash. The default crash dump size is Small Memory Dump. See <a href="r10_dump_files_fb0158c7-161d-4959-9dd3-00be89aebd02.xml.htm">Varieties of Kernel-Mode Dump Files</a> for a description of the three file types.</P>
+<P>After selecting the dump file size, you can accept or change the default dump file path and file name.</P>
+<P>You can also select or deselect any of the <b>Write an event to the system log</b>, <b>Send an administrative alert</b>, and <b>Automatically reboot</b> options.</P>
+<P>If you make any changes, the system will reboot after you click <b>OK</b>.</P>
+<P>The settings that you select will apply to any kernel-mode dump file created by a system crash, regardless of whether the system crash was accidental or whether it was caused by the debugger. See <a href="r10_dump_files_9f03f640-4a73-4b26-ad4b-8e9e132279f2.xml.htm">Forcing a System Crash</a> for details on causing a deliberate crash.</P>
+<P>However, these settings do not affect dump files created by the <b>.dump</b> command. See <a href="r10_dump_files_19dd1e34-c204-4716-af87-ddca127865ac.xml.htm">Creating a Dump File Without a System Crash</a> for details on using this command.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Enabling a Kernel-Mode Dump File RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>WriteDumpFile</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, WriteDumpFile"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="WriteDumpFile"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_d9fa8d64-3c92-425b-82fc-dec8553bdb52.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::WriteDumpFile method">
+<META NAME="MS-HKWD" CONTENT="WriteDumpFile (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_d9fa8d64-3c92-425b-82fc-dec8553bdb52.xml"></A>WriteDumpFile</H1>
+<P><P>The <b>WriteDumpFile</b> method creates a <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#b9622678-468c-4b90-a002-a3d4280796f0">user-mode</a> or <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#c2dfd7a9-249b-4018-9789-2b3d6268346b">kernel-mode</a> <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#d02ecf5e-605d-42e2-9aea-a3ea60e2defb">crash dump file</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient::WriteDumpFile(</b><BR><b>    IN PCSTR  </b><i>DumpFile</i><b>,</b><BR><b>    IN ULONG  </b><i>Qualifier</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>DumpFile</i></DT>
+<DD>Specifies the name of the dump file to create.  <i>DumpFile</i> must include the file name extension.  <i>DumpFile</i> can include a relative or absolute path; relative paths are relative to the directory in which the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#84783e5c-aa71-4d1c-be03-f4cc8ce3d72f">debugger</a> was started.</DD>
+<DT><i>Qualifier</i></DT>
+<DD>Specifies the type of dump file to create.  For possible values, see <a href="structures_7eef95d3-3b13-46ff-ac5a-0e292a972eb9.xml.htm">DEBUG_DUMP_<i>XXX</i></a>.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>WriteDumpFile</b> is available in all versions of <b>IDebugClient</b>.</P>
+<H4>Comments</H4>
+<P>To specify the formatting of the file and&#8212;for user-mode minidumps&#8212;the information to include in the file, use <a href="idebugclient_6ce4aeba-f7a6-4872-9ff2-baf3b3165471.xml.htm"><b>WriteDumpFile2</b></a> or <a href="idebugclient_cbae8215-df5f-484c-9b0a-8a5dc1564a00.xml.htm"><b>WriteDumpFileWide</b></a>.</P>
+<P>For more information about crash dump files, see <a href="engine_dg_4f17b58c-6753-4fcf-b1de-13ddffb62c15.xml.htm">Dump-File Targets</a>.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugclient_6ce4aeba-f7a6-4872-9ff2-baf3b3165471.xml.htm"><b>WriteDumpFile2</b></a>, <a href="idebugclient_cbae8215-df5f-484c-9b0a-8a5dc1564a00.xml.htm"><b>WriteDumpFileWide</b></a>, <a href="r19_metacmds_a_10de67ad-e8c3-42f2-ba9e-95a146a0320d.xml.htm"><b>.dump (Create Dump File)</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: WriteDumpFile RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

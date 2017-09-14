@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>z (Execute While)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, z (Execute While)"><xml><MSHelp:Keyword Index="A" Term="r18_cmds_S_db1fba63-62d1-4e3c-a76c-a8cd4e158ed8.xml"/>
+<META NAME="MS-HKWD" CONTENT="z (Execute While) command condition">
+<META NAME="MS-HKWD" CONTENT="Execute While (z) command condition">
+<META NAME="MS-HKWD" CONTENT="while conditional command">
+<META NAME="MS-HKWD" CONTENT="conditional execution"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r18_cmds_S_db1fba63-62d1-4e3c-a76c-a8cd4e158ed8.xml"></A>z (Execute While)</H1>
+<P>The <b>z</b> command executes a command while a given condition is true.</P>
+<H4>Syntax</H4>
+<P>User-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><i>Command</i> <b>;</b> <b>z(</b> <i>Expression</i> <b>)</b> <BR></nobr></P>
+<P></P>
+<P>Kernel-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><i>Command</i> <b>;</b> [<i>Processor</i>] <b>z(</b> <i>Expression</i> <b>)</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Command</i></DT>
+<DD>Specifies the command to execute while the <i>Expression</i> condition evaluates to a nonzero value. This command is always executed at least once.</DD>
+<DT><i>Processor</i></DT>
+<DD>Specifies the processor that applies to the test. For more information about the syntax, see <a href="r13_syntax_b7eb5ea3-8cf4-420d-9461-94d4e20f38d5.xml.htm">Multiprocessor Syntax</a>. You can specify processors only in kernel mode.</DD>
+<DT><i>Expression</i></DT>
+<DD>Specifies the condition to test. If this condition evaluates to a nonzero value, the <i>Command</i> command is executed again and then <i>Expression</i> is tested again. For more information about the syntax, see <a href="r13_syntax_d261792b-06ed-497e-a4f5-3e5c7d9dcac7.xml.htm">Numerical Expression Syntax</a>.</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>In many debugger commands, the semicolon is used to separate unrelated commands. However, in the <b>z</b> command, a semicolon seperates the "z" from the <i>Command</i> parameter.</P>
+<P>The <i>Command </i>command is always executed at least once, and then <i>Expression</i> is tested. If the condition is a nonzero value, the command is again executed, and then <i>Expression</i> is tested again. (This behavior is similar to a C-language <b>do - while</b> loop, not a simple <b>while</b> loop.)</P>
+<P>If there are several semicolons to the left of the "z", all commands to the left of the "z" repeat as long as the <i>Expression</i> condition is true. Such commands can be any debugger commands that permit a terminal semicolon.</P>
+<P>If you add another semicolon and additional commands after the <b>z</b> command, these additional commands are executed after the loop is complete. We do not typically recommend a line that begins with "z" because it generates uninteresting output forever unless the condition becomes false because of some other action. Note that you can nest <b>z</b> commands.</P>
+<P>To break a loop that is continuing for too long, use <a href="r23_keys_5e05b1f2-1c9d-4f1a-a681-4994b0fe679c.xml.htm">CTRL+C</a> in CDB or KD, or use <a href="r37_gui_2_94482ad8-41d6-46e7-9a18-40dce2459d10.xml.htm"><b>Debug | Break</b></a> or <a href="r37_gui_2_94482ad8-41d6-46e7-9a18-40dce2459d10.xml.htm">CTRL+BREAK</a> in WinDbg.</P>
+<P>The following code example shows an unnecessarily complex way to zero the <b>eax</b> register.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>reax = eax - 1 ; z(eax)</b><BR></nobr></P>
+<P>The following example increments the <b>eax</b> and <b>ebx</b> registers until one of them is at least 8 and then it increments the <b>ecx</b> register once.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>reax=eax+1; rebx=ebx+1; z((eax&lt;8)|(ebx&lt;8)); recx=ecx+1</b><BR></nobr></P>
+<P>The following example uses C++ expression syntax and uses the pseudo-register <b>$t0</b> as a loop variable.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.expr /s c++</b><BR>Current expression evaluator: C++ - C++ source expressions<BR><BR>0:000&gt; <b>db pindexcreate[@$t0].szKey; r$t0=@t0+1; z( @$t0 &lt; cIndexCreate )</b><BR></nobr></P>
+<H4>See Also</H4>
+<P><a href="r17_cmds_i_d3caf916-24fd-419f-90eb-05a88b72032e.xml.htm"><b>j (Execute If-Else)</b></a> </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: z (Execute While) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

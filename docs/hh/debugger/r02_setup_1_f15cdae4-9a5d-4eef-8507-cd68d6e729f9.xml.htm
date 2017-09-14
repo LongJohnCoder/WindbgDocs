@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Setting Up a 1394 Cable Connection</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Setting Up a 1394 Cable Connection"><xml><MSHelp:Keyword Index="A" Term="r02_setup_1_f15cdae4-9a5d-4eef-8507-cd68d6e729f9.xml"/>
+<META NAME="MS-HKWD" CONTENT="setup, making a 1394 cable connection">
+<META NAME="MS-HKWD" CONTENT="1394 connection">
+<META NAME="MS-HKWD" CONTENT="1394 connection, setting up the hardware">
+<META NAME="MS-HKWD" CONTENT="IEEE 1394 cable">
+<META NAME="MS-HKWD" CONTENT="IEEE 1394 cable, [See &quot;1394 connection&quot;]">
+<META NAME="MS-HKWD" CONTENT="FireWire cable">
+<META NAME="MS-HKWD" CONTENT="FireWire cable, [See &quot;1394 connection&quot;]">
+<META NAME="MS-HKWD" CONTENT="cable connection, IEEE 1394 cable"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r02_setup_1_f15cdae4-9a5d-4eef-8507-cd68d6e729f9.xml"></A>Setting Up a 1394 Cable Connection</H1>
+<P>When the host computer is in the same location as the target computer, or when you have to put a local host computer that has remote access server (RAS) capabilities between the target and a remote host, you must connect the two computers by using an IEEE 1394 ("FireWire") cable, a <a href="r02_setup_1_91a40de4-47cc-4431-8f89-9d955eff8f2c.xml.htm">debug (null-modem) cable</a>, or a <a href="r02_setup_1_8237073f-467e-4a10-b191-b7cd218175ce.xml.htm">USB 2.0 debug cable</a>.</P>
+<P>Kernel debugging through a 1394 cable is not supported on all systems. The target computer and the host computer must be running Microsoft Windows XP or a later version of Windows. (The target computer and host computer do not have to be running the same version of Windows.)</P>
+<P>The target computer and host computer must have a 1394 adapter. Plug the 1394 cable into any port on the target computer and into any port on the host computer. The choice of port is not important, and it does not affect the channel number that is used during software setup.</P>
+<P class="note"><b>Note</b>  The drivers for the IEEE 1394 host debugging are not compatible with Microsoft Windows 2000.</P>
+<P class="note"><b>Note</b>  Additional support can be requested by sending mail to <img src="internet_link_sm.gif"><text> </text><a href="mailto:1394dbg@microsoft.com" target="_blank">1394dbg@microsoft.com</a>. </P>
+<H4>Software Setup</H4>
+<P>For information about how to configure the boot entries on the target computer,  see <a href="bootini_7a4cbe01-a9e7-4b00-9c85-7bac20c73286.xml.htm">Boot Parameters to Enable Debugging</a>.  For more information about how to start a kernel debugging session, see <a href="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml.htm">Attaching to a Target Computer (Kernel Mode)</a>.</P>
+<P class="note"><b>Note</b>  Before you perform kernel debugging over a 1394 cable, you must configure some additional software on the target computer and the host computer. For more information about this configuration, see <a href="r02~a_setup_1a_fcdec49c-b16c-4f8e-b1df-c1ceea0815f3.xml.htm">Disabling the 1394 Host Controller</a> and <a href="r03_setup_2_d48986aa-46cb-41a8-9be9-925545754d3a.xml.htm">Installing the 1394 Virtual Driver</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Setting Up a 1394 Cable Connection RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Combining This Method with Remote Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Combining This Method with Remote Debugging"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_d9ff842e-7b5a-4989-9931-f7318ac828b2.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_d9ff842e-7b5a-4989-9931-f7318ac828b2.xml"></A>Combining This Method with Remote Debugging</H1>
+<P>It is sometimes useful to <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">control the user-mode debugger from the kernel debugger</a> <i>and</i> use the user-mode debugger as a <a href="r08_use_remote_e8049dea-474e-411d-8286-ec4a646480f7.xml.htm">debugging server</a> at the same time.</P>
+<P>For example, this configuration is useful when your user-mode symbols are located on a symbol server. In the standard configuration for controlling the user-mode debugger from a kernel debugger, the interaction of the two debuggers can lead to tiny lapses in synchronization, and these lapses can prevent symbol server authentication. The more complex configuration described here can avoid this problem.</P>
+<P class="note"><b>Note</b>  In describing this scenario, <i>target application</i> refers to the user-mode application that is being debugged, <i>target computer</i> refers to the computer that contains the target application and the CDB or NTSD process, and <i>host computer</i> refers to the computer that contains the kernel debugger.</P>
+<P>To use this technique, you must do the following:</P><B></B><OL type="1">
+<LI>Start NTSD or CDB on the target computer, with the <nobr><b>-ddefer</b></nobr> and <nobr><b>-server</b></nobr> command-line options, specifying the desired transport options. The <nobr><b>-server</b></nobr> option must be the first parameter on the command line.   <P>For example, you can attach to a running process by using the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ntsd -server</b> <i>ServerTransport</i> <b>-ddefer</b> [<b>-y</b> <i>UserSymbolPath</i>] <b>-p </b><i>PID</i> <BR></nobr></P>
+<P>Or, you can start a new process as the target by using the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ntsd -server</b> <i>ServerTransport</i> <b>-ddefer</b> [<b>-y</b> <i>UserSymbolPath</i>] <i>ApplicationName</i> <BR></nobr></P>
+<P>If you are installing this as a postmortem debugger, you would use the following syntax. Note that you must manually edit the registry to install a postmortem debugger that includes the <nobr><b>-server</b></nobr> parameter; for details, see <a href="r04_setup_3_40cc08bd-c0da-4d75-90cd-f677b4f63d68.xml.htm">Enabling Postmortem Debugging</a>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ntsd -server</b> <i>ServerTransport</i> <b>-ddefer</b> [<b>-y</b> <i>UserSymbolPath</i>] <BR></nobr></P>
+<P>For information about the available transport options, see <a href="r08_use_remote_2cf49506-2562-4684-b843-be4726f59691.xml.htm">Activating a Debugging Server</a>. </P>
+</LI>
+<LI>Start WinDbg or KD on the host computer, as if you were going to debug the target computer, but do not actually break in to the target computer.  To use WinDbg, use the following syntax.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg</b> [<b>-y</b> <i>KernelSymbolPath</i>] [<b>-k</b> <i>ConnectionOptions</i>] <BR></nobr></P>
+<P>For more information about this step, see <a href="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml.htm">Attaching to a Target Computer (Kernel Mode)</a>.</P>
+</LI>
+<LI>Start WinDbg or CDB as a debugging client, with the same transport options used to start the server. This debugging client can be run on either the host computer or on a third computer. <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>cdb</b> <b>-remote</b> <i>ClientTransport</i> <BR></nobr></P>
+<P>For more information about this step, see <a href="r08_use_remote_d737f4f5-2c99-44cf-b276-0fda82be08c8.xml.htm">Activating a Debugging Client</a>. </P>
+</LI>
+<LI>Once the debuggers are running and the <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>Input&gt;</b></span> prompt appears in the kernel debugger, use the <a href="r22_metacmds_s_b21b6f36-ff6d-41af-a76a-899763c5ce9f.xml.htm"><b>.sleep (Pause Debugger)</b></a> command to pause the debuggers and let the target computer run for a few seconds. This gives the target computer time to process the remote transport protocol, establishing the connection between the user-mode remote server and the remote client. </LI>
+</OL>
+<P></P>
+<P>If you use CDB as the user-mode debugger, the Command Prompt window that is associated with CDB remains locked and unavailable while debugging continues. If you use NTSD, no additional window is created, even though NTSD has a process ID associated with it on the target computer.</P>
+<P>The four modes and the methods of switching between them described in the topic <a href="r05_use_start_415320ed-27ff-42a3-85da-d2d7e8723196.xml.htm">Switching Modes</a> apply in this combination scenario, with the following differences:</P><B></B><UL type="disc">
+<LI>There are two different user-mode debugging modes. When the target computer is running, the debugging server is controlled by the debugging client as in any other remote debugging session; this is called <i>remote-controlled user-mode debugging</i>. When the kernel-mode debugger is broken in to the target computer and the <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>Input&gt;</b></span> prompt is showing, the user-mode debugger is controlled by the kernel debugger; this is called <i>kernel-controlled user-mode debugging</i>. </LI>
+<LI>These two modes are never available at the same time. When the kernel debugger is broken in to the target computer, even though the user-mode debugger may be active, the target computer is unable to process the remote transport protocol, and therefore the user-mode debugger will not be able to receive remote input across this connection. </LI>
+<LI>If your user-mode symbols are located on a symbol server, any debugger commands that require symbol access should be issued while in remote-controlled user-mode debugging mode. </LI>
+<LI>To switch from kernel-controlled user-mode debugging to remote-controlled user-mode debugging, use the <a href="r22_metacmds_s_b21b6f36-ff6d-41af-a76a-899763c5ce9f.xml.htm"><b>.sleep (Pause Debugger)</b></a> command. When the user-mode debugger wakes from the sleep command, it will be in remote-controlled user-mode debugging mode.   </LI>
+<LI>To switch from remote-controlled user-mode debugging to kernel-mode debugging, enter any command from the <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>Input&gt;</b></span> prompt. If this prompt is not visible, switch to kernel-mode debugging, and then use the <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command at the <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>kd&gt;</b></span> prompt.  </LI>
+</UL>
+<P></P>
+<P>Internally, a user-mode debugger started with <nobr><b>-ddefer</b></nobr> gives first priority to input from the debugging client, and second priority to input from the kernel debugger. However, there can never be a conflict between simultaneous inputs, because when the kernel debugger has broken in to the target computer, the remote connection is unavailable. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Combining This Method with Remote Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

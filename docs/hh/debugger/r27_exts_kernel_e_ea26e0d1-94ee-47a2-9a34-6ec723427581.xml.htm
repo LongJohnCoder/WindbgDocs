@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!lpc</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !lpc"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_ea26e0d1-94ee-47a2-9a34-6ec723427581.xml"/>
+<META NAME="MS-HKWD" CONTENT="!lpc extension">
+<META NAME="MS-HKWD" CONTENT="LPC (local/light-weight procedure call)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_ea26e0d1-94ee-47a2-9a34-6ec723427581.xml"></A>!lpc</H1>
+<P><P>The <b>!lpc</b> extension displays information about all local procedure call (LPC) ports and messages in the target system.</P>
+</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!lpc message</b> <i>MessageID</i> <BR><b>!lpc port</b> <i>Port</i> <BR><b>!lpc scan</b> <i>Port</i> <BR><b>!lpc thread</b> <i>Thread</i> <BR><b>!lpc</b> <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows Server 2003 and Windows XP</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!lpc message</b> <i>MessageID</i> <BR><b>!lpc port</b> <i>Port</i> <BR><b>!lpc scan</b> <i>Port</i> <BR><b>!lpc thread</b> <i>Thread</i> <BR><b>!lpc PoolSearch</b> <BR><b>!lpc</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>message</b></DT>
+<DD><i>(Windows Server 2003, Windows XP, and Windows 2000 only)</i>  Displays information about a message, such as the server port that contains the message in the queue, and the thread waiting for this message, if any.</DD>
+<DT><i>MessageID</i></DT>
+<DD><i>(Windows Server 2003, Windows XP, and Windows 2000 only)</i>  Specifies the message ID of the message to be displayed. If the value of this parameter is 0 or this parameter is omitted, the <b>!lpc message</b> command displays a summary list of messages. (In Windows 2000 with Service Pack 1 (SP1), the summary includes all messages in the LPC zone. In Windows 2000 with Service Pack 2 (SP2), Windows XP, and later versions of Windows, the summary includes all messages in the kernel pool. Paged-out messages are not included.)</DD>
+<DT><b>port</b></DT>
+<DD><i>(Windows Server 2003, Windows XP, and Windows 2000 only)</i>  Displays port information, such as the name of the port, its semaphore state, messages in its queues, threads in its rundown queue, its handle count, its references, and related ports.</DD>
+<DT><b>scan</b></DT>
+<DD><i>(Windows Server 2003, Windows XP, and Windows 2000 only)</i>  Displays summary information about the specified port and about all ports that are connected to it.</DD>
+<DT><i>Port</i></DT>
+<DD><i>(Windows Server 2003, Windows XP, and Windows 2000 only)</i>  Specifies the hexadecimal address of the port to be displayed. If the <b>!lpc port</b> command is used, and <i>Port</i> is 0 or is omitted, a summary list of all LPC ports is displayed. If the <b>!lpc scan</b> command is used, <i>Port</i> must specify the address of an actual port.</DD>
+<DT><b>thread</b></DT>
+<DD><i>(Windows Server 2003, Windows XP, and Windows 2000 only) </i> Displays port information for all ports that contain the specified thread in their rundown port queues.</DD>
+<DT><i>Thread</i></DT>
+<DD><i>(Windows Server 2003, Windows XP, and Windows 2000 only) </i> Specifies the hexadecimal address of the thread. If this is 0 or omitted, the <b>!lpc thread</b> command displays a summary list of all threads that are performing any LPC operations.</DD>
+<DT><b>PoolSearch</b></DT>
+<DD><i>(Windows Server 2003 and Windows XP only) </i> Determines whether the <b>!lpc message</b> command searches for messages in the kernel pool. Each time <b>!lpc PoolSearch</b> is used, this setting toggles on or off (the initial setting is to not search the kernel pool). This only affects <b>!lpc message</b> commands that specify a nonzero value for <i>MessageID</i>.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP<BR>Windows Server 2003</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension is not supported in Windows Vista and later versions of Windows.</P>
+<P>In Windows Server 2003, Windows XP, and Windows 2000, using <b>!lpc</b> with no arguments displays help for this extension in the Debugger Command window.</P>
+<P>If you have a thread that is marked as waiting for a reply to a message, use the <b>!lpc message</b> command with the ID of the delayed message. This command displays the specified message, the port that contains it, and all related threads.</P>
+<P>If the message is not found and there were no read errors (such as "Unable to access zone segment"), the server received the message.</P>
+<P>In this case, the server port can usually be found by using the <b>!lpc thread</b> command. Threads that are waiting for replies are linked into a server communication queue. This command will display all ports that contain the specified thread. After you know the port address, use the <b>!lpc port</b> command. More specific information about each thread can then be obtained by using the <b>!lpc thread </b>command with the address of each thread.</P>
+<P>Here are several examples of the output from this extension from a Windows XP system:  </P>
+<P>In this example, all port LPC ports are displayed.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!lpc port</b><BR>Scanning 225 objects<BR>       1  Port: 0xe1405650 Connection: 0xe1405650  Communication: 0x00000000  'SeRmCommandPort' <BR>       1  Port: 0xe141ef50 Connection: 0xe141ef50  Communication: 0x00000000  'SmApiPort' <BR>       1  Port: 0xe13c5740 Connection: 0xe13c5740  Communication: 0x00000000  'ApiPort' <BR>       1  Port: 0xe13d9550 Connection: 0xe13d9550  Communication: 0x00000000  'SbApiPort' <BR>       3  Port: 0xe13d8830 Connection: 0xe141ef50  Communication: 0xe13d8910  '' <BR>80000004  Port: 0xe13d8910 Connection: 0xe141ef50  Communication: 0xe13d8830  '' <BR>       3  Port: 0xe13d8750 Connection: 0xe13d9550  Communication: 0xe13a4030  '' <BR>       .....<BR><BR></nobr></P>
+<P>In the previous example, the port at address <b>e14ae238 </b>has no messages; that is, all messages have been picked up and no new messages have arrived.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!lpc port e14ae238</b><BR><BR>Server connection port e14ae238  Name: ApiPort<BR>    Handles: 1   References: 107<BR>    Server process  : 84aa0140 (csrss.exe)<BR>    Queue semaphore : 84a96da8<BR>    Semaphore state 0 (0x0)<BR>    The message queue is empty<BR>    The LpcDataInfoChainHead queue is empty<BR></nobr></P>
+<P>In the previous example, the port at <b>0xe14ae238</b> has messages which have been queued, but not yet picked up by the server.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!lpc port 0xe14ae238</b><BR><BR>Server connection port e14ae238  Name: ApiPort<BR>    Handles: 1   References: 108<BR>    Server process  : 84aa0140 (csrss.exe)<BR>    Queue semaphore : 84a96da8<BR>    Semaphore state 0 (0x0)<BR>        Messages in queue:<BR>        0000 e20d9b80 - Busy  Id=0002249c  From: 0584.0680  Context=00000021  [e14ae248 . e14ae248]<BR>                   Length=0098007c  Type=00000001 (LPC_REQUEST)<BR>                   Data: 00000000 0002021e 00000584 00000680 002f0001 00000007<BR>    The message queue contains 1 messages<BR>    The LpcDataInfoChainHead queue is empty<BR><BR></nobr></P>
+<P>The remaining Windows XP examples concern the other options that can be used with this extension.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!lpc message 222be</b><BR>Searching message 222be in threads ...<BR>Client thread 842a4db0 waiting a reply from 222be<BR>Searching thread 842a4db0 in port rundown queues ...<BR><BR>Server communication port 0xe114a3c0<BR>    Handles: 1   References: 1<BR>    The LpcDataInfoChainHead queue is empty<BR>        Connected port: 0xe1e7b948      Server connection port: 0xe14ae238<BR><BR>Client communication port 0xe1e7b948<BR>    Handles: 1   References: 3<BR>    The LpcDataInfoChainHead queue is empty<BR><BR>Server connection port e14ae238  Name: ApiPort<BR>    Handles: 1   References: 107<BR>    Server process  : 84aa0140 (csrss.exe)<BR>    Queue semaphore : 84a96da8<BR>    Semaphore state 0 (0x0)<BR>    The message queue is empty<BR>    The LpcDataInfoChainHead queue is empty<BR>Done.<BR><BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!lpc thread 842a4db0</b><BR>Searching thread 842a4db0 in port rundown queues ...<BR><BR>Server communication port 0xe114a3c0<BR>    Handles: 1   References: 1<BR>    The LpcDataInfoChainHead queue is empty<BR>        Connected port: 0xe1e7b948      Server connection port: 0xe14ae238<BR><BR>Client communication port 0xe1e7b948<BR>    Handles: 1   References: 3<BR>    The LpcDataInfoChainHead queue is empty<BR><BR>Server connection port e14ae238  Name: ApiPort<BR>    Handles: 1   References: 107<BR>    Server process  : 84aa0140 (csrss.exe)<BR>    Queue semaphore : 84a96da8<BR>    Semaphore state 0 (0x0)<BR>    The message queue is empty<BR>    The LpcDataInfoChainHead queue is empty<BR><BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt;<b> !lpc scan e13d8830</b><BR>Scanning 225 objects<BR>       3  Port: 0xe13d8830 Connection: 0xe141ef50  Communication: 0xe13d8910  '' <BR>80000004  Port: 0xe13d8910 Connection: 0xe141ef50  Communication: 0xe13d8830  '' <BR>Scanning 3 objects<BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about LPCs, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !lpc RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>EXT_TDOP</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, EXT_TDOP"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="WdbgExts.h, DbgEng.h"/>
+<MSHelp:Attr Name="APIName" Value="EXT_TDOP"/>
+<MSHelp:Keyword Index="A" Term="Structures_77246150-309c-4646-82b2-ba9c75d9a2d4.xml"/>
+<META NAME="MS-HKWD" CONTENT="EXT_TDOP enumeration"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_77246150-309c-4646-82b2-ba9c75d9a2d4.xml"></A>EXT_TDOP</H1>
+<P>The EXT_TDOP enumeration is used in the <b>Operation</b> member of the <a href="structures_e4240445-73f9-4f38-8f1b-17035ced15f7.xml.htm">EXT_TYPED_DATA</a> structure to specify which suboperation the <a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a> <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation will perform.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef enum _EXT_TDOP {</b><BR><b>    EXT_TDOP_COPY,</b><BR><b>    EXT_TDOP_RELEASE,</b><BR><b>    EXT_TDOP_SET_FROM_EXPR,</b><BR><b>    EXT_TDOP_SET_FROM_U64_EXPR,</b><BR><b>    EXT_TDOP_GET_FIELD,</b><BR><b>    EXT_TDOP_EVALUATE,</b><BR><b>    EXT_TDOP_GET_TYPE_NAME,</b><BR><b>    EXT_TDOP_OUTPUT_TYPE_NAME,</b><BR><b>    EXT_TDOP_OUTPUT_SIMPLE_VALUE,</b><BR><b>    EXT_TDOP_OUTPUT_FULL_VALUE,</b><BR><b>    EXT_TDOP_HAS_FIELD,</b><BR><b>    EXT_TDOP_GET_FIELD_OFFSET,</b><BR><b>    EXT_TDOP_GET_ARRAY_ELEMENT,</b><BR><b>    EXT_TDOP_GET_DEREFERENCE,</b><BR><b>    EXT_TDOP_GET_TYPE_SIZE,</b><BR><b>    EXT_TDOP_OUTPUT_TYPE_DEFINITION,</b><BR><b>    EXT_TDOP_GET_POINTER_TO,</b><BR><b>    EXT_TDOP_SET_FROM_TYPE_ID_AND_U64,</b><BR><b>    EXT_TDOP_SET_PTR_FROM_TYPE_ID_AND_U64,</b><BR><b>    EXT_TDOP_COUNT</b><BR><b>} EXT_TDOP;</b><BR></P>
+<H4>Values</H4><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Operation</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_a17e6fed-cc6a-428b-a98a-85915793d049.xml.htm">EXT_TDOP_COPY</a></TD>
+<TD Width="">Makes a copy of a typed data description.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_c75b888e-1c18-4873-9c0f-38ff977774f4.xml.htm">EXT_TDOP_RELEASE</a></TD>
+<TD Width="">Releases a typed data description.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_7622ea11-1d2b-43e2-935c-ba7d66387ed3.xml.htm">EXT_TDOP_SET_FROM_EXPR</a></TD>
+<TD Width="">Returns the value of an expression.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_d8a1ef1e-e26f-4abb-96aa-e3e9404d467c.xml.htm">EXT_TDOP_SET_FROM_U64_EXPR</a></TD>
+<TD Width="">Returns the value of an expression. An optional address can be provided as a parameter to the expression.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_345b76ec-9294-47d4-a8d4-5a67611324fd.xml.htm">EXT_TDOP_GET_FIELD</a></TD>
+<TD Width="">Returns a member of a structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_39d737d1-5b94-4241-b111-b28171693825.xml.htm">EXT_TDOP_EVALUATE</a></TD>
+<TD Width="">Returns the value of an expression. An optional value can be provided as a parameter to the expression.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_a16be0cb-019a-4cd5-8b04-80e4ba62e6ee.xml.htm">EXT_TDOP_GET_TYPE_NAME</a></TD>
+<TD Width="">Returns the type name for typed data.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_ef937fa4-cfea-4ba4-94b2-025281bed1d7.xml.htm">EXT_TDOP_OUTPUT_TYPE_NAME</a></TD>
+<TD Width="">Prints the type name for typed data.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_852da124-570b-4fae-b361-410d64a717a2.xml.htm">EXT_TDOP_OUTPUT_SIMPLE_VALUE</a></TD>
+<TD Width="">Prints the value of typed data.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_b4bc1eb7-2ce6-4ce3-9698-d8820824db43.xml.htm">EXT_TDOP_OUTPUT_FULL_VALUE</a></TD>
+<TD Width="">Prints the type and value for typed data.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_6b4b03c4-6877-497b-b1cb-436e79e1b56c.xml.htm">EXT_TDOP_HAS_FIELD</a></TD>
+<TD Width="">Determines whether a structure contains a specified member.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_9057a2c7-2426-413f-926d-c361e1f498b4.xml.htm">EXT_TDOP_GET_FIELD_OFFSET</a></TD>
+<TD Width="">Returns the offset of a member within a structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_109155b7-0804-4cbd-89db-04e8d4ccbb73.xml.htm">EXT_TDOP_GET_ARRAY_ELEMENT</a></TD>
+<TD Width="">Returns an element from an array.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_a26c1fe2-0a61-4769-9e0c-71617a5194cf.xml.htm">EXT_TDOP_GET_DEREFERENCE</a></TD>
+<TD Width="">Dereferences a pointer, returning the value it points to.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_486c0b61-160a-4d63-aaea-a75028c91229.xml.htm">EXT_TDOP_GET_TYPE_SIZE</a></TD>
+<TD Width="">Returns the size of the specified typed data.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_6ed64a77-7672-46ba-a7a5-3e62fb0cca15.xml.htm">EXT_TDOP_OUTPUT_TYPE_DEFINITION</a></TD>
+<TD Width="">Prints the definition of the type for the specified typed data.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_1f8859ad-84be-451a-9380-315b82db1b3d.xml.htm">EXT_TDOP_GET_POINTER_TO</a></TD>
+<TD Width="">Returns a new typed data description that represents a pointer to specified typed data.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_2f348c15-6194-4bef-8e31-7f84653fde52.xml.htm">EXT_TDOP_SET_FROM_TYPE_ID_AND_U64</a></TD>
+<TD Width="">Creates a typed data description from a type and memory location.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_a5bff470-6242-4345-8968-a46495bc4c95.xml.htm">EXT_TDOP_SET_PTR_FROM_TYPE_ID_AND_U64</a></TD>
+<TD Width="">Creates a typed data description representing a pointer to a specified memory location with specified type.</TD>
+</TR>
+</table>
+<P>The remaining value, EXT_TDOP_COUNT, does not specify an operation. Instead, it represents the number of suboperations defined in the EXT_TDOP enumeration.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>WbgExts.h</i>.  Include <i>WdbgExts.h</i> before including <i>DbgEng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="structures_e4240445-73f9-4f38-8f1b-17035ced15f7.xml.htm">EXT_TYPED_DATA</a>, <a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a>, <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: EXT_TDOP RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

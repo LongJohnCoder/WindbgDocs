@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>x64 Architecture</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, x64 Architecture"><xml><MSHelp:Keyword Index="A" Term="t09_arch_x86_79e4e2cd-b260-447d-b74d-2273d06db23e.xml"/>
+<META NAME="MS-HKWD" CONTENT="x64 processor, architecture">
+<META NAME="MS-HKWD" CONTENT="registers, on an x64 processor">
+<META NAME="MS-HKWD" CONTENT="x64 processor, registers"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t09_arch_x86_79e4e2cd-b260-447d-b74d-2273d06db23e.xml"></A>x64 Architecture</H1>
+<P>The x64 architecture is a backwards-compatible extension of x86.  It provides a legacy 32-bit mode, which is identical to x86, and a new 64-bit mode.</P>
+<P>The term "x64" includes both AMD 64 and Intel64. The instruction sets are close to identical.</P>
+<P></P>
+<H3><A NAME="bfe2b159-ee54-4210-8769-ae5af80de325"></A>Registers</H3>
+<P>x64 extends x64's 8 general-purpose registers to be 64-bit, and adds 8 new 64-bit registers.  The 64-bit registers have names beginning with "r", so for example the 64-bit extension of <b>eax</b> is called <b>rax</b>.  The new registers are named <b>r8</b> through <b>r15</b>.</P>
+<P>The lower 32 bits, 16 bits, and 8 bits of each register are directly addressable in operands.  This includes registers, like <b>esi</b>, whose lower 8 bits were not previously addressable.  The following table specifies the assembly-language names for the lower portions of 64-bit registers.</P><B></B><table>
+<TR valign="top">
+<TH Width="">64-bit register</TH>
+<TH Width="">Lower 32 bits</TH>
+<TH Width="">Lower 16 bits</TH>
+<TH Width="">Lower 8 bits</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>rax</b> </TD>
+<TD Width=""><b>eax</b> </TD>
+<TD Width=""><b>ax</b> </TD>
+<TD Width=""><b>al</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>rbx</b> </TD>
+<TD Width=""><b>ebx</b> </TD>
+<TD Width=""><b>bx</b> </TD>
+<TD Width=""><b>bl</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>rcx</b> </TD>
+<TD Width=""><b>ecx</b> </TD>
+<TD Width=""><b>cx</b> </TD>
+<TD Width=""><b>cl</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>rdx</b> </TD>
+<TD Width=""><b>edx</b> </TD>
+<TD Width=""><b>dx</b> </TD>
+<TD Width=""><b>dl</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>rsi</b> </TD>
+<TD Width=""><b>esi</b> </TD>
+<TD Width=""><b>si</b> </TD>
+<TD Width=""><b>sil</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>rdi</b> </TD>
+<TD Width=""><b>edi</b> </TD>
+<TD Width=""><b>di</b> </TD>
+<TD Width=""><b>dil</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>rbp</b> </TD>
+<TD Width=""><b>ebp</b> </TD>
+<TD Width=""><b>bp</b> </TD>
+<TD Width=""><b>bpl</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>rsp</b> </TD>
+<TD Width=""><b>esp</b> </TD>
+<TD Width=""><b>sp</b> </TD>
+<TD Width=""><b>spl</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r8</b> </TD>
+<TD Width=""><b>r8d</b> </TD>
+<TD Width=""><b>r8w</b> </TD>
+<TD Width=""><b>r8b</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r9</b> </TD>
+<TD Width=""><b>r9d</b> </TD>
+<TD Width=""><b>r9w</b> </TD>
+<TD Width=""><b>r9b</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r10</b> </TD>
+<TD Width=""><b>r10d</b> </TD>
+<TD Width=""><b>r10w</b> </TD>
+<TD Width=""><b>r10b</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r11</b> </TD>
+<TD Width=""><b>r11d</b> </TD>
+<TD Width=""><b>r11w</b> </TD>
+<TD Width=""><b>r11b</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r12</b> </TD>
+<TD Width=""><b>r12d</b> </TD>
+<TD Width=""><b>r12w</b> </TD>
+<TD Width=""><b>r12b</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r13</b> </TD>
+<TD Width=""><b>r13d</b> </TD>
+<TD Width=""><b>r13w</b> </TD>
+<TD Width=""><b>r13b</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r14</b> </TD>
+<TD Width=""><b>r14d</b> </TD>
+<TD Width=""><b>r14w</b> </TD>
+<TD Width=""><b>r14b</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>r15</b> </TD>
+<TD Width=""><b>r15d</b> </TD>
+<TD Width=""><b>r15w</b> </TD>
+<TD Width=""><b>r15b</b> </TD>
+</TR>
+</table>
+<P></P>
+<P>Operations that output to a 32-bit subregister are automatically zero-extended to the entire 64-bit register.  Operations that output to 8-bit or 16-bit subregisters are <i>not</i> zero-extended (this is compatible x86 behavior).</P>
+<P>The high 8 bits of <b>ax</b>, <b>bx</b>, <b>cx</b>, and <b>dx</b> are still addressable as <b>ah</b>, <b>bh</b>, <b>ch</b>, <b>dh</b>, but cannot be used with all types of operands.   </P>
+<P>The instruction pointer, <b>eip</b>, and <b>flags</b> register have been extended to 64 bits (<b>rip</b> and <b>rflags</b>, respectively) as well.</P>
+<P>The x64 processor also provides several sets of floating-point registers:</P><B></B><UL type="disc">
+<LI>Eight 80-bit x87 registers.</LI>
+<LI>Eight 64-bit MMX registers.  (These overlap with the x87 registers.)</LI>
+<LI>The original set of eight 128-bit SSE registers is increased to sixteen.</LI>
+</UL>
+<P></P>
+<H3><A NAME="cd7cbabd-3cbd-4d0b-894f-0af282d3c6c3"></A>Calling Conventions</H3>
+<P></P>
+<P>Unlike the x86, the C/C++ compiler only supports one calling convention on x64.  This calling convention takes advantage of the increased number of registers available on x64:</P><B></B><UL type="disc">
+<LI>The first four integer or pointer parameters are passed in the <b>rcx</b>, <b>rdx</b>, <b>r8</b>, and <b>r9</b> registers. </LI>
+<LI>The first four floating-point parameters are passed in the first four SSE registers, <b>xmm0</b>-<b>xmm3</b>.</LI>
+<LI>The caller reserves space on the stack for arguments passed in registers.  The called function can use this space to spill the contents of registers to the stack.</LI>
+<LI>Any additional arguments are passed on the stack.</LI>
+<LI>An integer or pointer return value is returned in the <b>rax</b> register, while a floating-point return value is returned in <b>xmm0</b>.</LI>
+<LI><b>rax</b>, <b>rcx</b>, <b>rdx</b>, <b>r8</b>-<b>r11</b> are volatile.</LI>
+<LI><b>rbx</b>, <b>rbp</b>, <b>rdi</b>, <b>rsi</b>, <b>r12</b>-<b>r15</b> are nonvolatile.</LI>
+</UL>
+<P></P>
+<P>The calling convention for C++ is very similar: the <b>this</b> pointer is passed as an implicit first parameter.  The next three parameters are passed in registers, while the rest are passed on the stack.</P>
+<H3><A NAME="cdd8aaec-7655-4856-88b1-09ed42d7b239"></A>Addressing Modes</H3>
+<P>The addressing modes in 64-bit mode are similar to, but not identical to, x86.</P><B></B><UL type="disc">
+<LI>Instructions that refer to 64-bit registers are automatically performed with 64-bit precision.  (For example <b>mov rax, [rbx]</b> moves 8 bytes beginning at <b>rbx</b> into <b>rax</b>.)</LI>
+<LI>A special form of the <b>mov</b> instruction has been added for 64-bit immediate constants or constant addresses.  For all other instructions, immediate constants or constant addresses are still 32 bits.  </LI>
+<LI>x64 provides a new <b>rip</b>-relative addressing mode.  Instructions that refer to a single constant address are encoded as offsets from <b>rip</b>.  For example, the <b>mov rax, [</b><i>addr</i><b>]</b> instruction moves 8 bytes beginning at <i>addr</i> + <b>rip</b> to <b>rax</b>.</LI>
+</UL>
+<P></P>
+<P>Instructions, such as <b>jmp</b>, <b>call</b>, <b>push</b>, and <b>pop</b>, that implicitly refer to the instruction pointer and the stack pointer treat them as 64 bits registers on x64.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: x64 Architecture RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

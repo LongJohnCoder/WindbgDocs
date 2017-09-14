@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.restart (Restart Target Application)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .restart (Restart Target Application)"><xml><MSHelp:Keyword Index="A" Term="r21_metacmds_L_977adba8-167e-4a9e-8e9c-090b51ced28b.xml"/>
+<META NAME="MS-HKWD" CONTENT=".restart (Restart Target Application) command">
+<META NAME="MS-HKWD" CONTENT="Restart Target Application (.restart) command">
+<META NAME="MS-HKWD" CONTENT="controlling the target, Restart Target Application (.restart) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r21_metacmds_L_977adba8-167e-4a9e-8e9c-090b51ced28b.xml"></A>.restart (Restart Target Application)</H1>
+<P>The <b>.restart</b> command restarts the target application.<P>Do not confuse this command with the <a href="r21_metacmds_l_f69b1b8a-144b-4099-9ef6-0ba58a7db533.xml.htm"><b>.restart (Restart Kernel Connection)</b></a> command, which works only in kernel mode.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.restart</b> <BR></nobr></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>CDB and WinDbg can restart a target application if the debugger originally created the application. You can use the <b>.restart</b> command even if the target application has already closed.</P>
+<P>However, if the application is running and the debugger is later attached to the process, the <b>.restart</b> command has no effect.</P>
+<P>After the process is restarted, it immediately breaks into the debugger.</P>
+<P>In WinDbg, use the <a href="r37_gui_2_5532c5dd-8a55-4657-ab3f-68e9602f49ac.xml.htm"><b>View | WinDbg Command Line</b></a> command if you started your target from the WinDbg command prompt and you want to review this command line before you decide whether to use <b>.restart</b>.</P>
+<H4>Additional Information</H4>
+<P>For more information about how to issue this command and an overview of related commands, see <a href="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml.htm">Controlling the Target</a>. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .restart (Restart Target Application) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>EXT_TDOP_SET_FROM_TYPE_ID_AND_U64</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, EXT_TDOP_SET_FROM_TYPE_ID_AND_U64"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="EXT_TDOP_SET_FROM_TYPE_ID_AND_U64"/>
+<MSHelp:Keyword Index="A" Term="IDebugAdvanced_2f348c15-6194-4bef-8e31-7f84653fde52.xml"/>
+<META NAME="MS-HKWD" CONTENT="EXT_TDOP_SET_FROM_TYPE_ID_AND_U64 request operation"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugAdvanced_2f348c15-6194-4bef-8e31-7f84653fde52.xml"></A>EXT_TDOP_SET_FROM_TYPE_ID_AND_U64</H1>
+<P>The EXT_TDOP_SET_FROM_TYPE_ID_AND_U64 sub-operation of the <a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a> <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation creates a typed data description from a data type and a memory location.</P>
+<DL><H4>Parameters</H4>
+<DT><b>Operation</b></DT>
+<DD>Set to EXT_TDOP_SET_FROM_TYPE_ID_AND_U64 for this sub-operation.</DD>
+<DT><b>Flags</b></DT>
+<DD>Specifies the bit flags that describe the target's memory in which the value of the typed data resides.  See <a href="structures_e4240445-73f9-4f38-8f1b-17035ced15f7.xml.htm">EXT_TYPED_DATA</a> for details of these flags.</DD>
+<DT><b>InData</b></DT>
+<DD>Specifies the type and the memory location.  This instance of the <a href="structures_6e8e758c-2c5d-4590-8908-3e1734ea2c7d.xml.htm">DEBUG_TYPED_DATA</a> structure can be manually created and populated with the required members.  The following members are used:<DL><DT><b>ModBase</b></DT>
+<DD>Specifies the location in the target's virtual memory of the base address of the <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> that contains the type.</DD>
+<DT><b>Offset</b></DT>
+<DD>Specifies the location in the target's memory of the data.  <b>Offset</b> is a virtual memory address unless there are flags present in <b>Flags</b> that specify that <b>Offset</b> is a physical memory address.</DD>
+<DT><b>TypeId</b></DT>
+<DD>Specifies the type ID of the type.</DD>
+</DL>
+</DD>
+<DT><b>OutData</b></DT>
+<DD>Receives the typed data description.</DD>
+<DT><b>Status</b></DT>
+<DD>Receives the status code returned by this sub-operation.  This is the same as the value returned by <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a>.</DD>
+</DL>
+<H4>Comments</H4>
+<P>EXT_TDOP_SET_FROM_TYPE_ID_AND_U64 is a value in the <a href="structures_77246150-309c-4646-82b2-ba9c75d9a2d4.xml.htm">EXT_TDOP</a> enumeration.</P>
+<P>The parameters for this sub-operation are members of the <a href="structures_e4240445-73f9-4f38-8f1b-17035ced15f7.xml.htm">EXT_TYPED_DATA</a> structure.  The members of EXT_TYPED_DATA that are not listed in the preceding Parameters section are not used by this sub-operation and should be set to zero.  The descriptions of the members in the preceding Parameters section specify what the members are used for. See <a href="structures_e4240445-73f9-4f38-8f1b-17035ced15f7.xml.htm">EXT_TYPED_DATA</a> for more details.</P>
+<H4>See Also</H4>
+<P><a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a>, <a href="structures_77246150-309c-4646-82b2-ba9c75d9a2d4.xml.htm">EXT_TDOP</a>, <a href="structures_e4240445-73f9-4f38-8f1b-17035ced15f7.xml.htm">EXT_TYPED_DATA</a>, <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: EXT_TDOP_SET_FROM_TYPE_ID_AND_U64 RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>qd (Quit and Detach)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, qd (Quit and Detach)"><xml><MSHelp:Keyword Index="A" Term="r17_cmds_I_922e4540-49bd-419a-a76e-c8b9f766db22.xml"/>
+<META NAME="MS-HKWD" CONTENT="qd (Quit and Detach) command">
+<META NAME="MS-HKWD" CONTENT="Quit and Detach (qd) command">
+<META NAME="MS-HKWD" CONTENT="exiting the debugger, Quit and Detach (qd) command">
+<META NAME="MS-HKWD" CONTENT="quitting the debugger, Quit and Detach (qd) command">
+<META NAME="MS-HKWD" CONTENT="ending the debugging session, Quit and Detach (qd) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r17_cmds_I_922e4540-49bd-419a-a76e-c8b9f766db22.xml"></A>qd (Quit and Detach)</H1>
+<P>The <b>qd</b> command ends the debugging session and leaves any user-mode target application running. (In CDB and KD, this command also exits the debugger itself. In WinDbg, this command returns the debugger to <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#012a9e6e-a351-4156-b2fd-99bd88066e28">dormant mode</a>.)</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>qd</b> <BR></nobr></P>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All</TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>qd</b> command detaches from a target application and ends the debugging session, leaving the target still running. However, this command is supported only on Microsoft Windows XP and later versions of Windows. On Windows 2000, <b>qd</b> generates a warning message and has no effect.</P>
+<P>When you are performing remote debugging through the debugger, you cannot use the <b>qd</b> command from a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cab89f06-8d34-430d-b047-ea48e96aac1b">debugging client</a>.</P>
+<H4>Additional Information</H4>
+<P>For more information about exiting the debugger or detaching from the target, see  <a href="r07_use_operation_cec0a699-8a28-48a9-b3f8-62271f688f6c.xml.htm">Ending the Debugging Session</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: qd (Quit and Detach) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

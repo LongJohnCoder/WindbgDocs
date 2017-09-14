@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Public and Private Symbols</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Public and Private Symbols"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml"/>
+<META NAME="MS-HKWD" CONTENT="symbols, public">
+<META NAME="MS-HKWD" CONTENT="symbols, private">
+<META NAME="MS-HKWD" CONTENT="public symbols">
+<META NAME="MS-HKWD" CONTENT="private symbols">
+<META NAME="MS-HKWD" CONTENT="retail symbols">
+<META NAME="MS-HKWD" CONTENT="export symbols">
+<META NAME="MS-HKWD" CONTENT="symbol file, full symbol file">
+<META NAME="MS-HKWD" CONTENT="symbol file, stripped symbol file">
+<META NAME="MS-HKWD" CONTENT="full symbol file">
+<META NAME="MS-HKWD" CONTENT="stripped symbol file"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_ae77269d-cb81-45ba-bd6d-4110a6138782.xml"></A>Public and Private Symbols</H1>
+<P>When a full-sized <i>.pdb</i> or <i>.dbg</i> symbol file is built by a linker, it contains two distinct collections of information:  the <i>private symbol data</i> and a <i>public symbol table</i>.  These collections differ in the list of items they contain and the information they store about each item.</P>
+<P>The private symbol data includes the following items:</P><B></B><UL type="disc">
+<LI>Functions</LI>
+<LI>Global variables</LI>
+<LI>Local variables</LI>
+<LI>Information about user-defined structures, classes, and data types</LI>
+<LI>The name of the source file and the line number in that file corresponding to each binary instruction</LI>
+</UL>
+<P></P>
+<P>The public symbol table contains fewer items:</P><B></B><UL type="disc">
+<LI>Functions (except for functions declared <b>static</b>)</LI>
+<LI>Global variables specified as <b>extern</b> (and any other global variables visible across multiple object files) </LI>
+</UL>
+<P></P>
+<P>As a general rule, the public symbol table contains exactly those items that are accessible from one source file to another.  Items visible in only one object file&#8212;such as <b>static</b> functions, variables that are global only within a single source file, and local variables&#8212;are not included in the public symbol table. </P>
+<P>These two collections of data also differ in what information they include for each item.  The following information is typically included for each item contained in the private symbol data:</P><B></B><UL type="disc">
+<LI>Name of the item </LI>
+<LI>Address of the item in virtual memory   </LI>
+<LI>Frame pointer omission (FPO) records for each function  </LI>
+<LI>Data type of each variable, structure, and function </LI>
+<LI>Types and names of the parameters for each function  </LI>
+<LI>Scope of each local variable </LI>
+<LI>Symbols associated with each line in each source file  </LI>
+</UL>
+<P></P>
+<P>On the other hand, the public symbol table stores only the following information about each item included in it:</P><B></B><UL type="disc">
+<LI>The name of the item. </LI>
+<LI>The address of the item in the virtual memory space of its module.  For a function, this is the address of its entry point. </LI>
+<LI>Frame pointer omission (FPO) records for each function.  </LI>
+</UL>
+<P></P>
+<P>In other words, the public symbol data can be thought of as a subset of the private symbol data in <i>two</i> ways: it contains a shorter list of items, and it also contains less information about each item.  For example, the public symbol data does not include local variables at all. Each local variable is included only in the private symbol data, with its address, data type, and scope.  Functions, on the other hand, are included both in the private symbol data and public symbol table, but while the private symbol data includes the function name, address, FPO records, input parameter names and types, and output type, the public symbol table includes just the function name, address, and FPO record.</P>
+<P>There is one other difference between the private symbol data and the public symbol table.  Many of the items in the public symbol table have names that are <i>decorated</i> with a prefix, a suffix, or both.  These decorations are added by the C compiler, the C++ compiler, and the MASM assembler.  Typical prefixes include a series of underscores or the string <b>__imp_</b> (designating an imported function).  Typical suffixes include one or more at signs ( <b>@</b> ) followed by addresses or other identifying strings.  These decorations are used by the linker to disambiguate the symbol, since it is possible that function names or global variable names could be repeated across different modules.  These decorations are an exception to the general rule that the public symbol table is a subset of the private symbol data.</P>
+<H4>Full Symbol Files and Stripped Symbol Files</H4>
+<P>A <i>full symbol file</i> contains both the private symbol data and the public symbol table.  This kind of file is sometimes referred to as a <i>private symbol file</i>, but this name is misleading, for such a file contains both private and public symbols.</P>
+<P>A <i>stripped symbol file</i> is a smaller file that contains only the public symbol table &#8211; or, in some cases, only a subset of the public symbol table.  This file is sometimes referred to as a <i>public symbol file</i>.</P>
+<H4>Creating Full and Stripped Symbol Files</H4>
+<P>If you build your binaries with Visual Studio, you can create either full or stripped symbol files.  When building a "debug build" of a binary, Visual Studio typically will create full symbol files.  When building a "retail build", Visual Studio typically creates no symbol files, but a full or stripped symbol file will be created if the proper options are set.  </P>
+<P>If you build your binaries with the Build utility, the utility will create full symbol files.</P>
+<P>Using the BinPlace tool, you can create a stripped symbol file from a full symbol file.  When the most common BinPlace options are used (<b>-a -x -s -n</b>), the stripped symbol files are placed in the directory that is listed after the <b>-s</b> switch, and the full symbol files are placed in the directory that is listed after the <b>-n</b> switch.  When BinPlace strips a symbol file, the stripped and full versions of the file are given identical signatures and other identifying information. This allows you to use either version for debugging.</P>
+<P>Using the PDBCopy tool, you can create a stripped symbol file from a full symbol file by removing the private symbol data.  PDBCopy can also remove a specified subset of the public symbol table.  For details, see <a href="symchk_ba009a20-0795-4188-9cb2-7d7dd6119202.xml.htm">PDBCopy</a>.</P>
+<P>Using the SymChk tool, you can determine whether a symbol file contains private symbols.  For details, see <a href="symchk_18847902-e7cf-485d-95aa-e8bdc590521a.xml.htm">SymChk</a>.</P>
+<P></P>
+<H4>Viewing Public and Private Symbols in the Debugger</H4>
+<P>You can use WinDbg, KD, or CDB to view symbols.  When one of these debuggers has access to a full symbol file, it has both the information listed in the private symbol data and the information listed in the public symbol table. The private symbol data is more detailed, while the public symbol data contains symbol decorations.</P>
+<P>When accessing private symbols, private symbol data is always used because these symbols are not included in the public symbol table.  These symbols are never decorated.</P>
+<P>When accessing public symbols, the debugger's behavior depends on certain <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm">symbol options</a>:</P><B></B><UL type="disc">
+<LI>When the <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#d8974df2-0d92-4406-b818-8adba87cae13">SYMOPT_UNDNAME</a> option is on, decorations are not included when the name of a public symbol is displayed.  Moreover, when searching for symbols, decorations are ignored.  When this option is off, decorations are displayed when displaying public symbols, and decorations are used in searches.  Private symbols are never decorated in any circumstances.  This option is on by default in all debuggers.</LI>
+<LI>When the <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#d550a737-bff7-4175-a4bd-ef354cb12fb7">SYMOPT_PUBLICS_ONLY</a> option is on, private symbol data is ignored, and only the public symbol table is used.  This option is off by default in all debuggers.</LI>
+<LI>When the <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#89cdb2bf-4f2b-48cc-9297-8359ea5bd9e6">SYMOPT_NO_PUBLICS</a> option is on, the public symbol table is ignored, and searches and symbol information use the private symbol data alone.  This option is off by default in all debuggers. </LI>
+<LI>When the <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#fa4f74ce-fe78-49dc-94cc-3070af1c8010">SYMOPT_AUTO_PUBLICS</a> option is on (and both SYMOPT_PUBLICS_ONLY and SYMOPT_NO_PUBLICS are off), the first symbol search is performed in the private symbol data.  If the desired symbol is found there, the search terminates.  If not, the public symbol table is searched.  Since the public symbol table contains a subset of the symbols in the private data, normally this results in the public symbol table being ignored.</LI>
+<LI>When the SYMOPT_PUBLICS_ONLY, SYMOPT_NO_PUBLICS, and SYMOPT_AUTO_PUBLICS options are all off, both private symbol data and the public symbol table are searched each time a symbol is needed.  However, when matches are found in both places, the match in the private symbol data is used.  Therefore, the behavior in this instance is the same as when SYMOPT_AUTO_PUBLICS is on, except that using SYMOPT_AUTO_PUBLICS may cause symbol searches to happen slightly faster. </LI>
+</UL>
+<P></P>
+<P>Here is an example in which the command <a href="r18_cmds_s_717feb00-25c4-4911-be94-52c11698f782.xml.htm"><b>x (Examine Symbols)</b></a> is used three times.  The first time, the default symbol options are used, and so the information is taken from the private symbol data.  Note that this includes information about the address, size, and data type of the array <b>typingString</b>.  Next, the command <nobr><b>.symopt+ 4000</b></nobr> is used, causing the debugger to ignore the private symbol data.  When the <b>x</b> command is then run again, the public symbol table is used; this time there is no size and data type information for <b>typingString</b>.  Finally, the command <nobr><b>.symopt- 2</b></nobr> is used, which causes the debugger to include decorations.  When the <b>x</b> command is run this final time, the decorated version of the function name, <b>_typingString</b>, is shown.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>x /t /d *!*typingstring* </b><BR>00434420 char [128] TimeTest!typingString = char [128] ""<BR><BR>0:000&gt; <b>.symopt+ 4000</b><BR><BR>0:000&gt; <b>x /t /d *!*typingstring* </b><BR>00434420 &lt;NoType&gt; TimeTest!typingString = &lt;no type information&gt;<BR><BR>0:000&gt; <b>.symopt- 2</b><BR><BR>0:000&gt; <b>x /t /d *!*typingstring* </b><BR>00434420 &lt;NoType&gt; TimeTest!_typingString = &lt;no type information&gt; <BR></nobr></P>
+<P></P>
+<H4>Viewing Public and Private Symbols with the DBH Tool</H4>
+<P>Another way to view symbols is by using the <a href="symchk_fe7c1f84-3a50-410a-a8fd-2fa5ec6ab4dd.xml.htm">the DBH tool</a>.  DBH uses the same symbol options as the debugger.  Like the debugger, DBH leaves <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#d550a737-bff7-4175-a4bd-ef354cb12fb7">SYMOPT_PUBLICS_ONLY</a> and <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#89cdb2bf-4f2b-48cc-9297-8359ea5bd9e6">SYMOPT_NO_PUBLICS</a> off by default, and turns <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#d8974df2-0d92-4406-b818-8adba87cae13">SYMOPT_UNDNAME</a> and <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm#fa4f74ce-fe78-49dc-94cc-3070af1c8010">SYMOPT_AUTO_PUBLICS</a> on by default.  These defaults can be overridden by a command-line option or by a DBH command.</P>
+<P>Here is an example in which the DBH command <b>addr 414fe0</b> is used three times.  The first time, the default symbol options are used, and so the information is taken from the private symbol data.  Note that this includes information about the address, size, and data type of the function <b>fgets</b>.  Next, the command <nobr><b>symopt +4000</b></nobr> is used, which causes DBH to ignore the private symbol data.  When the <b>addr 414fe0</b> is then run again, the public symbol table is used; this time there is no size and data type information for the function <b>fgets</b>.  Finally, the command <nobr><b>symopt -2</b></nobr> is used, which causes DBH to include decorations.  When the <b>addr 414fe0</b> is run this final time, the decorated version of the function name, <b>_fgets</b>, is shown.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>pid:4308 mod:TimeTest[400000]: <b>addr 414fe0</b><BR><BR>fgets<BR>   name : fgets<BR>   addr :   414fe0<BR>   size : 113<BR>  flags : 0<BR>   type : 7e<BR>modbase :   400000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagFunction (5)<BR>  index : 7d<BR><BR>pid:4308 mod:TimeTest[400000]: <b>symopt +4000</b><BR><BR>Symbol Options: 0x10c13<BR>Symbol Options: 0x14c13<BR><BR>pid:4308 mod:TimeTest[400000]: <b>addr 414fe0</b><BR><BR>fgets<BR>   name : fgets<BR>   addr :   414fe0<BR>   size : 0<BR>  flags : 0<BR>   type : 0<BR>modbase :   400000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagPublicSymbol (a)<BR>  index : 7f<BR><BR>pid:4308 mod:TimeTest[400000]: <b>symopt -2</b><BR><BR>Symbol Options: 0x14c13<BR>Symbol Options: 0x14c11<BR><BR>pid:4308 mod:TimeTest[400000]: <b>addr 414fe0</b><BR><BR>_fgets<BR>   name : _fgets<BR>   addr :   414fe0<BR>   size : 0<BR>  flags : 0<BR>   type : 0<BR>modbase :   400000<BR>  value :        0<BR>    reg : 0<BR>  scope : SymTagNull (0)<BR>    tag : SymTagPublicSymbol (a)<BR>  index : 7f  <BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Public and Private Symbols RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

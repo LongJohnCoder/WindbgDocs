@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Enable pool tagging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Enable pool tagging"><xml><MSHelp:Keyword Index="A" Term="GFlags_c858b070-5a5e-4afc-9cfa-f933c81c8793.xml"/>
+<META NAME="MS-HKWD" CONTENT="Enable pool tagging (global flag)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_c858b070-5a5e-4afc-9cfa-f933c81c8793.xml"></A>Enable pool tagging</H1>
+<P>The <b>Enable pool tagging</b> flag collects data and calculates statistics about pool memory allocations sorted by pool tag value.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Abbreviation</b></TD>
+<TD Width="">ptg</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Hexadecimal value</b></TD>
+<TD Width="">0x400</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Symbolic Name</b></TD>
+<TD Width="">FLG_POOL_ENABLE_TAGGING</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Destination</b></TD>
+<TD Width="">System-wide registry entry</TD>
+</TR>
+</table>
+<P></P>
+<P class="note"></P>
+<H4>Comments</H4>
+<P>This flag is permanently set in Windows Server 2003 and later versions of Windows. On these systems, the <b>Enable pool tagging</b> check box in the Global Flags dialog box is dimmed and commands to enable or disable pool tagging fail. </P>
+<P>Use <b>ExAllocatePoolWithTag</b> or <b>ExAllocatePoolWithQuotaTag</b> to set the tag value. When no tag value is specified (<b>ExAllocatePool</b>, <b>ExAllocatePoolWithQuota</b>), Windows creates a tag with the default value of "None." Because data for all allocations with a "None" tag is combined, you cannot distinguish the data for a specific allocation. For information about these routines, see the Windows Driver Kit (WDK).</P>
+<P>In Windows XP and earlier systems, this flag also directs Windows to attach a pool tag even when the pool memory is allocated by using <b>ExAllocatePoolWithQuotaTag</b>. Otherwise, the tag bytes are used to store the quota values. In Windows Server 2003, tag values and quota values are stored in separate fields that are attached to every pool memory allocation.</P>
+<P class="note"><b>Note</b>  To display the data that Windows collects about a tagged allocation, use PoolMon, a tool that is included in the Windows Driver Kit. <P class="note">The description of the <b>Enable Pool Tagging</b> flag in the Windows XP Support Tools documentation is incomplete. This flag directs Windows to collect and process data by tag value.</P>
+</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Enable pool tagging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DBH Commands</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DBH Commands"><xml><MSHelp:Keyword Index="A" Term="SymChk_57318acb-a1c1-4b17-82c3-1760cb7bca17.xml"/>
+<META NAME="MS-HKWD" CONTENT="DBH, commands"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_57318acb-a1c1-4b17-82c3-1760cb7bca17.xml"></A>DBH Commands</H1>
+<P>From the DBH command line, you can use a variety of commands to analyze symbols and symbol files.</P>
+<P></P>
+<P></P>
+<P>The following table lists the commands that control the DBH options and perform other basic tasks.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>verbose</b> [<b>on</b>|<b>off</b>] </TD>
+<TD Width="">Turns verbose mode on or off.  With no parameter, displays the current verbose mode setting.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sympath</b> [<i>Path</i>] </TD>
+<TD Width="">Sets the symbol search path. With no parameter, displays the current symbol search path.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>symopt</b> <i>Options</i> <BR><BR><b>symopt</b> <b>+</b><i>Options</i> <BR><BR><b>symopt</b> <b>-</b><i>Options</i> <BR><BR><b>symopt</b> <BR><BR></TD>
+<TD Width="">Sets the symbol options.  With no <b>+</b> or <b>-</b>, the value of <i>Options</i> replaces the current symbol options.  If <b>+</b> or <b>-</b> is used, <i>Options</i> specifies the options to be added or removed; there must be a space before the <b>+</b> or <b>-</b> but no space after it.  With no parameter, the current symbol options are displayed.  When DBH is launched, the default value of all the symbol options is 0x10C13.  For a list of available options, see <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm">Setting Symbol Options</a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>help</b> </TD>
+<TD Width="">Displays help text for the DBH commands. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>quit</b> </TD>
+<TD Width="">Quits the DBH program. </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P>The following table lists the commands that load, unload, and rebase the target module.  These commands cannot be used if DBH was started by specifying a process ID on the command line.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>load</b> <i>File</i> </TD>
+<TD Width="">Loads the specified module.  <i>File</i> should specify the path, file name, and file name extension of either the executable file or the symbol file. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>unload</b> </TD>
+<TD Width="">Unloads the current module. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>base</b> <i>Address</i> </TD>
+<TD Width="">Sets the default base address to the specified value.  All symbol addresses will be determined relative to this base address.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P>The following table lists the commands that search for files and display directory information.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>findexe</b> <i>File</i> <i>Path</i> </TD>
+<TD Width="">Locates the specified executable file in the specified path, using the <b>FindExecutableImage</b> routine.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>finddbg</b> <i>File</i> <i>Path</i> </TD>
+<TD Width="">Locates the specified <i>.dbg</i> file in the specified path.  Including the <i>.dbg</i> extension is optional.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dir</b> <i>File</i> <i>Path</i> </TD>
+<TD Width="">Locates the specified file in the specified path or in any subdirectory under this path, using the <b>EnumDirTree</b> routine. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>srchtree</b> <i>Path</i> <i>File</i> </TD>
+<TD Width="">Locates the specified file in the specified path or in any subdirectory under this path, using the <b>SearchTreeForFile</b> routine.  This command is the same as <b>dir</b>, except that the parameters are reversed.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>ffpath</b> <i>File</i> </TD>
+<TD Width="">Finds the specified file in the current symbol path. </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P>The following table lists the commands that parse the module list and control the default module.  The default module and its base address are displayed on the DBH prompt. </P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>mod</b> <i>Address</i> </TD>
+<TD Width="">Changes the default module to the module with the specified base address.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>refresh</b> </TD>
+<TD Width="">Refreshes the module list. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>omap</b> </TD>
+<TD Width="">Displays the module OMAP structures. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>epmod</b> <i>PID</i> </TD>
+<TD Width="">Enumerates all the modules loaded for the specified process.  <i>PID</i> specifies the process ID of the desired process.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>info</b> </TD>
+<TD Width="">Displays information about the currently loaded module. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>obj</b> <i>Mask</i> </TD>
+<TD Width="">Lists all object files associated with the default module that match the specified pattern. <i>Mask</i> may contain a variety of wildcard characters and specifiers; see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a> for details. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>src</b> <i>Mask</i> </TD>
+<TD Width="">Lists all source files associated with the default module that match the specified pattern. <i>Mask</i> may contain a variety of wildcard characters and specifiers; see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a> for details. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>enummod</b> </TD>
+<TD Width="">Enumerates all loaded modules.  There is always at least one module, unless DBH is running without a target, in which case there are none.  </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P>The following table lists the commands that display and search for symbols.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>enum</b> <i>Module</i><b>!</b><i>Symbol</i> </TD>
+<TD Width="">Enumerates all symbols matching the specified module and symbol.  <i>Module</i> specifies the module to search (without the file name extension).  <i>Symbol</i> specifies a pattern that the symbol must contain. Both <i>Module</i> and <i>Symbol</i> may contain a variety of wildcard characters and specifiers; see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a> for details. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>enumaddr</b> <i>Address</i> </TD>
+<TD Width="">Enumerates all symbols associated with the specified address. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>addr</b> <i>Address</i> </TD>
+<TD Width="">Displays detailed information about the symbols associated with the specified address. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>name</b> [<i>Module</i><b>!</b>]<i>Symbol</i> </TD>
+<TD Width="">Displays detailed information about the specified symbol.  An optional <i>Module</i> specifier may be included.  Wildcards should not be used, because if multiple symbols match the pattern, <b>name</b> only displays the first of them. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>next</b> [<i>Module</i><b>!</b>]<i>Symbol</i> <BR><BR><b>next</b> <i>Address</i> <BR><BR><BR><BR></TD>
+<TD Width="">Displays detailed information about the next symbol after the specified symbol or address.  If a symbol is specified by name, an optional <i>Module</i> specifier may be included, but wildcards should not be used.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>prev</b> [<i>Module</i><b>!</b>]<i>Symbol</i> <BR><BR><b>prev</b> <i>Address</i> <BR><BR><BR><BR></TD>
+<TD Width="">Displays detailed information about the first symbol previous to the specified symbol or address.  If a symbol is specified by name, an optional <i>Module</i> specifier may be included, but wildcards should not be used.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>line</b> <i>File</i><b>#</b><i>LineNum</i> </TD>
+<TD Width="">Displays the hexadecimal address of the binary instruction associated with the specified source line, and any symbols associated with this line.  Also sets the current line number equal to the specified line number.  <i>File</i> specifies the name of the source file, and <i>LineNum</i> specifies the line number within that file; these should be separated with a number sign ( <b>#</b> ). </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>srclines</b> <i>File</i> <i>LineNum</i> </TD>
+<TD Width="">Displays the object files associated with the specified source line, and the hexadecimal address of the binary instruction associated with this line.  Does not change the current line number. <i>File</i> specifies the name of the source file, and <i>LineNum</i> specifies the line number within that file; these should be separated with a space. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>laddr</b> <i>Address</i> </TD>
+<TD Width="">Displays the source file and line number corresponding to the symbol located at the specified address. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>linenext</b> </TD>
+<TD Width="">Increments the current line number, and displays information about the new line number. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>lineprev</b> </TD>
+<TD Width="">Decrements the current line number, and displays information about the new line number. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>locals</b> <i>Function</i> [<i>Mask</i>] </TD>
+<TD Width="">Displays all local variables contained within the specified function.  If <i>Mask</i> is included, only those locals matching the specified pattern are displayed; see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a> for details. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>type</b> <i>TypeName</i> </TD>
+<TD Width="">Displays detailed information about the specified data type.  <i>TypeName</i> specifies the name of the data type (for example, WSTRING).  If no type name matches this value, any matching symbol will be displayed.  Unlike most DBH command parameters, <i>TypeName</i> is case-sensitive. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>elines</b> [<i>Source</i> [<i>Obj</i>]] </TD>
+<TD Width="">Enumerates all source lines matching the specified source mask and object mask.  <i>Source</i> specifies the name of the source file, including the absolute path and file name extension. <i>Obj</i> specifies the name of the object file, including the relative path and file name extension.  Both <i>Source</i> and <i>Obj</i> may contain a variety of wildcard characters and specifiers; see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a> for details. If a parameter is omitted this is equivalent to using the asterisk (<b>*</b>) wildcard.  If you do not wish to specify path information, prefix the file name with <b>*\</b> to indicate a wildcard path.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>index</b> <i>Value</i> </TD>
+<TD Width="">Displays detailed information about the symbol with the specified index value.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>scope</b> <i>Address</i> <BR><BR><b>scope</b> [<i>Module</i><b>!</b>]<i>Symbol</i>  <BR><BR></TD>
+<TD Width="">Displays detailed information about the parent of the specified symbol.  The symbol may be specified by address or by name.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>srch</b> [<b>mask=</b><i>Symbol</i>] [<b>index=</b><i>Index</i>] [<b>tag=</b><i>Tag</i>] [<b>addr=</b><i>Address</i>] [<b>globals</b>] </TD>
+<TD Width="">Searches for all symbols that match the specified masks.  <i>Symbol</i> specifies the symbol name. It should not include the module name, but it may contain wildcard characters and specifiers; see <a href="r13_syntax_c980a67c-f2d7-495d-8675-2763584a1516.xml.htm">String Wildcard Syntax</a> for details.  <i>Index</i> specifies the hexadecimal address of a symbol to be used as the parent for the search.  <i>Tag</i> specifies the hexadecimal symbol type classifier (<b>SymTag</b><I><B>Xxx</B></I>) value that must match the symbol.  <i>Address</i> specifies the address of the symbol.  If <b>globals</b> is included, only global symbols will be displayed.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>uw</b> <i>Address</i> </TD>
+<TD Width="">Displays the unwind information for the function at the specified address.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dtag</b> </TD>
+<TD Width="">Displays all the symbol type classifier (<b>SymTag</b><I><B>Xxx</B></I>) values. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>etypes</b> </TD>
+<TD Width="">Enumerates all data types. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>dump</b> </TD>
+<TD Width="">Displays a complete list of all symbol information in the target file.  </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P>The following table lists the commands that relate to symbol servers and symbol stores. </P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD colspan="2" Width=""><b>home</b> [<i>Path</i>] </TD>
+<TD Width="">Sets the home directory used by SymSrv and SrcSrv for the default downstream store.  If the symbol path contains a reference to a symbol server that uses a default downstream store, then the <b>sym</b> subdirectory of the home directory will be used for the downstream store.  With no parameter, <b>home</b> displays the current home directory. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>srvpath</b> <i>Path</i> </TD>
+<TD Width="">Tests whether the specified path is the path of a symbol store. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>srvind</b> <i>File</i> </TD>
+<TD Width="">Finds the symbol server index that corresponds to the specified file.  The symbol server index is a unique value based on the contents of the file, regardless of whether it actually has been added to any symbol store.  <i>File</i> should specify the file name and absolute path of the desired file. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>fii</b> <i>File</i> </TD>
+<TD Width="">Displays the symbol server indexes for the specified binary file and its associated files. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>getfile</b> <i>File</i> <i>Index</i> </TD>
+<TD Width="">Displays the file with the specified name and symbol server index.  <i>File</i> specifies the name of the desired file; this should not include its path.  <i>Index</i> specifies the symbol server index of the desired file.  DBH uses the <b>SymFindFileInPath</b> routine to search the tree under the current symbol path for a file with this name and this index.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sup</b> <i>Path</i> <i>File1</i> <i>File2</i> </TD>
+<TD Width="">Stores a file in a symbol store, based on the values of the parameters.  <i>Path</i> specifies the directory path of the symbol store.  <i>File1</i> and <i>File2</i> are used to create a delta value, which is in turn used to determine the file being stored. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>storeadd</b> <i>File</i> <i>Store</i> </TD>
+<TD Width="">Adds the specified file to the specified symbol store.  <i>Store</i> should be the root path of the symbol store. </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P>The following table lists the DBH commands that apply to real and imaginary symbols.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>undec</b> <i>Name</i> </TD>
+<TD Width="">Reveals the meaning of the decorations attached to the specified symbol name.  <i>Name</i> can be any string; it need not correspond to a currently loaded symbol.  If <i>Name</i> contains C++ decorations, the meaning of these decorations is displayed. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>add</b> <i>Name</i> <i>Address</i> <i>Size</i> </TD>
+<TD Width="">Adds the specified imaginary symbol to the list of symbols loaded in DBH.  <i>Name</i> specifies the name of the symbol to be added, <i>Address</i> specifies its hexadecimal address, and <i>Size</i> its hexadecimal size in bytes.  This is treated like any other symbol in later DBH commands, until the DBH session is ended with <b>quit</b> or <b>unload</b>, or until the imaginary symbol is deleted with <b>del</b>.  The actual target symbol file is not altered.   </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>del</b> <i>Name</i> <BR><BR><b>del</b> <i>Address</i> <BR><BR><BR><BR></TD>
+<TD Width="">Deletes an imaginary symbol previously added with the <b>add</b> command.  The symbol can be specified either by name or by address.  This cannot be used to delete real symbols. </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DBH Commands RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetOffsetByName</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetOffsetByName"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetOffsetByName"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_ef72e546-d27f-4cdf-9eeb-53151680c2d1.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::GetOffsetByName method">
+<META NAME="MS-HKWD" CONTENT="GetOffsetByName (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_ef72e546-d27f-4cdf-9eeb-53151680c2d1.xml"></A>GetOffsetByName</H1>
+<P><P>The <b>GetOffsetByName</b> and <b>GetOffsetByNameWide</b> methods return the location of a symbol identified by name.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbols::GetOffsetByName(</b><BR><b>    IN PCSTR  </b><i>Symbol</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Offset</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugSymbols3::GetOffsetByNameWide(</b><BR><b>    IN PCWSTR  </b><i>Symbol</i><b>,</b><BR><b>    OUT PULONG64  </b><i>Offset</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetOffsetByNameT GetOffsetByNameWide</b><BR><b>#else</b><BR><b>#define GetOffsetByNameT GetOffsetByName</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Symbol</i></DT>
+<DD>Specifies the name of the symbol to locate.  The name may be qualified by a <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a> name (for example, <b>mymodule!main</b>).</DD>
+<DT><i>Offset</i></DT>
+<DD>Receives the location in the target's memory address space of the base of the symbol's memory allocation.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful.  However, the name <i>Symbol</i> was not unique and multiple symbols with that name were found.  One of these symbols was arbitrarily chosen and returned.</DD>
+<DT>E_FAIL</DT>
+<DD>No symbol could be found with the specified name.</DD>
+</DL>
+<P>This method may also return other error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetOffsetByName</b> is available in all versions of <b>IDebugSymbols</b>.  <b>GetOffsetByNameWide</b> is available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4>Comments</H4>
+<P>If the name <i>Symbol</i> is not unique and <b>GetOffsetByName</b> finds multiple symbols with that name, then the ambiguity will be resolved arbitrarily.  In this case the value S_FALSE will be returned.  <a href="idebugsymbols_4b000f13-0dc1-4a2c-8de3-3bf5384172c3.xml.htm"><b>StartSymbolMatch</b></a> can be used to initiate a search to determine which is the desired result.</P>
+<P><b>GetNameByOffset</b> does not support pattern matching (e.g. wildcards).  To find a symbol using pattern matching use <b>StartSymbolMatch</b>.</P>
+<P>If the module name for the symbol is known, it is best to qualify the symbol name with the module name.  Otherwise the engine will search the symbols for all modules until it finds a match; this can take a long time if it has to load the symbol files for a lot of modules.  If the symbol name is qualified with a module name, the engine only searches the symbols for that module.  </P>
+<P>For more information about symbols and symbol names, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Symbols</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="idebugsymbols_5045ed52-43b3-4f5c-90fe-d9725aeb5782.xml.htm"><b>GetNameByOffset</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetOffsetByName RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Controlling the Target</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Controlling the Target"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml"/>
+<META NAME="MS-HKWD" CONTENT="controlling the target">
+<META NAME="MS-HKWD" CONTENT="controlling the target, overview">
+<META NAME="MS-HKWD" CONTENT="starting and stopping the target">
+<META NAME="MS-HKWD" CONTENT="execution of the target"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml"></A>Controlling the Target</H1>
+<P>While you are debugging a target application in user mode or a target computer in kernel mode, the target can be <i>running</i> or <i>stopped</i>.</P>
+<P>When the debugger connects to a kernel-mode target, the debugger leaves the target running, unless you use the <b>-b</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>, the target system has stopped responding (that is, <i>crashed</i>), or the target system is still stopped because of an earlier kernel debugging action.</P>
+<P>When the debugger starts or connects to a user-mode target, the debugger immediately stops the target, unless you use the <b>-g</b> command-line option. For more information, see <a href="r07_use_operation_4d852e32-e333-4f48-a97f-dc9b15419af4.xml.htm">Initial Breakpoint</a>.</P>
+<H4>When the Target is Running</H4>
+<P>When the target is running, most debugger actions are unavailable.</P>
+<P>If you want to stop a running target, you can issue a <b>Break</b> command. This command causes the debugger to <i>break into the target</i>. That is, the debugger stops the target and all control is given to the debugger. The application might not break immediately. For example, if all threads are currently executing system code, or are in a wait operation, the application breaks only after control has returned to the application's code.</P>
+<P>If a running target encounters an exception, if certain <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">events</a> occur, if a <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">breakpoint</a> is hit, or if the application closes normally, the target <i>breaks into the debugger</i>. This action stops the target and gives all control to the debugger. A message appears in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a> and describes the error, event, or breakpoint.</P>
+<H4>When the Target is Stopped</H4>
+<P>To start or control the target's execution, you can do the following:</P><B></B><UL type="disc">
+<LI>To cause the application to begin running, issue the <b>Go</b> command. </LI>
+<LI>To step through the application one instruction at a time, use the <b>Step Into</b> or <b>Step Over</b> commands. If a function call occurs, <b>Step Into</b> enters the function and continues stepping through each instruction. <b>Step Over</b> treats the function call as a single step. When the debugger is in <a href="r07_use_operation_9afb8c89-95fa-499e-bc4e-98f0365df573.xml.htm">Assembly Mode</a>, stepping occurs one machine instruction at a time. When the debugger is in <a href="r07_use_operation_6f6332fb-7207-429d-8a27-a2ff0bf02bbb.xml.htm">Source Mode</a>, stepping occurs one source line at a time.</LI>
+<LI>To finish the current function and stop when the return occurs, use the <b>Step Out</b> or <b>Trace and Watch</b> commands. The <b>Step Out</b> command continues until the current function ends. <b>Trace and Watch</b> continues until the current function ends and also displays a summary of the function's calls. However, you must issue the <b>Trace and Watch</b> command on the first instruction of the function in question. On Itanium-based processors, <b>Trace to Next Branch</b> runs until it encounters a branch instruction.</LI>
+<LI>If an exception occurs, you can use the <b>Go with Exception Handled</b> and <b>Go with Exception Not Handled</b> commands to resume execution and control the status of the exception. (For more information about exceptions, see <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a>.)</LI>
+<LI><i>(WinDbg only)</i>  If you select a line in the <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a> or a <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a> and then use the <b>Run to Cursor</b> command, the program runs until it encounters the selected line.</LI>
+<LI><i>(User Mode only)</i>  To close the target application and restart it from the beginning, use the <b>Restart</b> command. You can use this command only with a process that the debugger created. After the process is restarted, it immediately breaks into the debugger.</LI>
+<LI><i>(WinDbg only)</i>  To close the target application and clear the debugger, use the <b>Stop Debugging</b> command. This command enables you to start debugging a different target.</LI>
+</UL>
+<P></P>
+<H4>Command Forms</H4>
+<P>Most commands for starting or controlling the target&#8217;s execution exist as text commands, menu commands, toolbar buttons, and shortcut keys. As basic text commands, you can use these commands in CDB, KD, or WinDbg. (The text form of the commands frequently supports additional options, such as changing the location of the program counter or executing a fixed number of instructions.) You can use the menu commands, toolbar buttons, and shortcut keys in WinDbg.</P>
+<P>You can use the  commands in the following forms. </P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">WinDbg button</TH>
+<TH Width="">WinDbg command</TH>
+<TH Width="">WinDbg shortcut keys</TH>
+<TH Width="">Effect</TH>
+</TR>
+<TR valign="top">
+<TD Width=""></TD>
+<TD Width="">
+<p><img src="tbcursor.bmp"></p> </TD>
+<TD Width=""><a href="r37_gui_2_bcb62bb5-2c9c-4313-b0b5-ee2d28257632.xml.htm"><b>Debug | Run to Cursor</b></a> </TD>
+<TD Width="">F7<BR><BR>CTRL + F10<BR><BR></TD>
+<TD Width=""><i>(WinDbg only)</i>  Executes until it reaches the line that the cursor marks.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""></TD>
+<TD Width="">
+<p><img src="tbstop.bmp"></p> </TD>
+<TD Width=""><a href="r37_gui_2_b5acf3a0-cf4a-4664-9c1c-53e8f8c9b1c5.xml.htm"><b>Debug | Stop Debugging</b></a> </TD>
+<TD Width="">SHIFT + F5</TD>
+<TD Width="">Stops all debugging and closes the target.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><i>(CDB/KD only)</i> <a href="r23_keys_5e05b1f2-1c9d-4f1a-a681-4994b0fe679c.xml.htm">CTRL+C</a> </TD>
+<TD Width="">
+<p><img src="tbbreak.bmp"></p> </TD>
+<TD Width=""><a href="r37_gui_2_94482ad8-41d6-46e7-9a18-40dce2459d10.xml.htm"><b>Debug | Break</b></a> </TD>
+<TD Width="">CTRL + BREAK</TD>
+<TD Width="">Execution stops, and the debugger breaks into the target.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r21_metacmds_l_977adba8-167e-4a9e-8e9c-090b51ced28b.xml.htm"><b>.restart (Restart Target Application)</b></a> </TD>
+<TD Width="">
+<p><img src="tbrestart.bmp"></p> </TD>
+<TD Width=""><a href="r37_gui_2_38583e2c-aeb2-425a-8e88-4308b68f0157.xml.htm"><b>Debug | Restart</b></a> </TD>
+<TD Width="">CTRL + SHIFT + F5</TD>
+<TD Width=""><i>(User mode only)</i>  Restarts the target application.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> </TD>
+<TD Width="">
+<p><img src="tbgo.bmp"></p> </TD>
+<TD Width=""><a href="r37_gui_2_34401f19-4711-4af0-a368-4003d0e4c790.xml.htm"><b>Debug | Go</b></a> </TD>
+<TD Width="">F5</TD>
+<TD Width="">Target executes freely.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r16_cmds_c_31a4b468-d84d-4bfa-9f2f-178f979bd9f2.xml.htm"><b><u>gc (Go from Conditional Breakpoint)</u></b></a> </TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Resumes execution after a <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm"><u>conditional breakpoint</u></a>. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r16_cmds_c_bb7ab8a9-efe6-4feb-b234-e94d27848769.xml.htm"><b>gh (Go with Exception Handled)</b></a> </TD>
+<TD Width=""></TD>
+<TD Width=""><a href="r37_gui_2_4442c9ce-b5aa-46bc-959c-81a80b0b26bf.xml.htm"><b>Debug | Go Handled Exception</b></a> </TD>
+<TD Width=""></TD>
+<TD Width="">Same as <b>g (Go)</b>, except that the current exception is treated as handled.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r16_cmds_c_3254135f-8902-45ee-a2dc-a52049ea903c.xml.htm"><b>gn (Go with Exception Not Handled)</b></a> </TD>
+<TD Width=""></TD>
+<TD Width=""><a href="r37_gui_2_cbeea9aa-7254-46bc-8f82-ebf7387dc9f3.xml.htm"><b>Debug | Go Unhandled Exception</b></a> </TD>
+<TD Width=""></TD>
+<TD Width="">Same as <b>g (Go)</b>, except that the current exception is treated as unhandled.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r16_cmds_c_320ddebd-6cca-410d-b6bd-d8720b4494e3.xml.htm"><b>gu (Go Up)</b></a> </TD>
+<TD Width="">
+<p><img src="tbout.bmp"></p> </TD>
+<TD Width=""><a href="r37_gui_2_fe97789d-bf23-4201-9b27-809ce458f910.xml.htm"><b>Debug | Step Out</b></a> </TD>
+<TD Width="">SHIFT + F11</TD>
+<TD Width="">Target executes until the current function is complete.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r17_cmds_i_169c2b2f-7f47-4e0a-85a9-506f151f0a8f.xml.htm"><b>p (Step)</b></a> </TD>
+<TD Width="">
+<p><img src="tbover.bmp"></p> </TD>
+<TD Width=""><a href="r37_gui_2_6d36f140-250b-40f6-ab62-fe9920078271.xml.htm"><b>Debug | Step Over</b></a> </TD>
+<TD Width="">F10</TD>
+<TD Width="">Target executes one instruction. If this instruction is a function call, that function is executed as a single step.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r17_cmds_i_67cbbf97-d1b4-4aca-b1a0-e06913c64ae5.xml.htm"><b>pa (Step to Address)</b></a> </TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until it reaches the specified address. All steps in this function are displayed (but steps in called functions are not).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r17_cmds_i_ca12c167-064d-4959-8dd6-7a2e43251c69.xml.htm"><b>pc (Step to Next Call)</b></a> </TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until the next <b>call</b> instruction. If the current instruction is a <b>call</b> instruction, this call is executed completely and execution continues until the next <b>call</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r17_cmds_i_a61d315d-7988-48aa-b646-74f7aaed1fe5.xml.htm"><b>pct (Step to Next Call or Return)</b></a> </TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until it reaches a <b>call</b> instruction or a <b>return</b> instruction.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r17_cmds_i_15626819-5313-4343-8b5b-0c788570d74a.xml.htm"><b>ph (Step to Next Branching Instruction)</b></a><b> </b></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until it reaches any kind of branching instruction, including conditional or unconditional branches, calls, returns, and system calls.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r17_cmds_i_c168776c-0f6f-423f-af56-bdc91c9c3a17.xml.htm"><b>pt (Step to Next Return)</b></a><b> </b></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until it reaches a <b>return</b> instruction.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r18_cmds_s_fe6d30ae-7c39-40db-a971-2aae584c13d3.xml.htm"><b>t (Trace)</b></a> </TD>
+<TD Width="">
+<p><img src="tbinto.bmp"></p> </TD>
+<TD Width=""><a href="r37_gui_2_5c02f91a-b263-4ac8-9fe0-1f8f16265c51.xml.htm"><b>Debug | Step Into</b></a> </TD>
+<TD Width="">F11<BR><BR>F8<BR><BR></TD>
+<TD Width="">Target executes one instruction. If this instruction is a function call, debugger traces into that call.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r18_cmds_s_31779d34-fa53-48b4-bcb5-dcb3bb228d3a.xml.htm"><b>ta (Trace to Address)</b></a> </TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until it reaches the specified address. All steps in this function and called functions are displayed.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r18_cmds_s_6181ccf6-55e9-4a8a-9aec-f5616cd9f1f0.xml.htm"><b>tb (Trace to Next Branch)</b></a> </TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""><i>(All modes, except kernel mode, only on x86-based systems)</i>  Target executes until it reaches the next branch instruction.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r18_cmds_s_d3de7394-427e-4f70-b61d-94fa2ad32596.xml.htm"><b>tc (Trace to Next Call)</b></a> </TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until the next <b>call</b> instruction. If the current instruction is a <b>call</b> instruction, the instruction is traced into until a new <b>call</b> is reached.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r18_cmds_s_198f2fd2-8454-4bc7-88e8-407c8a29f1ec.xml.htm"><b>tct (Trace to Next Call or Return)</b></a><b> </b></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until it reaches a <b>call</b> instruction or <b>return</b> instruction. If the current instruction is a <b>call</b> instruction or <b>return</b> instruction, the instruction is traced into until a new <b>call</b> or <b>return</b> is reached.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r18_cmds_s_ab3c0d4f-f586-4f92-87f6-6473d20de466.xml.htm"><b>th (Trace to Next Branching Instruction)</b></a><b> </b></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until it reaches any kind of branching instruction, including conditional or unconditional branches, calls, returns, and system calls. If the current instruction is a branching instruction, the instruction is traced into until a new branching instruction is reached.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r18_cmds_s_ee978600-81d3-4dd2-a15c-396e8c042329.xml.htm"><b>tt (Trace to Next Return)</b></a><b> </b></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until it reaches a <b>return</b> instruction. If the current instruction is a <b>return</b> instruction, the instruction is traced into until a new <b>return</b> is reached.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r18_cmds_s_a69744a5-5296-4b8d-8e5c-ebeeb8a1c19f.xml.htm"><b>wt (Trace and Watch Data)</b></a> </TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">Target executes until the completion of the whole specified function. Statistics are then displayed.</TD>
+</TR>
+</table>
+<P></P>
+<P>For more information about how to restart the target computer, see <a href="r07_use_operation_8338d017-7a53-4d82-bd91-bd0eaebe319a.xml.htm">Crashing and Rebooting the Target Computer</a>.</P>
+<H4>Command-Line Options</H4>
+<P>If you do not want the application to stop immediately when it starts or loads, use CDB or WinDbg together with the <b>-g</b> command-line option. For more information about this situation, see <a href="r07_use_operation_4d852e32-e333-4f48-a97f-dc9b15419af4.xml.htm">Initial Breakpoint</a>.</P>
+<P>CDB and WinDbg also support the <b>-G</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>. This option causes the debugging session to end if the application completes properly.</P>
+<P>The following command tries to run the application from start to finish, and the debugger prompt appears only if an error occurs.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>cdb -g -G</b> <i>ApplicationName</i> <BR></nobr></P>
+<P>You can use the <b>-pt</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> to set the break time-out. There are certain problems that can make the target unable to communicate with the debugger. If a break command is issued and the debugger cannot break into the target after this time, the debugger displays a "Break-in timed out" message.</P>
+<P>At this point, the debugger stops trying to break into the target. Instead, the debugger pauses the target and enables you to examine (but not control) the target application.</P>
+<P></P>
+<P>The default time-out is 30 seconds.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Controlling the Target RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

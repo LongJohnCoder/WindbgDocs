@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wdfkd.wdflogdump</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wdfkd.wdflogdump"><xml><MSHelp:Keyword Index="A" Term="r33~c_exts_WDF_b04c0ea2-3c82-41c1-abd2-61e5e57d29da.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wdfkd.wdflogdump extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~c_exts_WDF_b04c0ea2-3c82-41c1-abd2-61e5e57d29da.xml"></A>!wdfkd.wdflogdump</H1>
+<P><P>The <b>!wdfkd.wdflogdump</b> extension displays the Kernel-Mode Driver Framework (KMDF) error log records, if available, from a <a href="r10_dump_files_940a7ef7-167f-4f4c-8c73-227538dd30f2.xml.htm">complete memory dump</a>, a <a href="r10_dump_files_cc9e7162-5f3f-486d-9732-328deb2078e9.xml.htm">kernel memory dump</a>, or a <a href="engine_dg_d08297b5-3efa-4b7b-864b-c76133c62431.xml.htm">live kernel-mode target</a>.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wdfkd.wdflogdump</b> [<i>DriverName </i>[<i>WdfDriverGlobals</i>]<i> </i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>DriverName</i></DT>
+<DD>Optional. The name of a driver. <i>DriverName </i>must not include the .<i>sys</i> file name extension. </DD>
+<DT><i>WdfDriverGlobals</i></DT>
+<DD>Optional. The address of the <b>WdfDriverGlobals</b> structure. You can determine this address by running <a href="r33~c_exts_wdf_81a80512-7719-4bc6-91b3-2d7ba1100c1e.xml.htm"><b>!wdfkd.wdfldr</b></a> and looking for the field labelled "WdfGlobals". Or, you can supply <nobr><b>@@(</b><i>Driver</i><b>!WdfDriverGlobals)</b></nobr> as the address value, where <i>Driver</i> is the name of the driver.  If any <i>WdfDriverGlobals</i> address is supplied, <i>DriverName</i> is ignored (although it must nevertheless be supplied).  </DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P><i>Wdfkd.dll</i></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If you omit the <i>DriverName </i>parameter, the default driver name is used. Use the <a href="r33~c_exts_wdf_5fb4814b-c564-4648-95e2-74cd56672689.xml.htm"><b>!wdfkd.wdfgetdriver</b></a> extension to display the default driver name, and use the <a href="r33~c_exts_wdf_b65c7163-f379-4d51-b0a2-c456afaf6ee7.xml.htm"><b>!wdfkd.wdfsetdriver</b></a> extension to set the default driver name. </P>
+<P>To determine the address of</P>
+<P>To display the framework's error log records from a <a href="r10_dump_files_1c793f2b-a711-4e06-9c87-99be8f297556.xml.htm">small memory dump</a>, use the <a href="r33~c_exts_wdf_cd751746-4ee3-4cd0-84a9-e3e726c8242c.xml.htm"><b>!wdfkd.wdfcrashdump</b></a> extension.  </P>
+<P>For information about setting information that the debugger needs to format WPP tracing messages, see <a href="r33~c_exts_wdf_2fbedc41-a957-49aa-bd1b-53c6662106e0.xml.htm"><b>!wdfkd.wdftmffile</b></a> and <a href="r33~c_exts_wdf_2d768986-34e6-4035-af92-b879180637f5.xml.htm"><b>!wdfkd.wdfsettraceprefix</b></a>. </P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~c_wdf_b21958be-e8b5-460c-87b7-a755da1cf37e.xml.htm">Kernel-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wdfkd.wdflogdump RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

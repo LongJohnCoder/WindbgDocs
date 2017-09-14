@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Choosing the Best Method</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Choosing the Best Method"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_421325cc-6e83-41aa-81d5-57a3ba622c23.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_421325cc-6e83-41aa-81d5-57a3ba622c23.xml"></A>Choosing the Best Method</H1>
+<P>There are several different ways to debug a service application. In order to choose the correct method, you must first make two choices:  the time at which the debugger is attached to the service application and what debugging configuration to use.</P>
+<P>There are three stages at which the debugger can be attached to the service application:</P><B></B><UL type="disc">
+<LI>The very beginning of the service startup. The debugger is automatically launched when the service begins. Choose this option if you want to debug the service's initialization code. </LI>
+<LI>The first time that the service encounters an exception. The debugger is automatically launched when an exception or crash occurs or if the service application calls the <b>DebugBreak</b> function. Choose this option if you want the debugger to appear when a problem is encountered but not before. </LI>
+<LI>After the service is running normally. You can manually attach a debugger to a service that is already running at any time. Choose this option if you do not want to make advance preparations for debugging. </LI>
+</UL>
+<P></P>
+<P>There are three debugging configurations you can choose:</P><B></B><UL type="disc">
+<LI>Local debugging<i>.</i>  A single debugger, running on the same computer as the service. </LI>
+<LI>Remote debugging.  A debugging server running on the same computer as the service, being controlled from a debugging client running on a second computer. </LI>
+<LI>Kernel-controlled user-mode debugging.  A user-mode debugger running on the same computer as the service, being controlled from a kernel debugger on a second computer. </LI>
+</UL>
+<P></P>
+<P>If your service is running on Windows 2000, Windows XP, or Windows Server 2003, you can combine any of these three attach options with any of these three debugging configuration options.</P>
+<P>If your service is running on Windows Vista or a later version of Windows, there is one restriction on how these choices can be combined. If you want to debug from the beginning of the service startup, or from the time that an exception is encountered, you must use either remote debugging or kernel-controlled user-mode debugging.</P>
+<P>In other words, on Windows Vista and later, you cannot use local debugging unless you plan to attach the debugger manually after the service is already running. This restriction results from the fact that in these versions of Windows, services run in session 0, and any debugger that is <i>automatically</i> launched and attached to the service is also in session 0, and does not have a user interface on the computer that the service is running on.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Choosing the Best Method RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

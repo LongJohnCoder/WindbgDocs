@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Important Breakpoints for Analyzing Reproducible Problems</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Important Breakpoints for Analyzing Reproducible Problems"><xml><MSHelp:Keyword Index="A" Term="t11~d_scsi_fa8fe93f-4605-43bb-be9f-4b20dd84e2eb.xml"/>
+<META NAME="MS-HKWD" CONTENT="SCSI Miniport Debugging, breakpoints and reproducible problems"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~d_scsi_fa8fe93f-4605-43bb-be9f-4b20dd84e2eb.xml"></A>Important Breakpoints for Analyzing Reproducible Problems</H1>
+<P>When debugging a SCSI miniport driver, there are three routines in which it is useful to set a breakpoint:</P><B></B><UL type="disc">
+<LI><b>scsiport!scsiportnotification</b> </LI>
+<LI><b>scsiport!spstartiosynchronized</b> </LI>
+<LI><b>miniport!HwStartIo</b> </LI>
+</UL>
+<P></P>
+<P>The routine <b>scsiport!scsiportnotification</b> is called right after a request is sent to the miniport. Thus, if you set a breakpoint in <b>scsiport!scsiportnotification</b> and then run a stack backtrace using <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kb 3</b></a>, you can determine whether the miniport is receiving and completing requests. If the first parameter is zero, the request has been completed. If the first parameter is nonzero, the third parameter is the address of the SCSI request block (SRB) that is not being completed, and you can use the <a href="r33~d_exts_scsi_f692b8a1-dfb0-41eb-ae2b-4f6fcb67282e.xml.htm"><b>!minipkd.srb</b></a> extension to further analyze the situation.</P>
+<P>Placing a breakpoint in either <b>scsiport!spstartiosynchronized</b> or <b>miniport!HwStartIo</b> will cause a break just prior to sending a request to the miniport. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Important Breakpoints for Analyzing Reproducible Problems RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

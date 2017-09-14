@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_DUMP_XXX</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_DUMP_XXX"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_DUMP_XXX"/>
+<MSHelp:Keyword Index="A" Term="Structures_7eef95d3-3b13-46ff-ac5a-0e292a972eb9.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_DUMP_XXX constants"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_7eef95d3-3b13-46ff-ac5a-0e292a972eb9.xml"></A>DEBUG_DUMP_<i>XXX</i></H1>
+<P>The DEBUG_DUMP_<i>XXX</i> constants are used by the methods <a href="idebugclient_d9fa8d64-3c92-425b-82fc-dec8553bdb52.xml.htm"><b>WriteDumpFile</b></a>, <a href="idebugclient_6ce4aeba-f7a6-4872-9ff2-baf3b3165471.xml.htm"><b>WriteDumpFile2</b></a>, and <a href="idebugclient_cbae8215-df5f-484c-9b0a-8a5dc1564a00.xml.htm"><b>WriteDumpFileWide</b></a> to specify the type of <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#d02ecf5e-605d-42e2-9aea-a3ea60e2defb">crash dump file</a> to create.</P>
+<P>The possible values include the following.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Type of Dump File Created</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DUMP_SMALL</TD>
+<TD Width="">Small Memory Dump (kernel-mode) or Minidump (user-mode).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DUMP_DEFAULT</TD>
+<TD Width="">Full User-Mode Dump (user-mode) or Kernel Summary Dump (kernel-mode).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DUMP_FULL</TD>
+<TD Width=""><i>(kernel-mode only)</i> Complete Memory Dump.</TD>
+</TR>
+</table>
+<P></P>
+<P>Moreover, the following aliases are available for kernel-mode debugging.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Alias</TH>
+<TH Width="">Value</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_KERNEL_SMALL_DUMP</TD>
+<TD Width="">DEBUG_DUMP_SMALL</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_KERNEL_DUMP</TD>
+<TD Width="">DEBUG_DUMP_DEFAULT</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_KERNEL_FULL_DUMP</TD>
+<TD Width="">DEBUG_DUMP_FULL</TD>
+</TR>
+</table>
+<P></P>
+<P>Additionally, the following aliases are available for user-mode debugging.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Alias</TH>
+<TH Width="">Value</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_USER_WINDOWS_SMALL_DUMP</TD>
+<TD Width="">DEBUG_DUMP_SMALL</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_USER_WINDOWS_DUMP</TD>
+<TD Width="">DEBUG_DUMP_DEFAULT</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>For a description of kernel-mode dump files, see <a href="r10_dump_files_fb0158c7-161d-4959-9dd3-00be89aebd02.xml.htm">Varieties of Kernel-Mode Dump Files</a>.  For a description of user-mode dump files, see <a href="r10_dump_files_8dea98f7-16d8-48a7-bf56-7689b0f20d49.xml.htm">Varieties of User-Mode Dump Files</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_DUMP_XXX RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

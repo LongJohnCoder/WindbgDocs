@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!devnode</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !devnode"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_87ee2749-b028-4ab8-b0c0-d4a6fc734488.xml"/>
+<META NAME="MS-HKWD" CONTENT="!devnode extension">
+<META NAME="MS-HKWD" CONTENT="device node">
+<META NAME="MS-HKWD" CONTENT="device tree"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_87ee2749-b028-4ab8-b0c0-d4a6fc734488.xml"></A>!devnode</H1>
+<P><P>The <b>!devnode</b> extension displays information about a node in the device tree.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!devnode</b> <i>Address</i> [<i>Flags</i>] [<i>Service</i>] <BR><b>!devnode 1</b> <BR><b>!devnode 2</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the hexadecimal address of the device extension whose node is to be displayed. If this is zero, the root of the main device tree is displayed.</DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies the level of output to be displayed. This can be any combination of the following bits:<DL><DT>Bit 0 (0x1)</DT>
+<DD>Causes the display to include all children of the device node.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Causes the display to include resources used (CM_RESOURCE_LIST). These include the boot configuration reported by IRP_MN_QUERY_RESOURCES, as well as the resources allocated to the device in the <b>AllocatedResources</b> parameter of IRP_MN_START_DEVICE.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>Causes the display to include resources required (IO_RESOURCE_REQUIREMENTS_LIST) as reported by IRP_MN_FILTER_RESOURCE_REQUIREMENTS.</DD>
+<DT>Bit 3 (0x8)</DT>
+<DD>Causes the display to include a list of translated resources as allocated to the device in the <b>AllocatedResourcesTranslated</b> parameter of IRP_MN_START_DEVICE.</DD>
+<DT>Bit 4 (0x10)</DT>
+<DD>Specifies that only device nodes that are not started should be displayed.</DD>
+<DT>Bit 5 (0x20)</DT>
+<DD>Specifies that only device nodes with problems should be displayed. (These are nodes that contain the flag bits DNF_HAS_PROBLEM or DNF_HAS_PRIVATE_PROBLEM.)</DD>
+</DL>
+</DD>
+<DT><i>Service</i></DT>
+<DD>Specifies the name of a service. If this is included, only those device nodes driven by this service will be displayed. (If <i>Flags</i> includes bit 0x1, device nodes driven by this service and all their children will be displayed.)<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!devnode 1</b> command lists all pending removals of device objects.</P>
+<P>The <b>!devnode 2</b> command lists all pending ejects of device objects.</P>
+<P>You can use <b>!devnode 0 1</b> to see the entire device tree.</P>
+<H4>Additional Information</H4>
+<P>See <a href="t12_drivers_ba75fa45-397b-473d-88dc-c5e0d598456a.xml.htm">Plug and Play Debugging</a> for applications of this extension command. For information about device trees, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !devnode RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

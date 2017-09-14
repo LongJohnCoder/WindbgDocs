@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Small Memory Dump</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Small Memory Dump"><xml><MSHelp:Keyword Index="A" Term="r10_dump_files_1c793f2b-a711-4e06-9c87-99be8f297556.xml"/>
+<META NAME="MS-HKWD" CONTENT="dump file, Small Memory Dump">
+<META NAME="MS-HKWD" CONTENT="Small Memory Dump"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r10_dump_files_1c793f2b-a711-4e06-9c87-99be8f297556.xml"></A>Small Memory Dump</H1>
+<P>A <i>Small Memory Dump</i> is much smaller than the other two kinds of kernel-mode crash dump files. It is exactly 64 KB in size, and requires only 64 KB of pagefile space on the boot drive.</P>
+<P>This dump file includes the following:</P><B></B><UL type="disc">
+<LI>The bug check message and parameters, as well as other blue-screen data.</LI>
+<LI>The processor context (PRCB) for the processor that crashed.</LI>
+<LI>The process information and kernel context (EPROCESS) for the process that crashed.</LI>
+<LI>The thread information and kernel context (ETHREAD) for the thread that crashed.</LI>
+<LI>The kernel-mode call stack for the thread that crashed. If this is longer than 16 KB, only the topmost 16 KB will be included.</LI>
+<LI>A list of loaded drivers.</LI>
+</UL>
+<P></P>
+<P></P>
+<P>In Windows XP and later versions of Windows, the following items are also included:</P><B></B><UL type="disc">
+<LI>A list of loaded modules and unloaded modules.</LI>
+<LI>The debugger data block. This contains basic debugging information about the system.</LI>
+<LI>Any additional memory pages that Windows identifies as being useful in debugging failures. This includes the data pages that the registers were pointing to when the crash occurred, and other pages specifically requested by the faulting component.</LI>
+<LI><i>(Intel Itanium processor only)</i>  The backing store.  </LI>
+<LI><i>(Windows Server 2003 and later)</i>  The Windows SKU  &#8212; for example, "Professional" or "Server".</LI>
+</UL>
+<P></P>
+<P>This kind of dump file can be useful when space is greatly limited. However, due to the limited amount of information included, errors that were not directly caused by the thread executing at time of crash may not be discovered by an analysis of this file.</P>
+<P>Since this kind of dump file does not contain images of any executables residing in memory at the time of the crash, you may also need to set the executable image path if these executables turn out to be important.</P>
+<P>If a second bug check occurs and a second Small Memory Dump file is created, the previous file will be preserved. Each additional file will be given a distinct name, which contains the date of the crash encoded in the filename. For example, <i>mini022900-01.dmp</i> is the first memory dump file generated on February 29, 2000. A list of all Small Memory Dump files is kept in the directory <i>%SystemRoot%\Minidump</i>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Small Memory Dump RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

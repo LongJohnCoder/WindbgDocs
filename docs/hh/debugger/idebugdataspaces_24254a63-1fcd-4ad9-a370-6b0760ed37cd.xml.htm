@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetNextTagged</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetNextTagged"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetNextTagged"/>
+<MSHelp:Keyword Index="A" Term="IDebugDataSpaces_24254a63-1fcd-4ad9-a370-6b0760ed37cd.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugDataSpaces::GetNextTagged method">
+<META NAME="MS-HKWD" CONTENT="GetNextTagged (IDebugDataSpaces) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugDataSpaces_24254a63-1fcd-4ad9-a370-6b0760ed37cd.xml"></A>GetNextTagged</H1>
+<P><P>The <b>GetNextTagged</b> method returns the GUID for the next block of tagged data in the enumeration.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugDataSpaces3::GetNextTagged(</b><BR><b>    IN ULONG64  </b><i>Handle</i><b>,</b><BR><b>    OUT LPGUID  </b><i>Tag</i><b>,</b><BR><b>    OUT PULONG  </b><i>Size</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Handle</i></DT>
+<DD>Specifies the handle identifying the enumeration.  This is the handle returned by <a href="idebugdataspaces_bc6f5148-04e1-4912-8ca2-8c095519af8f.xml.htm"><b>StartEnumTagged</b></a>.</DD>
+<DT><i>Tag</i></DT>
+<DD>Receives the GUID identifying the tagged data.  The data may be retrieved by passing this GUID to <a href="idebugdataspaces_cdf64ddf-da14-4607-8df2-1d4703a2eebf.xml.htm"><b>ReadTagged</b></a>.</DD>
+<DT><i>Size</i></DT>
+<DD>Receives the size of the data identified by the GUID <i>Tag</i>.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>There are no more blocks of tagged data available in this enumeration.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetNextTagged</b> is available in <b>IDebugDataSpaces3</b> and later versions.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugdataspaces_bc6f5148-04e1-4912-8ca2-8c095519af8f.xml.htm"><b>StartEnumTagged</b></a>, <a href="idebugdataspaces_cdf64ddf-da14-4607-8df2-1d4703a2eebf.xml.htm"><b>ReadTagged</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetNextTagged RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

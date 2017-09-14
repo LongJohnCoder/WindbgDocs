@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ReadProcessorSystemData</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ReadProcessorSystemData"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="ReadProcessorSystemData"/>
+<MSHelp:Keyword Index="A" Term="IDebugDataSpaces_a2ffd54a-03f2-4b74-928c-b043bfdac073.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugDataSpaces::ReadProcessorSystemData method">
+<META NAME="MS-HKWD" CONTENT="ReadProcessorSystemData (IDebugDataSpaces) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugDataSpaces_a2ffd54a-03f2-4b74-928c-b043bfdac073.xml"></A>ReadProcessorSystemData</H1>
+<P><P>The <b>ReadProcessorSystemData</b> method returns data about the specified processor.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugDataSpaces::ReadProcessorSystemData(</b><BR><b>    IN ULONG  </b><i>Processor</i><b>,</b><BR><b>    IN ULONG  </b><i>Index</i><b>,</b><BR><b>    OUT PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>DataSize</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Processor</i></DT>
+<DD>Specifies the processor whose data is to be read.</DD>
+<DT><i>Index</i></DT>
+<DD>Specifies the data type to read.  The following table contains the valid values.  After successful completion, the data returned in the buffer <i>Buffer</i> has the type specified by the middle column.<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KPCR_OFFSET</TD>
+<TD Width="">Returns the virtual address of the processor's Processor Control Region (PCR).<BR><BR>In this case, the argument <i>Buffer</i> can be considered to have type PULONG64.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KPRCB_OFFSET</TD>
+<TD Width="">Returns the virtual address of the processor's Processor Control Block (PRCB).<BR><BR>In this case, the argument <i>Buffer</i> can be considered to have type PULONG64.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KTHREAD_OFFSET</TD>
+<TD Width="">Returns the virtual address of the KTHREAD structure for the system thread  running on the processor.<BR><BR>In this case, the argument <i>Buffer</i> can be considered to have type PULONG64.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_BASE_TRANSLATION_VIRTUAL_OFFSET</TD>
+<TD Width="">Returns the virtual address of the base of the paging information owned by the operating system or the processor.  The address and the content at the address are processor- and operating-system-dependent. <BR><BR>In this case, the argument <i>Buffer</i> can be considered to have type PULONG64.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_PROCESSOR_IDENTIFICATION</TD>
+<TD Width="">Returns a description of the processor.<BR><BR>In this case, the argument <i>Buffer</i> can be considered to have type PDEBUG_PROCESSOR_IDENTIFICATION_ALL .<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_PROCESSOR_SPEED</TD>
+<TD Width="">Returns the speed of the processor in MHz.  This may not work in a particular session.<BR><BR>In this case, the argument <i>Buffer</i> can be considered to have type PULONG.<BR><BR></TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the processor data.  Upon successful completion of the method, the contents of this buffer may be accessed by casting <i>Buffer</i> to the type specified in the above table.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size in bytes of the buffer <i>Buffer</i>.  This is the maximum number of bytes that will be returned.</DD>
+<DT><i>DataSize</i></DT>
+<DD>Receives the size of the data in bytes.  If <i>DataSize</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>ReadProcessorSystemData</b> is available in all versions of <b>IDebugDataSpaces</b>.</P>
+<H4>Comments</H4>
+<P>This method is only available in <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>.</P>
+<P>For information about the PCR, PRCB, and KTHREAD structures, as well as information about paging tables, see <i>Microsoft Windows Internals</i> by David Solomon and Mark Russinovich.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ReadProcessorSystemData RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

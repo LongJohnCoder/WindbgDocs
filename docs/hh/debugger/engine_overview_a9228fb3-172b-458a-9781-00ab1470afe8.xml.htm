@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugger Engine Overview</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugger Engine Overview"><xml><MSHelp:Keyword Index="A" Term="Engine_Overview_a9228fb3-172b-458a-9781-00ab1470afe8.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine">
+<META NAME="MS-HKWD" CONTENT="Debugger Engine, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_Overview_a9228fb3-172b-458a-9781-00ab1470afe8.xml"></A>Debugger Engine Overview</H1>
+<P>The <i>debugger engine</i> (<i>DbgEng.dll</i>), typically referred to as the <i>engine</i>, provides an interface for examining and manipulating <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">debugging targets</a> in <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#b9622678-468c-4b90-a002-a3d4280796f0">user mode</a> and <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#c2dfd7a9-249b-4018-9789-2b3d6268346b">kernel mode</a> on Microsoft Windows.</P>
+<P>The debugger engine can acquire targets, set <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoints</a>, monitor <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">events</a>, query <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35">symbols</a>, read and write to memory, and control <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#a5a5985a-10e6-4a13-8a11-d9935f5661b9">threads</a> and <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#869bfa55-1556-4c4d-90ed-7b36f8f114b3">processes</a> in a target.</P>
+<P>You can use the debugger engine to write both <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#9625e841-0468-4bf3-940b-56f3f5831a12">debugger extension libraries</a> and stand-alone applications.  Such applications are referred to as <i>debugger engine applications</i>.  A debugger engine application that uses the full functionality of the debugger engine is called a <i>debugger</i>. For example, WinDbg, CDB, NTSD, and KD are debuggers; the debugger engine provides the core of their functionality.</P><B>Engine Concepts:</B><div class="indent1">
+<P><a href="engine_overview_87d6e561-6d31-4a9e-8be3-1b5b93ebb5a3.xml.htm">Debugging Session and Execution Model</a></P>
+</div>
+<div class="indent1">
+<P><a href="engine_overview_2838c538-1dc7-4494-b92d-49e58a4ad2aa.xml.htm">Client Objects</a></P>
+</div>
+<div class="indent1">
+<P><a href="engine_overview_21beeb6d-d7a0-454d-9f9d-ebbab52e3664.xml.htm">Input and Output</a></P>
+</div><B>Examining and Manipulating Targets:</B><div class="indent1">
+<P><a href="engine_overview_660db768-b40b-456b-988a-a13d0c20e0dd.xml.htm">Targets</a></P>
+</div>
+<div class="indent1">
+<P><a href="engine_overview_1679f61a-ff93-4666-9860-b26005170632.xml.htm">Events</a></P>
+</div>
+<div class="indent1">
+<P><a href="engine_overview_c23d9360-986f-4a98-8815-580deb69b591.xml.htm">Breakpoints</a></P>
+</div>
+<div class="indent1">
+<P><a href="engine_overview_fcf0ebc7-625b-461f-ae21-83c8937ff68f.xml.htm">Symbols</a></P>
+</div>
+<div class="indent1">
+<P><a href="engine_overview_3f66104f-72bb-4046-89cc-9a0be2d30318.xml.htm">Memory</a></P>
+</div>
+<div class="indent1">
+<P><a href="engine_overview_89c9fa4e-c2fe-4ba7-84d5-b049cebd3130.xml.htm">Threads and Processes</a></P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugger Engine Overview RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

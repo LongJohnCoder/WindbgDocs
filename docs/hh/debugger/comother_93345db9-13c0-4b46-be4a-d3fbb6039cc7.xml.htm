@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>IDebugBreakpoint</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, IDebugBreakpoint"><xml><MSHelp:Keyword Index="A" Term="ComOther_93345db9-13c0-4b46-be4a-d3fbb6039cc7.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugBreakpoint interface"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ComOther_93345db9-13c0-4b46-be4a-d3fbb6039cc7.xml"></A>IDebugBreakpoint</H1>
+<P>This <b>IDebugBreakpoint</b> interface includes the following methods:</P><B></B><div class="indent1">
+<P><a href="comother_069dfd81-8ad8-4fe7-95c4-a3499c1b5512.xml.htm"><b>GetAdder</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_4bb08d44-5a99-4177-b8a4-8926f1e45dcf.xml.htm"><b>GetCommand</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_166ee15d-c9e1-466f-9337-a6d20e9355ee.xml.htm"><b>SetCommand</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_2becec27-600b-4d57-93b0-8a794ff2f068.xml.htm"><b>AddFlags</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_5898a703-87fb-4d47-9d06-026783243e10.xml.htm"><b>GetFlags</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_15793582-5533-4f63-8278-9556b160e6d2.xml.htm"><b>RemoveFlags</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_0fb1a5d9-2c1f-4966-9838-e7d0ae17a43f.xml.htm"><b>SetFlags</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_408e8e80-f34e-4895-9bae-66dbb0f9aa97.xml.htm"><b>GetId</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_020a92c1-effa-4b14-9198-153641401e46.xml.htm"><b>GetOffset</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_bb0d9a70-c4b5-4883-9dab-37bf04848d8c.xml.htm"><b>SetOffset</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_08bb15b2-f37d-4bd2-b19a-899ab9293f4a.xml.htm"><b>GetOffsetExpression</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_d34036ae-b160-4b24-86d0-ebd2bd8408ea.xml.htm"><b>SetOffsetExpression</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_1e2f7a47-0f38-492a-a8b2-9eaa124a2f20.xml.htm"><b>GetParameters</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_297fe316-4a1a-476b-a804-056bb56b6e77.xml.htm"><b>GetDataParameters</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_250724e6-5ae3-4755-87de-3804e4e6f4ed.xml.htm"><b>SetDataParameters</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_bf916108-efd7-436f-a89e-a26826e2e258.xml.htm"><b>GetPassCount</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_8398fd11-1821-4adb-b8be-4e207b616169.xml.htm"><b>SetPassCount</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_b9308489-679e-4ced-bd73-84cbeaadc669.xml.htm"><b>GetCurrentPassCount</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_6a9afca5-8445-48d9-8e28-8d38e6cf2658.xml.htm"><b>GetMatchThreadId</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_5100cd0c-7d69-4210-9d32-ca1e9bd321aa.xml.htm"><b>SetMatchThreadId</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="comother_3305c400-f816-463b-a643-4495bf546460.xml.htm"><b>GetType</b></a></P>
+</div>
+<P>Although <b>IDebugBreakpoint</b> implements the <b>IUnknown</b> interface, the <b>IUnknown::AddRef</b> and <b>IUnknown::Release</b> methods are not used to control the lifetime of the breakpoint.  Instead, an <b>IDebugBreakpoint</b> object is deleted after the method <a href="idebugcontrol_431f31ce-38fb-4350-851b-49b103047943.xml.htm"><b>RemoveBreakpoint</b></a> is called.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: IDebugBreakpoint RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

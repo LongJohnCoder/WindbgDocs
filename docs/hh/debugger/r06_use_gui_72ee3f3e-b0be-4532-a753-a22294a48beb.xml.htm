@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Creating and Opening a Workspace</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Creating and Opening a Workspace"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_72ee3f3e-b0be-4532-a753-a22294a48beb.xml"/>
+<META NAME="MS-HKWD" CONTENT="workspaces, creating">
+<META NAME="MS-HKWD" CONTENT="workspaces, opening">
+<META NAME="MS-HKWD" CONTENT="workspaces, named workspaces">
+<META NAME="MS-HKWD" CONTENT="workspaces, default workspaces">
+<META NAME="MS-HKWD" CONTENT="workspaces, types of workspaces"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_72ee3f3e-b0be-4532-a753-a22294a48beb.xml"></A>Creating and Opening a Workspace</H1>
+<P>WinDbg has two kinds of workspaces: <i>default workspaces</i> and <i>named workspaces</i>.</P>
+<H4>Default Workspaces</H4>
+<P>WinDbg has several different kinds of default workspaces:</P><B></B><UL type="disc">
+<LI>The <i>base workspace</i> is used when WinDbg is in a dormant state.</LI>
+<LI>The <i>default user-mode workspace</i> is used when you are attaching to a user-mode process (by using the <b>-p</b> <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">command-line option</a> or by using the <a href="r36_gui_1_9f476268-a365-4ae3-a658-5e6ee79ae2db.xml.htm"><b>File | Attach to a Process</b></a> command).</LI>
+<LI>The <i>remote default workspace</i> is used when you are connecting to a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#098e09f5-d7db-435e-9403-16661d6693b5">debugging server</a>.</LI>
+<LI>The <i>default kernel-mode workspace</i> is used when WinDbg begins a <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging session</a>.</LI>
+<LI>The <i>processor-specific workspace</i> is used during kernel-mode debugging after WinDbg attaches to the target computer. There are separate processor-specific workspaces for x86-based, Itanium-based, and x64-based processors.</LI>
+</UL>
+<P></P>
+<P>When WinDbg creates a user-mode process for debugging, a workspace is created for that executable file. Each created executable file has its own workspace.</P>
+<P>When WinDbg analyzes a dump file, a workspace is created for that dump file analysis session. Each dump file has its own workspace.</P>
+<P>When you begin a debugging session, the appropriate workspace is loaded. When you end a debugging session or exit WinDbg, a dialog box is displayed and asks you if you want to save the changes that you have made to the current workspace. If you start WinDbg with the <b>-QY</b> <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">command-line option</a>, this dialog box does not appear, and workspaces are automatically saved. Also, if you start WinDbg by the <b>-Q</b> command-line option, this dialog box does not appear, and no changes are saved.</P>
+<P>Workspaces load in a cumulative manner. The base workspace is always loaded first. When you begin a particular debugging action, the appropriate workspace is loaded. So most debugging is completed after two workspaces have been loaded. Kernel-mode debugging is completed after three workspaces have been loaded (the base workspace, the default kernel-mode workspace, and the processor-specific workspace).</P>
+<P>For greatest efficiency, you should save settings in lower-level workspaces if you want them to apply to all of your WinDbg work.</P>
+<P class="note"><b>Note</b>  The layout of the debugging information windows is one exception to the cumulative behavior of workspaces. The position, docking status, and size of each window are determined by only the most recent workspace that you opened. This behavior includes the contents of the <a href="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml.htm">Watch window</a> and the locations that you viewed in each <a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory window</a>. The command history in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a> is not cleared when a new workspace is opened, but all other window states are reset.</P>
+<P>To access the base workspace, start WinDbg with no target, or click <a href="r37_gui_2_b5acf3a0-cf4a-4664-9c1c-53e8f8c9b1c5.xml.htm"><b>Stop Debugging</b></a> on the <b>Debug</b> menu after your session is complete. You can then make any edits that are allowed in the base workspace.</P>
+<H4>Named Workspaces</H4>
+<P>You can also give workspaces names and then save or load them individually. After you load a named workspace, all automatic loading and saving of default workspaces is disabled.</P>
+<P>Named workspaces contain some additional information that default workspaces do not. For more information about this additional information, see <a href="r06_use_gui_7e4af67e-180d-458e-97d7-6c3cbda04267.xml.htm">Workspace Contents</a>.</P>
+<H4>Opening, Saving, and Clearing Workspaces</H4>
+<P>To control workspaces, you can do the following::</P><B></B><UL type="disc">
+<LI>Open and load a named workspace by using the <b>-W</b> <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">command-line option</a>.</LI>
+<LI>Open and load a workspace from a file by using the <b>-WF</b> <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">command-line option</a>. </LI>
+<LI>Disable all automatic workspace loading by using the <b>-WX</b> <a href="r12_cmdline_9dff7ed1-068d-4f34-bd0a-ef155f921a0b.xml.htm">command-line option</a>. Only explicit workspace commands cause workspaces to be saved or loaded.</LI>
+<LI>Open and load a named workspace by clicking <a href="r36_gui_1_3b5db389-0c59-4503-9ebc-753afb9add13.xml.htm"><b>Open Workspace</b></a> on the <b>File </b>menu or pressing CTRL+W.</LI>
+<LI>Save the current default workspace or the current named workspace by clicking <a href="r36_gui_1_404d29f3-6e93-4db5-9c44-6be47da8c593.xml.htm"><b>Save Workspace</b></a> on the <b>File </b>menu.</LI>
+<LI>Assign a name to the current workspace and save it by clicking <a href="r36_gui_1_080774f5-3bb9-4c76-a497-b1a941e39c10.xml.htm"><b>Save Workspace As</b></a> on the <b>File </b>menu.</LI>
+<LI>Delete specific items and settings from the current workspace by clicking <a href="r36_gui_1_35ba1788-d9f8-4957-8f82-8b95ab25f145.xml.htm"><b>Clear Workspace</b></a> on the <b>File </b>menu.</LI>
+<LI>Delete workspaces by clicking <a href="r36_gui_1_ada99fbc-69a1-4360-9522-68d465ec252c.xml.htm"><b>Delete Workspaces</b></a> on the <b>File </b>menu.</LI>
+<LI>Open and load a workspace from a file by clicking <a href="r36_gui_1_9d5c04d0-c757-41ed-8144-6e2bc07f5acd.xml.htm"><b>Open Workspace in File</b></a> on the <b>File </b>menu.</LI>
+<LI>Save a workspace to a file by clicking <a href="r36_gui_1_4ad8ab50-1712-46a7-9219-bf6888cf4026.xml.htm"><b>Save Workspace to File</b></a> on the <b>File </b>menu.</LI>
+</UL>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Creating and Opening a Workspace RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

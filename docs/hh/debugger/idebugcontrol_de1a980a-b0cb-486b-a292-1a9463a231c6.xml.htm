@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetNumberEventFilters</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetNumberEventFilters"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetNumberEventFilters"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_de1a980a-b0cb-486b-a292-1a9463a231c6.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetNumberEventFilters method">
+<META NAME="MS-HKWD" CONTENT="GetNumberEventFilters (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_de1a980a-b0cb-486b-a292-1a9463a231c6.xml"></A>GetNumberEventFilters</H1>
+<P><P>The <b>GetNumberEventFilters</b> method returns the number of <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8c64ad6b-a845-4f5d-b862-f4e23db322a2">event filters</a> currently used by the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::GetNumberEventFilters(</b><BR><b>    OUT PULONG  </b><i>SpecificEvents</i><b>,</b><BR><b>    OUT PULONG  </b><i>SpecificExceptions</i><b>,</b><BR><b>    OUT PULONG  </b><i>ArbitraryExceptions</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>SpecificEvents</i></DT>
+<DD>Receives the number of <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">events</a> that can be controlled using the <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#42e1b548-244d-4d27-9ba3-1cdd167d75eb">specific event filters</a>.  These events are enumerated using some of the <a href="structures_a6679c9f-e984-42f4-b033-26ad9256c373.xml.htm">DEBUG_FILTER_<i>XXX</i></a> constants.</DD>
+<DT><i>SpecificExceptions</i></DT>
+<DD>Receives the number of <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exceptions</a> that can be controlled using the <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#98344738-8c89-457f-96a5-428053fcf5f2">specific exception filters</a>.  The first specific exception filter is the default exception filter.  The exceptions controlled by the other specific exception filters will always have their own filter and will not inherit their behavior from the default specific exception filter.  These exception filters are identified by their <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#0b476356-a48f-4e4f-84af-936458a97797">exception code</a>.  See <a href="structures_17f68bad-f76c-48a0-a721-8134d40c904a.xml.htm">Specific Exceptions</a> for a list of the specific exception filters.</DD>
+<DT><i>ArbitraryExceptions</i></DT>
+<DD>Receives the number of <a href="dbg_glossary_f75f2990-56bc-4632-bcba-2e994cbb39af.xml.htm#ac40e553-dd44-4cd0-aa79-5d58865fbb5f">arbitrary exception filters</a> currently used by the engine.  These exception filters are identified by their exception code.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetNumberEventFilters</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>For more information about event filters, see <a href="engine_dg_feda793f-b9e8-402f-9953-409e0e94247f.xml.htm">Event Filters</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetNumberEventFilters RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Parsing Extension Arguments</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Parsing Extension Arguments"><xml><MSHelp:Keyword Index="A" Term="EngExtCpp_DG_ee0ab1ba-1ede-4981-9200-ac2b0dbc6c03.xml"/>
+<META NAME="MS-HKWD" CONTENT="EngExtCpp extensions, parsing arguments"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_DG_ee0ab1ba-1ede-4981-9200-ac2b0dbc6c03.xml"></A>Parsing Extension Arguments</H1>
+<P>The EngExtCpp extension framework provides methods to aid in parsing the command-line arguments passed to an extension.  To take advantage of these methods, the extension must first declare the format of the command-line arguments in the <a href="engextcpp_ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml.htm">EXT_COMMAND</a> macro.</P>
+<P>To bypass the command-line argument parsing done by the framework and let the extension itself parse the arguments, set the command-line description to <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">"{{custom}}"</span> and use the method <a href="engextcpp_ref_1072b281-ece3-4641-93e8-60866c1e3ef4.xml.htm"><b>GetRawArgStr</b></a> to get the command-line arguments for parsing.</P>
+<P>Command-line description strings will automatically be wrapped when printed, to fit the column width of the display.  However, newline characters can be embedded in the description strings &#8211; using '<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">\n</span>' &#8211; to start  new lines.</P>
+<P>The command-line description can be NULL or the empty string.  If either occurs, it indicates that the extension command does not take any arguments.</P>
+<H4>Command-Line Description</H4>
+<P>The description of the command-line arguments is a sequence that contains two types of components: directives and arguments.  The description can optionally contain one of each directive and can contain up to 64 arguments.</P>
+<H4>Directives</H4>
+<P>Directives specify how the arguments are parsed.  They are enclosed by double braces (<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">'{{'</span> and <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">'}}'</span>).  Each directive can optionally appear zero or one times in the string that describes the arguments.</P>
+<P>The following directives are available:</P>
+<DL><DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>custom</b></span></DT>
+<DD>Turns off the parsing done by the extension framework and lets the extension perform its own parsing.</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>l:</b><i>str</i></span></DT>
+<DD>Overrides the default long description of the command-line arguments.  The extension framework will use <i>str</i> for the full description of all the arguments.</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>opt:</b><i>str</i></span></DT>
+<DD>Overrides the default prefix characters for named commands.  The default value is <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">"/-"</span>, allowing '<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">/</span>' or '<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">-</span>' to be used as the prefix that identifies named arguments.</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>s:</b><i>str</i></span></DT>
+<DD>Overrides the default short description of the command-line arguments.  The extension framework will use <i>str</i> for the short description of all the arguments.</DD>
+</DL>
+<P>Here are some examples of directives.  The following string is used by an extension command that parses its own arguments.  It also provides short and long descriptions for use with the automatic <b>!help</b> extension command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>{{custom}}{{s:&lt;arg1&gt; &lt;arg2&gt;}}{{l:arg1 - Argument 1\narg2 - Argument 2}}<BR></nobr></P>
+<P>The following string changes the argument option prefix characters to '<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">/</span>' or '<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">-</span>'.  With this directive, the arguments will be specified using '<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">+<i>arg</i></span>' and '<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">:<i>arg</i></span>' instead of '<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">/<i>arg</i></span>' and '<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">-<i>arg</i></span>':</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>{{opt:+:}}<BR></nobr></P>
+<P></P>
+<H4>Arguments</H4>
+<P>Arguments can be of two types: named and unnamed.  Unnamed arguments are read positionally.  Both types of argument also have a display name, used by the help command.</P>
+<P>Argument descriptions are enclosed by single braces (<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">'{'</span> and <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">'}'</span>).  </P>
+<P>Each argument description has the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>{</b>[<i>optname</i>]<b>;</b>[<i>type</i>[<b>,</b><i>flags</i>]]<b>;</b>[<i>argname</i>]<b>;</b>[<i>argdesc</i>]<b>}</b><BR></nobr></P>
+<P>where:</P>
+<DL><DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><i>optname</i></span></DT>
+<DD>The name of the argument.  This is the name used in commands and in methods that fetch arguments by name.  This name is optional.  If it is present, the argument becomes a "named argument"; it can appear anywhere on the command-line and is referenced by name.  If it is not present, the argument becomes an "unnamed argument"; its position on the command-line is important and it is referenced by its position relative to the other unnamed arguments.</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><i>type</i></span></DT>
+<DD>The type of the argument.  This affects how the argument is parsed and how it is retrieved. The <i>type</i> parameter can have one of the following values:<DL><DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>b</b></span></DT>
+<DD>Boolean type.  The argument is either present or not present.  Named Boolean arguments can be retrieved using <a href="engextcpp_ref_a4d457bf-6e64-46d7-892a-5ddda81c7f9d.xml.htm"><b>HasArg</b></a>.</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>e</b>[<b>d</b>][<b>s</b>][<i>bits</i>]</span></DT>
+<DD>Expression type.  The argument has a numeric value.  Named expression arguments can be retrieved using <a href="engextcpp_ref_02971a20-02b8-4655-a1e5-8f287b4b0182.xml.htm"><b>GetArgU64</b></a> and unnamed expression arguments can be retrieved using <a href="engextcpp_ref_94c8c0d8-bc72-4357-bcba-f2e8598aabff.xml.htm"><b>GetUnnamedArgU64</b></a>.<DL><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>d</b></span><P>The expression is limited to the next space character in the argument string.  If this is not present, the expression evaluator will consume characters from the command line until it determines that it reached the end of the expression.</P><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>s</b></span><P>The value of the expression is signed.  Otherwise, the value of the expression is unsigned.</P><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><i>bits</i></span><P>The number of bits in the value of the argument.  The maximum value for <i>bits</i> is 64.</P>
+</DL>
+</DD><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>s</b></span><P>String type.  The string is limited to the next space character.  Named string arguments can be retrieved using <a href="engextcpp_ref_0a1f3246-41a5-4a2f-8656-45f8c17b6418.xml.htm"><b>GetArgStr</b></a> and unnamed string arguments can be retrieved using <a href="engextcpp_ref_68f021ae-574a-4bc5-bea2-545f59b8ea74.xml.htm"><b>GetUnnamedArgStr</b></a>.</P><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>x</b></span><P>String type.  The argument is the rest of the command line.  The argument is retrieved using <b>GetArgStr</b> or <b>GetUnnamedArgStr</b>, as with the <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>s</b></span> string type.</P>
+</DL>
+</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><i>flags</i></span></DT>
+<DD>The argument flags.  These determine how the argument will be treated by the parser. The <i>flags</i> parameter can have one of the following values:<DL><DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>d=</b><i>expr</i></span></DT>
+<DD>The default value of the argument.  If the argument is not present on the command line, then the argument is set to <i>expr</i>.  The default value is a string that is parsed according to the type of the argument.</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>ds</b></span></DT>
+<DD>The default value will not be displayed in the argument description provided by the help.</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>o</b></span></DT>
+<DD>The argument is optional.  This is the default for named arguments.</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>r</b></span></DT>
+<DD>The argument is required.  This is the default for unnamed arguments.</DD>
+</DL>
+</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><i>argname</i></span></DT>
+<DD>The display name of the argument.  This is the name used by the automatic <b>!help</b> extension command and by the automatic <b>/?</b> or <b>-?</b> command-line arguments.  Used when printing a summary of the command-line options.</DD>
+<DT><span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><i>argdesc</i></span></DT>
+<DD>A description of the argument.  This is the description printed by the automatic <b>!help</b> extension and by the automatic "<b>/?</b>" or "<b>-?</b>" command-line arguments.</DD>
+</DL>
+<P></P>
+<P>Here are some examples of argument descriptions.  The following expression defines a command which takes a single optional expression argument.  The argument must fit in 32bits. If the argument isn't present on the command line, the default value of 0x100 will be used.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>{;e32,o,d=0x100;flags;Flags to control command}<BR></nobr></P>
+<P>The following expression defines a command with an optional Boolean "<b>/v</b>" argument and a required unnamed string argument.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>{v;b;;Verbose mode}{;s;name;Name of object}<BR></nobr></P>
+<P>The following expression defines a command that has an optional named expression argument <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>/oname</b> <i>expr</i></span> and an optional named string argument <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>/eol</b> <i>str</i></span>.  If <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>/eol</b></span> is present, its value will be set to the remainder of the command line and no further arguments will be parsed.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>{oname;e;expr;Address of object}{eol;x;str;Commands to use}<BR></nobr></P>
+<P></P>
+<H4>Command Line</H4>
+<P>The following is a list of some ways that arguments are parsed on the command line:</P><B></B><UL type="disc">
+<LI>The values of named expression and string arguments follow the name on the command line. For example, <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>/name</b> <i>expr</i></span> or <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>/name</b> <i>str</i></span>.</LI>
+<LI>For named Boolean arguments, the value is true if the name appears on the command line; false otherwise.</LI>
+<LI>Multiple single-character-named Boolean options can be grouped together on the command line. For example, "<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">/a /b /c</span>" can be written using the shorthand notation "<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">/abc</span>" (unless there is already an argument named "abc").</LI>
+<LI>If the command line contains the named argument "<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">?</span>" &#8211; for example, "<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">/?</span>" and "<span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">-?</span>" &#8211; the argument parsing ends, and the help text for the extension is displayed.</LI>
+</UL>
+<H4>Parsing Internals</H4>
+<P>Several methods are used by the argument parser to set arguments. </P>
+<P>The method <a href="engextcpp_ref_662530e0-caca-43f0-8b46-b21c8a1f00da.xml.htm"><b>SetUnnamedArg</b></a> will change the value of an unnamed argument.  And, for convenience, the methods <a href="engextcpp_ref_0d8a550a-c727-47e5-a5fe-10971e373a9d.xml.htm"><b>SetUnnamedArgStr</b></a> and <a href="engextcpp_ref_65080cf5-2492-440b-a496-869faf8c9c49.xml.htm"><b>SetUnnamedArgU64</b></a> will set unnamed string and expression arguments respectively.</P>
+<P>Similar methods exist for named arguments. <a href="engextcpp_ref_20376f38-03cf-4e1c-a4af-6b318a425ebc.xml.htm"><b>SetArg</b></a> is used to change the value of any named argument and <a href="engextcpp_ref_768f449e-fa81-4759-a16d-a8dfe1d3bf61.xml.htm"><b>SetArgStr</b></a> and <a href="engextcpp_ref_05510fa7-509e-49a2-97a3-7a1c4494350a.xml.htm"><b>SetArgU64</b></a> are used for named string and expression arguments respectively.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Parsing Extension Arguments RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

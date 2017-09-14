@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Kernel-Mode Environment Variables</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Kernel-Mode Environment Variables"><xml><MSHelp:Keyword Index="A" Term="r12_cmdline_a7670eb8-0ac9-4d47-ae07-97c237dc7f53.xml"/>
+<META NAME="MS-HKWD" CONTENT="environment variables, kernel-mode">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUG_PORT environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUG_BAUD_RATE environment variable">
+<META NAME="MS-HKWD" CONTENT="KDQUIET environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUG_CACHE_SIZE environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUG_BUS environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUG_1394_CHANNEL environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUG_1394_SYMLINK environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_DEBUG_OPTIONS environment variable">
+<META NAME="MS-HKWD" CONTENT="_NT_KD_FILES environment variable"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r12_cmdline_a7670eb8-0ac9-4d47-ae07-97c237dc7f53.xml"></A>Kernel-Mode Environment Variables</H1>
+<P>The following table lists the environment variables that are used only in kernel-mode debugging.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Variable</TH>
+<TH Width="">Meaning</TH>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUG_PORT = <i>ComPort</i></TD>
+<TD Width="">Specifies the COM port to be used in a kernel connection. For details, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUG_BAUD_RATE = <i>BaudRate</i></TD>
+<TD Width="">Specifies the baud rate to be used over the COM port connection. For details, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUG_BUS = 1394</TD>
+<TD Width="">Specifies that kernel debugging will be done over a 1394 cable connection.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUG_1394_CHANNEL = <i>1394Channel</i></TD>
+<TD Width="">Specifies the channel to be used for the 1394 kernel connection. For details, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUG_1394_SYMLINK = <i>Protocol</i></TD>
+<TD Width="">Specifies the connection protocol to be used for the 1394 kernel connection. For details, see <a href="r03_setup_2_70b570e5-d1d6-4bde-89d7-d52b3a9f7e6d.xml.htm">Choosing Kernel Debugging Settings</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">KDQUIET =<i>Anything</i></TD>
+<TD Width="">If KDQUIET is defined, the debugger will run in <i>quiet mode</i>. Quiet mode involves three distinct effects:<BR><BR>1. The debugger does not display messages each time an extension DLL is loaded or unloaded.<BR><BR>2. The <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command no longer requires an equal sign in its syntax.<BR><BR>3. The debugger will not display a warning message when breaking into the target computer.<BR><BR>Quiet mode can also be controlled by using the <a href="r18_cmds_s_abcad33e-4c8b-41e0-97de-951133b94a2d.xml.htm"><b>sq (Set Quiet Mode)</b></a> command.    <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUG_CACHE_SIZE<BR>= <i>Size</i></TD>
+<TD Width="">Specifies the maximum kernel debugging cache size, in bytes. This cache holds data received by the host computer from the serial connection. The default is 1,024,000.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_DEBUG_OPTIONS = <i>Option</i></TD>
+<TD Width="">Specifies one of the following two values:<BR><BR>NOEXTWARNING tells the debugger not to output a warning when it cannot find an extension command.<BR><BR>NOVERSIONCHECK tells the debugger not to check the version of debugger extensions.  <BR><BR><BR><BR>These options can be modified or displayed by using the <a href="r18_cmds_s_7c2593c9-be7b-4d8e-a9b9-2ef3cb673e2e.xml.htm"><b>so (Set Kernel Options)</b></a> command.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">_NT_KD_FILES = <i>MapFile</i> </TD>
+<TD Width="">Specifies a driver replacement map file. For details and for other methods of controlling driver replacement, see <a href="r07_use_operation_3272ec07-4f0a-4675-8ab0-6f802315a1ee.xml.htm">Mapping Driver Files</a>.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Kernel-Mode Environment Variables RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

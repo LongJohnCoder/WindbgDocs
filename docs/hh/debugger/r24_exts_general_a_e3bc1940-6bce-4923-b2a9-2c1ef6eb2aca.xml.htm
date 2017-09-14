@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!dumpfa</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !dumpfa"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_e3bc1940-6bce-4923-b2a9-2c1ef6eb2aca.xml"/>
+<META NAME="MS-HKWD" CONTENT="!dumpfa extension">
+<META NAME="MS-HKWD" CONTENT="failure analysis entries, display">
+<META NAME="MS-HKWD" CONTENT="failure analysis entries"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_e3bc1940-6bce-4923-b2a9-2c1ef6eb2aca.xml"></A>!dumpfa</H1>
+<P>The <b>!dumpfa</b> extension displays the contents of a failure analysis entry.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!dumpfa</b> <i>Address</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the failure analysis entry that is displayed.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ext.dll</i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ext.dll</i></TD>
+</TR>
+</table>
+<P></P>
+<H4><b>Comments</b></H4>
+<P>The <b>.dumpfa</b> extension is useful only to debug the <a href="r24_exts_general_a_6e1c68d6-f825-4a02-a9ba-2b0cd08cded8.xml.htm"><b>!analyze</b></a> extension, as the following example shows.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!dumpfa 0x00a34140</b><BR>DataUsed 3b0<BR>Type =        DEBUG_FLR_MARKER_BUCKET 00010016 - Size = 9<BR>Type =          DEBUG_FLR_MARKER_FILE 0001000d - Size = 16<BR>Type =      DEBUG_FLR_SYSXML_LOCALEID 00004200 - Size = 4<BR>Type =      DEBUG_FLR_SYSXML_CHECKSUM 00004201 - Size = 4<BR>Type =         DEBUG_FLR_READ_ADDRESS 0000000e - Size = 8<BR>Type =          DEBUG_FLR_FAULTING_IP 80000000 - Size = 8<BR>Type =     DEBUG_FLR_MM_INTERNAL_CODE 00001004 - Size = 8<BR>Type = DEBUG_FLR_CPU_MICROCODE_VERSION 0000301f - Size = 28<BR>Type = DEBUG_FLR_CUSTOMER_CRASH_COUNT 0000300b - Size = 8<BR>Type =    DEBUG_FLR_DEFAULT_BUCKET_ID 00010008 - Size = 12<BR>Type =         DEBUG_FLR_BUGCHECK_STR 00000600 - Size = 5<BR>Type = DEBUG_FLR_LAST_CONTROL_TRANSFER 0000000a - Size = 18<BR>Type =           DEBUG_FLR_TRAP_FRAME c0000002 - Size = 8<BR>Type =           DEBUG_FLR_STACK_TEXT 00010005 - Size = 1fb<BR>Type =        DEBUG_FLR_STACK_COMMAND 00010004 - Size = 17<BR>Type =        DEBUG_FLR_OS_BUILD_NAME 0000301e - Size = 9<BR>Type =          DEBUG_FLR_MODULE_NAME 00010006 - Size = 8<BR>Type =           DEBUG_FLR_IMAGE_NAME 00010001 - Size = c<BR>Type =      DEBUG_FLR_IMAGE_TIMESTAMP 80000002 - Size = 8<BR></nobr></P>You can also use the <a href="r24_exts_general_a_3c5ca489-0a56-4489-9337-03c22fbfedd6.xml.htm"><b>!asd</b></a> extension to debug the <b>!analyze </b>extension.<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !dumpfa RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

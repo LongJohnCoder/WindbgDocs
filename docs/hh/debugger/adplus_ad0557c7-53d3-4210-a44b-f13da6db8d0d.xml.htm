@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Settings</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Settings"><xml><MSHelp:Keyword Index="A" Term="ADPlus_ad0557c7-53d3-4210-a44b-f13da6db8d0d.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_ad0557c7-53d3-4210-a44b-f13da6db8d0d.xml"></A>Settings</H1>
+<P>The <b>Settings</b> section enables you to define the primary settings for ADPlus. Most of these settings are equivalent to command-line parameters.</P>
+<P>You can include as many instances as you want for the <b>ProcessID</b>, <b>ProcessName</b>, <b>Spawn</b>. and <b>Notify</b> elements.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>    &lt;Settings&gt;</b><BR><b>        &lt;AttachInterval&gt; inseconds &lt;/AttachInterval&gt; </b><BR><b>        &lt;AttachRepeats&gt; numberofrepeatedattachments &lt;/AttachRepeats&gt;</b><BR>        <b>&lt;RunMode&gt;</b> <i>runmode</i> <b>&lt;/RunMode&gt;</b><BR><b>        &lt;LastScriptCommand&gt; </b><i>LastCommand</i><b> &lt;/LastScriptCommand&gt;</b><BR>        <b>&lt;Option&gt; IIS &lt;/Option&gt;</b><BR>        <b>&lt;Option&gt; Quiet &lt;/Option&gt;</b><BR>        <b>&lt;Option&gt; NoTlist &lt;/Option&gt;</b><BR>        <b>&lt;Option&gt; NoTsCheck &lt;/Option&gt;</b><BR>        <b>&lt;Option&gt; NoFreeSpaceChecking &lt;/Option&gt;</b><BR>        <b>&lt;OutputDir&gt; </b><i>OutputDirectoryName</i><b> &lt;/OutputDir&gt;</b><BR>        <b>&lt;ProcessID&gt;</b> <i>PID</i> <b>&lt;/ProcessID&gt;</b><BR>        <b>&lt;ProcessName&gt; </b><i>ProcessName</i><b> &lt;/ProcessName&gt;</b><BR>        <b>&lt;GenerateScript&gt; </b><i>ScriptName</i><b> &lt;/GenerateScript&gt;</b><BR>        <b>&lt;Spawn&gt; </b><i>Spawn Command</i><b> &lt;/Spawn&gt;</b><BR>        <b>&lt;Sympath&gt; </b><i>Symbol Path</i><b> &lt;/Sympath&gt;</b><BR>        <b>&lt;SympathPlus&gt; </b><i>Symbol Path to add</i><b> &lt;/SympathPlus&gt;</b><BR>        <b>&lt;Notify&gt;</b> { <i>ComputerName</i> | <i>UserName</i> } <b>&lt;/Notify&gt;</b><BR>        <b>&lt;Debugger&gt; </b><i>Debugger</i><b> &lt;/ Debugger &gt;</b><BR>    <b>&lt;/Settings&gt;</b><BR></nobr></P>
+<P>The <b>Settings </b>section contains the following elements:</P>
+<DL><DL><DT><b>AttachInterval</b></DT>
+<DD>Same as the <i>IntervalInSeconds</i> parameter of the <b>&#8211;r</b> command-line option.</DD>
+</DL>
+<DL><DT><b>AttachRepeats</b></DT>
+<DD>Same as the <i>Repeats</i> parameter of the <b>&#8211;r</b> command-line option.</DD>
+</DL>
+<DL><DT><i>runmode</i></DT>
+<DD><i>runmode</i> can be either CRASH or HANG.</DD>
+</DL>
+<DL><DT><i>LastCommand</i></DT>
+<DD>Can be Q, QD, G, GN or Void. The first four options are equivalent to <a href="r17_cmds_i_27fbcb2b-e3e7-470e-bab9-29dd7a115129.xml.htm">q, qq (Quit)</a>, <a href="r17_cmds_i_922e4540-49bd-419a-a76e-c8b9f766db22.xml.htm">qd (Quit and Detach)</a>, <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm">g (Go)</a>, and <a href="r16_cmds_c_3254135f-8902-45ee-a2dc-a52049ea903c.xml.htm">gn, gN (Go with Exception Not Handled)</a> debugger commands. <P>Void indicates that no debugger command is added. In this situation, you must manually enter the last command in the debug session. </P>
+<P>The default behavior is Q. Setting <i>LastCommand </i>to something other than the default is required only if you will use the CTL+C behavior (<b>bpe</b> exception) to induce dumps.</P>
+</DD>
+</DL>
+<DL><DT><b>IIS</b></DT>
+<DD>Same as the <b>-iis</b> command-line option.</DD>
+</DL>
+<DL><DT><b>Quiet</b></DT>
+<DD>Same as the <b>-quiet</b> command-line option.</DD>
+</DL>
+<DL><DT><b>NoTlist</b></DT>
+<DD>Same as the <b>-NoTlist</b> command-line option.</DD>
+</DL>
+<DL><DT><b>NoTsCheck</b></DT>
+<DD>Same as the <b>-NoTsCheck</b> command-line option.</DD>
+</DL>
+<DL><DT><b>NoFreeSpaceChecking</b></DT>
+<DD>Same as the <b>-NoFreeSpaceChecking</b> command-line option.</DD>
+</DL>
+<DL><DT><i>OutputDirectoryName</i></DT>
+<DD>Same as the <b>-o</b> command-line option.</DD>
+</DL>
+<DL><DT><i>PID</i></DT>
+<DD>Same as the <b>-p</b> command-line option.</DD>
+</DL>
+<DL><DT><i>ProcessName</i></DT>
+<DD>Same as the <b>-pn</b> command-line option.</DD>
+</DL>
+<DL><DT><i>ScriptName</i></DT>
+<DD>Same as the <b>-gs</b> command-line option.</DD>
+</DL>
+<DL><DT><i>Spawn Command</i></DT>
+<DD>Same as the <b>-sc</b> command-line option.</DD>
+</DL>
+<DL><DT><i>Symbol Path</i></DT>
+<DD>Same as the <b>-y</b> command-line option.</DD>
+</DL>
+<DL><DT><i>Symbol Path to add</i></DT>
+<DD>Same as the <b>-yp</b> command-line option.</DD>
+</DL>
+<DL><DT>{ <i>ComputerName</i> | <i>UserName</i> }</DT>
+<DD>Same as the <b>-Notify</b> command-line option.</DD>
+</DL>
+<DL><DT><i>Debugger</i></DT>
+<DD>Same as the <b>-dbg</b> command-line option.</DD>
+</DL>
+</DL>
+<P></P>
+<P>For more information about the corresponding command-line switches, see <a href="adplus_fca9d42a-47f8-4596-ba51-238604e15c04.xml.htm">ADPlus Command-Line Options</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Settings RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>EXT_CLASS</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, EXT_CLASS"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Engextcpp.hpp"/>
+<MSHelp:Attr Name="APIName" Value="EXT_CLASS"/>
+<MSHelp:Keyword Index="A" Term="EngExtCpp_Ref_731f5b1a-bf23-4c78-8c2e-663dd7c35793.xml"/>
+<META NAME="MS-HKWD" CONTENT="EXT_CLASS constant"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_Ref_731f5b1a-bf23-4c78-8c2e-663dd7c35793.xml"></A>EXT_CLASS</H1>
+<P>The EXT_CLASS constant specifies the name of the C++ class that represents the EngExtCpp extension library.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>#ifndef EXT_CLASS</b><BR><b>#define EXT_CLASS Extension</b><BR><b>#endif</b><BR></P>
+<H4>Comments</H4>
+<P>The default value of EXT_CLASS is <b>Extension</b>.  You can change this value  by defining EXT_CLASS before you include the header file <i>Engextcpp.hpp</i>.</P>
+<P>Each extension command in the library is declared as a member of the class EXT_CLASS using the macro <a href="engextcpp_ref_a4a0b264-50e1-457b-a962-ca691509ea36.xml.htm">EXT_COMMAND_METHOD</a>.  For example, a library with two extension commands, <i>extcmd</i> and <i>anotherextcmd</i>, could define the class EXT_CLASS as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>class EXT_CLASS : public ExtExtension<BR>{<BR>public:<BR>    EXT_COMMAND_METHOD(<i>extcmd</i>);<BR>    EXT_COMMAND_METHOD(<i>anotherextcmd</i>);<BR>}<BR></nobr></P>
+<P>Extension commands that have been declared by using EXT_COMMAND_METHOD should be defined by using <a href="engextcpp_ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml.htm">EXT_COMMAND</a> and should be exported from the library.</P>
+<P>The <a href="engextcpp_ref_a5d385c6-22c3-4d60-8ad6-a605ab3705c9.xml.htm">EXT_DECLARE_GLOBALS</a> macro creates a single instance of the EXT_CLASS class.</P>
+<H4>Requirements</H4>
+<p><b>Headers:</b> Defined in <i>Engextcpp.hpp</i>.  Include <i>Engextcpp.hpp</i>.</p>
+<H4>See Also</H4>
+<P><a href="engextcpp_ref_a6dc21d7-b0c2-4e13-add5-ecfe3c38a94a.xml.htm">EXT_COMMAND</a>, <a href="engextcpp_ref_a4a0b264-50e1-457b-a962-ca691509ea36.xml.htm">EXT_COMMAND_METHOD</a>, <a href="engextcpp_ref_a5d385c6-22c3-4d60-8ad6-a605ab3705c9.xml.htm">EXT_DECLARE_GLOBALS</a></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: EXT_CLASS RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

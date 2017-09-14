@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Source Window</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Source Window"><xml><MSHelp:Keyword Index="A" Term="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml"/>
+<META NAME="MS-HKWD" CONTENT="debugging information windows, Source windows">
+<META NAME="MS-HKWD" CONTENT="Source windows">
+<META NAME="MS-HKWD" CONTENT="source debugging, Source windows"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_WINDOW_SOURCE"></a><H1><A NAME="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml"></A>Source Window</H1>
+<P></P>
+<P>The Source window displays source files that have been loaded into the debugger. </P>
+<H4>Opening the Source Window</H4>
+<P>The debugger opens a source window when it loads a new source file. To restore or switch to an open Source window, in the WinDbg window, on the <b>Window</b> menu, select the window from the list of windows at the bottom of the menu.</P>
+<P>The following figure shows an example of a Source window.</P>
+<p><img src="window-source.bmp"></p>
+<P>Each source file resides in its own Source window. The title of each Source window is the full path of the source file.</P>
+<H4>Using the Source Window</H4>
+<P>Each Source window displays the text of one source file. You cannot edit a source file in the debugger. For more information about changing the font and tab settings, see <a href="r06_use_gui_7c4da8a6-dba1-4e29-a873-542481ae86da.xml.htm">Changing Text Properties</a>.</P>
+<P>To select an entire word or token in a Source window, double-click the word or C++ token.</P>
+<H4>Shortcut Menu </H4>
+<P>Each Source window has a shortcut menu with additional commands. To access the menu, right-click the title bar or click the icon that appears near the upper-right corner of the window (<img src="window-source-icon.png">). The menu contains the following commands:</P><B></B><UL type="disc">
+<LI><b>Set instruction pointer to current line</b> changes the value of the instruction pointer to the instruction that corresponds to the current line. This command is equivalent to using the <a href="r37_gui_2_829b9f13-f6e5-4af0-a117-e1c2dd879073.xml.htm"><b>Edit | Set Current Instruction</b></a> command or pressing CTRL+SHIFT+I.</LI>
+<LI><b>Edit this file</b> opens the source file in a text editor. The editor is determined by the WinDiff editor registry information or by the value of the WINDBG_INVOKE_EDITOR environment variable. For example, consider if the value of WINDBG_INVOKE_EDITOR is the following.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>c:\my\path\myeditor.exe -file %f -line %l<BR></nobr></P>
+<P>In this case, <i>Myeditor.exe</i> will open to the one-based line number of the current source file. The %l option indicates that line numbers should be read as one-based, while %f indicates that the current source file should be used. Other substitution possibilities include %L, which indicates that line numbers are zero-based, and %p, which can also indicate that the current source file should be used.  </P>
+</LI>
+<LI><b>Copy</b> copies the current selection to the clipboard. If there is no current selection, this command has no effect.</LI>
+<LI><b>Copy file path to clipboard</b> copies the file path of the Source window to the clipboard.</LI>
+<LI><b>Evaluate selection</b> evaluates the currently-selected text by using the C++ expression evaluator. The result appears in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>. If the selected text includes more than one line, a syntax error results. This command is equivalent to using the <a href="r37_gui_2_4bb7b86a-23c5-4c60-8ced-202641a522f5.xml.htm"><b>Edit | Evaluate Selection</b></a> command, pressing CTRL+SHIFT+V, or using the  <a href="r15_cmds_a_5452eb2e-975c-4151-9bc0-890b163f004d.xml.htm"><b>?? (Evaluate C++ Expression)</b></a> command with the selected text as its argument.</LI>
+<LI><b>Display selected type</b> displays the data type of the selected object. This display appears in the Debugger Command window. If the selected text includes more than a single object, a syntax error or other irregular results might be displayed. This command is equivalent to using the <a href="r37_gui_2_d8a3c01a-29a2-4664-ad9a-0e8c3a41b459.xml.htm"><b>Edit | Display Selected Type</b></a> command or pressing CTRL+SHIFT+Y.</LI>
+<LI><i>(Menu only)</i>  <b>Open memory window for selected value</b> opens a new docked Memory window that displays memory starting at the address of the selected expression.</LI>
+<LI><i>(Menu only)</i>  <b>Add selection to Watch window </b>appends the selected source token to Watch window.</LI>
+<LI><b>Disassemble at current line</b> causes the instruction that corresponds to the current line to appear in the <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a>. The selected line is highlighted in the Source window and in the Disassembly window, but this command affects only the display&#8212;the instruction pointer is not changed. If the Disassembly window is closed when this command is clicked, it is opened.</LI>
+<LI><b>Select source language</b> displays a list of programming languages. Select the programming language that you used to generate the source file, and then click <b>OK</b> to enable basic syntax highlighting for the current Source window. Select <b>&lt;None&gt;</b> to disable syntax highlighting for the current Source window.</LI>
+<LI><b>Dock</b> or <b>Undock</b> causes the window to enter or leave the docked state.</LI>
+<LI><i>(Menu only)</i>  <b>Move to new dock</b> closes the Source window and opens it in a new dock.</LI>
+<LI><i>(Menu only)</i> <b>Set as tab-dock target for window type</b> sets the selected Source window as the tab-dock target for other Source windows.  All Source windows opened after one is chosen as the tab-dock target are automatically grouped with that window in a tabbed collection.  The Source Window marked as the tab-dock target will not close when <b>Window | Close All Source Windows</b> is selected.  This allows you to set a placeholder window that will not be closed unless you want it to be.</LI>
+<LI><b>Always floating</b> causes the window to remain undocked even if it is dragged to a docking location.</LI>
+<LI><b>Move with frame</b> causes the window to move when the WinDbg frame is moved, even if the window is undocked. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>.</LI>
+<LI><b>Help</b> opens this topic in the Debugging Tools for Windows documentation.</LI>
+<LI><b>Close</b> closes this window.</LI>
+</UL>
+<P></P>
+<H4>Source Window Colors and Hover Evaluation</H4>
+<P>If the debugger recognizes the source file name extension, the Source window displays certain syntax elements in color. To turn off or change the colors, do the following:</P><B></B><UL type="disc">
+<LI>To turn the syntax colors off in a single window, open the Source window's shortcut menu, click <b>Select source language</b>, and then click <b>&lt;None&gt;</b>. </LI>
+<LI>To turn the syntax colors off for all Source windows, select <b>Options</b> from the <b>View</b> menu. Then clear the <b>Parse Source Languages</b> check box.</LI>
+<LI>To change the syntax colors, select <b>Options</b> from the <b>View</b> menu. Then, in the <b>Colors</b> area, select a syntax element and click the <b>Change</b> button to change the color.</LI>
+<LI>The parsing method that is used for the highlighting is determined by the programming language that is associated with the file extension for the source file. To change the programming language that is associated with a specific file extension, use the <a href="r37_gui_2_24d9d97f-e5d4-4ba2-af95-e69fd78fc078.xml.htm"><b>File Extensions for Source Languages</b> dialog box</a>. To open this dialog box, in the WinDbg window, on the <b>View</b> menu, click <b>Source language file extensions</b>.</LI>
+</UL>
+<P></P>
+<P>The line that represents the current program counter is highlighted in green. However, if you select a line with the mouse or by using one of the <b>Edit | Go to </b><i>Xxx</i> commands, the selected line is green and the line that represents the current program counter is not highlighted. Lines at which breakpoints are set are highlighted as well. Enabled breakpoints are highlighted in red and disabled breakpoints are highlighted in yellow. If a breakpoint coincides with the current program counter, it is highlighted in purple.</P>
+<P>If you select a Source window and then use the mouse to hover over a symbol in that window, the symbol will be evaluated. The evaluation is the same as that produced by the <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a> command. To deactivate this evaluation, select <b>Options</b> from the <b>View</b> menu. Then clear the <b>Evaluate on hover</b> check box.</P>
+<H4>Additional Information</H4>
+<P>For more information about source debugging and related commands, see <a href="r07_use_operation_6f6332fb-7207-429d-8a27-a2ff0bf02bbb.xml.htm">Debugging in Source Mode</a>. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>. For more information about all techniques that you can use to control debugging information windows, see <a href="r06_use_gui_35306de1-d9fb-45e6-800f-e3ee00114421.xml.htm">Using Debugging Information Windows</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Source Window RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

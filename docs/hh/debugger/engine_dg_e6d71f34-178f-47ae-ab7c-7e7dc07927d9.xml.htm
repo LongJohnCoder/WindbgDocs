@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Target Information</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Target Information"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_e6d71f34-178f-47ae-ab7c-7e7dc07927d9.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, targets, info"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_e6d71f34-178f-47ae-ab7c-7e7dc07927d9.xml"></A>Target Information</H1>
+<P>The method <a href="idebugcontrol_4179686c-b047-41f5-98cc-28f2c6bd852d.xml.htm"><b>GetDebuggeeType</b></a> returns the nature of the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#2a8fdab1-9104-4107-b188-c3879a3c4a66">current target</a> (for example, whether it is a <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#4b2be502-8e1f-4b9a-9e8d-54729c1f7860">kernel-mode</a> or <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#ee9a29df-b52f-4883-8452-51e8c4d608a7">user-mode target</a>), and how the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> is connected to it.</P>
+<P>If the target is a <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#d02ecf5e-605d-42e2-9aea-a3ea60e2defb">crash dump file</a> file, the method <a href="idebugcontrol_fc8bec39-ffc3-46bd-9d18-954f0420906f.xml.htm"><b>GetDumpFormatFlags</b></a> will indicate what information is contained in the dump.</P>
+<H4>Target's Computer</H4>
+<P>The page size of the target's computer is returned by <a href="idebugcontrol_b38e4c0a-5992-4afe-b684-2eb65b3a0271.xml.htm"><b>GetPageSize</b></a>.  <a href="idebugcontrol_62a0cc8d-e542-4889-9f68-591d00828d4b.xml.htm"><b>IsPointer64Bit</b></a> will indicate if the computer uses 32-bit or 64-bit addresses.</P>
+<P class="note"><b>Note  </b>Internally, the debugger engine always uses 64-bit addresses for the target.  If the target only uses 32-bit addresses, the engine automatically converts them when communicating with the target.</P>
+<P>The number of processors in the target's computer is returned by <a href="idebugcontrol_0ddf74be-971f-4bd8-bdfd-4ceedfbbdc0f.xml.htm"><b>GetNumberProcessors</b></a>.</P>
+<P>There are three different processor types associated with the target's computer:</P><B></B><UL type="disc">
+<LI>The <i>actual processor type</i> is the type of the physical processor in the target's computer. This is returned by <a href="idebugcontrol_5511971f-2155-4ba3-b0f3-9bcd91b29555.xml.htm"><b>GetActualProcessorType</b></a>.</LI>
+<LI>The <i>executing processor type</i> is the type of the processor used in the currently executing processor context. This is returned by <a href="idebugcontrol_b2aad495-5a68-4888-bedb-da76edbfbe7a.xml.htm"><b>GetExecutingProcessorType</b></a>.</LI>
+<LI>The <i>effective processor type</i> is the processor type the debugger uses when interpreting information from the target &#8212; for example, setting breakpoints, accessing registers, and getting stack traces.  The effective processor type is returned by <a href="idebugcontrol_9e0db836-17eb-4df1-a298-f8d54282d188.xml.htm"><b>GetEffectiveProcessorType</b></a> and can be changed using <a href="idebugcontrol_284f54f4-897e-4329-b588-5eae0c638179.xml.htm"><b>SetEffectiveProcessorType</b></a>.</LI>
+</UL>
+<P>The effective processor type and executing processor type may differ from the actual processor type &#8212; for example, when the physical processor is an x64 processor and it is running in x86 mode.</P>
+<P>The different executing processor types that are supported by the physical processor on the target's computer are returned by <a href="idebugcontrol_582811e7-4eb0-4b94-a5d0-8c903ea8c2fe.xml.htm"><b>GetPossibleExecutingProcessorTypes</b></a>.  The number of these is returned by <a href="idebugcontrol_62f066c6-6ffb-4323-ad82-786a8a763783.xml.htm"><b>GetNumberPossibleExecutingProcessorTypes</b></a>.</P>
+<P>The list of processor types that is supported by the debugger engine is returned by <a href="idebugcontrol_555eef6a-df68-4f94-9cfa-dc31aee27014.xml.htm"><b>GetSupportedProcessorTypes</b></a>.  The number of supported processor types is returned by <a href="idebugcontrol_5b3a8335-0e6f-4f83-9549-fa53ce9eb1d5.xml.htm"><b>GetNumberSupportedProcessorTypes</b></a>.</P>
+<P>The names (full and abbreviated) of a processor type are returned by <a href="idebugcontrol_f14b5f52-cf94-458b-bd1e-61c3ad66a597.xml.htm"><b>GetProcessorTypeNames</b></a>.</P>
+<P>The current time on the target's computer is returned by <a href="idebugcontrol_166ad959-02b4-4b42-8acd-1456d224f9e7.xml.htm"><b>GetCurrentTimeDate</b></a>.  The length of time the target's computer has been running since the last boot is returned by <a href="idebugcontrol_e10ddd31-60fe-4353-befe-45a04154615b.xml.htm"><b>GetCurrentSystemUpTime</b></a>.  Time information may not be available for all targets.</P>
+<H4>Target Versions</H4>
+<P>The Windows version running on the target's computer is returned by <a href="idebugcontrol_32de1433-8721-41c0-9b14-43ef8f7bcf70.xml.htm"><b>GetSystemVersionValues</b></a> and the <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation <a href="idebugadvanced_96dc7a97-2f3a-451f-905a-de4b1fb1e5d7.xml.htm">DEBUG_REQUEST_GET_WIN32_MAJOR_MINOR_VERSIONS</a>, and a description of the Windows version is returned by <a href="idebugcontrol_4adaed37-7034-4c64-9064-466706a2951e.xml.htm"><b>GetSystemVersionString</b></a>.  Some of this information is also returned by <a href="idebugcontrol_92a4c34c-aa39-43e5-ad31-0ce26e45c246.xml.htm"><b>GetSystemVersion</b></a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Target Information RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wmitrace.searchpath</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wmitrace.searchpath"><xml><MSHelp:Keyword Index="A" Term="r34_exts_WMI_bc37cf69-1e42-4c02-b7e0-ad8563e93124.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wmitrace.searchpath extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r34_exts_WMI_bc37cf69-1e42-4c02-b7e0-ad8563e93124.xml"></A>!wmitrace.searchpath</H1>
+<P><P>The <b>!wmitrace.searchpath</b> extension specifies the location of the trace message format files for messages in the trace buffers.</P>
+<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wmitrace.searchpath</b> [<b>+</b>] <i>TMFPath</i> <BR><b>!wmitrace.searchpath</b> <BR></nobr></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>+</b> </DT>
+<DD>Causes <i>TMFPath</i> to be appended to the existing search path.  If the <nobr>plus ( <b>+</b> )</nobr> token is not used, <i>TMFPath</i> replaces the existing search path. </DD>
+<DT><i>TMFPath</i></DT>
+<DD>The path to the directory where the debugger should look for the trace message format files.  Paths that contain spaces are not supported.  If multiple paths are included, they should be separated by semicolons, and the entire string should be enclosed in quotation marks. When the <b>+</b> token is used, <i>TMFPath</i> will be appended to the existing path, with a semicolon automatically inserted between the existing path and the new path; however, if the <b>+</b> token is used, quotation marks cannot be used.  </DD>
+<DT></DT>
+<DD></DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P>This extension is exported by <i>Wmitrace.dll</i>. </P>
+<P>This extension is available in Windows 2000 and later versions of Windows. If you want to use this extension with Windows 2000, you must first copy the <i>Wmitrace.dll</i> file from the <i>winxp</i> subdirectory of the Debugging Tools for Windows installation directory to the <i>w2kfre</i> subdirectory. </P>
+<P></P>
+<H4>Comments</H4>
+<P>When used with no parameters, <b>!wmitrace.searchpath</b> displays the current search path. </P>
+<P>The trace message format files (<i>*.tmf</i>) contain instructions for formatting the binary trace messages that a trace provider generates. </P>
+<P>The <i>TMFPath</i> parameter must contain only a path to a directory; it cannot include a file name. The name of a TMF file is a message GUID followed by the <i>.tmf</i> extension. When the system formats a message, it reads the message GUID on the message and searches recursively for a TMF file whose name matches the message GUID, beginning in the specified directory.</P>
+<P>Windows needs a TMF file in order to format the binary trace messages in a buffer. Use <b>!wmitrace.searchpath</b> or <a href="r34_exts_wmi_15ca23b2-74e8-4bca-b12f-57c478cee2f6.xml.htm"><b>!wmitrace.tmffile</b></a> to specify the TMF file before using <a href="r34_exts_wmi_431968bb-f516-455a-b845-e73b331a604b.xml.htm"><b>!wmitrace.dynamicprint</b></a> or <a href="r34_exts_wmi_cda1a996-6130-4728-809c-2d0cf5eba21c.xml.htm"><b>!wmitrace.logdump</b></a> to display trace buffer contents. </P>
+<P>If you do not use either <b>!wmitrace.searchpath</b> or <b>!wmitrace.tmffile</b>, the system uses the value of the TRACE_FORMAT_SEARCH_PATH environment variable. If that variable is not present, it uses the <i>default.tmf</i> file, which is included in Windows. If the system cannot find any formatting information for a trace message, it writes a "No format information found" error message in place of the trace message content.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For a conceptual overview of event tracing, see the Microsoft Windows SDK. For information about trace message format files, see the "Trace Message Format Files" topic in the Windows Driver Kit (WDK).</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wmitrace.searchpath RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

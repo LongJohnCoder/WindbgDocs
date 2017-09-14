@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xCF: TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xCF: TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_32e57dc2-474d-4877-aa07-459e84a77311.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xCF: TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE">
+<META NAME="MS-HKWD" CONTENT="TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_32e57dc2-474d-4877-aa07-459e84a77311.xml"></A>Bug Check 0xCF: TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE</H1>
+<P>The TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE bug check has a value of 0x000000CF. This indicates that a driver has been incorrectly ported to the terminal server.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">Memory address referenced</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width=""><b>0:</b> Read<BR><BR><b>1:</b> Write<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">Address that referenced memory (if known)</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Reserved    </TD>
+</TR>
+</table>
+<P></P>
+<P>If the driver responsible for the error can be identified, its name is printed on the blue screen and stored in memory at the location (PUNICODE_STRING) <b>KiBugCheckDriver</b>.</P>
+<H4>Cause</H4>
+<P>The driver is referencing session space addresses from the system process context. This probably results from the driver queuing an item to a system worker thread.</P>
+<P>This driver needs to comply with Terminal Server's memory management rules.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xCF: TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using a Source Server</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using a Source Server"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_9f858c04-aa3a-4c3b-a747-45d9d46c3a62.xml"/>
+<META NAME="MS-HKWD" CONTENT="source server (srcsrv.dll)">
+<META NAME="MS-HKWD" CONTENT="source server (srcsrv.dll), overview">
+<META NAME="MS-HKWD" CONTENT="SrcSrv (srcsrv.dll)">
+<META NAME="MS-HKWD" CONTENT="SrcSrv (srcsrv.dll), overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_9f858c04-aa3a-4c3b-a747-45d9d46c3a62.xml"></A>Using a Source Server</H1>
+<P>A source server enables the debugger to automatically retrieve the source files that match the current target. To use a source server, you must be debugging binaries that have been source indexed at build time and whose source file locations are embedded in the PDB files. </P>
+<P>Debugging Tools for Windows includes the source server SrcSrv (<i>Srcsrv.exe</i>).  For technical information about this tool, see <a href="symchk_c1ea56ff-ef8a-46ab-bfd8-ee049ef81d2a.xml.htm">SrcSrv</a>.   </P>
+<H4>Using SrcSrv with a Debugger</H4>
+<P>SrcSrv can be used with WinDbg, KD, NTSD, or CDB.</P>
+<P>To use this source server with the debugger, include the text <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>srv*</b></span> in the source path, followed by the directory specification or UNC path of the source store:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>srv*</b><i>SourceStoreLocation </i><BR></nobr></P>
+<P></P>
+<P>For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>.srcpath srv*\\myserver\myshare;c:\mylocaldir </b><BR></nobr></P>
+<P></P>
+<P>This example also includes a local source path element (<i>c:\mylocaldir</i>). Regardless of whether <b>srv*</b> is the first element in the path or appears later, the source server will always be searched before any other source path elements. If SrcSrv is unable to access the source file or discover its location, the other paths will be searched by the debugger.</P>
+<P>If a source file is retrieved by the source server, it will remain on your hard drive after the debugging session is over. Source files are stored locally in the <i>src</i> subdirectory of the home directory (unlike the symbol server, the source server does not specify a local cache in the <b>srv*</b> syntax itself). The home directory defaults to the debugger installation directory; it can be changed by using the <a href="r25_exts_general_he_9b31ba76-7378-454b-9192-3501fa2fedb6.xml.htm"><b>!homedir</b></a> extension or by setting the DBGHELP_HOMEDIR environment variable. If this subdirectory does not already exist, it will be created.</P>
+<P>If you use the <a href="r21_metacmds_l_2bf63e00-f90a-4416-a13a-b4d4153e12dd.xml.htm"><b>.open (Open Source File)</b></a> command to open a new source file through SrcSrv, you must include the <nobr><b>-m </b><I><B>Address</B></I></nobr> parameter.</P>
+<P>For information on how to index your sources, or if you plan to create your own source control provider module, see <a href="symchk_c1ea56ff-ef8a-46ab-bfd8-ee049ef81d2a.xml.htm">SrcSrv</a>.</P>
+<H4>Using AgeStore to Reduce the Cache Size</H4>
+<P>Any source files downloaded by SrcSrv will remain on your hard drive after the debugging session is over.  To control the size of the source cache, the AgeStore tool can be used to delete cached files that are older than a specified date, or to reduce the contents of the cache below a specified size.  For details, see <a href="symchk_578d84f8-168a-40be-84c7-44815ac942c5.xml.htm">AgeStore</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using a Source Server RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

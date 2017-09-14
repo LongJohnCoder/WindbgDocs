@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>/debug</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, /debug"><xml><MSHelp:Keyword Index="A" Term="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml"/>
+<META NAME="MS-HKWD" CONTENT="/debug"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml"></A>/debug</H1>
+<P>The <b>/debug</b> parameter establishes a kernel debugging connection. </P><i>Syntax for Microsoft Windows 2000 and Windows XP only.</i><P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/debug</b><BR></nobr></P>
+<P></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/debug</b> <b>/debugport=COM</b><i>x </i>[ <b>/baudrate=</b><i>BaudRate</i> ] <BR></nobr></P>
+<P></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/debug /debugport=1394</b><i> </i>[<b>/channel=</b><i>Channel </i>] <BR></nobr></P>
+<P></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/debug /debugport=usb</b><i> </i><b>/targetname=</b><i>String</i><BR></nobr></P>
+<P></P>
+<P><i>Syntax for Microsoft Windows Server 2003 only.</i></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/debug</b><BR></nobr></P>
+<P></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/debug</b>[<b>=</b>{<b>autoenable</b> | <b>disable</b> | <b>noumex</b>}<b>,</b>...] <b>/debugport=COM</b><i>x </i>[ <b>/baudrate=</b><i>BaudRate</i> ]<BR></nobr></P>
+<P></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/debug</b>[<b>=</b>{<b>autoenable</b> | <b>disable</b> | <b>noumex</b>}<b>,</b>...] <b>/debugport=1394</b><i> </i>[<b>/channel=</b><i>Channel </i>]<BR></nobr></P>
+<P></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/debug</b>[<b>=</b>{<b>autoenable</b> | <b>disable</b> | <b>noumex</b>}<b>,</b>...] <b>/debugport=usb</b><i> </i><b>/targetname=</b><i>String</i><BR></nobr></P>
+<P></P>
+<P></P>
+<DL><H4>Subparameters</H4>
+<DT><b>/debugport</b></DT>
+<DD>Specifies the serial port used by the kernel debugger. <P>With <b>COM</b><i>x</i>, <b>/debugport</b><i> </i>enables debugging with a debug (null modem) cable. </P>
+<P>With <b>1394</b>, <b>/debugport</b> enables debugging with an IEEE 1394 cable. </P>
+<P>With <b>usb</b>, <b>/debugport</b> enables debugging with a USB 2.0 debugging cable.</P>
+</DD>
+<DT><b>COM</b><i>x</i></DT>
+<DD>Specifies the communications port used for kernel debugging with a null modem cable. Valid values are any valid COM port, such as COM1 or COM2. <I><B> </B></I></DD>
+<DT><b>/baudrate</b></DT>
+<DD>Specifies the speed of a kernel debugger connection when using the <b>/debugport=COM</b><i>x</i> parameter.</DD>
+<DT><i>BaudRate</i></DT>
+<DD>Specifies the speed of a kernel debugger connection in BPS. Valid values for <i>BaudRate</i> are 9600, 19200, 38400, 57600, and 115200. The default is 19200.</DD>
+<DT><b>1394</b></DT>
+<DD>Specifies debugging with an IEEE 1394 (FireWire) cable. This feature is supported only if your target computer and your host computer are both running Windows XP or a later version of Windows.<P><P class="note"><b>Note</b>  Before performing kernel debugging over a 1394 cable, you must properly configure the software on both the target and the host. See <a href="r02~a_setup_1a_fcdec49c-b16c-4f8e-b1df-c1ceea0815f3.xml.htm">Disabling the 1394 Host Controller</a> and <a href="r03_setup_2_d48986aa-46cb-41a8-9be9-925545754d3a.xml.htm">Installing the 1394 Virtual Driver</a> for details. </P>
+</P>
+</DD>
+<DT>/<b>channel</b></DT>
+<DD>Specifies the 1394 bus channel used when debugging with an IEEE 1394 cable. The default value is 0.</DD>
+<DT><i>Channel</i></DT>
+<DD>Specifies the 1394 channel. The default value is 0. The value of <i>Channel</i> must be a decimal integer between 0 and 62, inclusive, and must match the channel number used by the host computer. The channel specified in this parameter does not depend on the physical 1394 port chosen on the adapter.</DD>
+<DT><b>usb</b></DT>
+<DD>Specifies debugging with a USB 2.0 debugging cable.  This feature is supported only if your host computer is running Windows 2000 or later, and your target computer is running Windows Vista or later.<P><P class="note"><b>Note</b>  Before you perform kernel debugging over a USB 2.0 cable, additional configuration is required.    See <a href="r02_setup_1_8237073f-467e-4a10-b191-b7cd218175ce.xml.htm">Setting Up a USB 2.0 Debug Cable Connection</a> for details. </P> </P>
+</DD>
+<DT><b>/targetname</b></DT>
+<DD>Specifies a string to use as the identification for the USB 2.0 connection.  This string can be any value.</DD>
+<DT><i>String</i></DT>
+<DD>Specifies a string to use as the identification for the USB 2.0 connection.  <i>String</i> can be any value.</DD>
+<DT><b>autoenable</b></DT>
+<DD>Specifies that the kernel debugger is enabled automatically when an exception or other critical event occurs. Until then, the debugger is active but is disabled.</DD>
+<DT><b>disable</b></DT>
+<DD>Specifies that the kernel debugger is enabled when you type <b>kdbgctrl</b> to clear the enable block. Until then, the debugger is active but is disabled. <P>The <b>/debug=disable</b> parameter is designed to be a preferred alternative to <a href="bootini_dd36cfd4-9c6f-487f-8264-0afb65b4b070.xml.htm"><b>/crashdebug</b></a>. For more information about the KDbgCtrl tool, see the <i>Debugging Tools for Windows</i> documentation.</P>
+</DD>
+<DT><b>noumex</b></DT>
+<DD>Specifies that the kernel debugger does not break for user-mode exceptions. By default, the kernel debugger breaks for particular user-mode exceptions, such as STATUS_BREAKPOINT and STATUS_SINGLE_STEP.  The <b>/debug=noumex</b> parameter is effective only when there is no user-mode debugger attached to the process.</DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>/debug</b> parameter is supported only on Windows Server 2003, Windows XP, and Windows 2000. In Windows Vista and later versions of Windows, use BCDEdit and the <b>/dbgsettings</b> parameter and its subparameters to establish debugger settings for all boot entries. Then, use the <b>/debug</b> parameter to enable debugging for a particular boot entry.</P>
+<P>To enable local (one computer) debugging, use only the <b>/debug</b> parameter.</P>
+<P>To enable debugging with a debug (null-modem) cable, use the <b>/debug</b> parameter with the <b>/debugport=COM</b><i>x</i> and <b>/baudrate</b> subparameter.</P>
+<P>To enable debugging with an IEEE 1394 (FireWire) cable, use the <b>/debug</b> parameter with the <b>/debugport=1394</b> and <b>/channel</b> subparameters. </P>
+<P>Because the <b>/debugport</b> subparameter reserves the specified port, do not use it unless you plan to debug the computer. </P>
+<P>When you enable kernel debugging on a serial port, Windows removes the specified port from the system device list. As a result, on computers with an  ACPI BIOS,  the port does not appear in any device lists, such as the one in Device Manager. On computers that do no have an ACPI BIOS, the port appears with an error message, such as "Not enough resources to use this port." These messages indicate that the port is under the control of the host debugging computer; they do not indicate a malfunction.</P>
+<P>To test a cable connection, start your test after connecting the cable, but before enabling debugging.</P>
+<P>When you configure a boot entry for debugging, the boot loader appends a bracketed phrase, <b>[debugger enabled]</b>, to the friendly name that appears in the boot menu. However, the boot loader omits the bracketed phrase from the boot menu when the friendly name and the bracketed phrase together exceed 70 characters. To restore the bracketed phrase, shorten the friendly name.</P>
+<P>On Windows Server 2003, you can use the <b>autoenable</b>, <b>disable</b>, and <b>noumex</b> subparameters of <b>/debug</b> to enable the debugger only when you need it. You can use more than one subparameter at a time. To use multiple subparameters, separate each subparameter with a comma. (Do not type <b>/debug</b> more than once. If you do, Windows uses the first instance and ignores all others.)</P>
+<P>For example, <b>/debug=autoenable,noumex</b> enables the kernel debugger on an exception or critical event, but not for user-mode events.</P>
+<P>For detailed examples of the use of the <b>/debug</b> parameter and its variations, see <a href="bootini_7a4cbe01-a9e7-4b00-9c85-7bac20c73286.xml.htm">Boot Parameters to Enable Debugging</a>.</P>
+<H4>Examples</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /debug<BR><BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /debug /debugport=COM1 /baudrate=115200<BR><BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /debug /debugport=1394 /channel=44<BR><BR>multi(0)disk(0)rdisk(0)partition(1)\WINNT="Windows Server 2003, Standard" /noexecute=optout /fastdetect /debug=autoenable /debugport=1394 /channel=44<BR><BR>multi(0)disk(0)rdisk(0)partition(1)\WINNT="Windows Server 2003, Standard" /noexecute=optout /fastdetect /debug=disable,noumex /debugport=COM1 /baudrate=115200<BR><BR></nobr></P>
+<H4>Bootcfg Commands</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /debug ON /ID 1<BR>bootcfg /debug ON /port=COM<i>x</i> [/baud=115200] /ID 2<BR>bootcfg /dbg1394 ON /channel=44 /ID 3<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: /debug RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>$&lt;, $&gt;&lt;, $$&lt;, $$&gt;&lt;, $$&gt;a&lt; (Run Script File)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, $<, $><, $$<, $$><, $$>a< (Run Script File)"><xml><MSHelp:Keyword Index="A" Term="r15_cmds_A_85f99aae-f246-400c-8d44-625b758a0e10.xml"/>
+<META NAME="MS-HKWD" CONTENT="$< (Run Script File) command">
+<META NAME="MS-HKWD" CONTENT="$>< (Run Script File) command">
+<META NAME="MS-HKWD" CONTENT="$$< (Run Script File) command">
+<META NAME="MS-HKWD" CONTENT="$$>< (Run Script File) command">
+<META NAME="MS-HKWD" CONTENT="Run Script File ($<) command">
+<META NAME="MS-HKWD" CONTENT="Run Script File ($><) command">
+<META NAME="MS-HKWD" CONTENT="Run Script File ($$<) command">
+<META NAME="MS-HKWD" CONTENT="Run Script File ($$><) comm"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r15_cmds_A_85f99aae-f246-400c-8d44-625b758a0e10.xml"></A>$&lt;, $&gt;&lt;, $$&lt;, $$&gt;&lt;, $$&gt;a&lt; (Run Script File)</H1>
+<P>The <b>$&lt;</b>, <b>$&gt;&lt;</b>, <b>$$&lt;</b>, <b>$$&gt;&lt;</b>, and <b>$$&gt;a&lt;</b> commands read the contents of the specified script file and use its contents as debugger command input.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>$&lt;</b><i>Filename</i> <BR><b>$&gt;&lt;</b><i>Filename</i> <BR><b>$$&lt;</b> <i>Filename</i> <BR><b>$$&gt;&lt;</b> <i>Filename</i> <BR><b>$$&gt;a&lt;</b> <i>Filename </i>[<i>arg1 arg2 arg3 ...</i> ] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Filename</i></DT>
+<DD>Specifies a file that contains valid debugger command text. The file name must follow Microsoft Windows file name conventions. The file name may contain spaces.</DD>
+<DT><i>argn</i></DT>
+<DD>Specifies any number of string arguments for the debugger to pass to the script. The debugger will replace any string of the form <b>${$arg</b><I><B>n</B></I><b>}</b> in the script file with the corresponding <i>argn </i> before executing the script. Arguments may not contain quotation marks or semicolons. Multiple arguments must be separated by spaces; if an argument contains a space it must be enclosed in quotation marks. All arguments are optional.</DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If you use the <b>$$&lt;</b> or <b>$$&gt;&lt;</b> token for this command, the space between the token and <i>Filename</i> is optional. You can add a semicolon or another command after this command.  You can enclose <i>Filename</i> in quotation marks, but this is not required, even if <i>Filename</i> contains spaces or additional commands follow on the same line.</P>
+<P>If you use the <b>$&lt;</b> or <b>$&gt;&lt;</b> token for this command, you cannot add any spaces between the token and <i>Filename</i>. You must not enclose <i>Filename</i> in quotation marks. You cannot add a semicolon or another command after this command.</P>
+<P>The <b>$&lt;</b> and <b>$$&lt;</b> tokens execute the commands that are found in the script file literally. The <b>$&gt;&lt;</b> and <b>$$&gt;&lt;</b> tokens open the script file, replace all carriage returns with semicolons, and execute the resulting text as a single command block. These tokens are useful if you are running scripts that contain debugger command programs. For more information about these programs, see <a href="r05_use_start_81070bdc-2ffb-4a22-a785-0935553fb4c4.xml.htm">Using Debugger Command Programs</a>.</P>
+<P>The <b>$$&gt;a&lt;</b> token allows the debugger to pass arguments to the script. A space between the token and <i>Filename</i> is optional.  If <i>Filename</i> contains spaces, it must be enclosed in quotations marks.  If too many arguments are supplied, the excess arguments are ignored.  If too few arguments are supplied, any token in the source file of the form <b>${$arg</b><I><B>n</B></I><b>}</b> where <i>n</i> is larger than the number of supplied arguments will remain in its literal form and will not be replaced with anything.  You can follow this command with a semicolon and additional commands; the presence of a semicolon terminates the argument list.</P>
+<P>When the debugger executes a script file, the commands and their output are displayed in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>. When the end of the script file is reached, control returns to the debugger.</P>
+<P>The following table summarizes how you can use these commands.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Token</TH>
+<TH Width="">Space permitted before the file name?</TH>
+<TH Width="">Condenses the script into a single command block?</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$&lt;</b></TD>
+<TD Width="">No</TD>
+<TD Width="">No</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$&gt;&lt;</b></TD>
+<TD Width="">No</TD>
+<TD Width="">Yes</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$$&lt;</b></TD>
+<TD Width="">Yes</TD>
+<TD Width="">No</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$$&gt;&lt;</b></TD>
+<TD Width="">Yes</TD>
+<TD Width="">Yes</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>$$&gt;a&lt;</b></TD>
+<TD Width="">Yes</TD>
+<TD Width="">Yes</TD>
+</TR>
+</table>
+<P></P>
+<P>When the debugger executes a script file, the commands and their output are displayed in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>. When the end of the script file is reached, control returns to the debugger.</P>
+<P>The <b>$&lt;</b>, <b>$&gt;&lt;</b>, <b>$$&lt;</b>, and <b>$$&gt;&lt;</b> commands echo the commands contained in the script file and display the output of these commands. The <b>$$&gt;a&lt;</b> command does not echo the commands found in the script file, but merely displays their output.</P>
+<P>Script files can be nested. If the debugger encounters one of these tokens in a script file, execution moves to the new script file and returns to the previous location when the new script file has been completed. Scripts can also be called recursively.</P>
+<P>In WinDbg, you can paste the additional command text in the Debugger Command window.</P>
+<H4>Example</H4>
+<P>The following example demonstrates how to pass arguments to a script file, <i>Myfile.txt</i>. Assume that the file contains the following text:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>.echo The first argument is ${$arg1}.<BR>.echo The second argument is ${$arg2}.<BR></nobr></P>
+<P></P>
+<P>Then you can pass arguments to this file by using a command like this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>$$&gt;a&lt;myfile.txt myFirstArg mySecondArg</b> <BR></nobr></P>
+<P>The result of this command would be:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>The first argument is myFirstArg.<BR>The second argument is mySecondArg.<BR></nobr></P>
+<P></P>
+<P>Here is an example of what happens when the wrong number of argument is supplied. Assume that the file <i>My Script.txt</i> contains the following text:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>.echo The first argument is ${$arg1}.<BR>.echo The fifth argument is ${$arg5}.<BR>.echo The fourth argument is ${$arg4}.<BR></nobr></P>
+<P></P>
+<P>Then the following semicolon-delimited command line produces output thus:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>$$&gt;a&lt; "c:\binl\my script.txt" "First one" Two "Three More" Four; recx</b> <BR>The first argument is First one.<BR>The fifth argument is ${$arg5}.<BR>The fourth argument is Four.<BR>ecx=0021f4ac<BR></nobr></P>
+<P></P>
+<P>In the preceding example, the file name is enclosed in quotation marks because it contains a space, and arguments that contain spaces are enclosed in quotation marks as well. Although a fifth argument seems to be expected by the script, the semicolon terminates the <b>$$&gt;a&lt;</b> command after the fourth argument.</P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: $<, $><, $$<, $$><, $$>a< (Run Script File) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

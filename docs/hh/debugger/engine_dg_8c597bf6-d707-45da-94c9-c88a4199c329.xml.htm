@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Scopes and Symbol Groups</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Scopes and Symbol Groups"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_8c597bf6-d707-45da-94c9-c88a4199c329.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, symbols, symbol groups">
+<META NAME="MS-HKWD" CONTENT="symbol group, scopes">
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, symbols, scopes">
+<META NAME="MS-HKWD" CONTENT="scopes"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_8c597bf6-d707-45da-94c9-c88a4199c329.xml"></A>Scopes and Symbol Groups</H1>
+<P>A <i>symbol group</i> contains a set of symbols for efficient manipulation as a group.  A symbol group can be created and populated manually or can be automatically generated and updated based on symbols in lexical scopes, such as local variables and function arguments.  The interface <a href="comother_f174a794-e2c2-4d0a-912e-b3de6327ef19.xml.htm"><b>IDebugSymbolGroup</b></a> is used to represent a symbol group.</P>
+<P>There are two ways to create a symbol group.  An empty symbol group is returned by <a href="idebugsymbols_fe8b31b2-0c5c-4dde-9d60-a353893e3f65.xml.htm"><b>CreateSymbolGroup</b></a>, and the symbol group for the current lexical scope is returned by <a href="idebugsymbols_a51f6be3-09dc-48a4-ae45-149fea6bfb1b.xml.htm"><b>GetScopeSymbolGroup</b></a>.</P>
+<P class="note"><b>Note:</b>  The symbol group generated from the current scope is a snapshot of the local variables.  If any execution occurs in the target, the symbols may no longer be accurate.  Also, if the current scope changes, the symbol group will no longer represent the <i>current</i> scope (because it will continue to represent the scope for which it was created).</P>
+<P>Symbols can be added to a symbol group using <a href="comother_936851e7-6a8b-4b42-b339-9c8aa096d684.xml.htm"><b>AddSymbol</b></a>, and removed using <a href="comother_d532b37e-11c9-4cff-a619-0b9dffef0af1.xml.htm"><b>RemoveSymbolByIndex</b></a> or <a href="comother_894176f1-bf26-4780-b287-a97993dd6e79.xml.htm"><b>RemoveSymbolByName</b></a>.  The method <a href="comother_6805cc12-0d46-4114-a40d-54c7e32b3c7c.xml.htm"><b>OutputAsType</b></a> tells the debugger to use a different symbol type when handling a symbol's data.  </P>
+<P class="note"><b>Note:</b>  The values for scoped symbols may not be accurate.  In particular, the machine architecture and compiler optimizations may prevent the debugger from accurately determining a symbol's value.</P>
+<P>The <i>symbol entry information</i> is a description of a symbol, including its location and its type.  To find this information for a symbol in a <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a>, use the <a href="idebugsymbols_a1ac4d9f-172c-4697-937d-a59c88bb8778.xml.htm"><b>IDebugSymbols3::GetSymbolEntryInformation</b></a>.  To find this information for a symbol in a symbol group, use <a href="comother_b34e6d42-3da1-43bd-954d-0aaf0da5a3a8.xml.htm"><b>IDebugSymbolGroup2::GetSymbolEntryInformation</b></a>.  See <a href="structures_5673550e-274a-429f-9a31-88e401bca68e.xml.htm">DEBUG_SYMBOL_ENTRY</a> for details of the symbol entry information.</P>
+<P>The following methods return information about a symbol in a symbol group:</P><B></B><UL type="disc">
+<LI><a href="comother_e12d7aee-985e-4770-8567-7c3748a79905.xml.htm"><b>GetSymbolName</b></a> returns the name of the symbol.</LI>
+<LI><a href="comother_11a91301-541c-4bc3-aa1e-614db8170e03.xml.htm"><b>GetSymbolOffset</b></a> returns the absolute address in the target's virtual address space of the symbol, if the symbol has an absolute address.</LI>
+<LI><a href="comother_9383fee9-ec27-4ccb-8768-02bd550746d7.xml.htm"><b>GetSymbolRegister</b></a> returns the register containing the symbol, if the symbol is contained in a register.</LI>
+<LI><a href="comother_a6e69468-38f9-449d-9bd7-0ef52585f2aa.xml.htm"><b>GetSymbolSize</b></a> returns the size of the data for the symbol.</LI>
+<LI><a href="comother_27d4a23e-4566-4b37-a692-2b82310ae8e9.xml.htm"><b>GetSymbolTypeName</b></a> returns the name of the symbol's type.</LI>
+<LI><a href="comother_2a064ea0-63f4-441f-a79c-e6fc1e9688c7.xml.htm"><b>GetSymbolValueText</b></a> returns the value of the symbol as a string.</LI>
+</UL>
+<P>If a symbol is stored in a register or in a memory location known to the debugger engine, its value can be changed using <a href="comother_3b8938be-b82e-404c-b80f-36e1ceedc353.xml.htm"><b>WriteSymbol</b></a>.</P>
+<P>A symbol is a <i>parent symbol</i> if it contains other symbols. For example, a structure contains its members.  A symbol is a <i>child symbol</i> if it is contained in another symbol.  A symbol may be both a parent and child symbol.  Each symbol group has a flat structure and contains parent symbols and their children.  Each symbol has a <i>depth</i> &#8212; symbols without parents in the symbol group have a depth of zero, and the depth of each child symbol is one greater than the depth of its parent.  The children of a parent symbol may or may not be present in the symbol group.  When the children are present in the symbol group, the parent symbol is referred to as <i>expanded</i>.  To add or remove the children of a symbol in a symbol group, use <a href="comother_894f45d2-9f7b-4d8d-85e3-9240d020ebbe.xml.htm"><b>ExpandSymbol</b></a>.</P>
+<P>The number of symbols in a symbol group is returned by <a href="comother_e355317f-ba58-4d2a-a8f7-ad3cf4b17607.xml.htm"><b>GetNumberSymbols</b></a>.  The <i>index</i> of a symbol in a symbol group is an identification number; the index ranges from zero to the number of symbols minus one.  Each time a symbol is added to or removed from a symbol group &#8212; for example, by expanding a symbol &#8212; the index of all the symbols in the symbol group may change.</P>
+<P>The symbol parameters, including information about parent-child relationships, can be found by using <a href="comother_f81a6f5a-df93-4ae2-9694-88a25d6d67a8.xml.htm"><b>GetSymbolParameters</b></a>. This method returns a <a href="structures_d79dd552-1acf-4023-99e0-418639a54782.xml.htm">DEBUG_SYMBOL_PARAMETERS</a> structure.</P>
+<P>The symbols in a symbol group can be printed to the debugger's output stream using the method <a href="comother_47d8529f-4fdf-4a79-ae80-61e483c897f2.xml.htm"><b>OutputSymbols</b></a>.</P>
+<H4>Scopes</H4>
+<P>The <i>current scope</i>, or <i>current local context</i>, determines the local variables exposed by the debugger engine.  The scope has three components:</P><B></B><OL type="1">
+<LI>A <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#ab5b362b-84d0-4128-bd43-7e3d5014f81f">stack frame</a>.</LI>
+<LI>A current instruction.</LI>
+<LI>A <a href="dbg_glossary_67e8768c-0585-41a5-ab7c-f8d2b5978663.xml.htm#203060b3-930a-4f3b-9173-348c463917c7">register context</a>. </LI>
+</OL>
+<P>If the stack frame is at the top of the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#81c37228-c201-48ad-9f7a-85d8b1ade52c">call stack</a>, the current instruction is the instruction that resulted in the last <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a>.  Otherwise the current instruction is the function call which resulted in the next higher stack frame.</P>
+<P>The methods <a href="idebugsymbols_500f523a-22d9-468e-8d7c-36f49bda089c.xml.htm"><b>GetScope</b></a> and <a href="idebugsymbols_20e96a86-b9c3-481f-9a26-319bac975e15.xml.htm"><b>SetScope</b></a> can be used to get and set the current scope.  When an event occurs, the current scope is set to the scope of the event.  The current scope can be reset to the scope of the last event using <a href="idebugsymbols_e3d0b307-57e7-4bc1-83f6-3352dd33a7aa.xml.htm"><b>ResetScope</b></a>.</P>
+<H4>Thread Context</H4>
+<P>The <i>thread context</i> is the state preserved by Windows when switching threads.  This is similar to the register context, except that there is some kernel-only processor state that is part of the register context but not the thread context.  This extra state is available as registers during kernel-mode debugging.</P>
+<P></P>
+<P>The thread context is represented by the CONTEXT structure defined in <i>ntddk.h</i>.  This structure is platform-dependent and its interpretation depends on the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#ba5af89e-695c-44ee-98cc-bdb218ce8d1c">effective processor type</a>.  The methods <a href="idebugadvanced_1a044a89-612f-4a3c-b3cd-0a715ae6af92.xml.htm"><b>GetThreadContext</b></a> and <a href="idebugadvanced_08e9f1e1-7af3-4cdf-9550-7d22fa5a59da.xml.htm"><b>SetThreadContext</b></a> can be used to get and set the thread context.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Scopes and Symbol Groups RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,528 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Itanium Instructions</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Itanium Instructions"><xml><MSHelp:Keyword Index="A" Term="t10_arch_ia64_de8b2333-094e-4d83-ae9a-7857ed2fa619.xml"/>
+<META NAME="MS-HKWD" CONTENT="Itanium processor, instructions">
+<META NAME="MS-HKWD" CONTENT="Itanium processor, memory access">
+<META NAME="MS-HKWD" CONTENT="Itanium processor, arithmetic"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t10_arch_ia64_de8b2333-094e-4d83-ae9a-7857ed2fa619.xml"></A>Itanium Instructions</H1>
+<P>Only the instructions most likely to be encountered in user-mode code are detailed here. Instructions marked with an asterisk (<b>*</b>) are particularly important.</P>
+<P></P>
+<P>The general notation for instructions is:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>(qp)    op...   <b>dest</b> = <b>src1</b>, <b>src2</b>, ...<BR><BR></nobr></P>
+<P>where <b>(qp)</b> is the optional qualifying predicate, the ellipses (<b>...</b>) after the opcode are optional completers, <b>dest</b> is the destination (or destinations, for comparison operators), and <b>src</b> is the source.</P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="78a06aab-b5f5-482f-a099-084996ceabec"></A>Memory Access (Aligned)</H3><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">ld<i>x</i></TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>]</TD>
+<TD Width="">Load from memory (zero-extended).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">ld<i>x</i></TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>], <b>Rc</b>/<i>imm</i><sub>9</sub></TD>
+<TD Width="">Load with postincrement.</TD>
+</TR>
+</table>
+<P></P>
+<P>An optional parameter after the comma performs a postincrement of the <b>Rb</b> register. For example, ld8 r1 = [r2], 8 loads a 64-bit value from the address in <b>r2</b> and then increments the <b>r2</b> register by 8.</P>
+<P>An optional .nt# completer spcifies that the memory will not be accessed again for a while. Higher values of # indicate longer-term abandonment. (.nta is the most aggressive level.)</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">st<i>x</i></TD>
+<TD Width="">[<b>Ra</b>] = <b>Rb</b></TD>
+<TD Width="">Store to memory.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">st<i>x</i></TD>
+<TD Width="">[<b>Ra</b>] = <b>Rb</b>, <i>imm</i><sub>9</sub></TD>
+<TD Width="">Store with postincrement.</TD>
+</TR>
+</table>
+<P></P>
+<P>Again, an optional parameter after the comma performs a postincrement of the address register.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">ldf<i>f</i></TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>]</TD>
+<TD Width="">Load from memory (zero-extended).</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">ldf<i>f</i></TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>], <b>Rc</b>/<i>imm</i><sub>9</sub></TD>
+<TD Width="">Load with postincrement.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">stf<i>f</i></TD>
+<TD Width="">[<b>Ra</b>] = <b>Rb</b></TD>
+<TD Width="">Store to memory.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">stf<i>f</i></TD>
+<TD Width="">[<b>Ra</b>] = <b>Rb</b>, <i>imm</i><sub>9</sub></TD>
+<TD Width="">Store with postincrement.</TD>
+</TR>
+</table>
+<P></P>
+<P>And again for floating-point registers.</P>
+<H3><A NAME="d55d5b40-7c57-4ef9-81f6-1fa5e52e5c73"></A>Memory Access (Advanced/Speculated)</H3><B></B><table>
+<TR valign="top">
+<TD Width="">ld<i>x</i>.s</TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>]</TD>
+<TD Width="">Load speculated.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">ld<i>x</i>.a</TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>]</TD>
+<TD Width="">Load advanced.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">ld<i>x</i>.sa</TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>]</TD>
+<TD Width="">Load speculated advanced.</TD>
+</TR>
+</table>
+<P></P>
+<P>These were previously discussed.</P><B></B><table>
+<TR valign="top">
+<TD Width="">st.spill...</TD>
+<TD Width="">[<b>Rb</b>] = <b>Ra</b></TD>
+<TD Width="">Save a speculated value.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">ld.fill...</TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>]</TD>
+<TD Width="">Restore a speculated value.</TD>
+</TR>
+</table>
+<P></P>
+<P>Read and write a value that might have the NaT bit set. The numerical value is written as usual, and the NaT bit is saved/restored in the <b>ar.unat</b> special register. These allow you to speculate across procedure calls.</P><B></B><table>
+<TR valign="top">
+<TD Width=""></TD>
+<TD Width="">lfetch...</TD>
+<TD Width="">...</TD>
+<TD Width="">Cache line prefetch.</TD>
+</TR>
+</table>
+<P></P>
+<H3><A NAME="74ee091e-5b6d-4a8f-b7f1-807e7e151e05"></A>Verifying Speculated/Advanced Instructions</H3><B></B><table>
+<TR valign="top">
+<TD Width="">ld<i>x</i>.c.clr</TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>]</TD>
+<TD Width="">Check (or reload) and clear.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">ld<i>x</i>.c.nc</TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>]</TD>
+<TD Width="">Check (or reload), no clear.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">chk.a.clr</TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>]</TD>
+<TD Width="">Check (or jump) and clear.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">chk.a.nc</TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>]</TD>
+<TD Width="">Check (or jump), no clear.</TD>
+</TR>
+</table>
+<P></P>
+<P>Clearing an advanced load means that you have no plans to check the load again.</P>
+<P></P>
+<H3><A NAME="d039d7c6-30ad-4e1f-a1b2-8ac763ddc262"></A>Special Registers</H3><B></B><table>
+<TR valign="top">
+<TD Width="">mov</TD>
+<TD Width=""><b>Ra</b> = <b>S</b></TD>
+<TD Width="">Read from special register.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">mov</TD>
+<TD Width=""><b>S</b> = <b>Ra</b></TD>
+<TD Width="">Write to special register.</TD>
+</TR>
+</table>
+<P></P>
+<P>Special registers, in general, can only be read from and written to. They do not take part in arithmetic computations and cannot be compared against directly.</P><B></B><table>
+<TR valign="top">
+<TD Width="">mov</TD>
+<TD Width=""><b>pr</b> = <b>Ra</b>, mask</TD>
+<TD Width="">Write to predicate registers.</TD>
+</TR>
+</table>
+<P></P>
+<P>The mask specifies which predicate registers should be loaded from register <b>Ra</b>. The bottom bit of the mask corresponds to predicate register <b>p1</b>, through bit 14 of the mask corresponding to predicate register <b>p15</b>. Bit 15 of the mask represents all the predicate registers <b>p16</b> through <b>p63</b>. (Recall that predicate register zero is hard-wired to TRUE.)</P>
+<P>Recall that the predicate register preservation rules are established by convention, so the only masks you are likely to see are -1 (restore all registers) and 0x801F (preserve all the usual registers).</P>
+<H3><A NAME="5e96e5dd-d054-4457-8dc7-1cb5132fc15a"></A>Interlocked Instructions</H3><B></B><table>
+<TR valign="top">
+<TD Width="">xchg<i>x</i>...</TD>
+<TD Width=""><b>Ra</b> = [<b>Rb</b>], <b>Rc</b></TD>
+<TD Width="">Interlocked exchange</TD>
+</TR>
+</table>
+<P></P>
+<P>Store <b>Rc</b> to [<b>Rb</b>] and return the original value in <b>Ra</b>.</P><B></B><table>
+<TR valign="top">
+<TD Width="">cmpxchg<i>x</i>...</TD>
+<TD Width=""><b>Ra = [Rb], Rc, ar.ccv</b></TD>
+<TD Width="">Conditional exchange</TD>
+</TR>
+</table>
+<P></P>
+<P>Check if the value in [<b>Rb</b>] is equal to the special <b>ar.ccv</b> register. If so, store <b>Rc</b> to [<b>Rb</b>]; otherwise, leave it unchanged. In either case, return the original value of [<b>Rb</b>] in <b>Ra</b>.</P><B></B><table>
+<TR valign="top">
+<TD Width="">fetchadd<i>x</i>...</TD>
+<TD Width=""><b>Ra = [Rb], Rc</b>/n</TD>
+<TD Width="">Interlocked add</TD>
+</TR>
+</table>
+<P></P>
+<P>Atomically adds <b>Rc</b>/n to [<b>Rb</b>], returning the previous value in <b>Ra</b>.</P>
+<H3><A NAME="d4fb64b2-f126-44e1-805c-c06543944bbf"></A>Control Flow</H3><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">br.cond...</TD>
+<TD Width=""><b>Ba</b>/addr</TD>
+<TD Width="">Branch</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">br.call...</TD>
+<TD Width=""><b>Ba</b>/addr</TD>
+<TD Width="">Call</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">br.ret...</TD>
+<TD Width=""><b>Ba</b>/addr</TD>
+<TD Width="">Return</TD>
+</TR>
+</table>
+<P>See the Control Flow section in <a href="t10_arch_ia64_058d30c8-b157-4fed-8317-371ffe0d0942.xml.htm">Itanium Architecture</a> for a description of the various completers.</P>
+<P>There are other types of branch instructions as well, but these are not used as much.</P>
+<H3><A NAME="d2027565-c889-4bad-bef5-c87b2535002a"></A>Arithmetic</H3><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">add</TD>
+<TD Width=""><b>Ra = Rb,Rc</b></TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b> + <b>Rc</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">add</TD>
+<TD Width=""><b>Ra = Rb,Rc,1</b></TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b> + <b>Rc</b> + 1</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">adds</TD>
+<TD Width=""><b>Ra = </b><i>imm</i><sub>14</sub>,<b>Rb</b></TD>
+<TD Width=""><b>Ra</b> = <i>imm</i><sub>14</sub> + <b>Rb</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">addl</TD>
+<TD Width=""><b>Ra =</b> <i>imm</i><sub>22</sub>,<b>Rb</b></TD>
+<TD Width=""><b>Ra</b> = <i>imm</i><sub>22</sub> + <b>Rb</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">sub<i>x</i></TD>
+<TD Width=""><b>Ra = Rb/n,Rc</b></TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>/n - <b>Rc</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">sub<i>x</i></TD>
+<TD Width=""><b>Ra = Rb,Rc,1</b></TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b> - <b>Rc</b> - 1</TD>
+</TR>
+</table>
+<P></P>
+<P></P><B></B><table>
+<TR valign="top">
+<TD Width="">shladd</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>,n,<b>Rc</b></TD>
+<TD Width=""><b>Ra</b> = (<b>Rb</b> SHL n) + <b>Rc</b></TD>
+</TR>
+</table>
+<P></P>
+<P>This shifts the first addend left by up to four positions before adding.</P>
+<P class="note"><b>Note</b>  There is no integer division or multiplication.   See the Multiplication subsection in this section for a multiplication workaround. For division, you will have to convert to floating point.</P>
+<H3><A NAME="a50175f5-f329-430f-8cbc-365fea2644c7"></A>Multiplication</H3>
+<P>There is a special floating-point format for handling integer multiplication.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">setf.sig</TD>
+<TD Width=""><b>Fa = Rb</b></TD>
+<TD Width=""><b>Fa</b> = <b>Rb</b> (special form)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">getf.sig</TD>
+<TD Width=""><b>Ra = Fb</b></TD>
+<TD Width=""><b>Ra</b> = <b>Fb</b> (special form)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">xma...</TD>
+<TD Width=""><b>Fa = Fb, Fc, Fd</b></TD>
+<TD Width=""><b>Fa</b> = <b>Fb</b> * <b>Fc</b> + <b>Fd</b> (special form)</TD>
+</TR>
+</table>
+<P></P>
+<P>The setf.sig and getf.sig instructions transfer between integer registers and floating-point registers (in the special form).</P>
+<P>The <b>xma</b> instruction performs the operation on numbers in special form, and the result is also in special form.</P>
+<P>There are four variations on the <b>xma</b> instruction. The .l version saves the low 64 bits of the result, the .h version saves the high 64 bits of the result, and the .u version performs an unsigned multiplication, rather than a signed multiplication.</P>
+<P>For example, xma.lu performs the multiplication as two unsigned integers and saves the low 64 bits of the result.</P>
+<H3><A NAME="d491032a-939f-4280-9c81-60c2cc186997"></A>Bits</H3><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">and</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>/<i>imm</i><sub>8</sub>,<b>Rc</b></TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>/<i>imm</i><sub>8</sub> and <b>Rc</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">or</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>/<i>imm</i><sub>8</sub>,<b>Rc</b></TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>/<i>imm</i><sub>8</sub> or <b>Rc</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">andcm</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>/<i>imm</i><sub>8</sub>,<b>Rc</b></TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>/<i>imm</i><sub>8</sub> and not <b>Rc</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">xor</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>/<i>imm</i><sub>8</sub>,<b>Rc</b></TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>/<i>imm</i><sub>8</sub> xor <b>Rc</b></TD>
+</TR>
+</table>
+<P></P>
+<P>The <b>andcm</b> instruction clears the bits specified by the last parameter.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">shl</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>,<b>Rc</b>/n</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b> SHL <b>Rc</b>/n</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">shr</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>,<b>Rc</b>/n</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b> SAR <b>Rc</b>/n</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">shr.u</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>,<b>Rc</b>/n</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b> SHR <b>Rc</b>/n</TD>
+</TR>
+</table>
+<P></P>
+<P>The <b>sh</b><i>x</i> instructions do shifting. A more general form of shifting is performed by the <b>extr</b> and <b>dep</b> instructions.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">extr</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>, n1, n2</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>&lt;n1, n2&gt;</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">extr.u</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>, n1, n2</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>&lt;n1, n2&gt;</TD>
+</TR>
+</table>
+<P></P>
+<P>The regular version of the <b>extr</b> (extract) instruction sign-extends the result, whereas the <b>extr.u</b> form zero-extends the result. The bit extraction instructions are also used to handle unaligned data.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">dep</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>, <b>Rc</b>, n1, n2</TD>
+<TD Width=""><b>Ra</b>&lt;n1, n2&gt; = <b>Rb</b>;</TD>
+</TR>
+<TR valign="top">
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width="">other bits come from <b>Rc</b></TD>
+</TR>
+</table>
+<P></P>
+<P>The <b>dep</b> (deposit) instruction builds its output by taking the &lt;n1, n2&gt; part from <b>Rb</b> and the rest of <b>Rc</b>. Think of it as a masked blt.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">shrp</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>, <b>Rc</b>, n</TD>
+<TD Width=""><b>Ra</b> = (<b>Rb</b>:<b>Rc</b>)&lt;n, 64&gt;</TD>
+</TR>
+</table>
+<P></P>
+<P>The <b>shrp</b> (shift right pair) instruction treats <b>Rb</b> and <b>Rc</b> as a huge 128-bit value and extracts 64 bits of it into the <b>Ra</b> register.</P>
+<H3><A NAME="922d6895-07f6-4a65-a089-d824acc8fde7"></A>Constants</H3><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">movl</TD>
+<TD Width=""><b>Ra</b> = n</TD>
+<TD Width="">Load 64-bit number.</TD>
+</TR>
+</table>
+<P></P>
+<P>Small numbers (up to 22 bits) can be loaded using <b>add Ra = n, r0</b> instruction. Larger numbers require the <b>movl</b> instruction. This is one of the few instructions that takes up two slots.</P>
+<H3><A NAME="d24d863d-f050-4ad1-9421-e69054f14168"></A>Comparisons</H3><B></B><table>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">cmp.<i>cc</i></TD>
+<TD Width=""><b>p1, p2 = Ra, Rb</b></TD>
+<TD Width="">Compare 64-bit values.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>*</b></TD>
+<TD Width="">cmp4.<i>cc</i></TD>
+<TD Width=""><b>p1, p2 = Ra, Rb</b></TD>
+<TD Width="">Compare 32-bit values.</TD>
+</TR>
+</table>
+<P></P>
+<P>See Comparisons section in <a href="t10_arch_ia64_058d30c8-b157-4fed-8317-371ffe0d0942.xml.htm">Itanium Architecture</a> for a detailed explanation.</P><B></B><table>
+<TR valign="top">
+<TD Width="">*</TD>
+<TD Width="">tbit</TD>
+<TD Width=""><b>p1</b>, <b>p2</b> = <b>Ra</b>, n</TD>
+<TD Width="">Test bit</TD>
+</TR>
+</table>
+<P></P>
+<P>The <b>tbit</b> instruction tests bit <i>n</i> in register <b>Ra</b>, setting both <b>p1</b> and <b>p2</b> accordingly.</P>
+<H3><A NAME="0d2fcb0e-1739-46e4-82d3-d56c6a6ed3e8"></A>Bit and Bytes</H3><B></B><table>
+<TR valign="top">
+<TD Width="">popcnt</TD>
+<TD Width=""><b>Ra = Rb</b></TD>
+<TD Width=""><b>Ra</b> = number of set bits in <b>Rb</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">czx1.l</TD>
+<TD Width=""><b>Ra = Rb</b></TD>
+<TD Width=""><b>Ra</b> = position of lowest zero byte</TD>
+</TR>
+<TR valign="top">
+<TD Width="">czx2.l</TD>
+<TD Width=""><b>Ra = Rb</b></TD>
+<TD Width=""><b>Ra</b> = position of lowest zero word</TD>
+</TR>
+<TR valign="top">
+<TD Width="">czx1.r</TD>
+<TD Width=""><b>Ra = Rb</b></TD>
+<TD Width=""><b>Ra</b> = position of highest zero byte</TD>
+</TR>
+<TR valign="top">
+<TD Width="">czx2.r</TD>
+<TD Width=""><b>Ra = Rb</b></TD>
+<TD Width=""><b>Ra</b> = position of highest zero word</TD>
+</TR>
+</table>
+<P></P>
+<P>If there is no zero byte or word, the <b>czx</b> instruction sets the <b>Ra</b> register to 8 (czx1) or 4 (czx2).</P>
+<H3><A NAME="77c4603a-6c97-491d-89ec-486808ea3520"></A>Conversion</H3><B></B><table>
+<TR valign="top">
+<TD Width="">*</TD>
+<TD Width="">sxt<i>x</i></TD>
+<TD Width=""><b>Ra = Rb</b></TD>
+<TD Width="">sign-extend <b>Rb</b> to <b>Ra</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">*</TD>
+<TD Width="">zxt<i>x</i></TD>
+<TD Width=""><b>Ra = Rb</b></TD>
+<TD Width="">zero-extend <b>Rb</b> to <b>Ra</b></TD>
+</TR>
+</table>
+<P></P>
+<H3><A NAME="39a0742f-0c15-464c-ac21-85c22ccd802d"></A>Idioms</H3><B></B><table>
+<TR valign="top">
+<TD Width="">*</TD>
+<TD Width="">add</TD>
+<TD Width=""><b>Ra</b> = <b>r0</b>, n</TD>
+<TD Width="">mov <b>Ra</b> = n</TD>
+</TR>
+<TR valign="top">
+<TD Width="">*</TD>
+<TD Width="">add</TD>
+<TD Width=""><b>Ra</b> = <b>r0</b>, <b>Rb</b></TD>
+<TD Width="">mov <b>Ra</b> = <b>Rb</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">*</TD>
+<TD Width="">add</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>, <b>r0</b>, 1</TD>
+<TD Width="">inc <b>Ra</b> = <b>Rb</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">*</TD>
+<TD Width="">sub</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>, <b>r0</b>, 1</TD>
+<TD Width="">dec <b>Ra</b> = <b>Rb</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">*</TD>
+<TD Width="">sub<i>x</i></TD>
+<TD Width=""><b>Ra</b> = <b>r0</b>, <b>Rb</b></TD>
+<TD Width="">neg<i>x</i> <b>Ra</b> = <b>Rb</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">*</TD>
+<TD Width="">xor</TD>
+<TD Width=""><b>Ra</b> = -1, <b>Rb</b></TD>
+<TD Width="">not <b>Ra</b> = <b>Rb</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""></TD>
+<TD Width="">shrp</TD>
+<TD Width=""><b>Ra</b> = <b>Rb</b>, <b>Rb</b>, n</TD>
+<TD Width="">rotl <b>Ra</b> = <b>Rb</b>, n</TD>
+</TR>
+</table>
+<P></P>
+<P>You can rotate by doing a paired shift where the two input registers are the same.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Itanium Instructions RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

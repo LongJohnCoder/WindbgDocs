@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>BCDEdit /bootdebug</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, BCDEdit /bootdebug"><xml><MSHelp:Keyword Index="A" Term="bootini_1b7477e9-580d-46e8-a37d-9f715ef4e5fa.xml"/>
+<META NAME="MS-HKWD" CONTENT="BCDEdit /bootdebug">
+<META NAME="MS-HKWD" CONTENT="boot debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_1b7477e9-580d-46e8-a37d-9f715ef4e5fa.xml"></A>BCDEdit /bootdebug</H1>
+<P></P>
+<P>The <b>/bootdebug</b> boot option enables or disables boot debugging of the current or specified Windows operating system boot entry. <P></P>
+</P>
+<P></P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>bcdedit</b> <b>/bootdebug</b> [<b>{</b><i>ID</i><b>}</b>] { <b>on</b> | <b>off</b> } <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>{</b><i>ID</i><b>}</b></DT>
+<DD>The <b>{</b><i>ID</i><b>}</b> is the GUID that is associated with the boot entry. If you do not specify an <b>{</b><i>ID</i><b>}</b>, the command modifies the operating system that is currently active. If a boot entry is specified, the GUID associated with the boot entry must be enclosed in braces <nobr><b>{ }</b>.</nobr> </DD>
+<DT><b>on</b></DT>
+<DD>Enables boot debugging of the specified boot entry. If a boot entry is not specified, boot debugging is enabled for the current operating system. </DD>
+<DT><b>off</b></DT>
+<DD>Disables boot debugging of the specified boot entry. If a boot entry is not specified, boot debugging is disabled for the current operating system. </DD>
+</DL>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>/bootdebug</b> boot option enables boot debugging for a specific boot entry. Use the <b>/dbgsettings</b> option to configure the type of debugging connection (<i>debugtype</i>) to use and the connection parameters. If no <b>/dbgsettings</b> are specified for the boot entry, the global debug settings are used. The default values for the global settings are shown in the following table.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">dbgsetting parameter</TH>
+<TH Width="">Default value</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Debugtype</TD>
+<TD Width="">Serial</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Debugport</TD>
+<TD Width="">1</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Baudrate</TD>
+<TD Width="">115200</TD>
+</TR>
+</table>
+<P></P>
+<P>The following command disables boot debugging of Windows Boot Manager (<i>Bootmgr.exe</i>).  Windows Boot Manager selects which operating system will start, and then loads the Windows boot loader. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /bootdebug {bootmgr} off </b><BR></nobr></P>
+<P></P>
+<P>The following command enables boot debugging of the Windows boot loader for the current operating system. The Windows boot loader (<i>Winload.exe</i>) controls the progress bar and loads the kernel boot drivers. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /bootdebug on </b><BR></nobr></P>
+<P></P>
+<P>In the following example, the first command sets the global debugger settings for a 1394 kernel debugging connection. The next three commands enable debugging of Windows Boot Manager, the boot loader, and then kernel debugging of the operating system. This combination allows debugging at every stage of startup. If this combination is used, the target computer will break into the debugger three times: when Windows Boot Manager loads, when the boot loader loads, and when the operating system starts up. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /dbgsettings 1394 CHANNEL:1 </b><BR><b>bcdedit /bootdebug {bootmgr} on </b><BR><b>bcdedit /bootdebug on </b><BR><b>bcdedit /debug on </b><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: BCDEdit /bootdebug RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

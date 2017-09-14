@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_FILTER_XXX</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_FILTER_XXX"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_FILTER_XXX"/>
+<MSHelp:Keyword Index="A" Term="Structures_a6679c9f-e984-42f4-b033-26ad9256c373.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_FILTER_XXX constants"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_a6679c9f-e984-42f4-b033-26ad9256c373.xml"></A>DEBUG_FILTER_<i>XXX</i></H1>
+<P>The DEBUG_FILTER_<i>XXX</i> constants are used for three different purposes: to specify individual <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#42e1b548-244d-4d27-9ba3-1cdd167d75eb">specific event filters</a>, to specify the <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#f661734a-d279-4ca5-b9bd-802dad9782af">break status</a> of an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8c64ad6b-a845-4f5d-b862-f4e23db322a2">event filter</a>, and to specify the <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#2ed842be-ebe1-40fa-8a33-cf3a9364b7ee">handling status</a> of an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8998765a-accc-4fd3-b1fd-cb82527e37b9">exception filter</a>.</P>
+<H4>Specific Event Filter</H4>
+<P>The following constants are used to specify specific event filters.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Event</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_CREATE_THREAD</TD>
+<TD Width="">Create Thread</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_EXIT_THREAD</TD>
+<TD Width="">Exit Thread</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_CREATE_PROCESS</TD>
+<TD Width="">Create Process</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_EXIT_PROCESS</TD>
+<TD Width="">Exit Process</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_LOAD_MODULE</TD>
+<TD Width="">Load Module</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_UNLOAD_MODULE</TD>
+<TD Width="">Unload Module</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_SYSTEM_ERROR</TD>
+<TD Width="">System Error</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_INITIAL_BREAKPOINT</TD>
+<TD Width="">Initial Break Point</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_INITIAL_MODULE_LOAD</TD>
+<TD Width="">Initial Module Load</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_DEBUGGEE_OUTPUT</TD>
+<TD Width="">Target Output</TD>
+</TR>
+</table>
+<P></P>
+<H4>Break Status</H4>
+<P>The following constants are used to specify the break status of an event filter.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_BREAK</TD>
+<TD Width="">The <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> will break into the debugger.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_SECOND_CHANCE_BREAK</TD>
+<TD Width="">The event will break into the debugger if it is a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#a48a7a88-0cc3-46d0-a1c9-2ccfeebb4c01">second chance exception</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_OUTPUT</TD>
+<TD Width="">A notification of the event will be printed to the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#9f38a31e-22cf-46a3-8081-4842019f46a6">debugger console</a>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_IGNORE</TD>
+<TD Width="">The event is ignored.</TD>
+</TR>
+</table>
+<P></P>
+<P>Additionally, for an arbitrary exception filter, setting the break status to DEBUG_FILTER_REMOVE, removes the event filter.</P>
+<H4>Handling Status</H4>
+<P>The following constants are used to specify the handling status of an exception filter.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_GO_HANDLED</TD>
+<TD Width="">The <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#7b03b5a5-20cd-4590-bd5e-727d81c47690">exception</a> has been handled.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_FILTER_GO_NOT_HANDLED</TD>
+<TD Width="">The exception has not been handled.</TD>
+</TR>
+</table>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_FILTER_XXX RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

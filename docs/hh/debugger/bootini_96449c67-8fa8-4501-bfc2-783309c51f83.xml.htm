@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>/redirect</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, /redirect"><xml><MSHelp:Keyword Index="A" Term="bootini_96449c67-8fa8-4501-bfc2-783309c51f83.xml"/>
+<META NAME="MS-HKWD" CONTENT="/redirect"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_96449c67-8fa8-4501-bfc2-783309c51f83.xml"></A>/redirect</H1>
+<P>The <b>/redirect</b> parameter enables Emergency Management Services (EMS) console redirection on a Windows server.</P>
+<H4>Computers with ACPI BIOS firmware and an SPCR table</H4>
+<P>In the [boot loader] section:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>redirect=COM</b><i>x</i> <BR>[<b>redirectbaudrate=</b><i>BaudRate</i>]<BR><BR>- OR -<BR><BR><b>redirect=USEBIOSSETTINGS</b><BR></nobr></P>
+<P></P>
+<P> </P>
+<P></P>
+<P>In the [operating systems] section:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/redirect</b> <BR></nobr></P>
+<P></P>
+<P> </P>
+<H4>Computers with BIOS firmware and no SPCR table</H4>
+<P>In the [boot loader] section:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>redirect=COM</b><i>x</i><BR>[<b>redirectbaudrate=</b><i>BaudRate</i>]<BR></nobr></P>
+<P></P>
+<P> </P>
+<P>In the [operating systems] section:</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/redirect</b> <BR></nobr></P>
+<P></P>
+<P> </P>
+<P></P>
+<H4>Computers with EFI firmware</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/redirect</b><BR></nobr></P>
+<P></P>
+<P> </P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>redirect=</b></DT>
+<DD>Establishes a port for EMS console redirection. This should be the same port that the computer uses for out-of-band management. <P>This parameter is required and valid only on computers with BIOS firmware. It appears in the [boot loader] section of the <i>Boot.ini</i> file and applies to all boot entries on the computer. </P>
+<P>The following table describes the values of the <b>redirect=</b> statement.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>COM</b><i>x</i></TD>
+<TD Width="">Specifies a serial port. Valid values are COM1, COM2, COM3, and COM4. Set this value to the serial port that is designated for out-of-band management in the firmware. You cannot use the same port for debugging and for EMS console redirection. <BR><BR>This value is required on computers with BIOS firmware that do not have an ACPI Serial Port Console Redirection (SPCR) table. <BR><BR>When used on computers that have an SPCR table, this value is used instead of the settings in the SPCR table. <BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>USEBIOSSETTINGS</b></TD>
+<TD Width="">Uses the port and connection speed that are designated for out-of-band management in the firmware.<BR><BR>Valid only on computers with a BIOS firmware and an ACPI Serial Port Console Redirection (SPCR) table. <BR><BR></TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>redirectbaudrate=</b></DT>
+<DD>Establishes the connection speed for EMS transmission. This parameter is optional and valid only with <b>redirect=COM</b><i>x</i>. If you omit this parameter on any computer with BIOS firmware, the default connection speed for EMS transmission is 9600 kilobits per second (Kbps).<P>When <b>redirect=COM</b><i>x</i> and <b>redirectbaudrate=</b> are used on computers with an SPCR table, the specified COM port and transmission rate are used instead of the settings in the SPCR table.</P>
+<P>The following table describes the value of the <b>redirectbaudrate=</b> parameter.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><i>BaudRate</i></TD>
+<TD Width="">Specifies the connection speed for EMS transmission. Valid values are 9600, 19200, 57600, and 115200 in kilobits per second (Kbps). (38400 is not a valid value.) The default value is 9600 Kbps.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>/redirect</b></DT>
+<DD>Enables EMS console redirection on a Windows server operating system associated with the boot entry. This parameter is valid on boot entries for Windows Server 2003 and later version of Windows server systems on all computers.<P></P>
+</DD>
+</DL>
+<H4>Comments</H4>
+<P>The <b>/redirect</b> parameter is supported only on Windows Server 2003, Windows XP, and Windows 2000. In Windows Vista and later versions of Windows, use BCDEdit and the <b>/emssettings</b> parameter and its subparameters to establish EMS settings for all boot entries. Then, use the <b>/ems</b> parameter to enable EMS for a particular boot entry.</P>
+<P>EMS allows users to control particular components of a server remotely, even when the server is not connected to the network or to other standard remote-administration tools. For information about EMS, search for Emergency Management Services on the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=10111" target="_blank">Microsoft TechNet</a> Web site.</P>
+<P>EMS is supported on all versions of Windows Server 2003 and later and versions of Windows server systems for x86-, x64-, and Itanium-based computers.</P>
+<P>To properly enable EMS console redirection after Windows is installed, Windows needs to know the port and transmission rate that the computer uses for out-of-band communication. Windows uses these same settings for EMS console redirection. </P>
+<P>On computers with EFI firmware, Windows automatically retrieves the out-of-band settings from the EFI firmware. On computers with BIOS firmware, Windows must find the out-of-band settings in the <i>Boot.ini</i> file.</P>
+<P>On computers with BIOS firmware and an ACPI Serial Port Console Redirection (SPCR) table, Windows can find the out-of-band settings established in the BIOS by reading entries in the SPCR table. On these systems, you can add the <b>redirect=USEBIOSSETTINGS</b> parameter to the <i>Boot.ini</i> file to direct Windows to look in the SPCR table for the port settings, or you can use the <b>redirect=COM</b><i>x</i> and <b>redirectbaudrate=</b> parameters to override the settings in the SPCR table.</P>
+<P>On computers that have BIOS firmware, but do not have an SPCR table, repeat the out-of-band settings in the <i>Boot.ini</i> file. Use the <b>redirect=COM</b><i>x</i> parameter to specify the port and the <b>redirectbaudrate=</b> parameter to specify the transmission rate.</P>
+<P>On all systems, use the <b>/redirect</b> parameter on a boot entry to enable EMS console redirection on the operating system that the boot entry loads.</P>
+<P>The boot parameters described in this section enable EMS console redirection after Windows is installed. For information about enabling EMS during a new installation or upgrade of Windows, search for "Enabling Emergency Management Services" on the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=10111" target="_blank">Microsoft TechNet</a> Web site.</P>
+<P>For a detailed example, see <a href="bootini_32960519-7cac-4b64-a2cc-358e0eba11ba.xml.htm">Boot Parameters to Enable EMS Redirection</a>.</P>
+<P>For more information about EMS, see "Emergency Management Services" in Help and Support. Also, review the topics in the "<b>Headless Server and Emergency Management Services Design</b>" section of the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=8757" target="_blank">Server Platform Design - Overview</a> page on the Windows Hardware Developer Central Web site.</P>
+<H4>Examples</H4>
+<P><b>Computers with no SPCR table (or to override the SPCR table)</b></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>redirect=COM1<BR>redirectbaudrate=115200<BR>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Windows Server 2003, Standard" /fastdetect /redirect<BR><BR></nobr></P>
+<P><b>Computers with an SPCR table</b></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=2<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>redirect=USEBIOSSETTINGS<BR>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Windows Server 2003, Standard" /fastdetect /redirect<BR><BR></nobr></P>
+<P><b>Computers with EFI firmware (Bootcfg display)</b></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot Options<BR>------------<BR>Timeout:             30<BR>Default:             \Device\HarddiskVolume3\WINDOWS<BR>CurrentBootEntryID:  1<BR><BR>Boot Entries<BR>------------<BR><BR>Boot entry ID:    1<BR>OS Friendly Name: Microsoft Windows .NET Enterprise Server<BR>OsLoadOptions:     /redirect<BR>BootFilePath:     \Device\HarddiskVolume1\EFI\Microsoft\WINNT50\ia64ldr.efi<BR>OsFilePath:       \Device\HarddiskVolume3\WINDOWS<BR><BR></nobr></P>
+<H4>Bootcfg Commands</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /ems ON /port COM1 /baud 115200 /ID 1<BR>bootcfg /ems ON /port BIOSSET /ID 1<BR>bootcfg /ems ON /ID 1<BR>bootcfg /ems EDIT /port COM1 /baud 115200 /ID 1<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: /redirect RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

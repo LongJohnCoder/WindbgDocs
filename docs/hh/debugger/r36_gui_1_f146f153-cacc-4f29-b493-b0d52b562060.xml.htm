@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>File | Connect to Remote Session</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, File | Connect to Remote Session"><xml><MSHelp:Keyword Index="A" Term="r36_gui_1_f146f153-cacc-4f29-b493-b0d52b562060.xml"/>
+<META NAME="MS-HKWD" CONTENT="File | Connect to Remote Session">
+<META NAME="MS-HKWD" CONTENT="remote debugging through the debugger, File | Connect to Remote Session"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_POPUP_CONNECT_TO_REMOTE_SESSION"></a><H1><A NAME="r36_gui_1_f146f153-cacc-4f29-b493-b0d52b562060.xml"></A>File | Connect to Remote Session</H1>
+<P></P>
+<P></P>
+<P>Click <b>Connect to Remote Session</b> on the <b>File</b> menu to make WinDbg a debugging client and to connect to an active debugging server.</P>
+<P>This command is equivalent to pressing CTRL+R. You can use this command only when WinDbg is in <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#012a9e6e-a351-4156-b2fd-99bd88066e28">dormant mode</a>.</P>
+<P>You cannot use this command to connect to a process server or a KD connection server; for that purpose, use <a href="r36_gui_1_50eb356d-0523-4f41-a707-140eafee0f63.xml.htm"><b>File | Connect to Remote Stub</b></a> instead.</P>
+<H4>Connect to Remote Debugger Session Dialog Box</H4>
+<P>When you click <b>Connect to Remote Session</b>, the <b>Connect to Remote Debugger Session </b>dialog box appears. You can use this dialog box to enter the remote connection parameters or to browse a list of debugging servers.</P>
+<P>To manually specify the remote connection parameters, enter one of the following strings in the <b>Connection string</b> box:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>npipe:server=</b><i>Server</i><b>,pipe=</b><i>PipeName</i>[<b>,password=</b><i>Password</i>] <BR><BR><b>tcp:server=</b><i>Server</i><b>,port=</b><i>Socket</i>[<b>,password=</b><i>Password</i>][<b>,ipversion=6</b>]<b> </b><BR><BR><b>tcp:clicon=</b><i>Server</i><b>,port=</b><i>Socket</i>[<b>,password=</b><i>Password</i>][<b>,ipversion=6</b>]<b> </b><BR><BR><b>com:port=</b><i>COMPort</i><b>,baud=</b><i>BaudRate</i><b>,channel=</b><i>COMChannel</i>[<b>,password=</b><i>Password</i>] <BR><BR><b>spipe:proto=</b><i>Protocol</i><b>,</b>{<b>certuser=</b><i>Cert</i>|<b>machuser=</b><i>Cert</i>}<b>,server=</b><i>Server</i><b>,pipe=</b><i>PipeName</i>[<b>,password=</b><i>Password</i>] <BR><BR><b>ssl:proto=</b><i>Protocol</i><b>,</b>{<b>certuser=</b><i>Cert</i>|<b>machuser=</b><i>Cert</i>}<b>,server=</b><i>Server</i><b>,port=</b><i>Socket</i>[<b>,password=</b><i>Password</i>]<b> </b><BR><BR><b>ssl:proto=</b><i>Protocol</i><b>,</b>{<b>certuser=</b><i>Cert</i>|<b>machuser=</b><i>Cert</i>}<b>,clicon=</b><i>Server</i><b>,port=</b><i>Socket</i>[<b>,password=</b><i>Password</i>]<b> </b><BR></nobr></P>
+<P></P>
+<P>The various parameters in the preceding options have the following possible values:</P>
+<DL><DT><i>Server</i></DT>
+<DD>The network name of the computer on which the debugging server was created. Do <i>not</i> precede this name with backslashes (<b>\\</b>).</DD>
+<DT><i>PipeName</i></DT>
+<DD>If you use the NPIPE or SPIPE protocol, <i>PipeName</i> is the name that was given to the pipe when the server was created.</DD>
+<DT><i>Socket</i></DT>
+<DD>If you use the TCP or SSL protocol, <i>Socket</i> is the same socket port number that was used when the server was created.</DD>
+<DT><i>COMPort</i></DT>
+<DD>If you use the COM protocol, <i>COMPort</i> specifies the COM port to use. The "COM" prefix is optional (for example, both "com2" and "2" are correct).</DD>
+<DT><i>BaudRate</i></DT>
+<DD>If you use the COM protocol, <i>BaudRate</i> should match the baud rate that you chose when the server was created.</DD>
+<DT><i>COMChannel</i></DT>
+<DD>If you use the COM protocol, <i>COMChannel</i> should match the channel number that you chose when the server was created.   </DD>
+<DT><i>Protocol</i></DT>
+<DD><i>(Windows 2000 and later)</i>  If you use the SSL or SPIPE protocol, <i>Protocol</i> should match the secure protocol that you used when the server was created.</DD>
+<DT><i>Cert</i></DT>
+<DD><i>(Windows 2000 and later)</i>  If you use the SSL or SPIPE protocol, you should use the identical <b>certuser=</b><i>Cert</i> or <b>machuser=</b><i>Cert</i> parameter that was used when the server was created.</DD>
+<DT><b>clicon</b></DT>
+<DD>Specifies that the debugging server will try to connect to the client through a reverse connection. The client must use <b>clicon</b> if and only if the server is using <b>clicon</b>. In most cases, the debugging client is started <i>before</i> the debugging server when a reverse connection is used.</DD>
+<DT><i>Password</i></DT>
+<DD>If you used a password when the server was created, you must supply <i>Password</i> to create the debugging client. This value must match the original password. Passwords are case-sensitive. If the wrong password is supplied, the error message will specify "Error 0x80004005".</DD>
+<DT><b>ipversion=6</b></DT>
+<DD><i>(Debugging Tools for Windows 6.6.07 and earlier only) </i>Forces the debugger to use IP version 6 rather than version 4 when you are using TCP to connect to the Internet.  In Windows Vista and later versions, the debugger attempts to auto-default to IP version 6, making this option unnecessary.  <P></P>
+</DD>
+</DL>
+<P></P>
+<P>Instead of manually specifying the remote connection parameters, you can press the <b>Browse</b> button in the <b>Connect to Remote Debugger Session </b>dialog box and use the <b>Browse Remote Servers</b> dialog box.</P>
+<H4>Browse Remote Servers Dialog Box</H4>
+<P>In the <b>Browse Remote Servers</b> dialog box, in the <b>Machine</b> text box, enter the name of the computer that the debugging server is running on. (The two initial backslashes are optional: "MyBox" and "\\MyBox" are both correct.) Then, press the <b>Refresh</b> button.  </P>
+<P>The <b>Servers </b>area lists all of the debugging servers that are running on that computer. Select any of the listed servers and then press ENTER or click <b>OK</b>. (You can also double-click one of the listed servers.) The proper connection string for the debugging server that you selected will now appear in the <b>Connection string</b> box in the <b>Connect to Remote Debugger Session</b> dialog box.</P>
+<P>If the server is password-protected, the connection string includes <b>Password=*</b>. You must replace the asterisk (<b>*</b>) with the actual password.</P>
+<P>After you specify the server and password, click <b>OK</b> to open the connection.</P>
+<P>This list of servers in the <b>Browse Remote Servers </b>dialog box can also include servers that no longer exist but were shut down improperly. If you connect to one of these nonexistent servers, you will receive an error message. </P>
+<P>The list of servers does not include process servers and KD connection servers; you can list those servers only by using the <a href="r36_gui_1_50eb356d-0523-4f41-a707-140eafee0f63.xml.htm"><b>File | Connect to Remote Stub</b></a> command or by running <b>cdb -QR </b><i>Server</i> from a Command Prompt window.</P>
+<H4>Additional Information</H4>
+<P>For more information and for other methods of joining a remote debugging session, see <a href="r08_use_remote_d737f4f5-2c99-44cf-b276-0fda82be08c8.xml.htm">Activating a Debugging Client</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: File | Connect to Remote Session RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

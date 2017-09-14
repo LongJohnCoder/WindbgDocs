@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>WriteVirtualUncached</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, WriteVirtualUncached"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="WriteVirtualUncached"/>
+<MSHelp:Keyword Index="A" Term="IDebugDataSpaces_6b986179-8f9c-4b4f-b42c-0c91088868ec.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugDataSpaces::WriteVirtualUncached method">
+<META NAME="MS-HKWD" CONTENT="WriteVirtualUncached (IDebugDataSpaces) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugDataSpaces_6b986179-8f9c-4b4f-b42c-0c91088868ec.xml"></A>WriteVirtualUncached</H1>
+<P><P>The <b>WriteVirtualUncached</b> method writes data to the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>'s virtual address space.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugDataSpaces::WriteVirtualUncached(</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>BytesWritten</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Offset</i></DT>
+<DD>Specifies the location in the target's virtual address space to be written.</DD>
+<DT><i>Buffer</i></DT>
+<DD>Specifies the buffer to write the memory from.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size in bytes of the buffer.  This is also the number of bytes requested to be written.</DD>
+<DT><i>BytesWritten</i></DT>
+<DD>Receives the number of bytes that were actually written.  If it is set to NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was at least partially successful.  <i>BytesWritten</i> indicates the number of bytes successfully written, which may be less than <i>BufferSize</i>.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>WriteVirtualUncached</b> is available in all versions of <b>IDebugDataSpaces</b>.</P>
+<H4>Comments</H4>
+<P>This method writes the buffer to the memory in the target's virtual address space.</P>
+<P>This method behaves identically to <a href="idebugdataspaces_2f8783ea-c7e4-438f-ad5b-898d0072a2f4.xml.htm"><b>WriteVirtual</b></a>, except that it avoids using the virtual memory cache.  It is therefore useful for reading inherently volatile virtual memory, such as memory-mapped device areas, without contaminating or invalidating the cache.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugdataspaces_2f8783ea-c7e4-438f-ad5b-898d0072a2f4.xml.htm"><b>WriteVirtual</b></a>, <a href="idebugdataspaces_265817a7-d690-4b8c-957f-06ec5d4f2f08.xml.htm"><b>ReadVirtualUncached</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: WriteVirtualUncached RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!running</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !running"><xml><MSHelp:Keyword Index="A" Term="r29_exts_kernel_Q_3a20d5ae-b6e7-44d5-a343-8a67f36ad66a.xml"/>
+<META NAME="MS-HKWD" CONTENT="!running extension">
+<META NAME="MS-HKWD" CONTENT="multiprocessor computer, !running extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r29_exts_kernel_Q_3a20d5ae-b6e7-44d5-a343-8a67f36ad66a.xml"></A>!running</H1>
+<P><P>The <b>!running</b> extension displays a list of running threads on all processors of the target computer.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!running</b> [<b>-i</b>] [<b>-t</b>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-i</b></DT>
+<DD>Causes the display to include idle processors as well.</DD>
+<DT><b>-t</b></DT>
+<DD>Causes a stack trace to be displayed for each processor.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>With no options, <b>!running</b> will display the affinity of all active processors and all idle processors. For all active processors, it will also display the current and next thread fields from the process control block (PRCB) and the state of the 16 built-in queued spin locks.</P>
+<P>Here is an example from a multiprocessor Itanium system:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>!running</b><BR> <BR>System Processors 3 (affinity mask)<BR>  Idle Processors 0<BR> <BR>     Prcb              Current           Next<BR>  0  e0000000818f8000  e0000000818f9e50  e0000000866f12f0  ................<BR> 1  e000000086f16010  e00000008620ebe0  e000000086eddbc0  .O..............<BR><BR></nobr></P>
+<P>The 16 characters at the end of each line indicate the built-in queued spin locks (the LockQueue entries in the PRCB). A period ( <b>.</b> ) indicates that the lock is not in use, <b>O</b> means the lock is owned by this processor, and <b>W</b> means the processor is queued for the lock. To see more information about the spin lock queue, use <a href="r29_exts_kernel_q_23790fbd-4598-4b77-bd98-738cbd9cdaa3.xml.htm"><b>!qlocks</b></a>.</P>
+<P>Here is an example that shows active and idle processors, along with their stack traces:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt;<b> !running -it</b><BR> <BR>System Processors f (affinity mask)<BR>  Idle Processors f<BR>All processors idle.<BR> <BR>     Prcb      Current   Next<BR>  0  ffdff120  805495a0            ................<BR> <BR>ChildEBP RetAddr<BR>8053e3f0 805329c2 nt!RtlpBreakWithStatusInstruction<BR>8053e3f0 80533464 nt!_KeUpdateSystemTime+0x126<BR>ffdff980 ffdff980 nt!KiIdleLoop+0x14<BR> <BR>  1  f87e0120  f87e2e60            ................<BR> <BR>ChildEBP RetAddr<BR>f87e0980 f87e0980 nt!KiIdleLoop+0x14<BR> <BR>  2  f87f0120  f87f2e60            ................<BR> <BR>ChildEBP RetAddr<BR>f87f0980 f87f0980 nt!KiIdleLoop+0x14<BR> <BR>  3  f8800120  f8802e60            ................<BR> <BR>ChildEBP RetAddr<BR>f8800980 f8800980 nt!KiIdleLoop+0x14<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information about debugging multiprocessor computers, see <a href="r13_syntax_b7eb5ea3-8cf4-420d-9461-94d4e20f38d5.xml.htm">Multiprocessor Syntax</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !running RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

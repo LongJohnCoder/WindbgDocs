@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.continue</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .continue"><xml><MSHelp:Keyword Index="A" Term="r14_tokens_0fcdb845-860b-4f9a-b2ed-f7da017f6a65.xml"/>
+<META NAME="MS-HKWD" CONTENT=".continue token"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r14_tokens_0fcdb845-860b-4f9a-b2ed-f7da017f6a65.xml"></A>.continue</H1>
+<P>The <b>.continue</b> token behaves like the <b>continue</b> keyword in C.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.for (...) {</b> ... ; <b>.if (</b><i>Condition</i><b>) .continue</b> ; ...<i> </i><b>}</b> <BR><BR><b>.while (...) {</b> ... ; <b>.if (</b><i>Condition</i><b>) .continue</b> ; ...<i> </i><b>}</b> <BR><BR><b>.do {</b> ... ; <b>.if (</b><i>Condition</i><b>) .continue</b> ; ...<i> </i><b>} (...) </b><BR><BR></nobr></P>
+<H4>Comments</H4>
+<P>The <b>.continue</b> token can be used within any <a href="r14_tokens_2f368dfb-fa95-42f4-81bf-7aeaeea67c05.xml.htm"><b>.for</b></a>, <a href="r14_tokens_c5ca2d62-6dd6-4103-ab3a-43f8478ca1e1.xml.htm"><b>.while</b></a>, or <a href="r14_tokens_5bfe306c-aeb4-4c36-9b12-b252d1ecac93.xml.htm"><b>.do</b></a> loop.</P>
+<P>Since there is no control flow token equivalent to the C <b>goto</b> statement, you will usually use the <b>.continue</b> token within an <a href="r14_tokens_1685a3f4-2a71-4a78-abce-d0d42efaa274.xml.htm"><b>.if</b></a> conditional, as shown in the syntax examples above. However, this is not actually required.</P>
+<H4>Additional Information</H4>
+<P>For information about other control flow tokens and their use in debugger command programs, see <a href="r05_use_start_81070bdc-2ffb-4a22-a785-0935553fb4c4.xml.htm">Using Debugger Command Programs</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .continue RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

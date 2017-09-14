@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using SrcSrv</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using SrcSrv"><xml><MSHelp:Keyword Index="A" Term="SymChk_d332dbdb-c1be-4ece-b677-ace2a7eda0cd.xml"/>
+<META NAME="MS-HKWD" CONTENT="source servers, SrcSrv (srcsrv.dll)">
+<META NAME="MS-HKWD" CONTENT="SrcSrv, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_d332dbdb-c1be-4ece-b677-ace2a7eda0cd.xml"></A>Using SrcSrv</H1>
+<P>To use SrcSrv with WinDbg, KD, NTSD, or CDB, verify that you have installed a recent version of the Debugging Tools for Windows package (version 6.3 or later). Then, include the text  <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>srv*</b></span> in the source path, followed by the directory specification or UNC path of the source store: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>srv*</b><i>SourceStoreLocation </i><BR></nobr></P>
+<P></P>
+<P>For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>.srcpath srv*\\myserver\myshare;c:\mylocaldir </b><BR></nobr></P>
+<P></P>
+<P>Note that this example also includes a local source path element (<i>c:\mylocaldir</i>). If the debugger cannot retrieve the file using SrcSrv, it searches the specified path. Regardless of whether <b>srv*</b> is the first element in the path or appears later, the source server is always searched before any other source path elements.</P>
+<P>If a source file is retrieved by SrcSrv, it remains on your hard drive after the debugging session is over. Source files are stored locally in the <i>src</i> subdirectory of the home directory (unlike the symbol server, the source server does not specify a local cache in the <b>srv*</b> syntax itself). The home directory defaults to the Debugging Tools for Windows installation directory; it can be changed by using the <a href="r25_exts_general_he_9b31ba76-7378-454b-9192-3501fa2fedb6.xml.htm"><b>!homedir</b></a> extension or by setting the DBGHELP_HOMEDIR environment variable. If the <i>src</i> subdirectory of the home directory does not already exist, it is created.</P>
+<H4>Debugging SrcSrv</H4>
+<P>If you experience any trouble extracting the source files from the debugger, start the debugger with the <nobr><b>&#8211;n</b></nobr><i> </i>command-line parameter to view the actual source extraction commands along with the output of those commands.  The <nobr><a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym noisy</b></a></nobr> command does the same thing, but you may have already missed important information from previous extraction attempts.  This is because the debugger gives up trying to access source from version control repositories that appear to be unreachable. </P>
+<H4>Retrieving Source Files</H4>
+<P>If you use the <a href="r21_metacmds_l_2bf63e00-f90a-4416-a13a-b4d4153e12dd.xml.htm"><b>.open (Open Source File)</b></a> command to open a new source file through SrcSrv, you must include the <nobr><b>-m </b><I><B>Address</B></I></nobr> parameter.</P>
+<P>To facilitate the use of SrcSrv from tools other than the debuggers listed previously, the DbgHelp API provides access to SrcSrv functionality through the <b>SymGetSourceFile </b>function. To retrieve the name of the source file to be retrieved, call the <b>SymEnumSourceFiles</b> or <b>SymGetLineFromAddr64</b> function.  For more details on the DbgHelp API, see the <i>dbghelp.chm </i>documentation, which can be found in the <i>sdk/help</i> subdirectory of the Debugging Tools for Windows installation directory, or see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=125231" target="_blank"><u>Debug Help Library</u></a> on MSDN. </P>
+<H4>Using AgeStore to Reduce the Cache Size</H4>
+<P>Any source files downloaded by SrcSrv remain on your hard drive after the debugging session is over.  To control the size of the source cache, the AgeStore tool can be used to delete cached files that are older than a specified date or to reduce the contents of the cache below a specified size.  For details, see <a href="symchk_578d84f8-168a-40be-84c7-44815ac942c5.xml.htm">AgeStore</a>. </P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using SrcSrv RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

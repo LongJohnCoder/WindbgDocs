@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>IG_GET_KERNEL_VERSION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, IG_GET_KERNEL_VERSION"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="IG_GET_KERNEL_VERSION"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_33e7f185-3831-439b-9e92-8d942627f66b.xml"/>
+<META NAME="MS-HKWD" CONTENT="IG_GET_KERNEL_VERSION Ioctl operation"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_33e7f185-3831-439b-9e92-8d942627f66b.xml"></A>IG_GET_KERNEL_VERSION</H1>
+<P><P>The IG_GET_KERNEL_VERSION <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation receives information related to the operating system version of the target.  When calling <b>Ioctl</b> with <i>IoctlType</i> set to IG_GET_KERNEL_VERSION, <i>IpvData</i> should contain an instance of the DBGKD_GET_VERSION64 structure.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DBGKD_GET_VERSION64 {</b><BR><b>    USHORT  MajorVersion;</b><BR><b>    USHORT  MinorVersion;</b><BR><b>    UCHAR  ProtocolVersion;</b><BR><b>    UCHAR  KdSecondaryVersion;</b><BR><b>    USHORT  Flags;</b><BR><b>    USHORT  MachineType;</b><BR><b>    UCHAR  MaxPacketType;</b><BR><b>    UCHAR  MaxStateChange;</b><BR><b>    UCHAR  MaxManipulate;</b><BR><b>    UCHAR  Simulation;</b><BR><b>    USHORT  Unused[1];</b><BR><b>    ULONG64  KernBase;</b><BR><b>    ULONG64  PsLoadedModuleList;</b><BR><b>    ULONG64  DebuggerDataList;</b><BR><b>} DBGKD_GET_VERSION64, *PDBGKD_GET_VERSION64;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>MajorVersion</b></DT>
+<DD>Receives 0xF if the target's operating system is a free build, and 0xC if it is a checked build.</DD>
+<DT><b>MinorVersion</b></DT>
+<DD>Receives the build number for the target's operating system.</DD>
+<DT><b>ProtocolVersion</b></DT>
+<DD>Receives the version of the debugger protocol that is used to communicate between the debugger and the target.</DD>
+<DT><b>KdSecondaryVersion</b></DT>
+<DD>Receives a secondary version number that is used to distinguish among older, deprecated contexts.</DD>
+<DT><b>Flags</b></DT>
+<DD>Receives a set of bit flags for the current debugging session.  The following flags can be present.<B></B><table>
+<TR valign="top">
+<TH Width="">Flag</TH>
+<TH Width="">Meaning when set</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DBGKD_VERS_FLAG_MP</TD>
+<TD Width="">The target kernel was compiled with support for multiple processors.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBGKD_VERS_FLAG_DATA</TD>
+<TD Width="">The list <b>DebuggerDataList</b> is valid.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBGKD_VERS_FLAG_PTR64</TD>
+<TD Width="">The target uses 64-bit pointers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBGKD_VERS_FLAG_NOMM</TD>
+<TD Width="">The debugger's memory cache is active.  If this is not set, the debugger will convert all virtual addresses into physical address before accessing the target's memory.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBGKD_VERS_FLAG_HSS</TD>
+<TD Width="">The target supports hardware stepping.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBGKD_VERS_FLAG_PARTITIONS</TD>
+<TD Width="">Multiple operating system partitions exist.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>MachineType</b></DT>
+<DD>Receives the type of the target's processor.  Possible processor types are listed in the following table.<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Processor</TH>
+</TR>
+<TR valign="top">
+<TD Width="">IMAGE_FILE_MACHINE_I386</TD>
+<TD Width="">x86 architecture</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IMAGE_FILE_MACHINE_ARM</TD>
+<TD Width="">ARM architecture</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IMAGE_FILE_MACHINE_IA64</TD>
+<TD Width="">Intel Itanium architecture</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IMAGE_FILE_MACHINE_AMD64</TD>
+<TD Width="">x64 architecture</TD>
+</TR>
+<TR valign="top">
+<TD Width="">IMAGE_FILE_MACHINE_EBC</TD>
+<TD Width="">EFI byte code architecture</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>MaxPacketType</b></DT>
+<DD>Receives one plus the highest number for a debugger packet type recognized by the target.</DD>
+<DT><b>MaxStateChange</b></DT>
+<DD>Receives one plus the highest number for a state change generated by the target.</DD>
+<DT><b>MaxManipulate</b></DT>
+<DD>Receives one more that the highest number, recognized by the target, for a command to manipulate the target.</DD>
+<DT><b>Simulation</b></DT>
+<DD>Receives an indication if the target is in simulated execution.  Possible values are listed in the following table.<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Processor</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DBGKD_SIMULATION_NONE</TD>
+<TD Width="">No simulation is used.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DBGKD_SIMULATION_EXDI</TD>
+<TD Width="">EXDI simulation is used.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><b>Unused</b></DT>
+<DD>Unused.</DD>
+<DT><b>KernBase</b></DT>
+<DD>Receives the base address of the kernel image.</DD>
+<DT><b>PsLoadedModuleList</b></DT>
+<DD>Receives the value of the kernel variable <b>PsLoadedModuleList</b>.</DD>
+<DT><b>DebuggerDataList</b></DT>
+<DD>Receives the value of the kernel variable <b>KdDebuggerDataBlock</b>.  This a pointer to either a KDDEBUGGER_DATA64 structure or a KDDEBUGGER_DATA32 structure.  Use the function <a href="wdbgexts_ref_a9b54b49-d8ac-4bee-a837-3986a250403a.xml.htm"><b>GetDebuggerData</b></a> to fetch this structure.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>If this <b>Ioctl</b> operation succeeds, the return value from <b>Ioctl</b> is TRUE; otherwise, it is FALSE.</P>
+<H4>Comments</H4>
+<P>The parameters for the IG_GET_KERNEL_VERSION <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation are the members of the DBGKD_GET_VERSION64 structure.</P>
+<P>This operation is only available in <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Declared in <i>wdbgexts.h</i>. If you are writing a DbgEng extension that uses this <b>Ioctl</b> operation, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<H4>See Also</H4>
+<P><a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a>, <a href="wdbgexts_ref_a9b54b49-d8ac-4bee-a837-3986a250403a.xml.htm"><b>GetDebuggerData</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: IG_GET_KERNEL_VERSION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Performance Monitor to Find a User-Mode Memory Leak</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Performance Monitor to Find a User-Mode Memory Leak"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_a0de630e-922f-48e3-aed9-b807539163b9.xml"/>
+<META NAME="MS-HKWD" CONTENT="memory leak, user-mode, performance monitor"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_a0de630e-922f-48e3-aed9-b807539163b9.xml"></A>Using Performance Monitor to Find a User-Mode Memory Leak</H1>
+<P>If you suspect there is a user-mode memory leak but are not sure which process is causing it, you can use Performance Monitor to measure the memory usage of individual processes.</P>
+<P>Launch Performance Monitor. Add the following counters:</P><B></B><UL type="disc">
+<LI><b>Process</b>&#8212;&gt;<b>Private Bytes</b> (for each process you want to examine) </LI>
+<LI><b>Process</b>&#8212;&gt;<b>Virtual Bytes</b> (for each process you wish to examine) </LI>
+</UL>
+<P></P>
+<P>Change the update time to 600 seconds to capture a graph of the leak over time. You might also want to log the data to a file for later examination.</P>
+<P>The <b>Private Bytes</b> counter indicates the total amount of memory that a process has allocated, not including memory shared with other processes. The <b>Virtual Bytes</b> counter indicates the current size of the virtual address space that the process is using.</P>
+<P>Some memory leaks appear in the data file as an increase in private bytes allocated. Other memory leaks show up as an increase in the virtual address space.</P>
+<P>After you have determined which process is leaking memory,  use the UMDH tool to determine the specific routine that is at fault. For details, see <a href="t13_advanced_4ff1ea37-c529-423f-aae9-71c955c35eff.xml.htm">Using UMDH to Find User-Mode Memory Leaks</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Performance Monitor to Find a User-Mode Memory Leak RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

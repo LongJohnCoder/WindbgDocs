@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Graph Analysis with Unloadable Modules</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Graph Analysis with Unloadable Modules"><xml><MSHelp:Keyword Index="A" Term="t11~b_ks_e05a7448-d801-41eb-ae68-b54ad9162028.xml"/>
+<META NAME="MS-HKWD" CONTENT="kernel streaming debugging, unloadable modules"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~b_ks_e05a7448-d801-41eb-ae68-b54ad9162028.xml"></A>Graph Analysis with Unloadable Modules</H1>
+<P>This section describes a scenario that may affect you if you are working with unloadable modules such as KMixer.</P>
+<P>After loading, the extension module initializes at the first command usage. At initialization, the extension module checks whether every module is loaded and has correct symbols.  If any individual module is unloaded or has incorrect symbols loaded, the extension disables the library extension which handles identification, dumping, etc. for that module. In this case, you need to manually re-enable the disabled module.</P>
+<P>The above situation may occur if you load the extension at boot time. Specifically, you may encounter this scenario if you load <i>Ks.dll</i> and then issue a <a href="r21_metacmds_l_d7228edd-295a-4acf-a632-fcb544f9522b.xml.htm">.reboot</a> command. Or, it could happen if you break into the debugger during boot and load <i>Ks.dll</i> at that point.</P>
+<P>In the following example, we are capturing two streams (sndrec32) from a Telex USB microphone. Breaking on <b>splitter!FilterProcess</b> and running <a href="r33~b_exts_ks_df6c3259-4369-4b58-8d2c-ebbbcd3b7c2a.xml.htm">!ks.graph</a> on splitter's filter yields:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!graph ffa0c6d4 7</b><BR>Attempting a graph build on ffa0c6d4...  Please be patient...<BR>Graph With Starting Point ffa0c6d4:<BR>"usbaudio" Filter ffaaa768, Child Factories 2<BR>    Output Factory 0:<BR>        Pin ffb1caf0 (File 811deeb8, -&gt; "splitter" ffa8b008) Irps(q/p) = 7, 1<BR>"splitter" Filter ffa0c660, Child Factories 2<BR>    Output Factory 0:<BR>        Pin 81250008 (File ffb10028) Irps(q/p) = 3, 0<BR>        Pin 811df9c0 (File ffaaf2f0) Irps(q/p) = 3, 0<BR>    Input Factory 1:<BR>        Pin ffa8b008 (File ffb26d68, &lt;- "usbaudio" ffb1caf0) Irps(q/p) = 1, 7<BR></nobr></P>
+<P></P>
+<P>In this example, KMixer has been loaded and connected to splitter, but Kmixer does not appear in the graph. There are IRPs queued to splitter's output pin, yet the <b>!ks.graph</b> command is unable to backtrace and discover KMixer. Issue a <a href="r33~b_exts_ks_d320bb35-9ebb-42cb-ae39-9446791b45de.xml.htm">!ks.libexts details</a> command to investigate further:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!libexts details</b><BR>LibExt Details:<BR>--------------------------------------------------<BR>LibExt "portcls!" :<BR>    Status :  ACTIVE<BR>    This is the port class library extension to the KS DLL.  It supports<BR>    dumping wave cyclic, wave pci, irp streams, and several other upper<BR>    level structures.<BR>    Commands Exported: pciaudio<BR>    Help : pchelp<BR>    Hooks : dump dumpqueue dumpcircuit conv(file) conv(device) graph<BR>LibExt "STREAM!" :<BR>    Status :  ACTIVE<BR>    This is the stream class library extension to the KS DLL.  It supports<BR>    dumping device extensions, filters, streams, and SRBs.<BR>    Hooks : dump enumdevobj graph<BR>LibExt "kmixer!" :<BR>    Status :  INACTIVE<BR>    This is the KMIXER extension to the KS DLL.  It supports<BR>    virtually nothing at this point!<BR>    Hooks : dump graph<BR></nobr></P>
+<P></P>
+<P>According to the above ouput, the KMixer section of the extension is currently disabled (Status : INACTIVE). Since the extension module was first used in a context in which KMixer was not loaded, <i>Ks.dll</i> has disabled the KMixer section of the extension to prevent time-consuming references to an unloaded module.</P>
+<P>To enable KMixer explicitly, you can use <a href="r33~b_exts_ks_d320bb35-9ebb-42cb-ae39-9446791b45de.xml.htm">!ks.libexts</a> with the <b>enable</b> parameter, as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!libexts enable kmixer</b><BR>LibExt "kmixer" has been enabled.<BR><BR>kd&gt; !graph ffa0c6d4 7<BR>Attempting a graph build on ffa0c6d4...  Please be patient...<BR>Graph With Starting Point ffa0c6d4:<BR>"usbaudio" Filter ffaaa768, Child Factories 2<BR>    Output Factory 0:<BR>        Pin ffb1caf0 (File 811deeb8, -&gt; "splitter" ffa8b008) Irps(q/p) = 7, 1<BR>"splitter" Filter ffa0c660, Child Factories 2<BR>    Output Factory 0:<BR>        Pin 81250008 (File ffb10028, -&gt; "kmixer" 8123c000) Irps(q/p) = 3, 0<BR>        Pin 811df9c0 (File ffaaf2f0, -&gt; "kmixer" 81236000) Irps(q/p) = 3, 0<BR>    Input Factory 1:<BR>        Pin ffa8b008 (File ffb26d68, &lt;- "usbaudio" ffb1caf0) Irps(q/p) = 1, 7<BR>"kmixer" Filter ffa65b70, Child Factories 4<BR>    Input Factory 2:<BR>        Pin 81236000 (File ffaaf7d0, &lt;- "splitter" 811df9c0) Irps(q/p) = 0, 0<BR>    Output Factory 3:<BR>        Pin 81252d00 (File 811df1d8) Irps(q/p) = 10, 0<BR>"kmixer" Filter ffb03808, Child Factories 4<BR>    Input Factory 2:<BR>        Pin 8123c000 (File ffb10130, &lt;- "splitter" 81250008) Irps(q/p) = 0, 0<BR>    Output Factory 3:<BR>        Pin ffa1e9c0 (File 81253468) Irps(q/p) = 10, 0<BR></nobr></P>
+<P></P>
+<P>KMixer now appears as expected in the capture graph.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Graph Analysis with Unloadable Modules RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

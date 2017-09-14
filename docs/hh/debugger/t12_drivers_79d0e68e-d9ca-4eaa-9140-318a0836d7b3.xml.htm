@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Device Node Status Flags</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Device Node Status Flags"><xml><MSHelp:Keyword Index="A" Term="t12_drivers_79d0e68e-d9ca-4eaa-9140-318a0836d7b3.xml"/>
+<META NAME="MS-HKWD" CONTENT="Plug and Play (PnP), Device Node Status Flags">
+<META NAME="MS-HKWD" CONTENT="Device Node Status Flags">
+<META NAME="MS-HKWD" CONTENT="DNF_XXX"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t12_drivers_79d0e68e-d9ca-4eaa-9140-318a0836d7b3.xml"></A>Device Node Status Flags</H1>
+<P>The Device Node Status flags describe the status of a device.</P>
+<P>The most important flags are:</P>
+<DL><DT><b>DNF_MADEUP (0x00000001)</b></DT>
+<DD>The device was created and is owned by the PnP Manager. It was not created by a bus driver.</DD>
+<DT><b>DNF_DUPLICATE (0x00000002)</b></DT>
+<DD>The device node is a duplicate of another enumerated device node.</DD>
+<DT><b>DNF_HAL_NODE (0x00000004)</b></DT>
+<DD>The device node is the root node created by the hardware abstraction layer (HAL).</DD>
+<DT><b>DNF_REENUMERATE (0x00000008)</b></DT>
+<DD>The device needs to be re-enumerated.</DD>
+<DT><b>DNF_ENUMERATED (0x00000010)</b></DT>
+<DD>The PDO for the device was exposed by its parent.</DD>
+<DT><b>DNF_IDS_QUERIED (0x00000020)</b></DT>
+<DD>The operating system should send IRP_MN_QUERY_ID requests to the device driver.</DD>
+<DT><b>DNF_HAS_BOOT_CONFIG (0x00000040)</b></DT>
+<DD>The device has resources assigned by the BIOS. The device is considered pseudo-started and needs to participate in rebalancing.</DD>
+<DT><b>DNF_BOOT_CONFIG_RESERVED (0x00000080)</b></DT>
+<DD>The boot resources of the device are reserved.</DD>
+<DT><b>DNF_NO_RESOURCE_REQUIRED (0x00000100)</b></DT>
+<DD>The device does not require resources.</DD>
+<DT><b>DNF_RESOURCE_REQUIREMENTS_NEED_FILTERED (0x00000200)</b></DT>
+<DD>The device's resource requirements list is a filtered list.</DD>
+<DT><b>DNF_RESOURCE_REQUIREMENTS_CHANGED (0x00000400)</b></DT>
+<DD>The device's resource requirements list has changed.</DD>
+<DT><b>DNF_NON_STOPPED_REBALANCE (0x00000800)</b></DT>
+<DD>The device can be restarted with new resources without being stopped.</DD>
+<DT><b>DNF_LEGACY_DRIVER (0x00001000)</b></DT>
+<DD>The device's controlling driver is a non-PnP driver.</DD>
+<DT><b> DNF_HAS_PROBLEM (0x00002000)</b></DT>
+<DD>The device has a problem and will be removed.</DD>
+<DT><b>DNF_HAS_PRIVATE_PROBLEM (0x00004000)</b></DT>
+<DD>The device reported PNP_DEVICE_FAILED without also reporting PNP_DEVICE_RESOURCE_REQUIREMENTS_CHANGED.</DD>
+<DT><b>DNF_HARDWARE_VERIFICATION (0x00008000)</b></DT>
+<DD>The device node has hardware verification.</DD>
+<DT><b>DNF_DEVICE_GONE (0x00010000)</b></DT>
+<DD>The device's PDO is no longer returned in an IRP_QUERY_RELATIONS request.</DD>
+<DT><b>DNF_LEGACY_RESOURCE_DEVICENODE (0x00020000)</b></DT>
+<DD>The device node was created for legacy resource allocation.</DD>
+<DT><b>DNF_NEEDS_REBALANCE (0x00040000)</b></DT>
+<DD>The device node has triggered rebalancing.</DD>
+<DT><b>DNF_LOCKED_FOR_EJECT (0x00080000)</b></DT>
+<DD>The device is being ejected or is related to a device that is being ejected.</DD>
+<DT><b>DNF_DRIVER_BLOCKED (0x00100000)</b></DT>
+<DD>One or more of the drivers for the device node have been blocked from loading.</DD>
+<DT><b>DNF_CHILD_WITH_INVALID_ID (0x00200000)</b></DT>
+<DD>One or more children of the device node have invalid IDs.</DD>
+<DT><b>DNF_ASYNC_START_NOT_SUPPORTED (0x00400000)</b></DT>
+<DD>The device does not support asynchronous starts.</DD>
+<DT><b>DNF_ASYNC_ENUMERATION_NOT_SUPPORTED (0x00800000)</b></DT>
+<DD>The device does not support asynchronous enumeration.</DD>
+<DT><b>DNF_LOCKED_FOR_REBALANCE (0x01000000)</b></DT>
+<DD>The device is locked for rebalancing.</DD>
+<DT><b>DNF_UNINSTALLED (0x02000000)</b></DT>
+<DD>An IRP_MN_QUERY_REMOVE_DEVICE request is in progress for the device.</DD>
+<DT><b>DNF_NO_LOWER_DEVICE_FILTERS (0x04000000)</b></DT>
+<DD>There is no Registry entry of the lower-device-filters type for the device.</DD>
+<DT><b>DNF_NO_LOWER_CLASS_FILTERS (0x08000000)</b></DT>
+<DD>There is no Registry entry of the lower-class-filters type for the device.</DD>
+<DT><b>DNF_NO_SERVICE (0x10000000)</b></DT>
+<DD>There is no Registry entry of the service the for the device.</DD>
+<DT><b>DNF_NO_UPPER_DEVICE_FILTERS (0x20000000)</b></DT>
+<DD>There is no Registry entry of the upper-device-filters type for the device.</DD>
+<DT><b>DNF_NO_UPPER_CLASS_FILTERS (0x40000000)</b></DT>
+<DD>There is no Registry entry of the upper-class-filters type for the device.</DD>
+<DT><b>DNF_WAITING_FOR_FDO (0x80000000)</b></DT>
+<DD>Enumeration of the device is waiting until the driver attaches its FDO.</DD>
+<P></P>
+</DL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Device Node Status Flags RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

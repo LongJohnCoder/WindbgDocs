@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xFD: DIRTY_NOWRITE_PAGES_CONGESTION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xFD:  DIRTY_NOWRITE_PAGES_CONGESTION"><xml><MSHelp:Keyword Index="A" Term="t07_bugs_E0_2c11e5f0-b59b-49f9-9d32-2914f9fc395e.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xFD: DIRTY_NOWRITE_PAGES_CONGESTION">
+<META NAME="MS-HKWD" CONTENT="DIRTY_NOWRITE_PAGES_CONGESTION"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t07_bugs_E0_2c11e5f0-b59b-49f9-9d32-2914f9fc395e.xml"></A><b>Bug Check 0xFD:  DIRTY_NOWRITE_PAGES_CONGESTION</b></H1>
+<P>The DIRTY_NOWRITE_PAGES_CONGESTION bug check has a value of 0x000000FD. This indicates that there are no free pages available to continue basic system operations.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">Total number of dirty pages </TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">Number of non-writeable dirty pages </TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">Reserved  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">Most recently modified write-error status </TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>This bug check usually occurs because the component that owns the modified non-writeable pages failed to write out these pages after marking the relevant files as "do not write" to memory management.  This indicates a driver bug.</P>
+<P></P>
+<H4>Resolving the Problem</H4>
+<P>For more information about which driver is causing the problem, use the  <a href="r30_exts_kernel_u_f7bac801-e399-4fab-af3e-ad2c1effce20.xml.htm"><b>!vm 3</b></a>  extension, followed by  <a href="r27_exts_kernel_e_e5a27ddd-3d24-48ce-9076-7c72c6dd208d.xml.htm"><b>!memusage 1</b></a> .</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xFD:  DIRTY_NOWRITE_PAGES_CONGESTION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

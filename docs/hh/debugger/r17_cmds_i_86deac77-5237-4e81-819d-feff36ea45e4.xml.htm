@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>lsp (Set Number of Source Lines)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, lsp (Set Number of Source Lines)"><xml><MSHelp:Keyword Index="A" Term="r17_cmds_I_86deac77-5237-4e81-819d-feff36ea45e4.xml"/>
+<META NAME="MS-HKWD" CONTENT="lsp (Set Number of Source Lines) command">
+<META NAME="MS-HKWD" CONTENT="Set Number of Source Lines (lsp) command">
+<META NAME="MS-HKWD" CONTENT="source debugging, Set Number of Source Lines (lsp) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r17_cmds_I_86deac77-5237-4e81-819d-feff36ea45e4.xml"></A>lsp (Set Number of Source Lines)</H1>
+<P>The <b>lsp</b> command controls how many source lines are displayed while you step through or execute code or use the <a href="r17_cmds_i_749f9260-c240-4b42-8c63-9aff24b40d5a.xml.htm"><b>ls</b> and <b>lsa</b> commands</a>.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>lsp</b> [<b>-a</b>] <i>LeadingLines</i> <i>TrailingLines</i> <BR><b>lsp</b> [<b>-a</b>] <i>TotalLines</i> <BR><b>lsp</b> [<b>-a</b>] <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>-a</b></DT>
+<DD>Sets or displays the number of lines that <b>ls</b> and <b>lsa</b> show. If you omit <b>-a</b>, <b>lsp</b> sets or displays the number of lines that are shown while you step through and execute code.</DD>
+<DT><i>LeadingLines</i></DT>
+<DD>Specifies the number of lines to show before the current line.</DD>
+<DT><i>TrailingLines</i></DT>
+<DD>Specifies the number of lines to show after the current line.</DD>
+<DT><i>TotalLines</i></DT>
+<DD>Specifies the total number of lines to show. This number is divided evenly between leading and trailing lines. (If this number is odd, more trailing lines are displayed.)<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>When you use the <b>lsp</b> command together with no parameters, <b>lsp</b> displays the current leading line and trailing line values that you used while stepping. When you use this command together with only the <b>-a</b> parameter, <b>lsp</b> displays the values that you used while stepping and for the <a href="r17_cmds_i_749f9260-c240-4b42-8c63-9aff24b40d5a.xml.htm"><b>ls</b> and <b>lsa</b> commands</a>.</P>
+<P>When you step through a program or break in after program execution, the previous <b>lsp</b> command determines the number of leading and trailing lines that are displayed. When you use <b>lsa</b>, the previous <b>lsp -a</b> command determines the number of leading and trailing lines that are displayed. When you use <b>ls</b>, all lines appear as a single block, so the previous <b>lsp -a</b> command determines the total number of lines that are displayed.</P>
+<H4>Additional Information</H4>
+<P>For more information about source debugging and related commands, see <a href="r07_use_operation_6f6332fb-7207-429d-8a27-a2ff0bf02bbb.xml.htm">Debugging in Source Mode</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: lsp (Set Number of Source Lines) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!vpb</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !vpb"><xml><MSHelp:Keyword Index="A" Term="r30_exts_kernel_U_dbae16d0-8d6a-4c63-beb7-adb8e1834ae5.xml"/>
+<META NAME="MS-HKWD" CONTENT="!vpb extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r30_exts_kernel_U_dbae16d0-8d6a-4c63-beb7-adb8e1834ae5.xml"></A>!vpb</H1>
+<P>The <b>!vpb</b> extension displays a volume parameter block (VPB).</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!vpb</b> <i>Address</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the hexadecimal address of the VPB.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example. First, the device tree is displayed with the <a href="r26_exts_kernel_a_87ee2749-b028-4ab8-b0c0-d4a6fc734488.xml.htm"><b>!devnode</b></a> extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devnode 0 1</b><BR>Dumping IopRootDeviceNode (= 0x80e203b8)<BR>DevNode 0x80e203b8 for PDO 0x80e204f8<BR>  InstancePath is "HTREE\ROOT\0"<BR>  State = DeviceNodeStarted (0x308)<BR>  Previous State = DeviceNodeEnumerateCompletion (0x30d)<BR>  DevNode 0x80e56dc8 for PDO 0x80e56f18<BR>    InstancePath is "Root\dmio\0000"<BR>    ServiceName is "dmio"<BR>    State = DeviceNodeStarted (0x308)<BR>    Previous State = DeviceNodeEnumerateCompletion (0x30d)<BR>  DevNode 0x80e56ae8 for PDO 0x80e56c38<BR>    InstancePath is "Root\ftdisk\0000"<BR>    ServiceName is "ftdisk"<BR>    State = DeviceNodeStarted (0x308)<BR>    Previous State = DeviceNodeEnumerateCompletion (0x30d)<BR>    <b>DevNode 0x80e152a0 for PDO 0x80e15cb8</b><BR>      InstancePath is "STORAGE\Volume\1&amp;30a96598&amp;0&amp;Signature5C34D70COffset7E00Length60170A00"<BR>      ServiceName is "VolSnap"<BR>      TargetDeviceNotify List - f 0xe1250938  b 0xe14b9198<BR>      State = DeviceNodeStarted (0x308)<BR>      Previous State = DeviceNodeEnumerateCompletion (0x30d)<BR>    .....<BR><BR></nobr></P>
+<P>The last device node listed is a volume. Examine its physical device object (PDO) with the <a href="r26_exts_kernel_a_d7c58f52-7920-4308-92c8-362514c0c278.xml.htm"><b>!devobj</b></a> extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!devobj 80e15cb8</b><BR>Device object (80e15cb8) is for:<BR> HarddiskVolume1 \Driver\Ftdisk DriverObject 80e4e248<BR>Current Irp 00000000 RefCount 14 Type 00000007 Flags 00001050<BR>Vpb <b>80e15c30</b> DevExt 80e15d70 DevObjExt 80e15e40 Dope 80e15bd8 DevNode 80e152a0 <BR>ExtensionFlags (0000000000)  <BR>AttachedDevice (Upper) 80e14c60 \Driver\VolSnap<BR>Device queue is not busy.<BR><BR></nobr></P>
+<P>The address of this device's VPB is included in this listing. Use this address with the <b>!vpb</b> extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!vpb 80e15c30</b><BR>Vpb at 0x80e15c30<BR>Flags: 0x1 mounted <BR>DeviceObject: 0x80de5020<BR>RealDevice:   0x80e15cb8<BR>RefCount: 14<BR>Volume Label:           MY-DISK-C<BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about VPBs, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !vpb RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Minidumps</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Minidumps"><xml><MSHelp:Keyword Index="A" Term="r10_dump_files_39e1a7e3-abf0-4809-9432-1fcc4e98492e.xml"/>
+<META NAME="MS-HKWD" CONTENT="dump file, minidump">
+<META NAME="MS-HKWD" CONTENT="minidump"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r10_dump_files_39e1a7e3-abf0-4809-9432-1fcc4e98492e.xml"></A>Minidumps</H1>
+<P></P>
+<P>A user-mode dump file that includes only selected parts of the memory associated with a process is called a <i>minidump</i>.</P>
+<P>The size and contents of a minidump file vary depending on the program being dumped and the application doing the dumping. Sometimes, a minidump file is fairly large and includes the full memory and handle table. Other times, it is much smaller &#8212; for example, it might only contain information about a single thread, or only contain information about modules that are actually referenced in the stack.</P>
+<P>The name "minidump" is misleading, because the largest minidump files actually contain more information than the "full" user-mode dump. For example, <b>.dump /mf</b> or <b>.dump /ma</b> will create a larger and more complete file than <b>.dump /f</b>.  For this reason,  <b>.dump /m</b>[<i>MiniOptions</i>] recommended over <b>.dump /f</b> for all user-mode dump file creation.</P>
+<P>If you are creating a minidump file with the debugger, you can choose exactly what information to include. A simple <b>.dump /m</b> command will include basic information about the loaded modules that make up the target process, thread information, and stack information. This can be modified by using any of the following options:</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">.dump <i>option </i></TH>
+<TH Width=""><i>Effect on dump file </i></TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/ma </b></TD>
+<TD Width="">Creates a minidump with all optional additions. The <b>/ma</b> option is equivalent to <b>/mfFhut</b> &#8212; it adds full memory data, handle data, unloaded module information, basic memory information, and thread time information to the minidump.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mf </b></TD>
+<TD Width="">Adds full memory data to the minidump. All accessible committed pages owned by the target application will be included.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mF</b></TD>
+<TD Width="">Adds all basic memory information to the minidump.    This adds a stream to the minidump that contains all basic memory information, not just information about valid memory. This allows the debugger to reconstruct the complete virtual memory layout of the process when the minidump is being debugged. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mh </b></TD>
+<TD Width="">Adds data about the handles associated with the target application to the minidump.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mu </b></TD>
+<TD Width="">Adds unloaded module information to the minidump. This is only available in Windows Server 2003 and later versions of Windows.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mt</b></TD>
+<TD Width="">Adds additional thread information to the minidump. This includes thread times, which can be displayed by using <a href="r22_metacmds_s_2fa3c9d4-ae93-48f9-b8e3-092b1cbb02cf.xml.htm"><b>.ttime (Display Thread Times)</b></a> when debugging the minidump.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mi </b></TD>
+<TD Width="">Adds <i>secondary memory</i> to the minidump. Secondary memory is any memory referenced by a pointer on the stack or backing store, plus a small region surrounding this address.     </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mp </b></TD>
+<TD Width="">Adds process environment block (PEB) and thread environment block (TEB) data to the minidump. This can be useful if you need access to Windows system information regarding the application's processes and threads.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mw </b></TD>
+<TD Width="">Adds all committed read-write private pages to the minidump.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/md </b></TD>
+<TD Width="">Adds all read-write data segments within the executable image to the minidump.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mc </b></TD>
+<TD Width="">Adds code sections within images.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mr </b></TD>
+<TD Width="">Deletes from the minidump those portions of the stack and store memory that are not useful for recreating the stack trace. Local variables and other data type values are deleted as well. This option does not make the minidump smaller (since these memory sections are simply zeroed), but it is useful if you wish to protect the privacy of other applications. </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mR </b></TD>
+<TD Width="">Deletes the full module paths from the minidump. Only the module <i>names</i> will be included. This is a useful option if you wish to protect the privacy of the user's directory structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>/mk "</b><i>FileName</i><b>"</b> </TD>
+<TD Width="">(<i>Windows Vista only</i>)  Creates a kernel-mode minidump in addition to the user-mode minidump. The kernel-mode minidump will be restricted to the same threads that are stored in the user-mode minidump. <i>FileName</i> must be enclosed in quotation marks.</TD>
+</TR>
+</table>
+<P></P>
+<P>These options can be combined. For example, the command <b>.dump /mfiu</b> can be used to create a fairly large minidump, or the command <b>.dump /mrR</b> can be used to create a minidump that preserves the user's privacy. For full syntax details, see <a href="r19_metacmds_a_10de67ad-e8c3-42f2-ba9e-95a146a0320d.xml.htm"><b>.dump (Create Dump File)</b></a>.</P>
+<P>For details on the internals of minidump files, see the DbgHelp Reference in the Microsoft Windows SDK.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Minidumps RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

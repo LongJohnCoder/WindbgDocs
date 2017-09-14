@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>When ADPlus Can Be Used</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, When ADPlus Can Be Used"><xml><MSHelp:Keyword Index="A" Term="ADPlus_68d1bf90-5f64-46f7-a98b-fc9f4e933cd7.xml"/>
+<META NAME="MS-HKWD" CONTENT="ADPlus, appropriate usage"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_68d1bf90-5f64-46f7-a98b-fc9f4e933cd7.xml"></A>When ADPlus Can Be Used</H1>
+<P>ADPlus can create a detailed dump file in a variety of scenarios. This file contains debugging information that you must have to isolate the cause of problems that occur in complex environments.</P>
+<H4>When Should You Use ADPlus?</H4>
+<P>You should use ADPlus to capture debugging information if you are experiencing the following problems: </P><B></B><UL type="disc">
+<LI>Processes that stop responding (that is, <i>hang</i>).</LI>
+<LI>Processes that have 100 % CPU utilization on a single processor computer, 50 % utilization on a dual processor computer, 25 % utilization on a quad processor computer, and so on.</LI>
+<LI>Processes that fail (that is, <i>crash</i>) or shut down unexpectedly.</LI>
+</UL>
+<P></P>
+<H4>When Should You Not Use ADPlus?</H4>
+<P>You should not use ADPlus in the following situations: </P><B></B><UL type="disc">
+<LI>If you have to troubleshoot an application or process that ends unexpectedly during startup.<P>You can use ADPlus only together with processes that start successfully. If you have to troubleshoot processes that end unexpectedly during startup, you should use <a href="r10_dump_files_ba341fb1-1c3a-4800-86dc-44e3eae60a85.xml.htm">CDB</a>, <a href="r10_dump_files_ba341fb1-1c3a-4800-86dc-44e3eae60a85.xml.htm">WinDbg</a>, or <a href="r10_dump_files_bbade5fe-7a72-4267-84e3-6c7c5389cd5c.xml.htm">UserDump</a> instead.</P>
+</LI>
+<LI>If there is a noticeable performance effect when you use ADPlus in <a href="adplus_5c0245b0-d5f8-47aa-b73f-86b8d8c6111c.xml.htm">crash mode</a>.<P>This performance effect is typically caused by dynamic-link libraries (DLLs) or applications that throw many Microsoft Visual C++ EH exceptions (which occur when you use the C++ <b>throw</b> statement or when you use <b>try</b>/<b>catch</b> blocks). Applications that write lots of information to the debug output stream can also cause a decrease in performance. Frequently, ADPlus does not affect performance noticeably when it is running in crash mode.</P>
+</LI>
+</UL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: When ADPlus Can Be Used RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

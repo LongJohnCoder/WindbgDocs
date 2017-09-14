@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Disabling the 1394 Host Controller</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Disabling the 1394 Host Controller"><xml><MSHelp:Keyword Index="A" Term="r02~a_setup_1a_fcdec49c-b16c-4f8e-b1df-c1ceea0815f3.xml"/>
+<META NAME="MS-HKWD" CONTENT="1394 connection, disabling the host controller">
+<META NAME="MS-HKWD" CONTENT="host controller for 1394">
+<META NAME="MS-HKWD" CONTENT="net adapter for 1394"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r02~a_setup_1a_fcdec49c-b16c-4f8e-b1df-c1ceea0815f3.xml"></A>Disabling the 1394 Host Controller</H1>
+<P>For kernel debugging to work properly with a IEEE 1394 (FireWire) connection, you might have to disable the 1394 host controller on the target computer or disable the 1394 network adapter on the host computer. The required adjustments vary depending on the operating system on the target computer.</P>
+<P>When the target computer is running Microsoft Windows Server 2003 (with no service packs installed) or Windows XP with Service Pack 1 (SP1), you must disable the 1394 host controller on the target computer to perform kernel debugging with a 1394 connection. If the 1394 host controller remains enabled on computers that are running these operating systems, the core 1394 stack might compete with the 1394 debugging connection for resources. This competition might cause the debugging connection to fail or to be lost shortly after boot time.</P>
+<P>On Windows Vista (any version), Windows Server 2003 with Service Pack 1 (SP1), and Windows XP with Service Pack 2 (SP2), do not disable the host controller on the target computer. In fact, disabling the host controller while running these operating systems can prevent you from debugging the system during some power state changes. </P>
+<P>Do not disable the host controller on the <i>host</i> computer under any circumstances, regardless of the operating system.</P>
+<P>If you are having trouble debugging a computer that is running a pre-Windows Vista version of Windows over a 1394 connection, consider disabling the 1394 network adapter on the host computer. Disabling the 1394 network adapter can resolve issues that result from bus resets that are caused by loading the 1394 network adapter driver. Do not disable the 1394 network adapter if you are using IP1394. This method does not apply to Windows Vista, because it does not support 1394 network adapters.</P><B>To disable the 1394 host controller on the target computer</B><OL type="1">
+<LI>(<i>Windows Server 2003 (with no service packs installed) and Windows XP SP1 only</i>)</LI>
+<LI>On the target computer, open <b>Device Manager</b> (that is, click <b>Start</b>, click <b>Run</b>, and then enter <b>Devmgmt.msc</b>).</LI>
+<LI>Locate the 1394 host controller. Depending on which view you are using in Device Manager, you can find this controller in different locations. Typically, you can find it in the tree under the <b>PCI Bus</b> node. </LI>
+<LI>Right-click the 1394 host controller, and then click <b>Disable</b>.</LI>
+<LI>Restart the target computer.</LI>
+</OL>
+<P></P>
+<P>Be careful not to accidentally disable the 1394 network adapter.</P>
+<P></P><B>To disable the 1394 network adapter on the host computer</B><OL type="1">
+<LI>(<i>Windows Server 2003 and earlier only</i>)</LI>
+<LI>On the target computer, open <b>Device Manager</b> (that is, click <b>Start</b>, click <b>Run</b>, and then enter <b>Devmgmt.msc</b>).</LI>
+<LI>Expand <b>Network Adapters</b>, and locate <b>1394 Net Adapter</b>.</LI>
+<LI>Right-click <b>1394 Net Adapter</b>, and then click <b>Disable</b>.</LI>
+<LI>Restart the target computer.</LI>
+</OL>
+<P></P>
+<P class="note"><b>Note</b>  Before performing kernel debugging over a 1394 cable, you must also configure the software on the host computer. For more details, see <a href="r03_setup_2_d48986aa-46cb-41a8-9be9-925545754d3a.xml.htm">Installing the 1394 Virtual Driver</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Disabling the 1394 Host Controller RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

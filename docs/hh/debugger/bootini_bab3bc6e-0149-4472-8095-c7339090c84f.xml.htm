@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Overview of the Boot.ini File</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Overview of the Boot.ini File"><xml><MSHelp:Keyword Index="A" Term="bootini_bab3bc6e-0149-4472-8095-c7339090c84f.xml"/>
+<META NAME="MS-HKWD" CONTENT="Boot.ini files [WDK], about Boot.ini files">
+<META NAME="MS-HKWD" CONTENT="[boot loader] section [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="[operating systems] section [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="boot entries [WDK]">
+<META NAME="MS-HKWD" CONTENT="names [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="friendly names [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="boot entry parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot parameters [WDK]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_bab3bc6e-0149-4472-8095-c7339090c84f.xml"></A>Overview of the <i>Boot.ini</i> File</H1>
+<P>The <i>Boot.ini</i> file is a text file that contains the boot options for computers with BIOS firmware running NT-based operating system prior to Windows Vista. It is located at the root of the system partition, typically c:\<i>Boot.ini</i>.</P>
+<P>The following sample shows the content of a typical <i>Boot.ini</i> file.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect<BR>C:\CMDCONS\BOOTSECT.DAT="Microsoft Windows Recovery Console" /cmdcons<BR><BR></nobr></P>
+<P>The <i>Boot.ini</i> file has two main sections:</P><B></B><UL type="disc">
+<LI>The <b>[boot loader]</b> section contains option settings that apply to all boot entries on the system. The options include <b>timeout</b>, the boot menu time-out value, and <b>default</b>, the location of the default operating system.<P>The following sample shows the [boot loader] section of a <i>Boot.ini</i> file. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR><BR></nobr></P>
+</LI>
+<LI>The <b>[operating systems]</b> section is comprised of one or more <i>boot entries</i> for each operating system or bootable program installed on the computer. <P>A <i>boot entry</i> is a set of options that defines a load configuration for an operating system or bootable program. The boot entry specifies an operating system or bootable program and the location of its files. It can also include parameters that configure the operating system or program.</P>
+<P>The following sample shows the [operating systems] section of a <i>Boot.ini</i> file on a computer with two operating systems, Microsoft Windows XP and Microsoft Windows 2000. It has two boot entries, one for each operating system.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[operating systems]<BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect<BR>multi(0)disk(0)rdisk(0)partition(2)\WINNT="Microsoft Windows 2000 Professional" /fastdetect<BR></nobr></P>
+</LI>
+<P></P>
+</UL>
+<P></P>
+<P>Each boot entry includes the following elements:</P><B></B><UL type="disc">
+<LI>The location of the operating system. The <i>Boot.ini</i> file uses the Advanced RISC Computing (ARC) naming convention to display the path to the disk partition and directory where the operating system resides. For example: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR></nobr></P>
+</LI>
+<LI>A friendly name for the boot entry. The friendly name represents the boot entry in the boot menu. The friendly name is surrounded by quotation marks and represents the boot entry in the boot menu. For example: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>"Microsoft Windows XP Professional"<BR></nobr></P>
+</LI>
+<LI><i>Boot entry parameters</i>, also known as <i>boot parameters</i> or <i>load options</i>  enable, disable, and configure operating system features. Boot parameters resemble command-line parameters, each beginning with a forward slash (<b>/</b>), such as <a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug</b></a>. You can have zero or more boot parameters on each boot entry.<P>For a list of boot parameters that are relevant to driver testing and debugging, see <a href="bootini_09bcc247-05ed-43ac-950c-3477f972baf6.xml.htm">Boot.ini Boot Parameter Reference</a>.</P>
+</LI>
+</UL>
+<P></P>
+<P>You can have multiple boot entries for the same operating system, each with a different set of boot parameters. Windows creates a standard boot entry when you install the operating system, and you can create additional, customized entries for an operating system by editing the <i>Boot.ini</i> file.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Overview of the Boot.ini File RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

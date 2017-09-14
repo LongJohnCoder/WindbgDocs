@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>p (Step)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, p (Step)"><xml><MSHelp:Keyword Index="A" Term="r17_cmds_I_169c2b2f-7f47-4e0a-85a9-506f151f0a8f.xml"/>
+<META NAME="MS-HKWD" CONTENT="p (Step) command">
+<META NAME="MS-HKWD" CONTENT="Step (p) command">
+<META NAME="MS-HKWD" CONTENT="Program Step (p) command">
+<META NAME="MS-HKWD" CONTENT="controlling the target, Step (p) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r17_cmds_I_169c2b2f-7f47-4e0a-85a9-506f151f0a8f.xml"></A>p (Step)</H1>
+<P>The <b>p</b> command executes a single instruction or source line and optionally displays the resulting values of all registers and flags. When subroutine calls or interrupts occur, they are treated as a single step.<P></P>
+</P>
+<H4>Syntax</H4>
+<P>User-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr>[<b>~</b><i>Thread</i>] <b>p</b> [<b>r</b>] [= <i>StartAddress</i>] [<i>Count</i>] [<b>"</b><i>Command</i><b>"</b>] <BR></nobr></P>
+<P></P>
+<P>Kernel-Mode</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>p</b> [<b>r</b>] [= <i>StartAddress</i>] [<i>Count</i>] [<b>"</b><i>Command</i><b>"</b>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Thread</i></DT>
+<DD>Specifies the threads to continue executing. All other threads are frozen. For more information about the syntax, see <a href="r13_syntax_5bebd798-3782-4d86-8a4f-33b8f2488b7a.xml.htm">Thread Syntax</a>. You can specify threads only in user mode.</DD>
+<DT><b>r</b></DT>
+<DD>Turns on and off the display of registers and flags. By default, the registers and flags are displayed.  You can disable register display by using the <b>pr</b>, <a href="r18_cmds_s_fe6d30ae-7c39-40db-a971-2aae584c13d3.xml.htm"><b>tr</b></a>, or <nobr><a href="r21_metacmds_l_55475ec8-bd36-4a0c-b380-0ff50ea3488d.xml.htm"><b>.prompt_allow -reg</b></a></nobr> commands. All three of these commands control the same setting and you can use any of them to override any previous use of these commands.  <P>You can also disable register display by using the <nobr><a href="r17_cmds_i_11dcb4d0-b005-46df-b006-79397ff26e7e.xml.htm"><b>l-os</b></a></nobr> command. This setting is separate from the other three commands. To control <i>which</i> registers and flags are displayed, use the <a href="r17_cmds_i_7920456a-7091-467f-a3d0-552c68eee937.xml.htm"><b>rm (Register Mask)</b></a> command.</P>
+</DD>
+<DT><i>StartAddress</i></DT>
+<DD>Specifies the address where execution should begin. If you do not use <i>StartAddress</i>, execution begins at the instruction that the instruction pointer points to. For more information about the syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+<DT><i>Count</i></DT>
+<DD>Specifies the number of instructions or source lines to step through before stopping. Each step is displayed as a separate action in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>. The default value is one.</DD>
+<DT><i>Command</i></DT>
+<DD>Specifies a debugger command to execute after the step is performed. This command is executed before the standard <b>p</b> results are displayed. If you also use <i>Count</i>, the specified command is executed after all stepping is complete (but before the results from the final step are displayed).</DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>When you specify <i>Count</i>, each instruction is displayed as it is stepped through.</P>
+<P>If the debugger encounters a <b>call</b> instruction or interrupt while stepping, the called subroutine will execute completely unless a breakpoint is encountered. Control is returned to the debugger at the next instruction after the call or interrupt.</P>
+<P>Each step executes a single assembly instruction or a single source line, depending on whether the debugger is in assembly mode or source mode.  Use the <a href="r17_cmds_i_11dcb4d0-b005-46df-b006-79397ff26e7e.xml.htm"><b>l+t</b></a> and <nobr><a href="r17_cmds_i_11dcb4d0-b005-46df-b006-79397ff26e7e.xml.htm"><b>l-t</b></a></nobr> commands or the buttons on the WinDbg toolbar to switch between these modes.</P>
+<P>When you are quickly stepping many times in WinDbg, the debugging information windows are updated after each step.  If this update causes slower response time, use <a href="r22_metacmds_s_adbb77b3-4a91-4d60-9982-94729ef87d8e.xml.htm"><b>.suspend_ui (Suspend WinDbg Interface)</b></a> to temporarily suspend the refreshing of these windows.</P>
+<H4>Additional Information</H4>
+<P>For more information about issuing the <b>p</b> command and an overview of related commands, see <a href="r07_use_operation_eb5e303d-aaf6-4005-9617-f53d9a7b344e.xml.htm">Controlling the Target</a>. </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: p (Step) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

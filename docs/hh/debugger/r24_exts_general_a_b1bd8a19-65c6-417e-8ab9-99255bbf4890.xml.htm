@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!gflag</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !gflag"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_b1bd8a19-65c6-417e-8ab9-99255bbf4890.xml"/>
+<META NAME="MS-HKWD" CONTENT="!gflag extension">
+<META NAME="MS-HKWD" CONTENT="GFlags, !gflag extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_b1bd8a19-65c6-417e-8ab9-99255bbf4890.xml"></A>!gflag</H1>
+<P>The <b>!gflag</b> extension sets or displays the global flags.<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!gflag</b> [<b>+</b>|<b>-</b>] <i>Value</i> <BR><b>!gflag</b> {<b>+</b>|<b>-</b>} <i>Abbreviation</i> <BR><b>!gflag -?</b> <BR><b>!gflag</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Value</i></DT>
+<DD>Specifies a 32-bit hexadecimal number. If you do not use a plus sign (<b>+</b>) or minus sign (<b>-</b>), this number becomes the new value of the global flag bit field. If you add a plus sign (<b>+</b>) before this number, the number specifies one or more global flag bits to set to 1. If you add a minus sign (<b>-</b>) before this number, the number specifies one or more global flag bits to set to zero.</DD>
+<DT><i>Abbreviation</i></DT>
+<DD>Specifies a single global flag. <i>Abbreviation</i> is a three-letter abbreviation for a global flag that is set to 1  (<b>+</b>) or to zero (<b>-</b>).</DD>
+<DT><b>-?</b></DT>
+<DD>Displays some Help text for this extension, including a list of global flag abbreviations, in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> <BR><i>Ntsdexts.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Exts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If you do not specify any arguments, the <b>!gflag </b>extension displays the current global flag settings.</P>
+<P>The following table contains the abbreviations that you can use for the <i>Abbreviation</i> parameter.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Name</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000001</TD>
+<TD Width="">"soe"</TD>
+<TD Width="">Stop on exception.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000002</TD>
+<TD Width="">"sls"</TD>
+<TD Width="">Show loader snaps.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000004</TD>
+<TD Width="">"dic"</TD>
+<TD Width="">Debug initial command.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000008</TD>
+<TD Width="">"shg"</TD>
+<TD Width="">Stop if the GUI stops responding (that is, <i>hangs</i>).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000010</TD>
+<TD Width="">"htc"</TD>
+<TD Width="">Enable heap tail checking.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000020</TD>
+<TD Width="">"hfc"</TD>
+<TD Width="">Enable heap free checking.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000040</TD>
+<TD Width="">"hpc"</TD>
+<TD Width="">Enable heap parameter checking.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000080</TD>
+<TD Width="">"hvc"</TD>
+<TD Width="">Enable heap validation on call.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000100</TD>
+<TD Width="">"ptc"</TD>
+<TD Width="">Enable pool tail checking.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000200</TD>
+<TD Width="">"pfc"</TD>
+<TD Width="">Enable pool free checking.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000400</TD>
+<TD Width="">"ptg"</TD>
+<TD Width="">Enable pool tagging.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00000800</TD>
+<TD Width="">"htg"</TD>
+<TD Width="">Enable heap tagging.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00001000</TD>
+<TD Width="">"ust"</TD>
+<TD Width="">Create a user-mode stack trace DB.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00002000</TD>
+<TD Width="">"kst"</TD>
+<TD Width="">Create a kernel-mode stack trace DB.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00004000</TD>
+<TD Width="">"otl"</TD>
+<TD Width="">Maintain a list of objects for each type.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00008000</TD>
+<TD Width="">"htd"</TD>
+<TD Width="">Enable heap tagging by DLL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00010000</TD>
+<TD Width="">"idp"</TD>
+<TD Width="">Unused.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00020000</TD>
+<TD Width="">"d32"</TD>
+<TD Width="">Enable debugging of the Microsoft Win32 subsystem.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00040000</TD>
+<TD Width="">"ksl"</TD>
+<TD Width="">Enable loading of kernel debugger symbols.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00080000</TD>
+<TD Width="">"dps"</TD>
+<TD Width="">Disable paging of kernel stacks.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00100000</TD>
+<TD Width="">"scb"</TD>
+<TD Width="">Enable critical system breaks.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00200000</TD>
+<TD Width="">"dhc"</TD>
+<TD Width="">Disable heap coalesce on free.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00400000</TD>
+<TD Width="">"ece"</TD>
+<TD Width="">Enable close exception.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x00800000</TD>
+<TD Width="">"eel"</TD>
+<TD Width="">Enable exception logging.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x01000000</TD>
+<TD Width="">"eot"</TD>
+<TD Width="">Enable object handle type tagging.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x02000000</TD>
+<TD Width="">"hpa"</TD>
+<TD Width="">Put heap allocations at the end of pages.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x04000000</TD>
+<TD Width="">"dwl"</TD>
+<TD Width="">Debug WINLOGON.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x08000000</TD>
+<TD Width="">"ddp"</TD>
+<TD Width="">Disable kernel-mode <b>DbgPrint</b> and <b>KdPrint</b> output.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x10000000</TD>
+<TD Width="">NULL</TD>
+<TD Width="">Unused.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x20000000</TD>
+<TD Width="">NULL</TD>
+<TD Width="">Unused.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x40000000</TD>
+<TD Width="">NULL</TD>
+<TD Width="">Unused.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x80000000</TD>
+<TD Width="">"dpd"</TD>
+<TD Width="">Disable protected DLL verification.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>You can also set these flags by using the Global Flags utility (<i>Gflags.exe</i>).</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !gflag RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

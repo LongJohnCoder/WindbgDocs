@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.ttime (Display Thread Times)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .ttime (Display Thread Times)"><xml><MSHelp:Keyword Index="A" Term="r22_metacmds_S_2fa3c9d4-ae93-48f9-b8e3-092b1cbb02cf.xml"/>
+<META NAME="MS-HKWD" CONTENT=".ttime (Display Thread Times) command">
+<META NAME="MS-HKWD" CONTENT="Display Thread Times (.ttime) command">
+<META NAME="MS-HKWD" CONTENT="thread times"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r22_metacmds_S_2fa3c9d4-ae93-48f9-b8e3-092b1cbb02cf.xml"></A>.ttime (Display Thread Times)</H1>
+<P>The <b>.ttime</b> command displays the running times for a thread.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.ttime</b> <BR></nobr></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">x86 only</TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>This command only works in user mode. In kernel mode you should use <a href="r29_exts_kernel_q_127b52f2-51ff-49c3-9392-7059a2f5a723.xml.htm"><b>!thread</b></a> instead. This command works with user-mode minidumps as long as they were created with the <b>/mt</b> or <b>/ma</b> options; see <a href="r10_dump_files_39e1a7e3-abf0-4809-9432-1fcc4e98492e.xml.htm">Minidumps</a> for details.</P>
+<P>The <b>.ttime</b> command shows the creation time of the thread, as well as the amount of time it has been running in kernel mode and in user mode.</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>.ttime</b><BR>Created: Sat Jun 28 17:58:42 2003<BR>Kernel:  0 days 0:00:00.131<BR>User:    0 days 0:00:02.109<BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .ttime (Display Thread Times) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!locks (!kdext*.locks)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !locks (!kdext*.locks)"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_0a5e2949-f4ab-488f-bf59-72c3e15d7643.xml"/>
+<META NAME="MS-HKWD" CONTENT="!kdext*.locks extension">
+<META NAME="MS-HKWD" CONTENT="!locks (!kdext*.locks) extension">
+<META NAME="MS-HKWD" CONTENT="ERESOURCE locks">
+<META NAME="MS-HKWD" CONTENT="deadlocks"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_0a5e2949-f4ab-488f-bf59-72c3e15d7643.xml"></A>!locks (!kdext*.locks)</H1>
+<P><P></P>
+<P>The <b>!locks </b>extension in <i>Kdextx86.dll</i> and <i>Kdexts.dll</i> displays information about kernel ERESOURCE locks.</P>
+<P>This extension command should not be confused with the <a href="r31_exts_user_719ca52d-1eb4-4877-a644-4f6eff6f94dc.xml.htm"><b>!ntsdexts.locks</b></a> extension command.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!locks</b> [<i>Options</i>] [<i>Address</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Specifies the amount of information to be displayed. Any combination of the following options can be used:<DL><DT><b>-v</b></DT>
+<DD>Displays detailed information about each lock.</DD>
+<DT><b>-p</b></DT>
+<DD>Display all available information about the locks, including performance statistics.</DD>
+<DT><b>-d</b></DT>
+<DD>Display information about all locks. Otherwise, only locks with contention are displayed.)</DD>
+</DL>
+</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the hexadecimal address of the ERESOURCE lock to be displayed. If <i>Address</i> is 0 or omitted, information about all ERESOURCE locks in the system will be displayed.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!locks</b> extension displays all locks held on resources by threads. A lock can be shared or exclusive, which means no other threads can gain access to that resource. This information is useful when a deadlock occurs on a system. A deadlock is caused by one non-executing thread holding an exclusive lock on a resource that the executing thread needs. </P>
+<P>You can usually pinpoint a deadlock in Microsoft Windows 2000 by finding one non-executing thread that holds an exclusive lock on a resource that is required by an executing thread. Most of the locks are shared.</P>
+<P>Here is an example of the basic <b>!locks</b> output:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!locks</b><BR>**** DUMP OF ALL RESOURCE OBJECTS ****<BR>KD: Scanning for held locks......<BR><BR>Resource @ 0x80e97620    Shared 4 owning threads<BR>     Threads: ff688da0-01&lt;*&gt; ff687da0-01&lt;*&gt; ff686da0-01&lt;*&gt; ff685da0-01&lt;*&gt; <BR>KD: Scanning for held locks.......................................................<BR><BR>Resource @ 0x80e23f38    Shared 1 owning threads<BR>     Threads: 80ed0023-01&lt;*&gt; *** Actual Thread 80ed0020<BR>KD: Scanning for held locks.<BR><BR>Resource @ 0x80d8b0b0    Shared 1 owning threads<BR>     Threads: 80ed0023-01&lt;*&gt; *** Actual Thread 80ed0020<BR>2263 total locks, 3 locks currently held<BR><BR></nobr></P>
+<P>Note that the address for each thread displayed is followed by its thread count (for example, "-01"). If a thread is followed by "&lt;*&gt;", that thread is one of the owners of the lock. In some instances, the initial thread address contains an offset. In that case, the actual thread address is displayed as well.</P>
+<P>If you want to find more information about one of these resource objects, use the address that follows "Resource @" as an argument for future commands. To investigate the second resource shown in the preceding example, you could use <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt ERESOURCE 80d8b0b0</b></a>  or <a href="r29_exts_kernel_q_127b52f2-51ff-49c3-9392-7059a2f5a723.xml.htm"><b>!thread 80ed0020</b></a>. Or you could use the <b>!locks</b> extension again with the <b>-v</b> option:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!locks -v 80d8b0b0</b><BR><BR>Resource @ 0x80d8b0b0    Shared 1 owning threads<BR>     Threads: 80ed0023-01&lt;*&gt; *** Actual Thread 80ed0020<BR><BR>     THREAD 80ed0020  Cid 4.2c  Teb: 00000000 Win32Thread: 00000000 WAIT: (WrQueue) KernelMode Non-Alertable<BR>         8055e100  Unknown<BR>     Not impersonating<BR>GetUlongFromAddress: unable to read from 00000000<BR>     Owning Process 80ed5238<BR>     WaitTime (ticks)          44294977<BR>     Context Switch Count      147830             <BR>     UserTime                  0:00:00.0000<BR>     KernelTime                0:00:02.0143<BR>     Start Address nt!ExpWorkerThread (0x80506aa2)<BR>     Stack Init fafa4000 Current fafa3d18 Base fafa4000 Limit fafa1000 Call 0<BR>     Priority 13 BasePriority 13 PriorityDecrement 0<BR>ChildEBP RetAddr  <BR>fafa3d30 804fe997 nt!KiSwapContext+0x25 (FPO: [EBP 0xfafa3d48] [0,0,4]) [D:\NT\base\ntos\ke\i386\ctxswap.asm @ 139]<BR>fafa3d48 80506a17 nt!KiSwapThread+0x85 (FPO: [Non-Fpo]) (CONV: fastcall) [d:\nt\base\ntos\ke\thredsup.c @ 1960]<BR>fafa3d78 80506b36 nt!KeRemoveQueue+0x24c (FPO: [Non-Fpo]) (CONV: stdcall) [d:\nt\base\ntos\ke\queueobj.c @ 542]<BR>fafa3dac 805ad8bb nt!ExpWorkerThread+0xc6 (FPO: [Non-Fpo]) (CONV: stdcall) [d:\nt\base\ntos\ex\worker.c @ 1130]<BR>fafa3ddc 8050ec72 nt!PspSystemThreadStartup+0x2e (FPO: [Non-Fpo]) (CONV: stdcall) [d:\nt\base\ntos\ps\create.c @ 2164]<BR>00000000 00000000 nt!KiThreadStartup+0x16 [D:\NT\base\ntos\ke\i386\threadbg.asm @ 81]<BR><BR>1 total locks, 1 locks currently held<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !locks (!kdext*.locks) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>AgeStore Command-Line Options</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, AgeStore Command-Line Options"><xml><MSHelp:Keyword Index="A" Term="SymChk_42469a92-59b7-4bc2-b132-bb608cb7b51e.xml"/>
+<META NAME="MS-HKWD" CONTENT="command-line options, AgeStore">
+<META NAME="MS-HKWD" CONTENT="AgeStore, command-line options"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_42469a92-59b7-4bc2-b132-bb608cb7b51e.xml"></A>AgeStore Command-Line Options</H1>
+<P><P>The AgeStore command line uses the following syntax.  The parameters can be included in any order.</P>
+<P></P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>agestore</b> [<i>PathSpec</i>] <b>-date=</b><i>Month</i><b>-</b><i>Day</i><b>-</b><i>Year</i> <i>Options</i> <BR><BR><b>agestore</b> [<i>PathSpec</i>] <b>-days=</b><i>NumberOfDays</i> <i>Options</i> <BR><BR><b>agestore</b> [<i>PathSpec</i>] <b>-size=</b><i>SizeRemaining</i> <i>Options</i> <BR><BR><b>agestore</b> [<i>PathSpec</i>] <b>-size</b> <i>Options</i> <BR><BR><b>agestore -?</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>PathSpec</i></DT>
+<DD>Specifies the target directory in which files are to be deleted.  If the <nobr><b>-s</b></nobr> option is used, <i>PathSpec</i> specifies the root directory of the target tree in which files are to be deleted.  <i>PathSpec</i> may be the absolute or relative path of a directory on the local computer, or a UNC path.  If <i>PathSpec</i> contains spaces, it must be enclosed in quotation marks.  If <i>PathSpec</i> is omitted, AgeStore uses the current working directory.</DD>
+<DT><b>-date=</b><i>Month</i><b>-</b><i>Day</i><b>-</b><i>Year</i></DT>
+<DD>Specifies the cutoff date for deleting files.  All files that were last accessed prior to the specified date will be deleted.  The date must be specified in the format <nobr><i>Month</i><b>-</b><i>Day</i><b>-</b><i>Year</i>,</nobr> with hyphens between the month and day and between the day and the year.  Leading zeros in <i>Month</i> and <i>Day</i> are optional.  The year can be specifed with two digits or four.  Thus you can indicate the date of January 5, 2008 as <nobr><b>01-05-2008</b></nobr> or <nobr><b>1-5-08</b></nobr>. </DD>
+<DT><b>-days=</b><i>NumberOfDays</i></DT>
+<DD>Specifies the cutoff date and time for deleting files.  All files that were last accessed prior to the specified number of days ago will be deleted.  <i>NumberOfDays</i> specifies an integer number of 24-hour days.  For example, if the specifier <nobr><b>-days=3</b></nobr> is used at 6:00 PM on February 17, 2008, all files last accessed prior to 6:00 PM on February 14, 2008 will be deleted.</DD>
+<DT><b>-size=</b><i>SizeRemaining</i></DT>
+<DD>Specifies the total size of the files that should remain after the deletion, in bytes.  When this switch is used, AgeStore deletes files in the target directory or target tree, beginning with the files accessed least recently, until the total size of the remaining files is less than or equal to <i>SizeRemaining</i>.  When the <nobr><b>-s</b></nobr> option is used, AgeStore targets an entire directory tree, and <i>SizeRemaining</i> specifies the total size of files that should remain in this entire directory tree after deletion.</DD>
+<DT><b>-size</b></DT>
+<DD>Causes AgeStore to list the total size of all files in the target directory or target tree.  No files are deleted. </DD>
+<DT><i>Options</i></DT>
+<DD>Any combination of the following options.<DL><DT><b>-l</b></DT>
+<DD>Causes AgeStore not to delete any files, but merely to list all the files that <i>would</i> be deleted if this same command were run without the <nobr><b>-l</b></nobr> option.</DD>
+<DT><b>-s</b></DT>
+<DD>Causes AgeStore to treat the entire directory tree subordinate to <i>PathSpec</i> as the target.  When the <nobr><b>-s</b></nobr> option is not used, the directory specified by <i>PathSpec</i> becomes the target directory in which files will be deleted.  When the <nobr><b>-s</b></nobr> option is used, the directory specified by <i>PathSpec</i> and all subdirectories under it become the target tree in which files will be deleted.</DD>
+<DT><b>-k</b></DT>
+<DD>Causes AgeStore to keep any empty subdirectories.  If this option is not used, AgeStore deletes the target directory if it is completely empty after the command runs.  If the <nobr><b>-s</b></nobr> option is used without the <nobr><b>-k</b></nobr> option, all empty directories in the target directory tree will be deleted after AgeStore has completed its file deletion -- even the root directory itself, if it becomes empty.  If there are directories in this tree that happen to be already empty before AgeStore runs, AgeStore deletes these directories as well.  However, if the AgeStore command results in no file deletion (for example, if the <nobr><b>-size=</b><i>SizeRemaining</i></nobr> parameter specifies a size larger than the total size of all files in the target tree), empty directories are not deleted.  If the <nobr><b>-s</b></nobr> option is not used, empty directories are never deleted, and the <nobr><b>-k</b></nobr> option is ignored. </DD>
+<DT><b>-q</b></DT>
+<DD>Quiet mode.  If this option is not included, AgeStore lists all files as they are deleted.</DD>
+<DT><b>-y</b></DT>
+<DD>Suppresses the <b>(y/n)</b> prompt.  If this option is not used, AgeStore prompts you with an "Are you sure?" prompt before deleting any files.</DD>
+</DL>
+<P></P>
+</DD>
+<DT><b>-?</b></DT>
+<DD>Displays help text for the AgeStore command line.</DD>
+</DL>
+<H4>Additional Information</H4>
+<P>For more information about the AgeStore tool, see <a href="symchk_7614e89a-f669-4c32-af18-931d396fc8eb.xml.htm">Using AgeStore</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: AgeStore Command-Line Options RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

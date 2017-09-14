@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SetMatchThreadId</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SetMatchThreadId"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="SetMatchThreadId"/>
+<MSHelp:Keyword Index="A" Term="ComOther_5100cd0c-7d69-4210-9d32-ca1e9bd321aa.xml"/>
+<META NAME="MS-HKWD" CONTENT="SetMatchThreadId (IDebugBreakpoint) method">
+<META NAME="MS-HKWD" CONTENT="IDebugBreakpoint::SetMatchThreadId method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ComOther_5100cd0c-7d69-4210-9d32-ca1e9bd321aa.xml"></A>SetMatchThreadId</H1>
+<P><P>The <b>SetMatchThreadId</b> method sets the engine thread ID of the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#a5a5985a-10e6-4a13-8a11-d9935f5661b9">thread</a> that can trigger a breakpoint.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugBreakpoint::SetMatchThreadId(</b><BR><b>    IN ULONG  </b><i>Thread</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Thread</i></DT>
+<DD>The engine thread ID of the thread that can trigger this breakpoint.</DD>
+</DL>
+<H4>Return Value</H4>
+<P><b>SetMatchThreadId</b> might return one of the following values:</P>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>The thread that <i>Thread</i> specifies could not be found.</DD>
+<DT>E_INVALIDARG</DT>
+<DD>The target is in a kernel and the breakpoint is a processor breakpoint.  Processor breakpoints cannot be limited to threads in kernel mode.</DD>
+</DL>
+<P>This method might also return other error values.  For more information about possible return values, see <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a>.</P>
+<H4>Comments</H4>
+<P>If you have set a thread for the breakpoint, the breakpoint can be triggered only if that thread hits the breakpoint.  If you have not set a thread, any thread can trigger the breakpoint.</P>
+<P>If you have set a thread, you can remove the setting by setting <i>Id</i> to DEBUG_ANY_ID.</P>
+<P></P>
+<P>For more information about breakpoint properties, see <a href="engine_dg_139ab0e2-36b9-463b-bfdd-05cd64791d4f.xml.htm">Controlling Breakpoint Flags and Parameters</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Versions: </b>Available in all versions of <b>IDebugBreakpoint</b>.</p>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SetMatchThreadId RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

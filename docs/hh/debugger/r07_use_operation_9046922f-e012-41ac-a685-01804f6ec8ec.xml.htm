@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Methods of Controlling Breakpoints</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Methods of Controlling Breakpoints"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_9046922f-e012-41ac-a685-01804f6ec8ec.xml"/>
+<META NAME="MS-HKWD" CONTENT="breakpoints, controlling"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_9046922f-e012-41ac-a685-01804f6ec8ec.xml"></A>Methods of Controlling Breakpoints</H1>
+<P>You can specify the location of a <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">breakpoint</a> by virtual address, module and routine offsets, or source file and line number (when in source mode). If you put a breakpoint on a routine without an offset, the breakpoint is activated when that routine is entered.</P>
+<P>There are several additional kinds of breakpoints: </P><B></B><UL type="disc">
+<LI>A breakpoint can be associated with a certain thread. </LI>
+<LI>A breakpoint can enable a fixed number of passes through an address before it is triggered. </LI>
+<LI>A breakpoint can automatically issue certain commands when it is triggered. </LI>
+<LI>A breakpoint can be set on non-executable memory and watch for that location to be read or written to.</LI>
+</UL>
+<P></P>
+<P>If you are debugging more than one process in user mode, the collection of breakpoints depends on the current process. To view or change a process' breakpoints, you must select the process as the current process. For more information about the current process, see <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">Controlling Processes and Threads</a>.</P>
+<H4>Methods of Controlling and Displaying Breakpoints</H4>
+<P>To control or display breakpoints, you can use the following methods:</P><B></B><UL type="disc">
+<LI>Use the <a href="r15_cmds_a_4239e89a-bfe7-423f-ab96-4f0725cef52a.xml.htm"><b>bl (Breakpoint List)</b></a> command to list existing breakpoints and their current status. </LI>
+<LI>Use the <a href="r19_metacmds_a_fbc53fa8-9480-485b-9b49-64cf24fecd26.xml.htm"><b>.bpcmds (Display Breakpoint Commands)</b></a> command to list all breakpoints along with the commands that were used to create them. </LI>
+<LI>Use the <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bp (Set Breakpoint)</b></a> command to set a new breakpoint.</LI>
+<LI>Use the <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bu (Set Unresolved Breakpoint)</b></a> command to set a new breakpoint. Breakpoints that are set with <b>bu</b> are called <i>unresolved breakpoints</i>; they have different characteristics than breakpoints that are set with <b>bp</b>. For complete details, see <a href="r07_use_operation_3a87f521-a016-43a6-bc5f-820bfd4fa0c4.xml.htm">Unresolved Breakpoints (<b>bu</b> Breakpoints)</a>. </LI>
+<LI>Use the <a href="r15_cmds_a_76c9b5bf-1e1a-4257-8bd4-4b00e2840523.xml.htm"><b>bm (Set Symbol Breakpoint)</b></a> command to set new breakpoints on symbols that match a specified pattern. A breakpoint set with <b>bm</b> will be associated with an address (like a <b>bp</b> breakpoint) if the <b>/d</b> switch is included; it will be unresolved (like a <b>bu</b> breakpoint) if this switch is not included. </LI>
+<LI>Use the <a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba (Break on Access)</b></a> command to set a <i>processor breakpoint</i>, also known as a <i>data breakpoint</i>. These breakpoints can be triggered when the memory location is written to, when it is read, when it is executed as code, or when kernel I/O occurs. For complete details, see <a href="r07_use_operation_d80bd6e2-8037-421c-ae24-557262f4dad4.xml.htm">Processor Breakpoints (<b>ba</b> Breakpoints)</a>. </LI>
+<LI>Use the <a href="r15_cmds_a_ccc07fee-278e-46c1-83a8-a80313d93ba2.xml.htm"><b>bc (Breakpoint Clear)</b></a> command to permanently remove one or more breakpoints.</LI>
+<LI>Use the <a href="r15_cmds_a_086f3898-7c6d-4c41-b262-ca44e1966aa6.xml.htm"><b>bd (Breakpoint Disable)</b></a> command to temporarily disable one or more breakpoints.</LI>
+<LI>Use the <a href="r15_cmds_a_1bc918e0-3f85-4e12-b692-a9e84b2681cf.xml.htm"><b>be (Breakpoint Enable)</b></a> command to re-enable one or more disabled breakpoints.</LI>
+<LI>Use the <a href="r15_cmds_a_a5203f1e-08a8-4990-8737-0b4d09210fa5.xml.htm"><b>br (Breakpoint Renumber)</b></a> command to change the ID of an existing breakpoint.</LI>
+<LI>Use the <a href="r15_cmds_a_c820ed98-ebdc-4f54-95bd-7a91f5f5d625.xml.htm"><b>bs (Update Breakpoint Command)</b></a> command to change the command associated with an existing breakpoint.</LI>
+<LI>Use the <a href="r15_cmds_a_bc07ae71-d4f3-4d9c-8254-5551e473d94a.xml.htm"><b>bsc (Update Conditional Breakpoint)</b></a> command to change the condition under which an existing conditional breakpoint occurs.</LI>
+<LI><i>(WinDbg only)</i>  The <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a> and the <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source windows</a> highlight lines that have breakpoints set. Enabled breakpoints are red, disabled breakpoints are yellow, and a breakpoint that corresponds to the current program counter location is purple.</LI>
+<LI><i>(WinDbg only)</i>  The <a href="r37_gui_2_5abe2105-cf44-4d1e-a4ae-f4d44409ed58.xml.htm"><b>Edit | Breakpoints</b></a> command or the ALT+F9 shortcut key open the <b>Breakpoints</b> dialog box. This dialog box lists all breakpoints, and you can use it to disable, enable, or clear existing breakpoints or to set new breakpoints.</LI>
+<LI><i>(WinDbg only)</i>  If you set the cursor on a specific line in the Disassembly window or in a Source window, you can press F9 or click the <b>Insert or remove </b>button (<img src="tbbp.bmp">) on the toolbar to set a breakpoint at that line. If you press the shortcut key or click the button when the active window is not the Disassembly window or a Source window, it has the same effect as <b>Edit | Breakpoints</b>.</LI>
+</UL>
+<P></P>
+<P>Each breakpoint has a decimal number called the <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#039eced1-0802-4884-b0ea-99d5ea7023bd"><i>breakpoint ID</i></a> associated with it. This number identifies the breakpoint in various commands.</P>
+<H4>Breakpoint Commands</H4>
+<P>You can include a command in a breakpoint that is automatically executed when the breakpoint is hit.</P>
+<P>For example, the following command breaks at <b>MyFunction+0x47</b>, writes a dump file, and then resumes execution.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>bu MyFunction+0x47 ".dump c:\mydump.dmp; g"</b> <BR></nobr></P>
+<P></P>
+<P class="note"><b>Note</b>  If you are controlling the user-mode debugger from the kernel debugger, do not use <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> in the breakpoint command string. The serial interface might be unable to keep up with this command, and you will be unable to break back into CDB. For more information about this situation, see <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a>.</P>
+<H4>Number of Breakpoints</H4>
+<P>In kernel mode, you can use a maximum of 32 software breakpoints. In user mode, you can use any number of software breakpoints.</P>
+<P>The number of processor breakpoints that are supported depends on the target processor architecture. </P>
+<H4>Conditional Breakpoints</H4>
+<P>You can set a breakpoint that is triggered only under certain conditions. For more information about these kinds of breakpoints, see <a href="t01_basic_a4ebd4e7-bb0c-4d6b-b04a-11e823bae62c.xml.htm">Setting a Conditional Breakpoint</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Methods of Controlling Breakpoints RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

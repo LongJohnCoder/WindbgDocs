@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetEventFilterText</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetEventFilterText"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetEventFilterText"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_61936aac-8fe2-4f18-86aa-cba1404d845f.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetEventFilterText method">
+<META NAME="MS-HKWD" CONTENT="GetEventFilterText (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_61936aac-8fe2-4f18-86aa-cba1404d845f.xml"></A>GetEventFilterText</H1>
+<P><P>The <b>GetEventFilterText</b> and <b>GetEventFilterTextWide</b> methods return a short description of an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> for a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#881e2e22-4799-498c-88ee-45fb367a0a6b">specific filter</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::GetEventFilterText(</b><BR><b>    IN ULONG  </b><i>Index</i><b>,</b><BR><b>    OUT PSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>TextSize</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugControl4::GetEventFilterTextWide(</b><BR><b>    IN ULONG  </b><i>Index</i><b>,</b><BR><b>    OUT PWSTR  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>TextSize</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetEventFilterTextT GetEventFilterTextWide</b><BR><b>#else</b><BR><b>#define GetEventFilterTextT GetEventFilterText</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Index</i></DT>
+<DD>Specifies the index of the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8c64ad6b-a845-4f5d-b862-f4e23db322a2">event filter</a> whose description will be returned.  Only the specific filters have a description attached to them; <i>Index</i> must refer to a specific filter.</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the description of the specific filter.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size, in characters, of the buffer that <i>Buffer</i> specifies.</DD>
+<DT><i>TextSize</i></DT>
+<DD>Receives the size of the event description.  If <i>TextSize</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD><i>Index</i> did not refer to a specific filter.  This can occur if <i>Index</i> refers to an <a href="dbg_glossary_f75f2990-56bc-4632-bcba-2e994cbb39af.xml.htm#ac40e553-dd44-4cd0-aa79-5d58865fbb5f">arbitrary exception filter</a>.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetEventFilterText</b> is available in all versions of <b>IDebugControl</b>.  <b>GetEventFilterTextWide</b> is available in <b>IDebugControl4</b> and later versions.</P>
+<H4>Comments</H4>
+<P>For more information about <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#8c64ad6b-a845-4f5d-b862-f4e23db322a2">event filters</a>, see <a href="engine_dg_feda793f-b9e8-402f-9953-409e0e94247f.xml.htm">Event Filters</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>sx, sxd, sxe, sxi, sxn (Set Exceptions)</b></a>, <a href="idebugcontrol_ebe245a7-c76c-4b31-aa58-ccad250ed92a.xml.htm"><b>GetSpecificFilterParameters</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetEventFilterText RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

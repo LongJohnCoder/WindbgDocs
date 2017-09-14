@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DebugExtensionUninitialize</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DebugExtensionUninitialize"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DebugExtensionUninitialize"/>
+<MSHelp:Keyword Index="A" Term="Extensions_Ref_76594e24-5f2d-495f-b8a9-6acec1f21ba4.xml"/>
+<META NAME="MS-HKWD" CONTENT="DebugExtensionUninitialize callback function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Extensions_Ref_76594e24-5f2d-495f-b8a9-6acec1f21ba4.xml"></A>DebugExtensionUninitialize</H1>
+<P>The <b>DebugExtensionUninitialize</b> callback function is called by the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2dbaa658-dbfe-47de-8266-97ed86c41aea">engine</a> to uninitialize the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#5f0c1329-ded4-4373-bde8-f2b4e9d8499b">DbgEng extension</a> <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#9625e841-0468-4bf3-940b-56f3f5831a12">DLL</a> before it is unloaded.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>void</b><BR><b>CALLBACK</b><BR><b>  DebugExtensionUninitialize(</b><BR><b>    void</b><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT>None</DT>
+</DL>
+<H4>Return Value</H4>
+<P>None</P>
+<H4>Comments</H4>
+<P>This function is optional.  A DbgEng extension DLL only needs to export <b>DebugExtensionUninitialize</b> if it needs to be notified before it is unloaded.  The engine looks for this function by name in the extension DLL.</P>
+<P>This function can be used by the extension DLL to clean up before it is unloaded.</P>
+<P>There may or may not be a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">session</a> active when this function is called, so the extension should not assume that it is able to query session information.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>The function type is defined as PDEBUG_EXTENSION_UNINITIALIZE in <i>dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="extensions_ref_e260c42c-8299-4578-8919-3b2167701275.xml.htm"><b>DebugExtensionInitialize</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DebugExtensionUninitialize RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

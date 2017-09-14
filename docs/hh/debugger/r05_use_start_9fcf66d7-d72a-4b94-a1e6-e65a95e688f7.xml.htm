@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Controlling the User-Mode Debugger from the Kernel Debugger</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Controlling the User-Mode Debugger from the Kernel Debugger"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml"/>
+<META NAME="MS-HKWD" CONTENT="KD, controlling CDB or NTSD">
+<META NAME="MS-HKWD" CONTENT="WinDbg, controlling CDB or NTSD">
+<META NAME="MS-HKWD" CONTENT="CDB, redirecting control to the kernel debugger">
+<META NAME="MS-HKWD" CONTENT="NTSD, redirecting control to the kernel debugger">
+<META NAME="MS-HKWD" CONTENT="redirecting user-mode output to the kernel debugger">
+<META NAME="MS-HKWD" CONTENT="controlling the user-mode debugger from the kernel debugger">
+<META NAME="MS-HKWD" CONTENT="controlling the user-mode debugger from the kernel debugger, overview">
+<META NAME="MS-HKWD" CONTENT="controlling the user-mode debugger from the kernel debugger, sleep mode">
+<META NAME="MS-HKWD" CONTENT="sleep mode"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml"></A>Controlling the User-Mode Debugger from the Kernel Debugger</H1>
+<P>You can redirect the input and output from a user-mode debugger to a kernel debugger. This redirection enables the kernel debugger to control a specific user-mode debugging session that is occurring on the target computer.</P>
+<P>You can use either KD or WinDbg as the kernel debugger.</P>
+<P>You can use either CDB or NTSD as the user-mode debugger. <a href="r01_intro_d33cdade-c8d0-4a93-a626-d19ffa1df8b2.xml.htm#f7997e21-d84a-4224-af71-bc393265af91">NTSD</a> is the better choice, because it requires minimal resources from the processor and operating system of the computer whose application is being debugged. In fact, when NTSD is started under the control of the kernel debugger, no NTSD window is created. With NTSD, you can perform user-mode debugging through the serial port early in the boot phase and late into shutdown. </P>
+<P>This section includes the following:</P><B></B><UL type="disc">
+<LI><a href="r05_use_start_0f22034f-a032-4d16-8fac-5c22cf5d766f.xml.htm">Starting the Debugging Session</a> describes how to begin a session where the user-mode debugger is controlled from the kernel debugger. </LI>
+<LI><a href="r05_use_start_415320ed-27ff-42a3-85da-d2d7e8723196.xml.htm">Switching Modes</a> describes the four different modes that are involved, and how to alternate between them. </LI>
+<LI><a href="r05_use_start_c16587d2-b2f7-4ce5-9e58-3c3e8c6e4b30.xml.htm">When to Use This Technique</a> describes scenarios where this technique is particularly useful. </LI>
+<LI><a href="r05_use_start_d9ff842e-7b5a-4989-9931-f7318ac828b2.xml.htm">Combining This Method with Remote Debugging</a> describes how to control the user-mode debugger from a kernel debugger, and use it as a debugging server at the same time. This combination can be useful if your user-mode symbols are located on a symbol server. </LI>
+</UL>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Controlling the User-Mode Debugger from the Kernel Debugger RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

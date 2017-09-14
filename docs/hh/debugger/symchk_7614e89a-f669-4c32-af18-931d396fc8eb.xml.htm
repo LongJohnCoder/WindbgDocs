@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using AgeStore</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using AgeStore"><xml><MSHelp:Keyword Index="A" Term="SymChk_7614e89a-f669-4c32-af18-931d396fc8eb.xml"/>
+<META NAME="MS-HKWD" CONTENT="AgeStore, using"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_7614e89a-f669-4c32-af18-931d396fc8eb.xml"></A>Using AgeStore</H1>
+<P>AgeStore is a tool that deletes files in a directory or directory tree, based on their last access dates.  Its primary use is for removing old files from the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#ac594c2f-1bc6-4ee9-a628-bc146d313672">downstream store</a> used by a symbol server or a source server, in order to conserve disk space. It can also be used as a general file deletion tool.</P>
+<P>AgeStore can delete all files in a single directory (the <i>target directory</i>), or in all the directories within a tree (the <i>target tree</i>). The <nobr><b>-s</b></nobr> option indicates that an entire tree is to be targeted.</P>
+<P>There are three ways to specify which files within the target directory or target tree are to be deleted.  The <nobr><b>agestore -date=</b><i>Month</i><b>-</b><i>Day</i><b>-</b><i>Year</i></nobr> command deletes all files that were last accessed prior to the specified date.  The <nobr><b>agestore -days=</b><i>NumberOfDays</i></nobr> command deletes all files that were last accessed more than the specified number of days ago.  The <nobr><b>agestore -size=</b><i>SizeRemaining</i></nobr> command deletes all files in the target directory or target tree, beginning with the least-recently-accessed files, until the total size of the remaining files is less than or equal to <i>SizeRemaining</i>.</P>
+<P>For example, the following command deletes all files in <i>C:\MyDir</i> that were last accessed prior to January 7, 2008:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>agestore c:\mydir -date=01-07-2008</b><BR></nobr></P>
+<P></P>
+<P></P>
+<P>The following command deletes all files in the directory tree subordinate to <i>C:\symbols\downstreamstore</i> that were last accessed over thirty days ago:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>agestore c:\symbols\downstreamstore -days=30 -s</b><BR></nobr></P>
+<P>The following command deletes files in the directory tree subordinate to <i>C:\symbols\downstreamstore</i>, beginning with those accessed longest ago, until the total size of all files in this tree is less than or equal to 50,000 bytes:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>agestore c:\symbols\downstreamstore -size=50000 -s</b><BR></nobr></P>
+<P>The <nobr><b>-l</b></nobr> option causes AgeStore to delete no files, but merely to list all the files that <i>would</i> be deleted without this option.  Before you use any AgeStore command you should run the intended command with the <nobr><b>-l</b></nobr> option added, to verify that it will delete exactly those files you intend it to delete.</P>
+<P>For the complete command line syntax, see <a href="symchk_42469a92-59b7-4bc2-b132-bb608cb7b51e.xml.htm">AgeStore Command-Line Options</a>.</P>
+<H4>Running AgeStore on Windows Vista and Later</H4>
+<P>Because AgeStore deletes files based on the last time that they were accessed, it can run successfully only if your your file system stores Last Access Time (LAT) data.  In the NTFS file system, LAT data storage can be either enabled or disabled.  If it is disabled, AgeStore will not run, but will display the following error message instead:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Last-Access-Time support is disabled on this computer.<BR>Please read the documentation for more details.<BR></nobr></P>
+<P>In Windows 2000, Windows XP, and Windows Server 2003, LAT data storage is enabled by default.  In Windows Vista and later versions of Windows, LAT data storage is disabled by default, and therefore AgeStore will not run unless you first enable this data.  </P>
+<P>In Windows Vista and later versions of Windows, you can use the FSUtil (<i>Fsutil.exe</i>) tool to enable the gathering of LAT data.  From a Command Prompt window, issue the following command: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>fsutil behavior set disablelastaccess 0 <BR></nobr></P>
+<P>To disable the gathering of LAT data, using the following command: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>fsutil behavior set disablelastaccess 1 <BR></nobr></P>
+<P>These changes take effect after the next restart of Windows. </P>
+<P>The FAT32 file system always stores LAT information (although only the date, and not the time, are stored).  Therefore, AgeStore works with FAT32 file systems.  However, since AgeStore will not run when the NTFS LAT is disabled, you must enable NTFS LAT even if your file system is FAT32.  </P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using AgeStore RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

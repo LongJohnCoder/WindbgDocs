@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ndiskd.dbgsystems</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ndiskd.dbgsystems"><xml><MSHelp:Keyword Index="A" Term="r32_exts_Lg_ND_RPC_178e44e0-7397-41ee-b8d5-63e0bcd80d1c.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ndiskd.dbgsystems extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r32_exts_Lg_ND_RPC_178e44e0-7397-41ee-b8d5-63e0bcd80d1c.xml"></A>!ndiskd.dbgsystems</H1>
+<P>The <b>!ndiskd.dbgsystems</b> extension controls which NDIS components will transmit debug information.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ndiskd.dbgsystems</b> [<i>Values</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Values</i></DT>
+<DD>Selects various NDIS components to trace and watch for debug information. If no <i>Values</i> are specified, the current NDIS components selected are displayed.  <P>If multiple components are selected, separate them with spaces. If a previously-selected component is repeated, its debug monitoring will be toggled off. The following values are possible:</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Value</b></TD>
+<TD Width=""><b>Meaning</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">INIT</TD>
+<TD Width="">Traces adapter initialization.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">CONFIG</TD>
+<TD Width="">Traces adapter configuration.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">SEND</TD>
+<TD Width="">Traces sending data over the network.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">RECV</TD>
+<TD Width="">Traces receiving data from the network.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">PROTOCOL</TD>
+<TD Width="">Traces protocol operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">BIND</TD>
+<TD Width="">Traces binding operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">BUS_QUERY</TD>
+<TD Width="">Traces bus queries.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">REGISTRY</TD>
+<TD Width="">Traces registry operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">MEMORY</TD>
+<TD Width="">Traces memory management.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">FILTER</TD>
+<TD Width="">Traces filter operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">REQUEST</TD>
+<TD Width="">Traces requests.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">WORK_ITEM</TD>
+<TD Width="">Traces work-item operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">PNP</TD>
+<TD Width="">Traces Plug and Play operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">PM</TD>
+<TD Width="">Traces Power Management operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">OPEN</TD>
+<TD Width="">Traces operations that open reference objects.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">LOCKS</TD>
+<TD Width="">Traces locking operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">RESET</TD>
+<TD Width="">Traces resetting operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">WMI</TD>
+<TD Width="">Traces Windows Management Instrumentation operations.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">NDIS_CO</TD>
+<TD Width="">Traces Connection-Oriented NDIS.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">REFERENCE</TD>
+<TD Width="">Traces reference operations.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ndiskd.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP</b></TD>
+<TD Width=""><i>Ndiskd.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows Vista and later</b></TD>
+<TD Width=""><i>Ndiskd.dll</i></TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For information about NDIS drivers, see the Windows Driver Kit (WDK) documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ndiskd.dbgsystems RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

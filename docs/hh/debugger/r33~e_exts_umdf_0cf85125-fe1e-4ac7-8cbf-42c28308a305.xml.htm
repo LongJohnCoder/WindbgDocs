@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wudfext.wudfrefhist</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wudfext.wudfrefhist"><xml><MSHelp:Keyword Index="A" Term="r33~e_exts_umdf_0cf85125-fe1e-4ac7-8cbf-42c28308a305.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wudfext.wudfrefhist extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~e_exts_umdf_0cf85125-fe1e-4ac7-8cbf-42c28308a305.xml"></A>!wudfext.wudfrefhist</H1>
+<P><P>The <b>!wudfext.wudfrefhist</b> extension displays the reference count stack history for a UMDF object. </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wudfext.wudfrefhist</b> <i>ObjectAddress</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>ObjectAddress</i></DT>
+<DD>Specifies the address of the UMDF object whose reference count stack history is to be displayed. Note that this is the address of the object itself, not of the interface. </DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Wudfext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <i>ObjectAddress</i> parameter must be the address of the UMDF object, not the address of the interface (which is used by many other UMDF extensions). To determine the address of the UMDF object, the <a href="r33~e_exts_umdf_0047d2cf-5cb8-4cea-bb15-9f95035573b4.xml.htm"><b>!wudfext.wudfdumpobjects</b></a> extension can be used; this extension displays both the UMDF object address and the interface address. Alternatively, if you know the address of the interface, you can use it as the argument of the <a href="r33~e_exts_umdf_b9beeeeb-9229-464e-87a4-8f1e8521b39e.xml.htm"><b>!wudfext.wudfobject</b></a> extension; the resulting display will include the object address (displayed after the symbol "Fx:"). </P>
+<P>If the reference count tracking option (<b>TrackRefCounts</b>) has been enabled in WDF Verifier, you can use <b>!wudfext.wudfrefhist</b> to display each call stack that increments or decrements an object's reference count.  You can determine whether a call stack is causing a memory leak by examining its <b>AddRef</b> and <b>Release</b> calls for references that are being added and not released.</P>
+<P>This extension can be used at any time, even if UMDF has not broken in to the debugger. </P>
+<P>If this extension does not display the desired information, make sure that the relevant data is paged in and then try again. </P>
+<P>Here is an example of the <b>!wudfext.wudfrefhist</b> display:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wudfrefhist 0x4e1fc78</b> <BR><BR>-----------------------------------------------------------------------<BR>2  (++)<BR>-----------------------------------------------------------------------<BR>WUDFx!CWdfObject::TrackRefCounts+0xf7<BR>WUDFx!CWdfObject::AddRef+0x41<BR>WUDFx!CWdfIoQueue::AddRef+0x1a<BR>WUDFx!CWdfDevice::CreateIoQueue+0x432<BR>0x044e8719    &lt;Symbol name not found, hr=0x80004005&gt;<BR>WUDFx!CWdfDevice::CreateIoQueue+0x0<BR>0x044e73e3    &lt;Symbol name not found, hr=0x80004005&gt;<BR>WUDFx!CWdfDevice::CreateIoQueue+0x0<BR>0x044e714e    &lt;Symbol name not found, hr=0x80004005&gt;<BR>WUDFx!CWdfDevice::CreateIoQueue+0x0<BR>WUDFx!CWdfDriver::OnAddDevice+0x7b4<BR>WUDFx!CWUDF::AddDevice+0x28<BR>wudfhost!CWudfDeviceStack::OnAddDevice+0x158<BR>wudfhost!CLpcNotification::OnAddDevice+0x150<BR>wudfhost!CLpcNotification::Message+0x115<BR>wudfhost!WdfLpcPort::ProcessMessage+0x1d9<BR>wudfhost!WdfLpcCommPort::ProcessMessage+0x1ff<BR>wudfhost!WdfLpcConnPort::ProcessMessage+0xf8<BR>wudfhost!WdfLpc::WorkerThread+0x2b8<BR>-----------------------------------------------------------------------<BR>3  (++)<BR>-----------------------------------------------------------------------<BR>WUDFx!CWdfObject::TrackRefCounts+0xf7<BR>WUDFx!CWdfObject::AddRef+0x41<BR>WUDFx!CWdfIoQueue::AddRef+0x1a<BR>WUDFx!CWdfIoQueue::QueryInterface+0xe8<BR>WUDFx!CWdfDevice::CreateIoQueue+0x516<BR>0x044e8719    &lt;Symbol name not found, hr=0x80004005&gt;<BR>WUDFx!CWdfDevice::CreateIoQueue+0x0<BR>0x044e73e3    &lt;Symbol name not found, hr=0x80004005&gt;<BR>WUDFx!CWdfDevice::CreateIoQueue+0x0<BR>0x044e714e    &lt;Symbol name not found, hr=0x80004005&gt;<BR>WUDFx!CWdfDevice::CreateIoQueue+0x0<BR>WUDFx!CWdfDriver::OnAddDevice+0x7b4<BR>WUDFx!CWUDF::AddDevice+0x28<BR>wudfhost!CWudfDeviceStack::OnAddDevice+0x158<BR>wudfhost!CLpcNotification::OnAddDevice+0x150<BR>wudfhost!CLpcNotification::Message+0x115<BR>wudfhost!WdfLpcPort::ProcessMessage+0x1d9<BR>wudfhost!WdfLpcCommPort::ProcessMessage+0x1ff<BR>wudfhost!WdfLpcConnPort::ProcessMessage+0xf8<BR>-----------------------------------------------------------------------<BR>2  (--)<BR>-----------------------------------------------------------------------<BR>WUDFx!CWdfObject::TrackRefCounts+0xf7<BR>WUDFx!CWdfObject::Release+0x41<BR>WUDFx!CWdfIoQueue::Release+0x1a<BR><BR>. . . . <BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~e_umdf_274b4c46-4590-4992-9646-2353377d7549.xml.htm">User-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wudfext.wudfrefhist RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

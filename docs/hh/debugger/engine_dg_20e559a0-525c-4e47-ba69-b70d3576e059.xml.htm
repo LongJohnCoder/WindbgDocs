@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Types</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Types"><xml><MSHelp:Keyword Index="A" Term="Engine_DG_20e559a0-525c-4e47-ba69-b70d3576e059.xml"/>
+<META NAME="MS-HKWD" CONTENT="Debugger Engine API, symbols, types"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Engine_DG_20e559a0-525c-4e47-ba69-b70d3576e059.xml"></A>Types</H1>
+<P>Type information from a <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a>'s <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#ee431472-4429-4f7a-b2e1-da9fe9759455">symbol file</a> is identified by two pieces of information:  a type ID and the base address of the module to which the type belongs.  The following methods can be used to find a type ID:</P><B></B><UL type="disc">
+<LI><a href="idebugsymbols_cf0d81fd-9bd1-4b90-a7d5-99f1cb225036.xml.htm"><b>GetTypeId</b></a> returns the type ID for a given type name.</LI>
+<LI><a href="idebugsymbols_c62a5150-7e20-4217-8fb8-667cbd93042a.xml.htm"><b>GetSymbolTypeId</b></a> returns the type ID for the type of a symbol with the given name.</LI>
+<LI><a href="idebugsymbols_3f41981b-8ed2-4828-8bfb-a50b934a65ee.xml.htm"><b>GetOffsetTypeId</b></a> returns the type ID for the symbol found at the given location.</LI>
+</UL>
+<P>The name and size of a type are returned by <a href="idebugsymbols_01f0496a-ce0e-442b-88c9-2a92c15a1237.xml.htm"><b>GetTypeName</b></a> and <a href="idebugsymbols_d1c65bea-0479-4ca8-bdfa-6c7a7376792a.xml.htm"><b>GetTypeSize</b></a>, respectively.</P>
+<P>The following convenience methods can be used for reading and writing typed data in the target's physical and virtual memory:</P><B></B><div class="indent1">
+<P><a href="idebugsymbols_d9131c11-5752-4b05-b779-69cb256b8ded.xml.htm"><b>ReadTypedDataPhysical</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugsymbols_b5205296-88eb-4af8-8448-b2a79f08e7b0.xml.htm"><b>WriteTypedDataPhysical</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugsymbols_c7a6fee6-d6bc-4dd6-923a-7e789801091f.xml.htm"><b>ReadTypedDataVirtual</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugsymbols_51186c12-dc2b-4906-a8fa-9e0f4a960135.xml.htm"><b>WriteTypedDataVirtual</b></a></P>
+</div>
+<H4>Printing Typed Data</H4>
+<P>To format typed data and send it to the output callbacks, use <a href="idebugsymbols_35ce4485-6c19-44fd-8382-011b0e620f48.xml.htm"><b>OutputTypedDataPhysical</b></a> and <a href="idebugsymbols_0b8c7b9b-8e0a-4166-b474-830f662be2c6.xml.htm"><b>OutputTypedDataVirtual</b></a> for data in the target's physical and virtual memory respectively.</P>
+<P>The type options described in <a href="structures_b1b82eb1-6d88-41b0-8fd9-f08ec5c25938.xml.htm">DEBUG_TYPEOPTS_<i>XXX</i></a> affect how the engine formats typed data before sending it to the output callbacks.</P>
+<P>The type options may be turned on by using <a href="idebugsymbols_e856a688-7f26-4a00-b911-5b23a0bafa11.xml.htm"><b>AddTypeOptions</b></a>, and turned off by using <a href="idebugsymbols_e5b88999-5c49-49cc-a3b8-2dea953b4fc1.xml.htm"><b>RemoveTypeOptions</b></a>.</P>
+<P><a href="idebugsymbols_ea8a630e-a7a9-40eb-9127-76fd876bf253.xml.htm"><b>GetTypeOptions</b></a> returns the current type options.  To set all the type options at once, use <a href="idebugsymbols_b6a88e5d-93c9-4cc6-ab53-e5e5f6b8f107.xml.htm"><b>SetTypeOptions</b></a>.</P>
+<H4>Interpreting Raw Data Using Type Information</H4>
+<P>The debugger engine API supports interpreting typed data.  This provides a way to walk object hierarchies on the target, including finding members of structures, dereferencing pointers, and locating array elements.</P>
+<P>Typed data is described by instances of the <a href="structures_6e8e758c-2c5d-4590-8908-3e1734ea2c7d.xml.htm">DEBUG_TYPED_DATA</a> structure and represents regions of memory on the target cast to a particular type.  The <a href="idebugadvanced_873e0a1a-4c79-428d-a551-b2132da9b98f.xml.htm">DEBUG_REQUEST_EXT_TYPED_DATA_ANSI</a> <a href="idebugadvanced_8fbf249e-5550-42c0-b16d-d42aaa4de660.xml.htm"><b>Request</b></a> operation is used to manipulate these instances.  They can be initialized to the result of expressions or by casting regions of memory to a specified type.  For a list of all the sub-operations that the DEBUG_REQUEST_EXT_TYPED_DATA_ANSI <b>Request</b> operation supports, see <a href="structures_77246150-309c-4646-82b2-ba9c75d9a2d4.xml.htm">EXT_TDOP</a>.</P>
+<H4>Additional Information</H4>
+<P>For details on output callbacks, see <a href="engine_dg_ce5dd9cd-7068-4ca7-95d9-f4985a9812c2.xml.htm">Input and Output</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Types RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

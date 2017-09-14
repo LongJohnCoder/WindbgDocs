@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wdfkd.wdfinterrupt</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wdfkd.wdfinterrupt"><xml><MSHelp:Keyword Index="A" Term="r33~c_exts_WDF_915ca2c8-aed1-4f72-8b45-6b867954541a.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wdfkd.wdfinterrupt extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~c_exts_WDF_915ca2c8-aed1-4f72-8b45-6b867954541a.xml"></A>!wdfkd.wdfinterrupt</H1>
+<P><P>The <b>!wdfkd.wdfinterrupt</b> extension displays information about a WDFINTERRUPT object. </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wdfkd.wdfinterrupt</b> <i>Handle</i> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Handle</i></DT>
+<DD>A handle to a WDFINTERRUPT object. </DD>
+<DT><i>Flags</i></DT>
+<DD>Optional. Specifies the kind of information to display. <i>Flags</i> can be any combination of the following bits. The default value is 0x0.<DL><DT>Bit 0 (0x1)</DT>
+<DD>Displays the interrupt service routines (ISRs) for the interrupt dispatch table (IDT) associated with this WDFINTERRUPT object.  Setting this flag is equivalent to following the <b>!wdfinterrupt</b> extension with the <a href="r27_exts_kernel_e_d2462212-c130-4a5b-875b-8d1006f6b8d3.xml.htm"><b>!idt</b></a> extension. </DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P><i>Wdfkd.dll</i></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The following example shows the output of the <b>!wdfinterrupt</b> extension with bit 0 set in the <i>Flags</i> parameter (so the output displays information about the IDT).</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wdfkd.wdfinterrupt 0x7a988698  1</b> <BR><BR>Dumping WDFINTERRUPT 0x7a988698<BR>=========================<BR>  Interrupt Type: Line-based, Connected, Enabled<BR>  Vector: 0xa1 (!idt 0xa1)<BR>  Irql: 0x9<BR>  Mode: LevelSensitive<BR>  Polarity: WdfInterruptPolarityUnknown<BR>  ShareDisposition: CmResourceShareShared<BR>  FloatingSave: FALSE<BR>  Interrupt Priority Policy: WdfIrqPriorityUndefined<BR>  Processor Affinity Policy: WdfIrqPolicyOneCloseProcessor<BR>  Processor Group: 0<BR>  Processor Affinity: 0x3<BR><BR>  dt nt!KINTERRUPT 0x8594eb28<BR><BR>  EvtInterruptIsr: 1394ohci!Interrupt::WdfEvtInterruptIsr (0x8d580552)<BR>  EvtInterruptDpc: 1394ohci!Interrupt::WdfEvtInterruptDpc (0x8d580682)<BR><BR>Dumping IDT:<BR><BR>a1:          85167a58 ndis!ndisMiniportIsr (KINTERRUPT 85167a00)<BR>                                    Wdf01000!FxInterrupt::_InterruptThunk (KINTERRUPT 85987500)<BR><BR>To get ISR from KINTERRUPT: <BR>   dt &lt;KINTERRUPT&gt; nt!KINTERRUPT ServiceContext<BR>   dt &lt;ServiceContext&gt; wdf01000!FxInterrupt m_EvtInterruptIsr<BR><BR></nobr></P>
+<P></P>
+<P>In the preceding example, the display concludes with two suggested <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a> commands that can be used to display additional data. </P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~c_wdf_b21958be-e8b5-460c-87b7-a755da1cf37e.xml.htm">Kernel-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wdfkd.wdfinterrupt RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Thread Syntax</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Thread Syntax"><xml><MSHelp:Keyword Index="A" Term="r13_syntax_5bebd798-3782-4d86-8a4f-33b8f2488b7a.xml"/>
+<META NAME="MS-HKWD" CONTENT="thread, command syntax">
+<META NAME="MS-HKWD" CONTENT="~ (thread identifier)">
+<META NAME="MS-HKWD" CONTENT="thread, thread identifier ( ~ )">
+<META NAME="MS-HKWD" CONTENT="thread, thread ID">
+<META NAME="MS-HKWD" CONTENT="~[] (thread identifier)">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, ~ (thread identifier)">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, ~[] (thread identifier)">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, threads"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r13_syntax_5bebd798-3782-4d86-8a4f-33b8f2488b7a.xml"></A>Thread Syntax</H1>
+<P>Many debugger commands have thread identifiers as their parameters. A tilde ( <b>~</b> ) appears before the thread identifier. </P>
+<P>The thread identifier can be one of the following values.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Thread identifier</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>~.</b></TD>
+<TD Width="">The current thread.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>~#</b></TD>
+<TD Width="">The thread that caused the current exception or debug event.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>~*</b></TD>
+<TD Width="">All threads in the process.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>~</b><i>Number</i></TD>
+<TD Width="">The thread whose ordinal is <i>Number</i>.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>~~[</b><i>TID</i><b>]</b></TD>
+<TD Width="">The thread whose thread ID is <i>TID</i>. (The brackets are required And you cannot add a space between the second tilde and the opening bracket.)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>~[</b><i>Expression</i><b>]</b></TD>
+<TD Width="">The thread whose thread ID is the integer to which the numerical <i>Expression</i> resolves.  </TD>
+</TR>
+</table>
+<P></P>
+<P>Threads are assigned ordinals as they are created. Note that this number differs from the thread ID that the Microsoft Windows operating system uses.</P>
+<P>When debugging begins, the current thread is the one that caused the present exception or debug event (or the active thread when the debugger attached to the process). That thread remains the current thread until you specify a new one by using a <a href="r15_cmds_a_b10eaec6-a443-4cb3-8715-959477da74fa.xml.htm"><b>~s (Set Current Thread)</b></a> command or by using the <a href="r36_gui_1_8a25e803-69aa-49a0-b3ef-2f3334b803c5.xml.htm">Processes and Threads window</a> in WinDbg.</P>
+<P>Thread identifiers typically appear as command prefixes. Note that not all wildcard characters are available in all commands that use thread identifiers. </P>
+<P>An example of the ~[<i>Expression</i>] syntax would be <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;">~[@$t0]</span>.  In this example, the thread changes depending on the value of a user-defined pseudo-register.  This syntax allows debugger scripts to programmatically select a thread.</P>
+<H4>Controlling Threads in Kernel Mode</H4>
+<P>In kernel mode, you cannot control threads by using thread identifiers. For more information about how to access thread-specific information in kernel mode, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>.</P>
+<P class="note"><b>Note</b>  You can use the tilde character ( <b>~</b> ) to specify threads during user-mode debugging. In kernel-mode debugging, you can use the tilde to specify processors. For more information about how to specify processors, see <a href="r13_syntax_b7eb5ea3-8cf4-420d-9461-94d4e20f38d5.xml.htm">Multiprocessor Syntax</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Thread Syntax RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

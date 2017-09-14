@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Running in Crash Mode Remotely</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Running in Crash Mode Remotely"><xml><MSHelp:Keyword Index="A" Term="ADPlus_662c9738-6925-4c36-9688-97cd038c2b18.xml"/>
+<META NAME="MS-HKWD" CONTENT="ADPlus, Terminal Server issues">
+<META NAME="MS-HKWD" CONTENT="Terminal Server and ADPlus"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ADPlus_662c9738-6925-4c36-9688-97cd038c2b18.xml"></A>Running in Crash Mode Remotely</H1>
+<P>There are many occasions when you must initiate ADPlus in <a href="adplus_5c0245b0-d5f8-47aa-b73f-86b8d8c6111c.xml.htm">crash mode</a> from a local client computer to monitor a process that ends unexpectedly on one or more remote servers in a cluster of servers. Typically, on Microsoft Windows 2000, you can initiate ADPlus in crash mode remotely by using Terminal Services. However, because you cannot debug applications that are running in different window stations on Windows 2000, ADPlus disables crash-mode functionality when it detects that it is running in of a Terminal Services session.</P>
+<P>Instead, you must first create a batch file that opens a Command Prompt window on the remote server that has been shared by using the <i>Remote.exe</i> utility. Then, schedule this batch file to run on the target server by using the AT command (which causes the command shell to run noninteractively, similar to a service). The remote command shell is then connected to a local workstation or client computer that uses the same <i>Remote.exe</i> utility that was used to start it.</P>
+<P>To start a remote command shell on a server by using the AT command, you must follow the correct procedure on the remote server and the local client.</P>
+<P>Ideally, you should install the debuggers on the local client computer. If you cannot install the debuggers on the local client computer, you should at least put a copy of the <i>Remote.exe</i> utility on the local client. The following procedure assumes that Debugging Tools for Windows package is installed in <i>C:\Debuggers</i> on the remote server and that this package (or at least <i>Remote.exe</i>) is installed in <i>D:\Debuggers</i> on the local client. Adjust this procedure to the actual installation on your computers.</P>
+<P>To set up a remote command shell on the server, do the following:</P><B></B><OL type="1">
+<LI>Create a new batch file that is named <i>Remoteshell.cmd</i> in the <i>C:\Debuggers</i> folder.</LI>
+<LI>Add the following line to this batch file:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>c:\debuggers\remote.exe /s "cmd.exe" remoteshell<BR></nobr></P>
+</LI>
+<LI>At the console on the server or in a Terminal Services session, open a new Command Prompt window, and type the following command: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>AT 15:00 c:\debuggers\remoteshell.cmd<BR></nobr></P>
+<P>In this command, "15:00" is 1 minute later than the current time. For example, if the current time is 14:59, type 15:00.</P>
+</LI>
+<LI>Wait for the AT command to run.</LI>
+<LI>At the command prompt, type <b>AT</b> without parameters to verify that the task has run without errors.</LI>
+</OL>
+<P></P>
+<P>To connect to the remote command shell from the client, do the following:</P><B></B><OL type="1">
+<LI>At a command prompt, move to the <i>D:\Debuggers</i> directory.</LI>
+<LI>Type the following command: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>remote.exe /c <i>RemoteServer</i> remoteshell<BR></nobr></P>
+<P>In this command, <i>RemoteServer</i> is the name of the remote server.</P>
+<P>After you run this command, your local command shell is connected to the remote command shell that is running on the server, and all commands that you type locally are run on the remote server. For example, the <b>dir c:\</b> command lists the contents of the remote server's drive C.</P>
+</LI>
+<LI>In the remote command shell, run ADPlus in crash mode as if you were running it locally from the console. However, you must use the <b>-quiet</b> option to suppress all message boxes that ADPlus displays by default. If you do not use this option, the remote command shell stops responding (that is, hangs) after you run ADPlus and does not return to a prompt. Then, you must close the Command Prompt window on the server and start a new instance.</LI>
+<LI>To send a debug break (CTRL+C) to a process that ADPlus is currently debugging remotely through crash mode, use the <i>Breakin.exe</i> utility. By default, this utilityis installed together with the debuggers in the root of the debuggers directory. For example, to stop debugging IIS (<i>Inetinfo.exe</i>) that is running with a process ID of 1975, type the following command in the remote command shell:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>breakin.exe 1975<BR></nobr></P>
+<P>Alternatively, you can use the <i>Kill.exe</i> utility to end any processes that are being debugged. This utility is located in the root directory of the Debugging Tools for Windows installation tree.</P>
+</LI>
+</OL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Running in Crash Mode Remotely RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

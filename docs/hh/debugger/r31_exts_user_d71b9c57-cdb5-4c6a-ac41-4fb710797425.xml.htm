@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!uniqstack</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !uniqstack"><xml><MSHelp:Keyword Index="A" Term="r31_exts_user_d71b9c57-cdb5-4c6a-ac41-4fb710797425.xml"/>
+<META NAME="MS-HKWD" CONTENT="!uniqstack extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r31_exts_user_d71b9c57-cdb5-4c6a-ac41-4fb710797425.xml"></A>!uniqstack</H1>
+<P>The <b>!uniqstack</b> extension displays all of the stacks for all of the threads in the current process, excluding stacks that appear to have duplicates.  </P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!uniqstack</b> [ <b>-b | -v | -p </b>] [ <b>-n </b>]<BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-b</b></DT>
+<DD>Causes the display to include the first three parameters passed to each function.</DD>
+<DT><b>-v</b></DT>
+<DD>Causes the display to include frame pointer omission (FPO) information. On x86-based processors, the calling convention information is also displayed.</DD>
+<DT><b>-p</b></DT>
+<DD>Causes the display to include the full parameters for each function that is called in the stack trace. This listing will include each parameter's data type, name, and value. <i>This requires full symbol information.</i></DD>
+<DT><b>-n</b></DT>
+<DD>Causes frame numbers to be displayed.</DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Uext.dll</i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Uext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension is similar to the <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>k, kb, kc, kd, kp, kP, kv </b>(Display Stack Backtrace)</a> command, except that it does not display duplicate stacks.  </P>
+<P>For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!uniqstack</b><BR>Processing 14 threads, please wait<BR><BR>.  0  Id: f0f0f0f0.15c Suspend: 1 Teb: 00000000`7fff8000 Unfrozen<BR>      Priority: 0<BR>Child-SP          Child-BSP         RetAddr           Call Site<BR>00000000`0006e5e0 00000000`00070420 00000000`6b009840 wow64!Wow64NotifyDebugger+0x40 [d:\xpclient\base\wow64\wow64\wow64.c @ 581]<BR>00000000`0006e600 00000000`000703d0 00000000`6b03db00 wow64!Wow64KiRaiseException+0x1a0 [d:\xpclient\base\wow64\wow64\wow64.c @ 649]<BR>00000000`0006e950 00000000`000703b0 00000000`6b008520 wow64!whNtRaiseException+0x40<BR>00000000`0006e950 00000000`00070368 00000000`6b1845e0 wow64!Wow64SystemService+0x220 [d:\xpclient\base\wow64\wow64\wow64.c @ 1100]<BR>00000000`0006e9b0 00000000`00070310 00000000`6b009980 wow64cpu!CpuSimulate+0x3a0 [d:\xpclient\base\wow64\cpu\ia64\cpu\cpumain.c @ 730]<BR>00000000`0006e9d0 00000000`000702d0 00000000`6b009ff0 wow64!RunCpuSimulation+0x60 [d:\xpclient\base\wow64\wow64\wow64.c @ 1168]<BR>00000000`0006e9e0 00000000`00070248 00000000`77ea4a10 wow64!Wow64LdrpInitialize+0x5d0 [d:\xpclient\base\wow64\wow64\wow64.c @ 248]<BR>00000000`0006f290 00000000`000700e0 00000000`77ea5d60 ntdll!LdrpInitializeProcess+0x2150 [d:\xpclient\base\ntdll\ldrinit.c @ 1817]<BR>00000000`0006f4c0 00000000`00070028 00000000`77ed6000 ntdll!LdrpInitialize+0x560 [d:\xpclient\base\ntdll\ldrinit.c @ 553]<BR>00000000`0006f550 00000000`00070000 00000000`77ed9000 ntdll!LdrInitializeThunk+0x20 [D:\xpclient\base\ntdll\daytona\..\ia64\ldrthunk.s @ 80]<BR>00000000`0006f550 00000000`00070000 00000000`77ca78a0 ntdll!KiUserApcDispatch+0x50 [D:\xpclient\base\ntos\rtl\user\..\ia64\trampoln.s @ 203]<BR>00000000`0006fff0 00000000`00070000 00000000`00000000 0x77ca78a0<BR><BR>.  1  Id: f0f0f0f0.718 Suspend: 1 Teb: 00000000`7fff4000 Unfrozen<BR>      Priority: 0<BR>Child-SP          Child-BSP         RetAddr           Call Site<BR>00000000`0043eb50 00000000`00440250 00000000`6b008520 wow64!whNtDelayExecution+0x150 [d:\xpclient\base\wow64\whnt32\obj\ia64\whnt32.c @ 24541]<BR>00000000`0043eb80 00000000`00440208 00000000`6b1845e0 wow64!Wow64SystemService+0x220 [d:\xpclient\base\wow64\wow64\wow64.c @ 1100]<BR>00000000`0043ebe0 00000000`004401a8 00000000`6b009980 wow64cpu!CpuSimulate+0x3a0 [d:\xpclient\base\wow64\cpu\ia64\cpu\cpumain.c @ 730]<BR>00000000`0043ec00 00000000`00440168 00000000`6b009ff0 wow64!RunCpuSimulation+0x60 [d:\xpclient\base\wow64\wow64\wow64.c @ 1168]<BR>00000000`0043ec10 00000000`004400e0 00000000`77ea5f50 wow64!Wow64LdrpInitialize+0x5d0 [d:\xpclient\base\wow64\wow64\wow64.c @ 248]<BR>00000000`0043f4c0 00000000`00440028 00000000`77ed6000 ntdll!LdrpInitialize+0x750 [d:\xpclient\base\ntdll\ldrinit.c @ 626]<BR>00000000`0043f550 00000000`00440000 00000000`77ed9000 ntdll!LdrInitializeThunk+0x20 [D:\xpclient\base\ntdll\daytona\..\ia64\ldrthunk.s @ 80]<BR>00000000`0043f550 00000000`00440000 00000000`7de05690 ntdll!KiUserApcDispatch+0x50 [D:\xpclient\base\ntos\rtl\user\..\ia64\trampoln.s @ 203]<BR>00000000`0043fff0 00000000`00440000 00000000`00000000 kernel32!MulDiv+0x110 [D:\xpclient\base\win32\client\i386\critsect.asm @ 550]<BR><BR>. 13  Id: f0f0f0f0.494 Suspend: 1 Teb: 00000000`7ef98000 Unfrozen<BR>      Priority: 0<BR>Child-SP          Child-BSP         RetAddr           Call Site<BR>00000000`00feffe0 00000000`00ff0040 00000000`77e94f30 ntdll!DbgBreakPoint+0x10 [D:\xpclient\base\ntos\rtl\user\..\ia64\debugstb.s @ 66]<BR>00000000`00feffe0 00000000`00ff0040 00000000`00000000 ntdll!DbgUiRemoteBreakin+0x90 [d:\xpclient\base\ntdll\dlluistb.c @ 269]<BR><BR>Total threads: 14<BR>Duplicate callstacks: 11 (windbg thread #s follow):<BR>2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For more information about stack traces and other ways to display stack traces, see <a href="r07_use_operation_531a7dd9-5201-43eb-9054-a793c3e60a60.xml.htm">Viewing the Call Stack</a>.  </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !uniqstack RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

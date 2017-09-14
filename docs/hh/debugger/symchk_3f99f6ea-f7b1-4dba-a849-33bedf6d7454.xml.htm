@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Setting Up the Web Site</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Setting Up the Web Site"><xml><MSHelp:Keyword Index="A" Term="SymChk_3f99f6ea-f7b1-4dba-a849-33bedf6d7454.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_3f99f6ea-f7b1-4dba-a849-33bedf6d7454.xml"></A>Setting Up the Web Site</H1>
+<P>Set up a Web site from which to share the source files and note the root directory of the site.  Your source is then available from a site such as:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>https://SrcMachineName/source<BR></nobr></P>
+<P></P>
+<P>In order to make your source files accessible over the Internet, you must configure the directories containing the source files.</P>
+<P>Begin by selecting the directory in which your indexed source resides.  In our  examples, we call this directory <i>c:\source</i> and the name of the server on the network  <i>\SrcMachineName.</i>  Permissions must be set so that users can access the site, and you must add the security groups that must access the source content over the network.  The amount of security to enable varies from environment to environment.  For some installations, this group is <i>Everyone</i>.</P>
+<P></P><B>To set up the permissions for the directory:</B><OL type="1">
+<LI>Open <b>Windows Explorer</b>.</LI>
+<LI>Expand <b>My Computer</b>.</LI>
+<LI>Expand the C: drive.</LI>
+<LI>Right-click <b>c:\source</b> and choose <b>Sharing and Security</b>.</LI>
+<LI>Check the <b>Share this folder</b> button.</LI>
+<LI>Click the <b>Permissions</b> button.</LI>
+<LI>Verify that the desired security groups have read access by adding them under <b>Group or user names</b> and checking the appropriate box.</LI>
+<LI>Click <b>OK</b> to exit Permissions.</LI>
+<LI>Click <b>OK</b> to exit Source Properties.</LI>
+</OL>
+<P></P>
+<P>The source directory can now be used for debugging by another computer with a source path of <i>srv*\\SrcMachineName\source</i>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Setting Up the Web Site RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

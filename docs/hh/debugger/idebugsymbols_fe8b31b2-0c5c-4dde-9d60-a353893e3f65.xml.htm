@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>CreateSymbolGroup</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, CreateSymbolGroup"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="CreateSymbolGroup"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_fe8b31b2-0c5c-4dde-9d60-a353893e3f65.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::CreateSymbolGroup method">
+<META NAME="MS-HKWD" CONTENT="CreateSymbolGroup (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_fe8b31b2-0c5c-4dde-9d60-a353893e3f65.xml"></A>CreateSymbolGroup</H1>
+<P><P>The <b>CreateSymbolGroup</b> and <b>CreateSymbolGroup2</b> methods create a new <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#827759d9-ce19-46ff-a648-973ba876d8e7">symbol group</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbols::CreateSymbolGroup(</b><BR><b>    OUT IDebugSymbolGroup * *  </b><i>Group</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugSymbols3::CreateSymbolGroup2(</b><BR><b>    OUT IDebugSymbolGroup2 * *  </b><i>Group</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Group</i></DT>
+<DD>Receives an interface pointer for the new <a href="comother_f174a794-e2c2-4d0a-912e-b3de6327ef19.xml.htm"><b>IDebugSymbolGroup</b></a> object.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>CreateSymbolGroup</b> is available in all versions of <b>IDebugSymbols</b>.  <b>CreateSymbolGroup2</b> is available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4><b>Comments</b></H4>
+<P>The newly created symbol group is empty; it does not contain any <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35">symbols</a>.  Symbols may be added to the symbol group using <a href="comother_936851e7-6a8b-4b42-b339-9c8aa096d684.xml.htm"><b>IDebugSymbolGroup::AddSymbol</b></a>.</P>
+<P>References to the returned object are managed like other COM objects, using the <b>IUnknown::AddRef</b> and <b>IUnknown::Release</b> methods.  In particular, the <b>IUnknown::Release</b> method must be called when the returned object is no longer needed.  See <a href="engine_dg_4902f2ee-669d-4691-b52b-bf48e4e84f40.xml.htm">COM Interfaces</a> for more information about using COM interfaces in the Debugger Engine API.</P>
+<P>For more information about symbol groups, see <a href="engine_dg_8c597bf6-d707-45da-94c9-c88a4199c329.xml.htm">Scopes and Symbol Groups</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="comother_f174a794-e2c2-4d0a-912e-b3de6327ef19.xml.htm"><b>IDebugSymbolGroup</b></a>, <a href="comother_936851e7-6a8b-4b42-b339-9c8aa096d684.xml.htm"><b>IDebugSymbolGroup::AddSymbol</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: CreateSymbolGroup RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

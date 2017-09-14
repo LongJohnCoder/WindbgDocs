@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging Performance-Optimized Code</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging Performance-Optimized Code"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_39b11826-8480-4e35-8ec3-c6cc4f49c9df.xml"/>
+<META NAME="MS-HKWD" CONTENT="performance-optimized code"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_39b11826-8480-4e35-8ec3-c6cc4f49c9df.xml"></A>Debugging Performance-Optimized Code</H1>
+<P>Microsoft has certain techniques that it uses to re-arrange compiled and linked code so that it executes with more efficiency. These techniques optimize the component for memory hierarchies, and are based on training scenarios.</P>
+<P>The resulting optimization reduces paging (and page faults), and increases spatial locality between code and data. It addresses a key performance bottleneck that would be introduced by poor positioning of the original code. A component that has gone through this optimization may have its code or data block within a function moved to different locations of the binary.</P>
+<P>In modules that have been optimized by these techniques, the locations of code and data blocks will often be found at memory addresses different than the locations where they would reside after normal compilation and linking. Furthermore, functions may have been split into many non-contiguous blocks, in order that the most commonly-used code paths can be located close to each other on the same pages.</P>
+<P>Therefore, a function (or any symbol) plus an offset will not necessarily have the same meaning it would have in non-optimized code.</P>
+<H4>Debugging Performance-Optimized Code</H4>
+<P>When debugging, you can see if a module has been performance-optimized by using the <a href="r25_exts_general_he_736a1eee-5c20-404f-9fa3-58ae28617a47.xml.htm"><b>!lmi</b></a> extension command on any module for which symbols have been loaded:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!lmi ntdll</b><BR>Loaded Module Info: [ntdll]<BR>         Module: ntdll<BR>   Base Address: 77f80000<BR>     Image Name: ntdll.dll<BR>   Machine Type: 332 (I386)<BR>     Time Stamp: 394193d2 Fri Jun 09 18:03:14 2000<BR>       CheckSum: 861b1<BR>Characteristics: <b>230e stripped perf</b><BR>Debug Data Dirs: Type Size     VA  Pointer<BR>                 MISC  110,     0,   76c00 [Data not mapped]<BR>     Image Type: DBG      - Image read successfully from symbol server.<BR>                 c:\symbols\dll\ntdll.dbg<BR>    Symbol Type: DIA PDB  - Symbols loaded successfully from symbol server.<BR>                 c:\symbols\dll\ntdll.pdb<BR><BR></nobr></P>
+<P>In this output, notice the term <b>perf</b> on the "Characteristics" line. This indicates that this performance optimization has been applied to <i>ntdll.dll</i>.</P>
+<P>The debugger is able to understand a function or other symbol without an offset; this allows you to set breakpoints on functions or other labels without any problem. However, the output of a dissassembly operation may be confusing, because this disassembly will reflect the changes made by the optimizer.</P>
+<P>Since the debugger will try to stay close to the original code, you might see some amusing results. The rule of thumb when working with performance-optimized codes is simply that <b>you cannot perform reliable address arithmetic on optimized code.</b></P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>bl</b><BR> 0 e f8640ca6     0001 (0001) tcpip!IPTransmit<BR> 1 e f8672660     0001 (0001) tcpip!IPFragment<BR><BR>kd&gt; <b>u f864b4cb</b><BR>tcpip!IPTransmit+e48:<BR>f864b4cb f3a4             rep     movsb<BR>f864b4cd 8b75cc           mov     esi,[ebp-0x34]<BR>f864b4d0 8b4d10           mov     ecx,[ebp+0x10]<BR>f864b4d3 8b7da4           mov     edi,[ebp-0x5c]<BR>f864b4d6 8bc6             mov     eax,esi<BR>f864b4d8 6a10             push    0x10<BR>f864b4da 034114           add     eax,[ecx+0x14]<BR>f864b4dd 57               push    edi<BR><BR></nobr></P>
+<P>You can see from the breakpoint list that the address of <b>IPTransmit</b> is 0xF8640CA6.</P>
+<P>When you unassemble a section of code within this function at 0xF864B4CB, the output indicates that this is 0xE48 bytes past the beginning of the function. However, if you subtract the base of the function from this address, the actual offset appears to be 0xA825.</P>
+<P>What is happening is this: The debugger is indeed showing a disassembly of the binary instructions beginning at 0xF864B4CB. But instead of computing the offset by simple subtraction, the debugger displays &#8212; as best it can &#8212; the offset to the function entry as it existed in the original code before the optimizations were performed. That value is 0xE48.</P>
+<P>On the other hand, if you try to look at <b>IPTransmit</b>+0xE48, you will see this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>u tcpip!iptransmit+e48</b><BR>tcpip!ARPTransmit+d8:<BR>f8641aee 0856ff           or      [esi-0x1],dl<BR>f8641af1 75fc             jnz     tcpip!ARPTransmit+0xd9 (f8641aef)<BR>f8641af3 57               push    edi<BR>f8641af4 e828eeffff       call    tcpip!ARPSendData (f8640921)<BR>f8641af9 5f               pop     edi<BR>f8641afa 5e               pop     esi<BR>f8641afb 5b               pop     ebx<BR>f8641afc c9               leave<BR><BR></nobr></P>
+<P>What is happening here is that the debugger recognizes the symbol <b>IPTransmit</b> as equivalent to the address 0xF8640CA6, and the command parser performs a simple addition to find that 0xF8640CA6 + 0xE48 = 0xF8641AEE. This address is then used as the argument for the <a href="r18_cmds_s_51dda883-e059-4b86-9406-a1f16ebd3fc1.xml.htm"><b>u (Unassemble)</b></a> command. But once this location is analyzed, the debugger discovers that this is not <b>IPTransmit</b> plus an offset of 0xE48. Indeed, it is not part of this function at all. Rather, it corresponds to the function <b>ARPTransmit</b> plus an offset of 0xD8.</P>
+<P>The reason this happens is that performance optimization is not reversible through address arithmetic. While the debugger can take an address and deduce its original symbol and offset, it does not have enough information to take a symbol and offset and translate it to the correct address. Consequently, disassembly is not useful in these cases.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging Performance-Optimized Code RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

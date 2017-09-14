@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>IDebugEventCallbacks::LoadModule</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, IDebugEventCallbacks::LoadModule"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="IDebugEventCallbacks::LoadModule"/>
+<MSHelp:Keyword Index="A" Term="ComCallbacks_3d8f0501-0915-425e-a940-aa5f41bad734.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugEventCallbacks, LoadModule">
+<META NAME="MS-HKWD" CONTENT="LoadModule (IDebugEventCallbacks)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ComCallbacks_3d8f0501-0915-425e-a940-aa5f41bad734.xml"></A>IDebugEventCallbacks::LoadModule</H1>
+<P><P>The <b>LoadModule</b> callback method is called by the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> when a <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a>-load <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">debugging event</a> occurs in the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugEventCallbacks::LoadModule(</b><BR><b>    IN ULONG64  </b><i>ImageFileHandle</i><b>,</b><BR><b>    IN ULONG64  </b><i>BaseOffset</i><b>,</b><BR><b>    IN ULONG  </b><i>ModuleSize</i><b>,</b><BR><b>    IN PCSTR  </b><i>ModuleName</i><b>,</b><BR><b>    IN PCSTR  </b><i>ImageName</i><b>,</b><BR><b>    IN ULONG  </b><i>CheckSum</i><b>,</b><BR><b>    IN ULONG  </b><i>TimeDateStamp</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugEventCallbacksWide::LoadModule(</b><BR><b>    IN ULONG64  </b><i>ImageFileHandle</i><b>,</b><BR><b>    IN ULONG64  </b><i>BaseOffset</i><b>,</b><BR><b>    IN ULONG  </b><i>ModuleSize</i><b>,</b><BR><b>    IN PCWSTR  </b><i>ModuleName</i><b>,</b><BR><b>    IN PCWSTR  </b><i>ImageName</i><b>,</b><BR><b>    IN ULONG  </b><i>CheckSum</i><b>,</b><BR><b>    IN ULONG  </b><i>TimeDateStamp</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define IDebugEventCallbacksT IDebugEventCallbacksWide</b><BR><b>#else</b><BR><b>#define IDebugEventCallbacksT IDebugEventCallbacks</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>ImageFileHandle</i></DT>
+<DD>Specifies the handle to the module's <a href="dbg_glossary_48d73de7-50e9-4e41-8a7f-0207d5301620.xml.htm#2208fbbb-efbe-415d-bec5-df565d6cdad8">image file</a>.  If this information is not available, <i>ImageFileHandle</i> will be NULL. </DD>
+<DT><i>BaseOffset</i></DT>
+<DD>Specifies the base address of the module in the target's memory address space.  If this information is not available, <i>BaseOffset</i> will be NULL.</DD>
+<DT><i>ModuleSize</i></DT>
+<DD>Specifies the module's <a href="dbg_glossary_48d73de7-50e9-4e41-8a7f-0207d5301620.xml.htm#4feb6c4a-924f-451f-aa79-a8a7232c2802">image</a> size in bytes.  If this information is not available, <i>ModuleSize</i> will be NULL.</DD>
+<DT><i>ModuleName</i></DT>
+<DD>Specifies the simplified module name that is used by the debugger engine.  In most cases, this matches the image file name excluding the extension. For details, see <a href="r06_use_gui_8f9c224f-0972-4b0f-941d-cfaac48c608c.xml.htm">Executable Image Path</a>.  If this information is not available, <i>ModuleName</i> will be NULL.</DD>
+<DT><i>ImageName</i></DT>
+<DD>Specifies the module's image file name, which can include the path.  If this information is not available, <i>ImageName</i> will be NULL.</DD>
+<DT><i>CheckSum</i></DT>
+<DD>Specifies the checksum of the module's image file.  If this information is not available, <i>CheckSum</i> will be NULL.</DD>
+<DT><i>TimeDateStamp</i></DT>
+<DD>Specifies the time and date stamp of the module's image file.  If this information is not available, <i>TimeDateStamp</i> will be zero.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>This method returns a <a href="structures_c68bce96-5dba-43bb-a3dd-3f8f3b11520e.xml.htm">DEBUG_STATUS_<i>XXX</i></a> value, which indicates how the execution of the target should proceed after the engine processes this event.  For details on how the engine treats this value, see <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>.</P>
+<H4>Comments</H4>
+<P>This method is only called by the engine if the DEBUG_EVENT_LOAD_MODULE flag is set in the mask returned by <a href="comcallbacks_564e7fce-ee9a-404e-9ae4-06805cb0b677.xml.htm"><b>IDebugEventCallbacks::GetInterestMask</b></a>.</P>
+<P>After calling this method, the engine will call <a href="comcallbacks_693f0465-088e-4f3d-a8a4-89e8803d0227.xml.htm"><b>IDebugEventCallbacks::ChangeSymbolState</b></a>, with the <i>Flags</i> parameter containing the bit flag DEBUG_CSS_LOADS.</P>
+<P>For more information about handling events, see <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>. </P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: IDebugEventCallbacks::LoadModule RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.cache (Set Cache Size)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .cache (Set Cache Size)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_f283d0a1-e577-4429-9ab3-001663afd9f3.xml"/>
+<META NAME="MS-HKWD" CONTENT=".cache (Set Cache Size) command">
+<META NAME="MS-HKWD" CONTENT="Set Cache Size (.cache) command">
+<META NAME="MS-HKWD" CONTENT="cache size">
+<META NAME="MS-HKWD" CONTENT="forcedecodeptes">
+<META NAME="MS-HKWD" CONTENT="forcedecodeptes, [See &quot;&quot;.cache forcedecodeptes&quot;&quot;]">
+<META NAME="MS-HKWD" CONTENT="forcedecodeuser">
+<META NAME="MS-HKWD" CONTENT="forcedecodeuser, [See &quot;&quot;.cache forcedecodeuser&quot;&quot;]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_f283d0a1-e577-4429-9ab3-001663afd9f3.xml"></A>.cache (Set Cache Size)</H1>
+<P>The <b>.cache</b> command sets the size of the cache used to hold data obtained from the target. Also sets a number of cache and memory options.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.cache</b> <i>Size</i> <BR><b>.cache</b> <i>Option</i> <BR><b>.cache</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Size</i></DT>
+<DD>The size of the kernel debugging cache, in kilobytes. If <i>Size</i> is zero, the cache is disabled. The command output displays the cache size in bytes. (The default size is 1000 KB.)</DD>
+<DT><i>Option</i></DT>
+<DD>Can be any one of the following options:<DL><DT><b>hold</b></DT>
+<DD>Automatic cache flushing is disabled.</DD>
+<DT><b>unhold</b></DT>
+<DD>Turns off the <b>hold</b> option. (This is the default setting.)</DD>
+<DT><b>decodeptes</b></DT>
+<DD>All transition page table entries (PTEs) will be implicitly decoded. (This is the default setting.)</DD>
+<DT><b>nodecodeptes</b></DT>
+<DD>Turns off the <b>decodeptes</b> option.</DD>
+<DT><b>forcedecodeptes</b></DT>
+<DD>All virtual addresses will be translated into physical addresses before access. This option also causes the cache to be disabled. Unless you are concerned with kernel-mode memory, it is more efficient to use <b>forcedecodeuser</b> instead.</DD>
+<DT><b>forcedecodeuser</b></DT>
+<DD>All user-mode virtual addresses will be translated into physical addresses before access. This option also causes the cache to be disabled.<P class="note"><b>Note</b>  You must activate <b>forcedecodeuser</b> (or <b>forcedecodeptes</b>) before using <a href="r22_metacmds_s_5263404d-63fa-4eda-a34a-c986e174e8e7.xml.htm"><b>.thread (Set Register Context)</b></a>, <a href="r19_metacmds_a_649c5127-f473-4518-aa6b-490c2a68d4f8.xml.htm"><b>.context (Set User-Mode Address Context)</b></a>, <a href="r21_metacmds_l_b8eace76-f3f6-4f0c-96fc-0c9d8dd572cc.xml.htm"><b>.process (Set Process Context)</b></a>, or <a href="r29_exts_kernel_q_79cd8660-46ab-484e-814e-1913c99fc022.xml.htm"><b>!session</b></a> during live debugging. If you use the <b>/p</b> option with <b>.thread</b> and <b>.process</b>, the <b>forcedecodeuser</b> option is automatically set. In any other case, you will need to use the <b>.cache forcedecodeuser</b> command explicitly.</P>
+</DD>
+<DT><b>noforcedecodeptes</b></DT>
+<DD>Turns off the <b>forcedecodeptes</b> and <b>forcedecodeuser</b> options. (This is the default setting.)</DD>
+<DT><b>flushall</b></DT>
+<DD>Deletes the entire virtual memory cache.</DD>
+<DT><b>flushu</b></DT>
+<DD>Deletes all entries of ranges with errors from the cache, as well as all user-mode entries.</DD>
+<DT><b>flush</b>  <i>Address </i></DT>
+<DD>Deletes a 4096-byte block of the cache, beginning at <i>Address.</i></DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">kernel mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If <b>.cache</b> is used with no arguments, the current cache size, status, and options are displayed.</P>
+<P>The <b>.cache forcedecodeuser</b> or <b>.cache forcedecodeptes</b> option will only last as long as the debugger remains broken into the target computer. If any stepping or execution of the target takes place, the <b>noforcedecodeptes</b> state will again take effect. This prevents the debugger from interfering with execution or a reboot in an unproductive manner.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .cache (Set Cache Size) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

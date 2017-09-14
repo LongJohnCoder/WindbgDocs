@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetModuleVersionInformation</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetModuleVersionInformation"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetModuleVersionInformation"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_a325db82-91a3-48d9-b189-8971cd5eaf75.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::GetModuleVersionInformation method">
+<META NAME="MS-HKWD" CONTENT="GetModuleVersionInformation (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_a325db82-91a3-48d9-b189-8971cd5eaf75.xml"></A>GetModuleVersionInformation</H1>
+<P><P>The <b>GetModuleVersionInformation</b> and <b>GetModuleVersionInformationWide</b> methods return version information for the specified <a href="dbg_glossary_60cfce96-a40c-4a82-a856-dceb8d5fe3c2.xml.htm#c125f2f6-a5ce-419a-98de-c9331ca0e56d">module</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbols2::GetModuleVersionInformation(</b><BR><b>    IN ULONG  </b><i>Index</i><b>,</b><BR><b>    IN ULONG64  </b><i>Base</i><b>,</b><BR><b>    IN PCSTR  </b><i>Item</i><b>,</b><BR><b>    OUT OPTIONAL PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>VerInfoSize</i><BR><b>    );</b><BR><BR><b>HRESULT</b><BR><b>  IDebugSymbols3::GetModuleVersionInformationWide(</b><BR><b>    IN ULONG  </b><i>Index</i><b>,</b><BR><b>    IN ULONG64  </b><i>Base</i><b>,</b><BR><b>    IN PCWSTR  </b><i>Item</i><b>,</b><BR><b>    OUT OPTIONAL PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>VerInfoSize</i><BR><b>    );</b><BR><BR><b>#ifdef UNICODE</b><BR><b>#define GetModuleVersionInformationT GetModuleVersionInformationWide</b><BR><b>#else</b><BR><b>#define GetModuleVersionInformationT GetModuleVersionInformation</b><BR><b>#endif</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Index</i></DT>
+<DD>Specifies the index of the module.  If it is set to DEBUG_ANY_ID, the <i>Base</i> parameter is used to specify the location of the module instead.</DD>
+<DT><i>Base</i></DT>
+<DD>If <i>Index</i> is DEBUG_ANY_ID, specifies the location in the target's memory address space of the base of the module.  Otherwise it is ignored.</DD>
+<DT><i>Item</i></DT>
+<DD>Specifies the version information being requested.  This string corresponds to the <i>lpSubBlock</i> parameter of the function <b>VerQueryValue</b>.  For details on the <b>VerQueryValue</b> function, see the Platform SDK.</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the requested version information.  If <i>Buffer</i> is NULL, this information is not returned.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size in characters of the buffer <i>Buffer</i>.</DD>
+<DT><i>VerInfoSize</i></DT>
+<DD>Receives the size in characters of the version information.  If <i>VerInfoSize</i> is NULL, this information is not returned.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The size of the buffer was smaller than the size of the version information.  In this case the buffer is filled with the truncated version information.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>The specified module was not found.</DD>
+</DL>
+<P>This method may also return other error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetModuleVersionInformation</b> is available in <b>IDebugSymbols2</b> and later versions.  <b>GetModuleVersionInformationWide</b> is available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4>Comments</H4>
+<P>Module version information is available only for loaded modules and may not be available in all sessions.</P>
+<P>For more information about modules, see <a href="engine_dg_7c681050-ba73-4e87-818f-a9fac75a720b.xml.htm">Modules</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="idebugsymbols_0eead97d-6ca0-4682-bc06-71df2cf04c69.xml.htm"><b>GetModuleByOffset2</b></a>, <a href="idebugsymbols_0406a71f-e9eb-4acd-93e8-1637ee2506df.xml.htm"><b>GetModuleByIndex</b></a>, <a href="idebugsymbols_151a5c5e-ec01-4801-9ba2-86f26506410c.xml.htm"><b>GetNumberModules</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetModuleVersionInformation RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

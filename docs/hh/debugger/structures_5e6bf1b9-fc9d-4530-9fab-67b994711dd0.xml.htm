@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_SYMBOL_XXX</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_SYMBOL_XXX"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_SYMBOL_XXX"/>
+<MSHelp:Keyword Index="A" Term="Structures_5e6bf1b9-fc9d-4530-9fab-67b994711dd0.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_SYMBOL_XXX constants"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_5e6bf1b9-fc9d-4530-9fab-67b994711dd0.xml"></A>DEBUG_SYMBOL_<i>XXX</i></H1>
+<P>The DEBUG_SYMBOL_<i>XXX</i> constants are used for the symbol flags bit-set.  The symbol flags describe (in part) a symbol in a symbol group.</P>
+<P>The least significant bits of the symbol flags&#8212;the bits found in DEBUG_SYMBOL_EXPANSION_LEVEL_MASK&#8212;form a number that represents the expansion depth of the symbol within the symbol group.  The depth of a child symbol is always one more than the depth of its parent symbol.  For example, to find the depth of a symbol whose flags are contained in the variable <b>flags</b>, use the following statement:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>depth = flags &amp; DEBUG_SYMBOL_EXPANSION_LEVEL_MASK;<BR><BR></nobr></P>
+<P>The rest of the symbol flags&#8217; bit-set can contain the following bit-flags.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Meaning when set</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMBOL_EXPANDED</TD>
+<TD Width="">The children of the symbol are part of the symbol group.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMBOL_READ_ONLY</TD>
+<TD Width="">The symbol represents a read-only variable.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMBOL_IS_ARRAY</TD>
+<TD Width="">The symbol represents an array variable.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMBOL_IS_FLOAT</TD>
+<TD Width="">The symbol represents a floating-point variable.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMBOL_IS_ARGUMENT</TD>
+<TD Width="">The symbol represents an argument passed to a function.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_SYMBOL_IS_LOCAL</TD>
+<TD Width="">The symbol represents a local variable in a scope.</TD>
+</TR>
+</table>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="structures_d79dd552-1acf-4023-99e0-418639a54782.xml.htm">DEBUG_SYMBOL_PARAMETERS</a> </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_SYMBOL_XXX RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

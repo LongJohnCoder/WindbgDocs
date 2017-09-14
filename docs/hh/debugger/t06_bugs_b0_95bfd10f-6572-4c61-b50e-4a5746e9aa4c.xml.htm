@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xD2: BUGCODE_ID_DRIVER</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xD2: BUGCODE_ID_DRIVER"><xml><MSHelp:Keyword Index="A" Term="t06_bugs_B0_95bfd10f-6572-4c61-b50e-4a5746e9aa4c.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xD2: BUGCODE_ID_DRIVER">
+<META NAME="MS-HKWD" CONTENT="BUGCODE_ID_DRIVER"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t06_bugs_B0_95bfd10f-6572-4c61-b50e-4a5746e9aa4c.xml"></A>Bug Check 0xD2: BUGCODE_ID_DRIVER</H1>
+<P>The BUGCODE_ID_DRIVER bug check has a value of 0x000000D2. This indicates that a problem occurred with an NDIS driver.</P>
+<H4>Parameters</H4>
+<P>Before this bug check occurs, a message is sent to the DbgPrint buffer. If a debugger is connected, this message will be displayed.</P>
+<P>This message indicates the type of violation. The meanings of the bug check parameters depend on this message.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Message and Cause</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the miniport block</TD>
+<TD Width="">Number of bytes requested</TD>
+<TD Width="">0</TD>
+<TD Width="">1</TD>
+<TD Width=""><b>Allocating shared memory at raised IRQL.</b> A driver called <b>NdisMAllocateSharedMemory</b> with IRQL &gt;= DISPATCH_LEVEL.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the miniport block</TD>
+<TD Width="">The <i>Status</i> value submitted to <b>NdisMResetComplete</b></TD>
+<TD Width="">The <i>AddressingReset</i> value submitted to <b>NdisMResetComplete</b></TD>
+<TD Width="">0</TD>
+<TD Width=""><b>Completing reset when one is not pending.</b> A driver called <b>NdisMResetComplete</b>, but no reset was pending.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the miniport block</TD>
+<TD Width="">Memory page containing address being freed</TD>
+<TD Width="">Address of shared memory signature</TD>
+<TD Width="">Virtual address being freed</TD>
+<TD Width=""><b>Freeing shared memory not allocated.</b> A driver called <b>NdisMFreeSharedMemory</b> or <b>NdisMFreeSharedMemoryAsync</b> with an address that is not located in NDIS shared memory.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the miniport block</TD>
+<TD Width="">Address of the packet that is incorrectly included in the packet array</TD>
+<TD Width="">Address of the packet array</TD>
+<TD Width="">Number of packets in the array</TD>
+<TD Width=""><b>Indicating packet not owned by it.</b> The miniport's packet array is corrupt.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the MiniBlock</TD>
+<TD Width="">Address of the driver object</TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width=""><b>NdisAddDevice: AddDevice </b>called with a <b>MiniBlock</b> that is not on the <b>NdisMiniDriverList.</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the MiniBlock</TD>
+<TD Width="">The MiniBlock's reference count</TD>
+<TD Width="">0</TD>
+<TD Width="">0</TD>
+<TD Width=""><b>NdisMUnload: MiniBlock </b>is getting unloaded but it is still on<b> NdisMiniDriverList.</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the miniport block</TD>
+<TD Width="">Memory page</TD>
+<TD Width="">Wrapper context</TD>
+<TD Width="">Address of shared memory signature</TD>
+<TD Width=""><b>Overwrote past allocated shared memory.</b> The address being written to is not located in NDIS shared memory.</TD>
+</TR>
+</table>
+<P></P>
+<P>In the following instances of this bug check, the meaning of the parameters depends on the message <i>and</i> on the value of Parameter 4.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Message and Cause</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the miniport block</TD>
+<TD Width="">Address of the miniport interrupt</TD>
+<TD Width="">Address of the miniport timer queue</TD>
+<TD Width="">1</TD>
+<TD Width=""><b>Unloading without deregistering interrupt.</b> A miniport driver failed its initialization without deregistering its interrupt.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the miniport block</TD>
+<TD Width="">Address of the miniport timer queue</TD>
+<TD Width="">Address of the miniport interrupt</TD>
+<TD Width="">2</TD>
+<TD Width=""><b>Unloading without deregistering interrupt.</b> A miniport driver did not deregister its interrupt during the halt process.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the miniport block</TD>
+<TD Width="">Address of the miniport interrupt</TD>
+<TD Width="">Address of the miniport timer queue</TD>
+<TD Width="">1</TD>
+<TD Width=""><b>Unloading without deregistering timer.</b> A miniport driver failed its initialization without successfully canceling all its timers.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Address of the miniport block</TD>
+<TD Width="">Address of the miniport timer queue</TD>
+<TD Width="">Address of the miniport interrupt</TD>
+<TD Width="">2</TD>
+<TD Width=""><b>Unloading without deregistering timer.</b> A miniport driver halted without successfully canceling all its timers.</TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>This bug check code only occurs on Windows 2000 and Windows XP. In Windows Server 2003 and later, the corresponding code is <a href="t05_bugs_60_91b81505-4a6e-4e6d-ab25-4b86f9a86e98.xml.htm">bug check 0x7C</a> (BUGCODE_NDIS_DRIVER).</P>
+<P>On the checked build of Windows, only the <b>Allocating Shared Memory at Raised IRQL</b> and <b>Completing Reset When One is Not Pending</b> instances of this bug check can occur. All the other instances of bug check 0xD2 are replaced with ASSERTs. See <a href="t02_debugfns_5c3e007d-5d9d-4531-8392-495c1d9750af.xml.htm">Breaking Into the Debugger</a> for details.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xD2: BUGCODE_ID_DRIVER RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

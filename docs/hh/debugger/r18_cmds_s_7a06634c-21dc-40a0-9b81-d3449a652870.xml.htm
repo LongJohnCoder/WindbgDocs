@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>s (Search Memory)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, s (Search Memory)"><xml><MSHelp:Keyword Index="A" Term="r18_cmds_S_7a06634c-21dc-40a0-9b81-d3449a652870.xml"/>
+<META NAME="MS-HKWD" CONTENT="s (Search Memory) command">
+<META NAME="MS-HKWD" CONTENT="Search Memory (s) command">
+<META NAME="MS-HKWD" CONTENT="memory, Search Memory (s) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r18_cmds_S_7a06634c-21dc-40a0-9b81-d3449a652870.xml"></A>s (Search Memory)</H1>
+<P>The <b>s</b> command searches through memory to find a specific byte pattern.<P>Do not confuse this command with the <a href="r15_cmds_a_32745f90-8ccb-4de2-b340-2bd8f129c260.xml.htm"><b>~s (Change Current Processor)</b></a>, <a href="r15_cmds_a_b10eaec6-a443-4cb3-8715-959477da74fa.xml.htm"><b>~s (Set Current Thread)</b></a>, <a href="r15_cmds_a_6d7e3f3c-4a87-4737-9587-07281a371f01.xml.htm"><b>|s (Set Current Process)</b></a>, or <a href="r15_cmds_a_71ad20ba-2731-457c-aa06-e7c6f2cfaee2.xml.htm"><b>||s (Set Current System)</b></a> commands.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>s</b> [<b>-</b>[<b>[</b><i>Flags</i><b>]</b>]<i>Type</i>] <i>Range</i> <i>Pattern</i> <BR><b>s</b> <b>-</b>[<b>[</b><i>Flags</i><b>]</b>]<b>v</b> <i>Range</i> <i>Object</i> <BR><b>s</b> <b>-</b>[<b>[</b><i>Flags</i><b>]</b>]<b>sa</b> <i>Range</i> <BR><b>s</b> <b>-</b>[<b>[</b><i>Flags</i><b>]</b>]<b>su</b> <i>Range</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>[</b><i>Flags</i><b>]</b></DT>
+<DD>Specifies one or more search options. Each flag is a single letter. You must enclose the flags in a single set of brackets ([]). You cannot add spaces between the brackets, except between <b>n</b> or <b>l</b> and its argument. For example, if you want to specify the <b>s</b> and <b>w</b> options, use the command <nobr><b>s -[sw]</b><i>Type Range Pattern</i></nobr>. <P>You can specify one or more of the following flags:</P>
+<DL><DT><b>s</b></DT>
+<DD>Saves all of the results of the current search. You can use these results to repeat the search later.</DD>
+<DT><b>r</b></DT>
+<DD>Restricts the current search to the results from the last saved search. You cannot use the <b>s</b> and <b>r</b> flags in the same command. When you use <b>r</b>, the value of <i>Range</i> is ignored, and the debugger searches only those hits that were saved by the previous <b>s</b> command.</DD>
+<DT><b>n</b> <i>Hits</i></DT>
+<DD>Specifies the number of hits to save when you use the <b>s</b> flag. The default value is 1024 hits. If you use <b>n</b> together with other flags, <b>n</b> must be the last flag, followed by its <i>Hits</i> argument. The space between <b>n</b> and <i>Hits</i> is optional, but you cannot add any other spaces within the brackets. If any later search that uses the <b>s</b> flag discovers more than the specified number of hits, the <b>Overflow error</b> message is displayed to notify you that not all hits are being saved.</DD>
+<DT><b>l</b> <i>Length</i></DT>
+<DD>Causes a search for arbitrary ASCII or Unicode strings to return only strings that are at least <i>Length</i> characters long. The default length is 3. This value affects only searches that use the <b>-sa</b> or <b>-su</b> flags.</DD>
+<DT><b>w</b></DT>
+<DD>Searches only writeable memory regions. You must enclose the "w" in brackets.</DD>
+<DT><b>1</b></DT>
+<DD>Displays only the addresses of search matches in the search output. This option is useful if you are using the <a href="r14_tokens_edf3a785-a32a-495f-be5c-364833d77aa6.xml.htm"><b>.foreach</b></a> token to pipe the command output into another command's input.</DD>
+</DL>
+</DD>
+<DT><i>Type</i></DT>
+<DD>Specifies the memory type to search for. Add a hyphen (-) in front of <i>Type</i> . You can use one of the following <i>Type</i> values.<B></B><table>
+<TR valign="top">
+<TH Width=""><i>Type</i></TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>b</b></TD>
+<TD Width="">Byte  (8 bits)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>w</b></TD>
+<TD Width="">WORD  (16 bits)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>d</b></TD>
+<TD Width="">DWORD  (32 bits)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>q</b></TD>
+<TD Width="">QWORD  (64 bits)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>a</b></TD>
+<TD Width="">ASCII string<BR>(not necessarily a null-terminated string)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>u</b></TD>
+<TD Width="">Unicode string<BR>(not necessarily a null-terminated string)</TD>
+</TR>
+</table>
+<P></P>
+<P>If you omit <i>Type</i>, byte values are used. However, if you use <i>Flags</i>, you cannot omit <i>Type</i>.</P>
+</DD>
+<DT><b>sa</b></DT>
+<DD>Searches for any memory that contains printable ASCII strings. Use the <b>l</b> <i>Length</i> flag to specify a minimum length of such strings. The default minimum length is 3 characters.</DD>
+<DT><b>su</b></DT>
+<DD>Searches for any memory that contains printable Unicode strings. Use the <b>l</b> <i>Length</i> flag to specify a minimum length of such strings. The default minimum length is 3 characters.</DD>
+<DT><i>Range</i></DT>
+<DD>Specifies the memory area to search through. This range cannot be more than 256 MB long unless you use the <b>L?</b> syntax. For more information about this syntax, see <a href="r13_syntax_d9e99810-a9ef-46fa-8706-76bbdb7e5609.xml.htm">Address and Address Range Syntax</a>.</DD>
+<DT><i>Pattern</i></DT>
+<DD>Specifies one or more values to search for. By default, these values are byte values. You can specify different types of memory in <i>Type</i>. If you specify a WORD, DWORD, or QWORD value, enclose it in single quotation marks (for example, <b>'Tag7'</b>). If you specify a string, enclose it in double quotation marks (for example, <b>"This string"</b>).</DD>
+<DT><b>-v</b></DT>
+<DD>Searches for objects of the same type as the specified <i>Object</i>.</DD>
+<DT><i>Object</i></DT>
+<DD>Specifies the address of an object or the address of a pointer to an object. The debugger then searches for objects of the same type as the object that <i>Object</i> specifies.</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>If the debugger finds the byte pattern that you specify, the debugger displays the first memory address in the <i>Range</i> memory area where the pattern was found. The debugger displays an excerpt of memory that begins at that location in a format that matches the specified <i>Type</i> memory type. If <i>Type</i> is <b>a</b> or <b>u</b>, the memory contents and the corresponding ASCII or Unicode characters are displayed.</P>
+<P></P>
+<P>You must specify the <i>Pattern</i> parameter as a series of bytes, unless you specify a different <i>Type</i> value. You can enter byte values as numeric or ASCII characters:</P><B></B><UL type="disc">
+<LI>Numeric values are interpreted as numbers in the current radix (16, 10, or 8). To change the default radix, use the <a href="r17_cmds_i_d2b1e43f-2f4b-4746-b038-0b360a63e458.xml.htm"><b>n (Set Number Base)</b></a> command. You can override the default radix by specifying the <b>0x</b> prefix (hexadecimal), the <b>0n</b> prefix (decimal), the <b>0t</b> prefix (octal), or the <b>0y</b> prefix (binary).<P class="note"><b>Note</b>  The default radix behaves differently when you use C++ expressions. For more information about these expressions and the radix, see <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a>.</P>
+</LI>
+<LI>You must enclose ASCII characters in single straight quotation marks. You cannot use C-style escape characters (such as '\0' or '\n').   </LI>
+</UL>
+<P>If you specify multiple bytes, you must separate them by spaces.</P>
+<P>The <b>s-a</b> and <b>s-u</b> commands search for specified ASCII and Unicode strings, respectively. These strings do not have to be null-terminated.</P>
+<P>The <b>s-sa</b> and <b>s-su</b> commands search for unspecified ASCII and Unicode strings. These are useful if you are checking a range of memory to see whether it contains any printable characters.</P>
+<P>The <b>s-v</b> command searches for objects of the same data type as the <i>Object </i>object. You can use this command only if the desired object is a C++ class or another object that is associated with virtual function tables (Vtables). The <b>s-v</b> command searches the <i>Range</i> memory area for the addresses of this class's Vtables. If multiple Vtables exist in this class, the search algorithm looks for all of these pointer values, separated by the proper number of bytes. If any matches are found, the debugger returns the base address of the object and full information about this object&#8212;similar to the output of the <a href="r16_cmds_c_94727332-6184-4ced-897b-d358ca7c173d.xml.htm"><b>dt (Display Type)</b></a> command. <I><B> </B></I></P>
+<P>The following code examples show the <b>s</b> command. If you assume that the current radix is 16, the following command searches memory locations 0012FF40 through 0012FF5F for "Hello".</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>s 0012ff40 L20 'H' 'e' 'l' 'l' 'o' </b><BR></nobr></P>
+<P>The following command has the same effect.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>s 0012ff40 L20 48 65 6c 6c 6f</b> <BR></nobr></P>
+<P>The following <b>s-a</b> command also has the same effect.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>s -a 0012ff40 L20 "Hello" </b><BR></nobr></P>
+<P>These commands locate each appearance of "Hello" and return the address of each such pattern&#8212;that is, the address of the letter "H".</P>
+<P>The debugger returns only patterns that are completely contained in the search range. Overlapping patterns are found correctly. (In other words, the pattern "QQQ" is found three times in "QQQQQ".)</P>
+<P>The following example shows a search that uses the <i>Type</i> parameter. This command searches memory locations 0012FF40 through 0012FF5F for the double-word 'VUTS':</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>s -d 0012ff40 L20 'VUTS'</b> <BR></nobr></P>
+<P>On little-endian computers, 'VUTS' is the same as the byte pattern 'S' 'T' 'U' 'V'. However, searches for WORDs, DWORDs, and QWORDs return only results that are correctly byte-aligned.</P>
+<H4>Additional Information</H4>
+<P>For more information about memory manipulation and a description of other memory-related commands, see <a href="r07_use_operation_d368d81b-2cd4-4227-9b84-b5d956eed347.xml.htm">Reading and Writing Memory</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: s (Search Memory) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

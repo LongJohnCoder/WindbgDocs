@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Command Browser Window</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Command Browser Window"><xml><MSHelp:Keyword Index="A" Term="r36_gui_1_b3a3067c-62b2-4d66-99c7-e48cd026d6ba.xml"/>
+<META NAME="MS-HKWD" CONTENT="debugging information windows, command browser window">
+<META NAME="MS-HKWD" CONTENT="command browser window">
+<META NAME="MS-HKWD" CONTENT="Debugger Command window, command browser window"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r36_gui_1_b3a3067c-62b2-4d66-99c7-e48cd026d6ba.xml"></A>Command Browser Window</H1>
+<P>The Command Browser window displays and stores the text results of a debugger command. This window creates a command reference that enables you to view the results of a specific command without re-entering the command. The Command Browser window also provides navigation through the stored commands, so you can more quickly access commands than with the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>.</P>
+<H4>Opening the Command Browser Window</H4>
+<P>To open or switch to the Command Browser window, in the WinDbg window, on the <b>View</b> menu, click <nobr><b>Command Browser</b></nobr>. (You can also press CTRL+N or click the <b>Command Browser (Ctrl+N)</b> button (<img src="window-command-browser-icon.png">) on the toolbar.  ALT+SHIFT+N will close the Command Browser Window.)</P>
+<P>The following figure shows an example of a Command Browser window.</P>
+<p><img src="window-commandbrowser.png"><p><b></b></p>
+</p>
+<P>The Command Browser window has a menu in which you can enter or select commands, several navigation buttons, and a pane that shows the results of the current command.</P>
+<H4>Using the Command Browser Window</H4>
+<P>In the Command Browser window, you can do the following:</P><B></B><UL type="disc">
+<LI>To enter a command, type it in the <b>Command</b> box.</LI>
+<LI>To view the results of a previously entered command, use the <b>Start</b>, <b>Prev</b>, and <b>Next</b> buttons to scroll through the command list, or select one of the preceding 20 commands from the <b>Command</b> menu. To find a command that is not one of the preceding 20 commands, use the <b>Next</b> button.</LI>
+</UL>
+<P>The Command Browser window has a shortcut menu with additional commands. To access the menu, right-click the title bar or click the icon near the upper-right corner of the window (<img src="window-command-browser-icon.png">). The context menu contains the following commands:</P><B></B><UL type="disc">
+<LI><b>Start</b>, <b>Prev</b>, and <b>Next</b> move the cursor to the start of the command history or to the previous or next command, respectively.  </LI>
+<LI><b>Add to Recent Commands </b>puts the current command into the <b>Recent Commands</b> menu of the <b>View</b> menu in the WinDbg window. Recent commands are saved in the workspace.</LI>
+<LI><b>Toolbar </b>turns the toolbar on and off.</LI>
+<LI><b>Dock</b> or <b>Undock</b> causes the window to enter or leave the docked state.</LI>
+<LI><i>(Menu only)</i>  <b>Move to new dock</b> closes the Command Browser window and opens it in a new dock.</LI>
+<LI><i>(Menu only)</i> <b>Set as tab-dock target for window type</b> is unavailable for the Command Browser window.  This option is only available for <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source</a> or <a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory</a> windows.</LI>
+<LI><b>Always floating</b> causes the window to remain undocked even if it is dragged to a docking location.</LI>
+<LI><b>Move with frame</b> causes the window to move when the WinDbg frame is moved, even if the window is undocked. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>.</LI>
+<LI><b>Close</b> closes this window.</LI>
+</UL>
+<H4>Additional Information</H4>
+<P>For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>. For more information about all techniques that you can use to control debugging information windows, see <a href="r06_use_gui_35306de1-d9fb-45e6-800f-e3ee00114421.xml.htm">Using Debugging Information Windows</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Command Browser Window RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

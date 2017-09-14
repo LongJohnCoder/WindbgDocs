@@ -1,0 +1,617 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ReadDebuggerData</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ReadDebuggerData"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="ReadDebuggerData"/>
+<MSHelp:Keyword Index="A" Term="IDebugDataSpaces_618b8518-3e32-4518-8e4b-38f66484d554.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugDataSpaces::ReadDebuggerData method">
+<META NAME="MS-HKWD" CONTENT="ReadDebuggerData (IDebugDataSpaces) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugDataSpaces_618b8518-3e32-4518-8e4b-38f66484d554.xml"></A>ReadDebuggerData</H1>
+<P><P>The <b>ReadDebuggerData</b> method returns information about the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a> that the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> has queried or determined during the current <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">session</a>.  The available information includes the locations of certain key target kernel locations, specific status values, and a number of other things.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugDataSpaces::ReadDebuggerData(</b><BR><b>    IN ULONG  </b><i>Index</i><b>,</b><BR><b>    OUT PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>DataSize</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Index</i></DT>
+<DD>Specifies the index of the data to retrieve.  The following values are valid:<B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Return Type</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KernBase</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the base address of the kernel image.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_BreakpointWithStatusAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel function <b>BreakpointWithStatusInstruction</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_SavedContextAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of saved context record during a bugcheck.  It is only valid after a bugcheck.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KiCallUserModeAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel function <b>KiCallUserMode</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KeUserCallbackDispatcherAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the kernel variable <b>KeUserCallbackDispatcher</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_PsLoadedModuleListAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>PsLoadedModuleList</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_PsActiveProcessHeadAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>PsActiveProcessHead</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_PspCidTableAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>PspCidTable</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_ExpSystemResourcesListAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>ExpSystemResourcesList</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_ExpPagedPoolDescriptorAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>ExpPagedPoolDescriptor</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_ExpNumberOfPagedPoolsAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>ExpNumberOfPagedPools</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KeTimeIncrementAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>KeTimeIncrement</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KeBugCheckCallbackListHeadAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>KeBugCheckCallbackListHead</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KiBugcheckDataAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the kernel variable <b>KiBugCheckData</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_IopErrorLogListHeadAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>IopErrorLogListHead</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_ObpRootDirectoryObjectAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>ObpRootDirectoryObject</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_ObpTypeObjectTypeAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>ObpTypeObjectType</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSystemCacheStartAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmSystemCacheStart</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSystemCacheEndAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmSystemCacheEnd</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSystemCacheWsAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmSystemCacheWs</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmPfnDatabaseAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmPfnDatabase</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSystemPtesStartAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the kernel variable <b>MmSystemPtesStart</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSystemPtesEndAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the kernel variable <b>MmSystemPtesEnd</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSubsectionBaseAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmSubsectionBase</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmNumberOfPagingFilesAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmNumberOfPagingFiles</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmLowestPhysicalPageAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmLowestPhysicalPage</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmHighestPhysicalPageAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmHighestPhysicalPage</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmNumberOfPhysicalPagesAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmNumberOfPhysicalPages</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmMaximumNonPagedPoolInBytesAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmMaximumNonPagedPoolInBytes</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmNonPagedSystemStartAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmNonPagedSystemStart</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmNonPagedPoolStartAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmNonPagedPoolStart</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmNonPagedPoolEndAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmNonPagedPoolEnd</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmPagedPoolStartAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmPagedPoolStart</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmPagedPoolEndAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmPagedPoolEnd</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmPagedPoolInformationAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmPagedPoolInfo</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmPageSize</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the page size.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSizeOfPagedPoolInBytesAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmSizeOfPagedPoolInBytes</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmTotalCommitLimitAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmTotalCommitLimit</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmTotalCommittedPagesAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmTotalCommittedPages</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSharedCommitAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmSharedCommit</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmDriverCommitAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmDriverCommit</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmProcessCommitAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmProcessCommit</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmPagedPoolCommitAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmPagedPoolCommit</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmExtendedCommitAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmExtendedCommit</b>..</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmZeroedPageListHeadAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmZeroedPageListHead</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmFreePageListHeadAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmFreePageListHead</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmStandbyPageListHeadAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmStandbyPageListHead</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmModifiedPageListHeadAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmModifiedPageListHead</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmModifiedNoWritePageListHeadAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmModifiedNoWritePageListHead</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmAvailablePagesAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmAvailablePages</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmResidentAvailablePagesAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmResidentAvailablePages</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_PoolTrackTableAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>PoolTrackTable</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_NonPagedPoolDescriptorAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>NonPagedPoolDescriptor</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmHighestUserAddressAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmHighestUserAddress</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSystemRangeStartAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmSystemRangeStart</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmUserProbeAddressAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmUserProbeAddress</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KdPrintCircularBufferAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the kernel variable <b>KdPrintDefaultCircularBuffer</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KdPrintCircularBufferEndAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the end of the array KdPrintDefaultCircularBuffer</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KdPrintWritePointerAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>KdPrintWritePointer</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KdPrintRolloverCountAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>KdPrintRolloverCount</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmLoadedUserImageListAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmLoadedUserImageList</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_PaeEnabled</TD>
+<TD Width="">BOOLEAN</TD>
+<TD Width="">Returns TRUE when the target system has PAE enabled.<BR><BR>Returns FALSE otherwise.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_SharedUserData</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address in the target of the shared user-mode structure, KUSER_SHARED_DATA.  The KUSER_SHARED_DATA structure is defined in <i>ntddk.h</i> (in the Windows Driver Kit) and <i>ntexapi.h</i> (in the Windows SDK).<BR><BR>Some of the information contained in this structure is displayed by the debugger extension <b>!kuser</b>.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_ProductType</TD>
+<TD Width="">ULONG</TD>
+<TD Width="">Returns the value of the <b>NtProductType</b> field in the shared user-mode page.<BR><BR>This value should be interpreted the same way as the <b>wProductType</b> field of the structure OSVERSIONINFOEX, which is documented in the Windows SDK.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_SuiteMask</TD>
+<TD Width="">ULONG</TD>
+<TD Width="">Returns the value of the <b>SuiteMask</b> field in the shared user-mode page.<BR><BR>This value should be interpreted the same way as the <b>wSuiteMask</b> field of the structure OSVERSIONINFOEX, which is documented in the Windows SDK.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_DumpWriterStatus</TD>
+<TD Width="">ULONG</TD>
+<TD Width="">Returns the status of the writer of the dump file.  This value is operating system and dump file type specific.</TD>
+</TR>
+</table>
+<P></P>
+<P>The following values are valid for Windows XP and later versions of Windows:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Return Type</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_NtBuildLabAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>NtBuildLab</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KiNormalSystemCall</TD>
+<TD Width="">ULONG64</TD>
+<TD Width=""><i>(Itanium only)</i> Returns the address of the kernel function <b>KiNormalSystemCall</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KiProcessorBlockAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the kernel variable <b>KiProcessorBlock</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmUnloadedDriversAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmUnloadedDrivers</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmLastUnloadedDriverAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmLastUnloadedDriver</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmTriageActionTakenAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>VerifierTriageActionTaken</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSpecialPoolTagAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmSpecialPoolTag</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KernelVerifierAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>KernelVerifier</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmVerifierDataAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmVerifierData</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmAllocatedNonPagedPoolAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmAllocatedNonPagedPool</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmPeakCommitmentAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmPeakCommitment</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmTotalCommitLimitMaximumAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmTotalCommitLimitMaximum</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_CmNtCSDVersionAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>CmNtCSDVersion</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmPhysicalMemoryBlockAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmPhysicalMemoryBlock</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSessionBase</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmSessionBase</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSessionSize</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmSessionSize</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmSystemParentTablePage</TD>
+<TD Width="">ULONG64</TD>
+<TD Width=""><i>(Itanium only)</i> Returns the address of the kernel variable <b>MmSystemParentTablePage</b>.</TD>
+</TR>
+</table>
+<P></P>
+<P>The following values are valid for Windows Server 2003 and later versions of Windows:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Return Type</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_MmVirtualTranslationBase</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>MmVirtualTranslationBase</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetKThreadNextProcessor</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>NextProcessor</b> field in the KTHREAD structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetKThreadTeb</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>Teb</b> field in the KTHREAD structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetKThreadKernelStack</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>KernelStack</b> field in the KTHREAD structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetKThreadInitialStack</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>InitialStack</b> field in the KTHREAD structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetKThreadApcProcess</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the ApcState.Process field in the KTHREAD structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetKThreadState</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>State</b> field in the KTHREAD structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetKThreadBStore</TD>
+<TD Width="">USHORT</TD>
+<TD Width=""><i>(Itanium only)</i> Returns the offset of the <b>InitialBStore</b> field in the KTHREAD structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetKThreadBStoreLimit</TD>
+<TD Width="">USHORT</TD>
+<TD Width=""><i>(Itanium only)</i> Returns the offset of the <b>BStoreLimit</b> field in the KTHREAD structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_SizeEProcess</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the size of the EPROCESS structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetEprocessPeb</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>Peb</b> field in the EPROCESS structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetEprocessParentCID</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>InheritedFromUniqueProcessId</b> field in the EPROCESS structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetEprocessDirectoryTableBase</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>DirectoryTableBase</b> field in the EPROCESS structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_SizePrcb</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the size of the KPRCB structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetPrcbDpcRoutine</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>DpcRoutineActive</b> field in the KPRCB structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetPrcbCurrentThread</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>CurrentThread</b> field in the KPRCB structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetPrcbMhz</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>MHz</b> field in the KPRCB structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetPrcbCpuType</TD>
+<TD Width="">USHORT</TD>
+<TD Width=""><i>For Itanium processors:</i>  Returns the offset of the <b>ProcessorModel</b> field in the KPRCB structure.<BR><BR><i>For all other processors:</i>  Returns the offset of the <b>CpuType</b> field in the KPRCB structure.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetPrcbVendorString</TD>
+<TD Width="">USHORT</TD>
+<TD Width=""><i>For Itanium processors:</i>  Returns the offset of the <b>ProcessorVendorString</b> field in the KPRCB structure.<BR><BR><i>For all other processors:</i>  Returns the offset of the <b>VendorString</b> field in the KPRCB structure.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetPrcbProcessorState</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the ProcessorState.ContextFrame field in the KPRCB structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_OffsetPrcbNumber</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the offset of the <b>Number</b> field in the KPRCB structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_SizeEThread</TD>
+<TD Width="">USHORT</TD>
+<TD Width="">Returns the size of the ETHREAD structure.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KdPrintCircularBufferPtrAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>KdPrintCircularBuffer</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_DATA_KdPrintBufferSizeAddr</TD>
+<TD Width="">ULONG64</TD>
+<TD Width="">Returns the address of the kernel variable <b>KdPrintBufferSize</b>.</TD>
+</TR>
+</table>
+<P></P>
+</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the value of the specified debugger data.  The <b>Return Type</b> column in the above table specifies the data type that is returned.  The data can be accessed by casting <i>Buffer</i> to a pointer to that type.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size in bytes of the buffer <i>Buffer</i>.</DD>
+<DT><i>DataSize</i></DT>
+<DD>Receives the number of bytes used in the buffer <i>Buffer</i>.  If <i>DataSize</i> is NULL, this information is not returned.<P></P>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method can also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>ReadDebuggerData</b> is available in all versions of <b>IDebugDataSpaces</b>.</P>
+<H4>Comments</H4>
+<P>Some or all of the values may be unavailable in certain debugging sessions.  For example, some of the values are only available for particular versions of the operating system.</P>
+<P>For details on the different values returned by <b>ReadDebuggerData</b>, see <i>Microsoft Windows Internals</i> by David Solomon and Mark Russinovich, the Microsoft Windows SDK, and the Windows Driver Kit (WDK).</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ReadDebuggerData RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

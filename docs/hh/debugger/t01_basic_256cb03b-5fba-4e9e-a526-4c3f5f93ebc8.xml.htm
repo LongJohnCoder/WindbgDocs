@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Extracting Information from a Dump File</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Extracting Information from a Dump File"><xml><MSHelp:Keyword Index="A" Term="t01_basic_256cb03b-5fba-4e9e-a526-4c3f5f93ebc8.xml"/>
+<META NAME="MS-HKWD" CONTENT="extracting information from a dump file">
+<META NAME="MS-HKWD" CONTENT="dump file, extracting various information">
+<META NAME="MS-HKWD" CONTENT="machine name (determining from a dump file)">
+<META NAME="MS-HKWD" CONTENT="computer name (determining from a dump file)">
+<META NAME="MS-HKWD" CONTENT="IP address (determining from a dump file)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t01_basic_256cb03b-5fba-4e9e-a526-4c3f5f93ebc8.xml"></A>Extracting Information from a Dump File</H1>
+<P>Certain kinds of information, such as the name of the target computer, are easily available during live debugging. When debugging a dump file it takes a little more work to determine this information.</P>
+<H4>Finding the Computer Name in a Kernel-Mode Dump File</H4>
+<P>If you need to determine the name of the computer on which the crash dump was made, you can use the <a href="r25_exts_general_he_c7e783ec-cfb1-42a0-8da0-fdf0334e5bbd.xml.htm"><b>!peb</b></a> extension and look for the value of COMPUTERNAME it its output.    </P>
+<P>Or you can use the following command:  </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0: kd&gt; <b>x srv!SrvComputerName</b><BR>be8ce2e8  srv!SrvComputerName  = _UNICODE_STRING "AIGM-MYCOMP-PUB01"<BR><BR></nobr></P>
+<H4>Finding the IP Address in a Kernel-Mode Dump File</H4>
+<P>To determine the IP address of the computer on which the crash dump was made, find a thread stack that shows some send/receive network activity. Open one of the send packets or receive packets. The IP address will be visible in that packet.</P>
+<H4>Finding the Process ID in a User-Mode Dump File</H4>
+<P>To determine the process ID of the target application from a user-mode dump file, use the <a href="r15_cmds_a_94a10932-6816-4202-8307-985cd46649d1.xml.htm"><b>| (Process Status)</b></a> command. This will display all the processes being debugged at the time the dump was written. The process marked with a period (<b>.</b>) is the current process. Its process ID is given in hexadecimal after the <b>id:</b> notation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Extracting Information from a Dump File RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

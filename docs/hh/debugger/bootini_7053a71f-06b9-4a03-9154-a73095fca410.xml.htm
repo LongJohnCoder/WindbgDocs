@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Boot Parameters to Load a Partial Checked Build</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Boot Parameters to Load a Partial Checked Build"><xml><MSHelp:Keyword Index="A" Term="bootini_7053a71f-06b9-4a03-9154-a73095fca410.xml"/>
+<META NAME="MS-HKWD" CONTENT="partial checked build boot options [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot entry parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="loading partial checked builds [WDK boot options]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_7053a71f-06b9-4a03-9154-a73095fca410.xml"></A>Boot Parameters to Load a Partial Checked Build</H1>
+<P>A <i>partial checked build</i> contains checked build versions of the kernel and HAL and a free build of the remainder of the operating system. For details, see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=153575" target="_blank"><u>Installing Just the Checked Operating System and HAL (For Windows XP and Windows Server 2003)</u></a> and <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=153576" target="_blank"><u>Installing Just the Checked Operating System and HAL (For Windows Vista and Later)</u></a> in the Windows Driver Kit (WDK) documentation. </P>
+<P></P>
+<P><H4>Configuring a Partial Checked Build in Operating Systems prior to Windows Vista</H4> </P>
+<P>To configure a partial checked build on Windows 2000, Windows XP, or Windows Server 2003, add the <b>/kernel</b> and <b>/hal</b> parameters to a boot entry. Because Bootcfg does not have a parameter-specific switch to add the <b>/kernel</b> and <b>/hal</b> parameters, use the Bootcfg <b>/raw</b> switch, which allows you to specify any boot parameters for a boot entry.</P>
+<P>The first boot entry in the following sample <i>Boot.ini</i> file loads a partial checked build of Windows XP .</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[boot loader]<BR>timeout=30<BR>default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS<BR>[operating systems]<BR><b>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Partial Checked Build" /fastdetect /kernel=ntoskrnl.chk /hal=halacpi.chk</b><BR>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect<BR></nobr></P>
+<P></P>
+<P>In the following Bootcfg command, the <b>/raw</b> switch adds the content of the string <b>"/kernel=ntoskrnl.chk /hal=halacpi.chk"</b> to a boot entry. The <b>/A</b> switch directs Bootcfg to append the string to the entry, rather than replacing the parameters for the entry. The <b>/ID</b> switch identifies the boot entry.</P>
+<P>Without <b>/A</b>, the specified parameters would replace all parameters in the second boot entry &#8212; in this case, <b>/fastdetect</b>.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /raw "/kernel=ntoskrnl.chk /hal=halacpi.chk" /A /id 1<BR><BR></nobr></P>
+<P>The following Bootcfg display of boot options in EFI NVRAM shows the result of the command. The parameters that the command added are displayed in bold type.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot Options <BR>------------ <BR>Timeout: 30 <BR>Default: \Device\HarddiskVolume3\WINDOWS<BR>CurrentBootEntryID: 1<BR><BR>Boot Entries<BR>------------ <BR>Boot entry ID: 1<BR>OS Friendly Name: Windows Server 2003, Enterprise<BR>OsLoadOptions: /fastdetect <b>/kernel=ntoskrnl.chk /hal=halacpi.chk</b><BR>BootFilePath: Device\HarddiskVolume1\EFI\Microsoft\WINNT50\ia64ldr.efi<BR>OsFilePath: \Device\HarddiskVolume3\WINDOWS<BR><BR></nobr></P>
+<P></P>
+<H4>Configuring a Partial Checked Build in Windows Vista and Later</H4>
+<P>To configure a partial checked build on Windows Vista and later, use the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDedit /set</b></a> command and the <b>kernel </b>and<b> hal</b> options. </P>
+<P>The following commands configure a boot entry to use the checked versions of the kernel and hardware abstraction layer (HAL). </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} kernel ntoskrnl.chk<BR></nobr></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /set {18b123cd-2bf6-11db-bfae-00e018e2b8db} hal halacpi.chk<BR></nobr></P>
+<P></P>
+<P>To view the results of the commands, type <b>bcdedit /enum</b>. The <b>/enum</b> option lists all of the boot entries. The boot entry that has been modified to use the checked versions of the kernel and HAL has also been configured for kernel debugging over a serial connection. </P>
+<P></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Windows Boot Loader<BR>-------------------<BR>identifier              {18b123cd-2bf6-11db-bfae-00e018e2b8db}<BR>device                  partition=C:<BR>path                    \Windows\system32\winload.exe<BR>description             PartialCheckedBuild<BR>locale                  en-US<BR>inherit                 {bootloadersettings}<BR>debugtype               serial<BR>debugport               1<BR>baudrate                115200<BR>osdevice                partition=C:<BR>systemroot              \Windows<BR>kernel                  ntoskrnl.chk<BR>hal                     halacpi.chk<BR>resumeobject            {d7094401-2641-11db-baba-00e018e2b8db}<BR>nx                      OptIn<BR>debug                   Yes<BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Boot Parameters to Load a Partial Checked Build RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

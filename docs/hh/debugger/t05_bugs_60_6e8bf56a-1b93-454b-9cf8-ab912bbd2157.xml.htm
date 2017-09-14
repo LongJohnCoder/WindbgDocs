@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x7F: UNEXPECTED_KERNEL_MODE_TRAP</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x7F: UNEXPECTED_KERNEL_MODE_TRAP"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_6e8bf56a-1b93-454b-9cf8-ab912bbd2157.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x7F: UNEXPECTED_KERNEL_MODE_TRAP">
+<META NAME="MS-HKWD" CONTENT="UNEXPECTED_KERNEL_MODE_TRAP"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_6e8bf56a-1b93-454b-9cf8-ab912bbd2157.xml"></A>Bug Check 0x7F: UNEXPECTED_KERNEL_MODE_TRAP</H1>
+<P>The UNEXPECTED_KERNEL_MODE_TRAP bug check has a value of 0x0000007F. This bug check indicates that the Intel CPU generated a trap and the kernel failed to catch this trap.<P>This trap could be a <i>bound trap </i>(a trap the kernel is not permitted to catch) or a <i>double fault </i>(a fault that occurred while processing an earlier fault, which always results in a system failure).</P>
+</P>
+<H4>Parameters</H4>
+<P>The first parameter that appears on the blue screen specifies the trap number.</P>
+<P>The most common trap codes include the following: </P><B></B><UL type="disc">
+<LI>0x00000000, or Divide by Zero Error, indicates that a DIV instruction is executed and the divisor is zero. Memory corruption, other hardware problems, or software failures can cause this error. </LI>
+<LI>0x00000004, or Overflow, occurs when the processor executes a call to an interrupt handler when the overflow (OF) flag is set. </LI>
+<LI>0x00000005, or Bounds Check Fault, indicates that the processor, while executing a BOUND instruction, finds that the operand exceeds the specified limits. A BOUND instruction ensures that a signed array index is within a certain range. </LI>
+<LI>0x00000006, or Invalid Opcode, indicates that the processor tries to execute an invalid instruction. This error typically occurs when the instruction pointer has become corrupted and is pointing to the wrong location. The most common cause of this error is hardware memory corruption. </LI>
+<LI>0x00000008, or Double Fault, indicates that an exception occurs during a call to the handler for a prior exception. Typically, the two exceptions are handled serially. However, there are several exceptions that cannot be handled serially, and in this situation the processor signals a double fault. There are two common causes of a double fault:<B></B><UL type="circle">
+<LI>A kernel stack overflow. This overflow occurs when a guard page is hit, and the kernel tries to push a trap frame. Because there is no stack left, a stack overflow results, causing the double fault. If you think this overview has occurred, use <a href="r29_exts_kernel_q_127b52f2-51ff-49c3-9392-7059a2f5a723.xml.htm"><b>!thread</b></a> to determine the stack limits, and then use <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kb (Display Stack Backtrace)</b></a> with a large parameter (for example, <b>kb 100</b>) to display the full stack.</LI>
+<LI>A hardware problem.</LI>
+</UL>
+</LI>
+</UL>
+<P></P>
+<P>The less-common trap codes include the following:</P><B></B><UL type="disc">
+<LI>0x00000001 &#8212; A system-debugger call</LI>
+<LI>0x00000003 &#8212; A debugger breakpoint</LI>
+<LI>0x00000007 &#8212; A hardware coprocessor instruction with no coprocessor present</LI>
+<LI>0x0000000A &#8212; A corrupted Task State Segment</LI>
+<LI>0x0000000B &#8212; An access to a memory segment that was not present</LI>
+<LI>0x0000000C &#8212; An access to memory beyond the limits of a stack</LI>
+<LI>0x0000000D &#8212; An exception not covered by some other exception; a protection fault that pertains to access violations for applications</LI>
+</UL>
+<P></P>
+<P>For other trap numbers, see an Intel architecture manual.</P>
+<H4>Cause</H4>
+<P>Bug check 0x7F typically occurs after you install a faulty or mismatched hardware (especially memory) or if installed hardware fails.</P>
+<P>A double fault can occur when the kernel stack overflows. This overflow occurs if multiple drivers are attached to the same stack. For example, if two file system filter drivers are attached to the same stack and then the file system recurses back in, the stack overflows.</P>
+<H4>Resolving the Problem</H4>
+<P><i>Debugging:</i>  Always begin with the <a href="r24_exts_general_a_6e1c68d6-f825-4a02-a9ba-2b0cd08cded8.xml.htm"><b>!analyze</b></a> extension.</P>
+<P>If this extension is not sufficient, use the <a href="r17_cmds_i_58e69e42-fcda-4972-9358-60ab7a6e1def.xml.htm"><b>kv (Display Stack Backtrace)</b></a> debugger command.</P><B></B><UL type="disc">
+<LI>If <b>kv</b> shows a <b>taskGate</b>, use the <a href="r22_metacmds_s_c977258e-a78a-47c5-937e-ff6626c41e04.xml.htm"><b>.tss (Display Task State Segment)</b></a> command on the part before the colon.</LI>
+<LI>If <b>kv</b> shows a trap frame, use the <a href="r22_metacmds_s_1c1078f3-5311-4695-be7d-0e10e76750d7.xml.htm"><b>.trap (Display Trap Frame)</b></a> command to format the frame.</LI>
+<LI>Otherwise, use the <a href="r22_metacmds_s_1c1078f3-5311-4695-be7d-0e10e76750d7.xml.htm"><b>.trap (Display Trap Frame)</b></a> command on the appropriate frame. (On x86-based platforms, this frame is associated with the procedure <b>NT!KiTrap</b>.) </LI>
+</UL>
+<P>After using one of these commands, use <b>kv</b> again to display the new stack.</P>
+<P><i>Troubleshooting: </i>If you recently added hardware to the computer, remove it to see if the error recurs. If existing hardware has failed, remove or replace the faulty component. Run hardware diagnostics that the system manufacturer supplies to determine which hardware component failed. </P>
+<P>The memory scanner is especially important. Faulty or mismatched memory can cause this bug check. For more informaiton about these procedures, see the owner's manual for your computer. Check that all adapter cards in the computer are properly seated. Use an ink eraser or an electrical contact treatment, available at electronics supply stores, to ensure adapter card contacts are clean. </P>
+<P>If the error appears on a newly installed system, check the availability of updates for the BIOS, the SCSI controller, or network cards. These kind of updates  are typically available on the Web site or BBS of the hardware manufacturer.</P>
+<P>Confirm that all hard disk drives, hard disk controllers, and SCSI adapters are listed in the Microsoft Windows Marketplace Tested Products List.</P>
+<P>If the error occurred after the installation of a new or updated device driver, you should remove or replace the driver. If, under this circumstance, the error occurs during the startup sequence and the system partition is formatted with NTFS, you might be able to use Safe Mode to rename or delete the faulty driver. If the driver is used as part of the system startup process in Safe Mode, you have to start the computer by using the Recovery Console in order to access the file.  </P>
+<P>Also restart your computer, and then press F8 at the character-based menu that displays the operating system choices. At the <b>Advanced Options</b> menu, select the <b>Last Known Good Configuration</b> option. This option is most effective when you add only one driver or service at a time.</P>
+<P>Overclocking (setting the CPU to run at speeds above the rated specification) can cause this error. If you have overclocked the computer that is experiencing the error, return the CPU to the default clock speed setting.</P>
+<P>Check the System Log in Event Viewer for additional error messages that might help identify the device or driver that is causing the error. You can also disable memory caching of the BIOS to try to resolve the problem. </P>
+<P>If you encountered this error while upgrading to a new version of the Windows operating system, the error might be caused by a device driver, a system service, a virus scanner, or a backup tool that is incompatible with the new version. If possible, remove all third-party device drivers and system services and disable any virus scanners before you upgrade. Contact the software manufacturer to obtain updates of these tools. Also make sure that you have installed the latest Windows Service Pack.</P>
+<P>Finally, if all the above steps do not resolve the error, take the system motherboard to a repair facility for diagnostic testing. A crack, a scratched trace, or a defective component on the motherboard can also cause this error.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x7F: UNEXPECTED_KERNEL_MODE_TRAP RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

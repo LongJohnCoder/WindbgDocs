@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0xA2: MEMORY_IMAGE_CORRUPT</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0xA2: MEMORY_IMAGE_CORRUPT"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_96cf91d9-db9c-46d7-8adb-81e10d00dae4.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0xA2: MEMORY_IMAGE_CORRUPT">
+<META NAME="MS-HKWD" CONTENT="MEMORY_IMAGE_CORRUPT"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_96cf91d9-db9c-46d7-8adb-81e10d00dae4.xml"></A>Bug Check 0xA2: MEMORY_IMAGE_CORRUPT</H1>
+<P>The MEMORY_IMAGE_CORRUPT bug check has a value of 0x000000A2. This bug check indicates that corruption has been detected in the image of an executable file in memory.<P></P>
+</P>
+<H4>Parameters</H4>
+<P>The following parameters appear on the blue screen. Parameter 1 indicates the type of violation. The meaning of the other parameters depends on the value of Parameter 1.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Parameter 4</TH>
+<TH Width="">Cause</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x02</TD>
+<TD Width=""><i>If Parameter 3 is zero:</i> The page number in the table page that failed <BR><BR><i>If Parameter 3 is nonzero:</i> The page number with the failing page run index <BR><BR></TD>
+<TD Width="">Zero, or the index that failed to match the run </TD>
+<TD Width="">0 </TD>
+<TD Width="">A table page check failure occurred. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x03</TD>
+<TD Width="">The starting physical page number of the range </TD>
+<TD Width="">The length (in pages) of the range </TD>
+<TD Width="">The page number of the table page that contains this run </TD>
+<TD Width="">The checksum for the range of memory listed is incorrect. </TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>A cyclic redundancy check (CRC) check on the memory range has failed.</P>
+<P>On a system wake operation, various regions of memory might be checked to guard against memory failures. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0xA2: MEMORY_IMAGE_CORRUPT RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

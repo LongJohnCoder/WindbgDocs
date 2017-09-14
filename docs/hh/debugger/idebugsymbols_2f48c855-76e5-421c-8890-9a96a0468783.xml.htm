@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetFunctionEntryByOffset</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetFunctionEntryByOffset"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Winnt.h, Dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetFunctionEntryByOffset"/>
+<MSHelp:Keyword Index="A" Term="IDebugSymbols_2f48c855-76e5-421c-8890-9a96a0468783.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSymbols::GetFunctionEntryByOffset method">
+<META NAME="MS-HKWD" CONTENT="GetFunctionEntryByOffset (IDebugSymbols) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSymbols_2f48c855-76e5-421c-8890-9a96a0468783.xml"></A>GetFunctionEntryByOffset</H1>
+<P><P>The <b>GetFunctionEntryByOffset</b> method returns the function entry information for a function.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSymbols3::GetFunctionEntryByOffset(</b><BR><b>    IN ULONG64  </b><i>Offset</i><b>,</b><BR><b>    IN ULONG  </b><i>Flags</i><b>,</b><BR><b>    OUT OPTIONAL PVOID  </b><i>Buffer</i><b>,</b><BR><b>    IN ULONG  </b><i>BufferSize</i><b>,</b><BR><b>    OUT OPTIONAL PULONG  </b><i>BufferNeeded</i><BR><b>    );</b><BR></P>
+<DL><H4><b>Parameters</b></H4>
+<DT><i>Offset</i></DT>
+<DD>Specifies a location in the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a>'s virtual address space of the function's implementation.  This is the value returned in the <i>Offset</i> parameter of <a href="idebugsymbols_9918b348-5b29-4b38-849e-3a36414b773d.xml.htm"><b>GetNextSymbolMatch</b></a> and <a href="comother_11a91301-541c-4bc3-aa1e-614db8170e03.xml.htm"><b>IDebugSymbolGroup::GetSymbolOffset</b></a>, and the value of the <b>Offset</b> field in the <a href="structures_5673550e-274a-429f-9a31-88e401bca68e.xml.htm">DEBUG_SYMBOL_ENTRY</a> structure.</DD>
+<DT><i>Flags</i></DT>
+<DD>Specifies a bit-flag which alters the behavior of this method.  If the bit DEBUG_GETFNENT_RAW_ENTRY_ONLY is not set, the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> will provide artificial entries for well known cases.  If this bit is set the artificial entries are not used.</DD>
+<DT><i>Buffer</i></DT>
+<DD>Receives the function entry information.  If the effective processor is an x86, this is the FPO_DATA structure for the function.  For all other architectures, this is the IMAGE_FUNCTION_ENTRY structure for that architecture.</DD>
+<DT><i>BufferSize</i></DT>
+<DD>Specifies the size of the buffer <i>Buffer</i>.</DD>
+<DT><i>BufferNeeded</i></DT>
+<DD>Specifies the size of the function entry information.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>S_FALSE</DT>
+<DD>The method was successful, but the buffer was not large enough to hold the function entry information and so the information was truncated to fit.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>No function entry information was found for the location <i>Offset</i>.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetFunctionEntryByOffset</b> is available in <b>IDebugSymbols3</b> and later versions.</P>
+<H4><b>Comments</b></H4>
+<P>The structures FPO_DATA and IMAGE_FUNCTION_ENTRY are documented in "Image Help Library" which is included in Debugging Tools For Windows in the <i>DbgHelp.chm</i> file. </P>
+<P class="note"><b>Note  </b>The functions in "Image Help Library" and "Debug Help Library", documented in <i>DbgHelp.chm</i>, should not be called by any extension or debugger engine application.</P>
+<P>For more information about symbols, see <a href="engine_dg_0ca00a05-8220-465b-aea6-76811384d300.xml.htm">Symbols</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.  FPO_DATA and IMAGE_FUNCTION_ENTRY are defined in <i>Winnt.h</i>.</p>
+<H4><b>See Also</b></H4>
+<P><a href="idebugsymbols_9918b348-5b29-4b38-849e-3a36414b773d.xml.htm"><b>GetNextSymbolMatch</b></a>, <a href="comother_11a91301-541c-4bc3-aa1e-614db8170e03.xml.htm"><b>IDebugSymbolGroup::GetSymbolOffset</b></a>, <a href="structures_5673550e-274a-429f-9a31-88e401bca68e.xml.htm">DEBUG_SYMBOL_ENTRY</a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetFunctionEntryByOffset RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

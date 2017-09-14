@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.apply_dbp (Apply Data Breakpoint to Context)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .apply_dbp (Apply Data Breakpoint to Context)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_b9e14456-09b9-431f-89fa-b50fd865be97.xml"/>
+<META NAME="MS-HKWD" CONTENT=".apply_dbp (Apply Data Breakpoint to Context) command">
+<META NAME="MS-HKWD" CONTENT="Apply Data Breakpoint to Context (.apply_dbp) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_b9e14456-09b9-431f-89fa-b50fd865be97.xml"></A>.apply_dbp (Apply Data Breakpoint to Context)</H1>
+<P>The <b>.apply_dbp</b> command applies the current process' existing data breakpoints to the specified register context.  <P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.apply_dbp</b> [<b>/m</b> <i>Context</i>] <BR><BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>/m</b> <i>Context</i></DT>
+<DD>Specifies the address of a register context (CONTEXT structure) in memory to which to apply the current process' data breakpoints. </DD>
+<P></P>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode and kernel mode </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live target only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Breakpoints that are controlled by the processor are called <i>data breakpoints</i> or <i>processor breakpoints</i>. These breakpoints are created by the <a href="r15_cmds_a_12b97b7c-4264-440b-8422-f1c7cf647113.xml.htm"><b>ba (Break on Access)</b></a> command. </P>
+<P>These breakpoints are associated with a memory location in the address space of a specific process.  The <b>.apply_dbp</b> command modifies the specified register context so that these data breakpoints will be active when this context is used.</P>
+<P>If the <b>/m</b> <i>Address</i> parameter is not used, data breakpoints will be applied to the current register context.</P>
+<P>This command can only be used if the target is in native machine mode.  For example, if the target is running on a 64-bit machine emulating an x86 processor using <a href="dbg_glossary_39db479e-a9f5-4a31-b599-21aa77a0c60d.xml.htm#d3917b78-9dea-441e-99a1-d8cddce2b1a9">WOW64</a>, this command cannot be used.</P>
+<P>One example of a time this command is useful is when you are in an exception filter.  The <b>.apply_dbp</b> command can update the exception filter's stored context.  Data breakpoints will then be applied when the exception filter exits and the stored context is resumed. Without such a modification it is possible that data breakpoints would be lost.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about breakpoints controlled by the processor, see <a href="r07_use_operation_d80bd6e2-8037-421c-ae24-557262f4dad4.xml.htm">Processor Breakpoints (<b>ba</b> Breakpoints)</a>. For more information about the register context (thread context), see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#ca0c8db7-0f2b-4b1a-973c-304275053ffb">Register Context</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .apply_dbp (Apply Data Breakpoint to Context) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

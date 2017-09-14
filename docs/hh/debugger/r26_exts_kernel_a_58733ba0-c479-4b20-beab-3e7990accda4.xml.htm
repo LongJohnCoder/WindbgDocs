@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!dskheap</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !dskheap"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_58733ba0-c479-4b20-beab-3e7990accda4.xml"/>
+<META NAME="MS-HKWD" CONTENT="!dskheap extension">
+<META NAME="MS-HKWD" CONTENT="desktops"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_58733ba0-c479-4b20-beab-3e7990accda4.xml"></A>!dskheap</H1>
+<P><P>The <b>!dskheap </b>extension displays desktop heap information for a specified session.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!dskheap</b> [<b>-v</b>] [<b>-s </b><i>SessionID</i>]<BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-v</b></DT>
+<DD>Causes the display to include more detailed output.</DD>
+<DT><b>-s </b><i>SessionID</i></DT>
+<DD>Specifies a session. If this parameter is omitted, then the desktop heap information for session 0 is displayed.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The desktop heap information for the session is arranged by window station.</P>
+<P>Here are a couple of examples:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!dskheap -s 3</b><BR>  Winstation\Desktop            Heap Size(KB)   Used Rate(%)<BR>------------------------------------------------------------<BR>  WinSta0\Screen-saver              3072                 0%<BR>  WinSta0\Default                   3072                 0%<BR>  WinSta0\Disconnect                  64                 4%<BR>  WinSta0\Winlogon                   128                 5%<BR>------------------------------------------------------<BR>                Total Desktop: (    6336 KB -   4 desktops)<BR>                Session ID:  3<BR>============================================================<BR>kd&gt; <b>!dskheap</b><BR>  Winstation\Desktop            Heap Size(KB)   Used Rate(%)<BR>------------------------------------------------------------<BR>  WinSta0\Default                   3072                 0%<BR>  WinSta0\Disconnect                  64                 4%<BR>  WinSta0\Winlogon                   128                 9%<BR>  Service-0x0-3e7$\Default           512                 4%<BR>  Service-0x0-3e5$\Default           512                 0%<BR>  Service-0x0-3e4$\Default           512                 1%<BR>  SAWinSta\SADesktop                 512                 0%<BR>------------------------------------------------------<BR>                Total Desktop: (    5312 KB -   7 desktops)<BR>                Session ID:  0<BR>============================================================<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about desktops or desktop heaps, see the Microsoft Windows SDK documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !dskheap RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

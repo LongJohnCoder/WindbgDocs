@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging Hyper-V via a Null-modem Cable Connection</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging Hyper-V via a Null-modem Cable Connection"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_1780d57d-a2a7-4b0e-a55b-3258041cbfef.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_1780d57d-a2a7-4b0e-a55b-3258041cbfef.xml"></A>Debugging Hyper-V via a Null-modem Cable Connection</H1>
+<P>To debug either the root partition or Windows hypervisor across a null-modem cable connection, use the following procedure.  </P><B></B><OL type="1">
+<LI>Verify that you have the proper version of Debugging Tools for Windows installed on the host computer. If you are unsure of which version to use, see <a href="r02_setup_1_bec62139-3e78-4a5a-9ff0-b525fe703d98.xml.htm">Choosing a 32-Bit or 64-Bit Debugger Package</a>. To debug Hyper-V across a null-modem cable, the x64 package must be used. If a different version of the package is required for your target, use a 1394 cable to debug Hyper-V,  </LI>
+<LI>Copy the file <i>Kdhvcom.dll</i> from the Debugging Tools for Windows package to the <i>Windows\system32</i> directory on the root partition of the target computer.  </LI>
+<LI>On the target computer, use the BCDEdit tool to set the boot configuration settings to allow the debugging that you want. If you intend to debug the root partition, use the following commands: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /set dbgtransport kdhvcom.dll </b><BR><b>bcdedit /dbgsettings serial DEBUGPORT:</b><i>Port</i><b> BAUDRATE:</b><i>Baud</i><b> </b><BR><b>bcdedit /debug on </b><BR></nobr></P>
+<P>If you intend to debug Windows hypervisor, use the following commands:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>bcdedit /hypervisorsettings serial DEBUGPORT:</b><i>Port</i><b> BAUDRATE:</b><i>Baud</i><b> </b><BR><b>bcdedit /set hypervisordebug on </b><BR><b>bcdedit /set hypervisorlaunchtype auto </b><BR></nobr></P>
+<P>In these commands, <i>Port</i> represents the number of the COM port that you are using, and <i>Baud</i> represents the rate of the connection. For example, if you are using COM1 with a baud of 115,200, <i>Port</i> is <b>1</b> and <i>Baud</i> is <b>115200</b>.  For details on the use of BCDEdit,  see <a href="bootini_7a4cbe01-a9e7-4b00-9c85-7bac20c73286.xml.htm">Editing Boot Options</a>.  </P>
+<P>If you want to enable debugging of both the root partition and Window hypervisor, use both sets of BCDEdit commands described in this step.</P>
+<P>After issuing these BCDEdit commands, restart the target computer. </P>
+</LI>
+<LI>Connect the host computer and the target computer by connecting a null-modem cable between their COM ports. This is done exactly as in standard kernel debugging; for details, see <a href="r02_setup_1_91a40de4-47cc-4431-8f89-9d955eff8f2c.xml.htm">Setting Up a Null-Modem Cable Connection</a>.</LI>
+<LI>Open a Command Prompt window on the host computer, and change the current directory to the root directory of the Debugging Tools for Windows installation.  Run the vmdemux (virtual machine demultiplexer) tool, using the following command line:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>vmdemux -src com:port=</b><i>Port</i><b>,baud=</b><i>Baud</i><b> </b><BR></nobr></P>
+<P>In this command, <i>Port</i> represents the number of the COM port you are using (including the "com" prefix), and <i>Baud</i> represents the rate of the connection. For example, if you are using COM1 with a baud of 115,200, <i>Port</i> is <b>com1</b> and <i>Baud</i> is <b>115200</b>. If you have already begun debugging Windows hypervisor and are restarting vmdemux, include the <nobr><b>-channel 0</b></nobr> parameter as well.  </P>
+<P>Vmdemux creates multiple named-pipe sessions across the COM connection: one channel for debugging Windows hypervisor and one channel for debugging the root partition. For each channel, vmdemux displays a connection string that can be used to connect a kernel debugger across that channel. </P>
+</LI>
+<LI>The actual debugging session is started by using the Remote tool (<i>Remote.exe</i>) to launch KD. To begin debugging the root partition, use the following command:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>remote.exe /s "</b><i>DbgPath</i><b>\kd &#8211;k </b><I><B>RP</B>ConnectionString</i><b> -y</b> <i>SymPath</i><b>" HyperV_ROOT</b> <BR></nobr></P>
+<P>To begin debugging Windows hypervisor, use the following command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>remote.exe /s "</b><i>DbgPath</i><b>\kd -k </b><I><B>HV</B>ConnectionString</i><b> -y </b><i>SymPath</i><b>" HyperV_HV</b> <BR></nobr></P>
+<P>In these commands, <i>RPConnectionString</i> and <i>HVConnectionString</i> represent the connection strings for the root partition and Windows hypervisor, respectively, which were displayed in the output of vmdemux in the previous step.  <i>DbgPath</i> represents the root directory of the Debugging Tools for Windows installation, and <i>SymPath</i> represents the symbol path. You may include other KD options as well. If you want to connect remotely to KD from another computer (using WinDbg or a second instance of KD), include the <b>-server</b> parameter followed by any permissible transport options. If you include the <b>-server</b> parameter, it must be the first parameter used.  </P>
+<P>For example, the command to debug the root partition is similar to this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>remote.exe /s "\debuggers\kd &#8211;k com:port=\\.\pipe\Vm1,pipe,resets=0,reconnect -y srv*c:\localstore*http://msdl.microsoft.com/download/symbols" HyperV_ROOT</b> <BR></nobr></P>
+<P>And the command to debug Windows hypervisor is similar to this:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>remote.exe /s "c:\debuggers\kd -k com:port=\\.\pipe\Vm0,pipe,resets=0,reconnect -y srv*c:\localstore*http://msdl.microsoft.com/download/symbols" HyperV_HV</b> <BR></nobr></P>
+</LI>
+</OL>
+<P></P>
+<P>At this point, you can debug the target normally. For available commands, see <a href="r05_use_start_2a697bbe-caeb-49e4-ad14-ce07699d630b.xml.htm">Debugger Operation</a> and <a href="r07_use_operation_3c307117-9a8a-4597-8a52-6bedbefa7864.xml.htm">Debugger Operation (Kernel Mode)</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging Hyper-V via a Null-modem Cable Connection RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Remote Debugging Through the Debugger</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Remote Debugging Through the Debugger"><xml><MSHelp:Keyword Index="A" Term="r08_use_remote_e8049dea-474e-411d-8286-ec4a646480f7.xml"/>
+<META NAME="MS-HKWD" CONTENT="remote debugging through the debugger">
+<META NAME="MS-HKWD" CONTENT="remote debugging through the debugger, overview">
+<META NAME="MS-HKWD" CONTENT="debugging client">
+<META NAME="MS-HKWD" CONTENT="debugging server">
+<META NAME="MS-HKWD" CONTENT="TCP (remote debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="COM port (remote debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="modem (remote debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="named pipe (remote debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="NPIPE (remote debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="secure pipe (remote debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="SPIPE (remote debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="secure sockets layer (remote debugging protocol)">
+<META NAME="MS-HKWD" CONTENT="SSL (remote debugging protocol)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_REMOTE_DEBUGGING_THROUGH_THE_DEBUGGER"></a><H1><A NAME="r08_use_remote_e8049dea-474e-411d-8286-ec4a646480f7.xml"></A>Remote Debugging Through the Debugger</H1>
+<P></P>
+<P></P>
+<P>Remote debugging directly through the debugger is usually the best and easiest method of performing remote debugging.</P>
+<P>This technique involves running two debuggers at different locations. The debugger that is actually doing the debugging is called the <i>debugging server</i>. The debugger that is controlling the session from a distance is called the <i>debugging client</i>.</P>
+<P>The two computers do not have to be running the same version of Windows; they can be running any version of Windows. The actual debuggers used need not be the same; a WinDbg debugging client can connect to a CDB debugging server, and so on.</P>
+<P>However, it is best that the debugger binaries on the two computers both be from the same release of the Debugging Tools for Windows package, or at least both from recent releases.     </P>
+<P>To set up this remote session, the debugging server is set up first, and then the debugging client is activated. Any number of debugging clients can connect to a debugging server. A single debugger can turn itself into several debugging servers at the same time, to facilitate different kinds of connections.</P>
+<P>However, no single debugger can be a debugging client and a debugging server simultaneously. If you need to chain together three debuggers, see <a href="r08_use_remote_358472ae-473e-45c2-b145-5bfdf08909e1.xml.htm">Other Methods of Remote Debugging</a>.</P>
+<P>This section includes:</P><B></B><div class="indent1">
+<P><a href="r08_use_remote_2cf49506-2562-4684-b843-be4726f59691.xml.htm">Activating a Debugging Server</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r08_use_remote_3b069af0-5e17-48d7-864a-9b45f6ee1aa4.xml.htm">Searching for Debugging Servers</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r08_use_remote_d737f4f5-2c99-44cf-b276-0fda82be08c8.xml.htm">Activating a Debugging Client</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r08_use_remote_2553d693-7bdf-4adc-815e-e5ba47d01321.xml.htm">Client and Server Examples</a> </P>
+</div>
+<div class="indent1">
+<P><a href="r08_use_remote_6a360dc5-a228-4746-a24e-13fc94f80fe2.xml.htm">Controlling a Remote Debugging Session</a> </P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Remote Debugging Through the Debugger RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

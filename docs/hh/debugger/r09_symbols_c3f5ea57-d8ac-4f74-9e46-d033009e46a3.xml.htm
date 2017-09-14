@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Configuring the Registry</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Configuring the Registry"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_c3f5ea57-d8ac-4f74-9e46-d033009e46a3.xml"/>
+<META NAME="MS-HKWD" CONTENT="SymProxy, registry">
+<META NAME="MS-HKWD" CONTENT="ProxyCfg and SymProxy">
+<META NAME="MS-HKWD" CONTENT="Netsh and SymProxy"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_c3f5ea57-d8ac-4f74-9e46-d033009e46a3.xml"></A>Configuring the Registry</H1>
+<P>SymProxy stores its settings in the registry key</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKLM/Software/Microsoft/Symbol Server Proxy<BR></nobr></P>
+<P></P>
+<P>This registry key controls the location from which to find symbols to store in the Web site, the logging level, and whether or not SymProxy operates with a direct connection to the network.  You can create this key by running the SymProxy registration tool (<i>Symproxy.reg</i>) provided with Debugging Tools for Windows.  Type <b>symproxy.reg</b> at the command prompt or double-click it from Windows Explorer.</P>
+<H4>Web Directories</H4>
+<P>For each virtual directory generated in IIS that you are using as a symbol store, you must setup a registry key below the <b>Web Directories</b> subkey of the following registry key. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKLM/Software/Microsoft/Symbol Server Proxy<BR></nobr></P>
+<P></P><B>To set up a registry key for a symbol store virtual directory</B><OL type="1">
+<LI>Create the registry key under the <b>Web Directories </b>key that has the same name as the virtual directory.</LI>
+<LI>Create a new <b>String Value</b> or <b>Expandable String Value</b> called <b>SymbolPath</b> for the registry key that you just created.</LI>
+<LI>Edit the contents of <b>SymbolPath</b> to contain all of the symbol stores used by the SymProxy symbol store.  If there is more than one symbol store being used, separate them with semicolons.  A maximum of 10 stores is supported for each value.  HTTP paths must include the <b>http://</b> prefix, and UNC paths must include the <b>\\</b> prefix.</LI>
+</OL>
+<P></P>
+<P>For example, if one of the virtual directories is called <b>Symbols</b>, and the symbols stores that it accesses are located at the UNC store <i>\\symbols\symbols </i>and the HTTP store <i>http://msdl.microsoft.com/download/symbols</i>, create the following registry key.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKLM/Software/Microsoft/Symbol Server Proxy/Web Directories/symbols<BR></nobr></P>
+<P></P>
+<P>After this key is created, edit its <b>SymbolPath</b> to be <i>\\symbols\symbols;http://msdl.microsoft.com/download/symbols</i>.  This can be seen in the following screenshot of the Registry Editor.</P>
+<P></P>
+<p><img src="symproxy_registry.png"><p><b>Registry Example</b></p>
+</p>
+<P></P>
+<P>In this example, SymProxy first searches for symbols in <i>\\symbols\symbols</i>.  If the files are not found there, the Microsoft Symbol Store will be used.</P>
+<P>You can also define a global source for all symbol files by generating a <b>SymbolPath</b> value directly in the <b>Web Directories</b> key.  However, we do not recommend this because it causes malformed symbol requests from debugging clients to generate spurious directories and files in the root of your Web site.</P>
+<H4>Logging</H4>
+<P>SymProxy reports its activity to the Application Event Viewer.  The value stored in <b>Loglevel</b> determines the level of reporting.  This is a REG_DWORD located in the &#8220;Symbol Server Proxy&#8221; key.  Typically, the default setting is 0, but you can change this to any of the following values:</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Loglevel</b></TD>
+<TD Width=""><b>Reporting Level</b></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0</TD>
+<TD Width="">quiet</TD>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">error</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">succss</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">info</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">warning</TD>
+</TR>
+<TR valign="top">
+<TD Width="">5</TD>
+<TD Width="">debug</TD>
+</TR>
+</table>
+<P></P>
+<P>If you have trouble moving files into the symbol store, you can adjust these values to determine what is happening.  If you set <b>Loglevel</b> to 5, all activity is available in the Event Viewer.  To determine where files come from and to examine the initialization, set <b>Loglevel</b> to 3.</P>
+<P>In order to complete the logging configuration, you must register SymProxy with the Application Event Viewer.  </P><B>To register SymProxy with the Application Event Viewer</B><OL type="1">
+<LI>Create the registry key <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKLM\SYSTEM\CurrentControlSet\Services\EventLog\Application\SymProxy <BR></nobr></P>
+</LI>
+<LI>Within this key, create a new <b>Expandable String Value</b> (REG_EXPAND_SZ) named <b>EventMessageFile</b>.</LI>
+<LI>Set the contents of this string to <b>%WINDIR%\system32\inetsrv\symproxy.dll</b>.</LI>
+</OL>
+<P></P>
+<P>SymProxy is now labeled as a message source in the registry, and logging is activated.</P>
+<H4>Accessing Outside Network Resources</H4>
+<P>When SymSrv is used in conjunction with SymProxy, it runs as a service and uses the WinHTTP API to access symbols over an HTTP connection.  This differs from its usual behavior of using WinInet for this purpose.</P>
+<P>Consequently, you may need to set up HTTP proxy settings so that this service can access outside network resources.  Use one of the following methods to configure these settings:</P><B></B><UL type="disc">
+<LI>In Windows 2000, Windows XP, and Windows Server 2003, use the ProxyCfg tool (<i>Proxycfg.exe</i>)<i>. </i> For instructions, type the following in a Command Prompt window: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>proxycfg -? <BR></nobr></P>
+</LI>
+<LI>In Windows Vista, Windows Server 2008, and later versions of Windows, use the Netsh tool (<i>netsh.exe</i>). For instructions, type the following in a Command Prompt window: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>netsh winhttp -? <BR></nobr></P>
+</LI>
+</UL>
+<P></P>
+<P>The default behavior of SymProxy is to use whatever HTTP proxy is designated by either ProxyCfg or Netsh.  If no HTTP proxy is configured, SymProxy uses a dummy proxy to allow access to secure HTTP sites within your intranet.  As a side effect, this technique prevents SymProxy from working with direct connections to the external Internet.  If you wish to permit SymProxy to operate with a direct connection to the Internet, create a REG_DWORD value named <b>NoInternetProxy</b> in the <b>Symbol Server Proxy</b> key of your registry.  Set the value of <b>NoInternetProxy</b> to 1 and verify that there is no HTTP proxy indicated by ProxyCfg.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Configuring the Registry RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

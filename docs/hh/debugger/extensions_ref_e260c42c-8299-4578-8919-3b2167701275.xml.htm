@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DebugExtensionInitialize</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DebugExtensionInitialize"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DebugExtensionInitialize"/>
+<MSHelp:Keyword Index="A" Term="Extensions_Ref_e260c42c-8299-4578-8919-3b2167701275.xml"/>
+<META NAME="MS-HKWD" CONTENT="DebugExtensionInitialize callback function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Extensions_Ref_e260c42c-8299-4578-8919-3b2167701275.xml"></A>DebugExtensionInitialize</H1>
+<P>The <b>DebugExtensionInitialize</b> callback function is called by the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> after loading a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#5f0c1329-ded4-4373-bde8-f2b4e9d8499b">DbgEng extension</a> <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#9625e841-0468-4bf3-940b-56f3f5831a12">DLL</a>.</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>CALLBACK</b><BR><b>  DebugExtensionInitialize(</b><BR><b>    OUT PULONG  </b><i>Version</i><b>,</b><BR><b>    OUT PULONG  </b><i>Flags</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Version</i></DT>
+<DD>Receives the version of the extension.  The high 16 bits contain the major version number, and the low 16 bits contain the minor version number.</DD>
+<DT><i>Flags</i></DT>
+<DD>Set this to zero. (Reserved for future use.)</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The extension was successfully initialized.</DD>
+</DL>
+<P>Any other value indicates that the extension DLL was unable to initialize and the engine will unload it.</P>
+<H4>Comments</H4>
+<P>The engine looks for this function by name in each extension DLL.  This function must be exported by a DbgEng extension DLL.</P>
+<P>The version number can be set by using the macro DEBUG_EXTENSION_VERSION found in <i>dbgeng.h</i>, for example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>*Version = DEBUG_EXTENSION_VERSION(Major, Minor)<BR></nobr></P>
+<P>Implementations of this function should initialize any global variables required by the extension DLL.</P>
+<P>There may or may not be a <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">session</a> active when this function is called, so the extension should not assume that it is able to query session information.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>The function type is defined as PDEBUG_EXTENSION_INITIALIZE in <i>dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="extensions_ref_76594e24-5f2d-495f-b8a9-6acec1f21ba4.xml.htm"><b>DebugExtensionUninitialize</b></a>, <a href="extensions_ref_18dd6999-773d-42e8-826a-dcac1fc1ed35.xml.htm"><b>DebugExtensionNotify</b></a>, <a href="extensions_ref_dfff8fda-36a7-42ab-9ad7-1698c352c028.xml.htm"><b>KnownStructOutput</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DebugExtensionInitialize RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

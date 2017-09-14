@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Creating Your Own Provider Module</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Creating Your Own Provider Module"><xml><MSHelp:Keyword Index="A" Term="SymChk_e3c8ede7-4e43-4f37-87bb-136cefd26814.xml"/>
+<META NAME="MS-HKWD" CONTENT="version control systems, provider modules"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_e3c8ede7-4e43-4f37-87bb-136cefd26814.xml"></A>Creating Your Own Provider Module</H1>
+<P>In general, to create your own provider module, you must implement the following set of interfaces. </P>
+<DL><DT><b>$module::SimpleUsage()</b></DT>
+<DD><DL><DT><b>Purpose</b></DT>
+<DD>Displays simple module usage information to STDOUT.</DD>
+</DL>
+<DL><DT><b>Parameters</b></DT>
+<DD>None</DD>
+</DL>
+<DL><DT><b>Return Value</b></DT>
+<DD>None</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><b>$module::VerboseUsage()</b></DT>
+<DD><DL><DT><b>Purpose</b></DT>
+<DD>Displays in-depth module usage information to STDOUT.</DD>
+</DL>
+<DL><DT><b>Parameters</b></DT>
+<DD>None</DD>
+</DL>
+<DL><DT><b>Return Value</b></DT>
+<DD>None</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><b>$objref = $module::new(</b><i>@CommandArguments</i><b>)</b></DT>
+<DD><DL><DT><b>Purpose</b></DT>
+<DD>Initializes an instance of the provider module.</DD>
+</DL>
+<DL><DT><b>Parameters</b></DT>
+<DD><DL><DT><i>@CommandArguments</i></DT>
+<DD>All @ARGV arguments that are not recognized by <i>ssindex.cmd</i> as being general arguments.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<DL><DT><b>Return Value</b></DT>
+<DD>A reference that can be used in later operations.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><b>$objref-&gt;GatherFileInformation(</b><i>$SourcePath</i><b>, </b><i>$ServerHashReference</i><b>)</b></DT>
+<DD><DL><DT><b>Purpose</b></DT>
+<DD>Enables the module to gather the required source-indexing information for the directory specified by the <i>$SourcePath</i> parameter.  The module should not assume that this entry is called only once for each object instancebecause SSIndex may call it multiple times for different paths.</DD>
+</DL>
+<DL><DT><b>Parameters</b></DT>
+<DD><DL><DT><i>$SourcePath</i></DT>
+<DD>The local directory containing the source to be indexed.</DD>
+</DL>
+<DL><DT><i>$ServerHashReference</i></DT>
+<DD>A reference to a hash containing all of the entries from the specified <i>Srcsrv.ini</i> file.</DD>
+</DL>
+<P></P>
+</DD>
+<DT></DT>
+</DL>
+<DL><DT><b>Return Value</b></DT>
+<DD>None</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><b>(</b><i>$VariableHashReference</i><b>, </b><i>$FileEntry</i><b>) = $objref</b><nobr><b>-&gt;</b></nobr><b>GetFileInfo(</b><i>$LocalFile</i><b>) </b></DT>
+<DD><DL><DT><b>Purpose</b></DT>
+<DD>Provides the necessary information to extract a single, specific file from the source control system.</DD>
+</DL>
+<DL><DT><b>Parameters</b></DT>
+<DD><DL><DT><i>$LocalFile</i></DT>
+<DD>A fully qualified file name.</DD>
+</DL>
+<P></P>
+</DD>
+<DT></DT>
+</DL>
+<DL><DT><b>Return Values</b></DT>
+<DD><DL><DT><i>$VariableHashReference</i></DT>
+<DD>A hash reference of the variables necessary to interpret the returned <i>$FileEntry</i>.  <i>Ssindex.cmd</i> caches these variables for every source file used by a single debug file to reduce the amount of information written to the source index stream.</DD>
+</DL>
+<DL><DT><i>$FileEntry</i></DT>
+<DD>The file entry to be written to the source index stream to allow SrcSrv to extract this file from source control.  The exact format of this line is specific to the source control system.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><i>$TextString</i><b> = $objref-&gt;LongName()</b></DT>
+<DD><DL><DT><b>Purpose</b></DT>
+<DD>Provides a descriptive string to identify the source control system to the end user.</DD>
+</DL>
+<DL><DT><b>Parameters</b></DT>
+<DD>None</DD>
+<DT></DT>
+</DL>
+<DL><DT><b>Return Value</b></DT>
+<DD><DL><DT><i>$TextString</i></DT>
+<DD>The descriptive name of the source control system.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><b>@StreamVariableLines=$objref-&gt;SourceStreamVariables()</b></DT>
+<DD><DL><DT><b>Purpose</b></DT>
+<DD>Enables the source control system to add source-control-specific variables to the source stream for each debug file.  The sample modules use this method for writing the required EXTRACT_CMD and EXTRACT_TARGET variables.</DD>
+</DL>
+<DL><DT><b>Parameters</b></DT>
+<DD>None<P></P>
+</DD>
+<DT></DT>
+</DL>
+<DL><DT><b>Return Value</b></DT>
+<DD><DL><DT><i>@StreamVariableLines</i></DT>
+<DD>The list of entries for the source stream variables.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Creating Your Own Provider Module RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

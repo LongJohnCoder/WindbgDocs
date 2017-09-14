@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Client Objects and the Engine</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Client Objects and the Engine"><xml><MSHelp:Keyword Index="A" Term="EngExtCpp_DG_42d89746-845e-4b92-a7b0-362d1a7e57bb.xml"/>
+<META NAME="MS-HKWD" CONTENT="EngExtCpp extensions, client objects"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="EngExtCpp_DG_42d89746-845e-4b92-a7b0-362d1a7e57bb.xml"></A>Client Objects and the Engine</H1>
+<P>An EngExtCpp extension interacts with the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> through a <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a>.  Interface pointers to the client object are available to the extension through members of the <a href="engextcpp_ref_3a533353-f008-4887-b937-2098acf1c68e.xml.htm"><b>ExtExtension</b></a> base class.  The following members provide access to the first version of the engine API interfaces.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Engine API interface</TH>
+<TH Width="">ExtExtension member</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugadvanced_73a2f722-f225-466b-aecc-2c7e6999e25f.xml.htm"><b>IDebugAdvanced</b></a><b> </b></TD>
+<TD Width=""><b>m_Advanced</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugclient_3f5f6372-0e7d-4050-b09a-b7776ff8bf7c.xml.htm"><b>IDebugClient</b></a><b> </b></TD>
+<TD Width=""><b>m_Client</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugcontrol_ce0030b2-73a7-49a8-9d21-942922a69184.xml.htm"><b>IDebugControl</b></a><b> </b></TD>
+<TD Width=""><b>m_Control</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugdataspaces_83f3a88c-f7e6-4b5c-a2b2-4e8bccef4281.xml.htm"><b>IDebugDataSpaces</b></a><b> </b></TD>
+<TD Width=""><b>m_Data</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugregisters_ca710692-a977-4276-b779-2b66311938dc.xml.htm"><b>IDebugRegisters</b></a><b> </b></TD>
+<TD Width=""><b>m_Registers</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugsymbols_4046a7ad-b8ed-4a10-991e-f7d63f9e35d0.xml.htm"><b>IDebugSymbols</b></a><b> </b></TD>
+<TD Width=""><b>m_Symbols</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="idebugsystemobjects_82c2f1f3-4eb4-4071-ba0b-d2e4d2929ce2.xml.htm"><b>IDebugSystemObjects</b></a><b> </b></TD>
+<TD Width=""><b>m_System</b></TD>
+</TR>
+</table>
+<P>The following members provide access to later versions of the engine API interfaces.  These interfaces may not be available in all versions of the debugger engine.  If they are not available, any attempt to use them will result in a exception being thrown.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Engine API interface</TH>
+<TH Width="">ExtExtension member</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugAdvanced2</b></TD>
+<TD Width=""><b>m_Advanced2</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugAdvanced3</b></TD>
+<TD Width=""><b>m_Advanced3</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugClient2</b></TD>
+<TD Width=""><b>m_Client2</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugClient3</b></TD>
+<TD Width=""><b>m_Client3</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugClient4</b></TD>
+<TD Width=""><b>m_Client4</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugClient5</b></TD>
+<TD Width=""><b>m_Client5</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugControl2</b></TD>
+<TD Width=""><b>m_Control2</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugControl3</b></TD>
+<TD Width=""><b>m_Control3</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugControl4</b></TD>
+<TD Width=""><b>m_Control4</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugData2</b></TD>
+<TD Width=""><b>m_Data2</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugData3</b></TD>
+<TD Width=""><b>m_Data3</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugData4</b></TD>
+<TD Width=""><b>m_Data4</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugRegisters2</b></TD>
+<TD Width=""><b>m_Registers2</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugSymbols2</b></TD>
+<TD Width=""><b>m_Symbols2</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugSymbols3</b></TD>
+<TD Width=""><b>m_Symbols3</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugSystemObjects2</b></TD>
+<TD Width=""><b>m_System2</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugSystemObjects3</b></TD>
+<TD Width=""><b>m_System3</b></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>IDebugSystemObjects4</b></TD>
+<TD Width=""><b>m_System4</b></TD>
+</TR>
+</table>
+<P>The members in these tables are initialized each time the extension library is used to execute an extension command or format a structure for output.  Once a task is completed, these members are uninitialized.  Consequently, extensions should not cache the values of these members and should use the <b>ExtExtension</b> members directly.</P>
+<P>An extension library can also create its own client objects using the method <a href="idebugclient_baa33ba0-bc95-4bfb-b8bf-b91598833599.xml.htm"><b>IDebugClient::CreateClient</b></a> or the functions <a href="clientfns_4a96fd16-32b9-40f5-bc7f-60ae6ecadb32.xml.htm"><b>DebugCreate</b></a> or <a href="clientfns_7beeb350-b8bd-44ea-b5c9-ca0da15146ae.xml.htm"><b>DebugConnect</b></a>.</P>
+<P>For an overview of client objects, see <a href="engine_overview_2838c538-1dc7-4494-b92d-49e58a4ad2aa.xml.htm">Client Objects</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Client Objects and the Engine RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

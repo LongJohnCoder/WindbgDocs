@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>SetCurrentProcessId</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, SetCurrentProcessId"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="SetCurrentProcessId"/>
+<MSHelp:Keyword Index="A" Term="IDebugSystemObjects_e588cabd-e079-4dc0-ab0f-085181414985.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugSystemObjects::SetCurrentProcessId method">
+<META NAME="MS-HKWD" CONTENT="SetCurrentProcessId (IDebugSystemObjects) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugSystemObjects_e588cabd-e079-4dc0-ab0f-085181414985.xml"></A>SetCurrentProcessId</H1>
+<P><P>The <b>SetCurrentProcessId</b> method makes the specified <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#869bfa55-1556-4c4d-90ed-7b36f8f114b3">process</a> the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugSystemObjects::SetCurrentProcessId(</b><BR><b>    IN ULONG  </b><i>Id</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Id</i></DT>
+<DD>Specifies the engine process ID for the process that is to become the current process.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>No process with the given process ID was found.</DD>
+<DT>E_FAIL</DT>
+<DD>No suitable candidate for the current thread could be found in the process.</DD>
+</DL>
+<P>This method may also return other error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>SetCurrentProcessId</b> is available in all versions of <b>IDebugSystemObjects</b>.</P>
+<H4>Comments</H4>
+<P>This method also changes the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#e79fad75-e3ff-41d6-9f36-896e7b1ce5bb">current thread</a>, and may change the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#2a8fdab1-9104-4107-b188-c3879a3c4a66">current target</a> and current computer.</P>
+<P>If the process is changed, the callback <a href="comcallbacks_fafc4238-0565-410b-9e00-1cbce74737f4.xml.htm"><b>IDebugEventCallbacks::ChangeEngineState</b></a> will be called with the DEBUG_CES_CURRENT_THREAD bit set.</P>
+<P class="note"><b>Note</b>  In <a href="dbg_glossary_25516462-f653-424b-9a0c-f6d3ca1bb457.xml.htm#714fb29e-5a07-45f9-99e8-e3f319e69c2f">kernel-mode debugging</a>, the current process is a <a href="dbg_glossary_70b9b003-ee7a-401b-b0e3-bd8d3f9c3250.xml.htm#29bd5b67-5855-469b-a8d6-822d65629990">virtual process</a>, it is not a system process.  This method cannot be used to change between system processes in kernel-mode debugging.  However, the <a href="dbg_glossary_48d73de7-50e9-4e41-8a7f-0207d5301620.xml.htm#9642d18c-535a-4402-af2f-25124e98ffee">implicit process</a> may be changed by using <a href="idebugsystemobjects_10effa04-b87c-4555-9860-c2d5057a2529.xml.htm"><b>SetImplicitProcessDataOffset</b></a>.</P>
+<P>For more information about processes, see <a href="engine_dg_1442c778-acca-4b77-a596-6863ab5c8279.xml.htm">Threads and Processes</a>.  For details on monitoring events, see <a href="engine_dg_d6c1b024-ac66-457c-aaf9-913336fdfce5.xml.htm">Monitoring Events</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: SetCurrentProcessId RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

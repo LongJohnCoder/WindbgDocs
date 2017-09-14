@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>C</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, glossary, C"><xml><MSHelp:Keyword Index="A" Term="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml"/>
+<META NAME="MS-HKWD" CONTENT="C++ expression">
+<META NAME="MS-HKWD" CONTENT="C call stack">
+<META NAME="MS-HKWD" CONTENT="call stack">
+<META NAME="MS-HKWD" CONTENT="callback object">
+<META NAME="MS-HKWD" CONTENT="checked build">
+<META NAME="MS-HKWD" CONTENT="child symbol">
+<META NAME="MS-HKWD" CONTENT="client">
+<META NAME="MS-HKWD" CONTENT="client object">
+<META NAME="MS-HKWD" CONTENT="client thread">
+<META NAME="MS-HKWD" CONTENT="code breakpoint">
+<META NAME="MS-HKWD" CONTENT="crash dump file">
+<META NAME="MS-HKWD" CONTENT="current process">
+<META NAME="MS-HKWD" CONTENT="current target">
+<META NAME="MS-HKWD" CONTENT="current thread"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>    <H1><A NAME="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml"></A>C</H1>
+<P></P>
+<DL><DT><B><A NAME="8907a4f7-b8b9-42a4-8883-7a54897a9bdf"></A>C++ expression</B></DT>
+<DD>An expression that can be evaluated by the C++ expression evaluator.</DD>
+<P>For details of the syntax, see <a href="r13_syntax_372599d3-a780-4c57-9219-05575c604059.xml.htm">C++ Numbers and Operators</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="8f0d9d10-4966-4008-9357-bfc79d9aad38"></A>C call stack</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#81c37228-c201-48ad-9f7a-85d8b1ade52c">call stack</a>.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="81c37228-c201-48ad-9f7a-85d8b1ade52c"></A>call stack</B></DT>
+<DD>The set of stack frames for each thread containing representing the function calls made by the thread.  Each time a function call is made a new stack frame is pushed onto the top of the stack.  When that function returns, the stack frame is popped off the stack.<P>Sometimes referred to as the<i> C call stack</i> or simply the <i>stack</i>.</P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="1c902c96-93dc-4d9d-9f83-c1cf26bce7f0"></A>callback object</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#b82b8e27-44ea-4267-932f-0ed8f937939c">event callbacks</a>, <a href="dbg_glossary_48d73de7-50e9-4e41-8a7f-0207d5301620.xml.htm#8403e17d-255f-4066-8d17-9f6d93ec52e6">input callbacks</a>, and <a href="dbg_glossary_bd74f9e2-0647-457f-b229-a732edd24da4.xml.htm#ee29b70e-9ee5-4f78-81f7-d86e41b0969b">output callbacks</a>.</DD>
+<P></P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="4abb5bf0-b8bd-4c56-bbfa-598f77215cbe"></A>checked build</B></DT>
+<DD>Two different builds of each NT-based operating system exist:<B></B><UL type="disc">
+<LI>The <i>free build</i> (or <i>retail build</i>) of Windows is the end-user version of the operating system.  For details, see <a href="dbg_glossary_115ca2a1-47f8-405f-a4f7-a7446892d897.xml.htm#fa518e01-fcc1-428f-9548-a6443ecba5d0">free build</a>. </LI>
+<LI>The <i>checked build</i> (or <i>debug build</i>) of Windows serves as a testing and debugging aid in the developing of the operating system and kernel-mode drivers. The checked build contains extra error checking, argument verification, and debugging information that is not available in the free build. , making it easier to trace the cause of problems in system software. A checked system or driver can help isolate and track down driver problems that can cause unpredictable behavior, result in memory leaks, or result in improper device configuration.</LI>
+</UL>
+<P></P>
+<P>Although the checked build provides extra protection, it consumes more memory and disk space than the free build. System and driver performance is slower, because additional code paths are executed due to parameter checking and output of diagnostic messages, and some alternate implementations of kernel functions are used.</P>
+<P></P>
+<P>The checked build of Windows should not be confused with a driver that has been built in one of the Checked Build Environments of the Windows Driver Kit (WDK).</P>
+</DD>
+<P>For more information, see "Using the Checked Build of Windows" in the WDK.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="7f417d30-b6ae-4ff1-9f31-80f6515c818c"></A>child symbol</B></DT>
+<DD>A <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35">symbol</a> that is contained in another symbol.  For example, the symbol for a member in a structure is a child of the symbol for that structure.</DD>
+<P><i>See also</i> <a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#7dc89772-522e-4eea-a539-82ca282e5612">parent symbol</a>.<P>For more information, see <a href="engine_dg_8c597bf6-d707-45da-94c9-c88a4199c329.xml.htm">Scopes and Symbol Groups</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="f9f1d5c4-da8d-41b1-aa24-ac5f406e6654"></A>client</B></DT>
+<DD><i>See </i><a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a>.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="ebdc9536-c283-4bb5-b572-c30c8c8acd51"></A>client object</B></DT>
+<DD>A client object is used for interaction with the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a>.  It holds per-client state, and provides implementations for the top-level interfaces in the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#98ac5bd2-076f-48f9-94e6-2a4518471d3c">debugger engine API</a>.</DD>
+<P>For more information, see <a href="engine_overview_2838c538-1dc7-4494-b92d-49e58a4ad2aa.xml.htm">Client Objects</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="dbab27fb-1baa-4eed-9e6b-c0aab6e1defb"></A>client thread</B></DT>
+<DD>The thread in which the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> was created.  In general, a client's methods may be called only from this thread.  The <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> uses this thread to make all calls to the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#1c902c96-93dc-4d9d-9f83-c1cf26bce7f0">callback object</a> registered with the client.</DD>
+<P>For more information, see <a href="engine_overview_2838c538-1dc7-4494-b92d-49e58a4ad2aa.xml.htm">Client Objects</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="c8569cca-95a3-4d4b-9b6d-079a3fd74c17"></A>code breakpoint</B></DT>
+<DD><i>See</i> <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#966bf102-d48c-4c87-9dea-3bed91a69ee0">software breakpoint</a>.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="d02ecf5e-605d-42e2-9aea-a3ea60e2defb"></A>crash dump file</B></DT>
+<DD>A file that contains a snapshot of certain memory regions and other data related to an application or operating system.  A crash dump file can be stored and then used to debug the application or operating system at a later time.<P>A user-mode crash dump file can be created by Windows when an application crashes, and a kernel-mode crash dump file can be created by special Windows routines when Windows itself crashes.  There are several different types of crash dump files.</P>
+</DD>
+<P>For more information, see <a href="r10_dump_files_fba942f0-e0f2-4644-9426-95ad5bca7c9a.xml.htm">Crash Dump Files</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="30992da8-a386-4161-aca9-e9323245eabe"></A>current process</B></DT>
+<DD>The <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#869bfa55-1556-4c4d-90ed-7b36f8f114b3">process</a> that the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> is currently controlling.  When an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurs, the current process is set to the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#2b2e563b-fb4f-400e-835f-b883e485b0b3">event process</a>.</DD>
+<P><i>See also</i> <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#2a8fdab1-9104-4107-b188-c3879a3c4a66">current target</a> and <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#e79fad75-e3ff-41d6-9f36-896e7b1ce5bb">current thread</a>.<P>For more information, see <a href="engine_dg_1442c778-acca-4b77-a596-6863ab5c8279.xml.htm">Threads and Processes</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="2a8fdab1-9104-4107-b188-c3879a3c4a66"></A>current target</B></DT>
+<DD>The <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a> that the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> is currently controlling.  When an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurs, the current target is set to the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#25bafc55-cacc-4ea1-83d5-3550f9879fde">event target</a>.</DD>
+<P><i>See also</i> <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#e79fad75-e3ff-41d6-9f36-896e7b1ce5bb">current thread</a> and <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="e79fad75-e3ff-41d6-9f36-896e7b1ce5bb"></A>current thread</B></DT>
+<DD>The <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#a5a5985a-10e6-4a13-8a11-d9935f5661b9">thread</a> that the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> is currently controlling.  When an <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurs, the current thread is set to the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#e61456d2-3bac-4156-9a64-7093e642c95d">event thread</a>.</DD>
+<P><i>See also</i> <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#30992da8-a386-4161-aca9-e9323245eabe">current process</a> and <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#2a8fdab1-9104-4107-b188-c3879a3c4a66">current target</a>.<P>For more information, see <a href="engine_dg_1442c778-acca-4b77-a596-6863ab5c8279.xml.htm">Threads and Processes</a>.</P>
+</P>
+</DL>
+<P></P>  <DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: C RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

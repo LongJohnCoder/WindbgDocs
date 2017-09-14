@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ks.objhdr</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ks.objhdr"><xml><MSHelp:Keyword Index="A" Term="r33~b_exts_KS_934456a2-0534-478f-8a81-bef4b9f1b3ad.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ks.objhdr extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~b_exts_KS_934456a2-0534-478f-8a81-bef4b9f1b3ad.xml"></A>!ks.objhdr</H1>
+<P>The <b>!ks.objhdr</b> extension displays the kernel streaming object header associated with the specified file object.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ks.objhdr</b> <i>FileObject</i> [<i>Level</i>] [<i>Flags</i>]  <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>FileObject</i></DT>
+<DD>This parameter specifies a pointer to a WDM file object. If <i>FileObject</i> is not valid, the command returns an error.</DD>
+<DT><i>Level</i></DT>
+<DD>Optional. Values are the same as those for <a href="r33~b_exts_ks_9116ca53-f889-4849-b200-270e37aef1d3.xml.htm"><b>!ks.dump</b></a>. </DD>
+<DT><i>Flags</i></DT>
+<DD>Optional. Values are the same as those for <a href="r33~b_exts_ks_9116ca53-f889-4849-b200-270e37aef1d3.xml.htm"><b>!ks.dump</b></a>. </DD>
+<P></P>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>winxp\Ks.dll </i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ks.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Levels and flags for <b>!ks.objhdr</b> are identical to those described in <a href="r33~b_exts_ks_9116ca53-f889-4849-b200-270e37aef1d3.xml.htm"><b>!ks.dump</b></a>.</P>
+<P>The output from <a href="r33~b_exts_ks_626a9908-39cf-4f78-afe7-207f806405ff.xml.htm"><b>!ks.allstreams</b></a> and <a href="r33~b_exts_ks_295e7674-92ca-415e-9388-ca9971d35fee.xml.htm"><b>!ks.enumdevobj</b></a> can be used as the input for <b>!ks.objhdr</b>. To do this with the <i>avssamp</i> sample, for instance, issue the following commands:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!ks.allstreams</b><BR>6 Kernel Streaming FDOs found:<BR>    Functional Device 8299be18 [\Driver\smwdm]<BR>    Functional Device 827c86d8 [\Driver\wdmaud]<BR>    Functional Device 827c0f08 [\Driver\sysaudio]<BR>    Functional Device 82424590 [\Driver\avssamp]<BR>    Functional Device 82423720 [\Driver\MSPQM]<BR>    Functional Device 82b91a88 [\Driver\MSPCLOCK]<BR>kd&gt; <b>!ks.enumdevobj</b> 82424590<BR>WDM device object 82424590:<BR>    Corresponding KSDEVICE        82427540<BR>    Factory 8285baa4 [Descriptor f7a333c8] instances:<BR>        82837a34 <BR>kd&gt; <b>!ks.objhdr</b> 82837a34 7<BR></nobr></P>
+<P>The results of this command might be lengthy. Issue a Ctrl-BREAK (WinDbg) or Ctrl-C (NTSD, CDB, KD) to stop the output.</P>
+<P>Here's a separate example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!ks.objhdr</b> 81D828B8 7<BR>Adjusting file object 81D828B8 to object header 81BC1008<BR><BR>Object Header 81BC1008<BR>    Associated Create Items:<BR>        Create Item F9F77E98<BR>            CreateFunction = ks!CKsFilter::DispatchCreatePin+0x00<BR>            ObjectClass = {146F1A80-4791-11D0-A5D6-28DB04C10000}<BR>            Flags = 0<BR>    Child Create Handler List:<BR>        Create Item F9F85AA0<BR>            CreateFunction = ks!CKsPin::DispatchCreateAllocator+0x00<BR>            ObjectClass = {642F5D00-4791-11D0-A5D6-28DB04C10000}<BR>            Flags = 0<BR>        Create Item F9F85AB8<BR>            CreateFunction = ks!CKsPin::DispatchCreateClock+0x00<BR>            ObjectClass = {53172480-4791-11D0-A5D6-28DB04C10000}<BR>            Flags = 0<BR>        Create Item F9F85AD0<BR>            CreateFunction = ks!CKsPin::DispatchCreateNode+0x00<BR>            ObjectClass = {0621061A-EE75-11D0-B915-00A0C9223196}<BR>            Flags = 0<BR>    DispatchTable:<BR>        Dispatch Table F9F85AE8<BR>            DeviceIoControl = ks!CKsPin::DispatchDeviceIoControl+0x00<BR>            Read = ks!KsDispatchInvalidDeviceRequest+0x00<BR>            Write = ks!KsDispatchInvalidDeviceRequest+0x00<BR>            Flush = ks!KsDispatchInvalidDeviceRequest+0x00<BR>            Close = ks!CKsPin::DispatchClose+0x00<BR>            QuerySecurity = ks!KsDispatchQuerySecurity+0x00<BR>            SetSecurity = ks!KsDispatchSetSecurity+0x00<BR>            FastDeviceIoControl = ks!KsDispatchFastIoDeviceControlFailure+0x00<BR>            FastRead = ks!KsDispatchFastReadFailure+0x00<BR>            FastWrite = ks!KsDispatchFastReadFailure+0x00<BR>    TargetState: KSTARGET_STATE_ENABLED<BR>    TargetDevice: 00000000<BR>    BaseDevice  : 81BBDF10<BR>    Stack Depth : 1<BR>    Corresponding AVStream object = 81A971B0<BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~b_ks_b4eb1677-2223-49b7-8562-fdcfe42da3da.xml.htm">Kernel Streaming Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ks.objhdr RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

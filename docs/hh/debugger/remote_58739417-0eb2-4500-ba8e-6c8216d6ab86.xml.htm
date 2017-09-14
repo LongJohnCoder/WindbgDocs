@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Remote Tool Concepts</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Remote Tool Concepts"><xml><MSHelp:Keyword Index="A" Term="Remote_58739417-0eb2-4500-ba8e-6c8216d6ab86.xml"/>
+<META NAME="MS-HKWD" CONTENT="Remote Tool, Remote Tool Concepts">
+<META NAME="MS-HKWD" CONTENT="Remote Tool, Remote Client">
+<META NAME="MS-HKWD" CONTENT="Remote Tool, Remote Server">
+<META NAME="MS-HKWD" CONTENT="Remote Tool, visible session"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Remote_58739417-0eb2-4500-ba8e-6c8216d6ab86.xml"></A>Remote Tool Concepts</H1>
+<P>The following concepts are used in the Remote tool.</P>
+<H3><A NAME="88bd3d6b-e8e9-4cd6-9d72-f03ddba94854"></A>Client and Server</H3>
+<P>The Remote tool uses a client-server paradigm that avoids the words <i>local</i> and <i>remote</i>, which are relative terms that can be confusing when there are multiple users and multiple computers.</P>
+<P>Commands that you type at the client and server computers appear in the Command Prompt windows of both computers.</P>
+<H4>The Server</H4>
+<P>The <i>server </i>is the computer on which the console program runs. The <i>Remote Server</i> is the instance of the Remote tool running on the server. The server establishes and names the remote session (named pipe), issues the command to start the console program, and determines who is permitted to connect to the session.</P>
+<H4>The Client</H4>
+<P>The <i>client</i> is a remote computer that sends commands to the console program. The <i>Remote Client</i> is the instance of the Remote tool running on the client computer. The client connects to the remote session that the server established and uses the remote session (named pipe) that the server created to send commands to the console program that runs on the server. </P>
+<P>The Remote tool supports multiple clients in each remote session. Each client is running one Remote Client. All of the clients can send commands to the console program running on the server, and all of the clients can see the commands sent and output displayed.</P>
+<H3><A NAME="ea849ebb-8c45-425a-9031-b708fddbc51f"></A>Visible Session</H3>
+<P>When remote sessions are <i>visible</i>, they appear in the list of remote sessions on the computer. To display the list, use the <a href="remote_fa2adaef-530c-458f-836e-cf35373d36fc.xml.htm">Remote Server query command</a> (<b>/q</b>).</P>
+<P>By default, only debugger sessions are visible, that is, sessions in which the value of the <i>Command</i> parameter include the words <b>kd</b>, <b>dbg</b>, <b>remoteds</b>, <b>ntsd</b>, or <b>cdb</b>; otherwise, the session is not visible. The <i>Command</i> parameter is part of the Remote tool command on the server.</P>
+<P>To make a session visible, add the <b>/v</b> parameter to the <a href="remote_35021c40-6256-4db8-9da2-b053a147dbb8.xml.htm">Remote Server</a> command. To make a debugger session invisible, add the <b>/-v</b> parameter to the command.</P>
+<P>For help with the Remote Server query command, see <a href="remote_fa2adaef-530c-458f-836e-cf35373d36fc.xml.htm">Remote Server Query Command</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Remote Tool Concepts RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

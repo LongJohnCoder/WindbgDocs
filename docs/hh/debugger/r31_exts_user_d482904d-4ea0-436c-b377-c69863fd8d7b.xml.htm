@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!dreg</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !dreg"><xml><MSHelp:Keyword Index="A" Term="r31_exts_user_d482904d-4ea0-436c-b377-c69863fd8d7b.xml"/>
+<META NAME="MS-HKWD" CONTENT="!dreg extension">
+<META NAME="MS-HKWD" CONTENT="controlling the user-mode debugger from the kernel debugger, !dreg extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r31_exts_user_d482904d-4ea0-436c-b377-c69863fd8d7b.xml"></A>!dreg</H1>
+<P>The <b>!dreg</b> extension displays registry information.<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!dreg</b> [<b>-d</b>|<b>-w</b>] <i>KeyPath</i>[<b>!</b><i>Value</i>] <BR><b>!dreg</b> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-d</b></DT>
+<DD>Causes binary values to be displayed as DWORDs.</DD>
+<DT><b>-w</b></DT>
+<DD>Causes binary values to be displayed as WORDs.</DD>
+<DT><i>KeyPath</i></DT>
+<DD>Specifies the registry key path. It can begin with any of the following abbreviations:<DL><DT><b>hklm</b></DT>
+<DD>HKEY_LOCAL_MACHINE</DD>
+<DT><b>hkcu</b></DT>
+<DD>HKEY_CURRENT_USER</DD>
+<DT><b>hkcr</b></DT>
+<DD>HKEY_CLASSES_ROOT</DD>
+<DT><b>hku</b></DT>
+<DD>HKEY_USERS</DD>
+</DL>
+<P>If no abbreviation is used, HKEY_LOCAL_MACHINE is assumed. </P>
+</DD>
+<DT><i>Value</i></DT>
+<DD>Specifies the name of the registry value to be displayed. If an asterisk (<b>*</b>) is used, all values are displayed. If <i>Value</i> is omitted, all subkeys are displayed.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ntsdexts.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ntsdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>!dreg</b> extension can be used to display the registry during user-mode debugging.  </P>
+<P>It is most useful during remote debugging, as it allows you to browse the registry of the remote machine. It is also useful when controlling the user-mode debugger from the kernel debugger, because you cannot run a standard registry editor on the target machine when it is frozen. (You can use the <b>.sleep</b> command for this purpose as well. See <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">Controlling the User-Mode Debugger from the Kernel Debugger</a> for details.)</P>
+<P>It is also useful when debugging locally, as the information is presented in an easily readable format.</P>
+<P>If <b>!dreg</b> is used during kernel-mode debugging, the results shown will be for the host computer, and not the target computer.  To display raw registry information for the target computer, use the <a href="r29_exts_kernel_q_a0d5a48c-9f77-4373-8153-d3dd26dd8337.xml.htm"><b>!reg</b></a> extension instead.</P>
+<P></P>
+<P>Here are some examples. The following will display all subkeys of the specified registry key:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>!dreg hkcu\Software\Microsoft</b><BR><BR></nobr></P>
+<P>The following will display all values in the specified registry key:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>!dreg System\CurrentControlSet\Services\Tcpip!*</b><BR><BR></nobr></P>
+<P>The following will display the value Start in the specified registry key:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>!dreg System\CurrentControlSet\Services\Tcpip!Start</b><BR><BR></nobr></P>
+<P>Typing <b>!dreg</b> without any arguments will display some brief Help text for this extension in the Debugger Command window..</P>
+<H4>Additional Information</H4>
+<P>For information about the registry, see the Windows Driver Kit (WDK) documentation and <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !dreg RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

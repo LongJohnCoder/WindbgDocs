@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using a Repeater</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using a Repeater"><xml><MSHelp:Keyword Index="A" Term="r08_use_remote_3bf94625-3bb0-4a4c-9d1e-2df655c5ad70.xml"/>
+<META NAME="MS-HKWD" CONTENT="repeater, using a repeater"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r08_use_remote_3bf94625-3bb0-4a4c-9d1e-2df655c5ad70.xml"></A>Using a Repeater</H1>
+<P>A repeater connection obeys very simple rules:</P><B></B><UL type="disc">
+<LI>Any communication that the server and client intend for each other passes through the repeater without alteration.</LI>
+<LI>Any action that the server performs with respect to the transport connection affects the repeater (and only indirectly affects the client).</LI>
+<LI>Any action that the client performs with respect to the transport connection affects the repeater (and only indirectly affects the server).</LI>
+</UL>
+<P></P>
+<P>This means that any debugging commands, debugger output, control keys, and file access will take place exactly as if the client and server were directly connected. The repeater will be invisible to all these commands.</P>
+<P>Actions that terminate the connection itself will affect the repeater. For example, if you issue a <a href="r17_cmds_i_27fbcb2b-e3e7-470e-bab9-29dd7a115129.xml.htm"><b>qq (Quit)</b></a> command from the client, the server will shut down and will send a shutdown signal to the transport. This will cause the repeater to exit (unless it was started with the <b>-p</b> option). As another example, the <a href="r19_metacmds_a_e53f575c-5a40-48c6-af85-4aebc680ca91.xml.htm"><b>.clients (List Debugging Clients)</b></a> command will list the client's computer name, but it will show the connection protocol used to connect the server with the repeater.</P>
+<P>If the server is shut down, the repeater will automatically exit (unless it was started with the <b>-p</b> option). When the repeater shuts down, this will cause a debugging client to exit as well, although a smart client will not. If for some reason you need to terminate the repeater directly, you can use Task Manager or the <i>kill.exe</i> tool.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using a Repeater RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

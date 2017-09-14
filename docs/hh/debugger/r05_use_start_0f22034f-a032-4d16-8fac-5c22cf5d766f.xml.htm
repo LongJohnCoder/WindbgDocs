@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Starting the Debugging Session</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Starting the Debugging Session"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_0f22034f-a032-4d16-8fac-5c22cf5d766f.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_0f22034f-a032-4d16-8fac-5c22cf5d766f.xml"></A>Starting the Debugging Session</H1>
+<P>In this documentation of how to <a href="r05_use_start_9fcf66d7-d72a-4b94-a1e6-e65a95e688f7.xml.htm">control user-mode debugging from the kernel debugger</a>, <i>target application</i> refers to the user-mode application that is being debugged, <i>target computer</i> refers to the computer that contains the target application and the NTSD or CDB process, and <i>host computer</i> refers to the computer that contains the kernel debugger.</P>
+<P>To begin using this technique, you must do the following. You can do steps 1 and 2 in either order.</P><B></B><OL type="1">
+<LI>Start NTSD or CDB on the target computer, with the <nobr><b>-d</b></nobr> command-line option.  <P>For example, you can attach to a running process by using the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ntsd -d</b> [<b>-y</b> <i>UserSymbolPath</i>] <b>-p </b><i>PID</i> <BR></nobr></P>
+<P>Or, you can start a new process as the target by using the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ntsd -d</b> [<b>-y</b> <i>UserSymbolPath</i>] <i>ApplicationName</i> <BR></nobr></P>
+<P>If you are installing this as a postmortem debugger, you would use the following syntax.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>ntsd -d</b> [<b>-y</b> <i>UserSymbolPath</i>] <BR></nobr></P>
+<P>For more information about this step, see <a href="r05_use_start_93639902-63fa-4e1b-a145-bd91af8eabb8.xml.htm">Attaching to a Running Process (User Mode)</a> or <a href="r05_use_start_77acc3de-f774-4eba-8804-ae878cd5e99d.xml.htm">Spawning a New Process (User Mode)</a>.</P>
+</LI>
+<LI>Start WinDbg or KD on the host computer, as if you were going to debug the target computer, but do not actually break in to the target computer.  To use WinDbg, use the folloinwg syntax.<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg</b> [<b>-y</b> <i>KernelSymbolPath</i>] [<b>-k</b> <i>ConnectionOptions</i>] <BR></nobr></P>
+<P>For more information about this step, see <a href="r05_use_start_9132f269-042d-43ca-a1df-18ffc85aa4a5.xml.htm">Attaching to a Target Computer (Kernel Mode)</a>.</P>
+</LI>
+<LI>If you have not set the user-mode symbol path, set it from the <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>Input&gt;</b></span> prompt. If you have not set the kernel-mode symbol path, set it from the <span style="cursor:text; font: 100% Courier New, Courier, mono; color: #660000;"><b>kd&gt;</b></span> prompt. For information on how to access these prompts and to switch between modes, see <a href="r05_use_start_415320ed-27ff-42a3-85da-d2d7e8723196.xml.htm">Switching Modes</a>. </LI>
+</OL>
+<P></P>
+<P>If you use CDB, the Command Prompt window that is associated with CDB remains locked and unavailable while debugging continues. If you use NTSD, no additional window is created, even though NTSD has a process ID associated with it on the target computer.</P>
+<P>If you want to run the user-mode debugger from the kernel debugger while also using it as a debugging server, see <a href="r05_use_start_d9ff842e-7b5a-4989-9931-f7318ac828b2.xml.htm">Combining This Method with Remote Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Starting the Debugging Session RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

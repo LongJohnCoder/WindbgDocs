@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ib, iw, id (Input from Port)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ib, iw, id (Input from Port)"><xml><MSHelp:Keyword Index="A" Term="r17_cmds_I_31c2e6e2-06c5-42be-828a-030f9c4454fe.xml"/>
+<META NAME="MS-HKWD" CONTENT="ib (Input from Port) command">
+<META NAME="MS-HKWD" CONTENT="id (Input from Port) command">
+<META NAME="MS-HKWD" CONTENT="iw (Input from Port) command">
+<META NAME="MS-HKWD" CONTENT="Input from Port (ib - id - iw) command">
+<META NAME="MS-HKWD" CONTENT="port input"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r17_cmds_I_31c2e6e2-06c5-42be-828a-030f9c4454fe.xml"></A>ib, iw, id (Input from Port)</H1>
+<P>The <b>ib</b>, <b>iw</b>, and <b>id</b> commands read and display a byte, word, or double word from the selected port.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>ib</b> <i>Address</i> <BR><b>iw</b> <i>Address</i> <BR><b>id</b> <i>Address</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>The address of the port.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">Kernel mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">x86-based computer only   </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>ib</b> command reads a single byte, the <b>iw</b> command reads a word, and the <b>id</b> command reads a double word.</P>
+<P>Make sure that reading an I/O port does not affect the behavior of the device that you are reading from. Some devices change state after a read-only port has been read. You should also not try to read a word or double-word from a port that does not allow values of this length.</P>
+<H4>See Also</H4>
+<P><a href="r17_cmds_i_e425e015-5b4a-497e-be90-516b52a5ea92.xml.htm"><b>ob, od, ow (Output to Port)</b></a> </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ib, iw, id (Input from Port) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetNumberDumpFiles</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetNumberDumpFiles"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetNumberDumpFiles"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_db74cf2c-c7e7-46c2-be98-f4023b22c5c3.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::GetNumberDumpFiles method">
+<META NAME="MS-HKWD" CONTENT="GetNumberDumpFiles (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_db74cf2c-c7e7-46c2-be98-f4023b22c5c3.xml"></A>GetNumberDumpFiles</H1>
+<P><P>The <b>GetNumberDumpFiles</b> method returns the number of files containing supporting information that were used when opening the current dump target.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient4::GetNumberDumpFiles(</b><BR><b>    OUT PULONG  </b><i>Number</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Number</i></DT>
+<DD>Receives the number of files.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetNumberDumpFiles</b> is available in all versions of <b>IDebugClient4</b>.</P>
+<H4>Comments</H4>
+<P>For more information about crash dump files, see <a href="engine_dg_4f17b58c-6753-4fcf-b1de-13ddffb62c15.xml.htm">Dump-File Targets</a>.</P>
+<H4>Requirements</H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<P></P>
+<H4>See Also</H4>
+<P><a href="idebugclient_f4f1540c-116c-4e74-ad19-10beb0ac2739.xml.htm"><b>GetDumpFile</b></a>, <a href="idebugclient_11398d02-21c4-4ec5-9e1c-8e7e87808c35.xml.htm"><b>AddDumpInformationFile</b></a>, <a href="idebugclient_515044fe-647d-447a-bb74-5738d4d08d6d.xml.htm"><b>AddDumpInformationFileWide</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetNumberDumpFiles RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

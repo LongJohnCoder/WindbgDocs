@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>|s (Set Current Process)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, |s (Set Current Process)"><xml><MSHelp:Keyword Index="A" Term="r15_cmds_A_6d7e3f3c-4a87-4737-9587-07281a371f01.xml"/>
+<META NAME="MS-HKWD" CONTENT="|s (Set Current Process) command">
+<META NAME="MS-HKWD" CONTENT="Set Current Process (|s) command">
+<META NAME="MS-HKWD" CONTENT="process, Set Current Process (|s) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r15_cmds_A_6d7e3f3c-4a87-4737-9587-07281a371f01.xml"></A>|s (Set Current Process)</H1>
+<P>The <b>|s</b> command sets or displays the current process number.<P>Do not confuse this command with the <a href="r18_cmds_s_7a06634c-21dc-40a0-9b81-d3449a652870.xml.htm"><b>s (Search Memory)</b></a>, <a href="r15_cmds_a_32745f90-8ccb-4de2-b340-2bd8f129c260.xml.htm"><b>~s (Change Current Processor)</b></a>, <a href="r15_cmds_a_b10eaec6-a443-4cb3-8715-959477da74fa.xml.htm"><b>~s (Set Current Thread)</b></a>, or <a href="r15_cmds_a_71ad20ba-2731-457c-aa06-e7c6f2cfaee2.xml.htm"><b>||s (Set Current System)</b></a> command.</P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>|</b><i>Process</i> <b>s</b> <BR><b>|</b> <b>s</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Process</i></DT>
+<DD>Specifies the process to set or display. For more information about the syntax, see <a href="r13_syntax_a48cd749-4fec-4281-b271-53b04a1b04ab.xml.htm">Process Syntax</a>.</DD>
+</DL>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>You can specify processes only in user mode.</P>
+<P>If you use the <b>|s</b> syntax, the debugger displays information about the current process.</P>
+<P>This command also disassembles the current instruction for the current system, process, and thread.</P>
+<H4>Additional Information</H4>
+<P>For more information about other methods of displaying or controlling processes and threads, see <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">Controlling Processes and Threads</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: |s (Set Current Process) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

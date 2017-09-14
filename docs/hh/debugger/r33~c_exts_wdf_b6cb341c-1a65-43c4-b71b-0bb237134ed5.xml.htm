@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!wdfkd.wdfpoolusage</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !wdfkd.wdfpoolusage"><xml><MSHelp:Keyword Index="A" Term="r33~c_exts_WDF_b6cb341c-1a65-43c4-b71b-0bb237134ed5.xml"/>
+<META NAME="MS-HKWD" CONTENT="!wdfkd.wdfpoolusage extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~c_exts_WDF_b6cb341c-1a65-43c4-b71b-0bb237134ed5.xml"></A>!wdfkd.wdfpoolusage</H1>
+<P><P>The <b>!wdfkd.wdfpoolusage</b> extension displays pool usage information for a specified driver, if the Kernel-Mode Driver Framework (KMDF) verifier is enabled for the driver.  </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!wdfkd.wdfpoolusage</b> [<i>DriverName</i> [<i>SearchAddress</i>] [<i>Flags</i>] ]] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>DriverName</i></DT>
+<DD>Optional. The name of a driver. <i>DriverName </i>must not include the .<i>sys</i> file name extension.</DD>
+<DT><i>SearchAddress</i></DT>
+<DD>Optional. A string that represents a memory address. The pool entry that contains <i>SearchAddress</i> is displayed. If <i>SearchAddress </i>is 0 or omitted, all of the driver's pool entries are displayed.  </DD>
+<DT><i>Flags</i></DT>
+<DD>Optional. The kind of information to display.  This parameter is valid only if <i>SearchAddress</i> is nonzero. <i>Flags</i> can be any combination of the following bits. The default value is 0x0.<DL><DT>Bit 0 (0x1)</DT>
+<DD>Displays verbose output. Multiple lines are displayed for each. If this flag is not set, the information about an allocation is displayed on one line.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Displays internal type information for each handle. </DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>Displays the caller of each pool entry. </DD>
+</DL>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4>
+<P><i>Wdfkd.dll</i></P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If you omit the <i>DriverName </i>parameter, the default driver is used. You can display the default driver by using the <a href="r33~c_exts_wdf_5fb4814b-c564-4648-95e2-74cd56672689.xml.htm"><b>!wdfkd.wdfgetdriver</b></a> extension; you can set the default driver by using the <a href="r33~c_exts_wdf_b65c7163-f379-4d51-b0a2-c456afaf6ee7.xml.htm"><b>!wdfkd.wdfsetdriver</b></a> extension.  </P>
+<P>The following example shows the output from the <b>!wdfpoolusage</b> extension when no pool allocation is marked and the <i>Flags</i> value is set to 0.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wdfpoolusage wdfrawbusenumtest 0 0</b> <BR>-----------------------------------<BR>FxDriverGlobals 83b7af18 pool stats<BR>-----------------------------------<BR>Driver Tag: 'RawB'<BR>15126 NonPaged Bytes, 548 Paged Bytes<BR>94 NonPaged Allocations, 10 Paged Allocations<BR>15610 PeakNonPaged Bytes, 752 PeakPaged Bytes<BR>100 PeakNonPaged Allocations, 14 PeakPaged Allocations<BR><BR>pool 82dbae00, Size  512 Tag 'RawB', NonPaged, Caller:  Wdf01000!FxVerifierLock::AllocateThreadTable+5d<BR><BR></nobr></P>
+<P>The following example shows the output from <b>!wdfpoolusage</b> that appears when the value of <i>Flags</i> is 1. (Note that the ellipsis (&#8230;) on the second line indicates the omission of some output that is the same as that shown in the preceding example.)</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!wdfpoolusage wdfrawbusenumtest 0 1</b> <BR>. . . <BR>100 PeakNonPaged Allocations, 14 PeakPaged Allocations<BR><BR>Client alloc starts at 82dbae00<BR>Size  512 Tag 'RawB'<BR>NonPaged (0x0)<BR>Caller:  Wdf01000!FxVerifierLock::AllocateThreadTable+5d<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~c_wdf_b21958be-e8b5-460c-87b7-a755da1cf37e.xml.htm">Kernel-Mode Driver Framework Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !wdfkd.wdfpoolusage RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

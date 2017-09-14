@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging a Device Installation Co-Installer</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging a Device Installation Co-Installer"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_300bcc18-0c3c-400b-bbaa-e67e19f94bb0.xml"/>
+<META NAME="MS-HKWD" CONTENT="device installation co-installer debugging">
+<META NAME="MS-HKWD" CONTENT="installation co-installer debugging">
+<META NAME="MS-HKWD" CONTENT="co-installer debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_300bcc18-0c3c-400b-bbaa-e67e19f94bb0.xml"></A>Debugging a Device Installation Co-Installer</H1>
+<P>Some hardware device installation packages include DLL files known as <i>co-installers</i>, which assist with installing the device. </P>
+<P>You cannot debug a co-installer in the same fashion as other modules.  This is because of the unique way in which a co-installer is loaded, and because many installation scenarios occur automatically without providing the developer an opportunity to break into the running process.</P>
+<P>You can resolve this issue by programmatically installing the device. Attaching a debugger to the application which installs the device allows access to the co-installer itself. The simplest way to accomplish this is to install or reinstall the device using the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=152915" target="_blank">DevCon</a> tool that is included in the Windows Driver Kit (WDK).  You can then debug the co-installer with WinDbg. </P>
+<P>Use the following procedure to accomplish this task.  This procedure assumes you have developed a working driver installation package for your device which uses a co-installer.  It also assumes that you have the latest copy of the WDK.  For information on developing drivers, driver installation packages, and driver installation co-installers, see the WDK documentation.</P><B>Debugging a Co-installer Using DevCon and WinDbg</B><OL type="1">
+<LI>Plug in the hardware device. </LI>
+<LI>Cancel the <b>New Hardware Found</b> wizard. </LI>
+<LI>Start WinDbg. </LI>
+<LI>Select <b>Open Executable</b> from WinDbg's <b>File</b> menu. </LI>
+<LI>In the <b>Open Executable</b> dialog box, do the following: <B></B><OL type="1">
+<LI>In the file selection text box, select the DevCon tool (<i>Devcon.exe</i>).  For this, browse to the WDK installation folder, then open the subdirectory <i>tools</i>, then open the subdirectory <i>devcon</i>, then open the subdirectory that matches the processor architecture of your machine, and then select <i>Devcon.exe</i>.  Click only once on <i>Devcon.exe</i> and do not yet press <b>Open</b>. </LI>
+<LI>In the <b>Arguments</b> text box, enter the following text, where <i>INFFile</i> is the filename of your Device Installation Information (INF) file, and <i>HardwareID</i> is the hardware ID of your device: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>update</b> <i>INFFile</i> <i>HardwareID</i> <BR></nobr></P>
+</LI>
+<LI>In the <b>Start directory</b> text box, enter the path to your device installation package. </LI>
+<LI>Click <b>Open</b>. </LI>
+</OL>
+</LI>
+<LI>The debugging process will begin, and WinDbg will break into the DevCon process before DevCon installs your driver. </LI>
+<LI>Configure the debugger to break into the co-installer process when it is loaded. You can do this by either of the following methods: <B></B><UL type="disc">
+<LI>In the Debugger Command window, use the <a href="r18_cmds_s_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml.htm"><b>sxe (Set Exceptions)</b></a> command followed by <b>ld:</b> and then the filename of the co-installer, excluding the file extension.  There should be no space after the colon  For example, if the name of the co-installer is <i>mycoinst.dll</i>, you would use the following command: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>sxe ld:mycoinst</b> <BR></nobr></P>
+</LI>
+<LI>Select <b>Event Filters</b> from WinDbg's <b>Debug</b> menu. In the <b>Event Filters</b> dialog box, select <b>Load module</b>.  Under <b>Execution</b>, select <b>Enabled.</b>  Under <b>Continue</b>, select <b>Not Handled.</b>  Click the <b>Argument</b> button, and then in the text box enter the filename of the co-installer, excluding the file extension (for example, enter "mycoinst" for <i>mycoinst.dll</i>). Click <b>OK</b> and then click <b>Close</b>. </LI>
+</UL>
+</LI>
+<LI>Resume execution by pressing F5 or entering the <b>g (Go)</b> command in the Debugger Command window. </LI>
+<LI>When the co-installer is loaded, execution will break back into the debugger.  At this point, you can set any additional breakpoints that you need. </LI>
+</OL>
+<P></P>
+<H4>Limitations of This Procedure</H4>
+<P>In certain cases, running a device installation package under DevCon may result in slightly different behavior than that of a PnP installation, because of different security tokens and the like.  If you are trying to debug a specific problem in your co-installer, it is possible that this problem will not replicate if DevCon is involved. Therefore, before using this technique, you should use DevCon to install your driver <i>without</i> a debugger attached to verify that this problem exists in both the PnP and the DevCon scenarios.</P>
+<P>If the problem vanishes whenever DevCon initiates the installation, then you will have to debug your co-installer without using DevCon.  One way of doing this is to use the <a href="tlist_d98fd688-471d-4855-aa5c-997719bd11c3.xml.htm">TList</a> tool with the <b>/m</b> option to determine which process is loading the co-installer module, and then attaching the debugger to that process. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging a Device Installation Co-Installer RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetWindbgExtensionApis64</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetWindbgExtensionApis64"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="Wdbgexts.h, Dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetWindbgExtensionApis64"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_51215e32-dcd3-440f-92ee-6ff82ae1c8e6.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetWindbgExtensionApis64 method">
+<META NAME="MS-HKWD" CONTENT="GetWindbgExtensionApis64 (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_51215e32-dcd3-440f-92ee-6ff82ae1c8e6.xml"></A>GetWindbgExtensionApis64</H1>
+<P><P>The <b>GetWindbgExtensionApis64</b> method returns a structure that facilitates using the <a href="dbg_glossary_39db479e-a9f5-4a31-b599-21aa77a0c60d.xml.htm#49c8dbfa-839a-40a3-9617-c0e8d76049b8">WdbgExts API</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl::GetWindbgExtensionApis64(</b><BR><b>    IN OUT WINDBG_EXTENSION_APIS64 *  </b><i>Api</i><BR><b>  );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Api</i></DT>
+<DD>Receives a WINDBG_EXTENSION_APIS64 structure.  This structure contains the functions used by the WdbgExts API.  The <b>nSize</b> member of this structure must be set to the size of the structure before it is passed to this method.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_INVALIDARG</DT>
+<DD>The value of <i>Api</i>-&gt;<b>nSize</b> does not equal the size of the structure WINDBG_EXTENSION_APIS64.</DD>
+</DL>
+<P>This method may also return other error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetWindbgExtensionApis64</b> is available in all versions of <b>IDebugControl</b>.</P>
+<H4>Comments</H4>
+<P>If you are including <i>Wdbgexts.h</i> in your extension code, you should call this method during the initialization of the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#9625e841-0468-4bf3-940b-56f3f5831a12">extension DLL</a> (see <a href="extensions_ref_e260c42c-8299-4578-8919-3b2167701275.xml.htm"><b>DebugExtensionInitialize</b></a>).</P>
+<P>Many WdbgExts functions are really macros.  To ensure that these macros work correctly, the structure received by the <i>Api</i> parameter should be stored in a global variable named <b>ExtensionApis</b>.  </P>
+<P>The WINDBG_EXTENSION_APIS64 structure returned by this method serves the same purpose as the one provided to the callback function <a href="wdbgexts_callbacks_18383848-27f2-4d4e-a5b0-c6ce27377687.xml.htm"><b>WinDbgExtensionDllInit</b></a> (used by WdbgExts extensions).</P>
+<P>For a list of the functions provided by the WdbgExts API, see <a href="wdbgexts_ref_a074bbf3-80f8-415e-988d-1b45b2e73cc1.xml.htm">WdbgExts Functions</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  WINDBG_EXTENSION_APIS64 is defined in <i>Wdbgexts.h</i>.  Include <i>Dbgeng.h</i> and <i>Wdbgexts.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetWindbgExtensionApis64 RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

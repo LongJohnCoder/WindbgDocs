@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Boot Options in a Boot.ini File</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Boot Options in a Boot.ini File"><xml><MSHelp:Keyword Index="A" Term="bootini_b6707f0b-f96b-48f1-a8ff-ce2d9675dc22.xml"/>
+<META NAME="MS-HKWD" CONTENT="Boot.ini files [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], Boot.ini files"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_b6707f0b-f96b-48f1-a8ff-ce2d9675dc22.xml"></A>Boot Options in a <i>Boot.ini</i> File</H1>
+<P><i>Boot.ini </i>is a text file located at the root of the system partition, typically <i>c:\Boot.ini</i>. <i>Boot.ini</i> stores boot options for computers with BIOS firmware, traditionally, computers with x86 and x64-based processors. </P>
+<P>On Windows Server 2003 and earlier versions of NT-based Windows operating systems, when the computer starts, the Windows boot loader, Ntldr, reads the <i>Boot.ini</i> file and displays the entries for each operating system in the boot menu. Then, Ntldr loads the selected operating system in accordance with settings in the <i>Boot.ini</i> file.</P>
+<P>By default, on NTFS drives, the <b>system</b>, <b>hidden</b>, <b>archived</b>, and <b>read-only</b> attributes are set to protect the <i>Boot.ini</i> file; however, members of the Administrators group can change these attributes. The file attributes do not affect the operation of boot loader.</P>
+<P>The following sections briefly describe the <i>Boot.ini</i> file and explain the aspects of boot options that are specific to computers with Personal Computer Advanced Technology (PC/AT)-type BIOS firmware.</P>
+<P>This section includes:</P><B></B><div class="indent1">
+<P><a href="bootini_bab3bc6e-0149-4472-8095-c7339090c84f.xml.htm">Overview of the <i>Boot.ini</i> File</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_ff101da7-6579-4895-adcb-5f1fb2986cc9.xml.htm">Editing the <i>Boot.ini</i> File</a> </P>
+</div>
+<div class="indent1">
+<P><a href="bootini_59d823d0-8c4a-4de6-bc9d-08eb66af5d39.xml.htm">Backing Up the <i>Boot.ini</i> File</a> </P>
+</div>
+<P></P>
+<P>This document describes aspects of the <i>Boot.ini</i> file that are of special interest to driver developers and testers. For a complete list of the <i>Boot.ini</i> file parameters, see <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=137742" target="_blank">Available Switch Options for the Windows XP and the Windows Server 2003 Boot.ini Files</a> topic in the Microsoft Knowledge Base.   </P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Boot Options in a Boot.ini File RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

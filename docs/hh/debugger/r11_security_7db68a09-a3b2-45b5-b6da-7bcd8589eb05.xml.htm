@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Security During Remote Debugging</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Security During Remote Debugging"><xml><MSHelp:Keyword Index="A" Term="r11_security_7db68a09-a3b2-45b5-b6da-7bcd8589eb05.xml"/>
+<META NAME="MS-HKWD" CONTENT="security considerations, remote debugging">
+<META NAME="MS-HKWD" CONTENT="remote debugging through remote.exe, security considerations">
+<META NAME="MS-HKWD" CONTENT="remote debugging through the debugger, security considerations">
+<META NAME="MS-HKWD" CONTENT="process server, security considerations"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r11_security_7db68a09-a3b2-45b5-b6da-7bcd8589eb05.xml"></A>Security During Remote Debugging</H1>
+<P>There are two ways to increase security during remote debugging: by restricting who can connect to your session and by restricting the powers of someone who does connect.</P>
+<H4>Controlling Access to the Debugging Session</H4>
+<P>If you are performing <a href="r08_use_remote_e8049dea-474e-411d-8286-ec4a646480f7.xml.htm">remote debugging through the debugger</a>, or using a <a href="r08_use_remote_0828c18f-b042-4288-9b58-a56e3076eb2e.xml.htm">process server</a> or <a href="r08_use_remote_da274d6a-0dd9-43db-98cf-5c84038694db.xml.htm">KD connection server</a>, any computer on your local network can attempt to attach to your debugging session.</P>
+<P>If you are using the TCP, 1394, COM, or named pipe protocols, you can require the Debugging Client to supply a password. However, this password is not encrypted during transmission, and therefore these protocols are not secure.</P>
+<P>If you want your Debugging Server to be secure, you must use secure sockets layer (SSL) or secure pipe (SPIPE) protocol.</P>
+<P>If you are performing <a href="r08_use_remote_73c4c537-42b6-451d-b928-2ec0a1357640.xml.htm">remote debugging through <i>remote.exe</i></a>, you can use the <b>/u</b> parameter to prohibit connections from unauthorized users.</P>
+<H4>Restricting the Powers of the Client</H4>
+<P>If you are setting up a kernel-mode debugging session, you can restrict the debugger's ability to interfere with the host machine by using <a href="r11_security_c67f1beb-2dab-4e98-aa23-02facc89a8f1.xml.htm">Secure Mode</a>.</P>
+<P>In user mode, Secure Mode is not available. You can stop an intrusive client from issuing Microsoft MS-DOS commands and running external programs by issuing the <a href="r21_metacmds_l_1d3d0816-860f-4a78-95b6-ac2d40bebd3f.xml.htm"><b>.noshell (Prohibit Shell Commands)</b></a> command. However, there are many other ways for a client to interfere with your computer.</P>
+<P>Note that both Secure Mode and <b>.noshell</b> will prevent both the Debugging Client and the Debugging Server from taking certain actions. There is no way to place a restriction on the client but not on the server.</P>
+<H4>Forgotten Process Servers</H4>
+<P>When you start a process server on a remote machine, the process server runs silently.</P>
+<P>If you perform remote debugging through this process server and then end the session, the process server continues to run.</P>
+<P>A forgotten process server is a potential target for an attack. You should always shut down an unneeded process server. Use the <i>Kill.exe</i> utility or Task Manager to terminate the process server.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Security During Remote Debugging RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

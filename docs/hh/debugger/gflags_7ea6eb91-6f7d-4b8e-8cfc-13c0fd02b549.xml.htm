@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Detecting Overruns and Underruns</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Detecting Overruns and Underruns"><xml><MSHelp:Keyword Index="A" Term="GFlags_7ea6eb91-6f7d-4b8e-8cfc-13c0fd02b549.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_7ea6eb91-6f7d-4b8e-8cfc-13c0fd02b549.xml"></A>Detecting Overruns and Underruns</H1>
+<P>You can use the <b>Verify Start</b> or <b>Verify End</b> option in GFlags to align allocations from the special pool so that they are best suited to detect overruns (accessing memory past the end of the allocation) or underruns (accessing memory that precedes the beginning of the allocation). </P><B></B><UL type="disc">
+<LI><b>Verify Start</b> enables underrun detection on allocations from the special pool. This causes a bug check when a program tries to access memory preceding its special pool memory allocation. </LI>
+<LI><b>Verify End</b> enables overrun detection on allocations from the special pool. This causes a bug check when a program tries to access memory beyond its special pool memory allocation. Because overruns are much more common, <b>Verify End</b> is the default.</LI>
+</UL>
+<P></P>
+<P>In Windows Vista and later versions of Windows, this option is available on the <b>System Registry</b> and <b>Kernel Flags</b> tabs. In earlier versions of Windows, it is available only on the <b>System Registry</b> tab.</P><B>To specify special pool alignment:</B><OL type="1">
+<LI>Click the <b>System Registry</b> tab. </LI>
+<LI>Click <b>Verify Start</b> or <b>Verify End</b>. </LI>
+<LI>Click <b>Apply</b>. <P>The following illustration shows the Verify Start and Verify End settings on the System <b>Registry</b> tab.</P><img src="gflags-overruns.png"></LI>
+</OL>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>Verify Start</b> and <b>Verify End</b> alignment settings apply to all allocations from the special pool, including special pool allocation requests set in Driver Verifier. If you set the alignment without specifying a pool tag or allocation size, then the settings apply only to requests set in Driver Verifier.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Detecting Overruns and Underruns RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

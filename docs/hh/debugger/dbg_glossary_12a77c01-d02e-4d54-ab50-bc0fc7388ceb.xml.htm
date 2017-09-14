@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>P</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, glossary, P"><xml><MSHelp:Keyword Index="A" Term="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml"/>
+<META NAME="MS-HKWD" CONTENT="page table">
+<META NAME="MS-HKWD" CONTENT="Page Table Entry (PTE)">
+<META NAME="MS-HKWD" CONTENT="paged pool">
+<META NAME="MS-HKWD" CONTENT="paging">
+<META NAME="MS-HKWD" CONTENT="parent symbol">
+<META NAME="MS-HKWD" CONTENT="primary client">
+<META NAME="MS-HKWD" CONTENT="process server">
+<META NAME="MS-HKWD" CONTENT="processor breakpoint"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>    <H1><A NAME="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml"></A>P</H1>
+<P></P>
+<DL><DT><B><A NAME="1be6ce37-117d-4448-a216-fb23bee6a0dc"></A>page table</B></DT>
+<DD>A process-specific table that maps virtual memory addresses to physical memory addresses.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="5727b45b-8f3a-4e6a-b5cc-bcc8aded67ea"></A>Page Table Entry (PTE)</B></DT>
+<DD>An item in the page table.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="231c5e51-22c9-4bac-8ff4-4f0d7d9a780d"></A>paged pool</B></DT>
+<DD>A portion of system memory that can be paged to disk.<P>Note that this term does not only refer to memory that actually has actually been paged out to the disk &#8212; it includes any memory that the operating system is permitted to page.</P>
+</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="7b8e44c8-d95a-46b7-b2ff-7cdbfe1afe8d"></A>paging</B></DT>
+<DD>A virtual memory operation in which the memory manager transfers pages from memory to disk when physical memory becomes full. A <i>page fault</i> occurs when a thread accesses a page that is not in memory.</DD>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="7dc89772-522e-4eea-a539-82ca282e5612"></A>parent symbol</B></DT>
+<DD>A <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#986a5629-886b-417b-a52e-7352511b0e35">symbol</a> that is contains in other symbols, for example, a structure contains its member.</DD>
+<P><i>See also</i> <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#7f417d30-b6ae-4ff1-9f31-80f6515c818c">child symbol</a>.<P>For more information, see <a href="engine_dg_8c597bf6-d707-45da-94c9-c88a4199c329.xml.htm">Scopes and Symbol Groups</a>.</P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="7d001449-2cd4-4a4c-a500-4aa0b724ff6a"></A>primary client</B></DT>
+<DD>A <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client object</a> that has joined the current <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">debugging session</a>.</DD>
+<P>For more information, see <a href="engine_overview_2838c538-1dc7-4494-b92d-49e58a4ad2aa.xml.htm">Client Objects</a>.</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="927cdf63-ac0c-4f34-af24-1cdc17ca8d68"></A>process server</B></DT>
+<DD>An instance of the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> acting as a proxy, listening for connections from <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#e969f84e-cb68-450e-bec4-6995463722ed">smart client</a> and performing memory, processor, or Windows operations as requested by these remote clients.</DD>
+<P><i>See also</i> <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#098e09f5-d7db-435e-9403-16661d6693b5">debugging server</a>.<P>For more information, see <a href="r08_use_remote_0828c18f-b042-4288-9b58-a56e3076eb2e.xml.htm">Process Servers (User Mode)</a> and <a href="engine_dg_403e6a06-76ae-4dfc-a475-4e8a77318c95.xml.htm#2198fa25-e6ef-4e68-b715-3a32968b560c">Process Server and Smart Client</a>. </P>
+</P>
+</DL>
+<P></P>
+<DL><DT><B><A NAME="4d5a4a35-a0a2-49c3-87f8-97d78cb0284a"></A>processor breakpoint</B></DT>
+<DD>A <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoint</a> that is implemented by the processor.  The <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> instructs the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target's</a> processor to insert this breakpoint.</DD>
+<P><i>See also</i> <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#966bf102-d48c-4c87-9dea-3bed91a69ee0">software breakpoint</a>.<P>For more information, see <a href="r07_use_operation_b31049a1-efde-4f99-b82d-f47c3c7daf64.xml.htm">Using Breakpoints</a> or <a href="engine_dg_4f9c88b1-f2a7-4a25-b1ff-ac050eb5c42d.xml.htm">Breakpoints</a>. </P>
+</P>
+</DL>
+<P></P>  <DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: P RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

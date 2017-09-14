@@ -1,0 +1,653 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>IDebugControl</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, IDebugControl"><xml><MSHelp:Keyword Index="A" Term="IDebugControl_ce0030b2-73a7-49a8-9d21-942922a69184.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl interface"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_ce0030b2-73a7-49a8-9d21-942922a69184.xml"></A>IDebugControl</H1>
+<P>The <b>IDebugControl</b> interface includes the following methods:</P><B></B><div class="indent1">
+<P><a href="idebugcontrol_99336950-ba0b-46e1-871d-582f08ab5519.xml.htm"><b>Assemble</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9cacf343-5c88-4a06-8f68-7c94b15419b8.xml.htm"><b>AddAssemblyOptions</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_600ee4dc-0a79-42a9-a394-2ff053874f00.xml.htm"><b>GetAssemblyOptions</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_8d971b27-ff9f-4097-a96a-68dabf08b200.xml.htm"><b>RemoveAssemblyOptions</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_b39768e8-fb98-4056-b548-c568316279e1.xml.htm"><b>SetAssemblyOptions</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_7eb9fdc3-f2a0-4239-a035-9abb8e85cd28.xml.htm"><b>Disassemble</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_c985be86-1f8b-4b54-ae35-a7dec5980cec.xml.htm"><b>Evaluate</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_d49bfbf9-c9e1-4a43-8f2c-8778ef51db79.xml.htm"><b>Execute</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_61c4589a-321e-4574-8565-87bdc7b36a73.xml.htm"><b>ExecuteCommandFile</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_3d11665a-ec78-4742-8195-2798601814e9.xml.htm"><b>AddBreakpoint</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_431f31ce-38fb-4350-851b-49b103047943.xml.htm"><b>RemoveBreakpoint</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_641f8e32-6c08-4b63-89c6-877b52a86ab2.xml.htm"><b>GetBreakpointById</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_d290fd1e-da1d-4d02-9503-a3c0f8337cec.xml.htm"><b>GetBreakpointByIndex</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_c5b9bf83-0a0e-4570-8a05-04ca39a4d335.xml.htm"><b>GetNumberBreakpoints</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_7b2d9423-82db-4274-a1f7-eebcda92e6c3.xml.htm"><b>GetBreakpointParameters</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_d96bd559-1a82-4d5d-8aa8-7a32242f2b68.xml.htm"><b>ReadBugCheckData</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_8533dd3f-f004-4d89-9f02-b7835fc6169e.xml.htm"><b>GetCodeLevel</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_40aa5eed-ef3f-4ec4-84eb-0cfec638bc4a.xml.htm"><b>SetCodeLevel</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_4179686c-b047-41f5-98cc-28f2c6bd852d.xml.htm"><b>GetDebuggeeType</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_5593ec3a-31f4-4775-9356-49f1757323c0.xml.htm"><b>GetDisassembleEffectiveOffset</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9f2641b6-ca40-4f1f-85e6-911bb0ab82f8.xml.htm"><b>OutputDisassembly</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_51f0991b-9b9d-4a21-89be-099537a78ea5.xml.htm"><b>OutputDisassemblyLines</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_fc8bec39-ffc3-46bd-9d18-954f0420906f.xml.htm"><b>GetDumpFormatFlags</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_6042b0b9-8175-4790-be19-43f8659716dc.xml.htm"><b>AddEngineOptions</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_75edd4f2-c81d-408d-a61a-3c2fcf5932e6.xml.htm"><b>GetEngineOptions</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_b1af0528-4fc2-4ea3-90e8-c7d92b0632f4.xml.htm"><b>RemoveEngineOptions</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_bcc66264-b955-480d-b610-5080386354c9.xml.htm"><b>SetEngineOptions</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_94595f9e-7e73-4291-a904-49f1a8fbbaa8.xml.htm"><b>GetSystemErrorControl</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_60e365d4-8645-469c-8973-9f2da168bba3.xml.htm"><b>SetSystemErrorControl</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_73931ad2-ace6-4d38-ad22-c322f2e3c13c.xml.htm"><b>GetNotifyEventHandle</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9934efa7-aed4-4706-8885-71d78f6950a8.xml.htm"><b>SetNotifyEventHandle</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_520cbec0-e8b3-49d1-9938-a8f496585758.xml.htm"><b>GetNumberEvents</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_7aec300e-651e-46c6-a4e7-d4ed2b9ca674.xml.htm"><b>GetCurrentEventIndex</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9a902b9c-c621-4d71-bae7-d3fd288b1cd8.xml.htm"><b>SetNextEventIndex</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_53afcbab-2b43-4b99-9b87-050fce6d495b.xml.htm"><b>GetEventIndexDescription</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9eae3270-fd1f-4d50-875b-3bd9908ba76d.xml.htm"><b>GetExpressionSyntax</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_6f1ebcec-908b-4f00-b9cf-e7a036bc05e5.xml.htm"><b>SetExpressionSyntax</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9556ddd4-d38f-4c56-8456-81c12afb177e.xml.htm"><b>GetExpressionSyntaxNames</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_88ebbf3c-a6f7-41d1-84e8-291a8db101c2.xml.htm"><b>SetExpressionSyntaxByName</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_af12dddf-1d15-4abf-8500-8beab99b69ea.xml.htm"><b>GetNumberExpressionSyntaxes</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9d85fcbb-1c02-4b5a-b9ab-c50b9b266d1d.xml.htm"><b>AddExtension</b></a>  </P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_c762281b-f49c-4837-a524-e2f04edb3b0c.xml.htm"><b>RemoveExtension</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_c37b420a-b94b-4d54-8a5a-2e1a74b49f26.xml.htm"><b>CallExtension</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_821ee348-ddb2-4464-93cd-b6a58e267795.xml.htm"><b>GetExtensionByPath</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9f227e3a-ee1e-44d0-9675-ec773e3391e5.xml.htm"><b>GetExtensionFunction</b></a><b> </b></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><b>GetWindbgExtensionApis32</b></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_51215e32-dcd3-440f-92ee-6ff82ae1c8e6.xml.htm"><b>GetWindbgExtensionApis64</b></a><b>  </b></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_19a7d8b3-1f16-400e-bf8f-c782d48b2cf5.xml.htm"><b>WaitForEvent</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_a0acf45f-8741-48a0-9eb0-f8a9aa55c476.xml.htm"><b>GetEventFilterCommand</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_b0661dd4-9ecd-49ac-93e1-86d3c6c2c3f6.xml.htm"><b>SetEventFilterCommand</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_de1a980a-b0cb-486b-a292-1a9463a231c6.xml.htm"><b>GetNumberEventFilters</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_61936aac-8fe2-4f18-86aa-cba1404d845f.xml.htm"><b>GetEventFilterText</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_4016bdce-0386-4c6f-9039-9a4046f3805b.xml.htm"><b>GetLastEventInformation</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_2d615fc9-52f1-4169-9265-430a1ce0f940.xml.htm"><b>GetStoredEventInformation</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_012d902c-ff4c-4ac8-9a35-b6cdcd1e2894.xml.htm"><b>GetExceptionFilterParameters</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_4e60bce4-e40d-46b6-83ad-55559b97fbad.xml.htm"><b>SetExceptionFilterParameters</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_fba6b716-8dba-4581-87c3-b808d3ab40a1.xml.htm"><b>GetExceptionFilterSecondCommand</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_39380f22-4c68-40fe-b277-f7eace77bcee.xml.htm"><b>SetExceptionFilterSecondCommand</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_ab3a5161-b3e1-47fe-bc97-1f75af363cff.xml.htm"><b>GetSpecificFilterArgument</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_a7f790fa-29f1-46f2-9163-a4b99f4880da.xml.htm"><b>SetSpecificFilterArgument</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_ebe245a7-c76c-4b31-aa58-ccad250ed92a.xml.htm"><b>GetSpecificFilterParameters</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9bf01d08-9fc1-4ddf-b8dd-c6db0b568f83.xml.htm"><b>SetSpecificFilterParameters</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_10615761-d032-439f-955b-220def3835a9.xml.htm"><b>Input</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_e060c1a6-43cd-46a1-ba4c-e9aa69bcf205.xml.htm"><b>ReturnInput</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_2c12e1fe-0f9b-45d6-9ff4-477bc42b2275.xml.htm"><b>GetNearInstruction</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_059bd637-c75b-4b52-a382-c645cb4b25b9.xml.htm"><b>GetInterrupt</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_dd73562c-6f15-4101-8ab3-3f432de5a002.xml.htm"><b>SetInterrupt</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_33383d54-faba-46a1-8e14-8a3215b0d2f7.xml.htm"><b>GetInterruptTimeout</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_c16219f4-97b7-451d-8f04-30aa262667f6.xml.htm"><b>SetInterruptTimeout</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_988fe3ac-a51d-4757-995d-40fe9d66aa02.xml.htm"><b>CloseLogFile</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_cad2fa56-b2ca-4a26-822e-193acf602913.xml.htm"><b>GetLogFile</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9822bd84-b8ee-4d36-a66f-e38567d23646.xml.htm"><b>GetLogFile2</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_984f684e-c1c0-4819-b8ac-02718581c6ad.xml.htm"><b>OpenLogFile</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_93e0a810-9b23-43c2-b714-99a39c398f1e.xml.htm"><b>OpenLogFile2</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_a3ef306a-5134-49c7-b589-65a4afaa90ac.xml.htm"><b>GetLogMask</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_b1c44a2b-d2fd-407b-8994-00f5e53af10d.xml.htm"><b>SetLogMask</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><b>GetManagedStatus</b></P>
+</div>
+<div class="indent1">
+<P><b>ResetManagedStatus</b></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_7c101d44-aa43-48d4-8176-2ed110eca231.xml.htm"><b>GetReturnOffset</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_4b29317b-e521-4deb-84dc-fc4bb7d6ca90.xml.htm"><b>Output</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_b35fb81f-3425-4a39-8c80-b6e8a161ba71.xml.htm"><b>ControlledOutput</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_4c0f8057-9e61-4a89-a2e8-be15bd49e5fc.xml.htm"><b>OutputVaList</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_2ea55393-9577-4639-ac83-5cefb584ff3b.xml.htm"><b>ControlledOutputVaList</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_b38e4c0a-5992-4afe-b684-2eb65b3a0271.xml.htm"><b>GetPageSize</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_62a0cc8d-e542-4889-9f68-591d00828d4b.xml.htm"><b>IsPointer64Bit</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_5511971f-2155-4ba3-b0f3-9bcd91b29555.xml.htm"><b>GetActualProcessorType</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_9e0db836-17eb-4df1-a298-f8d54282d188.xml.htm"><b>GetEffectiveProcessorType</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_284f54f4-897e-4329-b588-5eae0c638179.xml.htm"><b>SetEffectiveProcessorType</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_b2aad495-5a68-4888-bedb-da76edbfbe7a.xml.htm"><b>GetExecutingProcessorType</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_0ddf74be-971f-4bd8-bdfd-4ceedfbbdc0f.xml.htm"><b>GetNumberProcessors</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_582811e7-4eb0-4b94-a5d0-8c903ea8c2fe.xml.htm"><b>GetPossibleExecutingProcessorTypes</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_62f066c6-6ffb-4323-ad82-786a8a763783.xml.htm"><b>GetNumberPossibleExecutingProcessorTypes</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_555eef6a-df68-4f94-9cfa-dc31aee27014.xml.htm"><b>GetSupportedProcessorTypes</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_5b3a8335-0e6f-4f83-9549-fa53ce9eb1d5.xml.htm"><b>GetNumberSupportedProcessorTypes</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_f14b5f52-cf94-458b-bd1e-61c3ad66a597.xml.htm"><b>GetProcessorTypeNames</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_bb972181-80f5-4c7a-8705-919273529eee.xml.htm"><b>OutputPrompt</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_fc743964-a97c-45d2-8167-0e7401c7a546.xml.htm"><b>OutputPromptVaList</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_1f566e74-8920-43ce-8e5f-3c467ddb8d8a.xml.htm"><b>GetPromptText</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_3f4cb732-868a-4944-bcd9-dd1f221824df.xml.htm"><b>GetRadix</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_f0462fa8-da93-414b-b4b1-246a50572bb2.xml.htm"><b>SetRadix</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_ef51127a-c022-4e3d-bb63-55553daea893.xml.htm"><b>GetStackTrace</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_07d53535-7d91-4771-84b1-f4ac4895a158.xml.htm"><b>OutputStackTrace</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_ae12ec1a-8839-49cc-8082-c328a570188b.xml.htm"><b>GetContextStackTrace</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_6d7b3f4e-9b64-41f5-8d26-ba745fae5d43.xml.htm"><b>OutputContextStackTrace</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_1a038e3b-1bf3-47d0-8e40-b2ebc3506308.xml.htm"><b>OutputCurrentState</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_0e47a42b-f980-4c4b-b8b3-8d795498e5d5.xml.htm"><b>GetExecutionStatus</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_b89bf576-8a07-49a8-8373-0b915300d36a.xml.htm"><b>SetExecutionStatus</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_92a4c34c-aa39-43e5-ad31-0ce26e45c246.xml.htm"><b>GetSystemVersion</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_4adaed37-7034-4c64-9064-466706a2951e.xml.htm"><b>GetSystemVersionString</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_32de1433-8721-41c0-9b14-43ef8f7bcf70.xml.htm"><b>GetSystemVersionValues</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_b6408c67-fb45-4a11-94b4-24099f406a8a.xml.htm"><b>GetTextMacro</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_5eac09ea-004d-4231-b865-d191790880fc.xml.htm"><b>SetTextMacro</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_d21af006-aa5b-4faf-abba-3f28f338b6bd.xml.htm"><b>GetTextReplacement</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_b53cd6ec-4cc4-45b2-96a0-b830bc7f8ca9.xml.htm"><b>SetTextReplacement</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_57964e7b-e11a-446f-afab-7d3326fab695.xml.htm"><b>OutputTextReplacements</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_ba950bc7-3ed5-4e2e-913d-c743e1190482.xml.htm"><b>RemoveTextReplacements</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_34139b78-b8a1-4096-a54c-7fdfac7024ce.xml.htm"><b>GetNumberTextReplacements</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_166ad959-02b4-4b42-8acd-1456d224f9e7.xml.htm"><b>GetCurrentTimeDate</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_e10ddd31-60fe-4353-befe-45a04154615b.xml.htm"><b>GetCurrentSystemUpTime</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_034a690e-25bb-40a1-b788-7b148ba0d9cd.xml.htm"><b>CoerceValue</b></a></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_a17ec845-aaf3-4480-a0fd-79fb515c48d5.xml.htm"><b>CoerceValues</b></a></P>
+</div>
+<div class="indent1">
+<P></P>
+</div>
+<div class="indent1">
+<P><a href="idebugcontrol_ea568b24-944d-4ed8-abd6-24b7c7771a1e.xml.htm"><b>OutputVersionInformation</b></a></P>
+</div>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: IDebugControl RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

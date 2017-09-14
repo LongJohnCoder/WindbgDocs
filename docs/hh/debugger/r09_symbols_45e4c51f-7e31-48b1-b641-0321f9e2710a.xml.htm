@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Verifying Symbols</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Verifying Symbols"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_45e4c51f-7e31-48b1-b641-0321f9e2710a.xml"/>
+<META NAME="MS-HKWD" CONTENT="symbols, verifying"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_45e4c51f-7e31-48b1-b641-0321f9e2710a.xml"></A>Verifying Symbols</H1>
+<P>Symbol problems can show up in a variety of ways. Perhaps a stack trace shows incorrect information or fails to identify the names of the functions in the stack. Or perhaps a debugger command failed to understand the name of a module, function, variable, structure, or data type.</P>
+<P>If you suspect that the debugger is not loading symbols correctly, there are several steps you can take to investigate this problem.</P>
+<P>First, use the <a href="r17_cmds_i_2360e197-1deb-4e41-98ff-d2c7e6c7d8f3.xml.htm"><b>lm (List Loaded Modules)</b></a> command to display the list of loaded modules with symbol information. The most useful form of this command is the following:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>lml</b> <BR><BR></nobr></P>
+<P>If you are using WinDbg, the <a href="r37_gui_2_47635b45-32b7-456e-a8ea-66e0fe716306.xml.htm"><b>Debug | Modules</b></a> menu command will let you see this information as well.</P>
+<P>Pay particular attention to any notes or abbreviations you may see in these displays. For an interpretation of these, see <a href="r09_symbols_5b8b553c-d200-44b2-a817-b0497d5e5b08.xml.htm">Symbol Status Abbreviations</a>.</P>
+<P>If you don't see the proper symbol files, the first thing to do is to check the symbol path:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt;<b> .sympath</b><BR>Current Symbol Path is: d:\MyInstallation\i386\symbols\retail<BR><BR></nobr></P>
+<P>If your symbol path is wrong, fix it. If you are using the kernel debugger make sure your local %WINDIR% is <b>not</b> on your symbol path.</P>
+<P>Then reload symbols using the <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload (Reload Module)</b></a> command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt;<b> .reload </b><I><B>ModuleName</B></I> <BR><BR></nobr></P>
+<P>If your symbol path is correct, you should activate <i>noisy mode</i> so you can see which symbol files <i>dbghelp</i> is loading. Then reload your module. See <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm">Setting Symbol Options</a> for information about how to activate noisy mode.</P>
+<P>Here is an example of a "noisy" reload of the Microsoft Windows symbols:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!sym noisy</b><BR>kd&gt; <b>.reload nt</b><BR> 1: Kernel Version 2081 MP Checked<BR> 2: Kernel base = 0x80400000 PsLoadedModuleList = 0x80506fa0<BR> 3: DBGHELP: FindExecutableImageEx-&gt; Looking for D:\MyInstallation\i386\ntkrnlmp.exe...mismatched timestamp<BR> 4: DBGHELP: No image file available for ntkrnlmp.exe<BR> 5: DBGHELP: FindDebugInfoFileEx-&gt; Looking for<BR> 6: d:\MyInstallation\i386\symbols\retail\symbols\exe\ntkrnlmp.dbg... no file<BR> 7: DBGHELP: FindDebugInfoFileEx-&gt; Looking for<BR> 8: d:\MyInstallation\i386\symbols\retail\symbols\exe\ntkrnlmp.pdb... no file<BR> 9: DBGHELP: FindDebugInfoFileEx-&gt; Looking for d:\MyInstallation\i386\symbols\retail\exe\ntkrnlmp.dbg... OK<BR>10: DBGHELP: LocatePDB-&gt; Looking for d:\MyInstallation\i386\symbols\retail\exe\ntkrnlmp.pdb... OK<BR>11: *** WARNING: symbols checksum and timestamp is wrong 0x0036a4ea 0x00361a83 for ntkrnlmp.exe<BR><BR></nobr></P>
+<P>The symbol handler first looks for an image that matches the module it is trying to load (lines three and four). The image itself is not always necessary, but if an incorrect one is present, the symbol handler will often fail. These lines show that the debugger found an image at <i>D:\MyInstallation\i386\ntkrnlmp.exe</i>, but the time-date stamp didn't match. Because the time-date stamp didn't match, the search continues. Next, the debugger looks for a <i>.dbg</i> file and a <i>.pdb</i> file that match the loaded image. These are on lines 6 through 10. Line 11 indicates that even though symbols were loaded, the time-date stamp for the image did not match (that is, the symbols were wrong).</P>
+<P>If the symbol-search encountered a catastrophic failure, you would see a message of the form:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>ImgHlpFindDebugInfo(00000000, module.dll, c:\MyDir;c:\SomeDir, 0823345, 0) failed<BR><BR></nobr></P>
+<P>This could be caused by items such as file system failures, network errors, and corrupt <i>.dbg</i> files.</P>
+<H4>Diagnosing Symbol Loading Errors</H4>
+<P>When in noisy mode, the debugger may print out error codes when it cannot load a symbol file. The error codes for <i>.dbg</i> files are listed in <i>winerror.h</i>. The <i>.pdb</i> error codes come from another source and the most common errors are printed in plain English text. </P>
+<P>Some common error codes for <i>.dbg</i> files from <i>winerror.h</i> are:</P>
+<DL><DT>0xB</DT>
+<DD>ERROR_BAD_FORMAT</DD>
+<DT>0x3</DT>
+<DD>ERROR_PATH_NOT_FOUND</DD>
+<DT>0x35</DT>
+<DD>ERROR_BAD_NETPATH</DD>
+</DL>
+<P></P>
+<P>It's possible that the symbol file cannot be loaded because of a networking error. If you see ERROR_BAD_FORMAT or ERROR_BAD_NETPATH and you are loading symbols from another machine on the network, try copying the symbol file to your host computer and put its path in your symbol path. Then try to reload the symbols.</P>
+<H4>Verifying Your Search Path and Symbols</H4>
+<P>Let "c:\MyDir;c:\SomeDir" represent your symbol path. Where should you look for debug information?</P>
+<P>In cases where the binary has been stripped of debug information, such as the free builds of Windows, first look for a <i>.dbg</i> file in the following locations:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>c:\MyDir\symbols\exe\ntoskrnl.dbg<BR>c:\SomeDir\symbols\exe\ntoskrnl.dbg<BR>c:\MyDir\exe\ntoskrnl.dbg<BR>c:\SomeDir\exe\ntoskrnl.dbg<BR>c:\MyDir\ntoskrnl.dbg<BR>c:\SomeDir\ntoskrnl.dbg<BR>current-working-directory\ntoskrnl.dbg<BR><BR></nobr></P>
+<P>Next, look for a <i>.pdb</i> file in the following locations:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>c:\MyDir\symbols\exe\ntoskrnl.pdb<BR>c:\MyDir\exe\ntoskrnl.pdb<BR>c:\MyDir\ntoskrnl.pdb<BR>c:\SomeDir\symbols\exe\ntoskrnl.pdb<BR>c:\SomeDir\exe\ntoskrnl.pdb<BR>c:\SomeDir\ntoskrnl.pdb<BR>current-working-directory\ntoskrnl.pdb<BR><BR></nobr></P>
+<P>Note that in the search for the <i>.dbg</i> file, the debugger interleaves searching through the <i>MyDir</i> and <i>SomeDir</i> directories, but in the <i>.pdb</i> search it does not.</P>
+<P>Windows XP and later versions of Windows do not use any <i>.dbg</i> symbol files. See <a href="r09_symbols_2725b901-b583-4abb-83cd-cbb72f6851a3.xml.htm">Symbols and Symbol Files</a> for details.</P>
+<H4>Mismatched Builds</H4>
+<P>One of the most common problems in debugging failures on a machine that is often updated is mismatched symbols from different builds. Three common causes of this problem are: pointing at symbols for the wrong build, using a privately built binary without the corresponding symbols, and using the uniprocessor hardware abstraction level (HAL) and kernel symbols on a multiprocessor machine. The first two are simply a matter of matching your binaries and symbols; the third can be corrected by renaming your <i>hal*.dbg</i> and <i>ntkrnlmp.dbg</i> to <i>hal.dbg</i> and <i>ntoskrnl.dbg</i>.</P>
+<P>To find out what build of Windows is installed on the target computer, use the <a href="r18_cmds_s_32bae7c8-9481-47a9-993f-d867452277a4.xml.htm"><b>vertarget (Show Target Computer Version)</b></a> command:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>vertarget</b> <BR>Windows XP Kernel Version 2505 UP Free x86 compatible<BR>Built by: 2505.main.010626-1514<BR>Kernel base = 0x804d0000 PsLoadedModuleList = 0x80548748<BR>Debug session time: Mon Jul 02 14:41:11 2001<BR>System Uptime: 0 days 0:04:53 <BR><BR></nobr></P>
+<H4>Testing the Symbols</H4>
+<P>Testing the symbols is more difficult. It involves verifying a stack trace on the debugger and seeing if the debug output is correct. Here's one example to try:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>u videoprt!videoportfindadapter2</b><BR>Loading symbols for 0xf2860000     videoprt.sys -&gt;   videoprt.sys<BR><BR>VIDEOPRT!VideoPortFindAdapter2:<BR>f2856f42 55               push    ebp<BR>f2856f43 8bec             mov     ebp,esp<BR>f2856f45 81ecb8010000     sub     esp,0x1b8<BR>f2856f4b 8b4518           mov     eax,[ebp+0x18]<BR>f2856f4e 53               push    ebx<BR>f2856f4f 8365f400         and     dword ptr [ebp-0xc],0x<BR>f2856f53 8065ff00         and     byte ptr [ebp-0x1],0x0<BR>f2856f57 56               push    esi<BR><BR></nobr></P>
+<P>The <b>u</b> command unassembles the videoportfindadapter string in <i>videoprt.sys</i>. The symbols are correct on the debugger because common stack commands like <i>push</i> and <i>mov</i> show up on the stack. Most functions begin with an add, sub, or push operation using either the base pointer (ebp) or the stack pointer (esp).</P>
+<P>It's usually obvious when the symbols aren't working correctly. <i>Glintmp.sys</i> doesn't have symbols in this example because a function isn't listed next to <b>Glintmp</b>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>kb</b><BR>Loading symbols for 0xf28d0000     videoprt.sys -&gt;   videoprt.sys<BR>Loading symbols for 0xf9cdd000      glintmp.sys -&gt;   glintmp.sys<BR>*** ERROR: Symbols could not be loaded for glintmp.sys<BR>ChildEBP RetAddr  Args to Child<BR>f29bf1b0 8045b5fa 00000001 0000a100 00000030 ntoskrnl!RtlpBreakWithStatusInstruction<BR>f29bf1b0 8044904e 00000001 0000a100 00000030 ntoskrnl!KeUpdateSystemTime+0x13e<BR>f29bf234 f28d1955 f9b7d000 ffafb2dc f9b7d000 ntoskrnl!READ_REGISTER_ULONG+0x6<BR>f29bf248 f9cde411 f9b7d000 f29bf2b0 f9ba0060 VIDEOPRT!VideoPortReadRegisterUlong+0x27<BR>00000002 00000000 00000000 00000000 00000000 glintMP+0x1411 <b>[No function listed.]</b> <BR><BR></nobr></P>
+<P>The wrong build symbols were loaded for this stack trace. Notice how there are no functions listed for the first two calls. This stack trace looks like a problem with <i>win32k.sys</i> drawing rectangles:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>1: kd&gt; <BR>1: kd&gt;<b> kb</b>                      [Local        9:50 AM]<BR>Loading symbols for 0xf22b0000       agpcpq.sys -&gt;   agpcpq.sys<BR>*** WARNING: symbols checksum is wrong 0x0000735a 0x00000000 for agpcpq.sys<BR>*** ERROR: Symbols could not be loaded for agpcpq.sys<BR>Loading symbols for 0xa0000000       win32k.sys -&gt;   win32k.sys<BR>*** WARNING: symbols checksum is wrong 0x00191a41 0x001995a9 for win32k.sys<BR>ChildEBP RetAddr  Args to Child<BR>be682b18 f22b372b 82707128 f21c1ffc 826a70f8 agpCPQ+0x125b <b>[No function listed.]</b><BR>be682b4c a0140dd4 826a72f0 e11410a8 a0139605 agpCPQ+0x372b <b>[No function listed.]</b><BR>be682b80 a00f5646 e1145100 e1cee560 e1cee560 win32k!vPatCpyRect1_6x6+0x20b<BR>00000001 00000000 00000000 00000000 00000000 win32k!RemoteRedrawRectangle+0x32 <BR><BR></nobr></P>
+<P>Here's the correct stack trace. The problem is really with <i>AGP440.sys</i>. The first item appearing on a stack trace is usually at fault. Notice that the <i>win32k.sys</i> rectangle error is gone:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>1: kd&gt; <b>kb</b>                      [Local        9:49 AM]<BR>ChildEBP RetAddr  Args to Child<BR>be682b18 f22b372b 82707128 f21c1ffc 826a70f8 agpCPQ!AgpReleaseMemory+0x88<BR>be682b30 f20a385c 82703638 e183ec68 00000000 agpCPQ!AgpInterfaceReleaseMemory+0x8b<BR>be682b4c a0140dd4 826a72f0 e11410a8 a0139605 VIDEOPRT!AgpReleasePhysical+0x44<BR>be682b58 a0139605 e1cee560 e11410a8 a00e5f0a win32k!OsAGPFree+0x14<BR>be682b64 a00e5f0a e1cee560 e11410a8 e1cee560 win32k!AGPFree+0xd<BR>be682b80 a00f5646 e1145100 e1cee560 e1cee560 win32k!HeapVidMemFini+0x49<BR>be682b9c a00f5c20 e1cee008 e1cee008 be682c0c win32k!vDdDisableDriver+0x3a<BR>be682bac a00da510 e1cee008 00000000 be682c0c win32k!vDdDisableDirectDraw+0x2d<BR>be682bc4 a00da787 00000000 e1843df8 e1843de8 win32k!PDEVOBJ__vDisableSurface+0x27<BR>be682bec a00d59fb 00000000 e1843de8 00000000 win32k!PDEVOBJ__vUnreferencePdev+0x204<BR>be682c04 a00d7421 e1cee008 82566a98 00000001 win32k!DrvDestroyMDEV+0x30<BR>be682ce0 a00a9e7f e1843e10 e184a008 00000000 win32k!DrvChangeDisplaySettings+0x8b3<BR>be682d20 a008b543 00000000 00000000 00000000 win32k!xxxUserChangeDisplaySettings+0x106<BR>be682d48 8045d119 00000000 00000000 00000000 win32k!NtUserChangeDisplaySettings+0x48<BR>be682d48 77e63660 00000000 00000000 00000000 ntkrnlmp!KiSystemService+0xc9 <BR><BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Useful Commands and Extensions</H4>
+<P>The following commands and extensions may be useful in tracking down symbol problems:</P>
+<DL><DT><a href="r17_cmds_i_2360e197-1deb-4e41-98ff-d2c7e6c7d8f3.xml.htm"><b>lm (List Loaded Modules)</b></a> </DT>
+<DD>Lists all modules and gives the loading status of all symbols in these modules.</DD>
+<DT><a href="r24_exts_general_a_0cfffcec-6e70-4dc3-99fc-5c15db5dd2b4.xml.htm"><b>!dh </b><I><B>image-header-base</B></I></a> </DT>
+<DD>Displays header information for a loaded image beginning at <i>image-header-base.</i></DD>
+<DT><a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload /n</b></a> </DT>
+<DD>Reloads all kernel symbols.</DD>
+<DT><a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload [</b><I><B>image-name</B></I><b>]</b></a> </DT>
+<DD><i>(CDB or WinDbg only)</i>  Reloads symbols for the image <i>image-name</i>. If no <i>image-name</i> is specified, reloads symbols for all images. (It is necessary to reload symbols after the symbol path has been changed.)</DD>
+<DT><a href="r25_exts_general_he_eb506027-9394-4d21-9b60-0b55af479e0d.xml.htm"><b>!sym noisy</b></a> </DT>
+<DD>Turns on verbose mode for symbol loads. This can be used to get information about the module loads. See <a href="r09_symbols_16fa1a1e-e71d-4721-b0f8-b3a09c220299.xml.htm">Setting Symbol Options</a> for details.</DD>
+<DT><a href="r22_metacmds_s_9b66f1cb-f87e-45be-9382-dc21f116fa2c.xml.htm"><b>.sympath [</b><I><B>new-symbol-path</B></I><b>]</b></a> </DT>
+<DD>Sets a new symbol path, or displays the current symbol path. See <a href="r06_use_gui_b967bbbf-bd93-420d-b653-e8aac55a402c.xml.htm">Symbol Path</a> for details.</DD>
+</DL>
+<P></P>
+<P>If the kernel symbols are correct, but you aren't getting a complete stack, the following commands may also be useful:</P>
+<DL><DT><a href="r18_cmds_s_717feb00-25c4-4911-be94-52c11698f782.xml.htm"><b>X *!</b></a> </DT>
+<DD>This will list the modules which currently have symbols loaded. This is useful if the kernel symbols are correct.</DD>
+<DT><a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload /user</b></a> </DT>
+<DD>This will attempt to reload all user-mode symbols. This is needed while performing kernel debugging if symbols were loaded while one process was running, and a break later occurred in another process. In this case, the user-mode symbols from the new process will not be loaded unless this command is executed.</DD>
+<DT><a href="r18_cmds_s_717feb00-25c4-4911-be94-52c11698f782.xml.htm"><b>X wdmaud!*start*</b></a> </DT>
+<DD>This will list only the symbols in the <b>wdmaud</b> module whose names contain the "start" string. This has the advantage that it forces the reloading of <i>all</i> the symbols in <b>wdmaud</b>, but only displays those with "start" in them. (This means a shorter listing, but since there are always some symbols with "start" in them, there will be some verification that the load has taken place.)</DD>
+</DL>
+<P></P>
+<P>One other useful technique for verifying symbols is unassembling code. Most functions begin with an add, sub, or push operation using either the base pointer (<b>ebp</b>) or the stack pointer (<b>esp</b> or <b>sp</b>). Try unassembling (<a href="r18_cmds_s_51dda883-e059-4b86-9406-a1f16ebd3fc1.xml.htm"><b>U </b><i>Function</i></a>) some of the functions on the stack (from offset zero) to verify the symbols.</P>
+<H4>Network and Port Problems</H4>
+<P>Problems will occur with the symbol files and while connecting to the debugger. Here are a few things to keep in mind if you encounter problems:</P><B></B><UL type="disc">
+<LI>Determine which COM port the debug cable is connected to on the test system.</LI>
+<LI>Check the <i>boot.ini</i> settings of the test system. Look for the <b>/debug</b> switch and check the baud rate and COM port settings.</LI>
+<LI>Network problems can interfere with debugging if the symbols files are accessed through the network.</LI>
+<LI><i>.dll</i> and <i>.sys</i> files with the same name (for example &#8722; <i>mga64.sys</i> and <i>mga64.dll</i>) will confuse the debugger if they aren't separated into the proper directories of the symbol tree.</LI>
+<LI>The kernel debugger doesn't always like replacing the build symbol files with private symbol files. Double check the symbol path and do a <b>.reload </b><i>FileName</i> on the misbehaving symbol. The <a href="r24_exts_general_a_0787939f-c2f2-42c9-9d52-3675c826a534.xml.htm"><b>!dlls</b></a> command is sometimes useful.</LI>
+</UL>
+<P></P>
+<H4>Questions and Misconceptions</H4>
+<P><b>Q: </b>I've successfully loaded symbols, but the stack seems to be wrong. Is the debugger broken?</P>
+<P><b>A: </b>Not necessarily. The most likely cause of your problem is that you've got incorrect symbols. Go through the steps outlined in this section to determine whether you've loaded valid symbols or not. Do not assume that because some things work you have valid symbols. For example, you very well may be able to execute <b>dd nt!ntbuildnumber</b> or <b>u nt!KeInitializeProcess</b> with incorrect symbols. Verify that they are correct using the procedures outlined above.</P>
+<P><b>Q: </b>Will the debugger still work with incorrect symbols?</P>
+<P><b>A: </b>Yes and no. Often you can get away with symbols that don't strictly match. For example, symbols from a previous Windows build will often work in certain cases, but there is no rule as to when this will work and when it will not.</P>
+<P><b>Q: </b>I'm stopped in the kernel debugger and I want to view symbols for my user-mode process. Can I do it?</P>
+<P><b>A: </b>Mostly. The support for this scenario is poor because the kernel debugger doesn't keep enough information around to track the module loads for each process, but there's a reasonable workaround. To load symbols for a user-mode module, execute a <b>.reload -user</b> command. This will load the user-mode modules for the current context.</P>
+<P><b>Q: </b>What does the following message mean?</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>*** WARNING: symbols checksum and timestamp is wrong 0x0036d6bf 0x0036ab55 for ntkrnlmp.exe<BR><BR></nobr></P>
+<P><b>A: </b>It means your symbols for <i>ntkrnlmp.exe</i> are wrong.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Verifying Symbols RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_ATTACH_XXX</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_ATTACH_XXX"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_ATTACH_XXX"/>
+<MSHelp:Keyword Index="A" Term="Structures_851d5883-75f7-42eb-98a5-bd59c9617282.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_ATTACH_XXX bit-flags">
+<META NAME="MS-HKWD" CONTENT="attaching to a user-mode process"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_851d5883-75f7-42eb-98a5-bd59c9617282.xml"></A>DEBUG_ATTACH_<i>XXX</i></H1>
+<P>The DEBUG_ATTACH_<i>XXX</i> bit-flags described in this topic control how the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> attaches to a <a href="dbg_glossary_fa191f80-14a9-47a0-bf4a-13d29c85162b.xml.htm#b9622678-468c-4b90-a002-a3d4280796f0">user-mode</a> <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#869bfa55-1556-4c4d-90ed-7b36f8f114b3">process</a>.  For the DEBUG_ATTACH_<i>XXX</i> options used when attaching to a <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#592a23b6-7f7d-434c-b4f6-5e1470b41393">kernel target</a>, see <a href="idebugclient_9008538b-3492-4952-a18f-b1dd346e887e.xml.htm"><b>AttachKernel</b></a>.</P>
+<P>The following table describes the possible flag values.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Value</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_ATTACH_NONINVASIVE</TD>
+<TD Width="">Attach to the target noninvasively.  For more information about noninvasive debugging, see <a href="r05_use_start_284e0db2-ee99-4c59-a6ef-af2557ee719b.xml.htm">Noninvasive Debugging (User Mode)</a>.<BR><BR><BR><BR>If this flag is set, then the flags DEBUG_ATTACH_EXISTING, DEBUG_ATTACH_INVASIVE_NO_INITIAL_BREAK, and DEBUG_ATTACH_INVASIVE_RESUME_PROCESS must not be set.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_ATTACH_EXISTING</TD>
+<TD Width="">Re-attach to an application to which a debugger has already attached (and possibly abandoned).  For more information about re-attaching to targets, see <a href="r07_use_operation_1d5faf67-01fe-4837-94ec-14e2fd60dea3.xml.htm">Re-attaching to the Target Application</a>.<BR><BR><BR><BR>If this flag is set, then the other DEBUG_ATTACH_<i>XXX</i> flags must not be set.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_ATTACH_NONINVASIVE_NO_SUSPEND</TD>
+<TD Width="">Do not suspend the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#a5a5985a-10e6-4a13-8a11-d9935f5661b9">target's threads</a> when attaching noninvasively.<BR><BR><BR><BR>If this flag is set, then the flag DEBUG_ATTACH_NONINVASIVE must also be set.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_ATTACH_INVASIVE_NO_INITIAL_BREAK</TD>
+<TD Width=""><i>(Windows XP and later)</i>  Do not request an <a href="dbg_glossary_48d73de7-50e9-4e41-8a7f-0207d5301620.xml.htm#7d1e41b4-37e6-417b-9446-698dc700ed32">initial break-in</a> when attaching to the target.<BR><BR><BR><BR>If this flag is set, then the flags DEBUG_ATTACH_NONINVASIVE and DEBUG_ATTACH_EXISTING must not be set.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">DEBUG_ATTACH_INVASIVE_RESUME_PROCESS</TD>
+<TD Width="">Resume all of the target's threads when attaching invasively.<BR><BR><BR><BR>If this flag is set, then the flags DEBUG_ATTACH_NONINVASIVE and DEBUG_ATTACH_EXISTING must not be set.<BR><BR></TD>
+</TR>
+</table>
+<P></P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_ATTACH_XXX RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

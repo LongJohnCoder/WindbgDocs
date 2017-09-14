@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetParameters</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetParameters"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetParameters"/>
+<MSHelp:Keyword Index="A" Term="ComOther_1e2f7a47-0f38-492a-a8b2-9eaa124a2f20.xml"/>
+<META NAME="MS-HKWD" CONTENT="GetParameters (IDebugBreakpoint) method">
+<META NAME="MS-HKWD" CONTENT="IDebugBreakpoint::GetParameters method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ComOther_1e2f7a47-0f38-492a-a8b2-9eaa124a2f20.xml"></A>GetParameters</H1>
+<P><P>The <b>GetParameters</b> method returns the parameters for a <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoint</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugBreakpoint::GetParameters(</b><BR><b>    OUT PDEBUG_BREAKPOINT_PARAMETERS  </b><i>Params</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Params</i></DT>
+<DD>The breakpoint's parameters.  For more information about the parameters, see <a href="structures_ad5f0e1f-7d6f-498d-80a0-1275ca3cb016.xml.htm"><b>DEBUG_BREAKPOINT_PARAMETERS</b></a>.</DD>
+</DL>
+<H4>Return Value</H4>
+<P><b>GetParameters</b> might return one of the following values:</P>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method might also return error values.  For more information about possible return values, see <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a>.</P>
+<H4>Comments</H4>
+<P>The <b>GetParameters</b> method is a convenience method that returns most of the parameters that the other <a href="comother_93345db9-13c0-4b46-be4a-d3fbb6039cc7.xml.htm"><b>IDebugBreakpoint</b></a> methods return.</P>
+<P>For a list of the parameters and flags that this method retrieves, and for other ways to read and write these parameters and flags, see <a href="engine_dg_139ab0e2-36b9-463b-bfdd-05cd64791d4f.xml.htm">Controlling Breakpoint Flags and Parameters</a> and <a href="engine_dg_127dfdf0-b01d-405e-a25c-511830d82cc0.xml.htm">Using Breakpoints</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Versions: </b>Available in all versions of <b>IDebugBreakpoint</b>.</p>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetParameters RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

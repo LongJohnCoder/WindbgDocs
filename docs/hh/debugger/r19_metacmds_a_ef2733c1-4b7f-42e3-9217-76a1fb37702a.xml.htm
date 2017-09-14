@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.dvalloc (Allocate Memory)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .dvalloc (Allocate Memory)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_ef2733c1-4b7f-42e3-9217-76a1fb37702a.xml"/>
+<META NAME="MS-HKWD" CONTENT=".dvalloc (Allocate Memory) command">
+<META NAME="MS-HKWD" CONTENT="Allocate Memory (.dvalloc) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_ef2733c1-4b7f-42e3-9217-76a1fb37702a.xml"></A>.dvalloc (Allocate Memory)</H1>
+<P>The <b>.dvalloc</b> command causes Windows to allocate additional memory to the target process.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.dvalloc</b> [<i>Options</i>] <i>Size</i> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><i>Options</i></DT>
+<DD>Can be any number of the following options:<DL><DT><b>/b</b> <i>BaseAddress</i></DT>
+<DD>Specifies the virtual address of the beginning of the allocation.</DD>
+<DT><b>/r</b></DT>
+<DD>Reserves the memory in the virtual address space but does not actually allocate any physical memory. If this option is used, the debugger calls <b>VirtualAllocEx</b> with the <i>flAllocationType</i> parameter equal to MEM_RESERVE. If this option is not used, the value MEM_COMMIT | MEM_RESERVE is used. See the Microsoft Windows SDK for details.</DD>
+</DL>
+</DD>
+<DT><i>Size</i></DT>
+<DD>Specifies the amount of memory to be allocated, in bytes. The amount of memory available to the program will equal <i>Size</i>. The amount of memory actually used may be slightly larger, since it is always a whole number of pages.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>.dvalloc</b> command calls <b>VirtualAllocEx</b> to allocate new memory for the target process. The allocated memory permits reading, writing, and execution.</P>
+<P>To free this memory, use <a href="r19_metacmds_a_4eee1e0c-6e94-4912-a1aa-bc9c95c03aa7.xml.htm"><b>.dvfree (Free Memory)</b></a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .dvalloc (Allocate Memory) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

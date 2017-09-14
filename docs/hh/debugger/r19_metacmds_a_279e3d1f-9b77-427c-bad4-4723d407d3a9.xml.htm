@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.allow_image_mapping (Allow Image Mapping)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .allow_image_mapping (Allow Image Mapping)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_279e3d1f-9b77-427c-bad4-4723d407d3a9.xml"/>
+<META NAME="MS-HKWD" CONTENT=".allow_image_mapping (Allow Image Mapping) command">
+<META NAME="MS-HKWD" CONTENT="Allow Image Mapping (.allow_image_mapping) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_279e3d1f-9b77-427c-bad4-4723d407d3a9.xml"></A>.allow_image_mapping (Allow Image Mapping)</H1>
+<P>The <b>.allow_image_mapping</b> command controls whether <a href="dbg_glossary_48d73de7-50e9-4e41-8a7f-0207d5301620.xml.htm#4feb6c4a-924f-451f-aa79-a8a7232c2802">image</a> files will be mapped.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.allow_image_mapping</b> [<b>/r</b>] <b>0</b> <BR><b>.allow_image_mapping</b> [<b>/r</b>] <b>1</b> <BR><b>.allow_image_mapping</b> <BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>/r</b></DT>
+<DD>Reloads all modules in the debugger's module list. This is equivalent to <a href="r21_metacmds_l_2fb08e4b-4d29-45cb-a63c-4222a7a29abc.xml.htm"><b>.reload /d</b></a>.</DD>
+<DT><b>0</b></DT>
+<DD>Prevents image files from being mapped.</DD>
+<DT><b>1</b></DT>
+<DD>Allows image files to be mapped.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode and kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all</TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>With no parameters, <b>.allow_image_mapping</b> will display whether image file mapping is currently allowed.  By default, this mapping is allowed. </P>
+<P>Image mapping is most common when a minidump is being debugged.  Image mapping can also occur if DbgHelp is unable to access debug records (for example, during kernel debugging when memory has been paged out).</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .allow_image_mapping (Allow Image Mapping) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

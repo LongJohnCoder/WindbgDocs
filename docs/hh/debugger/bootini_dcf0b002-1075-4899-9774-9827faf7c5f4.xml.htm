@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Exporting and Importing Boot Entries in EFI</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Exporting and Importing Boot Entries in EFI"><xml><MSHelp:Keyword Index="A" Term="bootini_dcf0b002-1075-4899-9774-9827faf7c5f4.xml"/>
+<META NAME="MS-HKWD" CONTENT="NVRAM boot options [WDK], exporting">
+<META NAME="MS-HKWD" CONTENT="EFI NVRAM boot options [WDK], exporting">
+<META NAME="MS-HKWD" CONTENT="NVRAM boot options [WDK], importing">
+<META NAME="MS-HKWD" CONTENT="EFI NVRAM boot options [WDK], importing">
+<META NAME="MS-HKWD" CONTENT="exporting boot entries [WDK]">
+<META NAME="MS-HKWD" CONTENT="importing boot entries">
+<META NAME="MS-HKWD" CONTENT="boot entry IDs [WDK]">
+<META NAME="MS-HKWD" CONTENT="EFI boot entry IDs [WDK]">
+<META NAME="MS-HKWD" CONTENT="identifiers [WDK boot options]"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_dcf0b002-1075-4899-9774-9827faf7c5f4.xml"></A>Exporting and Importing Boot Entries in EFI</H1>
+<P>Use the <b>nvrboot x</b> (export) command to create a backup copy of a boot entry. Design a naming and storage convention that will make it easy to find the backup copy files when you need them.</P>
+<P>Use the <b>nvrboot i</b> (import) command to import boot entries from the backup copies that you exported or from the Boot<i>xxxx</i> boot entry backup files that Setup created.</P>
+<P>Imported boot entries always receive new EFI boot entry IDs. For example, if you export a copy of Boot0003, and then import the copy into NVRAM, the imported boot entry receives a new boot entry ID, such as Boot000A.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Exporting and Importing Boot Entries in EFI RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

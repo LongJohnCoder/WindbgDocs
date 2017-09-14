@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.bugcheck (Display Bug Check Data)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .bugcheck (Display Bug Check Data)"><xml><MSHelp:Keyword Index="A" Term="r19_metacmds_A_88506020-c902-4aa5-8b38-9aaeab637277.xml"/>
+<META NAME="MS-HKWD" CONTENT=".bugcheck (Display Bug Check Data) command">
+<META NAME="MS-HKWD" CONTENT="Display Bug Check Data (.bugcheck) command">
+<META NAME="MS-HKWD" CONTENT="bug check, Display Bug Check Data (.bugcheck) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r19_metacmds_A_88506020-c902-4aa5-8b38-9aaeab637277.xml"></A>.bugcheck (Display Bug Check Data)</H1>
+<P>The <b>.bugcheck</b> command displays the data from a bug check on the target computer.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.bugcheck</b> <BR></nobr></P>
+<P></P>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">kernel mode only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live, crash dump</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>This command displays the current bug check data. (This bug check data will be accessible until the crashed machine is rebooted.)</P>
+<P>You can also display bug check data on 32-bit systems by using <b>dd NT!KiBugCheckData L5</b>, or on 64-bit systems by using <b>dq NT!KiBugCheckData L5</b>. However, the <b>.bugcheck</b> command is more reliable, because  it works in some scenarios that the <a href="r16_cmds_c_eddd6afa-a4e9-49c7-8752-7005aca29a84.xml.htm"><b>d* (Display Memory)</b></a> command will not (such as user-mode minidumps).</P>
+<P>The <a href="r24_exts_general_a_6e1c68d6-f825-4a02-a9ba-2b0cd08cded8.xml.htm"><b>!analyze</b></a> extension command is also useful after a bug check occurs.</P>
+<H4>Additional Information</H4>
+<P>For more information about bug checks, see <a href="t03_bug_intro_590bbf17-b7a5-4700-86fa-ba052d1bc9c5.xml.htm">Bug Checks (Blue Screens)</a>. For a description of individual bug checks,  see the <a href="t03_bug_intro_2552b67e-0b4f-4950-8bd1-6fb6c0d5c90d.xml.htm">Bug Check Code Reference</a> section.  </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .bugcheck (Display Bug Check Data) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

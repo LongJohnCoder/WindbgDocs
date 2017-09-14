@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>AML Debugging Examples</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, AML Debugging Examples"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_6e1c6b23-391c-426f-a024-3235c5548783.xml"/>
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, debugging examples"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_6e1c6b23-391c-426f-a024-3235c5548783.xml"></A>AML Debugging Examples</H1>
+<P>Here are examples that illustrate how to get started with AML debugging.</P>
+<H4>Investigating a Frozen Computer</H4>
+<P>If the target computer has frozen and you suspect it may be an ACPI problem, begin by using the <b>!amli lc</b> extension to display all the active contexts:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli lc</b><BR>*Ctxt=ffffffff8128d000, ThID=ffffffff81277880, Flgs=----R----, pbOp=ffffffff8124206c, Obj=\_SB.PCI0.ISA0.FDC0._CRS<BR><BR></nobr></P>
+<P>If no contexts are displayed, the error is probably not ACPI-related.</P>
+<P>If there are contexts shown, look for the one marked with an asterisk. This is the <i>current context</i> (the one that is being executed by the interpreter at the present moment).</P>
+<P>In this example, the target computer is running Windows XP or Windows Server 2003 on a 32-bit processor. Therefore all addresses are cast to 64 bits, producing a gratuitous FFFFFFFF in the high 32 bits. The abbreviation <b>pbOp</b> indicates the instruction pointer ("pointer to binary op codes"). The <b>Obj</b> field gives the full path and name of the method as it appears in the ACPI tables. For a description of the flags, see <a href="r33_exts_acpi_916a102a-d94c-4152-adfc-e6bfdf9071c0.xml.htm"><b>!amli lc</b></a>.</P>
+<P></P>
+<P>You can use the <a href="r33_exts_acpi_6c7a3353-9abf-4735-8c63-0e70ccfe5db2.xml.htm"><b>!amli u</b></a> command to disassemble the _CRS method as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli u \_SB.PCI0.ISA0.FDC0._CRS</b><BR><BR>ffffffff80e4a535 : CreateDWordFieldCRES, 0x76, RAMT)<BR>ffffffff80e4a540 : CreateDWordField(CRES, 0x82, PCIT)<BR>ffffffff80e4a54b : Add(MLEN(), 0x100000, RAMT)<BR>ffffffff80e4a559 : Subtract(0xffe00000, RAMT, PCIT)<BR>ffffffff80e4a567 : Return(CRES)<BR><BR></nobr></P>
+<H4>Breaking Into the AMLI Debugger</H4>
+<P>The <a href="r33_exts_acpi_1e2ac77d-055f-497d-be71-59204cda8b1c.xml.htm"><b>!amli debugger</b></a> command causes the AML interpreter to break into the AMLI Debugger the next time any AML code is executed.</P>
+<P>After the AMLI Debugger prompt appears, you can use any of the AMLI Debugger commands. You can also use <b>!amli</b> extension commands without prefixing them with "!amli":</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli debugger</b><BR>kd&gt; <b>g</b><BR><BR>AMLI(? for help)-&gt; <b>find _crs</b><BR>\_SB.LNKA._CRS<BR>\_SB.LNKB._CRS<BR>\_SB.LNKC._CRS<BR>\_SB.LNKD._CRS<BR>\_SB.PCI0._CRS<BR>\_SB.PCI0.LPC.NCP._CRS<BR>\_SB.PCI0.LPC.PIC._CRS<BR>\_SB.PCI0.LPC.TIME._CRS<BR>\_SB.PCI0.LPC.IDMA._CRS<BR>\_SB.PCI0.LPC.RTC._CRS<BR>\_SB.PCI0.LPC.SPKR._CRS<BR>\_SB.PCI0.LPC.FHUB._CRS<BR>\_SB.PCI0.SBD1._CRS<BR>\_SB.PCI0.SBD2._CRS<BR>\_SB.MBRD._CRS<BR><BR>AMLI(? for help)-&gt; <b>u \_SB.PCI0._CRS</b><BR><BR>ffffffff80e4a535 : CreateDWordFieldCRES, 0x76, RAMT)<BR>ffffffff80e4a540 : CreateDWordField(CRES, 0x82, PCIT)<BR>ffffffff80e4a54b : Add(MLEN(), 0x100000, RAMT)<BR>ffffffff80e4a559 : Subtract(0xffe00000, RAMT, PCIT)<BR>ffffffff80e4a567 : Return(CRES)<BR><BR></nobr></P>
+<H4>Using Breakpoints</H4>
+<P>In the following example, you will break into the AMLI Debugger before the method _BST is executed.</P>
+<P>Even if you have located a _BST object, you should verify that it is indeed a method. You can use the <a href="r33_exts_acpi_6053e299-7e6a-4401-a760-385611d5c8d4.xml.htm"><b>!amli dns</b></a> extension to do this.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli dns /s \_sb.pci0.isa.bat1._bst</b><BR><BR>ACPI Name Space: \_SB.PCI0.ISA.BAT1._BST (c29c2044)<BR>Method(_BST:Flags=0x0,CodeBuff=c29c20a5,Len=103)<BR><BR></nobr></P>
+<P>Now you can use the <a href="r33_exts_acpi_bb8ffbca-031d-4ed3-b933-a368071d90e9.xml.htm"><b>!amli bp</b></a> command to place the breakpoint:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli bp \_sb.pci0.isa.bat1._bst</b><BR><BR></nobr></P>
+<P>You may also want to place breakpoints within the method. You could use the <b>!amli u</b> command to disassemble _BST and then place a breakpoint on one of its steps:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli u _sb.pci0.isa.bat1._bst</b><BR><BR>ffffffffc29c20a5: Acquire(\_SB_.PCI0.ISA_.EC0_.MUT1, 0xffff)<BR>ffffffffc29c20c0: Store("CMBatt - _BST.BAT1", Debug)<BR>ffffffffc29c20d7: \_SB_.PCI0.ISA_.EC0_.CPOL()<BR>ffffffffc29c20ee: Release(\_SB_.PCI0.ISA_.EC0_.MUT1)<BR>ffffffffc29c2107: Return(PBST)<BR><BR>kd&gt; <b>!amli bp c29c20ee</b><BR><BR></nobr></P>
+<H4>Responding to a Triggered Breakpoint</H4>
+<P>In the following example, the method _WAK is running and then encounters a breakpoint:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Running \_WAK method<BR>Hit Breakpoint 0.<BR><BR></nobr></P>
+<P>Use the <b>!amli ln</b> extension to see the nearest method to the current program counter. The following  example is taken from a Windows 2000 system, so the addresses are shown in 32-bit form:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli ln</b><BR>c29accf5: \_WAK<BR><BR></nobr></P>
+<P>The <b>!amli lc</b> extension displays all the active contexts:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli lc</b><BR> Ctxt=c18b6000, ThID=00000000, Flgs=A-QC-W----, pbOp=c29bf8fe, Obj=\_SB.PCI0.ISA.EC0._Q09<BR>*Ctxt=c18b4000, ThID=c15a6618, Flgs=----R-----, pbOp=c29accf5, Obj=\_WAK<BR><BR></nobr></P>
+<P>This shows that the active contexts are associated with the methods _Q09 and _WAK. The current context is _WAK. </P>
+<P>Now you can use the <b>!amli r</b> command to display more details about the current context. From this you can see useful thread and stack information, as well as arguments passed to _WAK and the local data objects. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli r</b><BR>Context=c18b4000*, Queue=00000000, ResList=00000000<BR>ThreadID=c15a6618, Flags=00000010<BR>StackTop=c18b5eec, UsedStackSize=276 bytes, FreeStackSize=7636 bytes<BR>LocalHeap=c18b40c0, CurrentHeap=c18b40c0, UsedHeapSize=88 bytes<BR>Object=\_WAK, Scope=\_WAK, ObjectOwner=c18b4108, SyncLevel=0<BR>AsyncCallBack=ff06b5d0, CallBackData=0, CallBackContext=c99efddc<BR><BR>MethodObject=\_WAK<BR>c18b40e4: Arg0=Integer(:Value=0x00000001[1])<BR>c18b5f3c: Local0=Unknown()<BR>c18b5f54: Local1=Unknown()<BR>c18b5f6c: Local2=Unknown()<BR>c18b5f84: Local3=Unknown()<BR>c18b5f9c: Local4=Unknown()<BR>c18b5fb4: Local5=Unknown()<BR>c18b5fcc: Local6=Unknown()<BR>c18b5fe4: Local7=Unknown()<BR>c18b4040: RetObj=Unknown()<BR><BR></nobr></P>
+<H4>Tracing, Stepping, and Running AML Code</H4>
+<P>If you want to trace through the code, you can turn on full tracing information by using the <a href="r33_exts_acpi_d7069173-5282-4e7f-8685-163c13340c28.xml.htm"><b>!amli set</b></a> extension as follows:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli set spewon verboseon traceon</b><BR><BR></nobr></P>
+<P>Now you can step through the AML code, watching the code execute line by line. The <b>p</b> command steps over any function calls. The <b>t</b> command will step into function calls.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>AMLI(? for help)-&gt; <b>p</b><BR><BR>c29bfcb7: Store(\_SB_.PCI0.ISA_.ACAD.CHAC(SEL0=0x10e1)<BR>c29c17b1: {<BR>c29c17b1: | Store(LGreater(And(Arg0=0x10e1,0xf0,)=0xe0,0x80)=0xffffffff,Local0)=0xffffffff<BR><BR>AMLI(? for help)-&gt; <b>p</b><BR><BR>c29c17bb: | If(LNot(LEqual(Local0=0xffffffff,ACP_=0xffffffff)=0xffffffff)=0x0)<BR>c29c17ce: | {<BR>c29c17ce: | | Return(Zero)<BR>c29c17d0: | }<BR>c29c17d0: },Local1)=0x0<BR><BR>AMLI(? for help)-&gt; <b>t</b><BR><BR>c29bfcd4: Store(\_SB_.PCI0.ISA_.BAT1.CHBP(SEL0=0x10e1)<BR>c29c293d: {<BR>c29c293d: | Store("CMBatt - CHBP.BAT1",Debug)String(:Str="CMBatt - CHBP.BAT1")="CMBatt - CHBP.BAT1"<BR><BR></nobr></P>
+<P>You may also run methods from within the AMLI Debugger if you choose. For example, you might evaluate the status of the LNKA device by running its control method _STA:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>AMLI(? for help)-&gt; <b>run \_sb.lnka._sta</b><BR>PCI OpRegion Access on region c29b2268 device c29b2120<BR><BR>\_SB.LNKA._STA completed successfully with object data:<BR>Integer(:Value=0x0000000b[11])<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: AML Debugging Examples RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

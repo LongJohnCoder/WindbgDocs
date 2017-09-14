@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging Windows Setup and the OS Loader</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging Windows Setup and the OS Loader"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_3046b104-c0d8-454d-bbd2-db9c9743db1f.xml"/>
+<META NAME="MS-HKWD" CONTENT="Windows setup debugging">
+<META NAME="MS-HKWD" CONTENT="OS Loader debugging">
+<META NAME="MS-HKWD" CONTENT="setup debugging"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_3046b104-c0d8-454d-bbd2-db9c9743db1f.xml"></A>Debugging Windows Setup and the OS Loader</H1>
+<P>If your computer hangs in text-mode at the <b>Starting Windows</b> screen and has not connected into the debugger, it may be possible to modify your setup to allow the debugger to connect during startup.</P>
+<P>Before debugging can begin, you must start your target computer in Safe Mode and make the following preparations:</P><B></B><UL type="disc">
+<LI>Install the checked version of <i>$LDR$</i> on the target computer. If you install the full checked build of Windows, this file will be included. If you want to install only this file, you need to look for it under the name <i>setupldr.bin</i>. Copy this file to the root of the first bootable partition on the target computer and rename it <i>$LDR$</i> (with no file name extension). For instructions on how to install a full checked build or individual checked files, see the Windows Driver Kit.</LI>
+<LI>Make sure the symbols for the checked version of <i>$LDR$</i> are included in the debugger's symbol path.   </LI>
+<LI>Set the debugger baud rate to 19200.</LI>
+<LI>Modify the file <i>txtsetup.sif</i> on the target computer by adding the <b>/debugstop</b>, <b>/debugport</b>, and <b>/baudrate</b> switches to the <b>OsLoadOptions</b> line. Here is an example of a modified <i>txtsetup.sif</i> file:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>OsLoadOptions = "/fastdetect /noguiboot <b>/debugstop /debugport=com2 /baudrate=19200</b>" <BR>; OsLoadOptionsVar = "/fastdetect"<BR>; SetupCmdLinePrepend = "CDB" <BR></nobr></P>
+<P>The exact contents of your file may differ from this. The baud rate should match that used by the debugger (19200 is recommended). The COM port should be the port on the target computer to which the debugging cable is attached.</P>
+</LI>
+</UL>
+<P></P>
+<P>After these steps have been completed, use the following procedure to connect the debugger:</P><B>Debugging Windows Setup and the OS Loader</B><OL type="1">
+<LI>Start up the debugger with the <b>-d</b> command-line option, or use <a href="r23_keys_79aa3c00-93cf-4c56-956a-8ba0f4ae8b43.xml.htm">CTRL+K</a> to cause the debugger to break in when the first kernel module is loaded.</LI>
+<LI>When the debugger breaks in, you will see a message that the symbol checksum cannot be verified. Ignore this message! If you want to verify that your symbols are correct, do a stack trace and make sure the first line of the stack trace says <b>osloader!DbgBreakPoint</b>.</LI>
+</OL>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging Windows Setup and the OS Loader RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Target Computer and Host Computer</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Target Computer and Host Computer"><xml><MSHelp:Keyword Index="A" Term="r02_setup_1_3ababa5c-2202-4141-b689-a847cbfc3cb1.xml"/>
+<META NAME="MS-HKWD" CONTENT="target computer">
+<META NAME="MS-HKWD" CONTENT="host computer">
+<META NAME="MS-HKWD" CONTENT="checked build (debug build)">
+<META NAME="MS-HKWD" CONTENT="checked build (debug build), on host computer">
+<META NAME="MS-HKWD" CONTENT="checked build (debug build), on target computer">
+<META NAME="MS-HKWD" CONTENT="free build (retail build)">
+<META NAME="MS-HKWD" CONTENT="free build (retail build), on host computer">
+<META NAME="MS-HKWD" CONTENT="free build (retail build), on target computer">
+<META NAME="MS-HKWD" CONTENT="x86 processor, on host computer">
+<META NAME="MS-HKWD" CONTENT="x86 processor, on target computer">
+<META NAME="MS-HKWD" CONTENT="Itanium processor, on host computer">
+<META NAME="MS-HKWD" CONTENT="Itanium processor, on target computer">
+<META NAME="MS-HKWD" CONTENT="Windows, Windows version on host computer">
+<META NAME="MS-HKWD" CONTENT="Windows, Windows version on target computer"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r02_setup_1_3ababa5c-2202-4141-b689-a847cbfc3cb1.xml"></A>Target Computer and Host Computer</H1>
+<P>Kernel-mode debugging requires a <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#592a23b6-7f7d-434c-b4f6-5e1470b41393"><i>target computer</i></a> and a <i>host computer</i>. The target computer is used to run the kernel-mode application. The host computer is used to run the debugger.</P>
+<P>The following diagram shows the typical Microsoft Windows setup that you can use to perform kernel debugging and diagnose system failures.</P>
+<p><img src="dbg_2000.png"><p><b>Typical Windows debugging setup</b></p>
+</p>
+<P>This diagram shows the typical setup. However, the current versions of KD and WinDbg (which you installed with this documentation) are flexible. KD and WinDbg can do the following</P><B></B><UL type="disc">
+<LI>Debug a target computer that is running Windows.</LI>
+<LI>Debug a target computer that is running on an x86-based platform, an Itanium-based platform, or an x64-based platform.</LI>
+<LI>Can be started from a host computer that is running Windows.</LI>
+<LI>Can be started from a host computer that is on an x86-based platform, an Itanium-based platform, or an x64-based platform.</LI>
+</UL>
+<P></P>
+<P>The target computer and host computer do not have to use the same platform or the same version of Windows.</P>
+<P>Kernel debugging does not require specific combinations of the free or checked builds. You can debug a free system from a free or checked system, and you can debug a checked system from a free or checked system. However, typically, there is no reason for the host computer to run the slower checked build.</P>
+<P class="note"><b>Note</b>  If you are running the debuggers from an Itanium-based host computer, make sure that you are using the correct version of the binaries. For more information about which version of the debugger package to use, see <a href="r02_setup_1_bec62139-3e78-4a5a-9ff0-b525fe703d98.xml.htm">Choosing a 32-bit or 64-bit Debugger Package</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Target Computer and Host Computer RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

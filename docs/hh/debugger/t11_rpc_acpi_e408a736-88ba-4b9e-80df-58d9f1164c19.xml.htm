@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using AMLI Debugger Commands</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using AMLI Debugger Commands"><xml><MSHelp:Keyword Index="A" Term="t11_rpc_acpi_e408a736-88ba-4b9e-80df-58d9f1164c19.xml"/>
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, AMLI Debugger commands">
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, controlling the debugger">
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, controlling AML execution">
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, controlling trace mode settings">
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, notifying a namespace object">
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, displaying the object count table">
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, accessing memory">
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, accessing ports">
+<META NAME="MS-HKWD" CONTENT="AMLI Debugger, displaying help"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11_rpc_acpi_e408a736-88ba-4b9e-80df-58d9f1164c19.xml"></A>Using AMLI Debugger Commands</H1>
+<P>The following commands can be issued from the AMLI Debugger prompt.</P>
+<P></P><B></B><table>
+<TR valign="top">
+<TH Width="">General Category</TH>
+<TH Width="">Specific Action</TH>
+<TH Width="">AMLI Debugger<BR>Commands</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="#90fd3c9b-98e1-4dac-b392-b9e9d7e8f4a7">Controlling the Debugger</a> </TD>
+<TD Width="">Continue Execution<BR>Break to Kernel Debugger</TD>
+<TD Width=""><b>g</b> <BR><b>q</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="#7dcaeaa5-7051-4822-adc4-56611099737f">Controlling AML Execution</a> </TD>
+<TD Width="">Run Method<BR>Step Over AML Code<BR>Trace Into AML Code </TD>
+<TD Width=""><b>run</b> <BR><b>p</b> <BR><b>t</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="#466a375a-22c5-43e3-bd91-2ce66b7d8024">Controlling Trace Mode Settings</a> </TD>
+<TD Width="">Configure Trace Mode </TD>
+<TD Width=""><b>trace</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="#1d977ba0-63cc-4813-b922-2c83eefb50a2">Notifying a Namespace Object</a> </TD>
+<TD Width="">Notify Namespace Object </TD>
+<TD Width=""><b>notify</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="#2e76ccb0-ca3a-418f-95af-62b93a566aed">Displaying the Object Count Table</a> </TD>
+<TD Width="">Display Object Count Table</TD>
+<TD Width=""><b>dc</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="#fb3b8021-254b-49c6-b74d-41d46177318d">Accessing Memory</a> </TD>
+<TD Width="">Display Data<BR>Display Data Bytes<BR>Display Data Words<BR>Display Data DWORDs<BR>Display Data String<BR>Edit Memory</TD>
+<TD Width=""><b>d</b> <BR><b>db</b> <BR><b>dw</b> <BR><b>dd</b> <BR><b>da</b> <BR><b>e</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="#6fc0c33b-1579-4f81-884c-47bb818db589">Accessing Ports</a> </TD>
+<TD Width="">Read Byte from Port<BR>Read Word from Port<BR>Read DWORD from Port<BR>Write Byte to Port<BR>Write Word to Port<BR>Write DWORD to Port </TD>
+<TD Width=""><b>i</b> <BR><b>iw</b> <BR><b>id</b> <BR><b>o</b> <BR><b>ow</b> <BR><b>od</b> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="#d6621480-bd96-4703-a88f-f64420efa4a2">Displaying Help</a> </TD>
+<TD Width="">Display Help </TD>
+<TD Width=""><b>?</b> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<P></P>
+<H3><A NAME="90fd3c9b-98e1-4dac-b392-b9e9d7e8f4a7"></A>Controlling the Debugger</H3>
+<P><P>These commands exit the AMLI Debugger. The <b>g</b> command will resume normal execution of the target computer, and the <b>q</b> command will freeze the target computer and break into the kernel debugger.</P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>g</b> <BR><BR><b>q</b> <BR></nobr></P>
+<P></P>
+<P></P>
+<H3><A NAME="7dcaeaa5-7051-4822-adc4-56611099737f"></A>Controlling AML Execution</H3>
+<P>These commands allow you to run or step through AML methods. The <b>run</b> command begins execution at a specified point. The <b>p</b> and <b>t</b> commands allow you to step through one instruction at a time. If a function call is encountered, the <b>p</b> command treats the function as a single step, while the <b>t</b> command traces into the new function one instruction at a time.</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>run</b> <i>MethodName</i> [<i>ArgumentList</i>] <BR><BR><b>run</b> <i>CodeAddress</i> [<i>ArgumentList</i>] <BR><BR><b>p</b> <BR><BR><b>t</b> <BR></nobr></P>
+<P></P>
+<P></P>
+<DL><DT><i>MethodName</i></DT>
+<DD>Specifies the full path and name of a method. Execution will start at the beginning of this method's memory location.</DD>
+<DT><i>CodeAddress</i></DT>
+<DD>Specifies the address where execution is to begin. </DD>
+<DT><i>ArgumentList</i></DT>
+<DD>Specifies a list of arguments to be passed to the method. Each argument must be an integer. Multiple arguments should be separated with spaces.</DD>
+</DL>
+<P></P>
+<P></P>
+<H3><A NAME="466a375a-22c5-43e3-bd91-2ce66b7d8024"></A>Controlling Trace Mode Settings</H3>
+<P>The <b>trace</b> command controls the AML interpreter's trace mode settings. If this command is used with no parameters, the current trace mode settings are displayed.</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>trace</b> [<b>trigon</b>|<b>trigoff</b>] [<b>level=</b><i>Level</i>] [<b>add=</b><i>TPStrings</i>] [<b>zap=</b><i>TPNumbers</i>] <BR></nobr></P>
+<P></P>
+<DL><DT><b>trigon</b></DT>
+<DD>Activates trace trigger mode.</DD>
+<DT><b>trigoff</b></DT>
+<DD>Deactivates trace trigger mode.</DD>
+<DT><i>Level</i></DT>
+<DD>Specifies the new setting for the trace level.</DD>
+<DT><i>TPStrings</i></DT>
+<DD>Specifies one or more trigger points to be added. Each trigger point is specified by name. Multiple trigger point strings should be separated by commas.</DD>
+<DT><i>TPNumbers</i></DT>
+<DD>Specifies one or more trigger points to be deleted. Each trigger point is specified by number. Multiple trigger point numbers should be separated by commas. To see a list of trigger point numbers, use the <b>trace</b> command with no parameters.</DD>
+</DL>
+<P></P>
+<H3><A NAME="1d977ba0-63cc-4813-b922-2c83eefb50a2"></A>Notifying a Namespace Object</H3>
+<P>The <b>notify</b> command sends a notification to an ACPI namespace object. The notification will be placed in the specified object's queue.</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>notify</b> <i>ObjectName</i> <i>Value</i> <BR><BR><b>notify</b> <i>ObjectAddress</i> <i>Value</i> <BR></nobr></P>
+<P></P>
+<DL><DT><i>ObjectName</i></DT>
+<DD>Specifies the full namespace path of the object to be notified.</DD>
+<DT><i>ObjectAddress</i></DT>
+<DD>Specifies the address of the object to be notified.</DD>
+<DT><i>Value</i></DT>
+<DD>Specifies the notification value.</DD>
+</DL>
+<P></P>
+<P></P>
+<H3><A NAME="2e76ccb0-ca3a-418f-95af-62b93a566aed"></A>Displaying the Object Count Table</H3>
+<P>The <b>dc</b> command displays the memory object count table.<P></P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>dc</b> <BR></nobr></P>
+<P></P>
+<H3><A NAME="fb3b8021-254b-49c6-b74d-41d46177318d"></A>Accessing Memory</H3>
+<P>The memory access commands allow you to read and write to memory. When reading memory, you can choose the size of the memory units with the <b>db</b>, <b>dw</b>, <b>dd</b>, or <b>da</b> command. A simple <b>d</b> command displays memory in the most recently-chosen units. If this is the first display command used, byte units are used.<P>If no address or method is specified, display will begin where the previous display command ended.    </P>
+<P>These commands have the same effect as the standard kernel debugger memory commands; they are duplicated within the AMLI Debugger for easy access.</P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>d</b>[<b>b</b>|<b>w</b>|<b>d</b>|<b>a</b>] [ [<b>l=</b><i>Length</i>] [ <i>Method</i> | [<b>%%</b>]<i>Address</i> ] ] <BR><BR><b>e</b> [<b>%%</b>]<i>Address</i> <i>DataList</i> <BR></nobr></P>
+<P></P>
+<DL><DT><b>b</b></DT>
+<DD>Specifies that the data should be displayed in byte units.</DD>
+<DT><b>w</b></DT>
+<DD>Specifies that the data should be displayed in word (16-bit) units.</DD>
+<DT><b>d</b></DT>
+<DD>Specifies that the data should be displayed in DWORD (32-bit) units.</DD>
+<DT><b>a</b></DT>
+<DD>Specifies that the data should be displayed as a string. The data is displayed as ASCII characters. The display terminates when a NULL character is read, or when <i>Length</i> characters have been displayed.</DD>
+<DT><i>Length</i></DT>
+<DD>Specifies the number of bytes to be displayed. <i>Length</i> must be a hexadecimal number (without an <b>0x</b> prefix). If <i>Length</i> is omitted, the default display size is 0x80 bytes.</DD>
+<DT><i>Method</i></DT>
+<DD>Specifies the full path and name of a method. The display will start at the beginning of this method's memory location.</DD>
+<DT><i>Address</i></DT>
+<DD>Specifies the memory address where reading or writing will begin. If the address is prefixed with two percent signs (<b>%%</b>), it is interpreted as a physical address. Otherwise, it is interpreted as a virtual address.    </DD>
+<DT><i>DataList</i></DT>
+<DD>Specifies the data to be written to memory. Each item in the list can be either a hexadecimal byte or a string. When a string is used, it must be enclosed in quotation marks. Multiple items should be separated by spaces.</DD>
+</DL>
+<P></P>
+<P></P>
+<H3><A NAME="6fc0c33b-1579-4f81-884c-47bb818db589"></A>Accessing Ports</H3>
+<P>The port commands allow you to send output or receive input from a data port. The <b>i</b> and <b>o</b> commands transfer single bytes, the <b>iw</b> and <b>ow</b> commands transfer words (16 bits), and the <b>id</b> and <b>od</b> commands transfer DWORDS (32 bits).<P>These commands have the same effect as the standard kernel debugger port commands; they are duplicated within the AMLI Debugger for easy access.</P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>i</b> <i>Port</i> <BR><BR><b>iw</b> <i>Port</i> <BR><BR><b>id</b> <i>Port</i> <BR><BR><b>o</b> <i>Port</i> <i>DataForPort</i><BR><BR><b>ow</b> <i>Port</i> <i>DataForPort</i><BR><BR><b>od</b> <i>Port</i> <i>DataForPort</i><BR></nobr></P>
+<P></P>
+<DL><DT><i>Port</i></DT>
+<DD>Specifies the address of the port to be accessed. The port size must match the command chosen.</DD>
+<DT><i>DataForPort</i></DT>
+<DD>Specifies the data to be written to the port. The size of this data must match the command chosen.</DD>
+</DL>
+<P></P>
+<P></P>
+<H3><A NAME="d6621480-bd96-4703-a88f-f64420efa4a2"></A>Displaying Help</H3>
+<P>This command displays help text for the AMLI Debugger commands.</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>?</b> [<i>Command</i>] <BR></nobr></P>
+<P></P>
+<DL><DT><i>Command</i></DT>
+<DD>Specifies the command for which to display help. If this is omitted, a list of all AMLI Debugger commands and AMLI Debugger extensions is displayed.</DD>
+</DL>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using AMLI Debugger Commands RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

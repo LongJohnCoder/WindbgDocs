@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!scsikd.scsiext</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !scsikd.scsiext"><xml><MSHelp:Keyword Index="A" Term="r33~d_exts_SCSI_6e78f7b5-27a6-4f72-9c7a-99e4521dde11.xml"/>
+<META NAME="MS-HKWD" CONTENT="!scsikd.scsiext extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33~d_exts_SCSI_6e78f7b5-27a6-4f72-9c7a-99e4521dde11.xml"></A>!scsikd.scsiext</H1>
+<P>The <b>!scsikd.scsiext</b> extension displays detailed information about the specified SCSI port extension. </P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!scsikd.scsiext</b> <i>Device</i>  <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Device</i></DT>
+<DD>Specifies the device object or device extension of a SCSI port extension. </DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Scsikd.dll</i></TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Scsikd.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example of the <b>!scsikd.scsiext</b> display, where the SCSI port extension has been specified by a functional device object (FDO); this can be obtained from the <b>DO</b> field or <b>DevExt</b> field in the <a href="r33~d_exts_scsi_1b6be74d-e7c0-4e05-ba52-fc4fc7337750.xml.htm"><b>!minipkd.adapters</b></a> display:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!scsikd.scsiext 816f9a40</b> <BR>Scsiport functional device extension at address 816f9af8<BR>Common Extension:<BR>  Initialized<BR>  DO 0x816f9a40  LowerObject 0x816e8030  SRB Flags 00000000<BR>  Current Power (D0,S0)  Desired Power D-1 Idle 00000000<BR>  Current PnP state 0x0    Previous state 0xff<BR>  DispatchTable f9aee200   UsePathCounts (P0, H0, C0)<BR>Adapter Extension:<BR>  Port 2     IsPnp VirtualSlot HasInterrupt<BR>  LowerPdo 0x816e8030   HwDevExt 0x8170a004   Active Requests 0xffffffff<BR>  MaxBus 0x01   MaxTarget 0x10   MaxLun 0x08<BR>  Port Flags (0x00001000): PD_DISCONNECT_RUNNING<BR>  NonCacheExt 0x81702000  IoBase 0x00002000   Int 0x1a<BR>  RealBus# 0x0  RealSlot# 0x2<BR>  Timeout 0xffffffff   DpcFlags 0x00000000   Sequence 0x00000003<BR>  Srb Ext Header 0x817061a0   No. Requests 0x00000012<BR>  QueueTag BitMap 0x00000000   Hint 0x00000000<BR>  MaxQueueTag 0xfe (@0x816f9c58)<BR>  LuExt Size 0x00000038   SrbExt Size 0x00000188<BR>    SG List Size - Small 17   Large 0<BR>    Emergency  - SrbData 0x816f9830  Blocked List @0x816f9e94<BR>    CommonBuff - Size: 0x00006000    PA: 0x0000000001702000  VA: 0x81702000<BR>    Ke Objects - Int1: 0x8175ba50    Int2: 0x00000000        Dma: 0x816f9340<BR>    Lookaside  - SrbData @ 0x816f9e40 SgList @0x00000000  Remove: @0x00000000<BR>    Resources  - Raw: 0x817ba190     Translated: 0x81709678<BR>    Port Config 8177fde8<BR>    DeviceMap Handles: Port 0000009c    Busses e12d7b38<BR>  Interrupt Data @0x816f9ce4:<BR>    Flags (0x00000000):<BR>    Ready LUN 0x00000000   Wmi Events 0x00000000<BR>    Completed Request List (@0x816f9ce8): 0 entries<BR>    LUN 816ea0e8 @ (  0,  1,  0) c ev  pnp(00/ff) pow(0 ,0) DevObj 816ea030<BR><BR></nobr></P>
+<P>Here is an example of the <b>!scsikd.scsiext</b> display, where the SCSI port extension has been specified by a physical device object (PDO); this can be obtained from the <b>DevObj</b> field or <b>LUN</b> field in the <b>!minipkd.adapters</b> display:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!scsikd.scsiext 816ea030</b><BR>Scsiport physical device extension at address 816ea0e8<BR>Common Extension:<BR>  Initialized<BR>  DO 0x816ea030  LowerObject 0x816f9a40  SRB Flags 00000000<BR>  Current Power (D0,S0)  Desired Power D-1 Idle 0x8176c780<BR>  Current PnP state 0x0    Previous state 0xff<BR>  DispatchTable f9aee180   UsePathCounts (P0, H0, C0)<BR>Logical Unit Extension:<BR>  Address (2, 0, 1, 0) Claimed  Enumerated Visible<BR>  LuFlags (0x00000000):<BR>  Retry 0x00          Key 0x00000000<BR>  Lock 0x00000000  Pause 0x00000000   CurrentLock: 0x00000000<BR>  HwLuExt 0x8177ce10  Adapter 0x816f9af8  Timeout 0xffffffff<BR>  NextLun 0x00000000  ReadyLun 0x00000000<BR>  Pending 0x00000000  Busy 0x00000000     Untagged 0x00000000<BR>  Q Depth 000 (1628450047)   InquiryData 0x816ea206<BR>  DeviceMap Keys: Target 0x0000d0   Lun 00000000<BR>  Bypass SRB_DATA blocks 4 @ 816ea270   List 816ea810<BR>  RS Irp 8177dd80  Srb @ 816eaa0c   MDL @ 816eaa4c<BR>  Request List @0x816ea1f0 is empty<BR><BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information, see <a href="t11~d_scsi_f8b7b7e6-c5ba-44a4-83fe-450e0c0fd7d6.xml.htm">SCSI Miniport Debugging</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !scsikd.scsiext RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

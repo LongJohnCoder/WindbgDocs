@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x10D: WDF_VIOLATION</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x10D:  WDF_VIOLATION"><xml><MSHelp:Keyword Index="A" Term="t07_bugs_E0_2efba818-9311-481e-9be6-27fe44474a2c.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x10D: WDF_VIOLATION">
+<META NAME="MS-HKWD" CONTENT="WDF_VIOLATION"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t07_bugs_E0_2efba818-9311-481e-9be6-27fe44474a2c.xml"></A>Bug Check 0x10D:  WDF_VIOLATION</H1>
+<P>The WDF_VIOLATION bug check has a value of 0x0000010D.  This indicates that Kernel-Mode Driver Framework (KMDF) detected that Windows found an error in a framework-based driver.</P>
+<H4>Parameters</H4>
+<P>The following parameters are displayed on the blue screen. Parameter 1 indicates the specific error code of the bug check.  Parameter 4 is reserved.   </P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 1</TH>
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">Pointer to a WDF_POINTER_ROUTINE_TIMED_OUT_DATA structure </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">A framework-based driver has timed out during a power operation.  This typically means that the device stack did not set the DO_POWER_PAGABLE bit and a driver attempted a pageable operation after the paging device stack was powered down.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">An attempt is being made to acquire a lock that is currently being held.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">WDFREQUEST handle </TD>
+<TD Width="">The number of outstanding references that remain on both buffers </TD>
+<TD Width="">Windows Driver Framework Verifier has encountered a fatal error.  In particular, an I/O request was completed, but a framework request object cannot be deleted because there are outstanding references to the input buffer, the output buffer, or both.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">Reserved </TD>
+<TD Width="">The caller's address </TD>
+<TD Width="">A NULL parameter was passed to a function that required a non-NULL value. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x5</TD>
+<TD Width="">The handle value passed in </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">A framework object handle of the incorrect type was passed to a framework object method. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x6</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""><i>See table below.</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x7</TD>
+<TD Width="">The handle of the framework object </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">A driver attempted to delete a framework object incorrectly by calling <b>WdfObjectDereference</b> to delete a handle instead of calling <b>WdfObjectDelete</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x8</TD>
+<TD Width="">The handle of the DMA transaction object </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">An operation occurred on a DMA transaction object while it was not in the correct state.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x9</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""><i>Currently unused. </i> </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xA</TD>
+<TD Width="">A pointer to a WDF_QUEUE_FATAL_ERROR_DATA structure </TD>
+<TD Width="">Reserved </TD>
+<TD Width="">A fatal error has occurred while processing a request that is currently in the queue. <BR><BR><BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xB</TD>
+<TD Width=""></TD>
+<TD Width=""></TD>
+<TD Width=""><i>See table below.</i></TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xC</TD>
+<TD Width="">WDFDEVICE handle</TD>
+<TD Width="">Pointer to new PnP IRP</TD>
+<TD Width="">A new state-changing PnP IRP arrived while the driver was processing another state-changing PnP IRP.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xD</TD>
+<TD Width="">WDFDEVICE handle</TD>
+<TD Width="">Pointer to power IRP</TD>
+<TD Width="">A device's power policy owner received a power IRP that it did not request. There might be multiple power policy owners, but only one is allowed. A KMDF driver can change power policy ownership by calling <b>WdfDeviceInitSetPowerPolicyOwnership</b>.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xE</TD>
+<TD Width="">IRQL at which the event callback function was called.</TD>
+<TD Width="">IRQL at which the event callback function returned.</TD>
+<TD Width="">An event callback function did not return at the same IRQL at which it was called. The callback function changed the IRQL directly or indirectly (for example, by acquiring a spinlock, which raises IRQL to DISPATCH_LEVEL, but not releasing the spinlock).</TD>
+</TR>
+<TR valign="top">
+<TD Width="">0xF</TD>
+<TD Width="">Address of an event callback function.</TD>
+<TD Width="">Reserved</TD>
+<TD Width="">An event callback function entered a critical region, but it did not leave the critical region before returning.</TD>
+</TR>
+</table>
+<P></P>
+<P>If Parameter 1 is equal to 0x6, then a fatal error was made in handling a WDF request.  In this case, Parameter 2 further specifies the type of fatal error that has been made, as defined by the enumeration WDF_REQUEST_FATAL_ERROR.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">0x1</TD>
+<TD Width="">The address of the IRP </TD>
+<TD Width="">No more I/O stack locations are available to format the underlying IRP. </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x2</TD>
+<TD Width="">The WDF request handle value </TD>
+<TD Width="">An attempt was made to format a framework request object that did not contain an IRP.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x3</TD>
+<TD Width="">The WDF request handle value </TD>
+<TD Width="">The driver attempted to send a framework request that has already been sent to an I/O target.  </TD>
+</TR>
+<TR valign="top">
+<TD Width="">0x4</TD>
+<TD Width="">A pointer to a WDR_REQUEST_FATAL_ERROR_INFORMATION_LENGTH_MISMATCH_DATA structure that contains a pointer to the IRP, a WDF request handle value, an IRP major function, and the number of bytes attempted to be written </TD>
+<TD Width="">The driver has completed a framework request, but has written more bytes to the output buffer than are specified in the IRP.  </TD>
+</TR>
+</table>
+<P></P>
+<P>If Parameter 1 is equal to 0xB, then an attempt to acquire or release a lock was invalid.  In this case, Parameter 3 further specifies the error that has been made.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter 2</TH>
+<TH Width="">Parameter 3</TH>
+<TH Width="">Cause of Error</TH>
+</TR>
+<TR valign="top">
+<TD Width="">The handle value </TD>
+<TD Width="">0x0</TD>
+<TD Width="">A handle passed to <b>WdfObjectAcquireLock </b>or <b>WdfObjectReleaseLock</b> represents an object that does not support synchronization locks.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">A WDF spin lock handle </TD>
+<TD Width="">0x1</TD>
+<TD Width="">The spin lock is being released by a thread that did not acquire it.</TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Cause</H4>
+<P>See the description of each code in the Parameters section for an explanation of the cause.</P>
+<P></P>
+<H4>Resolving the Problem</H4>
+<P>Typically, the dump file will yield further information on the driver that caused this bug check.</P>
+<P>If Parameter 1 is equal to <b>0x2</b>, examine the caller&#8217;s stack to determine the lock in question.</P>
+<P>If Parameter 1 is equal to <b>0x3</b>, the driver's Kernel-Mode Driver Framework error log will include details about the outstanding references.</P>
+<P>If Parameter 1 is equal to <b>0x4</b>, use the <a href="r17_cmds_i_9b6813c3-7868-43c4-94fb-42e3488dd53a.xml.htm"><b>ln</b> debugger</a> command with the value of <i>Parameter 3</i> as its argument to determine which function requires a non-NULL parameter.</P>
+<P>If Parameter 1 is equal to <b>0x7</b>, use the <b>!wdfkd.wdfhandle</b> <i>Parameter 2</i> extension command to determine the handle type. </P>
+<P>If Parameter 1 is equal to <b>0xA</b>, then the WDF_QUEUE_FATAL_ERROR_DATA structure will indicate either the problematic request or the queue handle.  It will also indicate the NTSTATUS, if not STATUS_SUCCESS, when available.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x10D:  WDF_VIOLATION RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

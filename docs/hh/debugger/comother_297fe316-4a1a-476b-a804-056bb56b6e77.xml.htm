@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetDataParameters</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetDataParameters"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetDataParameters"/>
+<MSHelp:Keyword Index="A" Term="ComOther_297fe316-4a1a-476b-a804-056bb56b6e77.xml"/>
+<META NAME="MS-HKWD" CONTENT="GetDataParameters (IDebugBreakpoint) method">
+<META NAME="MS-HKWD" CONTENT="IDebugBreakpoint::GetDataParameters method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="ComOther_297fe316-4a1a-476b-a804-056bb56b6e77.xml"></A>GetDataParameters</H1>
+<P><P>The <b>GetDataParameters</b> method returns the parameters for a <a href="dbg_glossary_12a77c01-d02e-4d54-ab50-bc0fc7388ceb.xml.htm#4d5a4a35-a0a2-49c3-87f8-97d78cb0284a">processor breakpoint</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugBreakpoint::GetDataParameters(</b><BR><b>    OUT PULONG  </b><i>Size</i><b>,</b><BR><b>    OUT PULONG  </b><i>AccessType</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Size</i></DT>
+<DD>The size, in bytes, of the memory block whose access triggers the <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#0b1614a6-b26e-4079-8a25-381977fa2c44">breakpoint</a>.  For more information about restrictions on the value of <i>Size</i> based on the processor type, see <a href="engine_dg_139ab0e2-36b9-463b-bfdd-05cd64791d4f.xml.htm#317ec7de-2f16-437f-9768-6c3f4258d8bd">Valid Parameters for Processor Breakpoints</a>.</DD>
+<DT><i>AccessType</i></DT>
+<DD>Tthe type of access that triggers the breakpoint.  For a list of possible values, see <a href="engine_dg_139ab0e2-36b9-463b-bfdd-05cd64791d4f.xml.htm#317ec7de-2f16-437f-9768-6c3f4258d8bd">Valid Parameters for Processor Breakpoints</a>.</DD>
+</DL>
+<H4>Return Value</H4>
+<P><b>GetDataParameters</b> might return one of the following values:</P>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+<DT>E_NOINTERFACE</DT>
+<DD>The breakpoint is not a processor breakpoint.  For more information about the breakpoint type, see <a href="comother_3305c400-f816-463b-a643-4495bf546460.xml.htm"><b>GetType</b></a>.</DD>
+</DL>
+<P>This method might also return other error values.  For more information about possible return values, ssee <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a>.</P>
+<H4>Comments</H4>
+<P>The <a href="comother_1e2f7a47-0f38-492a-a8b2-9eaa124a2f20.xml.htm"><b>GetParameters</b></a> method also returns the information that is returned in <i>Size</i> and <i>AccessType</i>.</P>
+<P>For more information about breakpoint properties, see <a href="engine_dg_139ab0e2-36b9-463b-bfdd-05cd64791d4f.xml.htm">Controlling Breakpoint Flags and Parameters</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Versions: </b>Available in all versions of <b>IDebugBreakpoint</b>.</p>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetDataParameters RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

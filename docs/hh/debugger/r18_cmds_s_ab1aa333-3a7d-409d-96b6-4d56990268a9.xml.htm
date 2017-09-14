@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>sx, sxd, sxe, sxi, sxn, sxr, sx- (Set Exceptions)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, sx, sxd, sxe, sxi, sxn, sxr, sx- (Set Exceptions)"><xml><MSHelp:Keyword Index="A" Term="r18_cmds_S_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml"/>
+<META NAME="MS-HKWD" CONTENT="sx (Set Exceptions) command">
+<META NAME="MS-HKWD" CONTENT="sxd (Set Exceptions) command">
+<META NAME="MS-HKWD" CONTENT="sxe (Set Exceptions) command">
+<META NAME="MS-HKWD" CONTENT="sxi (Set Exceptions) command">
+<META NAME="MS-HKWD" CONTENT="sxn (Set Exceptions) command">
+<META NAME="MS-HKWD" CONTENT="sxr (Set Exceptions) command">
+<META NAME="MS-HKWD" CONTENT="Set Exceptions (sx - sxd - sxe - sxi - sxn) command">
+<META NAME="MS-HKWD" CONTENT="exceptions, Set Exceptions (sx - sxd - sxe - sxi - sxn) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r18_cmds_S_ab1aa333-3a7d-409d-96b6-4d56990268a9.xml"></A>sx, sxd, sxe, sxi, sxn, sxr, sx- (Set Exceptions)</H1>
+<P>The <b>sx</b><i>*</i> commands control the action that the debugger takes when an exception occurs in the application that is being debugged, or when certain events occur.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>sx</b> <BR><BR><b>sx</b>{<b>e</b>|<b>d</b>|<b>i</b>|<b>n</b>} [<b>-c</b> <b>"</b><i>Cmd1</i><b>"</b>] [<b>-c2</b> <b>"</b><i>Cmd2</i><b>"</b>] [<b>-h</b>] {<i>Exception</i>|<i>Event</i>|<b>*</b>} <BR><BR><b>sx-</b> [<b>-c</b> <b>"</b><i>Cmd1</i><b>"</b>] [<b>-c2</b> <b>"</b><i>Cmd2</i><b>"</b>] {<i>Exception</i>|<i>Event</i>|<b>*</b>} <BR><BR><b>sxr</b><BR></nobr></P>
+<DL><H4>Parameters</H4>
+<DT><b>-c "</b><i>Cmd1</i><b>"</b></DT>
+<DD>Specifies a command that is executed if the exception or event occurs. This command is executed when the <a href="dbg_glossary_115ca2a1-47f8-405f-a4f7-a7446892d897.xml.htm#721095c2-e24a-4306-b08a-12feea466aa2"><i>first chance</i></a> to handle this exception occurs, regardless of whether this exception breaks into the debugger. You must enclose the <i>Cmd1</i> string in quotation marks. This string can include multiple commands, separated by semicolons. The space between the <nobr><b>-c</b></nobr> and the quoted command string is optional.</DD>
+<DT><b>-c2</b> <b>"</b><i>Cmd2</i><b>"</b></DT>
+<DD>Specifies a command that is executed if the exception or event occurs and is not handled on the first chance. This command is executed when the <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#a48a7a88-0cc3-46d0-a1c9-2ccfeebb4c01"><i>second chance</i></a> to handle this exception occurs, regardless of whether this exception breaks into the debugger. You must enclose the <i>Cmd2</i> string in quotation marks. This string can include multiple commands, separated by semicolons. The space between the <nobr><b>-c2</b></nobr> and the quoted command string is optional.</DD>
+<DT><b>-h</b></DT>
+<DD>Changes the specified event's handling status instead of its break status. If <i>Event</i> is <b>cc</b>, <b>hc</b>, <b>bpec</b>, or <b>ssec</b>, you do not have to use the <b>-h</b> option.</DD>
+<DT><i>Exception</i></DT>
+<DD>Specifies the exception number that the command acts on, in the current radix.</DD>
+<DT><i>Event</i></DT>
+<DD>Specifies the event that the command acts on. These events are identified by short abbreviations. For a list of the events, see <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a>.</DD>
+<DT><b>*</b></DT>
+<DD>Affects all exceptions that are not otherwise explicitly named for <b>sx</b>. For a list of explicitly named exceptions, see <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a>.</DD>
+</DL>
+<H4>Environment</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">User mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">Live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">All </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>sx</b> command displays the list of exceptions for the current process and the list of all nonexception events and displays the default behavior of the debugger for each exception and event.</P>
+<P>The <b>sxe</b>, <b>sxd</b>, <b>sxn</b>, and <b>sxi</b> commands control the debugger settings for each exception and event.</P>
+<P>The <b>sxr </b>command resets all of the exception and event filter states to the default settings.  Commands are cleared, break and continue options are reset to their default settings, and so on.</P>
+<P>The <b>sx-</b> command does not change the handling status or the break status of the specified exception or event. This command can be used if you wish to change the first-chance command or second-chance command associated with a specific event, but do not wish to change anything else. </P>
+<P>If you include the <b>-h</b> option (or if the <b>cc</b>, <b>hc</b>, <b>bpec</b>, or <b>ssec</b> events are specified), the <b>sxe</b>, <b>sxd</b>, <b>sxn</b>, and <b>sxi</b> commands control the <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#2ed842be-ebe1-40fa-8a33-cf3a9364b7ee"><i>handling status</i></a> of the exception or event. In all other cases, these commands control the <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#f661734a-d279-4ca5-b9bd-802dad9782af"><i>break status</i></a> of the exception or event.</P>
+<P>When you are setting the break status, these commands have the following effects.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Status name</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sxe</b></TD>
+<TD Width=""><b>Break</b><BR><BR><b>(Enabled)</b><BR><BR></TD>
+<TD Width="">When this exception occurs, the target immediately breaks into the debugger before any other error handlers are activated. This kind of handling is called <i>first chance</i> handling.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sxd</b></TD>
+<TD Width=""><b>Second chance break</b><BR><BR><b>(Disabled)</b><BR><BR></TD>
+<TD Width="">The debugger does not break for a first-chance exception of this type (although a message is displayed). If other error handlers do not address this exception, execution stops and the target breaks into the debugger. This kind of handling is called <i>second chance</i> handling.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sxn</b></TD>
+<TD Width=""><b>Output</b><BR><BR><b>(Notify)</b><BR><BR></TD>
+<TD Width="">When this exception occurs, the target application does not break into the debugger at all. However, a message is displayed that notifies the user of this exception.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sxi</b></TD>
+<TD Width=""><b>Ignore</b></TD>
+<TD Width="">When this exception occurs, the target application does not break into the debugger at all, and no message is displayed.</TD>
+</TR>
+</table>
+<P></P>
+<P>When you are setting the handling status, these commands have the following effects:</P><B></B><table>
+<TR valign="top">
+<TH Width="">Command</TH>
+<TH Width="">Status name</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sxe</b></TD>
+<TD Width=""><b>Handled</b></TD>
+<TD Width="">The event is considered handled when execution resumes.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>sxd,<BR>sxn,<BR>sxi</b></TD>
+<TD Width=""><b>Not Handled</b></TD>
+<TD Width="">The event is considered not handled when execution resumes.</TD>
+</TR>
+</table>
+<P></P>
+<P>You can use the <b>-h</b> option together with exceptions, not events. Using this option with <b>ch</b>, <b>bpe</b>, or <b>sse</b> sets the handling status for <b>hc</b>, <b>bpec</b>, or <b>ssec</b>, respectively. If you use the <nobr><b>-h</b></nobr> option with any other event, it has no effect.</P>
+<P>Using the <b>-c</b> or <b>-c2</b> options with <b>hc</b>, <b>bpec</b>, or <b>ssec</b> associates the specified commands with <b>ch</b>, <b>bpe</b>, or <b>sse</b>, respectively.</P>
+<P>In the following example, the <b>sxe</b> command is used to set the break status of access violation events to break on the first chance, and to set the first-chance command that will be executed at that point to <b>r eax</b>.  Then the <b>sx-</b> command is used to alter the first-chance command to <b>r ebx</b>, without changing the handling status.  Finally, a portion of the <b>sx</b> output is shown, indicating the current settings for access violation events:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>sxe -c "r eax" av</b> <BR><BR>0:000&gt; <b>sx- -c "r ebx" av</b> <BR><BR>0:000&gt; <b>sx</b> <BR>  av - Access violation - break - not handled<BR>       Command: "r ebx"<BR>  . . .  <BR></nobr></P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about break status and handling status, descriptions of all event codes, a list of the default status for all events, and other methods of controlling this status, see <a href="r06_use_gui_36654d02-f0f5-4cca-80b3-2aaefd8fd67d.xml.htm">Controlling Exceptions and Events</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: sx, sxd, sxe, sxi, sxn, sxr, sx- (Set Exceptions) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

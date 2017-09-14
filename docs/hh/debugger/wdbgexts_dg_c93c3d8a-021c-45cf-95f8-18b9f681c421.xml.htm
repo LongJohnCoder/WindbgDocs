@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>WdbgExts Target Information</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, WdbgExts Target Information"><xml><MSHelp:Keyword Index="A" Term="WdbgExts_DG_c93c3d8a-021c-45cf-95f8-18b9f681c421.xml"/>
+<META NAME="MS-HKWD" CONTENT="WdbgExts extensions, target"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_DG_c93c3d8a-021c-45cf-95f8-18b9f681c421.xml"></A>WdbgExts Target Information</H1>
+<P>To determine if the target uses 32-bit or 64-bit pointers for memory addresses, use the function <a href="wdbgexts_ref_488f3445-c3ae-4847-8e3b-cf3892dcd365.xml.htm"><b>IsPtr64</b></a>.</P>
+<P>For information about the target's operating system, use the <a href="wdbgexts_ref_fa1f5367-924d-478c-a3cb-ca08bf8dde2f.xml.htm"><b>Ioctl</b></a> operation <a href="wdbgexts_ref_33e7f185-3831-439b-9e92-8d942627f66b.xml.htm"><b>IG_GET_KERNEL_VERSION</b></a>.  To get the total number of processors on the target and find out which one is the current processor, use the function <a href="wdbgexts_ref_951ca10a-3a73-433c-bd95-f054967f0df6.xml.htm"><b>GetKdContext</b></a>.</P>
+<P></P>
+<P>The <a href="wdbgexts_ref_a9b54b49-d8ac-4bee-a837-3986a250403a.xml.htm"><b>GetDebuggerData</b></a> function returns a KDDEBUGGER_DATA64 or KDDEBUGGER_DATA32 structure that contains information about the <a href="dbg_glossary_4146d166-2a62-4d54-90b7-5cdadb272bf0.xml.htm#97fed5e2-80ad-4319-91e6-e2e000fbcbd6">target</a> that the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">debugger engine</a> has queried or determined during the current <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#92258fee-c7c3-423c-af60-ab4583902c9b">session</a>.  This information includes certain key target locations and specific status values.</P>
+<P></P>
+<P>The debugger caches some information obtained from the target. The function <a href="wdbgexts_ref_da3c4b36-e7b1-429a-9d63-4f92101a189a.xml.htm"><b>GetDebuggerCacheSize</b></a> will return the size of this cache.</P>
+<P></P>
+<H4>Additional Information</H4>
+<P>For a more powerful target API, see <a href="engine_dg_e6d71f34-178f-47ae-ab7c-7e7dc07927d9.xml.htm">Target Information</a> in the <a href="engine_dg_d8e9e675-c026-46b5-b182-4da8b2e1f9a6.xml.htm">Using the Debugger Engine API</a> section of this documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: WdbgExts Target Information RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

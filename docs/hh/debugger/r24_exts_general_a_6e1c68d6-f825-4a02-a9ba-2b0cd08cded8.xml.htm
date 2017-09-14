@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!analyze</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !analyze"><xml><MSHelp:Keyword Index="A" Term="r24_exts_general_A_6e1c68d6-f825-4a02-a9ba-2b0cd08cded8.xml"/>
+<META NAME="MS-HKWD" CONTENT="!analyze extension">
+<META NAME="MS-HKWD" CONTENT="!analyze extension, syntax">
+<META NAME="MS-HKWD" CONTENT="bug check, !analyze extension">
+<META NAME="MS-HKWD" CONTENT="triage.ini file, !analyze extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r24_exts_general_A_6e1c68d6-f825-4a02-a9ba-2b0cd08cded8.xml"></A>!analyze</H1>
+<P><P>The <b>!analyze</b> extension displays information about the current exception or bug check.</P>
+</P>
+<H4>Syntax</H4>
+<P>User-Mode </P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!analyze</b> [<b>-v</b>] [<b>-f</b> | <b>-hang</b>] [<b>-D</b> <i>BucketID</i>] <BR><b>!analyze</b> <b>-c</b> [ <b>-load</b> <i>KnownIssuesFile</i> | <b>-unload</b> | <b>-help</b> ]<BR></nobr></P>
+<P></P>
+<P>Kernel-Mode </P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!analyze</b> [<b>-v</b>] [<b>-f</b> | <b>-hang</b>]  [<b>-D</b> <i>BucketID</i>] <BR><b>!analyze</b> <b>-c</b> [ <b>-load</b> <i>KnownIssuesFile</i> | <b>-unload</b> | <b>-help</b> ]<BR><b>!analyze</b> <b>-show</b> <i>BugCheckCode</i> [<i>BugParameters</i>] <BR></nobr></P>
+<P></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>-v</b></DT>
+<DD>Displays verbose output.   </DD>
+<DT><b>-f</b></DT>
+<DD>Generates the <b>!analyze</b> exception output. Use this parameter to see an exception analysis even when the debugger does not detect an exception.</DD>
+<DT><b>-hang</b></DT>
+<DD>Generates <b>!analyze</b> hung-application output. Use this parameter when the target has experienced a bug check or exception, but an analysis of why an application hung is more relevant to your problem. In kernel mode, <b>!analyze -hang</b> investigates locks that the system holds and then scans the DPC queue chain. In user mode, <b>!analyze -hang</b> analyzes the thread stack analysis to determine whether any threads are blocking other threads. <P>Before you run this extension in user mode, consider changing the current thread to the thread that you think has stopped responding (that is, hung), because the exception might have changed the current thread to a different one.  </P>
+</DD>
+<DT><b>-D</b> <i>BucketID</i></DT>
+<DD>Displays only those items that are relevant to the specified <i>BucketID</i>.   </DD>
+<DT><b>-show</b></DT>
+<DD>Displays information about the specified bug check code. </DD>
+<DT><b>-c</b></DT>
+<DD>Continues execution when the debugger encounters a known issue. If the issue is not a "known" issue, the debugger remains broken into the target.<P>You can use the <b>-c</b> option with the following subparameters. These subparameters configure the list of known issues. They do not cause execution to occur by themselves. Until you run <b>!analyze -c -load</b> at least one time, <b>!analyze -c</b> has no effect.</P>
+<DL><DT><b>-load</b> <i>KnownIssuesFile</i></DT>
+<DD>Loads the specified known-issues file. <i>KnownIssuesFile</i> specifies the path and file name of this file. This file must be in XML format. You can find a sample file in the <i>sdk\samples\analyze_continue</i> subdirectory of the debugger installation directory. (You must have performed a full install of Debugging Tools for Windows to have this file. For more information about a full installation, see <a href="r02_setup_1_06851ef4-eab5-4780-8b1f-005f51a67541.xml.htm">Debugger Installation</a>.)<P>The list of known issues in the <i>KnownIssuesFile</i> file is used for all later <b>!analyze -c</b> commands until you use <b>!analyze -c -unload</b>, or until you use <b>!analyze -c -load</b> again (at which point the new data replaces the old data).</P>
+</DD>
+<DT><b>-unload</b></DT>
+<DD>Unloads the current list of known issues.</DD>
+<DT><b>-help</b></DT>
+<DD>Displays help for the <b>!analyze -c</b> extension commands extension in the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a>. </DD>
+</DL>
+</DD>
+<DT><i>BugCheckCode</i></DT>
+<DD>Specifies the bug check code to display.</DD>
+<DT><i>BugParameters</i></DT>
+<DD>Specifies up to four bug check parameters. Separate these parameters with spaces. This parameter enables you to further refine your search.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Ext.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>In user mode, the <b>!analyze</b> and <b>!analyze -v</b> extensions display information about the current exception.</P>
+<P>In kernel mode, these extensions display information about the most recent bug check. If a bug check occurs, the <b>!analyze</b> display is automatically generated. You can use <b>!analyze -v</b> to show additional information. If you want to see only the basic bug check parameters, you can use the <a href="r19_metacmds_a_88506020-c902-4aa5-8b38-9aaeab637277.xml.htm"><b>.bugcheck (Display Bug Check Data)</b></a> command.</P>
+<P>You can use the <b>!analyzebugcheck -show</b> extension command to display information about an individual bug check code. This display is  not affected by the current status of the target computer.</P>
+<P>The following example shows the results of <b>!analyze</b> after a breakpoint is hit.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>!analyze</b><BR>Last event: Hit breakpoint 10000<BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For sample analysis of a user-mode exception and of a kernel-mode stop error (that is, crash), and for more information about how <b>!analyze</b> uses the <i>triage.ini</i> file, see <a href="t01_basic_440c4072-eddc-4eb8-9fd2-dbd1cadef89e.xml.htm">Using the <b>!analyze</b> Extension</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !analyze RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

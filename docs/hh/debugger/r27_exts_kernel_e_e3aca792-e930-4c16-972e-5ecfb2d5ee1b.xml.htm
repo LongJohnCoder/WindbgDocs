@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ioreslist</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ioreslist"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_e3aca792-e930-4c16-972e-5ecfb2d5ee1b.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ioreslist extension">
+<META NAME="MS-HKWD" CONTENT="IO_RESOURCE_REQUIREMENTS_LIST"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_e3aca792-e930-4c16-972e-5ecfb2d5ee1b.xml"></A>!ioreslist</H1>
+<P>The <b>!ioreslist</b> extension displays an IO_RESOURCE_REQUIREMENTS_LIST structure.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ioreslist</b> <i>Address</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the hexadecimal address of the IO_RESOURCE_REQUIREMENTS_LIST structure.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>Here is an example of the output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!ioreslist 0xe122b768</b><BR><BR>IoResList at 0xe122b768 : Interface 0x5  Bus 0  Slot 0xe<BR>  Alternative 0 (Version 1.1)<BR>    Preferred Descriptor 0 - Port (0x1) Device Exclusive (0x1)<BR>      Flags (0x01) - PORT_IO<BR>      0x000100 byte range with alignment 0x000100<BR>      1000 - 0x10ff<BR>    Alternative Descriptor 1 - Port (0x1) Device Exclusive (0x1)<BR>      Flags (0x01) - PORT_IO<BR>      0x000100 byte range with alignment 0x000100<BR>      0 - 0xffffffff<BR>    Descriptor 2 - DevicePrivate (0x81) Device Exclusive (0x1)<BR>      Flags (0000) -<BR>      Data:              : 0x1 0x0 0x0<BR>    Preferred Descriptor 3 - Memory (0x3) Device Exclusive (0x1)<BR>      Flags (0000) - READ_WRITE<BR>      0x001000 byte range with alignment 0x001000<BR>      40080000 - 0x40080fff<BR>    Alternative Descriptor 4 - Memory (0x3) Device Exclusive (0x1)<BR>      Flags (0000) - READ_WRITE<BR>      0x001000 byte range with alignment 0x001000<BR>      0 - 0xffffffff<BR>    Descriptor 5 - DevicePrivate (0x81) Device Exclusive (0x1)<BR>      Flags (0000) -<BR>      Data:              : 0x1 0x1 0x0<BR>    Descriptor 6 - Interrupt (0x2) Shared (0x3)<BR>      Flags (0000) - LEVEL_SENSITIVE<BR>      0xb - 0xb<BR><BR></nobr></P>
+<P>The IO_RESOURCE_REQUIREMENTS_LIST contains information about:</P><B></B><UL type="disc">
+<LI>Resource types<P>There are four types of resources: I/O, Memory, IRQ, DMA.</P>
+</LI>
+<LI>Descriptors<P>Each preferred setting has a "Preferred" descriptor and a number of "Alternative" descriptors.</P>
+</LI>
+</UL>
+<P></P>
+<P>This resource list contains the following requests:</P><B></B><UL type="disc">
+<LI>I/O Ranges<P>Prefers a range of 0x1000 to 0x10FF inclusive, but can use any 0x100 range between 0 and 0xFFFFFFFF, provided it is 0x100-aligned. (For example, 0x1100 to 0x11FF is acceptable.)</P>
+</LI>
+<LI>Memory<P>Prefers a range of 0x40080000 to 0x40080FFF, but can use any range that is of size 0x1000, is 0x1000-aligned, and is located between 0 and 0xFFFFFFFF.</P>
+</LI>
+<LI>IRQ<P>Must use IRQ 0xB.</P>
+</LI>
+</UL>
+<P></P>
+<P>Interrupts and DMA channels are represented as ranges with the same beginning and end.</P>
+<H4>Additional Information</H4>
+<P>See <a href="t12_drivers_ba75fa45-397b-473d-88dc-c5e0d598456a.xml.htm">Plug and Play Debugging</a> for applications of this extension command. For information about the IO_RESOURCE_REQUIREMENTS_LIST structure, see the Windows Driver Kit (WDK) documentation.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ioreslist RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

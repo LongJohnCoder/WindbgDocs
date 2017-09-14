@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>GetExpressionSyntax</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, GetExpressionSyntax"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="GetExpressionSyntax"/>
+<MSHelp:Keyword Index="A" Term="IDebugControl_9eae3270-fd1f-4d50-875b-3bd9908ba76d.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugControl::GetExpressionSyntax method">
+<META NAME="MS-HKWD" CONTENT="GetExpressionSyntax (IDebugControl) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugControl_9eae3270-fd1f-4d50-875b-3bd9908ba76d.xml"></A>GetExpressionSyntax</H1>
+<P><P>The <b>GetExpressionSyntax</b> method returns the current syntax that the <a href="dbg_glossary_e3f0f980-4b88-4e00-934b-0443c9640c06.xml.htm#cc3d62e3-661f-4077-bb5b-189750153eae">engine</a> is using for evaluating expressions.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugControl3::GetExpressionSyntax(</b><BR><b>    OUT PULONG  </b><i>Flags</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Receives the expression syntax.  It is set to one of the following values:<DL><DT>DEBUG_EXPR_MASM</DT>
+<DD>Expressions will be evaluated according to MASM syntax. For details of this syntax, see <a href="r13_syntax_eac65e6b-f13f-4fcb-8973-e64ba0ac8865.xml.htm">MASM Numbers and Operators</a>.</DD>
+<DT>DEBUG_EXPR_CPLUSPLUS</DT>
+<DD>Expressions will be evaluated according to C++ syntax. For details of this syntax, see <a href="r13_syntax_372599d3-a780-4c57-9219-05575c604059.xml.htm">C++ Numbers and Operators</a>.</DD>
+</DL>
+</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>GetExpressionSyntax</b> is available in <b>IDebugControl3</b> and later versions.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>Dbgeng.h</i>.  Include <i>Dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_6f1ebcec-908b-4f00-b9cf-e7a036bc05e5.xml.htm"><b>SetExpressionSyntax</b></a>, <a href="idebugcontrol_88ebbf3c-a6f7-41d1-84e8-291a8db101c2.xml.htm"><b>SetExpressionSyntaxByName</b></a>, <a href="idebugcontrol_c985be86-1f8b-4b54-ae35-a7dec5980cec.xml.htm"><b>Evaluate</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: GetExpressionSyntax RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>* (Comment Line Specifier)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, *  (Comment Line Specifier)"><xml><MSHelp:Keyword Index="A" Term="r14_tokens_b6aec954-2042-4d63-9351-88be964c23a7.xml"/>
+<META NAME="MS-HKWD" CONTENT="* (Comment Line Specifier) token">
+<META NAME="MS-HKWD" CONTENT="comment line token (*)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r14_tokens_b6aec954-2042-4d63-9351-88be964c23a7.xml"></A>*  (Comment Line Specifier)</H1>
+<P>If the asterisk ( <b>*</b> ) character is at the start of a command, then the rest of the line is treated as a comment, even if a semicolon appears after it.</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>*</b> [<i>any text</i>] <BR></nobr></P>
+<H4>Comments</H4>
+<P>The <b>*</b> token is parsed like any other debugger command.  Therefore, if you want to create a comment after another command, you must precede the <b>*</b> token with a semicolon.</P>
+<P>The <b>*</b> token will cause the remainder of the line to be ignored, even if a semicolon appears after it. This differs from <a href="r14_tokens_a3068665-cb8d-44d6-b392-d0ddfad8583c.xml.htm"><b>$$  (Comment Specifier)</b></a>, which creates a comment that can be terminated by a semicolon.</P>
+<P>For example, the following command will display <b>eax</b> and <b>ebx</b>, but not <b>ecx</b>:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>0:000&gt; <b>r eax; $$ some text; r ebx; * more text; r ecx</b> <BR><BR></nobr></P>
+<P></P>
+<P>Text prefixed by the <b>*</b> or <b>$$</b> tokens is not processed in any way. If you are performing remote debugging, a comment entered in the debugging server will not be visible in the debugging client, nor vice-versa. If you wish to make comment text appear in the Debugger Command window in a way visible to all parties, you should use <a href="r20_metacmds_e_6eb44413-2b5e-423a-8a53-73546ee1e3d1.xml.htm"><b>.echo (Echo Comment)</b></a>.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: *  (Comment Line Specifier) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

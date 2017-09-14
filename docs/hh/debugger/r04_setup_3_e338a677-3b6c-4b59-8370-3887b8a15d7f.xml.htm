@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Windows 95, 98, and Millennium</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Windows 95, 98, and Millennium"><xml><MSHelp:Keyword Index="A" Term="r04_setup_3_e338a677-3b6c-4b59-8370-3887b8a15d7f.xml"/>
+<META NAME="MS-HKWD" CONTENT="Windows, Windows 95">
+<META NAME="MS-HKWD" CONTENT="Windows, Windows 98">
+<META NAME="MS-HKWD" CONTENT="Windows, Windows Millennium Edition">
+<META NAME="MS-HKWD" CONTENT="debugger.exe">
+<META NAME="MS-HKWD" CONTENT="wdeb386.exe"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r04_setup_3_e338a677-3b6c-4b59-8370-3887b8a15d7f.xml"></A>Windows 95, 98, and Millennium</H1>
+<P>Debugging Tools for Windows no longer supports debugging of applications that run on Windows 95, Windows 98, or Windows Millennium Edition.</P>
+<P>If you want to perform user-mode debugging on one of these versions of Windows, you should use Debugging Tools for Windows version 6.7.5.1.  You can install this package from the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=8708" target="_blank">Debugging Tools for Windows</a> Web site. </P>
+<P>When using an older version of Debugging Tools for Windows, refer to the documentation included in that package, not a more recent version of the Debugging Tools for Windows documentation.  In particular, refer to the topic entitled "Limitations of Debugging on Windows 9x/Me" in that documentation.</P>
+<H4>Kernel-Mode Debugging of Windows 95, 98, and Millennium Computers</H4>
+<P>Debugging Tools for Windows cannot be used for kernel mode debugging of Windows 95, Windows 98, or Windows Millennium Edition targets.</P>
+<P>For kernel-mode debugging of these Windows versions, use the WDeb family of debuggers (for example, <i>wdeb386.exe</i>) or the Microsoft Windows System Debugger (<i>debugger.exe</i>). For more information, see the Windows Millennium Edition DDK or the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=87071" target="_blank">Debugging Tools for Windows Me</a> Web site. </P>
+<H4>Installing the Debuggers on Windows 95, 98, or Millennium</H4>
+<P>It is more complicated to install Debugging Tools for Windows on Windows 95, 98, and Millennium for two reasons.  First, Unicode support must be supplied to these operating systems. Second, the installation program used by Debugging Tools for Windows is not compatible with these operating systems.</P>
+<P>The following procedure describes how to install Debugging Tools for Windows successfully on these operating systems.</P><B>To install the debugging tools on Windows 95, 98, or Millennium</B><OL type="1">
+<LI>Install the Microsoft Layer for Unicode (MSLU) on the Windows 95, 98, or Millennium computer.  You can download MSLU from <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=86543" target="_blank">Microsoft Layer for Unicode on Windows 95, 98, and Me Systems</a>. </LI>
+<LI>Download Debugging Tools for Windows, version 6.7.5.1 (or any earlier version) from the <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=8708" target="_blank">Debugging Tools for Windows</a> Web site. Install this package on any NT-based Windows computer. </LI>
+<LI>Create a new folder on the Windows 95, 98, or Millennium computer where you want to use the debugging tools. Copy the contents of the Debugging Tools for Windows folder from your NT-based computer to this new folder. </LI>
+</OL>
+<P></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Windows 95, 98, and Millennium RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

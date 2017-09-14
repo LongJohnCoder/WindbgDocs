@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Example 9: Detecting a Pool Memory Leak</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Example 9:  Detecting a Pool Memory Leak"><xml><MSHelp:Keyword Index="A" Term="GFlags_6d4e8cad-6699-4443-aeca-21f7c87e55bb.xml"/>
+<META NAME="MS-HKWD" CONTENT="PoolMon, PoolMon and GFlags"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_6d4e8cad-6699-4443-aeca-21f7c87e55bb.xml"></A>Example 9:  Detecting a Pool Memory Leak</H1>
+<P>The following example uses GFlags to set the system-wide <a href="gflags_c858b070-5a5e-4afc-9cfa-f933c81c8793.xml.htm"><b>Enable pool tagging</b></a> flag in the registry. Then, it uses PoolMon (<i>poolmon.exe</i>), a tool in the Windows Driver Kit, to display the size of the memory pools. </P>
+<P>PoolMon monitors the bytes in the paged and nonpaged memory pools and sorts them by pool tag. By running PoolMon periodically, you can identify pools that expand continuously over time. This pattern often indicates a memory leak.</P>
+<P class="note"><b>Notes</b>  Pool tagging is permanently enabled in Windows Server 2003 and later versions of Windows. On these systems, the <b>Enable pool tagging</b> check box on the <b>Global Flags</b> dialog box is dimmed, and commands to enable or disable pool tagging fail. <P class="note">If pool tagging is not enabled, PoolMon fails and displays the following message: "Query pooltags Failed c0000002." </P>
+</P><B>To detect a pool memory leak</B><OL type="1">
+<LI>To enable pool tagging for all processes in versions of Windows earlier than Windows Server 2003, set the system-wide <a href="gflags_c858b070-5a5e-4afc-9cfa-f933c81c8793.xml.htm"><b>Enable pool tagging</b></a> flag in the registry. The following command line uses the flag abbreviation method, but you can identify the flag by its hexadecimal value or use the <b>Global Flags</b> dialog box:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /r +ptg </b><BR></nobr></P>
+</LI>
+<LI>Restart the computer to make the registry change effective.</LI>
+<LI>Run PoolMon periodically by using the following command. In this command, the <b>/b</b> parameter sorts the pools in descending size order. <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>poolmon /b </b><BR></nobr></P>
+<P>In response, PoolMon displays allocations from the memory pools in descending size order , including the number of allocate operations and free operations, and the amount of memory remaining in the pool (in the Bytes column).</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Memory: 16224K Avail: 4564K PageFlts: 31 InRam Krnl: 684K P: 680K<BR> Commit: 24140K Limit: 24952K Peak: 24932K  Pool N: 744K P: 2180K<BR><BR> Tag  Type    Allocs          Frees         Diff   Bytes      Per Alloc<BR>-----------------------------------------------------------------------<BR><BR> CM   Paged    1283 (   0)    1002 (   0)    281 1377312 (     0) 4901<BR>Strg  Paged   10385 (  10)    6658 (   4)   3727  317952 (   512)   85<BR> Fat  Paged    6662 (   8)    4971 (   6)   1691  174560 (   128)  103<BR>MmSt  Paged     614 (   0)     441 (   0)    173   83456 (     0)  482<BR><BR></nobr></P>
+<P>If the value in the <b>Bytes</b> column for an allocation expands continuously for no obvious reason, there might be a memory leak in that pool.</P>
+</LI>
+<LI>Clear the <b>Enable pool tagging</b> flag. <P>The following command line uses the flag abbreviation method, but you can identify the flag by its hexadecimal value or use the <b>Global Flag</b>s dialog box:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /r -ptg </b><BR></nobr></P>
+</LI>
+<LI>Restart Windows to make the registry change effective. </LI>
+</OL>
+<P></P>
+<P class="note"><b>Note</b>  Use the append symbol (<b>&gt;&gt;</b>) to redirect the PoolMon output to a log file. Later, you can examine the log file for pool size trends. For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>poolmon.exe /b &gt;&gt; poolmon.log </b><BR></nobr></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Example 9:  Detecting a Pool Memory Leak RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

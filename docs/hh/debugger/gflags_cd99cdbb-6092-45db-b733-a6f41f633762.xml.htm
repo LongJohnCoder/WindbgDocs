@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Example 14: Configuring Special Pool</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Example 14:  Configuring Special Pool"><xml><MSHelp:Keyword Index="A" Term="GFlags_cd99cdbb-6092-45db-b733-a6f41f633762.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_cd99cdbb-6092-45db-b733-a6f41f633762.xml"></A>Example 14:  Configuring Special Pool</H1>
+<P>Beginning in Windows Vista, you can configure the <a href="gflags_49d59420-7de8-4925-8f99-7ee0e8acd8ec.xml.htm">Special Pool</a> feature as a kernel flag setting or as a registry setting. If you configure it as a kernel flag (run time) setting, you do not need to restart the computer to make the change effective. In earlier versions of Windows, Special Pool is available only as a registry setting.</P>
+<P>Also, beginning in Windows Vista, you can set and configure the Special Pool feature from the command line. In earlier versions of Windows, you can set and configure the Special Pool feature only in the Global Flags dialog box.</P>
+<H4>Request Special Pool by pool tag without rebooting</H4>
+<P>The following command requests special pool for all allocations with the <b>Tag1</b> pool tag. This setting becomes effective immediately, but it is lost if you shut down or restart Windows.</P>
+<P>This command uses the <b>/k</b> parameter to specify a kernel flag (run time) setting and the <nobr><b>+spp</b></nobr> abbreviation to set a special pool request.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /k +spp Tag1</b><BR></nobr></P>
+<P></P>
+<P>Gflags responds by printing:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>Special Pool set to 0x31676154</b><BR><b>PoolTagOverruns set to 0x1</b><BR><b>Current Running Kernel Settings are: 00000000</b><BR></nobr></P>
+<P></P>
+<P>Notice that the special pool allocation request is not a kernel flag setting and is not reflected in the kernel settings value.</P>
+<P>Also, a special pool allocation request does not change the value of the overrun (0x1) or underrun (0x0) setting for special pool. To change from overruns, the default, to underruns, use the Gflags Dialog Box. For information, see <a href="gflags_7ea6eb91-6f7d-4b8e-8cfc-13c0fd02b549.xml.htm">Detecting Overruns and Underruns</a>.</P>
+<P>You cannot display the pool tag at the command line. To verify that the pool tag is a kernel setting, use the Gflags Dialog Box.</P>
+<H4>Request Special Pool by pool tag in the registry</H4>
+<P>The following command requests special pool for all allocations with the <b>Tag1</b> pool tag. Because this setting is stored in the registry, you must restart the computer to make it effective, but it remains effective until you change it. </P>
+<P>This command uses the <b>/r</b> parameter to specify a registry setting and the <nobr><b>+spp</b></nobr> abbreviation to set a special pool request.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /r +spp Tag1</b><BR></nobr></P>
+<P></P>
+<P>Gflags responds by printing:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>Special Pool set to 0x31676154</b><BR><b>PoolTagOverruns set to 0x1</b><BR><b>Current Boot Registry Settings are: 00000000</b><BR></nobr></P>
+<P></P>
+<P>Notice that the special pool allocation request is not a registry flag setting and is not reflected in the registry settings value.</P>
+<P>Also, a special pool allocation request does not change the value of the overrun (0x1) or underrun (0x0) setting for special pool. To change from overruns, the default, to underruns, use the Gflags Dialog Box. For information, see <a href="gflags_7ea6eb91-6f7d-4b8e-8cfc-13c0fd02b549.xml.htm">Detecting Overruns and Underruns</a>.</P>
+<P>To verify that the value has been added to the registry, use Reg or Regedit to display the value of the <b>PoolTag</b> entry in the <b>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</b> key.</P>
+<P>For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>c:&gt;reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -v PoolTag<BR><b>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</b><BR><b>    PoolTag    REG_DWORD    0x31676154</b><BR></nobr></P>
+<P></P>
+<H4>Request Special Pool by size without rebooting</H4>
+<P>The following command requests special pool for allocations of 1 to 8 bytes on an x86 computer with a PAGE_SIZE of 0x1000 and allocation granularity of 8 bytes.</P>
+<P>This command uses the <b>/k</b> parameter to specify a kernel flag (run time) setting and the <nobr><b>+spp</b></nobr> abbreviation to set a special pool request. The size value is preceded by <nobr><b>0x</b></nobr> to indicate that it is a size and not a pool tag.</P>
+<P>The value, 0x10, is calculated by adding the allocation granularity (8 bytes) to the largest size in the range (8 bytes) for a total of 16 bytes (0x10). For help in determining the correct value to enter, see "Selecting an Allocation Size" in <a href="gflags_49d59420-7de8-4925-8f99-7ee0e8acd8ec.xml.htm">Special Pool</a>. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /k +spp 0x10</b><BR></nobr></P>
+<P></P>
+<P>Gflags responds by printing:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>Special Pool set to 0x10</b><BR><b>PoolTagOverruns set to 0x1</b><BR><b>Current Running Kernel Settings are: 00000000</b><BR></nobr></P>
+<P></P>
+<P>Again, the special pool allocation request is not a kernel flag setting and is not reflected in the kernel settings value.</P>
+<P>Also, a special pool allocation request does not change the value of the overrun (0x1) or underrun (0x0) setting for special pool. To change from overruns, the default, to underruns, use the Gflags Dialog Box. For information, see <a href="gflags_7ea6eb91-6f7d-4b8e-8cfc-13c0fd02b549.xml.htm">Detecting Overruns and Underruns</a>.</P>
+<P></P>
+<H4>Request Special Pool by size in the registry</H4>
+<P>The following command requests special pool for allocations of <nobr>1024 to 1040 bytes</nobr> on an x64 computer with a <nobr>PAGE_SIZE of 0x1000</nobr> and allocation granularity of <nobr>16 bytes</nobr>.</P>
+<P>This command uses the <b>/r</b> parameter to specify a system-wide registry setting and the <nobr><b>+spp</b></nobr> abbreviation to set a special pool request. The size value is preceded by <nobr><b>0x</b></nobr> to indicate that it is a size and not a pool tag.</P>
+<P>The value, 0x420, is calculated by adding the allocation granularity (16 bytes) to the largest size in the range (1040 bytes) for a total of 1056 bytes (0x420). For help in determining the correct value to enter, see "Selecting an Allocation Size" in <a href="gflags_49d59420-7de8-4925-8f99-7ee0e8acd8ec.xml.htm">Special Pool</a>. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /r +spp 0x420</b><BR></nobr></P>
+<P></P>
+<P>Gflags responds by printing:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>Special Pool set to 0x420</b><BR><b>PoolTagOverruns set to 0x1</b><BR><b>Current Boot Registry Settings are: 00000000</b><BR></nobr></P>
+<P></P>
+<P>Again, the special pool allocation request is not a registry flag setting and is not reflected in the registry settings value.</P>
+<P>Also, a special pool allocation request does not change the value of the overrun (0x1) or underrun (0x0) setting for special pool. To change from overruns, the default, to underruns, use the Gflags Dialog Box. For information, see <a href="gflags_7ea6eb91-6f7d-4b8e-8cfc-13c0fd02b549.xml.htm">Detecting Overruns and Underruns</a>.</P>
+<P>To verify that the value has been added to the registry, use Reg or Regedit to display the value of the <b>PoolTag</b> entry in the <b>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</b> key.</P>
+<P>For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>c:&gt;reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -v PoolTag<BR>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management<BR>    PoolTag    REG_DWORD    0x420<BR></nobr></P>
+<P></P>
+<H4>Cancel a Special Pool Request</H4>
+<P>The following command cancels a request for Special Pool as a kernel flag (run time) setting. The command is the same for a request by pool tag or by size.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /k -spp</b><BR></nobr></P>
+<P></P>
+<P>The following command cancels a request for Special Pool as a registry setting. The command is the same for a request by pool tag or by size.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>gflags /r -spp</b><BR></nobr></P>
+<P></P>
+<P>When the command is successful, Gflags responds by printing:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>Special Pool value has been deleted.</b><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Example 14:  Configuring Special Pool RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

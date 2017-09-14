@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Script Files</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Script Files"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_1aa9e034-9f62-48a5-b48e-12b581f5d211.xml"/>
+<META NAME="MS-HKWD" CONTENT="script file">
+<META NAME="MS-HKWD" CONTENT="script file, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_1aa9e034-9f62-48a5-b48e-12b581f5d211.xml"></A>Using Script Files</H1>
+<P>A <i>script file</i> is a text file that contains a sequence of debugger commands. There are a variety of ways for the debugger to load a script file and execute it. A script file can contain commands to be executed sequentially or can use a more complex flow of execution.</P>
+<P>To execute a script file, you can do one of the following:</P><B></B><UL type="disc">
+<LI><i>(KD and CDB only; only when the debugger starts)</i>  Create a script file that is named <i>Ntsd.ini</i> and put it in the directory where you are starting the debugger from. The debugger automatically executes this file when the debugger starts. To use a different file for the startup script file, specify the path and file name by using the <b>-cf</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> or by using the <b>IniFile</b> entry in the <a href="r04_setup_3_0b710f80-3d76-456f-8081-6db088c4422e.xml.htm"><i>Tools.ini</i></a> file.</LI>
+<LI><i>(KD and CDB only; when each session starts)</i>  Create a script file and specify its path and file name by using the <b>-cfr</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a>. The debugger automatically executes this script file when the debugger starts and every time that the target is restarted.    </LI>
+<LI>Use the <b>$&lt;</b>, <b>$&gt;&lt;</b>, <b>$$&lt;</b>, and <b>$$&gt;&lt;</b> commands to execute a script file after the debugger is running. For more information about the syntax, see <a href="r15_cmds_a_85f99aae-f246-400c-8d44-625b758a0e10.xml.htm"><b>$&lt;, $&gt;&lt;, $&gt;&lt;, $$&gt;&lt; (Run Script File)</b></a>.</LI>
+</UL>
+<P></P>
+<P>The <b>$&gt;&lt;</b> and <b>$$&gt;&lt;</b> commands differ from the other methods of running scripts in one important way. When you use these commands, the debugger opens the specified script file, replaces all carriage returns with semicolons, and executes the resulting text as a single command block. These commands are useful for running scripts that contain debugger command programs. For more information about these programs, see <a href="r05_use_start_81070bdc-2ffb-4a22-a785-0935553fb4c4.xml.htm">Using Debugger Command Programs</a>.<a href="r05_use_start_81070bdc-2ffb-4a22-a785-0935553fb4c4.xml.htm">X</a></P>
+<P>You cannot use commands that are available only in WinDbg (such as <a href="r22_metacmds_s_7aa8be7d-3947-4880-9823-91395c6cd8d0.xml.htm"><b>.lsrcfix (Use Local Source Server)</b></a>, <a href="r22_metacmds_s_e9022e5e-5e3a-4e2c-8642-92f2eb79d503.xml.htm"><b>.lsrcpath (Set Local Source Path)</b></a>, <a href="r21_metacmds_l_2bf63e00-f90a-4416-a13a-b4d4153e12dd.xml.htm"><b>.open (Open Source File)</b></a>, and <a href="r22_metacmds_s_c487d5ac-196c-463f-a460-76b9e77e1a9c.xml.htm"><b>.write_cmd_hist (Write Command History)</b></a>) in script files, even if the script file is executed in WinDbg. In addition, you cannot use the <a href="r19_metacmds_a_38521679-84ac-4d49-8c48-499a37886617.xml.htm"><b>.beep (Speaker Beep)</b></a>, <a href="r19_metacmds_a_b086fb22-fd89-4b62-b840-b14d4093914b.xml.htm"><b>.cls (Clear Screen)</b></a>, <a href="r20_metacmds_e_2af0efbe-e8dd-4085-92ae-92175131aa6f.xml.htm"><b>.hh (Open HTML Help File)</b></a>, <a href="r20_metacmds_e_d4a949c6-e66f-45aa-a576-7215696f949d.xml.htm"><b>.idle_cmd (Set Idle Command)</b></a>, <a href="r21_metacmds_l_09834828-8263-4a4c-8c79-2f80f1f7d609.xml.htm"><b>.remote (Create Remote.exe Server)</b></a>, kernel-mode <a href="r21_metacmds_l_f69b1b8a-144b-4099-9ef6-0ba58a7db533.xml.htm"><b>.restart (Restart Kernel Connection)</b></a>, user-mode <a href="r21_metacmds_l_977adba8-167e-4a9e-8e9c-090b51ced28b.xml.htm"><b>.restart (Restart Target Application)</b></a>, or <a href="r22_metacmds_s_4545597b-8952-46bc-9870-d1e8e7a17648.xml.htm"><b>.wtitle (Set Window Title)</b></a> commands in a script file.  </P>
+<P class="note"><b>Note</b>  WinDbg supports the same scripts as KD and CDB, with one minor exception. You can use the <a href="r21_metacmds_l_88782c3d-0a61-4fe9-9cb2-049100f627a8.xml.htm"><b>.remote_exit (Exit Debugging Client)</b></a> command only in a script file that KD or CDB uses.   You cannot exit from a debugging client though a script that is executed in WinDbg.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Script Files RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

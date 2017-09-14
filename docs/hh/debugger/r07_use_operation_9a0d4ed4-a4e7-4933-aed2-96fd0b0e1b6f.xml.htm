@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging Managed Code</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging Managed Code"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_9a0d4ed4-a4e7-4933-aed2-96fd0b0e1b6f.xml"/>
+<META NAME="MS-HKWD" CONTENT="managed code debugging">
+<META NAME="MS-HKWD" CONTENT="managed code debugging, overview">
+<META NAME="MS-HKWD" CONTENT=".NET common language runtime">
+<META NAME="MS-HKWD" CONTENT="common language runtime (CLR)">
+<META NAME="MS-HKWD" CONTENT="CLR (common language runtime)">
+<META NAME="MS-HKWD" CONTENT="JIT compiler">
+<META NAME="MS-HKWD" CONTENT="JITted code">
+<META NAME="MS-HKWD" CONTENT="JITted code, [See &quot;managed code debugging&quot;]">
+<META NAME="MS-HKWD" CONTENT="Visual C++ with managed extensions">
+<META NAME="MS-HKWD" CONTENT="C++ with managed extensions">
+<META NAME="MS-HKWD" CONTENT="C# debugging">
+<META NAME="MS-HKWD" CONTENT="Visual Basic debugging">
+<META NAME="MS-HKWD" CONTENT="JScript debugging">
+<META NAME="MS-HKWD" CONTENT="sos.dll">
+<META NAME="MS-HKWD" CONTENT="SOS extensions"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_9a0d4ed4-a4e7-4933-aed2-96fd0b0e1b6f.xml"></A>Debugging Managed Code</H1>
+<P>You can also use the WinDbg, CDB, and NTSD to perform limited debugging of target applications that contain managed code.</P>
+<H4>Introduction to Managed Code</H4>
+<P><i>Managed code</i> is code that is executed together with the Microsoft .NET common language runtime (CLR). The .NET CLR manages raw code and data for the application and provides enhanced services such as garbage collection and platform-independent code.</P>
+<P>Compiled code that requires this runtime is called <i>managed code</i>. Code that does not require this runtime is called <i>unmanaged code</i>. An application that consists of only managed code is called a <i>managed application</i>.</P>
+<P>A managed .NET application can execute on any platform that supports the .NET CLR because the binary code that the compiler produces is not platform-specific. Binary code in a managed application is in Microsoft intermediate language (MSIL). The binary also includes object information and other references (known as <i>metadata</i>).</P>
+<P>A managed application differs from a traditional application because many details of the application's execution are determined by the runtime, such as how data structures are laid out in memory, and how native code is generated and used. When the application is run, the runtime makes decisions about data usage and code usage while the application is running, producing native code that is specific to the platform. The process of generating native code from MSIL is called <i>managing</i> or <i>just-in-time (JIT) compiling</i> (or sometimes <i>JITting</i>). The component of the runtime that performs this translation step is called the <i>JIT compiler</i>.</P>
+<P>After the JIT compiler has compiled the MSIL for a specific method, that method's stub is replaced with the address of the compiled code. Whenever this method is later called, the native code executes and the JIT compiler does not have to be involved in the process. </P>
+<H4>Building Managed Code</H4>
+<P>You can build managed code by using several compilers that are manufactured by a variety of software producers. In particular, Microsoft Visual Studio .NET can build managed code from four different languages:</P><B></B><UL type="disc">
+<LI>C++ with managed extensions</LI>
+<LI>C#</LI>
+<LI>Visual Basic</LI>
+<LI>JScript</LI>
+</UL>
+<P></P>
+<P>By default, Microsoft Visual C++ .NET does not build managed applications. You must request this kind of build through a command-line switch or through the graphical interface.</P>
+<H4>Debugging Managed Code</H4>
+<P>You can debug managed code by using the <i>Sos.dll</i> extension. This extension is located in the <i>\clr10</i> subdirectory of the Debugging Tools for Windows installation.</P>
+<P></P>
+<P>To use this extension, load it and then type <b>!clr10\sos.help</b>..</P>
+<P>This command lists all available extension commands and their parameters.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging Managed Code RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

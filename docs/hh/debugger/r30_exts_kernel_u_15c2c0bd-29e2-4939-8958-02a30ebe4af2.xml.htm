@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!vtop</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !vtop"><xml><MSHelp:Keyword Index="A" Term="r30_exts_kernel_U_15c2c0bd-29e2-4939-8958-02a30ebe4af2.xml"/>
+<META NAME="MS-HKWD" CONTENT="!vtop extension">
+<META NAME="MS-HKWD" CONTENT="virtual address, !vtop extension">
+<META NAME="MS-HKWD" CONTENT="physical address, !vtop extension">
+<META NAME="MS-HKWD" CONTENT="addresses, !vtop extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r30_exts_kernel_U_15c2c0bd-29e2-4939-8958-02a30ebe4af2.xml"></A>!vtop</H1>
+<P>The <b>!vtop</b> extension converts a virtual address to the corresponding physical address, and displays other page table and page directory information.</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!vtop</b> <i>PFN VirtualAddress</i> <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!vtop</b> <i>PFN VirtualAddress</i> <BR><b>!vtop 0</b><i> VirtualAddress</i> <BR></nobr></P>
+<P></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>DirBase</i></DT>
+<DD>Specifies the directory base for the process. Each process has its own virtual address space. Use the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a> extension to determine the directory base for a process.</DD>
+<DT><i>PFN</i></DT>
+<DD>Specifies the page frame number (PFN) of the directory base for the process. </DD>
+<DT><b>0</b></DT>
+<DD><i>(Windows XP and later)</i>  Causes <b>!vtop</b> to use the current <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm#e761ea09-6dde-4444-9472-9e71933f4e71">process context</a> for address translation.</DD>
+<DT><i>VirtualAddress</i></DT>
+<DD>Specifies the virtual address whose page is desired.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Kdextx86.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>To use this command, first use the <a href="r28_exts_kernel_n_e9446ce7-8219-425d-b7d2-48404ce64e3e.xml.htm"><b>!process</b></a> extension to determine the directory base of the process. The page frame number (PFN) of this directory base can be found by removing the three trailing hexadecimal zeros (in other words, by right-shifting the number 12 bits).</P>
+<P>Here is an example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!process 0 0</b><BR>**** NT ACTIVE PROCESS DUMP ****<BR>....<BR>PROCESS ff779190  SessionId: 0  Cid: 04fc    Peb: 7ffdf000  ParentCid: 0394<BR>    <b>DirBase: 098fd000</b>  ObjectTable: e1646b30  TableSize:   8.<BR>    Image: MyApp.exe<BR><BR></nobr></P>
+<P>Since the directory base is 0x098FD000, its PFN is 0x098FD.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt;<b> !vtop 98fd 12f980</b><BR>Pdi 0 Pti 12f<BR>0012f980 09de9000 pfn(09de9)<BR><BR></nobr></P>
+<P>Notice how the trailing three zeros are optional. The <b>!vtop</b> extension displays the page directory index (PDI), the page table index (PTI), the virtual address that you had originally input, the physical address of the beginning of the physical page, and the page frame number (PFN) of the page table entry (PTE).</P>
+<P>If you want to convert the virtual address 0x0012F980 to a physical address, you simply have to take the last three hexadecimal digits (0x980) and add them to the physical address of the beginning of the page (0x09DE9000). This gives the physical address 0x09DE9980.</P>
+<P>If you forget to remove the three zeros, and pass the full directory base to <b>!vtop</b> instead of the PFN, the results will usually be correct. This is because when <b>!vtop</b> receives a number too large to be a PFN, it right-shifts it twelve bits and uses that number instead:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt;<b> !vtop 98fd 12f980</b><BR>Pdi 0 Pti 12f<BR>0012f980 09de9000 pfn(09de9)<BR><BR>kd&gt; <b>!vtop 98fd000 12f980</b><BR>Pdi 0 Pti 12f<BR>0012f980 09de9000 pfn(09de9)<BR></nobr></P>
+<P>However, it is better to always use the PFN, because some directory base values will not be converted in this manner.</P>
+<H4>Additional Information</H4>
+<P>For other methods of achieving these results, see <a href="t01_basic_d3a32249-4872-4355-acf2-45e4743c4d66.xml.htm">Converting Virtual Addresses to Physical Addresses</a>. Also see <a href="r28_exts_kernel_n_27c12d34-9386-442e-805c-4a62ad3002d0.xml.htm"><b>!ptov</b></a>. For information about page tables and page directories, see <i>Microsoft Windows Internals,</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !vtop RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

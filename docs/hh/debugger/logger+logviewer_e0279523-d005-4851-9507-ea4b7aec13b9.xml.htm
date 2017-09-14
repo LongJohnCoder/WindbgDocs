@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Logger.exe</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Logger.exe"><xml><MSHelp:Keyword Index="A" Term="Logger+LogViewer_e0279523-d005-4851-9507-ea4b7aec13b9.xml"/>
+<META NAME="MS-HKWD" CONTENT="Logger, logger.exe">
+<META NAME="MS-HKWD" CONTENT="logger.exe">
+<META NAME="MS-HKWD" CONTENT="Logger, stand-alone"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Logger+LogViewer_e0279523-d005-4851-9507-ea4b7aec13b9.xml"></A>Using <i>Logger.exe</i></H1>
+<P>One way to activate Logger is to run the stand-alone <i>Logger.exe</i> program. This is essentially a very small debugger that can only take a single target. To run it, include the name of the target application on the command line:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>logger</b> <i>Target</i> <BR><BR></nobr></P>
+<P>When this is activated, it will load the specified application, and insert code into the target application that will jump off to a routine that loads and initializes <i>Logexts.dll</i> in the target application process. This is referred to as "injecting Logger into the target application."</P>
+<P>The <i>Logger.exe</i> utility and the <i>Logexts.dll</i> module are the two components of this Logger vehicle. They communicate through a shared section of memory that includes the output file handles, current category mask, and a pointer to the log output buffer.</P>
+<P>A window entitled <b>Logger (debugger)</b> will appear. This window will display the progress of Logger.</P>
+<H4>Change Settings Dialog Box</H4>
+<P>After the initialization finishes and the initial display is complete, the <b>Change Settings</b> dialog box will appear. This allows you to configure the Logger settings. The various settings are described here:</P>
+<DL><DT><b>API Settings</b></DT>
+<DD>This list displays the available API categories. The highlighted categories will be logged; the non-highlighted categories will not. The first time you run Logger, all categories will be highlighted. However, on subsequent runs, Logger will keep track of which categories are selected for a given target application.<P>If a category is disabled, the hooks for all APIs in that category will be removed so that there is no longer any performance overhead. COM hooks are not removed because they cannot be re-enabled at will.</P>
+<P>Enabling only certain categories can be useful when you are only interested in a particular type of interaction that the program is having with Windows &#8212; for example, file operations. This reduces the log file size and also reduces the effect that Logger has on the execution speed of the process.</P>
+</DD>
+<DT><b>Logging</b></DT>
+<DD>This section contains <b>Enable</b> and <b>Disable</b> radio buttons. Disabling logging will cause all API hooks to be removed in an effort to allow the program to run freely. COM hooks are not removed because they cannot be re-enabled at will.</DD>
+<DT><b>Inclusion / Exclusion List</b></DT>
+<DD>This section controls the module inclusion/exclusion list. It is often desirable to log only those function calls that are made from a certain module or set of modules. To facilitate that, Logger allows you to specify a module inclusion list or, alternatively, a module exclusion list. For instance, you would use an inclusion list if you only wanted to log calls from one or two module. If you wanted to log calls made from all modules except a short list of modules, you would use an exclusion list. The modules <i>Logexts.dll</i> and <i>Kernel32.dll</i> are always excluded, since Logger is not permitted to log itself.</DD>
+<DT><b>Flush the Buffer</b></DT>
+<DD>This button will flush the current output buffer. As a performance consideration, log output is flushed to disk only when the output buffer is full. By default, the buffer is 2144 bytes.<P>Since the buffer memory is managed by the target application, the automatic writing of the buffer to the log files on the disk will not occur if there is an access violation or some other non-recoverable error in the target application. In such cases, you should try to activate the target application's window and hit F12 to get this dialog box back, and then press <b>Flush the Buffer</b>. If this is not done, the most recently-logged functions might not appear in the log files.</P>
+</DD>
+<DT><b>Go</b></DT>
+<DD>This causes the target application to begin executing.</DD>
+</DL>
+<P></P>
+<H4>Running the Target Application</H4>
+<P>Once you have chosen the settings, click <b>Go</b>. The dialog box will close and the target application will begin to run.</P>
+<P>If you make the target application's window active and press F12, it will break into Logger. This will cause the target application to freeze and the <b>Change Settings</b> dialog box to reappear. You can alter the settings if you wish, and then press <b>Go</b> to continue execution.</P>
+<P>You can let the target application run for as long as you wish. If it terminates normally or due to an error, the logging will stop and cannot be restarted.</P>
+<P>When you wish to exit, select <b>File | Exit</b> and click <b>Yes</b>. If the target application is still running, it will be terminated.</P>
+<H4>Limitations of <i>Logger.exe</i></H4>
+<P>When you are running Logger through the <i>Logger.exe</i> tool, it will create only one output file &#8212; an <i>.lgv</i> file. No text file will be written. However, a <i>.txt</i> file of size zero will be created; this could overwrite a text log written by the debugger previously.  </P>
+<P>The output file will always be placed in <i>LogExts</i> subdirectory of the desktop; this location cannot be changed.</P>
+<P>These limitations will not apply if you are running Logger through the debugger and <i>Logexts.dll</i>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Logger.exe RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

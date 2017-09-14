@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Source Line Syntax</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Source Line Syntax"><xml><MSHelp:Keyword Index="A" Term="r13_syntax_01fe3d5e-b319-4199-9143-d7676bc32279.xml"/>
+<META NAME="MS-HKWD" CONTENT="expressions, source line numbers">
+<META NAME="MS-HKWD" CONTENT="source files and paths, line number syntax">
+<META NAME="MS-HKWD" CONTENT="line number syntax">
+<META NAME="MS-HKWD" CONTENT="source files and paths, file name syntax">
+<META NAME="MS-HKWD" CONTENT="file name syntax">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, source line numbers"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r13_syntax_01fe3d5e-b319-4199-9143-d7676bc32279.xml"></A>Source Line Syntax</H1>
+<P>You can specify source file line numbers as all or part of an MASM expression. These numbers evaluate to the offset of the executable code that corresponds to this source line.</P>
+<P class="note"><b>Note</b>  You cannot use source line numbers as part of a C++ expression. For more information about when MASM and C++ expression syntax is used, see <a href="r05_use_start_21325f4c-38a6-4965-821e-4f8f424a486d.xml.htm">Evaluating Expressions</a>.</P>
+<P>You must enclose source file and line number expressions by grave accents ( <b>` </b>). The following example shows the full format for source file line numbers.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>`</b>[[<i>Module</i><b>!</b>]<i>Filename</i>][<b>:</b><i>LineNumber</i>]<b>`</b><BR></nobr></P>
+<P>If you have multiple files that have identical file names, <i>Filename</i> should include the whole directory path and file name. This directory path should be the one that is used at compilation time. If you supply only the file name or only part of the path and if there are multiple matches, the debugger uses the first match that it finds.    </P>
+<P>If you omit <i>Filename</i>, the debugger uses the source file that corresponds to the current program counter.   </P>
+<P><i>LineNumber</i> is read as a decimal number unless you precede it with <b>0x</b>, regardless of the current default radix. If you omit <i>LineNumber</i>, the expression evaluates to the initial address of the executable that corresponds to the source file.</P>
+<P></P>
+<P>Source line expressions are not evaluated in CDB unless you issue a <a href="r21_metacmds_l_6a615bfe-9d01-4d00-8250-23c7b95bb0ae.xml.htm"><b>.lines (Toggle Source Line Support)</b></a> command or you include the <a href="r12_cmdline_3ec269e8-a2d8-43e4-8758-2201481cd323.xml.htm"><b>-lines</b> command-line option</a> when you start WinDbg..</P>
+<P>For more information about source debugging, see <a href="r07_use_operation_6f6332fb-7207-429d-8a27-a2ff0bf02bbb.xml.htm">Debugging in Source Mode</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Source Line Syntax RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

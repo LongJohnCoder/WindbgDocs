@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>/pae</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, /pae"><xml><MSHelp:Keyword Index="A" Term="bootini_17b4305e-23ac-40ea-99db-4858b29a5d66.xml"/>
+<META NAME="MS-HKWD" CONTENT="/pae"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_17b4305e-23ac-40ea-99db-4858b29a5d66.xml"></A>/pae</H1>
+<P>The <b>/pae</b> parameter enables Physical Address Extension (PAE). This parameter directs the system to load the PAE version of the Windows kernel.<P>For more information about using the /<b>pae</b> parameter and the other parameters that affect PAE configuration, see <a href="bootini_29e11bdf-06dc-489d-af10-27a8c03d3a62.xml.htm">Boot Parameters to Configure DEP and PAE</a>.</P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>/pae</b> <BR></nobr></P>
+<P></P>
+<H4>Comments</H4>
+<P>The <b>/pae</b> parameter is supported only on Windows Server 2003, Windows XP, and Windows 2000. On Windows Vista and later versions of Windows, use the <b>PAE</b> element with the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDEdit /set</b></a> command.</P>
+<P>PAE is an addressing strategy that uses a page-translation hierarchy to enable systems with 32-bit addressing to address more than 4 GB of physical memory. PAE also supports several advanced system and processor features, such as Data Execution Prevention (DEP; "No execute"), Non-Uniform Memory Architecture (NUMA), and hot-add memory, so it is also used on computers with less than 4 GB of memory. PAE must be supported by the processor and by the operating system.</P>
+<P>PAE is supported beginning with the Windows 2000 operating system. </P><B></B><table>
+<TR valign="top">
+<TH Width="">Operating system</TH>
+<TH Width="">Maximum memory support with PAE</TH>
+</TR>
+<TR valign="top">
+<TD Width="">Windows 2000 Advanced Server</TD>
+<TD Width="">8 GB of physical RAM</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Windows 2000 Datacenter Server</TD>
+<TD Width="">32 GB of physical RAM</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Windows XP (all versions)</TD>
+<TD Width="">4 GB of physical RAM*</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Windows Server 2003 (and SP1), Standard Edition</TD>
+<TD Width="">4 GB of physical RAM*</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Windows Server 2003, Enterprise Edition</TD>
+<TD Width="">32 GB of physical RAM</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Windows Server 2003, Datacenter Edition</TD>
+<TD Width="">64 GB of physical RAM</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Windows Server 2003 SP1, Enterprise Edition</TD>
+<TD Width="">64 GB of physical RAM</TD>
+</TR>
+<TR valign="top">
+<TD Width="">Windows Server 2003 SP1, Datacenter Edition</TD>
+<TD Width="">128 GB of physical RAM</TD>
+</TR>
+</table>
+<P></P>
+<P>* Total physical address space is limited to 4 GB on these versions of Windows. When 4 GB of memory is installed and PAE is enabled, the amount of available memory could be less than what you would expect. For more information about memory usage, see article Q888137, <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=3100&amp;id=888137" target="_blank">"The amount of RAM reported by the System Properties dialog box and the System Information tool is less than you expect after you install Windows XP Service Pack 2"</a> in the Microsoft Knowledge Base. </P>
+<P></P>
+<P>The <b>/pae</b> parameter is valid only on boot entries for 32-bit versions of Windows that run on computers with x86 and x64-based processors. On 32-bit versions of Windows, PAE is disabled by default. You must use the <b>/pae</b> boot parameter to enable PAE.</P>
+<P>However, Windows automatically enables PAE when the computer is configured for hot-add memory devices in memory ranges beyond the 4 GB region, as defined by the Static Resource Affinity Table (SRAT). <i>Hot-add memory </i>supports memory devices that you can add without rebooting or turning off the computer. In this case, because PAE must be enabled when the system starts, it is enabled automatically so that the system can immediately address extended memory that is added between restarts. Hot-add memory is supported only on Windows Server 2003, Datacenter Edition; Windows Server 2003, Enterprise Edition; Windows Server 2008, Datacenter Edition; Windows Server 2008, Enterprise IA64 Edition; and on the datacenter and enterprise editions of all later versions of Windows Server.  Moreover, for versions of Windows prior to Windows Server 2008, hot-add memory is supported only on computers with an ACPI BIOS, an x86 processor, and specialized hardware.  For Windows Server 2008 and later versions of Windows Server, it is supported for all processor architectures. </P>
+<P>On a computer that supports hardware-enabled Data Execution Prevention (DEP) and is running a 32-bit version of the Windows operating system that supports DEP, PAE is automatically enabled when DEP is enabled and, on all 32-bit versions of the Windows operating system, except Windows Server 2003 with SP1, PAE is disabled when you disable DEP. To enable PAE when DEP is disabled, you must enable PAE explicitly, by using <b>/noexecute=alwaysoff /pae</b>. For more information about DEP, see <a href="bootini_aff45176-bd02-43cf-9895-c212fa392de2.xml.htm"><b>/noexecute</b></a> and <a href="bootini_3d0f852c-df3d-4b82-a30d-de9cba86e8e1.xml.htm"><b>/execute</b></a>.</P>
+<P>PAE is required to support Cache Coherent Non-Uniform Memory Architecture (known as ccNUMA or NUMA) on computers with x86 processors, although Windows can run in non-NUMA mode on NUMA-capable computers without PAE. Even when it is required, PAE is not enabled automatically. NUMA is supported in all editions of Windows XP and Windows Vista, and in the Enterprise and Datacenter editions of Windows Server 2003.</P>
+<H4>Example</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Windows Server 2003, Enterprise" /fastdetect /pae<BR><BR></nobr></P>
+<H4>Bootcfg command</H4>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /raw "/pae" /A /ID 1<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: /pae RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

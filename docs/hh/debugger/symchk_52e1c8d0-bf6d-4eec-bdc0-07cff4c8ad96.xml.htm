@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>The SrcTool Utility</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, The SrcTool Utility"><xml><MSHelp:Keyword Index="A" Term="SymChk_52e1c8d0-bf6d-4eec-bdc0-07cff4c8ad96.xml"/>
+<META NAME="MS-HKWD" CONTENT="SrcSrv, SrcTool utility">
+<META NAME="MS-HKWD" CONTENT="SrcTool utility"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="SymChk_52e1c8d0-bf6d-4eec-bdc0-07cff4c8ad96.xml"></A>The SrcTool Utility</H1>
+<P>The SrcTool (<i>Srctool.exe</i>) utility lists all files indexed within the <i>.pdb</i> file.  For each file, it lists the full path, source control server, and version number of the file.  You can use this information for reference.</P>
+<P>You can also use SrcTool to list the raw source file information from the <i>.pdb</i> file.  To do this, use the <b>&#8211;s</b> switch on the command line.  </P>
+<P>SrcTool has other options as well.  Use the <b>?</b> switch to see them.  Of most interest is that this utility<i> </i>can be used to extract all of the source files from version control.  This is done with the <b>-x</b> switch.</P>
+<P class="note"><b>Note:</b>  Previous versions of this program  created a directory called <i>src</i> below the current directory when extracting files.  This is no longer the case.  If you want the <i>src</i> directory used, you must create it yourself and run the command from that directory.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: The SrcTool Utility RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

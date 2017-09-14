@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Process Syntax</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Process Syntax"><xml><MSHelp:Keyword Index="A" Term="r13_syntax_a48cd749-4fec-4281-b271-53b04a1b04ab.xml"/>
+<META NAME="MS-HKWD" CONTENT="process, command syntax">
+<META NAME="MS-HKWD" CONTENT="| (process identifier)">
+<META NAME="MS-HKWD" CONTENT="process, process identifier ( | )">
+<META NAME="MS-HKWD" CONTENT="process, process ID (PID)">
+<META NAME="MS-HKWD" CONTENT="PID (process ID)">
+<META NAME="MS-HKWD" CONTENT="|[] (process identifier)">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, | (process identifier)">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, |[] (process identifier)">
+<META NAME="MS-HKWD" CONTENT="process identifier ( | )">
+<META NAME="MS-HKWD" CONTENT="syntax rules for commands, processes"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r13_syntax_a48cd749-4fec-4281-b271-53b04a1b04ab.xml"></A>Process Syntax</H1>
+<P>Many debugger commands have process identifiers as their parameters. A vertical bar ( <b>|</b> ) appears before the process identifier.</P>
+<P>The process identifier can be one of the following values.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Process identifier</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><b>|.</b></TD>
+<TD Width="">The current process.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>|#</b></TD>
+<TD Width="">The process that caused the current exception or debug event.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>|*</b></TD>
+<TD Width="">All processes.</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>|</b><i>Number</i></TD>
+<TD Width="">The process whose ordinal is <i>Number</i>.  </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>|~[</b><i>PID</i><b>]</b></TD>
+<TD Width="">The process whose process ID is <i>PID</i>. (The brackets are required and you cannot add a space between the tilde (~) and the opening bracket.)</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>|[</b><i>Expression</i><b>]</b></TD>
+<TD Width="">The process whose process ID is the integer to which the numerical <i>Expression</i> resolves.</TD>
+</TR>
+</table>
+<P></P>
+<P>Processes are assigned ordinals as they are created. Note that this number differs from the process ID (PID) that the Microsoft Windows operating system uses.</P>
+<P>The current process defines the memory space and the set of threads that are used. When debugging begins, the current process is the one that caused the present exception or debug event (or the process that the debugger attached to). That process remains the current process until you specify a new one by using a <a href="r15_cmds_a_6d7e3f3c-4a87-4737-9587-07281a371f01.xml.htm"><b>|s (Set Current Process)</b></a> command or by using the <a href="r36_gui_1_8a25e803-69aa-49a0-b3ef-2f3334b803c5.xml.htm">Processes and Threads window</a> in WinDbg.</P>
+<P>Process identifiers are used as parameters in several commands, frequently as the command prefix. Note that WinDbg and CDB can debug child processes that the original process created. WinDbg and CDB can also attach to multiple unrelated processes.</P>
+<P>An example of the |[<i>Expression</i>] syntax would be [|@$t0].  In this example, the process changes depending on the value of a user-defined pseudo-register.  This syntax allows debugger scripts to programmatically select a process.</P>
+<H4>Controlling Processes in Kernel Mode</H4>
+<P>In kernel mode, you cannot control processes by using process identifiers. For more information about how to access process-specific information in kernel mode, see <a href="r07_use_operation_bdab0129-28de-4392-a221-53a08bcc468e.xml.htm">Changing Contexts</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Process Syntax RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

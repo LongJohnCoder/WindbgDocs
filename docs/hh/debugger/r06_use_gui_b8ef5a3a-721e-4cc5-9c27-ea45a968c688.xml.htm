@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Opening a Window</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Opening a Window"><xml><MSHelp:Keyword Index="A" Term="r06_use_gui_b8ef5a3a-721e-4cc5-9c27-ea45a968c688.xml"/>
+<META NAME="MS-HKWD" CONTENT="debugging information windows, opening"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r06_use_gui_b8ef5a3a-721e-4cc5-9c27-ea45a968c688.xml"></A>Opening a Window</H1>
+<P>When WinDbg begins a debugging session, the <a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a> automatically opens. The <a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a> also automatically opens, unless you deselect <a href="r37_gui_2_e8257b73-be67-4d7a-b87b-f2a7fcf9caaf.xml.htm"><b>Automatically Open Disassembly</b></a> on the <b>Window </b>menu.</P>
+<P>Whenever WinDbg discovers a source file that corresponds to the current program counter, WinDbg opens a <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a> for that file. For other ways to open Source windows, see <a href="r06_use_gui_b85f4b8e-eb5f-4502-9a0e-92d84cd3d8f1.xml.htm">Source Path</a>.</P>
+<P>You can use the following menu commands, toolbar buttons, and shortcut keys to switch to these windows. That is, if a window is not open, it opens. If a window is open but inactive, it becomes active. If a window is docked and there is a floating window in front of it, the docked window becomes active but the floating window stays in front of the docked window.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Window</TH>
+<TH Width="">Menu command</TH>
+<TH Width="">Button</TH>
+<TH Width="">Shortcut keys</TH>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r36_gui_1_7e0ce62e-7ce9-4b61-9fa8-06a775d1e8ba.xml.htm">Debugger Command window</a> </TD>
+<TD Width=""><b>View | Command</b> </TD>
+<TD Width="">
+<p><img src="tbcmd.bmp"></p> </TD>
+<TD Width="">ALT+1</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml.htm">Watch window</a> </TD>
+<TD Width=""><b>View | Watch</b> </TD>
+<TD Width="">
+<p><img src="tbwatch.bmp"></p> </TD>
+<TD Width="">ALT+2</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r36_gui_1_e05d85f5-f61e-41e4-b80a-f72b4fc0bdd7.xml.htm">Locals window</a> </TD>
+<TD Width=""><b>View | Locals</b> </TD>
+<TD Width="">
+<p><img src="tblocal.bmp"></p> </TD>
+<TD Width="">ALT+3</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r36_gui_1_1cc07c74-c19c-41ff-954e-8d74472ff458.xml.htm">Registers window</a> </TD>
+<TD Width=""><b>View | Registers</b> </TD>
+<TD Width="">
+<p><img src="tbreg.bmp"></p> </TD>
+<TD Width="">ALT+4</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory window</a> </TD>
+<TD Width=""><b>View | Memory</b> </TD>
+<TD Width="">
+<p><img src="tbmem.bmp"></p> </TD>
+<TD Width="">ALT+5</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r36_gui_1_b6fb163f-531c-4403-aa9d-100772f42189.xml.htm">Calls window</a> </TD>
+<TD Width=""><b>View | Call Stack</b> </TD>
+<TD Width="">
+<p><img src="tbcall.bmp"></p> </TD>
+<TD Width="">ALT+6</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml.htm">Disassembly window</a> </TD>
+<TD Width=""><b>View | Disassembly</b> </TD>
+<TD Width="">
+<p><img src="tbdisasm2.bmp"></p> </TD>
+<TD Width="">ALT+7</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r36_gui_1_19b6daa6-7c24-4279-883b-1790c32a1b9c.xml.htm">Scratch Pad</a> </TD>
+<TD Width=""><b>View | Scratch Pad</b> </TD>
+<TD Width="">
+<p><img src="tbspad.bmp"></p> </TD>
+<TD Width="">ALT+8</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r36_gui_1_8a25e803-69aa-49a0-b3ef-2f3334b803c5.xml.htm">Processes and Threads window</a> </TD>
+<TD Width=""><b>View | Processes and Threads</b></TD>
+<TD Width=""></TD>
+<TD Width="">ALT+9</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a> </TD>
+<TD Width="">Click <a href="r36_gui_1_6cfde3ed-776a-497e-9cc4-903c10a6a4bf.xml.htm"><b>File | Open Source File</b></a> and then select a source file.</TD>
+<TD Width="">
+<p><img src="tbopen.bmp"></p> </TD>
+<TD Width="">CTRL+O</TD>
+</TR>
+</table>
+<P></P>
+<P>You can also activate a window by selecting it from the <a href="r37_gui_2_2581f145-2f31-4098-a024-93afaf8f79ca.xml.htm">list of open windows</a> at the bottom of the <b>Window</b> menu.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Opening a Window RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Reading and Writing Registers and Flags</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Reading and Writing Registers and Flags"><xml><MSHelp:Keyword Index="A" Term="r07_use_operation_5cbc4ff1-b5f4-4308-b937-4343876eaaa8.xml"/>
+<META NAME="MS-HKWD" CONTENT="registers">
+<META NAME="MS-HKWD" CONTENT="registers, reading">
+<META NAME="MS-HKWD" CONTENT="registers, writing">
+<META NAME="MS-HKWD" CONTENT="flags">
+<META NAME="MS-HKWD" CONTENT="flags, reading">
+<META NAME="MS-HKWD" CONTENT="flags, writing"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r07_use_operation_5cbc4ff1-b5f4-4308-b937-4343876eaaa8.xml"></A>Reading and Writing Registers and Flags</H1>
+<P><i>Registers</i> are small volatile memory units that are located on the CPU. Many registers are dedicated to specific uses, and other registers are available for user-mode applications to use.</P>
+<P>The x86-based and Itanium-based processors have different collections of registers available. For more information about the registers on each processor, see <a href="t09_arch_x86_ef71f3fe-83ec-4c78-9482-cdf7a95eb3e5.xml.htm">Processor Architecture</a>.</P>
+<P>To manipulate CPU registers, you can do one of the following:</P><B></B><UL type="disc">
+<LI>Use the <a href="r17_cmds_i_68e6eb67-255f-4e2b-8017-183bb0be5f58.xml.htm"><b>r (Registers)</b></a> command to display or control the registers. You can customize this display by using several options or by using the <a href="r17_cmds_i_7920456a-7091-467f-a3d0-552c68eee937.xml.htm"><b>rm (Register Mask)</b></a> command.</LI>
+<LI><i>(WinDbg only)</i> Use the <a href="r36_gui_1_1cc07c74-c19c-41ff-954e-8d74472ff458.xml.htm">Registers window</a> to display or control the registers. You can customize the window to display the registers in any order.</LI>
+<LI><i>(WinDbg only)</i> Use the <a href="r36_gui_1_524b8f9f-bccf-4b4b-9cb6-5985351af354.xml.htm">Watch window</a> to display any list of registers or variables. You cannot use this window to alter the value of registers.</LI>
+</UL>
+<P></P>
+<P>Registers are also automatically displayed every time that the target stops. If you are stepping through your code with the <a href="r17_cmds_i_169c2b2f-7f47-4e0a-85a9-506f151f0a8f.xml.htm"><b>p (Step)</b></a> or <a href="r18_cmds_s_fe6d30ae-7c39-40db-a971-2aae584c13d3.xml.htm"><b>t (Trace)</b></a> commands, you see a register display at every step. To stop this display, use the <b>r</b> option when you use these commands.</P>
+<P>On an x86-based processor, the <b>r</b> option also controls several one-bit registers known as <i>flags</i>. To change these flags, you use a slightly different syntax than changing regular registers. For more information about these flags and an explanation of this syntax, see <a href="t09_arch_x86_689f0355-a582-450a-bd6c-f17c3167882f.xml.htm#68843a37-9f12-425d-87d4-eaa96cf8fb31">x86 Flags</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Reading and Writing Registers and Flags RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

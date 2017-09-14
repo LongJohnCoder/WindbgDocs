@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!runaway</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !runaway"><xml><MSHelp:Keyword Index="A" Term="r31_exts_user_ad164747-97c6-4751-88b5-5a21b13faedc.xml"/>
+<META NAME="MS-HKWD" CONTENT="!runaway extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r31_exts_user_ad164747-97c6-4751-88b5-5a21b13faedc.xml"></A>!runaway</H1>
+<P>The <b>!runaway</b> extension displays information about the time consumed by each thread.<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!runaway</b> [<i>Flags</i>] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Flags</i></DT>
+<DD>Specifies the kind of information to be displayed. <i>Flags</i> can be any combination of the following bits. The default value is 0x1.<DL><DT>Bit 0 (0x1)</DT>
+<DD>Causes the debugger to show the amount of user time consumed by each thread.</DD>
+<DT>Bit 1 (0x2)</DT>
+<DD>Causes the debugger to show the amount of kernel time consumed by each thread.</DD>
+<DT>Bit 2 (0x4)</DT>
+<DD>Causes the debugger to show the amount of time that has elapsed since each thread was created.</DD>
+</DL>
+<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Uext.dll</i> <BR><i>Ntsdexts.dll</i>   </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Uext.dll</i> <BR><i>Ntsdexts.dll</i>   </TD>
+</TR>
+</table>
+<P></P>
+<P>The <b>!runaway</b> extension can only be used during live debugging or when debugging crash dump files created by <a href="r19_metacmds_a_10de67ad-e8c3-42f2-ba9e-95a146a0320d.xml.htm"><b>.dump /mt</b></a> or <a href="r19_metacmds_a_10de67ad-e8c3-42f2-ba9e-95a146a0320d.xml.htm"><b>.dump /ma</b></a>.</P>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>This extension is a quick way to find out which threads are spinning out of control or consuming too much CPU time.</P>
+<P>The display identifies each thread by the debugger's internal thread numbering and by the thread ID in hexadecimal.  The debugger IDs are also shown.</P>
+<P>Here is an example:  </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><BR>0:001&gt; <b>!runaway 7</b><BR><BR> User Mode Time<BR> Thread       Time<BR> 0:55c        0:00:00.0093<BR> 1:1a4        0:00:00.0000<BR><BR> Kernel Mode Time<BR> Thread       Time<BR> 0:55c        0:00:00.0140<BR> 1:1a4        0:00:00.0000<BR><BR> Elapsed Time<BR> Thread       Time<BR> 0:55c        0:00:43.0533<BR> 1:1a4        0:00:25.0876<BR><BR></nobr></P>
+<H4>Additional Information</H4>
+<P>For information about threads in user mode, see <a href="r07_use_operation_88ea27e9-b77a-4cd2-b161-2d10d098448a.xml.htm">Controlling Processes and Threads</a>. For more information about analyzing processes and threads, see <i>Microsoft Windows Internals</i> by Mark Russinovich and David Solomon.</P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !runaway RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

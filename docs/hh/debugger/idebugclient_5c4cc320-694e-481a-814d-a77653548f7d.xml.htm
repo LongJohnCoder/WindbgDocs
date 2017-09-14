@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>ExitDispatch</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, ExitDispatch"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="ExitDispatch"/>
+<MSHelp:Keyword Index="A" Term="IDebugClient_5c4cc320-694e-481a-814d-a77653548f7d.xml"/>
+<META NAME="MS-HKWD" CONTENT="IDebugClient*::ExitDispatch method">
+<META NAME="MS-HKWD" CONTENT="ExitDispatch (IDebugClient*) method"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="IDebugClient_5c4cc320-694e-481a-814d-a77653548f7d.xml"></A>ExitDispatch</H1>
+<P><P>The <b>ExitDispatch</b> method causes the <a href="idebugclient_faf284c2-ca0f-4e00-bd74-08817338a808.xml.htm"><b>DispatchCallbacks</b></a> method to return.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>HRESULT</b><BR><b>  IDebugClient::ExitDispatch(</b><BR><b>    IN IDebugClient *  </b><i>Client</i><BR><b>    );</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>Client</i></DT>
+<DD>Specifies the <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#ebdc9536-c283-4bb5-b572-c30c8c8acd51">client</a> whose <a href="idebugclient_faf284c2-ca0f-4e00-bd74-08817338a808.xml.htm"><b>DispatchCallbacks</b></a> method should return.</DD>
+</DL>
+<H4>Return Value</H4>
+<DL><DT>S_OK</DT>
+<DD>The method was successful.</DD>
+</DL>
+<P>This method may also return error values.  See <a href="structures_58197d9d-3eb4-499d-8766-da0f4153114f.xml.htm">Return Values</a> for more details.</P>
+<H4>Interface Version</H4>
+<P><b>ExitDispatch</b> is available in all versions of <b>IDebugClient</b>.</P>
+<H4>Comments</H4>
+<P>This method is reentrant and may be called from any <a href="dbg_glossary_b06af58a-5ee8-44e1-855d-951cac7e4969.xml.htm#dbab27fb-1baa-4eed-9e6b-c0aab6e1defb">thread</a>.</P>
+<P>This method can be used to interrupt a thread waiting in <a href="idebugclient_faf284c2-ca0f-4e00-bd74-08817338a808.xml.htm"><b>DispatchCallbacks</b></a>.</P>
+<P>For more information about callbacks, see <a href="engine_dg_f76855d1-672f-4a0e-b4da-a2b4c2ac4e5d.xml.htm">Callbacks</a>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>dbgeng.h</i>.  Include <i>dbgeng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugclient_faf284c2-ca0f-4e00-bd74-08817338a808.xml.htm"><b>DispatchCallbacks</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: ExitDispatch RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

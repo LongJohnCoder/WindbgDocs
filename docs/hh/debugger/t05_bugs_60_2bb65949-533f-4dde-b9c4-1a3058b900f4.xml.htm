@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Bug Check 0x77: KERNEL_STACK_INPAGE_ERROR</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Bug Check 0x77: KERNEL_STACK_INPAGE_ERROR"><xml><MSHelp:Keyword Index="A" Term="t05_bugs_60_2bb65949-533f-4dde-b9c4-1a3058b900f4.xml"/>
+<META NAME="MS-HKWD" CONTENT="Bug Check 0x77: KERNEL_STACK_INPAGE_ERROR">
+<META NAME="MS-HKWD" CONTENT="KERNEL_STACK_INPAGE_ERROR"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t05_bugs_60_2bb65949-533f-4dde-b9c4-1a3058b900f4.xml"></A>Bug Check 0x77: KERNEL_STACK_INPAGE_ERROR</H1>
+<P>The KERNEL_STACK_INPAGE_ERROR bug check has a value of 0x00000077. This bug check indicates that the requested page of kernel data from the paging file could not be read into memory. </P>
+<H4>Parameters</H4>
+<P>The four parameters that listed in the message have two possible meanings.</P>
+<P>If the first parameter is 0, 1, or 2, the parameters have the following meaning.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width=""><b>0:</b>  The page of kernel data was retrieved from page cache.<BR><BR><b>1:</b>  The page was retrieved from a disk.<BR><BR><b>2:</b>  The page was retrieved from a disk, the storage stack returned SUCCESS, but <b>Status.Information</b> is not equal to PAGE_SIZE.<BR><BR></TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">The value that appears in the stack where the signature should be.</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">0</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">The address of the signature on the kernel stack</TD>
+</TR>
+</table>
+<P></P>
+<P>If the first parameter is any value other than 0, 1, or 2, the parameters have the following meaning.</P><B></B><table>
+<TR valign="top">
+<TH Width="">Parameter</TH>
+<TH Width="">Description</TH>
+</TR>
+<TR valign="top">
+<TD Width="">1</TD>
+<TD Width="">The status code</TD>
+</TR>
+<TR valign="top">
+<TD Width="">2</TD>
+<TD Width="">The I/O status code</TD>
+</TR>
+<TR valign="top">
+<TD Width="">3</TD>
+<TD Width="">The page file number</TD>
+</TR>
+<TR valign="top">
+<TD Width="">4</TD>
+<TD Width="">The offset into page file</TD>
+</TR>
+</table>
+<P></P>
+<H4>Cause</H4>
+<P>If the first parameter is 0 or 1, the stack signature in the kernel stack was not found. This error is probably caused by defective hardware, such as a RAM error.</P>
+<P>If the first parameter is 2, the driver stack returned an inconsistent status for the read of the page. For example, the driver stack returned a success status even though it did not read the whole page.</P>
+<P>If the first parameter is any value other than 0, 1, or 2, the value of the first parameter is an NTSTATUS error code that the driver stack returns after it tries to retrieve the page of kernel data.  You can determine the exact cause of this error from the I/O status code (the second parameter). Some common status codes include the following:</P><B></B><UL type="disc">
+<LI>0xC000009A, or STATUS_INSUFFICIENT_RESOURCES, indicates a lack of nonpaged pool resources. This status code indicates a driver error in the storage stack. (The storage stack should always be able to retrieve this data, regardless of software resource availability.)</LI>
+<LI>0xC000009C, or STATUS_DEVICE_DATA_ERROR, indicates bad blocks (sectors) on the hard disk.</LI>
+<LI>0xC000009D, or STATUS_DEVICE_NOT_CONNECTED, indicates defective or loose cabling, termination, or that the controller does not see the hard disk drive.</LI>
+<LI>0xC000016A, or STATUS_DISK_OPERATION_FAILED, indicates bad blocks (sectors) on the hard disk.</LI>
+<LI>0xC0000185, or STATUS_IO_DEVICE_ERROR, indicates improper termination or defective cabling on SCSI devices or that two devices are trying to use the same IRQ.</LI>
+</UL>
+<P></P>
+<P>These status codes are the most common ones that have specific causes. For more information about other possible status codes that might be returned, see the <i>Ntstatus.h</i> file in the Microsoft Windows Driver Kit (WDK).</P>
+<P>A virus infection can also cause this bug check.</P>
+<H4>Resolving the Problem</H4>
+<P><i>Resolving a bad block problem:</i> If you can restart the computer after the error, Autochk runs automatically and attempts to map the bad sector to prevent it from being used anymore. </P>
+<P>If Autochk does not scan the hard disk for errors, you can manually start the disk scanner. Run <b>Chkdsk /f /r</b> on the system partition. You must restart the computer before the disk scan begins. If you cannot start the system because the error, use the Recovery Console and run <b>Chkdsk /r</b>.  </P>
+<P class="note"><b>Warning</b>  If your system partition is formatted with the FAT file system, the long file names that the Windows operating system uses might be damaged if you use Scandisk or another MS-DOS-based hard disk tool to verify the integrity of your hard disk drive from MS-DOS. Always use the version of Chkdsk that matches your version of the Windows operating system.</P>
+<P><i>Resolving a defective hardware problem:</i> If the I/O status is 0xC0000185 and the paging file is on an SCSI disk, check the disk cabling and SCSI termination for problems.    </P>
+<P><i>Resolving a failing RAM problem:</i> Run the hardware diagnostics that the system manufacturer supplies, especially the memory scanner. For more information about these procedures, see the owner's manual for your computer. </P>
+<P>Check that all the adapter cards in the computer are properly seated. Use an ink eraser or an electrical contact treatment, available at electronics supply stores, to ensure adapter card contacts are clean.</P>
+<P>Check the System Log in Event Viewer for additional error messages that might help identify the device that is causing the error. You can also disable memory caching of the BIOS to try to resolve this error.</P>
+<P>Make sure that the latest Windows Service Pack is installed.</P>
+<P>If the preceding steps fail to resolve the error, take the system motherboard to a repair facility for diagnostic testing. A crack, a scratched trace, or a defective component on the motherboard can cause this error.</P>
+<P><i>Resolving a virus infection:</i> Check your computer for viruses by using any up-to-date, commercial virus scanning software that examines the Master Boot Record of the hard disk. All Windows file systems can be infected by viruses.</P>
+<H4>See Also</H4>
+<P><a href="t05_bugs_60_0b233b52-160a-482d-9a51-c53f2b3843b6.xml.htm">Bug Check 0x7A</a> (KERNEL_DATA_INPAGE_ERROR) </P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Bug Check 0x77: KERNEL_STACK_INPAGE_ERROR RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

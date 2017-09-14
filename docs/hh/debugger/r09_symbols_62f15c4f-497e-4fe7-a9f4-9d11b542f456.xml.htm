@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Setting Up Exclusion Lists</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Setting Up Exclusion Lists"><xml><MSHelp:Keyword Index="A" Term="r09_symbols_62f15c4f-497e-4fe7-a9f4-9d11b542f456.xml"/>
+<META NAME="MS-HKWD" CONTENT="SymProxy, exclusion lists"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r09_symbols_62f15c4f-497e-4fe7-a9f4-9d11b542f456.xml"></A>Setting Up Exclusion Lists</H1>
+<P>In some environments, you may find yourself debugging systems that have a large quantity of modules loaded for which you cannot obtain symbols.  This is often the case if you have code that is called by a third-party vendor.  This can result in a lot of failed attempts to find symbols, which is time-consuming and clogs up network resources.  To alleviate this situation, you can use an <i>exclusion list</i> to specify symbols that should be excluded from the search.  This feature exists in the client debugger, but you can also configure the SymProxy filter to use its own the exclusion list and prevent such network activity where it is most likely to take up resources.</P>
+<P>The exclusion list is made up of the names of the files for which you want to prevent processing.  The file names can contain wildcards.  For example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>dbghelp.pdb<BR>symsrv.*<BR>mso*<BR></nobr></P>
+<P></P>
+<P>The list can be implemented in two ways.  The first is in an <i>.ini</i> file, <i>%WINDIR%\system32\inetsrv\Symsrv.ini</i>.  A section called &#8220;exclusions&#8221; should contain the list:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>[exclusions]<BR>dbghelp.pdb<BR>symsrv.*<BR>mso*<BR></nobr></P>
+<P></P>
+<P>Alternatively, you can store the exclusions in the registry.  Create a key named </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>HKLM\ Software\Microsoft\Symbol Server\Exclusions<BR></nobr></P>
+<P>Store the file name list as string values (REG_SZ) within this key.  The name of the string value acts as the file name to exclude.  The contents of the string value can be used as a comment describing why the file is being excluded.</P>
+<P>SymProxy reads from the exclusion list every half-hour so that you do not need to restart the Web service to see changes take effect.  Add files to the list in the registry or <i>.ini</i> file and wait a short period for the exclusions to be used.</P>
+<P class="note"><b>Note</b>  SymProxy does not support the use of both <i>Symsrv.ini</i> and the registry. If the .<i>ini</i> file exists, it is used.  Otherwise, the registry is checked.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Setting Up Exclusion Lists RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

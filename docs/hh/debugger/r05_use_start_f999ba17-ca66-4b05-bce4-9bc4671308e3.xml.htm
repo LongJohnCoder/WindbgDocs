@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Using Shell Commands</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Using Shell Commands"><xml><MSHelp:Keyword Index="A" Term="r05_use_start_f999ba17-ca66-4b05-bce4-9bc4671308e3.xml"/>
+<META NAME="MS-HKWD" CONTENT="shell commands">
+<META NAME="MS-HKWD" CONTENT="shell commands, overview"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r05_use_start_f999ba17-ca66-4b05-bce4-9bc4671308e3.xml"></A>Using Shell Commands</H1>
+<P>The debugger can transmit certain commands to the Microsoft Windows environment in which the debugger is running.</P>
+<P>You can use the <a href="r22_metacmds_s_6a45ee2d-cc3f-4f6b-a649-87dde063d5ca.xml.htm"><b>.shell (Command Shell)</b></a> command in any Windows debugger. With this command, you can execute an application or a Microsoft MS-DOS command directly from the debugger. If you are performing <a href="r08_use_remote_e6793edc-50b2-4f6b-8e7c-2bfcfe2a0396.xml.htm">remote debugging</a>, these shell commands are executed on the <i>server</i>.</P>
+<P>The <a href="r21_metacmds_l_1d3d0816-860f-4a78-95b6-ac2d40bebd3f.xml.htm"><b>.noshell (Prohibit Shell Commands)</b></a> command or the <b>-noshell</b> <a href="r12_cmdline_8186a614-5656-427b-82ab-2a4899123d95.xml.htm">command-line option</a> disables all shell commands. The commands are disabled while the debugger is running, even if you begin a new debugging session. The commands remain disabled even if you issue a <a href="r21_metacmds_l_f69b1b8a-144b-4099-9ef6-0ba58a7db533.xml.htm"><b>.restart (Restart Kernel Connection)</b></a> command in KD.    </P>
+<P>If you are running a debugging server,you might want to disable shell commands. If the shell is available, a remote connection can use the <b>.shell</b> command to change your computer.</P>
+<H4>Network Drive Control</H4>
+<P>In WinDbg, you can use the <a href="r36_gui_1_5a688c12-4cfa-4bba-bf00-946cbf98a89b.xml.htm"><b>File | Map Network Drive</b></a> and <a href="r36_gui_1_a5147bcf-a73a-4f95-8630-87b50e01ae44.xml.htm"><b>File | Disconnect Network Drive</b></a> commands to control the network drive mappings. These changes always occur on the computer that WinDbg is running on, never on any computer that is remotely connected to WinDbg.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Using Shell Commands RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

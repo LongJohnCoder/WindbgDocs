@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>.kill (Kill Process)</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, .kill (Kill Process)"><xml><MSHelp:Keyword Index="A" Term="r20_metacmds_E_5c2717e9-eef2-4d91-9a54-33653ba7f904.xml"/>
+<META NAME="MS-HKWD" CONTENT=".kill (Kill Process) command">
+<META NAME="MS-HKWD" CONTENT="Kill Process (.kill) command"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r20_metacmds_E_5c2717e9-eef2-4d91-9a54-33653ba7f904.xml"></A>.kill (Kill Process)</H1>
+<P><P><i>In user mode</i>, the <b>.kill</b> command ends the debugging session and closes the target application.</P>
+<P><i>In kernel mode</i>, the <b>.kill</b> command ends a process on the target computer.</P>
+</P>
+<H4>Syntax</H4>
+<P>User-Mode Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.kill</b> [ <b>/h</b> | <b>/n</b> ]<BR><BR></nobr></P>
+<P></P>
+<P>Kernel-Mode Syntax</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>.kill</b> <i>Process</i> <BR><BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><b>/h</b></DT>
+<DD><i>(User mode only)</i>  Any outstanding debug event will be continued and marked as handled.  This is the default.</DD>
+<DT><b>/n</b></DT>
+<DD><i>(User mode only)</i>  Any outstanding debug event will be continued without being marked as handled.</DD>
+<DT><i>Process</i></DT>
+<DD>Specifies the address of the process to be terminated. If <i>Process</i> is omitted or zero, the default process for the current system state will be terminated.<P></P>
+</DD>
+</DL>
+<H4>Environment</H4>
+<P>In kernel mode, this command is supported only on Microsoft Windows Server 2003 and later versions of Windows.</P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Modes</b></TD>
+<TD Width="">user mode, kernel mode</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Targets</b></TD>
+<TD Width="">live debugging only</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Platforms</b></TD>
+<TD Width="">all </TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>In user mode, the <b>.kill</b> command ends the debugging session, closes the target application, and returns the debugger to dormant mode.</P>
+<P>In kernel mode, this command schedules the selected process on the target computer for termination. The next time that the target can run (for example, by using a <a href="r16_cmds_c_5caa8c36-48bf-4892-aaea-ea0e70481ab4.xml.htm"><b>g (Go)</b></a> command), the specified process is ended.</P>
+<P>You cannot use this command during local kernel debugging.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Versions:</b> <i>(Kernel mode) </i>Supported in Windows Server 2003 and later.</p>
+<H4>Additional Information</H4>
+<P>For more information about how to end or detach from a user-mode target, see  <a href="r07_use_operation_cec0a699-8a28-48a9-b3f8-62271f688f6c.xml.htm">Ending the Debugging Session</a>.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: .kill (Kill Process) RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

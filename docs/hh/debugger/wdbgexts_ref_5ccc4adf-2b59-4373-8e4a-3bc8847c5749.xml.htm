@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>StackTrace</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, StackTrace"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="wdbgexts.h, dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="StackTrace"/>
+<MSHelp:Keyword Index="A" Term="WdbgExts_Ref_5ccc4adf-2b59-4373-8e4a-3bc8847c5749.xml"/>
+<META NAME="MS-HKWD" CONTENT="StackTrace function"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="WdbgExts_Ref_5ccc4adf-2b59-4373-8e4a-3bc8847c5749.xml"></A>StackTrace</H1>
+<P><P>The <b>StackTrace</b> function retrieves a stack trace for the process being debugged. Returns the number of frames read into the buffer pointed to by <i>StackFrames</i>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>ULONG </b><BR><b>  StackTrace (</b><BR><b>    ULONG</b> <i>FramePointer</i><b>,</b><BR>    <b>ULONG</b> <i>StackPointer</i><b>,</b><BR>    <b>ULONG</b> <i>ProgramCounter</i><b>,</b><BR>    <b>PEXTSTACKTRACE</b> <i>StackFrames</i><b>,</b><BR>    <b>ULONG</b> <i>Frames</i><BR><i>    </i><b>);</b><BR></P>
+<DL><H4>Parameters</H4>
+<DT><i>FramePointer</i></DT>
+<DD>Specifies the frame pointer. If no specific value is desired, this should simply be set to zero.</DD>
+<DT><i>StackPointer</i></DT>
+<DD>Specifies the stack pointer. If no specific value is desired, this should simply be set to zero.</DD>
+<DT><i>ProgramCounter</i></DT>
+<DD>Specifies the instruction pointer. If no specific value is desired, this should simply be set to zero.</DD>
+<DT><i>StackFrames</i></DT>
+<DD>Receives the stack information. <i>StackFrames</i> must be a pointer to a buffer that is large enough to hold the number of stack frames specified by <i>Frames</i>. The stack frames are stored in the following data structure:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>typedef struct _tagEXTSTACKTRACE {<BR>    ULONG       FramePointer;<BR>    ULONG       ProgramCounter;<BR>    ULONG       ReturnAddress;<BR>    ULONG       Args[4];<BR>} EXTSTACKTRACE, *PEXTSTACKTRACE;<BR><BR></nobr></P>
+</DD>
+<DT><i>Frames</i></DT>
+<DD>Specifies the maximum number of frames that will fit into the buffer.</DD>
+</DL>
+<H4>Return Value</H4>
+<P>The actual number of frames written to the buffer pointed to by <i>StackFrames</i>.</P>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>wdbgexts.h</i>.  If you are writing a WdbgExts extension, include <i>wdbgexts.h</i>. If you are writing a DbgEng extension that calls this function, include <i>wdbgexts.h</i> before <i>dbgeng.h</i> (see <a href="extensions_dg_8afbe494-20c4-4b67-9f30-65ef5c9e66fd.xml.htm">Writing DbgEng Extension Code</a> for details).</p>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: StackTrace RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

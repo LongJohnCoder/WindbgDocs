@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Testing the Connection</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Testing the Connection"><xml><MSHelp:Keyword Index="A" Term="r02_setup_1_0c46e7c6-5511-44ef-aace-4dc09f791b29.xml"/>
+<META NAME="MS-HKWD" CONTENT="setup, testing cable connection"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r02_setup_1_0c46e7c6-5511-44ef-aace-4dc09f791b29.xml"></A>Testing the Connection</H1>
+<P>Before you start the debugger, you should test the connection between the host and target. You can do that by using the PowerShell utility.</P>
+<P class="note"><b>Note</b>  You can use HyperTerminal to test the connection in Windows XP and Windows 2000. However, HyperTerminal is not part of the Windows Vista operating system.</P>
+<H4><b>Using PowerShell to Test the Connection</b></H4>
+<P>If you don&#8217;t have PowerShell installed, you can install it from the following Web site: <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=104517" target="_blank">Windows PowerShell</a>. </P>
+<P>To test the serial connection by using PowerShell, do the following:</P><B></B><OL type="1">
+<LI>Connect the null-modem serial cable between the host and the target.</LI>
+<LI>Run the PowerShell tool from the <b>Start</b> menu on either the host or the target machine and enter the following command:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>PS&gt; [System.IO.Ports.SerialPort]::getportnames() <BR></nobr></P>
+</LI>
+<LI>If more than one port is displayed, you will need to validate the selected one. This can be performed by entering the following commands in the PowerShell window:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>PS&gt; $port= new-Object System.IO.Ports.SerialPort COM1,19200,None,8,one <BR>PS&gt; $port.open() <BR>PS&gt; $port.Write("Hello, world!") <BR>PS&gt; $port.Close()<BR></nobr></P>
+<P>This sends the message "Hello, world!" to the other machine. </P>
+<P class="note"><b>Note  </b>In the previous commands, it is assumed that the serial port is COM1 and the baud rate is 19200. If these assumptions do not work, try again using another port. </P>
+</LI>
+<LI>In order to prepare the computer on the other end of the cable to read the message, you can use any terminal emulator or PowerShell. First enter the following command:<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>PS&gt; [System.IO.Ports.SerialPort]::getportnames()<BR></nobr></P>
+<P>This command returns serial port enumeration.</P>
+</LI>
+<LI>Assuming the serial port is COM1 and the baud rate is 19200, enter the following commands in the PowerShell window: <P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>PS&gt; $port= new-Object System.IO.Ports.SerialPort COM1,19200,None,8,one <BR>PS&gt; $port.add_DataReceived({`$this is a handle to SerialPort.  $_ is a pointer to SerialDataRecievedEventArgs}) <BR>PS&gt; $port.Open()<BR></nobr></P>
+</LI>
+<LI>Once the "Hello, world!" message appears on the screen of the other computer, you can be sure that the correct port is selected and the connection is functional.</LI>
+</OL>
+<P></P>
+<H4><b>Using Hyperterminal to Test the Connection</b></H4>
+<P>To test the serial connection by using Hyperterminal, do the following:</P><B></B><OL type="1">
+<LI>On the host computer, click <b>Start</b>, point to <b>All Programs</b>, point to <b>Accessories</b>, point to <b>Communications</b>, and then click <b>Hyperterminal</b>. <P class="note"><b>Note  </b>If Hyperterminal is not installed, you can install it from the product CD by using <b>Add or Remove Programs</b> from the Control Panel.</P>
+</LI>
+<LI>In the <b>Connection Description</b> box, enter a name for the new connection. (The name is not important.)</LI>
+<LI>In the <b>Connect To</b> box, in the <b>Connect using</b> list, select the COM port that corresponds to the port that the null-modem cable is connected to on this computer.</LI>
+<LI>In the next window, accept the defaults for the COM port properties.</LI>
+<LI>Repeat steps 1 through 4 for the target computer.</LI>
+</OL>
+<P></P>
+<P>Hyperterminal is now ready for testing. Type a string of characters on the host system. If the null-modem cable is installed correctly and you chose the correct COM ports within HyperTerminal on both computers, the string of characters that you type on the host computer should be displayed in the HyperTerminal window of the target system.</P>
+<P>If the string does not appear on the target system, confirm the cable is plugged into both computers. Also make sure that the cable is a null-modem cable instead of a pass-though serial cable.</P>
+<P>If the cable is correct, the problem might be the COM ports. Create a new connection in HyperTerminal on the target system by using a different COM port. If the problem is not fixed, try changing the COM port on the host system. If the problem persists, change the target system's COM port setting back to the original setting and retest. Eventually, you should find the correct configuration, and the test will succeed.</P>
+<P>If, you forget which computer is using which port, on the <b>File</b> menu in HyperTerminal, click <b>Properties</b> to reveal the current COM port setting for the debug session.</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Testing the Connection RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

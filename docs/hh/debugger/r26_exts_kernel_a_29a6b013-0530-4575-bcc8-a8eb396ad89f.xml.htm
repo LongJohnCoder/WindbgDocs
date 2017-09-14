@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!devhandles</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !devhandles"><xml><MSHelp:Keyword Index="A" Term="r26_exts_kernel_A_29a6b013-0530-4575-bcc8-a8eb396ad89f.xml"/>
+<META NAME="MS-HKWD" CONTENT="!devhandles extension">
+<META NAME="MS-HKWD" CONTENT="handle, !devhandles extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r26_exts_kernel_A_29a6b013-0530-4575-bcc8-a8eb396ad89f.xml"></A>!devhandles</H1>
+<P>The <b>!devhandles </b>extension displays the open handles for the specified device.<P></P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!devhandles </b><i>Address</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Address</i></DT>
+<DD>Specifies the address of the device for which to display the open handles.</DD>
+<P></P>
+</DL>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<H4><b>Comments</b></H4>
+<P>To display complete handle information, this extension requires private symbols.</P>
+<P>The address of a device object can be obtained using the <a href="r26_exts_kernel_a_002d80d3-ce77-4ed3-a211-26ace4fd6f58.xml.htm"><b>!drvobj</b></a> or <a href="r26_exts_kernel_a_87ee2749-b028-4ab8-b0c0-d4a6fc734488.xml.htm"><b>!devnode</b></a> extensions.</P>
+<P>Here is a truncated example:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>lkd&gt; <b>!devhandles 0x841153d8</b><BR><BR>Checking handle table for process 0x840d3940<BR>Handle table at 95fea000 with 578 Entries in use<BR><BR>Checking handle table for process 0x86951d90<BR>Handle table at 8a8ef000 with 28 Entries in use<BR><BR>...<BR><BR>Checking handle table for process 0x87e63650<BR>Handle table at 947bc000 with 308 Entries in use<BR><BR>Checking handle table for process 0x87e6f4f0<BR>00000000: Unable to read handle table<BR><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !devhandles RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

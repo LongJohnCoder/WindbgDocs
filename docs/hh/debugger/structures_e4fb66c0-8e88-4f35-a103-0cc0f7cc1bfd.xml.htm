@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_HANDLE_DATA_BASIC</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_HANDLE_DATA_BASIC"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_HANDLE_DATA_BASIC"/>
+<MSHelp:Keyword Index="A" Term="Structures_e4fb66c0-8e88-4f35-a103-0cc0f7cc1bfd.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_HANDLE_DATA_BASIC structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_e4fb66c0-8e88-4f35-a103-0cc0f7cc1bfd.xml"></A>DEBUG_HANDLE_DATA_BASIC</H1>
+<P><P>The DEBUG_HANDLE_DATA_BASIC structure contains handle-related information about a system object.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_HANDLE_DATA_BASIC</b><BR><b>{</b><BR><b>    ULONG  TypeNameSize;</b><BR><b>    ULONG  ObjectNameSize;</b><BR><b>    ULONG  Attributes;</b><BR><b>    ULONG  GrantedAccess;</b><BR><b>    ULONG  HandleCount;</b><BR><b>    ULONG  PointerCount;</b><BR><b>} DEBUG_HANDLE_DATA_BASIC, *PDEBUG_HANDLE_DATA_BASIC;</b><BR></P>
+<DL><H4>Members</H4>
+<DT><b>TypeNameSize</b></DT>
+<DD>The size, in characters, of the object-type name.</DD>
+<DT><b>ObjectNameSize</b></DT>
+<DD>The size, in characters, of the object&#8217;s name.</DD>
+<DT><b>Attributes</b></DT>
+<DD>A bit-set that contains the handle's attributes.  For possible values, see "Handle" in the Windows Driver Kit (WDK).</DD>
+<DT><b>GrantedAccess</b></DT>
+<DD>A bit-set that specifies the access mask for the object that is represented by the handle.  For details, see ACCESS_MASK in the Platform SDK documentation.</DD>
+<DT><b>HandleCount</b></DT>
+<DD>The number of handle references for the object.</DD>
+<DT><b>PointerCount</b></DT>
+<DD>The number of pointer references for the object.</DD>
+</DL>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>.  Include <i>DbgEng.h</i>.</p>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_HANDLE_DATA_BASIC RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

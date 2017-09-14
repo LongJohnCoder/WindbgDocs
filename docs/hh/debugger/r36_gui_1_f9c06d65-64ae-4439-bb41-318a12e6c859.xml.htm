@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Disassembly Window</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Disassembly Window"><xml><MSHelp:Keyword Index="A" Term="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml"/>
+<META NAME="MS-HKWD" CONTENT="debugging information windows, Disassembly window">
+<META NAME="MS-HKWD" CONTENT="Disassembly window">
+<META NAME="MS-HKWD" CONTENT="assembly debugging, Disassembly window"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE><a name="HELP_TOPIC_WINDOW_DISASSEMBLY"></a><H1><A NAME="r36_gui_1_f9c06d65-64ae-4439-bb41-318a12e6c859.xml"></A>Disassembly Window</H1>
+<P></P>
+<P>The Disassembly window displays executable code in assembly language.</P>
+<H4>Opening the Disassembly Window</H4>
+<P>To open or switch to the Disassembly window, in the WinDbg window, on the <b>View</b> menu, click <b>Disassembly</b>. (You can also press ALT+7 or click the <b>Disassembly (Alt+7)</b> button (<img src="tbdisasm2.bmp">) on the toolbar.  ALT+SHIFT+7 will close the Disassembly Window.)</P>
+<P>The following figure shows an example of a Disassembly window.</P>
+<p><img src="window-disassembly.png"></p>
+<P>The debugger takes a section of memory, interprets it as binary machine instructions, and then disassembles it to produce an assembly-language version of the machine instructions. The resulting code is displayed in the Disassembly window.</P>
+<H4>Using the Disassembly Window</H4>
+<P>In the Disassembly window, you can do the following:</P><B></B><UL type="disc">
+<LI>To disassemble a different section of memory, in the <b>Offset</b> box, type the address of the memory you want to disassemble. (You can press ENTER after typing the address, but you do not have to.) The Disassembly window displays code before you have completed the address; you can disregard this code.</LI>
+<LI>To see other sections of memory, click the <b>Previous</b> or <b>Next</b> button or press the PAGE UP or PAGE DOWN keys. These commands display disassembled code from the preceding or following sections of memory, respectively. By pressing the RIGHT ARROW, LEFT ARROR, UP ARROW, and DOWN ARROW keys, you can navigate within the window. If you use these keys to move off of the page, a new page will appear.</LI>
+<LI>If you want to disassemble a section of memory that does not contain machine instructions, the debugger displays error messages.</LI>
+<LI>The line that represents the current program counter is highlighted in green, unless you select a line with the mouse or by using one of the <b>Edit | Go to</b> <i>Xxx </i>commands. If you select a line with the mouse or a <b>Edit | Go to</b> <i>Xxx </i>command, the selected line is green and the line that represents the current program counter is not highlighted. </LI>
+<LI>Lines at which breakpoints are set are highlighted. An enabled breakpoint is highlighted in in red, a disabled breakpoint is highlighted in yellow, and a breakpoint that coincides with the current program counter is highlighted in purple.</LI>
+</UL>
+<H4>Toolbar and Shortcut Menu</H4>
+<P>The Disassembly window has a toolbar that contains two buttons and a shortcut menu with additional commands. To access the menu, right-click the title bar or click the icon that appears near the upper-right corner of the window (<img src="tbdisasm2.bmp">). The toolbar and menu contain the following commands:</P><B></B><UL type="disc">
+<LI><i>(Toolbar only)</i>  The <b>Offset</b> box enables you to specify a new address for disassembly.</LI>
+<LI><i>(Toolbar and menu) </i><b>Previous</b> (on the toolbar) and <b>Previous page</b> (on the shortcut menu) causes the debugger to disassemble and display the instructions immediately prior to the current display.</LI>
+<LI><i>(Toolbar and menu) </i><b>Next</b> (on the toolbar) or <b>Next page</b> (on the shortcut menu) causes the debugger to disassemble and display the instructions immediately after the current display.</LI>
+<LI><i>(Menu only)</i>  <b>Go to current address</b> opens the <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source window</a> with the source file that corresponds to the selected line in the Disassembly window and highlights this line.</LI>
+<LI><i>(Menu only)</i>  <b>Disassemble before current instruction</b> causes the current line to be placed in the middle of the Disassembly window. This command is the default option. If this command is cleared the current line will appear at the top of the Disassembly window, which saves time because reverse-direction disassembly can be time-consuming.</LI>
+<LI><i>(Menu only)</i>  <b>Highlight instructions from the current source line</b> causes all of the instructions that correspond to the current source line to be highlighted. Often, a single source line will correspond to multiple assembly instructions. If code has been optimized, these assembly instructions might not be consecutive. This command enables you to find all of the instructions that were assembled from the current source line.</LI>
+<LI><i>(Menu only)</i>  <b>Show source line for each instruction</b> displays the source line number that corresponds to each assembly instruction.</LI>
+<LI><i>(Menu only)</i>  <b>Show source file for each instruction</b> displays the source file name that corresponds to each assembly instruction.</LI>
+<LI><i>(Menu only)</i>  <b>Toolbar</b> turns the toolbar on and off.</LI>
+<LI><i>(Menu only)</i>  <b>Dock</b> or <b>Undock</b> causes the window to enter or leave the docked state.</LI>
+<LI><i>(Menu only)</i>  <b>Move to new dock</b> closes the Disassembly window and opens it in a new dock.</LI>
+<LI><i>(Menu only)</i> <b>Set as tab-dock target for window type</b> is unavailable for the Disassembly window.  This option is only available for <a href="r36_gui_1_ea5c9fec-a311-4ddc-8418-23737796865f.xml.htm">Source</a> or <a href="r36_gui_1_20cff311-cb78-4ad3-a455-7009744a3686.xml.htm">Memory</a> windows.</LI>
+<LI><i>(Menu only)</i>  <b>Always floating</b> causes the window to remain undocked even if it is dragged to a docking location.</LI>
+<LI><i>(Menu only)</i>  <b>Move with frame</b> causes the window to move when the WinDbg frame is moved, even if the window is undocked. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>.</LI>
+<LI><i>(Menu only)</i>  <b>Help</b> opens this topic in the Debugging Tools for Windows documentation.</LI>
+<LI><i>(Menu only)</i>  <b>Close</b> closes this window.</LI>
+</UL>
+<P></P>
+<H4>Additional Information</H4>
+<P>For more information about assembly debugging and related commands and a full explanation of the assembly display, see <a href="r07_use_operation_9afb8c89-95fa-499e-bc4e-98f0365df573.xml.htm">Debugging in Assembly Mode</a>. For more information about docked, tabbed, and floating windows, see <a href="r06_use_gui_b7aca603-cf35-44b2-8cae-541535142929.xml.htm">Positioning the Windows</a>. For more information about all techniques that you can use to control debugging information windows, see <a href="r06_use_gui_35306de1-d9fb-45e6-800f-e3ee00114421.xml.htm">Using Debugging Information Windows</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Disassembly Window RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

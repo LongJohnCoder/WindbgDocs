@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Disable paging of kernel stacks</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Disable paging of kernel stacks"><xml><MSHelp:Keyword Index="A" Term="GFlags_f9978fc4-b694-41fc-b10d-c3d31e848084.xml"/>
+<META NAME="MS-HKWD" CONTENT="Disable paging of kernel stacks (global flag)"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="GFlags_f9978fc4-b694-41fc-b10d-c3d31e848084.xml"></A>Disable paging of kernel stacks</H1>
+<P>The <b>Disable paging of kernel stacks</b> flag prevents paging of the kernel-mode stacks of inactive threads. </P><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Abbreviation</b></TD>
+<TD Width="">dps</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Hexadecimal value</b></TD>
+<TD Width="">0x80000</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Symbolic Name</b></TD>
+<TD Width="">FLG_DISABLE_PAGE_KERNEL_STACKS</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Destination</b></TD>
+<TD Width="">System-wide registry entry</TD>
+</TR>
+</table>
+<P></P>
+<H4>Comments</H4>
+<P>Generally, the kernel-mode stack cannot be paged; it is guaranteed to be resident in memory. However, Windows occasionally pages the kernel stacks of inactive threads. This flag prevents these occurrences.</P>
+<P>The kernel debugger can provide information about a thread only when its stack is in physical memory. This flag is particularly important when debugging deadlocks and in other cases when every thread must be tracked.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Disable paging of kernel stacks RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!amli ln</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !amli ln"><xml><MSHelp:Keyword Index="A" Term="r33_exts_ACPI_1a02af87-276c-458a-ad9e-3ac6f39b92e0.xml"/>
+<META NAME="MS-HKWD" CONTENT="!amli ln extension"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r33_exts_ACPI_1a02af87-276c-458a-ad9e-3ac6f39b92e0.xml"></A>!amli ln</H1>
+<P>The <b>!amli ln</b> extension displays the specified method or the method containing a given address.<P></P>
+</P>
+<H4>Syntax</H4>
+<P>Syntax in Windows 2000</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!acpikd.amli ln</b> [ <i>MethodName</i> | <i>CodeAddress</i> ] <BR></nobr></P>
+<P></P>
+<P>Syntax in Windows XP and later</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!amli ln</b> [ <i>MethodName</i> | <i>CodeAddress</i> ] <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>MethodName</i></DT>
+<DD>Specifies the full path of the method name. If <i>MethodName</i> specifies an object that is not actually a method, an error results.</DD>
+<DT><i>CodeAddress</i></DT>
+<DD>Specifies the address of the AML code that is contained in the desired method. If <i>CodeAddress</i> is prefixed with two percent signs (<b>%%</b>), it is interpreted as a physical address. Otherwise, it is interpreted as a virtual address.<P></P>
+</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width=""><i>Acpikd.dll</i> </TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P></P>
+<H4>Comments</H4>
+<P>If neither <i>MethodName</i> nor <i>CodeAddress</i> is specified, the method associated with the current context is displayed.</P>
+<P>The following command shows the method being currently run:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!amli ln</b><BR>c29accf5: \_WAK<BR><BR></nobr></P>
+<P>The method _WAK is shown, with address 0xC29ACCF5.</P>
+<H4>Additional Information</H4>
+<P>For information about related commands and their uses, see <a href="t11_rpc_acpi_26cfe8b9-d3ee-4915-b8b5-f2335c18d782.xml.htm">The AMLI Debugger</a>.</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !amli ln RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

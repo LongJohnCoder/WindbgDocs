@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Changing Boot Parameters</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Changing Boot Parameters"><xml><MSHelp:Keyword Index="A" Term="bootini_695dd6dc-4598-4f93-8a4d-16ebc6394b8b.xml"/>
+<META NAME="MS-HKWD" CONTENT="boot entry parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot parameters [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot options [WDK], boot parameters"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_695dd6dc-4598-4f93-8a4d-16ebc6394b8b.xml"></A>Changing Boot Parameters</H1>
+<P>To enable and configure boot-related operating system features, such as debugging, you must add boot parameters to a boot entry for the operating system. </P>
+<P>For a list of boot parameters for Windows Server 2003 and earlier versions of NT-based Windows that are related to developing, testing, and debugging drivers, see <a href="bootini_09bcc247-05ed-43ac-950c-3477f972baf6.xml.htm">Boot.ini Boot Parameter Reference</a>.</P>
+<P>For examples of boot entries configured for driver debugging and testing on Windows Server 2003 and earlier versions of NT-based Windows, see <a href="bootini_eca9701d-6f34-4e1c-a9ad-f2e14ba189d5.xml.htm">Using Boot Parameters</a>.</P>
+<P>To change boot parameters on a system with BIOS firmware that is running Windows Server 2003 and earlier versions of NT-based Windows, you can use Bootcfg or edit the <i>Boot.ini</i> file in Notepad. On systems with EFI firmware, use Bootcfg or Nvrboot.</P>
+<P>To change boot parameters on a system running Windows Vista or later versions of Windows, you can use BCDEdit.</P>
+<H4>Using Bootcfg</H4>
+<P>Bootcfg displays the boot parameters in the <b>OS Load Options</b> field (labeled <b>OsLoadOptions</b> on systems with EFI firmware).</P>
+<P>The following Bootcfg sample shows the Bootcfg display of the boot options in EFI NVRAM. The sample boot entry includes the <a href="bootini_92599dfa-1b31-4273-8202-31c51e190b01.xml.htm"><b>/fastdetect</b></a> and <a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug</b></a> parameters with the <b>/debugport</b> and <b>/baudrate</b> subparameters.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot entry ID:    2<BR>OS Friendly Name: Microsoft Windows XP 64-Bit Edition<BR><b>OsLoadOptions:     /fastdetect /debug /debugport=COM1 /baudrate=115200</b><BR>BootFilePath:     \Device\HarddiskVolume1\EFI\Microsoft\WINNT50C\ia64ldr.efi<BR>OsFilePath:       \Device\HarddiskVolume3\WINDOWS.0<BR><BR></nobr></P>
+<P>To add a boot parameter to a boot entry, use the Bootcfg parameter-specific switches, such as <b>/ems</b>, <b>/debug</b>, and <b>/dbg1394</b>, or the Bootcfg <b>/addsw</b> or <b>/raw</b> switches. For a complete list of Bootcfg switches, at a command prompt, type <b>bootcfg /?</b>.</P>
+<P>For example, the following Bootcfg command uses the Bootcfg <b>/addsw</b> switch with the <b>/MM</b> argument and a value of 512 to add the <a href="bootini_1827b040-9a2c-4ec3-ad58-1194c63cefcc.xml.htm"><b>/maxmem</b></a> boot parameter to the second entry in the <b>Boot Entries</b> section and to set the value of <b>/maxmem</b> to 512 (MB). The <b>/ID</b> switch with a value of 2 identifies the second boot entry (line number 2).</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bootcfg /addsw /MM 512 /ID 2<BR><BR></nobr></P>
+<P>The resulting entry is shown in a sample display from the 64-bit version of Bootcfg.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot entry ID:    2<BR>OS Friendly Name: Microsoft Windows XP 64-Bit Edition<BR>OsLoadOptions:     /fastdetect /debug /debugport=COM1 /baudrate=115200 <b>/maxmem=512</b><BR>BootFilePath:     \Device\HarddiskVolume1\EFI\Microsoft\WINNT50C\ia64ldr.efi<BR>OsFilePath:       \Device\HarddiskVolume3\WINDOWS.0<BR><BR></nobr></P>
+<H4>Editing the <i>Boot.ini</i> File</H4>
+<P>In the <i>Boot.ini</i> file, the boot parameters appear in the boot entry immediately following the friendly name. </P>
+<P>For example, the following boot entry in the <i>Boot.ini</i> file includes the <a href="bootini_92599dfa-1b31-4273-8202-31c51e190b01.xml.htm"><b>/fastdetect</b></a> and <a href="bootini_abf8d7fe-59ef-40ce-b985-b7942a457e11.xml.htm"><b>/debug</b></a> parameters with the <b>/debugport</b> and <b>/baudrate</b> subparameters.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Windows XP Debug1" /fastdetect /debug /debugport=COM1 /baudrate=57600<BR><BR></nobr></P>
+<P>To add a boot parameter, type the parameter using the prescribed syntax.</P>
+<P>For example, to add the <a href="bootini_1827b040-9a2c-4ec3-ad58-1194c63cefcc.xml.htm"><b>/maxmem</b></a> parameter, type <b>/maxmem</b> and a value, in megabytes, to the list of boot parameters in the entry. Parameters can appear in any order. In the following example, the <b>/maxmem</b> parameter and a value of 512 (MB) appear at the end of the parameter list.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Windows XP Debug1" /fastdetect /debug /debugport=COM1 /baudrate=57600 <b>/maxmem=512</b><BR><BR></nobr></P>
+<P></P>
+<P></P>
+<H4>Using BCDEdit</H4>
+<P>To add a boot configuration parameter to a boot entry, use the BCDEdit boot entry options to change global settings, such as <b>/ems</b>, <b>/debug</b>, <b>/dbgsettings</b>, or set individual parameters using the <a href="bootini_36629b5a-bacc-426e-9432-900223d2d89d.xml.htm"><b>BCDEdit /set</b></a> options. For a complete list of BCDEdit options, at a command prompt, type <b>BCDEdit /? </b>or <b>BCDEdit /?</b> &lt;<i>command&gt;</i> to find help about a specific command.</P>
+<P></P>
+<P>For example, the following command enables PAE for a specified boot entry: </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /set {802d5e32-0784-11da-bd33-000476eba25f} pae forceenable<BR></nobr></P>
+<P></P>
+<P>To turn the kernel debugger on or off, use the <b>/debug</b> option with the following syntax:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /debug <i>&lt;ID&gt;</i> [on | off]<BR></nobr></P>
+<P></P>
+<P></P>
+<P>The <i>&lt;ID&gt;</i> is the GUID that is associated with the boot entry. If you do not specify an <i>&lt;ID&gt;</i>, the command modifies the operating system that is currently active. The following command turns on the kernel debugger for a boot entry, called DebugEntry:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>bcdedit /debug {49916baf-0e08-11db-9af4-000bdbd316a0} on<BR></nobr></P>
+<P></P>
+<P></P>
+<P>To view the current boot entries, type <b>bcdedit</b> at the command prompt. The boot entry for DebugEntry shows that the kernel debugger is turned on. </P>
+<P></P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Windows Boot Loader<BR>-------------------<BR>identifier              {49916baf-0e08-11db-9af4-000bdbd316a0}<BR>device                  partition=C:<BR>path                    \Windows\system32\winload.exe<BR>description             DebugEntry<BR>locale                  en-US<BR>inherit                 {bootloadersettings}<BR>osdevice                partition=C:<BR>systemroot              \Windows<BR>resumeobject            {3e3a9f69-024a-11db-b5fc-a50a1ad8a70e}<BR>nx                      OptIn<BR><b>pae                     ForceEnable</b><BR><b>debug                   Yes</b><BR></nobr></P>
+<P></P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Changing Boot Parameters RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

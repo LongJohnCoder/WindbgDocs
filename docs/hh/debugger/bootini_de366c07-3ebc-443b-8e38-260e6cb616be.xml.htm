@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Identifying Backup Files for Existing Boot Entries</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, DriverDevTools, Design Guide, Identifying Backup Files for Existing Boot Entries"><xml><MSHelp:Keyword Index="A" Term="bootini_de366c07-3ebc-443b-8e38-260e6cb616be.xml"/>
+<META NAME="MS-HKWD" CONTENT="NVRAM boot options [WDK], backup file searches">
+<META NAME="MS-HKWD" CONTENT="EFI NVRAM boot options [WDK], backup file searches">
+<META NAME="MS-HKWD" CONTENT="searches [WDK boot options]">
+<META NAME="MS-HKWD" CONTENT="locating boot entry backups [WDK]">
+<META NAME="MS-HKWD" CONTENT="existing boot entry searches [WDK]">
+<META NAME="MS-HKWD" CONTENT="boot entry backups [WDK]">
+<META NAME="MS-HKWD" CONTENT="identifying backup files for boot entries"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="bootini_de366c07-3ebc-443b-8e38-260e6cb616be.xml"></A>Identifying Backup Files for Existing Boot Entries</H1>
+<P>To search for the backup copy of a boot entry by its file name, you need the entry's EFI boot entry ID. However, neither Bootcfg nor Nvrboot display this ID.</P>
+<P>Instead, you can find a boot entry backup copy by searching for a Boot<i>xxxx</i> file in the installation's directory on the EFI partition. To find the installation directory, locate the path to the boot loader file for the operating system installation. The boot entry backup file for the installation is stored in the same directory.</P>
+<P>Use the <b>nvrboot d</b> (display) command or the <b>bootcfg</b> or <b>bootcfg query</b> commands to display the path to the directory in which the boot loader for the operating system is stored.</P>
+<P>In the following example, the boot loader for a boot entry is stored on the EFI partition in the \Microsoft\WINNT50 subdirectory. The backup copy of the boot entry for this installation is a file named Boot<i>xxxx</i> in the same subdirectory.</P>
+<P class="note"><b>Note</b>  The <b>Boot entry ID</b> field in Bootcfg and the boot entry number in Nvrboot do not display the EFI boot entry ID. The Bootcfg and Nvrboot IDs are line numbers that represent the order of the boot entry in the <b>Boot Entries</b> section and change when the entries are reordered.</P>
+<P>As shown in the following Bootcfg sample, the path to the boot loader file appears in the <b>BootFilePath</b> field. </P>
+<P>Bootcfg displays the file location as the  NT device name of the partition, followed by the file system path to the boot loader file. </P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>Boot Entries<BR>------------<BR>Boot entry ID:    1<BR>OS Friendly Name: Windows Server 2003, Enterprise<BR>OsLoadOptions:     /debug /debugport=COM1 /baudrate=115200<BR><b>BootFilePath:     \Device\HarddiskVolume1\EFI\Microsoft\WINNT50\ia64ldr.efi</b><BR>OsFilePath:       \Device\HarddiskVolume3\WINDOWS<BR><BR></nobr></P>
+<P>In the following sample of an Nvrboot display, the path to the boot loader file for an operating system installation appears in the <b>EFIOSLoaderFilePath</b> field.</P>
+<P>Nvrboot displays the file location as a partition GUID followed by the path to the boot loader file.</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>1. Load identifier = Windows Server 2003, Enterprise<BR>2. OsLoadOptions = /debug /debugport=COM1 /baudrate=115209<BR><b>3. EFIOSLoaderFilePath = 006F0073-0066-0074-5C00-570049004E00  ::  \EFI\Microsoft\WINNT50\ia64ldr.efi</b><BR>4. OSLoaderFilePath = 04000004-5D18-3F27-0000-0000205C273F  :: \Windows<BR><BR></nobr></P>
+<P>In both cases, the boot loader file (and the Boot<i>xxxx</i> boot entry backup file) for the operating system are in the WINNT50 directory of the EFI system partition (EFI\Microsoft\WINNT50).</P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Identifying Backup Files for Existing Boot Entries RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>DEBUG_SPECIFIC_FILTER_PARAMETERS</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, DEBUG_SPECIFIC_FILTER_PARAMETERS"><xml><MSHelp:Attr Name="TopicType" Value="apiref"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="APIType" Value="Function"/>
+<MSHelp:Attr Name="APILocation" Value="dbgeng.h"/>
+<MSHelp:Attr Name="APIName" Value="DEBUG_SPECIFIC_FILTER_PARAMETERS"/>
+<MSHelp:Keyword Index="A" Term="Structures_b0152b9b-4809-46c8-81a7-5f571720eca1.xml"/>
+<META NAME="MS-HKWD" CONTENT="DEBUG_SPECIFIC_FILTER_PARAMETERS structure"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="Structures_b0152b9b-4809-46c8-81a7-5f571720eca1.xml"></A>DEBUG_SPECIFIC_FILTER_PARAMETERS</H1>
+<P><P>The DEBUG_SPECIFIC_FILTER_PARAMETERS structure contains the parameters for a <a href="dbg_glossary_5048ec26-b9ce-44eb-afe2-ebb3e1c9e47d.xml.htm#42e1b548-244d-4d27-9ba3-1cdd167d75eb">specific event filter</a>.</P>
+</P>
+<P class="syntax" style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><b>typedef struct _DEBUG_SPECIFIC_FILTER_PARAMETERS</b><BR><b>{</b><BR><b>    ULONG  ExecutionOption;</b><BR><b>    ULONG  ContinueOption;</b><BR><b>    ULONG  TextSize;</b><BR><b>    ULONG  CommandSize;</b><BR><b>    ULONG  ArgumentSize;</b><BR><b>} DEBUG_SPECIFIC_FILTER_PARAMETERS, *PDEBUG_SPECIFIC_FILTER_PARAMETERS;</b><BR><BR></P>
+<DL><H4>Members</H4>
+<DT><b>ExecutionOption</b></DT>
+<DD>The <a href="dbg_glossary_68c9117f-3b66-4505-b633-9f0fd8c1a981.xml.htm#f661734a-d279-4ca5-b9bd-802dad9782af">break status</a> of the specific event filter.  For possible values, see <a href="structures_a6679c9f-e984-42f4-b033-26ad9256c373.xml.htm">DEBUG_FILTER_<i>XXX</i></a>.</DD>
+<DT><b>ContinueOption</b></DT>
+<DD>The <a href="dbg_glossary_bfdf5d47-fd1c-482c-be33-c4a04d766043.xml.htm#2ed842be-ebe1-40fa-8a33-cf3a9364b7ee">handling status</a> of the specific event filter.  For possible values, see <a href="structures_a6679c9f-e984-42f4-b033-26ad9256c373.xml.htm">DEBUG_FILTER_<i>XXX</i></a>.</DD>
+<DT><b>TextSize</b></DT>
+<DD>The size, in characters (including the terminator), of the name of the specific event filter.</DD>
+<DT><b>CommandSize</b></DT>
+<DD>The size, in characters, of the command (including the terminator), to execute when the <a href="dbg_glossary_c8f901be-266c-4f04-9680-7b04c121f308.xml.htm#5fd797d1-51e0-444c-bc98-94c230c53a52">event</a> occurs.</DD>
+<DT><b>ArgumentSize</b></DT>
+<DD>Specifies the size, in characters, of the specific event filter argument.  This size includes the NULL terminator.  If the specific event filter does not take an argument, <b>ArgumentSize</b> is zero.<P class="note"><b>Note  </b>If the filter does take an argument, but the argument is empty, <b>ArgumentSize</b> will be one, reflecting the NULL terminator.</P>
+</DD>
+</DL>
+<H4><b>Requirements</b></H4>
+<p><b>Headers: </b>Defined in <i>DbgEng.h</i>. Include <i>DbgEng.h</i>.</p>
+<H4>See Also</H4>
+<P><a href="idebugcontrol_ebe245a7-c76c-4b31-aa58-ccad250ed92a.xml.htm"><b>GetSpecificFilterParameters</b></a>, <a href="idebugcontrol_9bf01d08-9fc1-4ddf-b8dd-c6db0b568f83.xml.htm"><b>SetSpecificFilterParameters</b></a></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: DEBUG_SPECIFIC_FILTER_PARAMETERS RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

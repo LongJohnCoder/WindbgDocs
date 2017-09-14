@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Debugging the Service Application Manually</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Debugging the Service Application Manually"><xml><MSHelp:Keyword Index="A" Term="t13_advanced_8dded06a-1586-4f86-9ff9-bca1fca5380f.xml"/></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t13_advanced_8dded06a-1586-4f86-9ff9-bca1fca5380f.xml"></A>Debugging the Service Application Manually</H1>
+<P>Manually attaching to a service application after it has been started is much like debugging any running user-mode process.</P>
+<P>Use <a href="tlist_d98fd688-471d-4855-aa5c-997719bd11c3.xml.htm">the TList tool</a> with the <b>/s</b> option to display the process ID (PID) of each running process and the services active in each process.</P>
+<P>If the service application you want to debug is combined with other services in a single process, you must isolate it before debugging it.  To do this, perform the procedure described in <a href="t13_advanced_1d91f582-44b7-4603-804b-8ed48a14a2cf.xml.htm#a59821de-7863-44d3-85be-fb0165d63db0">Isolating the Service</a>.  At the end of this procedure,  restart the service.</P>
+<P>To determine the new PID of the service, issue the following Service Configuration tool (<i>Sc.exe</i>) command, where <i>ServiceName</i> is the name of the service:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>sc queryex</b> <i>ServiceName</i> <BR></nobr></P>
+<P>Now start WinDbg or CDB with this service application as the target. There are three ways to do this: by specifying the PID with the <nobr><b>-p</b></nobr> option, by specifying the executable name with the <nobr><b>-pn</b></nobr> option (if the executable name is unique), or by specifying the service name with the <nobr><b>-psn</b></nobr> option.  </P>
+<P>For example, if the process <i>SpoolSv.ex</i>e has a PID of 651 and contains the service named <i>Spooler</i>, the following three commands are equivalent:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr><b>windbg -p 651</b> [<i>AdditionalOptions</i>] <BR><b>windbg -pn spoolsv.exe</b> [<i>AdditionalOptions</i>] <BR><b>windbg -psn spooler</b> [<i>AdditionalOptions</i>] <BR></nobr></P>
+<P>After the debugger starts, proceed as you would in any other user-mode debugging session. For an overview of available options, see <a href="r07_use_operation_167942d3-b143-49df-b4f6-2ca81063bcce.xml.htm">Debugger Operation (User Mode)</a> and <a href="r07_use_operation_167942d3-b143-49df-b4f6-2ca81063bcce.xml.htm">Debugger Operation (User Mode)</a>. </P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Debugging the Service Application Manually RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

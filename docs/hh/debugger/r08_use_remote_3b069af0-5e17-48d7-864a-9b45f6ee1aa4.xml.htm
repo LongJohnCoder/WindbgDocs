@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Searching for Debugging Servers</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Searching for Debugging Servers"><xml><MSHelp:Keyword Index="A" Term="r08_use_remote_3b069af0-5e17-48d7-864a-9b45f6ee1aa4.xml"/>
+<META NAME="MS-HKWD" CONTENT="remote debugging through the debugger, locating debugging servers"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r08_use_remote_3b069af0-5e17-48d7-864a-9b45f6ee1aa4.xml"></A>Searching for Debugging Servers</H1>
+<P>You can use KD or CDB with the <b>-QR</b> command-line option to obtain a list of available debugging servers that are running on a network server.<P>This list may include servers that no longer exist but which were not shut down properly &#8212; connecting to one of these generates an error message. The list will also include process servers and KD connection servers. The server type will be indicated in each case.</P>
+<P>The syntax for this is as follows:</P>
+</P>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><i>Debugger</i> <b>-QR \\</b><i>Server</i> <BR></nobr></P>
+<P></P>
+<P><i>Debugger</i> can be either KD or CDB &#8212; the display will be the same in either case. The two backslashes (<b>\\</b>) preceding <i>Server</i> are optional.</P>
+<P>In WinDbg, you can use the <b>Connect to Remote Debugger Session</b> dialog box to browse a list of available servers. See <a href="r36_gui_1_f146f153-cacc-4f29-b493-b0d52b562060.xml.htm"><b>File | Connect to Remote Session</b></a> for details.</P>
+<P>Each debugging server is listed with the complete connection string that can be used to start a debugging client (except that any password will be replaced with an asterisk).</P>
+<P></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Searching for Debugging Servers RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

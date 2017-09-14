@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>!ihs</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, !ihs"><xml><MSHelp:Keyword Index="A" Term="r27_exts_kernel_E_520ba4ba-72ab-48ee-931e-ab78ab1b981d.xml"/>
+<META NAME="MS-HKWD" CONTENT="!ihs extension">
+<META NAME="MS-HKWD" CONTENT="interrupt history record"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="r27_exts_kernel_E_520ba4ba-72ab-48ee-931e-ab78ab1b981d.xml"></A>!ihs</H1>
+<P><P>The <b>!ihs </b>extension displays the interrupt history record for the specified processor, using program counter symbols. </P>
+</P>
+<H4>Syntax</H4>
+<P style="background:#dddddd;cursor:text;padding:2pt,4pt;font: 100% Courier New, Courier, mono;"><nobr><b>!ihs</b> <i>Processor</i> <BR></nobr></P>
+<P></P>
+<DL><H4>Parameters</H4>
+<DT><i>Processor</i></DT>
+<DD>Specifies a processor. If <i>Processor</i> is omitted, the current processor is used.</DD>
+</DL>
+<P></P>
+<H4>DLL</H4><B></B><table>
+<TR valign="top">
+<TD Width=""><b>Windows 2000</b></TD>
+<TD Width="">Unavailable</TD>
+</TR>
+<TR valign="top">
+<TD Width=""><b>Windows XP and later</b></TD>
+<TD Width=""><i>Kdexts.dll</i> </TD>
+</TR>
+</table>
+<P></P>
+<P>This extension command can only be used with an Itanium target computer.</P>
+<P></P>
+<H4>Comments</H4>
+<P>To display the interrupt history record without using program counter symbols, use the <a href="r27_exts_kernel_e_61025194-b1f7-4bc5-ae36-9cc69a3c638e.xml.htm"><b>!ih</b></a> extension. To enable the interrupt history record, add <b>/configflag=32</b> to the boot entry options.</P>
+<P>Here is an example of the output from this extension:</P>
+<P style="cursor:text; padding:2pt,4pt;font: 100% Courier New, Courier, mono; color: #660000;"><nobr>kd&gt; <b>!ihs</b><BR>Total # of interruptions = 2093185<BR>Vector              IIP                   IPSR          ExtraField            IIP Symbol<BR>        VHPT FAULT  e0000000830d3190      1010092a6018  IFA=      6fc00a0200c nt!MiAgeAndEstimateAvailableInWorkingSet+0x70<BR>        VHPT FAULT  e0000000830d33d0      1010092a6018  IFA= 1ffffe00001de2d0 nt!MiAgeAndEstimateAvailableInWorkingSet+0x2b0<BR>        VHPT FAULT  e0000000830d33d0      1010092a6018  IFA= 1ffffe01befff338 nt!MiAgeAndEstimateAvailableInWorkingSet+0x2b0<BR>        VHPT FAULT  e0000000830d3190      1010092a6018  IFA=      6fc00a0200c nt!MiAgeAndEstimateAvailableInWorkingSet+0x70<BR>        VHPT FAULT  e0000000830d33d0      1010092a6018  IFA= 1ffffe00001d9188 nt!MiAgeAndEstimateAvailableInWorkingSet+0x2b0<BR>        VHPT FAULT  e0000000830d3880      1010092a6018  IFA= 1ffffe01befff250 nt!MiAgeAndEstimateAvailableInWorkingSet+0x760<BR>        VHPT FAULT  e0000000830d3fb0      1010092a6018  IFA= e0000165f82dc1c0 nt!MiCheckAndSetSystemTrimCriteria+0x190<BR>        VHPT FAULT  e000000083063390      1010092a6018  IFA= e0000000fffe0018 nt!KeQuerySystemTime+0x30<BR>     THREAD SWITCH  e000000085896040  e00000008588c040  OSP= e0000165f82dbd40 <BR>        VHPT FAULT  e00000008329b130      1210092a6018  IFA= e0000165f7edaf30 nt!IopProcessWorkItem+0x30<BR>        VHPT FAULT  e0000165f7eda640      1210092a6018  IFA= e0000165fff968a9 netbios!RunTimerForLana+0x60<BR>    PROCESS SWITCH  e0000000818bbe10  e000000085896040  OSP= e0000165f8281de0 <BR>        VHPT FAULT  e00000008307cfc0      1010092a2018  IFA= e00000008189fe50 nt!SwapFromIdle+0x1e0<BR>EXTERNAL INTERRUPT  e0000000830623b0      1010092a6018  IVR=               d0 nt!Kil_TopOfIdleLoop<BR>        VHPT FAULT  e00000008314e310      1010092a2018  IFA= e0000165f88203f0 nt!KdReceivePacket+0x10<BR>        VHPT FAULT  e000000083580760      1010092a2018  IFA= e0000000f00ff3fd hal!READ_PORT_UCHAR+0x80<BR>    PROCESS SWITCH  e00000008558c990  e0000000818bbe10  OSP= e00000008189fe20 <BR>        VHPT FAULT  e00000008307cfc0      1010092a2018  IFA= e0000165f02433f0 nt!SwapFromIdle+0x1e0<BR>        VHPT FAULT          77cfbda0      1013082a6018  IFA=         77cfbda0 0x0000000077cfbda0<BR>        VHPT FAULT          77cfbdb0      1213082a6018  IFA=      6fbfee0ff98 0x0000000077cfbdb0<BR>   DATA ACCESS BIT          77b8e150      1213082a6018  IFA=         77c16ab8 0x0000000077b8e150<BR>        VHPT FAULT          77ed5d60      1013082a6018  IFA=      6fbfffa6048 0x0000000077ed5d60<BR>   DATA ACCESS BIT          77ed5d60      1213082a6018  IFA=         77c229c0 0x0000000077ed5d60<BR>   DATA ACCESS BIT          77b8e1b0      1013082a6018  IFA=         77c1c320 0x0000000077b8e1b0<BR>      USER SYSCALL          77cafa40        10082a6018  Num=               42 0x0000000077cafa40<BR>        VHPT FAULT  e00000008344dc20      1010092a6018  IFA= e000010600703784 nt!ExpLookupHandleTableEntry+0x20<BR>...<BR></nobr></P>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: !ihs RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>

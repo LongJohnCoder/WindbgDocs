@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML DIR="LTR" xmlns:MSHelp="http://msdn.microsoft.com/MSHelp">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Determining the Cause of a Video Stream Stall</TITLE>
+<META NAME="ms.locale" content="en-us">
+<META NAME="DESCRIPTION" CONTENT="Debugger, Debugger, Design Guide, Determining the Cause of a Video Stream Stall"><xml><MSHelp:Keyword Index="A" Term="t11~b_ks_2cdae838-f139-482c-ba01-57ce07f7bdac.xml"/>
+<META NAME="MS-HKWD" CONTENT="kernel streaming debugging, video stream stall, cause"></xml><LINK REL="stylesheet" type="text/css" href="backsdk4.css"><SCRIPT src="langref.js"></SCRIPT><style>dd {margin-bottom:0em; margin-left:1.9em; }</style>
+<style>.divclass {behavior:url(#default#savehistory);}</style>
+<META NAME="save" CONTENT="history">
+</HEAD>
+<Body topmargin="0">
+<DIV STYLE="display:none;"></DIV>
+<DIV STYLE="display:none;"></DIV>
+<TABLE CLASS="buttonbarshade" CELLSPACING="0" border="0"><TR><TD NOWRAP="true"> </TD></TR></TABLE>
+<TABLE CLASS="buttonbartable" CELLSPACING="0">
+<TR ID="hdr">
+<TD NOWRAP="true" CLASS="runninghead">Debugging Tools for Windows</TD>
+</TR>
+</TABLE>
+<H1><A NAME="t11~b_ks_2cdae838-f139-482c-ba01-57ce07f7bdac.xml"></A>Determining the Cause of a Video Stream Stall</H1>
+<P>There are two basic causes for a video stream stall:</P><B></B><UL type="disc">
+<LI>  <b>A hang</b>.  Either a user-mode thread or a kernel-mode thread is not being released by the driver.</LI>
+<LI>  <b>A stall</b>.  This is the result of a problem with a component in the streaming path.  Some possibilities include:<B></B><UL type="circle">
+<LI>  The capture driver is not completing packets.  In this case, either a driver component or the hardware might be the source of the stall.</LI>
+<LI>  The capture driver has no packets to complete.  In this case, the buffers might be stalled in a codec or other downstream component.</LI>
+<P></P>
+</UL>
+</LI>
+</UL>
+<P></P>
+<P>If you can reproduce the problem, attach a debugger at this point to determine which is the actual cause.  </P><B>To determine if the problem is a hang</B><OL type="1">
+<LI>Attach a user-mode debugger to the application and look for blocked user-mode threads. </LI>
+<LI>Determine whether the application is responsive.  Can the graph be paused?  Can the graph be stopped?  Does streaming restart if the graph is stopped and restarted?</LI>
+<LI>If the application is non-responsive, attempt to end the task by using Task Manager.  If this fails, there is a kernel-mode hang.</LI>
+</OL>
+<P></P><B>To determine if the problem is a stall</B><OL type="1">
+<LI>Determine where the samples are in the graph.  This can be done locally or in a kernel-mode debugging session.</LI>
+<LI>Determine whether samples are flowing downstream. If you can reproduce the bug in <img src="internet_link_sm.gif"><text> </text><a href="http://go.microsoft.com/fwlink/?linkid=9230" target="_blank"><u>GraphEdit</u></a>, place an intermediate filter in the graph to display samples.</LI>
+<LI>Determine if the processing routine is being called.  This can be done by attaching a kernel-mode debugger and setting a breakpoint in this routine. </LI>
+</OL>
+<DIV style="display:yes"></DIV>
+<DIV CLASS="footer"><br><A href="dbglegal.htm">© 2009 Microsoft Corporation</A><br><A href="mailto:windbgfb@microsoft.com?subject=documentation feedback [Debugger]: Determining the Cause of a Video Stream Stall RELEASE: (December 09, 2009)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AThe WDK team uses the feedback submitted to improve the WDK documentation. We do not use your e-mail address for any other purpose. We will remove your e-mail address from our system after the issue you are reporting has been resolved. While we are working to resolve this issue, we may send you an e-mail message to request more information about your feedback. After the issues have been addressed, we may send you an e-mail message to let you know that your feedback has been addressed.%0A%0AFor more information about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx.
+              ">Send feedback on this topic</A><br>Debugging Tools for Windows<br>December 09, 2009<br></DIV>
+</Body>
+</HTML>
